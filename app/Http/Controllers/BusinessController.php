@@ -204,16 +204,7 @@ class BusinessController extends Controller
                 $this->moduleUtil->getModuleData('after_business_created', ['business' => $business]);
             }
 
-            //Process payment information if superadmin is installed & package information is present
-            $is_installed_superadmin = $this->moduleUtil->isSuperadminInstalled();
-            $package_id = $request->get('package_id', null);
-            if ($is_installed_superadmin && ! empty($package_id) && (config('app.env') != 'demo')) {
-                $package = \Modules\Superadmin\Entities\Package::find($package_id);
-                if (! empty($package)) {
-                    Auth::login($user);
-                    return redirect()->route('register-pay', ['package_id' => $package_id]);
-                }
-            }
+          
 
             $output = ['success' => 1,
                 'msg' => __('business.business_created_succesfully'),

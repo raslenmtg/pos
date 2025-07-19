@@ -30,8 +30,8 @@
                     <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">@lang('purchase.purchases')</a>
                     <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">@lang('lang_v1.payment')</a>
                     <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">@lang('business.dashboard')</a>
-                    <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">@lang('business.system')</a>
-                    <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">@lang('lang_v1.prefixes')</a>
+                  
+                
                     <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">@lang('lang_v1.reward_point_settings')</a>
                     <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">@lang('lang_v1.custom_labels')</a>
                 </div>
@@ -60,18 +60,8 @@
                 <!-- tab 6 start -->
                 @include('business.partials.settings_dashboard')
                 <!-- tab 6 end -->
-                <!-- tab 7 start -->
-                @include('business.partials.settings_system')
-                <!-- tab 7 end -->
-                <!-- tab 8 start -->
-                @include('business.partials.settings_prefixes')
-                <!-- tab 8 end -->
-                <!-- tab 9 start -->
-        
-                <!-- tab 9 end -->
-                <!-- tab 10 start -->
-             
-                <!-- tab 10 end -->
+            
+            
                 <!-- tab 11 start -->
                 @include('business.partials.settings_reward_point')
                 <!-- tab 11 end -->
