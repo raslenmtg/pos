@@ -48,24 +48,6 @@
 		</div>
 		<div class="clearfix"></div>
 		<hr>
-		<div class="col-md-12">
-			<h4>@lang('lang_v1.bank_details'):</h4>
-		</div>
-		@php
-			$bank_details = !empty($user->bank_details) ? json_decode($user->bank_details, true) : [];
-		@endphp
-		<div class="col-md-4">
-			<p><strong>@lang('lang_v1.account_holder_name'):</strong> {{$bank_details['account_holder_name'] ?? ''}}</p>
-			<p><strong>@lang('lang_v1.account_number'):</strong> {{$bank_details['account_number'] ?? ''}}</p>
-		</div>
-		<div class="col-md-4">
-			<p><strong>@lang('lang_v1.bank_name'):</strong> {{$bank_details['bank_name'] ?? ''}}</p>
-			<p><strong>@lang('lang_v1.bank_code'):</strong> {{$bank_details['bank_code'] ?? ''}}</p>
-		</div>
-		<div class="col-md-4">
-			<p><strong>@lang('lang_v1.branch'):</strong> {{$bank_details['branch'] ?? ''}}</p>
-			<p><strong>@lang('lang_v1.tax_payer_id'):</strong> {{$bank_details['tax_payer_id'] ?? ''}}</p>
-		</div>
 		@if(!empty($view_partials))
 	      @foreach($view_partials as $partial)
 	        {!! $partial !!}

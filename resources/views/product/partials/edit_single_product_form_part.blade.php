@@ -35,6 +35,7 @@
                           {!! Form::label('single_dpp', trans('product.exc_of_tax') . ':*') !!}
 
                           {!! Form::text('single_dpp', @num_format($variation->default_purchase_price), ['class' => 'form-control input-sm dpp input_number', 'placeholder' => __('product.exc_of_tax'), 'required']); !!}
+                          <span class="input-group-addon">TND</span>
                         </div>
 
                         <div class="col-sm-6">

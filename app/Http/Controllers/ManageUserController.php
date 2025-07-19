@@ -289,10 +289,7 @@ class ManageUserController extends Controller
                 $user_data['dob'] = $this->moduleUtil->uf_date($request->input('dob'));
             }
 
-            if (! empty($request->input('bank_details'))) {
-                $user_data['bank_details'] = json_encode($request->input('bank_details'));
-            }
-
+          
             DB::beginTransaction();
 
             if ($user_data['allow_login'] && $request->has('username')) {

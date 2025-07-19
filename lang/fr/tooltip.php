@@ -11,7 +11,7 @@
      'over_all_sell_purchase' => '-ve value = Montant à payer <br> + ve Value = Montant à recevoir',
      'no_of_products_for_trending_products' => 'Nombre de produits de tendance à comparer dans le tableau ci-dessous.',
      'top_trending_products' => "Les produits les plus vendus de votre boutique. <br/> <small class = 'text-muted'> Appliquez des filtres pour connaître les produits tendance pour une catégorie spécifique, une marque, un lieu de travail, etc. </small>",
-     'sku' => "Identifiant de produit unique ou unité de gestion des stocks <br> <br> laissez-le vide pour générer automatiquement sku. <br> <small class = 'text-muted'> Vous pouvez modifier le préfixe sku dans les paramètres métier </small> ",
+     'sku' => "Identifiant de produit unique ou code à barre <br> <br> laissez-le vide pour générer automatiquement sku. <br> <small class = 'text-muted'> Vous pouvez modifier le préfixe sku dans les paramètres métier </small> ",
      'enable_stock' => 'Activer ou désactiver la gestion des stocks pour un produit.',
      'alert_quantity' => "Soyez alerté lorsque le stock de produits atteint ou descend en dessous de la quantité spécifiée. <br> <br> <small class = 'text-muted'> Les produits avec un stock faible s'afficheront dans le tableau de bord - Section Alerte stock produit. </small>",
      'product_type' => '<b> Produit unique </b>: Produit sans variations. <br> <b> Produit variable </b>: Produit avec des variations telles que la taille, la couleur, etc.',

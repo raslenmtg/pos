@@ -1095,7 +1095,7 @@ class Util
      */
     public function barcode_types()
     {
-        $types = ['C128' => 'Code 128 (C128)', 'C39' => 'Code 39 (C39)', 'EAN13' => 'EAN-13', 'EAN8' => 'EAN-8', 'UPCA' => 'UPC-A', 'UPCE' => 'UPC-E'];
+        $types = ['EAN13' => 'EAN-13', 'EAN8' => 'EAN-8', 'UPCA' => 'UPC-A', 'UPCE' => 'UPC-E','C128' => 'Code 128 (C128)', 'C39' => 'Code 39 (C39)',];
 
         return $types;
     }
@@ -1107,7 +1107,7 @@ class Util
      */
     public function barcode_default()
     {
-        return 'C128';
+        return 'EAN13';
     }
 
     /**
@@ -1617,8 +1617,7 @@ class Util
 
         $user_details['selected_contacts'] = isset($user_details['selected_contacts']) ? $user_details['selected_contacts'] : 0;
 
-        $user_details['bank_details'] = ! empty($user_details['bank_details']) ? json_encode($user_details['bank_details']) : null;
-
+      
         $user_details['password'] = $user_details['allow_login'] ? Hash::make($user_details['password']) : null;
 
         if ($user_details['allow_login']) {

@@ -208,96 +208,12 @@
             <div class="form-group">
                 <br>
                 <label>
-                    {!! Form::checkbox('enable_sr_no', 1, !(empty($duplicate_product)) ? $duplicate_product->enable_sr_no : false, ['class' => 'input-icheck']); !!} <strong>@lang('lang_v1.enable_imei_or_sr_no')</strong>
-                </label> @show_tooltip(__('lang_v1.tooltip_sr_no'))
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="form-group">
-                <br>
-                <label>
                     {!! Form::checkbox('not_for_selling', 1, !(empty($duplicate_product)) ? $duplicate_product->not_for_selling : false, ['class' => 'input-icheck']); !!} <strong>@lang('lang_v1.not_for_selling')</strong>
                 </label> @show_tooltip(__('lang_v1.tooltip_not_for_selling'))
             </div>
         </div>
 
-        <div class="clearfix"></div>
-
-        <!-- Rack, Row & position number -->
-        @if(session('business.enable_racks') || session('business.enable_row') || session('business.enable_position'))
-        <div class="col-md-12">
-            <h4>@lang('lang_v1.rack_details'):
-                @show_tooltip(__('lang_v1.tooltip_rack_details'))
-            </h4>
-        </div>
-        @foreach($business_locations as $id => $location)
-        <div class="col-sm-3">
-            <div class="form-group">
-                {!! Form::label('rack_' . $id, $location . ':') !!}
-
-                @if(session('business.enable_racks'))
-                {!! Form::text('product_racks[' . $id . '][rack]', !empty($rack_details[$id]['rack']) ? $rack_details[$id]['rack'] : null, ['class' => 'form-control', 'id' => 'rack_' . $id,
-                'placeholder' => __('lang_v1.rack')]); !!}
-                @endif
-
-                @if(session('business.enable_row'))
-                {!! Form::text('product_racks[' . $id . '][row]', !empty($rack_details[$id]['row']) ? $rack_details[$id]['row'] : null, ['class' => 'form-control', 'placeholder' => __('lang_v1.row')]); !!}
-                @endif
-
-                @if(session('business.enable_position'))
-                {!! Form::text('product_racks[' . $id . '][position]', !empty($rack_details[$id]['position']) ? $rack_details[$id]['position'] : null, ['class' => 'form-control', 'placeholder' => __('lang_v1.position')]); !!}
-                @endif
-            </div>
-        </div>
-        @endforeach
-        @endif
-
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('weight', __('lang_v1.weight') . ':') !!}
-                {!! Form::text('weight', !empty($duplicate_product->weight) ? $duplicate_product->weight : null, ['class' => 'form-control', 'placeholder' => __('lang_v1.weight')]); !!}
-            </div>
-        </div>
-        @php
-        $custom_labels = json_decode(session('business.custom_labels'), true);
-        $product_custom_fields = !empty($custom_labels['product']) ? $custom_labels['product'] : [];
-        $product_cf_details = !empty($custom_labels['product_cf_details']) ? $custom_labels['product_cf_details'] : [];
-
-        @endphp
-        <!--custom fields-->
-        <div class="clearfix"></div>
-
-        @foreach($product_custom_fields as $index => $cf)
-            @if(!empty($cf))
-                @php
-                    $db_field_name = 'product_custom_field' . $loop->iteration;
-                    $cf_type = !empty($product_cf_details[$loop->iteration]['type']) ? $product_cf_details[$loop->iteration]['type'] : 'text';
-                    $dropdown = !empty($product_cf_details[$loop->iteration]['dropdown_options']) ? explode(PHP_EOL, $product_cf_details[$loop->iteration]['dropdown_options']) : [];
-                @endphp
-
-                <div class="col-sm-3">
-                    <div class="form-group">
-                        {!! Form::label($db_field_name, $cf . ':') !!}
-
-                        @if(in_array($cf_type, ['text', 'date']))
-                        
-                            <input type="{{$cf_type}}" name="{{$db_field_name}}" id="{{$db_field_name}}" value="{{!empty($duplicate_product->$db_field_name) ? $duplicate_product->$db_field_name : null}}" class="form-control" placeholder="{{$cf}}">
-
-                        @elseif($cf_type == 'dropdown')
-                            {!! Form::select($db_field_name, $dropdown, !empty($duplicate_product->$db_field_name) ? $duplicate_product->$db_field_name : null, ['placeholder' => $cf, 'class' => 'form-control select2']); !!}
-                        @endif
-                    </div>
-                </div>
-            @endif
-        @endforeach
-
-        <div class="col-sm-3">
-            <div class="form-group">
-                {!! Form::label('preparation_time_in_minutes', __('lang_v1.preparation_time_in_minutes') . ':') !!}
-                {!! Form::number('preparation_time_in_minutes', !empty($duplicate_product->preparation_time_in_minutes) ? $duplicate_product->preparation_time_in_minutes : null, ['class' => 'form-control', 'placeholder' => __('lang_v1.preparation_time_in_minutes')]); !!}
-            </div>
-        </div>
+     
         <!--custom fields-->
         <div class="clearfix"></div>
         @include('layouts.partials.module_form_part')

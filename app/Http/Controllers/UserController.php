@@ -77,9 +77,7 @@ class UserController extends Controller
             if (! empty($request->input('dob'))) {
                 $input['dob'] = $this->moduleUtil->uf_date($request->input('dob'));
             }
-            if (! empty($request->input('bank_details'))) {
-                $input['bank_details'] = json_encode($request->input('bank_details'));
-            }
+         
 
             $user = User::find($user_id);
             $user->update($input);

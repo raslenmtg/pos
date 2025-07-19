@@ -85,6 +85,8 @@ $(document).ready(function() {
         tax_rate = tax_rate == undefined ? 0 : tax_rate;
 
         var purchase_exc_tax = __get_principle(purchase_inc_tax, tax_rate);
+        // Use Decimal.js to round to currency precision to avoid floating point precision issues
+        purchase_exc_tax = new Decimal(purchase_exc_tax).toDecimalPlaces(3).toNumber();
         __write_number($('input#single_dpp'), purchase_exc_tax);
         $('input#single_dpp').change();
 

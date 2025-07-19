@@ -150,7 +150,7 @@ class BusinessController extends Controller
             //Create owner.
             $owner_details = $request->only(['first_name', 'last_name', 'username', 'email', 'password']);
 
-            $owner_details['language'] = 'ar';
+            $owner_details['language'] = 'fr';
             $owner_details['surname'] = 'Mr';
  
 

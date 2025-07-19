@@ -160,36 +160,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-12">
-            <h4>Razorpay: <small>(For INR India)</small></h4>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('razor_pay_key_id', 'Key ID:') !!}
-                {!! Form::text('pos_settings[razor_pay_key_id]', $pos_settings['razor_pay_key_id'] ?? '', ['class' => 'form-control', 'id' => 'razor_pay_key_id']); !!}
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('razor_pay_key_secret', 'Key Secret:') !!}
-                {!! Form::text('pos_settings[razor_pay_key_secret]', $pos_settings['razor_pay_key_secret'] ?? '', ['class' => 'form-control', 'id' => 'razor_pay_key_secret']); !!}
-            </div>
-        </div>
-
-        <div class="col-md-12">
-            <h4>Stripe:</h4>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('stripe_public_key', __('lang_v1.stripe_public_key') . ':') !!}
-                {!! Form::text('pos_settings[stripe_public_key]', $pos_settings['stripe_public_key'] ?? '', ['class' => 'form-control', 'id' => 'stripe_public_key']); !!}
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('stripe_secret_key', __('lang_v1.stripe_secret_key') . ':') !!}
-                {!! Form::text('pos_settings[stripe_secret_key]', $pos_settings['stripe_secret_key'] ?? '', ['class' => 'form-control', 'id' => 'stripe_secret_key']); !!}
-            </div>
-        </div>
+       
     </div>
 </div>
