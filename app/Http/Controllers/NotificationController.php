@@ -99,10 +99,7 @@ class NotificationController extends Controller
         // if (!auth()->user()->can('send_notification')) {
         //     abort(403, 'Unauthorized action.');
         // }
-        $notAllowed = $this->notificationUtil->notAllowedInDemo();
-        if (! empty($notAllowed)) {
-            return $notAllowed;
-        }
+      
 
         try {
             $customer_notifications = NotificationTemplate::customerNotifications();

@@ -35,10 +35,7 @@ class ModulesController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $notAllowed = $this->moduleUtil->notAllowedInDemo();
-        if (! empty($notAllowed)) {
-            return $notAllowed;
-        }
+     
 
         //Get list of all modules.
         $modules = Module::toCollection()->toArray();
@@ -171,10 +168,7 @@ class ModulesController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $notAllowed = $this->moduleUtil->notAllowedInDemo();
-        if (! empty($notAllowed)) {
-            return $notAllowed;
-        }
+      
 
         try {
             $module = Module::find($module_name);

@@ -82,10 +82,7 @@ class ImportProductsController extends Controller
         }
 
         try {
-            $notAllowed = $this->productUtil->notAllowedInDemo();
-            if (! empty($notAllowed)) {
-                return $notAllowed;
-            }
+        
 
             //Set maximum php execution time
             ini_set('max_execution_time', 0);

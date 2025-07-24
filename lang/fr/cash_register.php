@@ -1,13 +1,13 @@
 <?php
 
  return [
-     'cash_register' => 'Caisse enregistreuse',
-     'manage_your_cash_register' => 'Gérer les caisses enregistreuses',
-     'all_your_cash_register' => 'Toutes les caisses enregistreuses',
+     'cash_register' => 'Caisse',
+     'manage_your_cash_register' => 'Gérer les caisses',
+     'all_your_cash_register' => 'Toutes les caisses',
      'cash_in_hand' => 'Du liquide en main',
-     'open_cash_register' => 'Ouvrir caisse enregistreuse',
+     'open_cash_register' => 'Ouvrir caisse',
      'enter_amount' => 'Entrer le montant',
-     'open_register' => 'Registre ouvert',
+     'open_register' => 'Ouvrir',
      'register_details' => 'Détails de caisse',
      'cash_payment' => 'Paiement en espèces',
      'checque_payment' => 'Paiement par chèque',

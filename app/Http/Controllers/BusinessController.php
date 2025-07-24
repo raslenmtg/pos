@@ -199,13 +199,6 @@ class BusinessController extends Controller
 
             DB::commit();
 
-            //Module function to be called after after business is created
-            if (config('app.env') != 'demo') {
-                $this->moduleUtil->getModuleData('after_business_created', ['business' => $business]);
-            }
-
-          
-
             $output = ['success' => 1,
                 'msg' => __('business.business_created_succesfully'),
             ];
@@ -331,10 +324,7 @@ class BusinessController extends Controller
         }
 
         try {
-            $notAllowed = $this->businessUtil->notAllowedInDemo();
-            if (! empty($notAllowed)) {
-                return $notAllowed;
-            }
+          
 
             $business_details = $request->only(['name', 'start_date', 'currency_id', 'tax_label_1', 'tax_number_1', 'tax_label_2', 'tax_number_2', 'default_profit_percent', 'default_sales_tax', 'default_sales_discount', 'sell_price_tax', 'sku_prefix', 'time_zone', 'fy_start_month', 'accounting_method', 'transaction_edit_days', 'sales_cmsn_agnt', 'item_addition_method', 'currency_symbol_placement', 'on_product_expiry',
                 'stop_selling_before', 'default_unit', 'expiry_type', 'date_format',
@@ -378,17 +368,7 @@ class BusinessController extends Controller
 
             $business_details['stock_expiry_alert_days'] = ! empty($request->input('stock_expiry_alert_days')) ? $request->input('stock_expiry_alert_days') : 30;
 
-            //Check for Purchase currency
-            if (! empty($request->input('purchase_in_diff_currency')) && $request->input('purchase_in_diff_currency') == 1) {
-                $business_details['purchase_in_diff_currency'] = 1;
-                $business_details['purchase_currency_id'] = $request->input('purchase_currency_id');
-                $business_details['p_exchange_rate'] = $request->input('p_exchange_rate');
-            } else {
-                $business_details['purchase_in_diff_currency'] = 0;
-                $business_details['purchase_currency_id'] = null;
-                $business_details['p_exchange_rate'] = 1;
-            }
-
+          
             //upload logo
             $logo_name = $this->businessUtil->uploadFile($request, 'business_logo', 'business_logos', 'image');
             if (! empty($logo_name)) {
@@ -413,6 +393,7 @@ class BusinessController extends Controller
                 unset($business_details['logo']);
             }
 
+         
             //System settings
             $shortcuts = $request->input('shortcuts');
             $business_details['keyboard_shortcuts'] = json_encode($shortcuts);
@@ -431,24 +412,12 @@ class BusinessController extends Controller
 
             $business_details['common_settings'] = ! empty($request->input('common_settings')) ? $request->input('common_settings') : [];
 
-            //Enabled modules
-            $enabled_modules = $request->input('enabled_modules');
-            $business_details['enabled_modules'] = ! empty($enabled_modules) ? $enabled_modules : null;
-            $business->fill($business_details);
-            $business->save();
-
             //update session data
             $request->session()->put('business', $business);
 
-            //Update Currency details
-            $currency = Currency::find($business->currency_id);
-            $request->session()->put('currency', [
-                'id' => $currency->id,
-                'code' => $currency->code,
-                'symbol' => $currency->symbol,
-                'thousand_separator' => $currency->thousand_separator,
-                'decimal_separator' => $currency->decimal_separator,
-            ]);
+               // Save the updated business details to the database
+            $business->update($business_details);
+
 
             //update current financial year to session
             $financial_year = $this->businessUtil->getCurrentFinancialYear($business->id);

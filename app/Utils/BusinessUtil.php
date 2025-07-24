@@ -55,7 +55,7 @@ class BusinessUtil extends Util
         $customer = [
             'business_id' => $business_id,
             'type' => 'customer',
-            'name' => 'Walk-In Customer',
+            'name' => 'Passager',
             'created_by' => $user_id,
             'is_default' => 1,
             'contact_id' => $contact_id,
@@ -120,11 +120,18 @@ class BusinessUtil extends Util
 
         //Add Default Unit for new business
         $unit = [
-            'business_id' => $business_id,
-            'actual_name' => 'Pieces',
-            'short_name' => 'Pc(s)',
+          [  'business_id' => $business_id,
+            'actual_name' => 'Pièces',
+            'short_name' => 'Pcs',
             'allow_decimal' => 0,
-            'created_by' => $user_id,
+            'created_by' => $user_id],
+        
+          [  'business_id' => $business_id,
+            'actual_name' => 'Kilogramme',
+            'short_name' => 'Kg',
+            'allow_decimal' => 1,
+            'created_by' => $user_id],
+
         ];
         Unit::create($unit);
 

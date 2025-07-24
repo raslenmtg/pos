@@ -2,9 +2,7 @@
 
 $include = [public_path('uploads'), base_path('.env')];
 
-if (file_exists(base_path('custom_views'))) {
-    $include[] = base_path('custom_views');
-}
+
 
 return [
 

@@ -235,11 +235,7 @@ class ManageUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //Disable in demo
-        $notAllowed = $this->moduleUtil->notAllowedInDemo();
-        if (! empty($notAllowed)) {
-            return $notAllowed;
-        }
+       
         
         if (! auth()->user()->can('user.update')) {
             abort(403, 'Unauthorized action.');
@@ -379,11 +375,7 @@ class ManageUserController extends Controller
      */
     public function destroy($id)
     {
-        //Disable in demo
-        $notAllowed = $this->moduleUtil->notAllowedInDemo();
-        if (! empty($notAllowed)) {
-            return $notAllowed;
-        }
+       
 
         if (! auth()->user()->can('user.delete')) {
             abort(403, 'Unauthorized action.');

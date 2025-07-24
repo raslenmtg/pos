@@ -61,10 +61,7 @@ class UserController extends Controller
     public function updateProfile(Request $request)
     {
         //Disable in demo
-        $notAllowed = $this->moduleUtil->notAllowedInDemo();
-        if (! empty($notAllowed)) {
-            return $notAllowed;
-        }
+      
 
         try {
             $user_id = $request->session()->get('user.id');
@@ -111,11 +108,7 @@ class UserController extends Controller
      */
     public function updatePassword(Request $request)
     {
-        //Disable in demo
-        $notAllowed = $this->moduleUtil->notAllowedInDemo();
-        if (! empty($notAllowed)) {
-            return $notAllowed;
-        }
+      
 
         try {
             $user_id = $request->session()->get('user.id');

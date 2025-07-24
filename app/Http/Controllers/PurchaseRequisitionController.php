@@ -368,38 +368,36 @@ class PurchaseRequisitionController extends Controller
         if (request()->ajax()) {
             $business_id = request()->session()->get('user.business_id');
 
-            $query = VariationLocationDetails::join(
+            $query = VariationLocationDetails::leftJoin(
                 'product_variations as pv',
                 'variation_location_details.product_variation_id',
                 '=',
                 'pv.id'
             )
-                    ->join(
+                    ->leftJoin(
                         'variations as v',
                         'variation_location_details.variation_id',
                         '=',
                         'v.id'
                     )
-                    ->join(
+                    ->rightJoin(
                         'products as p',
                         'variation_location_details.product_id',
                         '=',
                         'p.id'
                     )
-                    ->leftjoin(
+                    ->leftJoin(
                         'business_locations as l',
                         'variation_location_details.location_id',
                         '=',
                         'l.id'
                     )
-                    ->leftjoin('units as u', 'p.unit_id', '=', 'u.id')
-                    ->leftjoin('units as su', 'p.secondary_unit_id', '=', 'su.id')
+                    ->leftJoin('units as u', 'p.unit_id', '=', 'u.id')
+                    ->leftJoin('units as su', 'p.secondary_unit_id', '=', 'su.id')
                     ->where('p.business_id', $business_id)
                     ->where('p.enable_stock', 1)
                     ->where('p.is_inactive', 0)
-                    ->whereNull('v.deleted_at')
-                    ->whereNotNull('p.alert_quantity')
-                    ->whereRaw('variation_location_details.qty_available <= p.alert_quantity');
+                  ;
 
             //Check for permitted locations of a user
             $permitted_locations = auth()->user()->permitted_locations();

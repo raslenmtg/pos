@@ -70,11 +70,7 @@ class BackUpController extends Controller
         }
 
         try {
-            //Disable in demo
-            $notAllowed = $this->commonUtil->notAllowedInDemo();
-            if (! empty($notAllowed)) {
-                return $notAllowed;
-            }
+          
 
             // start the backup process
             Artisan::call('backup:run');

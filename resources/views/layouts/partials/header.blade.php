@@ -50,78 +50,7 @@
 
 
             <div class="tw-flex tw-flex-wrap tw-items-center tw-justify-end tw-gap-3">
-                @if (Module::has('Essentials'))
-                    @includeIf('essentials::layouts.partials.header_part')
-                @endif
-                <details class="tw-dw-dropdown tw-relative tw-inline-block tw-text-left">
-                    <summary
-                        class="tw-inline-flex tw-transition-all tw-ring-1 tw-ring-white/10 hover:tw-text-white tw-cursor-pointer tw-duration-200 tw-bg-@if(!empty(session('business.theme_color'))){{session('business.theme_color')}}@else{{'primary'}}@endif-800 hover:tw-bg-@if(!empty(session('business.theme_color'))){{session('business.theme_color')}}@else{{'primary'}}@endif-700 tw-py-1.5 tw-px-3 tw-rounded-lg tw-items-center tw-justify-center tw-text-sm tw-font-medium tw-text-white tw-gap-1">
-                        <svg aria-hidden="true" class="tw-size-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
-                            stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
-                            <path d="M9 12h6" />
-                            <path d="M12 9v6" />
-                        </svg>
-                    </summary>
-                    <ul class="tw-dw-menu tw-dw-dropdown-content tw-dw-z-[1] tw-dw-bg-base-100 tw-dw-rounded-box tw-w-48 tw-absolute tw-left-0 tw-z-10 tw-mt-2 tw-origin-top-right tw-bg-white tw-rounded-lg tw-shadow-lg tw-ring-1 tw-ring-gray-200 focus:tw-outline-none"
-                        role="menu" tabindex="-1">
-                        <div class="tw-p-2" role="none">
-                            <a href="{{ route('calendar') }}"
-                                class="tw-flex tw-items-center tw-gap-2 tw-px-3 tw-py-2 tw-text-sm tw-font-medium tw-text-gray-600 tw-transition-all tw-duration-200 tw-rounded-lg hover:tw-text-gray-900 hover:tw-bg-gray-100"
-                                role="menuitem" tabindex="-1">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar"
-                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <rect x="4" y="5" width="16" height="16" rx="2" />
-                                    <line x1="16" y1="3" x2="16" y2="7" />
-                                    <line x1="8" y1="3" x2="8" y2="7" />
-                                    <line x1="4" y1="11" x2="20" y2="11" />
-                                    <line x1="11" y1="15" x2="12" y2="15" />
-                                    <line x1="12" y1="15" x2="12" y2="18" />
-                                </svg>
-                                @lang('lang_v1.calendar')
-                            </a>
-                            @if (Module::has('Essentials'))
-                                <a href="#"
-                                    data-href="{{ action([\Modules\Essentials\Http\Controllers\ToDoController::class, 'create']) }}"
-                                    data-container="#task_modal"
-                                    class="btn-modal tw-flex tw-items-center tw-gap-2 tw-px-3 tw-py-2 tw-text-sm tw-font-medium tw-text-gray-600 tw-transition-all tw-duration-200 tw-rounded-lg hover:tw-text-gray-900 hover:tw-bg-gray-100"
-                                    role="menuitem" tabindex="-1">
-                                    <svg aria-hidden="true" class="tw-w-5 tw-h-5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M3 3m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
-                                        <path d="M9 12l2 2l4 -4" />
-                                    </svg>
-                                    @lang('essentials::lang.add_to_do')
-                                </a>
-                            @endif
-                            @if (auth()->user()->hasRole('Admin#' . auth()->user()->business_id))
-                                <a href="#" id="start_tour"
-                                    class="tw-flex tw-items-center tw-gap-2 tw-px-3 tw-py-2 tw-text-sm tw-font-medium tw-text-gray-600 tw-transition-all tw-duration-200 tw-rounded-lg hover:tw-text-gray-900 hover:tw-bg-gray-100"
-                                    role="menuitem" tabindex="-1">
-                                    <svg aria-hidden="true" class="tw-w-5 tw-h-5" xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none"
-                                        stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                                        <path d="M12 17l0 .01" />
-                                        <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
-                                    </svg>
-                                    @lang('lang_v1.application_tour')
-                                </a>
-                            @endif
-                        </div>
-                    </ul>
-
-                </details>
-
-
+             
                 {{-- data-toggle="popover" remove this for on hover show --}}
 
                 <button id="btnCalculator" title="@lang('lang_v1.calculator')" data-content='@include('layouts.partials.calculator')'

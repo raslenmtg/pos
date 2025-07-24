@@ -118,8 +118,7 @@ Route::middleware(['setData', 'auth', 'SetSessionData', 'language', 'timezone', 
     Route::post('/attach-medias-to-model', [HomeController::class, 'attachMediasToGivenModel'])->name('attach.medias.to.model');
     Route::get('/calendar', [HomeController::class, 'getCalendar'])->name('calendar');
 
-    Route::post('/test-email', [BusinessController::class, 'testEmailConfiguration']);
-    Route::post('/test-sms', [BusinessController::class, 'testSmsConfiguration']);
+   
     Route::get('/business/settings', [BusinessController::class, 'getBusinessSettings'])->name('business.getBusinessSettings');
     Route::post('/business/update', [BusinessController::class, 'postBusinessSettings'])->name('business.postBusinessSettings');
     Route::get('/user/profile', [UserController::class, 'getProfile'])->name('user.getProfile');
@@ -420,44 +419,13 @@ Route::middleware(['setData', 'auth', 'SetSessionData', 'language', 'timezone', 
 
     Route::resource('account-types', AccountTypeController::class);
 
-    //Restaurant module
-    Route::prefix('modules')->group(function () {
-        Route::resource('tables', Restaurant\TableController::class);
-        Route::resource('modifiers', Restaurant\ModifierSetsController::class);
-
-        //Map modifier to products
-        Route::get('/product-modifiers/{id}/edit', [Restaurant\ProductModifierSetController::class, 'edit']);
-        Route::post('/product-modifiers/{id}/update', [Restaurant\ProductModifierSetController::class, 'update']);
-        Route::get('/product-modifiers/product-row/{product_id}', [Restaurant\ProductModifierSetController::class, 'product_row']);
-
-        Route::get('/add-selected-modifiers', [Restaurant\ProductModifierSetController::class, 'add_selected_modifiers']);
-
-        Route::get('/kitchen', [Restaurant\KitchenController::class, 'index']);
-        Route::get('/kitchen/mark-as-cooked/{id}', [Restaurant\KitchenController::class, 'markAsCooked']);
-        Route::post('/refresh-orders-list', [Restaurant\KitchenController::class, 'refreshOrdersList']);
-        Route::post('/refresh-line-orders-list', [Restaurant\KitchenController::class, 'refreshLineOrdersList']);
-
-        Route::get('/orders', [Restaurant\OrderController::class, 'index']);
-        Route::get('/orders/mark-as-served/{id}', [Restaurant\OrderController::class, 'markAsServed']);
-        Route::get('/data/get-pos-details', [Restaurant\DataController::class, 'getPosDetails']);
-        Route::get('/data/check-staff-pin', [Restaurant\DataController::class, 'checkStaffPin']);
-        Route::get('/orders/mark-line-order-as-served/{id}', [Restaurant\OrderController::class, 'markLineOrderAsServed']);
-        Route::get('/print-line-order', [Restaurant\OrderController::class, 'printLineOrder']);
-    });
-
-    Route::get('bookings/get-todays-bookings', [Restaurant\BookingController::class, 'getTodaysBookings']);
-    Route::resource('bookings', Restaurant\BookingController::class);
+   
 
     Route::resource('types-of-service', TypesOfServiceController::class);
     Route::get('sells/edit-shipping/{id}', [SellController::class, 'editShipping']);
     Route::put('sells/update-shipping/{id}', [SellController::class, 'updateShipping']);
     Route::get('shipments', [SellController::class, 'shipments']);
 
-    Route::post('upload-module', [Install\ModulesController::class, 'uploadModule']);
-    Route::delete('manage-modules/destroy/{module_name}', [Install\ModulesController::class, 'destroy']);
-    Route::resource('manage-modules', Install\ModulesController::class)
-        ->only(['index', 'update']);
-    Route::get('regenerate', [Install\ModulesController::class, 'regenerate']);
 
     Route::resource('warranties', WarrantyController::class);
 

@@ -1034,11 +1034,7 @@ class ContactController extends Controller
         }
 
         try {
-            $notAllowed = $this->commonUtil->notAllowedInDemo();
-            if (! empty($notAllowed)) {
-                return $notAllowed;
-            }
-
+          
             //Set maximum php execution time
             ini_set('max_execution_time', 0);
 
@@ -1385,10 +1381,7 @@ class ContactController extends Controller
      */
     public function sendLedger(Request $request)
     {
-        $notAllowed = $this->notificationUtil->notAllowedInDemo();
-        if (! empty($notAllowed)) {
-            return $notAllowed;
-        }
+     
 
         try {
             $data = $request->only(['to_email', 'subject', 'email_body', 'cc', 'bcc', 'ledger_format']);

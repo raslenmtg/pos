@@ -93,11 +93,7 @@ class ImportSalesController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        $notAllowed = $this->businessUtil->notAllowedInDemo();
-        if (! empty($notAllowed)) {
-            return $notAllowed;
-        }
-
+     
         $business_id = request()->session()->get('user.business_id');
 
         if ($request->hasFile('sales')) {

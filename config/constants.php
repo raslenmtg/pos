@@ -11,21 +11,8 @@ return [
 
     'langs' => [
         'en' => ['full_name' => 'English', 'short_name' => 'English'],
-        'es' => ['full_name' => 'Spanish - Español', 'short_name' => 'Spanish'],
-        'sq' => ['full_name' => 'Albanian - Shqip', 'short_name' => 'Albanian'],
-        'hi' => ['full_name' => 'Hindi - हिंदी', 'short_name' => 'Hindi'],
-        'nl' => ['full_name' => 'Dutch', 'short_name' => 'Dutch'],
         'fr' => ['full_name' => 'French - Français', 'short_name' => 'French'],
-        'de' => ['full_name' => 'German - Deutsch', 'short_name' => 'German'],
-        'ar' => ['full_name' => 'Arabic - العَرَبِيَّة', 'short_name' => 'Arabic'],
-        'tr' => ['full_name' => 'Turkish - Türkçe', 'short_name' => 'Turkish'],
-        'id' => ['full_name' => 'Indonesian', 'short_name' => 'Indonesian'],
-        'ps' => ['full_name' => 'Pashto', 'short_name' => 'Pashto'],
-        'pt' => ['full_name' => 'Portuguese', 'short_name' => 'Portuguese'],
-        'vi' => ['full_name' => 'Vietnamese', 'short_name' => 'Vietnamese'],
-        'ce' => ['full_name' => 'Chinese', 'short_name' => 'Chinese'],
-        'ro' => ['full_name' => 'Romanian', 'short_name' => 'Romanian'],
-        'lo' => ['full_name' => 'Lao', 'short_name' => 'Lao'],
+        'ar' => ['full_name' => 'Arabic - العَرَبِيَّة', 'short_name' => 'Arabic']
     ],
     'langs_rtl' => ['ar'],
     'non_utf8_languages' => ['ar', 'hi', 'ps'],
@@ -47,7 +34,7 @@ return [
     'currency_exchange_rate' => 1,
     'orders_refresh_interval' => 600, //Auto refresh interval on Kitchen and Orders page in seconds,
 
-    'default_date_format' => 'm/d/Y', //Default date format to be used if session is not set. All valid formats can be found on https://www.php.net/manual/en/function.date.php
+    'default_date_format' => 'd/m/Y', //Default date format to be used if session is not set. All valid formats can be found on https://www.php.net/manual/en/function.date.php
 
     'new_notification_count_interval' => 60, //Interval to check for new notifications in seconds;Default is 60sec
 

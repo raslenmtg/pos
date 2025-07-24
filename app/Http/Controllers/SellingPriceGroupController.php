@@ -289,10 +289,7 @@ class SellingPriceGroupController extends Controller
     public function import(Request $request)
     {
         try {
-            $notAllowed = $this->commonUtil->notAllowedInDemo();
-            if (! empty($notAllowed)) {
-                return $notAllowed;
-            }
+         
 
             //Set maximum php execution time
             ini_set('max_execution_time', 0);
