@@ -200,15 +200,7 @@ class CashRegisterController extends Controller
         }
 
         try {
-            //Disable in demo
-            if (config('app.env') == 'demo') {
-                $output = ['success' => 0,
-                    'msg' => 'Feature disabled in demo!!',
-                ];
-
-                return redirect()->action([\App\Http\Controllers\HomeController::class, 'index'])->with('status', $output);
-            }
-
+         
             $input = $request->only(['closing_amount', 'total_card_slips', 'total_cheques', 'closing_note']);
             $input['closing_amount'] = $this->cashRegisterUtil->num_uf($input['closing_amount']);
             $user_id = $request->input('user_id');

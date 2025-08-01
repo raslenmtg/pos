@@ -121,8 +121,8 @@ class BusinessUtil extends Util
         //Add Default Unit for new business
         $unit = [
           [  'business_id' => $business_id,
-            'actual_name' => 'Pièces',
-            'short_name' => 'Pcs',
+            'actual_name' => 'Pièce',
+            'short_name' => 'Pu',
             'allow_decimal' => 0,
             'created_by' => $user_id],
         

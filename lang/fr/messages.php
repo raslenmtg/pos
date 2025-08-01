@@ -33,4 +33,5 @@
      'print_detailed' => 'Imprimer en Détail',
     'print_mini' => 'Imprimer Mini',
     'opening' => 'Ouverture',
+    'deactivate' => 'désactivater',
  ];

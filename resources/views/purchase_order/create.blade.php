@@ -137,7 +137,7 @@
 		<div class="row">
 			<div class="col-sm-3">
 				<div class="form-group">
-					{!! Form::label('purchase_requisition_ids', __('lang_v1.purchase_requisition').':') !!}
+					{!! Form::label('purchase_requisition_ids', __('lang_v1.purchase_requisition_list').':') !!}
 					{!! Form::select('purchase_requisition_ids[]', [], null, ['class' => 'form-control select2', 'multiple', 'id' => 'purchase_requisition_ids']); !!}
 				</div>
 			</div>
