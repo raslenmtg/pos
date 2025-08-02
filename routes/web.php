@@ -479,4 +479,7 @@ Route::middleware(['setData', 'auth', 'SetSessionData', 'language', 'timezone'])
         ->name('packing.downloadPdf');
     Route::get('/sells/invoice-url/{id}', [SellPosController::class, 'showInvoiceUrl']);
     Route::get('/show-notification/{id}', [HomeController::class, 'showNotification']);
+// routes/web.php
+Route::get('/notifications/template/{id}/{template_for}', [NotificationController::class, 'getTemplate'])
+    ->name('notifications.getTemplate');
 });

@@ -185,7 +185,7 @@ class PurchaseOrderController extends Controller
                         }
                     }
 
-                    $html .= '<li><a href="#" data-href="'.action([\App\Http\Controllers\NotificationController::class, 'getTemplate'], ['transaction_id' => $row->id, 'template_for' => 'purchase_order']).'" class="btn-modal" data-container=".view_modal"><i class="fas fa-envelope" aria-hidden="true"></i> '.__('lang_v1.send_notification').'</a></li>';
+                    $html .= '<li><a href="#" data-href="'.action([\App\Http\Controllers\NotificationController::class, 'getTemplate'], [ $row->id, 'purchase_order']).'" class="btn-modal" data-container=".view_modal"><i class="fas fa-envelope" aria-hidden="true"></i> '.__('lang_v1.send_notification').'</a></li>';
 
                     $html .= '</ul></div>';
 
