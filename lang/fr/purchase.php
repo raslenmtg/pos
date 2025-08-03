@@ -15,7 +15,7 @@
      'amount' => 'Montant',
      'payment_method' => 'Mode de paiement',
      'no_records_found' => 'Aucun enregistrement trouvé',
-     'payment_due' => 'Paiement dû',
+     'payment_due' => 'Impayé',
      'purchase_total' => "Total d'achat",
      'location' => 'Emplacement',
      'payment_note' => 'Note de paiement',

@@ -76,7 +76,7 @@
             @elseif($transaction->type == 'payroll')
                 <div class="row invoice-info">
                     <div class="col-sm-4 invoice-col">
-                        @lang('essentials::lang.payroll_for'):
+                        @lang('lang_v1.payroll_for'):
                         <address>
                             <strong>{{ $transaction->transaction_for->user_full_name }}</strong>
                             @if(!empty($transaction->transaction_for->address))

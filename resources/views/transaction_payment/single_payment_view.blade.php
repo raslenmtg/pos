@@ -88,7 +88,7 @@
               </address>
             @else
             @if(!empty($transaction->transaction_for))
-              @lang('essentials::lang.payroll_for'):
+              @lang('lang_v1.payroll_for'):
               <address>
                   <strong>{{ $transaction->transaction_for->user_full_name }}</strong>
                   @if(!empty($transaction->transaction_for->address))
