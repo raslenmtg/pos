@@ -25,31 +25,12 @@
         </div>
         <!-- <div class="clearfix"></div> -->
 
-        {{--<div class="col-sm-12 hide">
-            <div class="form-group">
-                {!! Form::label('sell_price_tax', __('business.sell_price_tax') . ':') !!}
-                <div class="input-group">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="sell_price_tax" value="includes" 
-                            class="input-icheck" @if($business->sell_price_tax == 'includes') {{'checked'}} @endif> Includes the Sale Tax
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="sell_price_tax" value="excludes" 
-                            class="input-icheck" @if($business->sell_price_tax == 'excludes') {{'checked'}} @endif>Excludes the Sale Tax (Calculate sale tax on Selling Price provided in Add Purchase)
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>--}}
-        <div class="col-sm-4">
+       <!-- <div class="col-sm-4">
             <div class="form-group">
                 {!! Form::label('item_addition_method', __('lang_v1.sales_item_addition_method') . ':') !!}
                 {!! Form::select('item_addition_method', [ 0 => __('lang_v1.add_item_in_new_row'), 1 =>  __('lang_v1.increase_item_qty')], $business->item_addition_method, ['class' => 'form-control select2', 'style' => 'width: 100%;']); !!}
             </div>
-        </div>
+        </div> 
         <div class="clearfix"></div>
         <div class="col-sm-4">
             <div class="form-group">
@@ -91,7 +72,7 @@
                 </div>
             </div>
         </div>
-        <div class="clearfix"></div>
+        <div class="clearfix"></div>-->
         <div class="col-sm-4">
             <div class="form-group">
                 <div class="checkbox">
@@ -148,18 +129,5 @@
             </div>
         </div>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col-md-12"><h4>@lang('lang_v1.payment_link') @show_tooltip(__('lang_v1.payment_link_help_text')):</h4></div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                    {!! Form::checkbox('pos_settings[enable_payment_link]', 1, !empty($pos_settings['enable_payment_link']) , [ 'class' => 'input-icheck', 'id' => 'enable_payment_link']); !!} {{ __( 'lang_v1.enable_payment_link' ) }}
-                    </label>
-                </div>
-            </div>
-        </div>
-       
-    </div>
+
 </div>

@@ -215,16 +215,7 @@
             </div>
           </div>
           @endif
-          <div class="col-sm-4">
-            <div class="checkbox">
-              <label>
-                {!! Form::checkbox('enable_sr_no', 1, $product->enable_sr_no, ['class' => 'input-icheck']); !!} <strong>@lang('lang_v1.enable_imei_or_sr_no')</strong>
-              </label>
-              @show_tooltip(__('lang_v1.tooltip_sr_no'))
-            </div>
-          </div>
-
-          <div class="col-sm-4">
+         <div class="col-sm-4">
           <div class="form-group">
             <br>
             <label>
@@ -273,15 +264,6 @@
           @endforeach
         @endif
 
-
-        <div class="col-sm-4">
-          <div class="form-group">
-            {!! Form::label('weight',  __('lang_v1.weight') . ':') !!}
-            {!! Form::text('weight', $product->weight, ['class' => 'form-control', 'placeholder' => __('lang_v1.weight')]); !!}
-          </div>
-        </div>
-        <div class="clearfix"></div>
-        
         @php
             $custom_labels = json_decode(session('business.custom_labels'), true);
             $product_custom_fields = !empty($custom_labels['product']) ? $custom_labels['product'] : [];
@@ -311,12 +293,6 @@
             @endif
         @endforeach
 
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('preparation_time_in_minutes',  __('lang_v1.preparation_time_in_minutes') . ':') !!}
-            {!! Form::number('preparation_time_in_minutes', $product->preparation_time_in_minutes, ['class' => 'form-control', 'placeholder' => __('lang_v1.preparation_time_in_minutes')]); !!}
-          </div>
-        </div>
         <!--custom fields-->
         @include('layouts.partials.module_form_part')
         </div>
