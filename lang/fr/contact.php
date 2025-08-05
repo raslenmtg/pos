@@ -24,7 +24,7 @@
      'all_purchases_linked_to_this_contact' => 'Tous les achats liés à ce contact',
      'all_sells_linked_to_this_contact' => 'Toutes les ventes liées à ce contact',
      'total_purchase_due' => 'Total des achats impayés',
-     'pay_due_amount' => 'Montant dû',
+     'pay_due_amount' => 'Impayé',
      'total_paid' => 'Total payé',
      'total_purchase_paid' => "Total des paiements d'achat",
      'total_sale_paid' => 'Total des paiements de vente',

@@ -369,7 +369,7 @@ return [
     'credit_limit' => 'الحد الائتماني',
     'credit_limit_help' => 'تبقى فارغة من دون حدود',
     'cutomer_credit_limit_exeeded' => 'تجاوز حدود ائتمان العملاء <br>:credit_limit',
-    'custom_payment_1' => 'مخصص الدفع 1',
+    'custom_payment_1' => 'كمبيالة',
     'custom_payment_2' => 'مخصص الدفع 2',
     'custom_payment_3' => 'مخصص الدفع 3',
     'transaction_no' => 'رقم العملية',
