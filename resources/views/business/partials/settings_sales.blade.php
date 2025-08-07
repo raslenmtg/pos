@@ -23,75 +23,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="clearfix"></div> -->
-
-       <!-- <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('item_addition_method', __('lang_v1.sales_item_addition_method') . ':') !!}
-                {!! Form::select('item_addition_method', [ 0 => __('lang_v1.add_item_in_new_row'), 1 =>  __('lang_v1.increase_item_qty')], $business->item_addition_method, ['class' => 'form-control select2', 'style' => 'width: 100%;']); !!}
-            </div>
-        </div> 
-        <div class="clearfix"></div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('amount_rounding_method', __('lang_v1.amount_rounding_method') . ':') !!} @show_tooltip(__('lang_v1.amount_rounding_method_help'))
-                {!! Form::select('pos_settings[amount_rounding_method]', 
-                [ 
-                    '1' =>  __('lang_v1.round_to_nearest_whole_number'), 
-                    '0.05' =>  __('lang_v1.round_to_nearest_decimal', ['multiple' => 0.05]), 
-                    '0.1' =>  __('lang_v1.round_to_nearest_decimal', ['multiple' => 0.1]),
-                    '0.5' =>  __('lang_v1.round_to_nearest_decimal', ['multiple' => 0.5])
-                ], 
-                !empty($pos_settings['amount_rounding_method']) ? $pos_settings['amount_rounding_method'] : null, ['class' => 'form-control select2', 'style' => 'width: 100%;', 'placeholder' => __('lang_v1.none')]); !!}
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="form-group">
-                <div class="checkbox">
-                <br>
-                  <label>
-                    {!! Form::checkbox('pos_settings[enable_msp]', 1,  
-                        !empty($pos_settings['enable_msp']) ? true : false , 
-                    [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.sale_price_is_minimum_sale_price' ) }} 
-                  </label>
-                  @show_tooltip(__('lang_v1.minimum_sale_price_help'))
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <div class="checkbox">
-                <br>
-                  <label>
-                    {!! Form::checkbox('pos_settings[allow_overselling]', 1,  
-                        !empty($pos_settings['allow_overselling']) ? true : false , 
-                    [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.allow_overselling' ) }} 
-                  </label>
-                  @show_tooltip(__('lang_v1.allow_overselling_help'))
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>-->
-        <div class="col-sm-4">
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                    {!! Form::checkbox('pos_settings[enable_sales_order]', 1, !empty($pos_settings['enable_sales_order']) , [ 'class' => 'input-icheck', 'id' => 'enable_sales_order']); !!} {{ __( 'lang_v1.enable_sales_order' ) }}
-                    </label>
-                  @show_tooltip(__('lang_v1.sales_order_help_text'))
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                    {!! Form::checkbox('pos_settings[is_pay_term_required]', 1, !empty($pos_settings['is_pay_term_required']) , [ 'class' => 'input-icheck', 'id' => 'is_pay_term_required']); !!} {{ __( 'lang_v1.is_pay_term_required' ) }}
-                    </label>
-                </div>
-            </div>
-        </div>
+     
 
     </div>
     <hr>

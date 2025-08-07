@@ -33,21 +33,6 @@
             </div>
         </div>
 
-        <div class="clearfix"></div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('transaction_edit_days', __('business.transaction_edit_days') . ':*') !!}
-                @show_tooltip(__('tooltip.transaction_edit_days'))
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="fa fa-edit"></i>
-                    </span>
-                    {!! Form::number('transaction_edit_days', $business->transaction_edit_days, ['class' => 'form-control','placeholder' => __('business.transaction_edit_days'), 'required']); !!}
-                </div>
-            </div>
-        </div>
-
-
 
     </div>
      {{-- code --}}

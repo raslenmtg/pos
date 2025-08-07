@@ -56,4 +56,6 @@
      'show_customer' => 'Afficher les informations client',
      'paid_label' => 'Étiquette Montant payé',
      'customer_label' => 'Étiquette client',
+     'invoice_scheme_for_pos'=>'le schéma du facture pour POV',
+     'invoice_scheme_for_sale'=>'le schéma du facture pour vente manuelle',
  ];

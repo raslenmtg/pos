@@ -36,9 +36,9 @@
           <table class="table subscription-details">
             <thead>
               <tr>
-                <th>Package</th>
-                <th>Quantity</th>
-                <th>Price</th>
+                <th>Packet</th>
+                <th>Quantité</th>
+                <th>Prix</th>
               </tr>
             </thead>
             <body>
@@ -56,17 +56,12 @@
         <div class="col-xs-12">
           <table class="table">
             <tr>
-              <th>Created At:</th>
+              <th>Créé a:</th>
               <td>{{@format_date($subscription->created_at)}}</td>
-              <th>Payment Transaction ID:</th>
+              <th>Paiement Transaction:</th>
               <td>{{$subscription->payment_transaction_id}}</td>
             </tr>
-            <tr>
-              <th>Created By:</th>
-              <td>{{$subscription->created_user->user_full_name}}</td>
-              <th>Paid Via:</th>
-              <td>{{$subscription->paid_via}}</td>
-            </tr>
+          
           </table>
         </div>
       </div>

@@ -332,20 +332,6 @@
 	            </div>
 		        <div class="clearfix"></div>
 
-		        @if((!empty($pos_settings['enable_sales_order']) && $sale_type != 'sales_order') || $is_order_request_enabled)
-					<div class="col-sm-3">
-						<div class="form-group">
-							{!! Form::label('sales_order_ids', __('lang_v1.sales_order').':') !!}
-							{!! Form::select('sales_order_ids[]', [], null, ['class' => 'form-control select2', 'multiple', 'id' => 'sales_order_ids']); !!}
-						</div>
-					</div>
-					<div class="clearfix"></div>
-				@endif
-				<!-- Call restaurant module if defined -->
-		        @if(in_array('tables' ,$enabled_modules) || in_array('service_staff' ,$enabled_modules))
-		        	<span id="restaurant_module_span">
-		        	</span>
-		        @endif
 			@endcomponent
 
 			@component('components.widget', ['class' => 'box-solid'])

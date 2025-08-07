@@ -209,8 +209,8 @@
                 </div>
             </div>
         </div>
-        <div class="clearfix"></div>
-        <div class="col-sm-6">
+        
+        <div class="col-sm-4">
             <div class="form-group">
                 <div class="checkbox">
                 <br>
@@ -223,32 +223,7 @@
             </div>
         </div>
 
-        <div class="col-sm-6">
-            <div class="form-group">
-                <div class="checkbox">
-                <br>
-                  <label>
-                    {!! Form::checkbox('pos_settings[inline_service_staff]', 1,  
-                    !empty($pos_settings['inline_service_staff']) ? true : false , 
-                    [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.enable_service_staff_in_product_line' ) }}
-                  </label>
-                  @show_tooltip(__('lang_v1.inline_service_staff_tooltip'))
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                <div class="checkbox">
-                <br>
-                  <label>
-                    {!! Form::checkbox('pos_settings[is_service_staff_required]', 1,  
-                    empty($pos_settings['is_service_staff_required']) ? 0 : 1 , 
-                    [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.is_service_staff_required' ) }}
-                  </label>
-                </div>
-            </div>
-        </div>
+   
         <div class="col-sm-4">
             <div class="form-group">
                 <div class="checkbox">
@@ -259,19 +234,6 @@
                     [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.disable_credit_sale_button' ) }}
                   </label>
                   @show_tooltip(__('lang_v1.show_credit_sale_btn_help'))
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-4">
-            <div class="form-group">
-                <div class="checkbox">
-                <br>
-                  <label>
-                    {!! Form::checkbox('pos_settings[enable_weighing_scale]', 1,  
-                    empty($pos_settings['enable_weighing_scale']) ? 0 : 1 , 
-                    [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.enable_weighing_scale' ) }}
-                  </label>
                 </div>
             </div>
         </div>
@@ -315,19 +277,8 @@
             </div>
         </div>
 
-        <div class="col-sm-4">
-            <div class="form-group">
-                <div class="checkbox">
-                <br>
-                  <label>
-                    {!! Form::checkbox('pos_settings[show_pricing_on_product_sugesstion]', 1,  
-                        !empty($pos_settings['show_pricing_on_product_sugesstion']) , 
-                    [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.show_pricing_on_product_sugesstion' ) }}
-                  </label>
-                </div>
-            </div>
-        </div>
+    
     </div>    
-    <hr>
-    @include('business.partials.settings_weighing_scale')
+ 
+ 
 </div>

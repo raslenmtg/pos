@@ -101,14 +101,14 @@
                             <tr>
                                 <th>@lang( 'superadmin::lang.package_name' )</th>
                                 <th>@lang( 'superadmin::lang.start_date' )</th>
-                                <th>@lang( 'superadmin::lang.trial_end_date' )</th>
+                         
                                 <th>@lang( 'superadmin::lang.end_date' )</th>
                                 <th>@lang( 'superadmin::lang.price' )</th>
-                                <th>@lang( 'superadmin::lang.paid_via' )</th>
+                        
                                 <th>@lang( 'superadmin::lang.payment_transaction_id' )</th>
                                 <th>@lang( 'sale.status' )</th>
                                 <th>@lang( 'lang_v1.created_at' )</th>
-                                <th>@lang( 'business.created_by' )</th>
+                            
                                 <th>@lang('messages.action')</th>
                             </tr>
                             </thead>
@@ -143,14 +143,14 @@
 			columns: [
 			    {data: 'package_name', name: 'P.name'},
 			    {data: 'start_date', name: 'start_date'},
-			    {data: 'trial_end_date', name: 'trial_end_date'},
+		
 			    {data: 'end_date', name: 'end_date'},
 			    {data: 'package_price', name: 'package_price'},
-			    {data: 'paid_via', name: 'paid_via'},
+		
 			    {data: 'payment_transaction_id', name: 'payment_transaction_id'},
 			    {data: 'status', name: 'status'},
 			    {data: 'created_at', name: 'created_at'},
-			    {data: 'created_by', name: 'created_by'},
+			  
 			    {data: 'action', name: 'action', searchable: false, orderable: false},
 			],
 			"fnDrawCallback": function (oSettings) {

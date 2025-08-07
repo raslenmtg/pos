@@ -108,15 +108,6 @@
 	    </td>
 	</tr>
 	
-	@if(isset($pos_settings['enable_weighing_scale']) && $pos_settings['enable_weighing_scale'] == 1)
-		<tr>
-		    <td>@lang('lang_v1.weighing_scale'):</td>
-		    <td>
-		    	@if(!empty($shortcuts["pos"]["weighing_scale"]))
-			    	{{ $shortcuts["pos"]["weighing_scale"] }}
-			    @endif
-		    </td>
-		</tr>
-	@endif
+	
 	
 </table>
