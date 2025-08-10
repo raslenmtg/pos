@@ -203,18 +203,19 @@ class BusinessUtil extends Util
         //Add POS shortcuts
         $business_details['keyboard_shortcuts'] = '{"pos":{"express_checkout":"shift+e","pay_n_ckeckout":"shift+p","draft":"shift+d","cancel":"shift+c","edit_discount":"shift+i","edit_order_tax":"shift+t","add_payment_row":"shift+r","finalize_payment":"shift+f","recent_product_quantity":"f2","add_new_product":"f4"}}';
 
-        //Add prefixes
+        $business_details['custom_labels']='{"payments":{"custom_pay_1":"Lettre de change","custom_pay_2":null,"custom_pay_3":null,"custom_pay_4":null,"custom_pay_5":null,"custom_pay_6":null,"custom_pay_7":null},"contact":{"custom_field_1":null,"custom_field_2":null,"custom_field_3":null,"custom_field_4":null,"custom_field_5":null,"custom_field_6":null,"custom_field_7":null,"custom_field_8":null,"custom_field_9":null,"custom_field_10":null},"product":{"custom_field_1":null,"custom_field_2":null,"custom_field_3":null,"custom_field_4":null,"custom_field_5":null,"custom_field_6":null,"custom_field_7":null,"custom_field_8":null,"custom_field_9":null,"custom_field_10":null,"custom_field_11":null,"custom_field_12":null,"custom_field_13":null,"custom_field_14":null,"custom_field_15":null,"custom_field_16":null,"custom_field_17":null,"custom_field_18":null,"custom_field_19":null,"custom_field_20":null},"product_cf_details":{"1":{"type":null,"dropdown_options":null},"2":{"type":null,"dropdown_options":null},"3":{"type":null,"dropdown_options":null},"4":{"type":null,"dropdown_options":null},"5":{"type":null,"dropdown_options":null},"6":{"type":null,"dropdown_options":null},"7":{"type":null,"dropdown_options":null},"8":{"type":null,"dropdown_options":null},"9":{"type":null,"dropdown_options":null},"10":{"type":null,"dropdown_options":null},"11":{"type":null,"dropdown_options":null},"12":{"type":null,"dropdown_options":null},"13":{"type":null,"dropdown_options":null},"14":{"type":null,"dropdown_options":null},"15":{"type":null,"dropdown_options":null},"16":{"type":null,"dropdown_options":null},"17":{"type":null,"dropdown_options":null},"18":{"type":null,"dropdown_options":null},"19":{"type":null,"dropdown_options":null},"20":{"type":null,"dropdown_options":null}},"location":{"custom_field_1":null,"custom_field_2":null,"custom_field_3":null,"custom_field_4":null},"user":{"custom_field_1":null,"custom_field_2":null,"custom_field_3":null,"custom_field_4":null},"purchase":{"custom_field_1":null,"custom_field_2":null,"custom_field_3":null,"custom_field_4":null},"purchase_shipping":{"custom_field_1":null,"custom_field_2":null,"custom_field_3":null,"custom_field_4":null,"custom_field_5":null},"sell":{"custom_field_1":null,"custom_field_2":null,"custom_field_3":null,"custom_field_4":null},"shipping":{"custom_field_1":null,"custom_field_2":null,"custom_field_3":null,"custom_field_4":null,"custom_field_5":null},"types_of_service":{"custom_field_1":null,"custom_field_2":null,"custom_field_3":null,"custom_field_4":null,"custom_field_5":null,"custom_field_6":null}}';
+     /*   //Add prefixes
         $business_details['ref_no_prefixes'] = [
-            'purchase' => 'PO',
+            'purchase' => 'AC',
             'stock_transfer' => 'ST',
             'stock_adjustment' => 'SA',
-            'sell_return' => 'CN',
-            'expense' => 'EP',
+            'sell_return' => 'RA',
+            'expense' => 'DE',
             'contacts' => 'CO',
-            'purchase_payment' => 'PP',
+            'purchase_payment' => 'PA',
             'sell_payment' => 'SP',
             'business_location' => 'BL',
-        ];
+        ];*/
 
         //Disable inline tax editing
         $business_details['enable_inline_tax'] = 0;

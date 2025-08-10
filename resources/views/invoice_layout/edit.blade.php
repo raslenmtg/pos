@@ -158,27 +158,8 @@
   <div class="box box-solid">
     <div class="box-body">
       <div class="row">
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('invoice_heading', __('invoice.invoice_heading') . ':' ) !!}
-            {!! Form::text('invoice_heading', $invoice_layout->invoice_heading, ['class' => 'form-control',
-              'placeholder' => __('invoice.invoice_heading') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('invoice_heading_not_paid', __('invoice.invoice_heading_not_paid') . ':' ) !!}
-            {!! Form::text('invoice_heading_not_paid', $invoice_layout->invoice_heading_not_paid, ['class' => 'form-control',
-              'placeholder' => __('invoice.invoice_heading_not_paid') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('invoice_heading_paid', __('invoice.invoice_heading_paid') . ':' ) !!}
-            {!! Form::text('invoice_heading_paid', $invoice_layout->invoice_heading_paid, ['class' => 'form-control',
-              'placeholder' => __('invoice.invoice_heading_paid') ]); !!}
-          </div>
-        </div>
+    
+      
         <div class="col-sm-3">
           <div class="form-group">
             {!! Form::label('proforma_heading', __('lang_v1.proforma_heading') . ':' ) !!}
@@ -187,12 +168,7 @@
               'placeholder' => __('lang_v1.proforma_heading'), 'id' => 'proforma_heading' ]); !!}
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('quotation_heading', __('lang_v1.quotation_heading') . ':' ) !!}@show_tooltip(__('lang_v1.tooltip_quotation_heading'))
-            {!! Form::text('quotation_heading', $invoice_layout->quotation_heading, ['class' => 'form-control', 'placeholder' => __('lang_v1.quotation_heading') ]); !!}
-          </div>
-        </div>
+    
 
         <div class="col-sm-3">
           <div class="form-group">
@@ -201,52 +177,7 @@
               'placeholder' => __('lang_v1.sales_order_heading'), 'id' => 'sales_order_heading' ]); !!}
           </div>
         </div>
-
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('invoice_no_prefix', __('invoice.invoice_no_prefix') . ':' ) !!}
-            {!! Form::text('invoice_no_prefix', $invoice_layout->invoice_no_prefix, ['class' => 'form-control',
-              'placeholder' => __('invoice.invoice_no_prefix') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('quotation_no_prefix', __('lang_v1.quotation_no_prefix') . ':' ) !!}
-            {!! Form::text('quotation_no_prefix', $invoice_layout->quotation_no_prefix, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.quotation_no_prefix') ]); !!}
-          </div>
-        </div>
         
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('date_label', __('lang_v1.date_label') . ':' ) !!}
-            {!! Form::text('date_label', $invoice_layout->date_label, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.date_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('due_date_label', __('lang_v1.due_date_label') . ':' ) !!}
-            {!! Form::text('common_settings[due_date_label]', !empty($invoice_layout->common_settings['due_date_label']) ? $invoice_layout->common_settings['due_date_label'] : null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.due_date_label'), 'id' => 'due_date_label' ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                {!! Form::checkbox('common_settings[show_due_date]', 1, !empty($invoice_layout->common_settings['show_due_date']), ['class' => 'input-icheck']); !!} @lang('lang_v1.show_due_date')</label>
-              </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('date_time_format', __('lang_v1.date_time_format') . ':' ) !!}
-            {!! Form::text('date_time_format', $invoice_layout->date_time_format, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.date_time_format') ]); !!} 
-              <p class="help-block">{!! __('lang_v1.date_time_format_help') !!}</p>
-          </div>
-        </div>
         @php
         $sell_custom_field_1_label = !empty($custom_labels['sell']['custom_field_1']) ? $custom_labels['sell']['custom_field_1'] : '';
 
@@ -356,21 +287,8 @@
               </div>
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('customer_label', __('invoice.customer_label') . ':' ) !!}
-            {!! Form::text('customer_label', $invoice_layout->customer_label, ['class' => 'form-control',
-              'placeholder' => __('invoice.customer_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                {!! Form::checkbox('show_client_id', 1, $invoice_layout->show_client_id, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_client_id')</label>
-              </div>
-          </div>
-        </div>
+    
+    
         <div class="col-sm-3">
           <div class="form-group">
             {!! Form::label('client_id_label', __('lang_v1.client_id_label') . ':' ) !!}
@@ -568,54 +486,14 @@
   <div class="box box-solid">
     <div class="box-body">
       <div class="row">
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('table_product_label', __('lang_v1.product_label') . ':' ) !!}
-            {!! Form::text('table_product_label', $invoice_layout->table_product_label, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.product_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('table_qty_label', __('lang_v1.qty_label') . ':' ) !!}
-            {!! Form::text('table_qty_label', $invoice_layout->table_qty_label, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.qty_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('table_unit_price_label', __('lang_v1.unit_price_label') . ':' ) !!}
-            {!! Form::text('table_unit_price_label', $invoice_layout->table_unit_price_label, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.unit_price_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('table_subtotal_label', __('lang_v1.subtotal_label') . ':' ) !!}
-            {!! Form::text('table_subtotal_label', $invoice_layout->table_subtotal_label, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.subtotal_label') ]); !!}
-          </div>
-        </div>
+     
         <div class="col-sm-3">
           <div class="form-group">
             {!! Form::label('cat_code_label', __('lang_v1.cat_code_label') . ':' ) !!}
             {!! Form::text('cat_code_label', $invoice_layout->cat_code_label, ['class' => 'form-control', 'placeholder' => 'HSN or Category Code' ]); !!}
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('total_quantity_label', __('lang_v1.total_quantity_label') . ':' ) !!}
-            {!! Form::text('common_settings[total_quantity_label]', !empty($invoice_layout->common_settings['total_quantity_label']) ? $invoice_layout->common_settings['total_quantity_label'] : null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.total_quantity_label'), 'id' => 'total_quantity_label' ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('item_discount_label', __('lang_v1.item_discount_label') . ':' ) !!}
-            {!! Form::text('common_settings[item_discount_label]', !empty($invoice_layout->common_settings['item_discount_label']) ? $invoice_layout->common_settings['item_discount_label'] : null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.item_discount_label'), 'id' => 'item_discount_label' ]); !!}
-          </div>
-        </div>
+     
 
         <div class="col-sm-3">
           <div class="form-group">
@@ -726,14 +604,6 @@
           </div>
         @endif
 
-        <div class="col-sm-3">
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                {!! Form::checkbox('show_image', 1, !empty($invoice_layout->show_image), ['class' => 'input-icheck']); !!} @lang('lang_v1.show_product_image')</label>
-              </div>
-          </div>
-        </div>
         <div class="clearfix"></div>
         <div class="col-sm-3">
           <div class="form-group">
@@ -776,35 +646,8 @@
   <div class="box box-solid">
     <div class="box-body">
       <div class="row">
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('sub_total_label', __('invoice.sub_total_label') . ':' ) !!}
-            {!! Form::text('sub_total_label', $invoice_layout->sub_total_label, ['class' => 'form-control',
-              'placeholder' => __('invoice.sub_total_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('discount_label', __('invoice.discount_label') . ':' ) !!}
-            {!! Form::text('discount_label', $invoice_layout->discount_label, ['class' => 'form-control',
-              'placeholder' => __('invoice.discount_label') ]); !!}
-          </div>
-        </div>
-        
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('tax_label', __('invoice.tax_label') . ':' ) !!}
-            {!! Form::text('tax_label', $invoice_layout->tax_label, ['class' => 'form-control',
-              'placeholder' => __('invoice.tax_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('total_label', __('invoice.total_label') . ':' ) !!}
-            {!! Form::text('total_label', $invoice_layout->total_label, ['class' => 'form-control',
-              'placeholder' => __('invoice.total_label') ]); !!}
-          </div>
-        </div>
+     
+     
         <div class="col-sm-3">
           <div class="form-group">
             {!! Form::label('total_items_label', __('lang_v1.total_items_label') . ':' ) !!}
@@ -812,27 +655,7 @@
               'placeholder' => __('lang_v1.total_items_label'), 'id' => 'total_items_label' ]); !!}
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('round_off_label', __('lang_v1.round_off_label') . ':' ) !!}
-            {!! Form::text('round_off_label', $invoice_layout->round_off_label, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.round_off_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('total_due_label', __('invoice.total_due_label') . ' (' . __('lang_v1.current_sale') . '):' ) !!}
-            {!! Form::text('total_due_label', $invoice_layout->total_due_label, ['class' => 'form-control',
-              'placeholder' => __('invoice.total_due_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('paid_label', __('invoice.paid_label') . ':' ) !!}
-            {!! Form::text('paid_label', $invoice_layout->paid_label, ['class' => 'form-control',
-              'placeholder' => __('invoice.paid_label') ]); !!}
-          </div>
-        </div>
+    
         <div class="col-sm-3">
           <div class="form-group">
             <div class="checkbox">
@@ -842,16 +665,7 @@
           </div>
         </div>
 
-        <!-- Barcode -->
-        <div class="col-sm-3">
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                {!! Form::checkbox('show_barcode', 1, $invoice_layout->show_barcode, ['class' => 'input-icheck']); !!} @lang('invoice.show_barcode')</label>
-              </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
+      
         <div class="col-sm-3">
           <div class="form-group">
             {!! Form::label('prev_bal_label', __('invoice.total_due_label') . ' (' . __('lang_v1.all_sales') . '):' ) !!}
@@ -893,13 +707,7 @@
                 @endif
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('word_format', __('lang_v1.word_format') . ':') !!} 
-            @show_tooltip(__('lang_v1.word_format_help'))
-            {!! Form::select('common_settings[num_to_word_format]', ['international' => __('lang_v1.international'), 'indian' => __('lang_v1.indian')], $invoice_layout->common_settings['num_to_word_format'] ?? 'international', ['class' => 'form-control', 'id' => 'word_format']); !!}
-          </div>
-        </div>
+       
 
         <div class="col-sm-3">
           <div class="form-group">
@@ -924,10 +732,7 @@
           </div>
         </div>
 
-        <div class="clearfix"></div>
-        <div class="col-md-12 hide">
-          <hr/>
-        </div>
+       
         
         <div class="col-sm-12">
           <div class="form-group">
@@ -964,130 +769,10 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-4">
-        <div class="form-group">
-            <div class="checkbox">
-                <label>
-                {!! Form::checkbox('common_settings[show_qr_code_label]', 1, !empty($invoice_layout->common_settings['show_qr_code_label']), ['class' => 'input-icheck']); !!} @lang('lang_v1.show_labels')</label>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-4">
-        <div class="form-group">
-            <div class="checkbox">
-                <label>
-                {!! Form::checkbox('common_settings[zatca_qr]', 1, !empty($invoice_layout->common_settings['zatca_qr']), ['class' => 'input-icheck']); !!} @lang('lang_v1.zatca_qr')</label>
-                @show_tooltip(__('lang_v1.zatca_qr_help'))
-            </div>
-        </div>
-    </div>
-    <div class="clearfix"></div>
-    <div class="col-md-12">
-      <h4>@lang('lang_v1.fields_to_be_shown'):</h4>
-    </div>
-    @php
-      $qr_code_fields = empty($invoice_layout->qr_code_fields) ? [] : $invoice_layout->qr_code_fields;
-    @endphp
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'business_name', in_array('business_name', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('business.business_name')</label>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'address', in_array('address', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('lang_v1.business_location_address')</label>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'tax_1', in_array('tax_1', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('lang_v1.business_tax_1')</label>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'tax_2', in_array('tax_2', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('lang_v1.business_tax_2')</label>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'invoice_no', in_array('invoice_no', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('sale.invoice_no')</label>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'invoice_datetime', in_array('invoice_datetime', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('lang_v1.invoice_datetime')</label>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'subtotal', in_array('subtotal', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('sale.subtotal')</label>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'total_amount', in_array('total_amount', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('lang_v1.total_amount_with_tax')</label>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'total_tax', in_array('total_tax', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('lang_v1.total_tax')</label>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'customer_name', in_array('customer_name', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('sale.customer_name')</label>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group">
-        <div class="checkbox">
-          <label>
-            {!! Form::checkbox('qr_code_fields[]', 'invoice_url', in_array('invoice_url', $qr_code_fields), ['class' => 'input-icheck']); !!} @lang('lang_v1.view_invoice_url')</label>
-        </div>
-      </div>
-    </div>
-
+   
+  
   </div>
   @endcomponent
-@if(!empty($enabled_modules) && in_array('types_of_service', $enabled_modules) )
-    @include('types_of_service.invoice_layout_settings', ['module_info' => $invoice_layout->module_info])
-@endif
-<!-- Call restaurant module if defined -->
-@include('restaurant.partials.invoice_layout', ['module_info' => $invoice_layout->module_info, 'edit_il' => true])
-
-@if(Module::has('Repair'))
-  @include('repair::layouts.partials.invoice_layout_settings', ['module_info' => $invoice_layout->module_info, 'edit_il' => true])
-@endif
 
 
 <div class="box box-solid">

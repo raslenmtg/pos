@@ -1,10 +1,219 @@
 <!-- business information here -->
+<style>
+	.invoice-classic {
+		font-family: Arial, sans-serif;
+		max-width: 210mm;
+		margin: 0 auto;
+		padding: 10mm;
+		background: #fff;
+		color: #000;
+		line-height: 1.4;
+		font-size: 12px;
+	}
+	.invoice-header {
+		border-bottom: 2px solid #000;
+		padding-bottom: 15px;
+		margin-bottom: 20px;
+	}
+	.company-logo {
+		max-height: 60px;
+		margin-bottom: 10px;
+	}
+	.company-info {
+		text-align: center;
+		margin-bottom: 15px;
+	}
+	.company-name {
+		font-size: 20px;
+		font-weight: bold;
+		color: #000;
+		margin-bottom: 8px;
+		text-transform: uppercase;
+	}
+	.company-details {
+		font-size: 11px;
+		color: #000;
+		margin-bottom: 3px;
+	}
+	.invoice-title {
+		font-size: 18px;
+		font-weight: bold;
+		color: #000;
+		text-align: center;
+		margin: 15px 0;
+		padding: 8px;
+		border: 2px solid #000;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+	}
+	.invoice-meta {
+		border: 1px solid #000;
+		padding: 15px;
+		margin-bottom: 20px;
+	}
+	.meta-left, .meta-right {
+		font-size: 11px;
+	}
+	.meta-label {
+		font-weight: bold;
+		color: #000;
+		display: inline-block;
+		min-width: 100px;
+	}
+	.invoice-table {
+		width: 100%;
+		border-collapse: collapse;
+		margin: 15px 0;
+		border: 1px solid #000;
+	}
+	.invoice-table th {
+		background: #000;
+		color: #fff;
+		padding: 8px 6px;
+		font-weight: bold;
+		text-align: left;
+		font-size: 11px;
+		border: 1px solid #000;
+	}
+	.invoice-table td {
+		padding: 6px;
+		border: 1px solid #000;
+		vertical-align: top;
+		font-size: 10px;
+	}
+	.invoice-table tbody tr:nth-child(even) {
+		background: #f9f9f9;
+	}
+	.text-right {
+		text-align: right !important;
+	}
+	.totals-section {
+		margin-top: 20px;
+	}
+	.payment-info {
+		float: left;
+		width: 48%;
+		margin-right: 2%;
+	}
+	.totals-table {
+		float: right;
+		width: 48%;
+		margin-left: 2%;
+	}
+	.totals-table table, .payment-info table {
+		width: 100%;
+		border-collapse: collapse;
+		border: 1px solid #000;
+	}
+	.totals-table th, .totals-table td, .payment-info th, .payment-info td {
+		padding: 6px 8px;
+		border: 1px solid #000;
+		font-size: 11px;
+	}
+	.totals-table th, .payment-info th {
+		background: #f0f0f0;
+		font-weight: bold;
+		color: #000;
+	}
+	.total-final {
+		background: #000 !important;
+		color: #fff !important;
+		font-weight: bold;
+		font-size: 12px;
+	}
+	.tax-summary {
+		margin-top: 20px;
+		clear: both;
+	}
+	.tax-summary table {
+		width: 100%;
+		border-collapse: collapse;
+		border: 1px solid #000;
+	}
+	.tax-summary th {
+		background: #000;
+		color: #fff;
+		padding: 8px;
+		font-weight: bold;
+		border: 1px solid #000;
+	}
+	.tax-summary td {
+		padding: 6px 8px;
+		border: 1px solid #000;
+		text-align: center;
+		font-size: 11px;
+	}
+	.invoice-footer {
+		margin-top: 30px;
+		padding-top: 15px;
+		border-top: 1px solid #000;
+		clear: both;
+	}
+	.footer-text {
+		font-size: 11px;
+		color: #000;
+		margin-bottom: 10px;
+	}
+	.barcode-section {
+		text-align: center;
+		margin-top: 10px;
+	}
+	.additional-notes {
+		margin: 15px 0;
+		padding: 10px;
+		border: 1px solid #000;
+		border-left: 4px solid #000;
+		font-size: 11px;
+		color: #000;
+	}
+	.product-image {
+		max-width: 40px;
+		height: auto;
+		margin-right: 8px;
+		float: left;
+		border: 1px solid #ccc;
+	}
+	
+	/* Print optimizations */
+	@media print {
+		.invoice-classic {
+			padding: 5mm;
+			margin: 0;
+		}
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		.invoice-table th {
+			-webkit-print-color-adjust: exact;
+			print-color-adjust: exact;
+		}
+		.total-final {
+			-webkit-print-color-adjust: exact;
+			print-color-adjust: exact;
+		}
+		.tax-summary th {
+			-webkit-print-color-adjust: exact;
+			print-color-adjust: exact;
+		}
+	}
+	
+	/* Clear floats utility */
+	.clearfix::after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+</style>
 
-<div class="row" style="color: #000000 !important;">
+<div class="invoice-classic">
+<div class="row invoice-header" style="color: #000000 !important;">
 		<!-- Logo -->
 		@if(empty($receipt_details->letter_head))
 			@if(!empty($receipt_details->logo))
-				<img style="max-height: 120px; width: auto;" src="{{$receipt_details->logo}}" class="img img-responsive center-block">
+				<div class="text-center">
+					<img src="{{$receipt_details->logo}}" class="company-logo img img-responsive">
+				</div>
 			@endif
 
 			<!-- Header text -->
@@ -15,68 +224,75 @@
 			@endif
 
 			<!-- business information here -->
-			<div class="col-xs-12 text-center">
-				<h2 class="text-center">
+			<div class="col-xs-12 company-info">
+				<div class="company-name">
 					<!-- Shop & Location Name  -->
 					@if(!empty($receipt_details->display_name))
 						{{$receipt_details->display_name}}
 					@endif
-				</h2>
+				</div>
 
 				<!-- Address -->
-				<p>
+				<div class="company-details">
 				@if(!empty($receipt_details->address))
-						<small class="text-center">
 						{!! $receipt_details->address !!}
-						</small>
 				@endif
-				@if(!empty($receipt_details->contact))
-					<br/>{!! $receipt_details->contact !!}
-				@endif	
-				@if(!empty($receipt_details->contact) && !empty($receipt_details->website))
-					, 
-				@endif
-				@if(!empty($receipt_details->website))
-					{{ $receipt_details->website }}
+				</div>
+				@if(!empty($receipt_details->contact) || !empty($receipt_details->website))
+				<div class="company-details">
+					@if(!empty($receipt_details->contact))
+						{!! $receipt_details->contact !!}
+					@endif
+					@if(!empty($receipt_details->contact) && !empty($receipt_details->website))
+						 • 
+					@endif
+					@if(!empty($receipt_details->website))
+						{{ $receipt_details->website }}
+					@endif
+				</div>
 				@endif
 				@if(!empty($receipt_details->location_custom_fields))
-					<br>{{ $receipt_details->location_custom_fields }}
+				<div class="company-details">{{ $receipt_details->location_custom_fields }}</div>
 				@endif
-				</p>
-				<p>
-				@if(!empty($receipt_details->sub_heading_line1))
-					{{ $receipt_details->sub_heading_line1 }}
+				@if(!empty($receipt_details->sub_heading_line1) || !empty($receipt_details->sub_heading_line2) || !empty($receipt_details->sub_heading_line3) || !empty($receipt_details->sub_heading_line4) || !empty($receipt_details->sub_heading_line5))
+				<div class="company-details">
+					@if(!empty($receipt_details->sub_heading_line1))
+						{{ $receipt_details->sub_heading_line1 }}<br>
+					@endif
+					@if(!empty($receipt_details->sub_heading_line2))
+						{{ $receipt_details->sub_heading_line2 }}<br>
+					@endif
+					@if(!empty($receipt_details->sub_heading_line3))
+						{{ $receipt_details->sub_heading_line3 }}<br>
+					@endif
+					@if(!empty($receipt_details->sub_heading_line4))
+						{{ $receipt_details->sub_heading_line4 }}<br>
+					@endif		
+					@if(!empty($receipt_details->sub_heading_line5))
+						{{ $receipt_details->sub_heading_line5 }}
+					@endif
+				</div>
 				@endif
-				@if(!empty($receipt_details->sub_heading_line2))
-					<br>{{ $receipt_details->sub_heading_line2 }}
+				@if(!empty($receipt_details->tax_info1) || !empty($receipt_details->tax_info2))
+				<div class="company-details">
+					@if(!empty($receipt_details->tax_info1))
+						<strong>{{ $receipt_details->tax_label1 }}</strong> {{ $receipt_details->tax_info1 }}
+						@if(!empty($receipt_details->tax_info2))<br>@endif
+					@endif
+					@if(!empty($receipt_details->tax_info2))
+						<strong>{{ $receipt_details->tax_label2 }}</strong> {{ $receipt_details->tax_info2 }}
+					@endif
+				</div>
 				@endif
-				@if(!empty($receipt_details->sub_heading_line3))
-					<br>{{ $receipt_details->sub_heading_line3 }}
-				@endif
-				@if(!empty($receipt_details->sub_heading_line4))
-					<br>{{ $receipt_details->sub_heading_line4 }}
-				@endif		
-				@if(!empty($receipt_details->sub_heading_line5))
-					<br>{{ $receipt_details->sub_heading_line5 }}
-				@endif
-				</p>
-				<p>
-				@if(!empty($receipt_details->tax_info1))
-					<b>{{ $receipt_details->tax_label1 }}</b> {{ $receipt_details->tax_info1 }}
-				@endif
-
-				@if(!empty($receipt_details->tax_info2))
-					<b>{{ $receipt_details->tax_label2 }}</b> {{ $receipt_details->tax_info2 }}
-				@endif
-				</p>
-			@endif
+			</div>
+		@endif
 
 
 			<!-- Title of receipt -->
 			@if(!empty($receipt_details->invoice_heading))
-				<h3 class="text-center">
+				<div class="invoice-title">
 					{!! $receipt_details->invoice_heading !!}
-				</h3>
+				</div>
 			@endif
 		</div>
 		@if(!empty($receipt_details->letter_head))
@@ -84,46 +300,46 @@
 				<img style="width: 100%;margin-bottom: 10px;" src="{{$receipt_details->letter_head}}">
 			</div>
 		@endif
-	<div class="col-xs-12 text-center">
+	<div class="col-xs-12 invoice-meta">
 		<!-- Invoice  number, Date  -->
-		<p style="width: 100% !important" class="word-wrap">
-			<span class="pull-left text-left word-wrap">
-				@if(!empty($receipt_details->invoice_no_prefix))
-					<b>{!! $receipt_details->invoice_no_prefix !!}</b>
-				@endif
-				{{$receipt_details->invoice_no}}
+		<div class="row">
+			<div class="col-xs-6 meta-left">
+				<div style="margin-bottom: 8px;">
+					<span class="meta-label">Invoice #:</span>
+					@if(!empty($receipt_details->invoice_no_prefix))
+						{!! $receipt_details->invoice_no_prefix !!}
+					@endif
+					{{$receipt_details->invoice_no}}
+				</div>
 
 				@if(!empty($receipt_details->types_of_service))
-					<br/>
-					<span class="pull-left text-left">
-						<strong>{!! $receipt_details->types_of_service_label !!}:</strong>
+					<div style="margin-bottom: 8px;">
+						<span class="meta-label">{!! $receipt_details->types_of_service_label !!}:</span>
 						{{$receipt_details->types_of_service}}
-						<!-- Waiter info -->
-						@if(!empty($receipt_details->types_of_service_custom_fields))
-							@foreach($receipt_details->types_of_service_custom_fields as $key => $value)
-								<br><strong>{{$key}}: </strong> {{$value}}
-							@endforeach
-						@endif
-					</span>
+					</div>
+					@if(!empty($receipt_details->types_of_service_custom_fields))
+						@foreach($receipt_details->types_of_service_custom_fields as $key => $value)
+							<div style="margin-bottom: 5px;"><span class="meta-label">{{$key}}:</span> {{$value}}</div>
+						@endforeach
+					@endif
 				@endif
 
 				<!-- Table information-->
 		        @if(!empty($receipt_details->table_label) || !empty($receipt_details->table))
-		        	<br/>
-					<span class="pull-left text-left">
+		        	<div style="margin-bottom: 8px;">
 						@if(!empty($receipt_details->table_label))
-							<b>{!! $receipt_details->table_label !!}</b>
+							<span class="meta-label">{!! $receipt_details->table_label !!}:</span>
 						@endif
 						{{$receipt_details->table}}
-
-						<!-- Waiter info -->
-					</span>
+					</div>
 		        @endif
 
 				<!-- customer info -->
 				@if(!empty($receipt_details->customer_info))
-					<br/>
-					<b>{{ $receipt_details->customer_label }}</b> <br> {!! $receipt_details->customer_info !!} <br>
+					<div style="margin-bottom: 8px;">
+						<span class="meta-label">{{ $receipt_details->customer_label }}:</span><br>
+						{!! $receipt_details->customer_info !!}
+					</div>
 				@endif
 				@if(!empty($receipt_details->client_id_label))
 					<br/>
@@ -148,13 +364,19 @@
 					<br/>
 					<strong>{{ $receipt_details->customer_rp_label }}</strong> {{ $receipt_details->customer_total_rp }}
 				@endif
-			</span>
+			</div>
 
-			<span class="pull-right text-left">
-				<b>{{$receipt_details->date_label}}</b> {{$receipt_details->invoice_date}}
+			<div class="col-xs-6 meta-right text-right">
+				<div style="margin-bottom: 8px;">
+					<span class="meta-label">{{$receipt_details->date_label}}:</span>
+					{{$receipt_details->invoice_date}}
+				</div>
 
 				@if(!empty($receipt_details->due_date_label))
-				<br><b>{{$receipt_details->due_date_label}}</b> {{$receipt_details->due_date ?? ''}}
+				<div style="margin-bottom: 8px;">
+					<span class="meta-label">{{$receipt_details->due_date_label}}:</span>
+					{{$receipt_details->due_date ?? ''}}
+				</div>
 				@endif
 
 				@if(!empty($receipt_details->brand_label) || !empty($receipt_details->repair_brand))
@@ -262,8 +484,8 @@
 					<strong>{{ $receipt_details->sell_custom_field_4_label }}:</strong> {!!$receipt_details->sell_custom_field_4_value ?? ''!!}
 				@endif
 
-			</span>
-		</p>
+			</div>
+		</div>
 	</div>
 </div>
 
@@ -287,7 +509,7 @@
 				$p_width -= 10;
 			@endphp
 		@endif
-		<table class="table table-responsive table-slim">
+		<table class="invoice-table">
 			<thead>
 				<tr>
 					<th width="{{$p_width}}%">{{$receipt_details->table_product_label}}</th>
@@ -307,7 +529,7 @@
 					<tr>
 						<td>
 							@if(!empty($line['image']))
-								<img src="{{$line['image']}}" alt="Image" width="50" style="float: left; margin-right: 8px;">
+								<img src="{{$line['image']}}" alt="Product Image" class="product-image">
 							@endif
                             {{$line['name']}} {{$line['product_variation']}} {{$line['variation']}} 
                             @if(!empty($line['sub_sku'])), {{$line['sub_sku']}} @endif @if(!empty($line['brand'])), {{$line['brand']}} @endif @if(!empty($line['cat_code'])), {{$line['cat_code']}}@endif
@@ -398,11 +620,10 @@
 	</div>
 </div>
 
-<div class="row" style="color: #000000 !important;">
-	<div class="col-md-12"><hr/></div>
-	<div class="col-xs-6">
+<div class="totals-section clearfix" style="color: #000000 !important;">
+	<div class="payment-info">
 
-		<table class="table table-slim">
+		<table>
 
 			@if(!empty($receipt_details->payments))
 				@foreach($receipt_details->payments as $payment)
@@ -451,9 +672,8 @@
 		</table>
 	</div>
 
-	<div class="col-xs-6">
-        <div class="table-responsive">
-          	<table class="table table-slim">
+	<div class="totals-table">
+          	<table>
 				<tbody>
 					@if(!empty($receipt_details->total_quantity_label))
 						<tr>
@@ -592,7 +812,7 @@
 					@endif
 
 					<!-- Total -->
-					<tr>
+					<tr class="total-final">
 						<th>
 							{!! $receipt_details->total_label !!}
 						</th>
@@ -600,27 +820,26 @@
 							{{$receipt_details->total}}
 							@if(!empty($receipt_details->total_in_words))
 								<br>
-								<small>({{$receipt_details->total_in_words}})</small>
+								<small style="color: #ccc;">({{$receipt_details->total_in_words}})</small>
 							@endif
 						</td>
 					</tr>
 				</tbody>
         	</table>
-        </div>
     </div>
 
-    <div class="border-bottom col-md-12">
+    <div class="tax-summary">
 	    @if(empty($receipt_details->hide_price) && !empty($receipt_details->tax_summary_label) )
 	        <!-- tax -->
 	        @if(!empty($receipt_details->taxes))
-	        	<table class="table table-slim table-bordered">
+	        	<table>
 	        		<tr>
 	        			<th colspan="2" class="text-center">{{$receipt_details->tax_summary_label}}</th>
 	        		</tr>
 	        		@foreach($receipt_details->taxes as $key => $val)
 	        			<tr>
-	        				<td class="text-center"><b>{{$key}}</b></td>
-	        				<td class="text-center">{{$val}}</td>
+	        				<td><strong>{{$key}}</strong></td>
+	        				<td>{{$val}}</td>
 	        			</tr>
 	        		@endforeach
 	        	</table>
@@ -629,28 +848,31 @@
 	</div>
 
 	@if(!empty($receipt_details->additional_notes))
-	    <div class="col-xs-12">
-	    	<p>{!! nl2br($receipt_details->additional_notes) !!}</p>
+	    <div class="additional-notes">
+	    	<strong>Additional Notes:</strong><br>
+	    	{!! nl2br($receipt_details->additional_notes) !!}
 	    </div>
     @endif
     
 </div>
-<div class="row" style="color: #000000 !important;">
+<div class="invoice-footer" style="color: #000000 !important;">
 	@if(!empty($receipt_details->footer_text))
-	<div class="@if($receipt_details->show_barcode || $receipt_details->show_qr_code) col-xs-8 @else col-xs-12 @endif">
+	<div class="footer-text">
 		{!! $receipt_details->footer_text !!}
 	</div>
 	@endif
 	@if($receipt_details->show_barcode || $receipt_details->show_qr_code)
-		<div class="@if(!empty($receipt_details->footer_text)) col-xs-4 @else col-xs-12 @endif text-center">
+		<div class="barcode-section">
 			@if($receipt_details->show_barcode)
 				{{-- Barcode --}}
-				<img class="center-block" src="data:image/png;base64,{{DNS1D::getBarcodePNG($receipt_details->invoice_no, 'C128', 2,30,array(39, 48, 54), true)}}">
+				<img src="data:image/png;base64,{{DNS1D::getBarcodePNG($receipt_details->invoice_no, 'C128', 2,30,array(39, 48, 54), true)}}">
 			@endif
 			
 			@if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
-				<img class="center-block mt-5" src="data:image/png;base64,{{DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54])}}">
+				<img src="data:image/png;base64,{{DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54])}}" style="margin-top: 10px;">
 			@endif
 		</div>
 	@endif
 </div>
+
+</div> <!-- End invoice-classic container -->
