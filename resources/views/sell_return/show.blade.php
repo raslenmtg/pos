@@ -116,7 +116,7 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-          <strong>{{ __('repair::lang.activities') }}:</strong><br>
+          <strong>{{ __('lang_v1.activities') }}:</strong><br>
           @includeIf('activity_log.activities', ['activity_type' => 'sell'])
       </div>
   </div>

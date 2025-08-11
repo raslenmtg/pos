@@ -3,19 +3,10 @@
 	<thead>
 		<tr>
 			<td>
-
-			@if(!empty($receipt_details->invoice_heading))
-				<p class="text-right text-muted-imp" style="font-weight: bold; font-size: 18px !important">{!! $receipt_details->invoice_heading !!}</p>
-			@endif
-
+				<p class="text-right text-muted-imp" style="font-weight: bold; font-size: 18px !important">Facture d'avoir</p>
 			<p class="text-right">
-				@if(!empty($receipt_details->invoice_no_prefix))
-					{!! $receipt_details->invoice_no_prefix !!}
-				@endif
-
 				{{$receipt_details->invoice_no}}
 			</p>
-
 			</td>
 		</tr>
 	</thead>
@@ -39,7 +30,7 @@
 		
 		<!-- Logo -->
 		@if(!empty($receipt_details->logo))
-			<img src="{{$receipt_details->logo}}" class="img">
+			<img src="{{$receipt_details->logo}}" class="img invoice-img">
 			<br/>
 		@endif
 
@@ -81,15 +72,7 @@
 			</p>
         @endif
 
-		<!-- Waiter info -->
-		@if(!empty($receipt_details->waiter_label) || !empty($receipt_details->waiter))
-        	<p>
-				@if(!empty($receipt_details->waiter_label))
-					{!! $receipt_details->waiter_label !!}
-				@endif
-				{{$receipt_details->waiter}}
-			</p>
-        @endif
+	
 	</div>
 
 	<div class="col-md-6 invoice-col width-50">
@@ -293,10 +276,7 @@
 </div>
 
 <div class="row invoice-info color-555" style="page-break-inside: avoid !important">
-	<div class="col-md-6 invoice-col width-50">
-		<b class="pull-left">Authorized Signatory</b>
-	</div>
-
+	
 	<div class="col-md-6 invoice-col width-50">
 		<table class="table-no-side-cell-border table-no-top-cell-border width-100">
 			<tbody>
@@ -375,12 +355,7 @@
 		{{$receipt_details->additional_notes}}
 	</div>
 
-	{{-- Barcode --}}
-	@if($receipt_details->show_barcode)
-		<div class="col-xs-6">
-			<img class="center-block" src="data:image/png;base64,{{DNS1D::getBarcodePNG($receipt_details->invoice_no, 'C128', 2,30,array(39, 48, 54), true)}}">
-		</div>
-	@endif
+
 </div>
 
 @if(!empty($receipt_details->footer_text))

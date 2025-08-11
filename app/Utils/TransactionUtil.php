@@ -1578,84 +1578,25 @@ class TransactionUtil extends Util
         $output['footer_text'] = $invoice_layout->footer_text;
 
         //Barcode related information.
-        $output['show_barcode'] = ! empty($il->show_barcode) ? true : false;
+        $output['show_barcode'] =  false;
 
         if (in_array($transaction_type, ['sell', 'sales_order'])) {
             //Qr code related information.
             $output['show_qr_code'] = ! empty($il->show_qr_code) ? true : false;
 
-            $zatca_qr = ! empty($il->common_settings['zatca_qr']) ? true : false;
-
-            if ($zatca_qr) {
-                $total_order_tax = $transaction->tax_amount + $total_line_taxes;
-                $qr_code_text = $this->_zatca_qr_text($business_details->name, $business_details->tax_number_1, $transaction->transaction_date, $transaction->final_total, $total_order_tax);
-            } else {
-                $is_label_enabled = ! empty($il->common_settings['show_qr_code_label']) ? true : false;
                 $qr_code_details = [];
                 $qr_code_fields = ! empty($il->qr_code_fields) ? $il->qr_code_fields : [];
-
-                if (in_array('business_name', $qr_code_fields)) {
-                    $qr_code_details[] = $is_label_enabled ? __('business.business').': '.$business_details->name : $business_details->name;
-                }
-                if (in_array('address', $qr_code_fields)) {
-                    $qr_code_details[] = $is_label_enabled ? __('business.address').': '.$location_details->name.', '.$output['address'] : $location_details->name.' '.str_replace(',', '', $output['address']);
-                }
-                if (in_array('tax_1', $qr_code_fields)) {
-                    $qr_code_details[] = $is_label_enabled ? $business_details->tax_label_1.': '.$business_details->tax_number_1 : $business_details->tax_number_1;
-                }
-                if (in_array('tax_2', $qr_code_fields)) {
-                    $qr_code_details[] = $is_label_enabled ? $business_details->tax_label_2.' '.$business_details->tax_number_2 : $business_details->tax_number_2;
-                }
-                if (in_array('invoice_no', $qr_code_fields)) {
-                    $qr_code_details[] = $is_label_enabled ? $il->invoice_no_prefix.': '.$transaction->invoice_no : $transaction->invoice_no;
-                }
-                if (in_array('invoice_datetime', $qr_code_fields)) {
-                    $qr_code_details[] = $is_label_enabled ? $output['date_label'].': '.$output['invoice_date'] : $output['invoice_date'];
-                }
-                if (in_array('subtotal', $qr_code_fields)) {
-                    $qr_code_details[] = $is_label_enabled ? $output['subtotal_label'].' '.$output['subtotal'] : $output['subtotal'];
-                }
-                if (in_array('total_amount', $qr_code_fields)) {
-                    $qr_code_details[] = $is_label_enabled ? $output['total_label'].' '.$output['total'] : $output['total'];
-                }
-                if (in_array('total_tax', $qr_code_fields)) {
-                    $total_order_tax = $transaction->tax_amount + $total_line_taxes;
-                    $total_order_tax_formatted = $this->num_f($total_order_tax, $show_currency, $business_details);
-                    $qr_code_details[] = $is_label_enabled ? __('sale.tax').': '.$total_order_tax_formatted : $total_order_tax_formatted;
-                }
-                if (in_array('customer_name', $qr_code_fields)) {
-                    $cust_label = $il->customer_label ?? __('contact.customer');
-                    $qr_code_details[] = $is_label_enabled ? $cust_label.': '.$customer->full_name : $customer->full_name;
-                }
-                if (in_array('invoice_url', $qr_code_fields)) {
-                    $qr_code_details[] = $this->getInvoiceUrl($transaction->id, $business_details->id);
-                }
-
+                $qr_code_details[] = $this->getInvoiceUrl($transaction->id, $business_details->id);
                 $output['qr_code_details'] = $qr_code_details;
 
-                $qr_code_text = $is_label_enabled ? implode(', ', $qr_code_details) : implode(' ', $qr_code_details);
-            }
-
+                $qr_code_text =  implode(' ', $qr_code_details);
             if ($transaction->status == 'final') {
                 $output['qr_code_text'] = $qr_code_text;
             }
         }
         //Module related information.
         $il->module_info = ! empty($il->module_info) ? json_decode($il->module_info, true) : [];
-        if (! empty($il->module_info['tables']) && $this->isModuleEnabled('tables')) {
-            //Table label & info
-            $output['table_label'] = null;
-            $output['table'] = null;
-            if (isset($il->module_info['tables']['show_table'])) {
-                $output['table_label'] = ! empty($il->module_info['tables']['table_label']) ? $il->module_info['tables']['table_label'] : '';
-                if (! empty($transaction->res_table_id)) {
-                    $table = ResTable::find($transaction->res_table_id);
-                }
-
-                //res_table_id
-                $output['table'] = ! empty($table->name) ? $table->name : '';
-            }
-        }
+      
 
         if (! empty($il->module_info['types_of_service']) && $this->isModuleEnabled('types_of_service') && ! empty($transaction->types_of_service_id)) {
             //Table label & info

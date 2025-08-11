@@ -263,7 +263,7 @@
 				@endforeach
 			@endif
 		</table>
-		<b class="pull-left">Authorized Signatory</b>
+		
 	</div>
 
 	<div class="col-md-6 invoice-col width-50">

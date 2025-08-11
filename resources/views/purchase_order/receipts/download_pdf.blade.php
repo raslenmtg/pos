@@ -384,8 +384,7 @@
 				@if(!empty($last_purchase))
 					{{$last_purchase->sales_person->user_full_name}}
 				@endif
-				<br>
-				{{__('lang_v1.authorized_signatory')}}
+			
 			</td>
 		</tr>
 	</table>

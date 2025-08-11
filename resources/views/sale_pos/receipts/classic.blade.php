@@ -212,7 +212,7 @@
 		@if(empty($receipt_details->letter_head))
 			@if(!empty($receipt_details->logo))
 				<div class="text-center">
-					<img src="{{$receipt_details->logo}}" class="company-logo img img-responsive">
+					<img src="{{$receipt_details->logo}}" class="company-logo invoive-img img img-responsive">
 				</div>
 			@endif
 
@@ -635,29 +635,6 @@
 				@endforeach
 			@endif
 
-			<!-- Total Paid-->
-			@if(!empty($receipt_details->total_paid))
-				<tr>
-					<th>
-						{!! $receipt_details->total_paid_label !!}
-					</th>
-					<td class="text-right">
-						{{$receipt_details->total_paid}}
-					</td>
-				</tr>
-			@endif
-
-			<!-- Total Due-->
-			@if(!empty($receipt_details->total_due) && !empty($receipt_details->total_due_label))
-			<tr>
-				<th>
-					{!! $receipt_details->total_due_label !!}
-				</th>
-				<td class="text-right">
-					{{$receipt_details->total_due}}
-				</td>
-			</tr>
-			@endif
 
 			@if(!empty($receipt_details->all_due))
 			<tr>

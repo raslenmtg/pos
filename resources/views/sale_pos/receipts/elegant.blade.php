@@ -70,23 +70,6 @@
 			</div>
 		@endif
 
-		@if(!empty($receipt_details->all_due))
-			<div class="bg-light-blue-active text-right font-23 padding-5">
-				<span class="pull-left bg-light-blue-active">
-					{!! $receipt_details->all_bal_label !!}
-				</span>
-
-				{{$receipt_details->all_due}}
-			</div>
-		@endif
-		
-		<!-- Total Paid-->
-		@if(!empty($receipt_details->total_paid))
-			<div class="text-right font-23 ">
-				<span class="pull-left">{!! $receipt_details->total_paid_label !!}</span>
-				{{$receipt_details->total_paid}}
-			</div>
-		@endif
 		<!-- Date-->
 		@if(!empty($receipt_details->date_label))
 			<div class="text-right font-23 ">
@@ -583,7 +566,7 @@
 				@endforeach
 			@endif
 		</table>
-		<b class="pull-left">{{__('lang_v1.authorized_signatory')}}</b>
+		
 	</div>
 
 	<div class="col-md-6 invoice-col width-50">

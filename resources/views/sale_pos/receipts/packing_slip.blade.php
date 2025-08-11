@@ -205,12 +205,6 @@
 	</div>
 </div>
 
-<div class="row invoice-info color-555" style="page-break-inside: avoid !important">
-	<div class="col-md-6 invoice-col width-50">
-		<b class="pull-left">@lang('lang_v1.authorized_signatory')</b>
-	</div>
-</div>
-
 {{-- Barcode --}}
 @if($receipt_details->show_barcode)
 <br>

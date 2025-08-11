@@ -608,30 +608,6 @@
 					</div>
 				@endforeach
 			@endif
-            <!-- Total Paid-->
-				@if(!empty($receipt_details->total_paid))
-					<div class="flex-box">
-						<p class="width-50 text-left">
-							{!! $receipt_details->total_paid_label !!}
-						</p>
-						<p class="width-50 text-right">
-							{{$receipt_details->total_paid}}
-						</p>
-					</div>
-				@endif
-
-				<!-- Total Due-->
-				@if(!empty($receipt_details->total_due) && !empty($receipt_details->total_due_label))
-					<div class="flex-box">
-						<p class="width-50 text-left">
-							{!! $receipt_details->total_due_label !!}
-						</p>
-						<p class="width-50 text-right">
-							{{$receipt_details->total_due}}
-						</p>
-					</div>
-				@endif
-
 				@if(!empty($receipt_details->all_due))
 					<div class="flex-box">
 						<p class="width-50 text-left">

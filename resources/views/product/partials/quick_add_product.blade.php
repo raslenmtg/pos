@@ -27,7 +27,7 @@
         <div class="col-sm-4">
           <div class="form-group">
             {!! Form::label('barcode_type', __('product.barcode_type') . ':*') !!}
-              {!! Form::select('barcode_type', $barcode_types, 'C128', ['class' => 'form-control select2', 'required']); !!}
+              {!! Form::select('barcode_type', $barcode_types, 'EAN13', ['class' => 'form-control select2', 'required']); !!}
           </div>
         </div>
         <div class="clearfix"></div>
@@ -128,12 +128,7 @@
               {!! Form::select('product_locations[]', $business_locations, $default_location, ['class' => 'form-control select2', 'multiple', 'id' => 'product_locations']); !!}
           </div>
         </div>
-        <div class="col-sm-4">
-          <div class="form-group">
-            {!! Form::label('weight',  __('lang_v1.weight') . ':') !!}
-            {!! Form::text('weight', null, ['class' => 'form-control', 'placeholder' => __('lang_v1.weight')]); !!}
-          </div>
-        </div>
+     
         <div class="clearfix"></div>
         <div class="col-sm-8">
           <div class="form-group">
