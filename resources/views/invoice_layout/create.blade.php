@@ -489,15 +489,7 @@
   <div class="box box-solid">
     <div class="box-body">
       <div class="row">
-       
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('cat_code_label', __('lang_v1.cat_code_label') . ':' ) !!}
-            {!! Form::text('cat_code_label', 'HSN', ['class' => 'form-control',
-              'placeholder' => 'HSN or Category Code' ]); !!}
-          </div>
-        </div>
-
+     
         <div class="col-sm-3">
           <div class="form-group">
             {!! Form::label('discounted_unit_price_label', __('lang_v1.discounted_unit_price_label') . ':' ) !!}
@@ -644,16 +636,6 @@
   <div class="box box-solid">
     <div class="box-body">
       <div class="row">
-       
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('total_due_label', __('invoice.total_due_label') . ' (' . __('lang_v1.current_sale') . '):' ) !!}
-            {!! Form::text('total_due_label', __('report.total_due'), ['class' => 'form-control',
-              'placeholder' => __('invoice.total_due_label') ]); !!}
-          </div>
-        </div>
-       
-
         <div class="col-sm-3">
           <div class="form-group">
             <div class="checkbox">
@@ -662,40 +644,7 @@
               </div>
           </div>
         </div>
-        <!-- Barcode -->
-        <div class="col-sm-3">
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                {!! Form::checkbox('show_barcode', 1, false, ['class' => 'input-icheck']); !!} @lang('invoice.show_barcode')</label>
-              </div>
-          </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('prev_bal_label', __('invoice.total_due_label') . ' (' . __('lang_v1.all_sales') . '):' ) !!}
-            {!! Form::text('prev_bal_label', '', ['class' => 'form-control',
-              'placeholder' => __('invoice.total_due_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-5">
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                {!! Form::checkbox('show_previous_bal', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_previous_bal_due')</label>
-                @show_tooltip(__('lang_v1.previous_bal_due_help'))
-              </div>
-          </div>
-        </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('change_return_label', __('lang_v1.change_return_label') . ':' ) !!} @show_tooltip(__('lang_v1.change_return_help'))
-            {!! Form::text('change_return_label', __('lang_v1.change_return'), ['class' => 'form-control',
-              'placeholder' => __('lang_v1.change_return_label') ]); !!}
-          </div>
-        </div>
-
+   
         <div class="col-sm-3 hide" id="hide_price_div">
           <div class="form-group">
             <div class="checkbox">
@@ -714,17 +663,6 @@
                 @endif
           </div>
         </div>
-
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('tax_summary_label', __('lang_v1.tax_summary_label') . ':' ) !!}
-            {!! Form::text('common_settings[tax_summary_label]', '', ['class' => 'form-control', 'placeholder' => __('lang_v1.tax_summary_label'), 'id' => 'tax_summary_label' ]); !!}
-          </div>
-        </div>
-
-        
-
-
       </div>
     </div>
   </div>

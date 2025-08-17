@@ -74,28 +74,11 @@
 
 						<input type="hidden" name="shipping_status" id="shipping_status" value="@if(empty($edit)){{''}}@else{{$transaction->shipping_status}}@endif">
 
-						<input type="hidden" name="delivered_to" id="delivered_to" value="@if(empty($edit)){{''}}@else{{$transaction->delivered_to}}@endif">
-
-						<input type="hidden" name="delivery_person" id="delivery_person" value="@if(empty($edit)){{''}}@else{{$transaction->delivery_person}}@endif">
-
 						<input type="hidden" name="shipping_charges" id="shipping_charges" value="@if(empty($edit)){{@num_format(0.00)}} @else{{@num_format($transaction->shipping_charges)}} @endif" data-default="0.00">
 					</span>
 				</td>
-				@if(in_array('types_of_service', $enabled_modules))
-					<td class="col-sm-3 col-xs-6 d-inline-table">
-						<b class="tw-text-base md:tw-text-lg tw-font-bold">@lang('lang_v1.packing_charge')(+):</b>
-						<i class="fas fa-edit cursor-pointer service_modal_btn"></i> 
-						<span  class="tw-text-base md:tw-text-lg tw-font-semibold" id="packing_charge_text">
-							0
-						</span>
-					</td>
-				@endif
-				@if(!empty($pos_settings['amount_rounding_method']) && $pos_settings['amount_rounding_method'] > 0)
-				<td>
-					<b class="tw-text-base md:tw-text-lg tw-font-bold" id="round_off">@lang('lang_v1.round_off'):</b> <span id="round_off_text">0</span>								
-					<input type="hidden" name="round_off_amount" id="round_off_amount" value=0>
-				</td>
-				@endif
+			
+			
 			</tr>
 		</table>
 	</div>

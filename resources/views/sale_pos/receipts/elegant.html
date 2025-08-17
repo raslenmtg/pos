@@ -68,7 +68,7 @@
         .party-box h3 {
             margin-top: 0;
             font-size: 16px;
-           
+          
             padding-bottom: 5px;
             margin-bottom: 10px;
         }
@@ -216,15 +216,6 @@
                  color: #fff !important;
                  border: 1px solid;
             }
-            .furl{
-                 position: fixed;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                text-align: center;
-                font-size: 12px;
-                color: #333;
-            }
         }
     </style>
 </head>
@@ -267,30 +258,33 @@
 
         <section class="invoice-parties">
             <div class="party-box from-box">
-                  <div >
+                   <div >
                      @if(!empty($receipt_details->display_name))
-                            {{$receipt_details->display_name}} 
+                            {{$receipt_details->display_name}}
                         @endif
-                        
+                          <br>
                         @if(!empty($receipt_details->address))
-                           <br> {!! $receipt_details->address !!}  
+                            {!! $receipt_details->address !!}
                         @endif
-                      
+                        <br>
                         @if(!empty($receipt_details->contact))
                             <br>{!! $receipt_details->contact !!}
                         @endif
-                         
+                          <br>
                         @if(!empty($receipt_details->website))
                             <br>{{ $receipt_details->website }}
                         @endif
                     </div>
             </div>
  		 @if(!empty($receipt_details->customer_info))
-            <div class="party-box to-box" style='border-bottom:none'>
+           <div class="party-box to-box" style='border-bottom:none'>
                 <h3>Client:  {!! $receipt_details->customer_info !!}</h3>
                 <div class="word-wrap">
                     @if(!empty($receipt_details->client_id_label))
                         <p>{{ $receipt_details->client_id_label }} <span >{{ $receipt_details->client_id_label }}:</span> {{ $receipt_details->client_id }}</p>
+                    @endif
+                    @if(!empty($receipt_details->customer_custom_fields))
+                        <p>{!! $receipt_details->customer_custom_fields !!}</p>
                     @endif
                     @if(!empty($receipt_details->sales_person_label))
                         <p><span >{{ $receipt_details->sales_person_label }}:</span> {{ $receipt_details->sales_person }}</p>
@@ -366,78 +360,40 @@
 
         <section class="invoice-summary">
             <div class="summary-left">
-                @if(!empty($receipt_details->payments))
-                    <span style="font-size: 16px;font-weight:bold">Méthode de Paiement:</span>
+            
+                    <span style="font-size: 16px;">Paiement</span>
                     <table class="payments-table">
-                        @foreach($receipt_details->payments as $payment)
+                    
                             <tr>
                                 <td>{{$payment['method']}}</td>
                                 <td class="text-right">{{$payment['amount']}}</td>
                                 <td>({{$payment['date']}})</td>
                             </tr>
-                        @endforeach
+                     
                     </table>
-                @endif
+            
                 
-                @if(!empty($receipt_details->additional_notes))
+              
                     <div class="additional-notes">
                         <h3 style="font-size: 16px;">Notes</h3>
                         <p>{!! nl2br($receipt_details->additional_notes) !!}</p>
                     </div>
-                @endif
+          
             </div>
 
             <div class="summary-right">
                 <table class="totals-table">
                     <tr>
-                        <td>{!! $receipt_details->subtotal_label !!}</td>
-                        <td>{{$receipt_details->subtotal_exc_tax}}</td>
+                        <td>{sssss}</td>
+                        <td>{{fffffx}}</td>
                     </tr>
-
-                    @if( !empty($receipt_details->discount) )
-                        <tr>
-                            <td>{!! $receipt_details->discount_label !!}</td>
-                            <td>(-) {{$receipt_details->discount}}</td>
-                        </tr>
-                    @endif
-                    @if( !empty($receipt_details->total_line_discount) )
-                        <tr>
-                            <td>{!! $receipt_details->line_discount_label !!}</td>
-                            <td>(-) {{$receipt_details->total_line_discount}}</td>
-                        </tr>
-                    @endif
-
-                    @if(!empty($receipt_details->shipping_charges))
-                        <tr>
-                            <td>{!! $receipt_details->shipping_charges_label !!}</td>
-                            <td>(+) {{$receipt_details->shipping_charges}}</td>
-                        </tr>
-                    @endif
-                    
-                    @if(!empty($receipt_details->group_tax_details))
-                        @foreach($receipt_details->group_tax_details as $key => $value)
-                            <tr>
-                                <td>{!! $key !!}</td>
-                                <td>(+) {{$value}}</td>
-                            </tr>
-                        @endforeach
-                    @else
-                        @if( !empty($receipt_details->tax) )
-                            <tr>
-                                <td>{!! $receipt_details->tax_label !!}</td>
-                                <td>(+) {{$receipt_details->tax}}</td>
-                            </tr>
-                        @endif
-                    @endif
 
                     <tr class="total-row">
-                        <td><strong>{!! $receipt_details->total_label !!}</strong></td>
-                        <td><strong>{{$receipt_details->total}}</strong></td>
+                        <td><strong>{!! ccccl !!}</strong></td>
+                        <td><strong>{{$rrrotal}}</strong></td>
                     </tr>
                 </table>
-                 @if(!empty($receipt_details->total_in_words))
-                    <p class="total-in-words">{{$receipt_details->total_in_words}}</p>
-                @endif
+               
             </div>
         </section>
 
@@ -456,8 +412,6 @@
             @endif
         </footer>
     </div>
- <div class="furl">
-         www.simplexgestion.tn
-    </div>
+
 </body>
 </html>

@@ -41,18 +41,8 @@
 				        </div>
 				    </div>
 
-				    <div class="col-md-6">
-				        <div class="form-group">
-				            {!! Form::label('delivered_to_modal', __('lang_v1.delivered_to') . ':' ) !!}
-				            {!! Form::text('delivered_to_modal', !empty($transaction->delivered_to) ? $transaction->delivered_to : null, ['class' => 'form-control','placeholder' => __('lang_v1.delivered_to')]); !!}
-				        </div>
-				    </div>
-					<div class="col-md-6">
-				        <div class="form-group">
-				            {!! Form::label('delivery_person_modal', __('lang_v1.delivery_person') . ':' ) !!} <br>
-				            {!! Form::select('delivery_person_modal', $users, !empty($transaction->delivery_person) ? $transaction->delivery_person : null, ['style' => 'width:100%' ,'class' => 'form-control select2 width-100','placeholder' => __('messages.please_select')]); !!}
-				        </div>
-				    </div>
+				 
+				
 				    @php
 				        $custom_labels = json_decode(session('business.custom_labels'), true);
 

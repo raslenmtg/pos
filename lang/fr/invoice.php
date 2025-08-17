@@ -52,7 +52,7 @@
      'total_due_label' => 'Étiquette total impayé',
      'invoice_heading_not_paid' => 'Suffixe de titre pour impayé',
      'invoice_heading_paid' => 'Suffixe de titre pour payé',
-     'show_payments' => 'Afficher les informations de paiement',
+     'show_payments' => 'Afficher les informations de méthode paiement',
      'show_customer' => 'Afficher les informations client',
      'paid_label' => 'Étiquette Montant payé',
      'customer_label' => 'Étiquette client',

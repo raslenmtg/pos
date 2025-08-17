@@ -489,14 +489,6 @@
      
         <div class="col-sm-3">
           <div class="form-group">
-            {!! Form::label('cat_code_label', __('lang_v1.cat_code_label') . ':' ) !!}
-            {!! Form::text('cat_code_label', $invoice_layout->cat_code_label, ['class' => 'form-control', 'placeholder' => 'HSN or Category Code' ]); !!}
-          </div>
-        </div>
-     
-
-        <div class="col-sm-3">
-          <div class="form-group">
             {!! Form::label('discounted_unit_price_label', __('lang_v1.discounted_unit_price_label') . ':' ) !!}
             {!! Form::text('common_settings[discounted_unit_price_label]', !empty($invoice_layout->common_settings['discounted_unit_price_label']) ? $invoice_layout->common_settings['discounted_unit_price_label'] : null, ['class' => 'form-control',
               'placeholder' => __('lang_v1.discounted_unit_price_label'), 'id' => 'discounted_unit_price_label' ]); !!}
@@ -639,35 +631,19 @@
   <div class="box box-solid">
     <div class="box-body">
       <div class="row">
-    
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('prev_bal_label', __('invoice.total_due_label') . ' (' . __('lang_v1.all_sales') . '):' ) !!}
-            {!! Form::text('prev_bal_label', $invoice_layout->prev_bal_label, ['class' => 'form-control',
-              'placeholder' => __('invoice.total_due_label') ]); !!}
-          </div>
-        </div>
-        <div class="col-sm-5">
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                {!! Form::checkbox('show_previous_bal', 1, $invoice_layout->show_previous_bal, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_previous_bal_due')</label>
-                @show_tooltip(__('lang_v1.previous_bal_due_help'))
-              </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="form-group">
-            {!! Form::label('change_return_label', __('lang_v1.change_return_label') . ':' ) !!} @show_tooltip(__('lang_v1.change_return_help'))
-            {!! Form::text('change_return_label', $invoice_layout->change_return_label, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.change_return_label') ]); !!}
-          </div>
-        </div>
         <div class="col-sm-3 @if($invoice_layout->design != 'slim') hide @endif" id="hide_price_div">
           <div class="form-group">
             <div class="checkbox">
               <label>
                 {!! Form::checkbox('common_settings[hide_price]', 1, !empty($invoice_layout->common_settings['hide_price']), ['class' => 'input-icheck']); !!} @lang('lang_v1.hide_all_prices')</label>
+              </div>
+          </div>
+        </div>
+       <div class="col-sm-3">
+          <div class="form-group">
+            <div class="checkbox">
+              <label>
+                {!! Form::checkbox('show_payments', 1, $invoice_layout->show_payments, ['class' => 'input-icheck']); !!} @lang('invoice.show_payments')</label>
               </div>
           </div>
         </div>
@@ -681,14 +657,7 @@
                 @endif
           </div>
         </div>
-       
-
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('tax_summary_label', __('lang_v1.tax_summary_label') . ':' ) !!}
-            {!! Form::text('common_settings[tax_summary_label]', !empty($invoice_layout->common_settings['tax_summary_label']) ? $invoice_layout->common_settings['tax_summary_label'] : null, ['class' => 'form-control', 'placeholder' => __('lang_v1.tax_summary_label'), 'id' => 'tax_summary_label' ]); !!}
-          </div>
-        </div>
+      
 
       </div>
     </div>
@@ -697,15 +666,7 @@
     <div class="box-body">
       <div class="row">
         <div class="col-sm-12">
-        
-        <div class="col-sm-6 hide">
-          <div class="form-group">
-            {!! Form::label('highlight_color', __('invoice.highlight_color') . ':' ) !!}
-            {!! Form::text('highlight_color', $invoice_layout->highlight_color, ['class' => 'form-control',
-              'placeholder' => __('invoice.highlight_color') ]); !!}
-          </div>
-        </div>
-
+      
        
         
         <div class="col-sm-12">

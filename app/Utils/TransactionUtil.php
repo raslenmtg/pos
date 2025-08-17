@@ -1070,7 +1070,7 @@ class TransactionUtil extends Util
         //Shop Contact Info
         $output['contact'] = '';
         if ($il->show_mobile_number == 1 && ! empty($location_details->mobile)) {
-            $output['contact'] .= '<b>'.__('contact.mobile').':</b> '.$location_details->mobile;
+            $output['contact'] .= __('contact.mobile').': '.$location_details->mobile;
         }
         if ($il->show_alternate_number == 1 && ! empty($location_details->alternate_number)) {
             if (empty($output['contact'])) {
@@ -1103,7 +1103,7 @@ class TransactionUtil extends Util
                 if (! empty($customer->contact_address)) {
                     $output['customer_info'] .= '<br>';
                 }
-                $output['customer_info'] .= '<b>'.__('contact.mobile').'</b>: '.$customer->mobile;
+                $output['customer_info'] .=  ! empty($customer->mobile) ? __('contact.mobile').': '.$customer->mobile : '';
                 if (! empty($customer->landline)) {
                     $output['customer_info'] .= ', '.$customer->landline;
                 }
@@ -1517,13 +1517,13 @@ class TransactionUtil extends Util
                                 ];
                         } elseif ($value['method'] == 'cheque') {
                             $output['payments'][] =
-                                ['method' => $method.(! empty($value['cheque_number']) ? (', Cheque Number:'.$value['cheque_number']) : ''),
+                                ['method' => $method.(! empty($value['cheque_number']) ? (' :'.$value['cheque_number']) : ''),
                                     'amount' => $this->num_f($value['amount'], $show_currency, $business_details),
                                     'date' => $this->format_date($value['paid_on'], false, $business_details),
                                 ];
                         } elseif ($value['method'] == 'bank_transfer') {
                             $output['payments'][] =
-                                ['method' => $method.(! empty($value['bank_account_number']) ? (', Account Number:'.$value['bank_account_number']) : ''),
+                                ['method' => $method.(! empty($value['bank_account_number']) ? (' :'.$value['bank_account_number']) : ''),
                                     'amount' => $this->num_f($value['amount'], $show_currency, $business_details),
                                     'date' => $this->format_date($value['paid_on'], false, $business_details),
                                 ];
@@ -1571,7 +1571,7 @@ class TransactionUtil extends Util
         }
 
         //Check for barcode
-        $output['barcode'] = ($il->show_barcode == 1) ? $transaction->invoice_no : false;
+        $output['barcode'] =  false;
 
         //Additional notes
         $output['additional_notes'] = $transaction->additional_notes;
@@ -1594,146 +1594,7 @@ class TransactionUtil extends Util
                 $output['qr_code_text'] = $qr_code_text;
             }
         }
-        //Module related information.
-        $il->module_info = ! empty($il->module_info) ? json_decode($il->module_info, true) : [];
-      
-
-        if (! empty($il->module_info['types_of_service']) && $this->isModuleEnabled('types_of_service') && ! empty($transaction->types_of_service_id)) {
-            //Table label & info
-            $output['types_of_service_label'] = null;
-            $output['types_of_service'] = null;
-            if (isset($il->module_info['types_of_service']['show_types_of_service'])) {
-                $output['types_of_service_label'] = ! empty($il->module_info['types_of_service']['types_of_service_label']) ? $il->module_info['types_of_service']['types_of_service_label'] : '';
-                $output['types_of_service'] = $transaction->types_of_service->name;
-            }
-
-            if (isset($il->module_info['types_of_service']['show_tos_custom_fields'])) {
-                $types_of_service_custom_labels = $this->getCustomLabels($business_details, 'types_of_service');
-                $output['types_of_service_custom_fields'] = [];
-                if (! empty($transaction->service_custom_field_1)) {
-                    $tos_custom_label_1 = $types_of_service_custom_labels['custom_field_1'] ?? __('lang_v1.service_custom_field_1');
-                    $output['types_of_service_custom_fields'][$tos_custom_label_1] = $transaction->service_custom_field_1;
-                }
-                if (! empty($transaction->service_custom_field_2)) {
-                    $tos_custom_label_2 = $types_of_service_custom_labels['custom_field_2'] ?? __('lang_v1.service_custom_field_2');
-                    $output['types_of_service_custom_fields'][$tos_custom_label_2] = $transaction->service_custom_field_2;
-                }
-                if (! empty($transaction->service_custom_field_3)) {
-                    $tos_custom_label_3 = $types_of_service_custom_labels['custom_field_3'] ?? __('lang_v1.service_custom_field_3');
-                    $output['types_of_service_custom_fields'][$tos_custom_label_3] = $transaction->service_custom_field_3;
-                }
-                if (! empty($transaction->service_custom_field_4)) {
-                    $tos_custom_label_4 = $types_of_service_custom_labels['custom_field_4'] ?? __('lang_v1.service_custom_field_4');
-                    $output['types_of_service_custom_fields'][$tos_custom_label_4] = $transaction->service_custom_field_4;
-                }
-
-                if (! empty($transaction->service_custom_field_5)) {
-                    $tos_custom_label_5 = $types_of_service_custom_labels['custom_field_5'] ?? __('lang_v1.service_custom_field_5');
-                    $output['types_of_service_custom_fields'][$tos_custom_label_5] = $transaction->service_custom_field_5;
-                }
-
-                if (! empty($transaction->service_custom_field_6)) {
-                    $tos_custom_label_6 = $types_of_service_custom_labels['custom_field_6'] ?? __('lang_v1.service_custom_field_6');
-                    $output['types_of_service_custom_fields'][$tos_custom_label_6] = $transaction->service_custom_field_6;
-                }
-            }
-        }
-
-        if (! empty($il->module_info['service_staff']) && $this->isModuleEnabled('service_staff')) {
-            //Waiter label & info
-            $output['service_staff_label'] = null;
-            $output['service_staff'] = null;
-            if (isset($il->module_info['service_staff']['show_service_staff'])) {
-                $output['service_staff_label'] = ! empty($il->module_info['service_staff']['service_staff_label']) ? $il->module_info['service_staff']['service_staff_label'] : '';
-                if (! empty($transaction->res_waiter_id)) {
-                    $waiter = \App\User::find($transaction->res_waiter_id);
-                }
-
-                //res_table_id
-                $output['service_staff'] = ! empty($waiter->id) ? implode(' ', [$waiter->first_name, $waiter->last_name]) : '';
-            }
-        }
-
-        //Repair module details
-        if (! empty($il->module_info['repair']) && $transaction->sub_type == 'repair') {
-            if (! empty($il->module_info['repair']['show_repair_status'])) {
-                $output['repair_status_label'] = $il->module_info['repair']['repair_status_label'];
-                $output['repair_status'] = '';
-                if (! empty($transaction->repair_status_id)) {
-                    $repair_status = \Modules\Repair\Entities\RepairStatus::find($transaction->repair_status_id);
-                    $output['repair_status'] = $repair_status->name;
-                }
-            }
-
-            if (! empty($il->module_info['repair']['show_repair_warranty'])) {
-                $output['repair_warranty_label'] = $il->module_info['repair']['repair_warranty_label'];
-                $output['repair_warranty'] = '';
-                if (! empty($transaction->repair_warranty_id)) {
-                    $repair_warranty = \App\Warranty::find($transaction->repair_warranty_id);
-                    $output['repair_warranty'] = $repair_warranty->name;
-                }
-            }
-
-            if (! empty($il->module_info['repair']['show_serial_no'])) {
-                $output['serial_no_label'] = $il->module_info['repair']['serial_no_label'];
-                $output['repair_serial_no'] = $transaction->repair_serial_no;
-            }
-
-            if (! empty($il->module_info['repair']['show_defects'])) {
-                $output['defects_label'] = $il->module_info['repair']['defects_label'];
-                $output['repair_defects'] = $transaction->repair_defects;
-            }
-
-            if (! empty($il->module_info['repair']['show_model'])) {
-                $output['model_no_label'] = $il->module_info['repair']['model_no_label'];
-
-                $output['repair_model_no'] = '';
-
-                if (! empty($transaction->repair_model_id)) {
-                    $device_model = \Modules\Repair\Entities\DeviceModel::find($transaction->repair_model_id);
-
-                    if (! empty($device_model)) {
-                        $output['repair_model_no'] = $device_model->name;
-                    }
-                }
-            }
-
-            if (! empty($il->module_info['repair']['show_repair_checklist'])) {
-                $output['repair_checklist_label'] = $il->module_info['repair']['repair_checklist_label'];
-                $output['checked_repair_checklist'] = $transaction->repair_checklist;
-
-                $checklists = [];
-                if (! empty($transaction->repair_model_id)) {
-                    $model = \Modules\Repair\Entities\DeviceModel::find($transaction->repair_model_id);
-
-                    if (! empty($model) && ! empty($model->repair_checklist)) {
-                        $checklists = explode('|', $model->repair_checklist);
-                    }
-                }
-
-                $output['repair_checklist'] = $checklists;
-            }
-
-            if (! empty($il->module_info['repair']['show_device'])) {
-                $output['device_label'] = $il->module_info['repair']['device_label'];
-                $device = \App\Category::find($transaction->repair_device_id);
-
-                $output['repair_device'] = '';
-                if (! empty($device)) {
-                    $output['repair_device'] = $device->name;
-                }
-            }
-
-            if (! empty($il->module_info['repair']['show_brand'])) {
-                $output['brand_label'] = $il->module_info['repair']['brand_label'];
-                $brand = \App\Brands::find($transaction->repair_brand_id);
-                $output['repair_brand'] = '';
-                if (! empty($brand)) {
-                    $output['repair_brand'] = $brand->name;
-                }
-            }
-        }
-
+            $il->module_info =  [];
         //Custom fields
         $custom_labels = json_decode($business_details['custom_labels']);
 

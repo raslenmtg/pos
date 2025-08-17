@@ -17363,3 +17363,6 @@ Did you mean one of these?
 #87 C:\\Users\\Med Raslen\\Desktop\\UltimatePOS_v6.5\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('C:\\\\Users\\\\Med Ra...')
 #88 {main}
 "} 
+[2025-08-16 14:25:38] local.EMERGENCY: File:C:\Users\Med Raslen\Desktop\UltimatePOS_v6.5\storage\framework\views\2a689a70e0e3f26caabb83b75a3ecca60d2020ac.phpLine:454Message:Undefined property: stdClass::$show_barcode (View: C:\Users\Med Raslen\Desktop\UltimatePOS_v6.5\resources\views\sale_pos\receipts\elegant.blade.php)  
+[2025-08-16 14:25:46] local.EMERGENCY: File:C:\Users\Med Raslen\Desktop\UltimatePOS_v6.5\storage\framework\views\2a689a70e0e3f26caabb83b75a3ecca60d2020ac.phpLine:454Message:Undefined property: stdClass::$show_barcode (View: C:\Users\Med Raslen\Desktop\UltimatePOS_v6.5\resources\views\sale_pos\receipts\elegant.blade.php)  
+[2025-08-16 14:27:51] local.EMERGENCY: File:C:\Users\Med Raslen\Desktop\UltimatePOS_v6.5\storage\framework\views\2a689a70e0e3f26caabb83b75a3ecca60d2020ac.phpLine:454Message:Undefined property: stdClass::$show_barcode (View: C:\Users\Med Raslen\Desktop\UltimatePOS_v6.5\resources\views\sale_pos\receipts\elegant.blade.php)  
