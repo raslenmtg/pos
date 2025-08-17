@@ -150,22 +150,6 @@
   <div class="box-body">
     <div class="row">
       
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('proforma_heading', __('lang_v1.proforma_heading') . ':' ) !!}
-            @show_tooltip(__('lang_v1.tooltip_proforma_heading'))
-            {!! Form::text('common_settings[proforma_heading]', __('lang_v1.proforma_invoice'), ['class' => 'form-control',
-              'placeholder' => __('lang_v1.proforma_heading'), 'id' => 'proforma_heading' ]); !!}
-          </div>
-        </div>
-     
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('sales_order_heading', __('lang_v1.sales_order_heading') . ':' ) !!}
-            {!! Form::text('common_settings[sales_order_heading]', __('lang_v1.sales_order'), ['class' => 'form-control',
-              'placeholder' => __('lang_v1.sales_order_heading'), 'id' => 'sales_order_heading' ]); !!}
-          </div>
-        </div>
       
       @php
         $sell_custom_field_1_label = !empty($custom_labels['sell']['custom_field_1']) ? $custom_labels['sell']['custom_field_1'] : '';
@@ -216,23 +200,6 @@
           </div>
         </div>
         @endif
-        
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('sales_person_label', __('lang_v1.sales_person_label') . ':' ) !!}
-            {!! Form::text('sales_person_label', null, ['class' => 'form-control',
-            'placeholder' => __('lang_v1.sales_person_label') ]); !!}
-          </div>
-        </div>
-
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('commission_agent_label', __('lang_v1.commission_agent_label') . ':' ) !!}
-            {!! Form::text('commission_agent_label', __('lang_v1.commission_agent'), ['class' => 'form-control',
-            'placeholder' => __('lang_v1.commission_agent_label') ]); !!}
-          </div>
-        </div>
-
         <div class="clearfix"></div>
         
         <div class="col-sm-3">
@@ -291,22 +258,8 @@
               </div>
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('client_id_label', __('lang_v1.client_id_label') . ':' ) !!}
-            {!! Form::text('client_id_label', null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.client_id_label') ]); !!}
-          </div>
-        </div>
-        
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('client_tax_label', __('lang_v1.client_tax_label') . ':' ) !!}
-            {!! Form::text('client_tax_label', null, ['class' => 'form-control',
-            'placeholder' => __('lang_v1.client_tax_label') ]); !!}
-          </div>
-        </div>
-
+      
+     
         <div class="col-sm-3">
           <div class="form-group">
             <div class="checkbox">
