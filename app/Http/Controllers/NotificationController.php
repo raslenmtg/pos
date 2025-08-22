@@ -41,7 +41,7 @@ class NotificationController extends Controller
         $business_id = request()->session()->get('user.business_id');
 
         $notification_template = NotificationTemplate::getTemplate($business_id, $template_for);
-        debug($template_for);
+        
         $contact = null;
         $transaction = null;
         if ($template_for == 'new_booking') {
@@ -95,7 +95,7 @@ class NotificationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function send(Request $request)
-    {
+    {abort(403, 'Unauthorized action.');
         // if (!auth()->user()->can('send_notification')) {
         //     abort(403, 'Unauthorized action.');
         // }

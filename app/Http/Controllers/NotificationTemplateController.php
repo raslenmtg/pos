@@ -96,6 +96,7 @@ class NotificationTemplateController extends Controller
      */
     public function store(Request $request)
     {
+        
         if (! auth()->user()->can('send_notification')) {
             abort(403, 'Unauthorized action.');
         }

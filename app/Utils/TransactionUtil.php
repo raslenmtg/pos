@@ -1100,10 +1100,7 @@ class TransactionUtil extends Util
 
             if ($receipt_printer_type != 'printer') {
                 $output['customer_info'] .= $customer->contact_address;
-                if (! empty($customer->contact_address)) {
-                    $output['customer_info'] .= '<br>';
-                }
-                $output['customer_info'] .=  ! empty($customer->mobile) ? __('contact.mobile').': '.$customer->mobile : '';
+                $output['customer_info'] .=  ! empty($customer->mobile) ? '<br> '.__('contact.mobile').': '.$customer->mobile : '';
                 if (! empty($customer->landline)) {
                     $output['customer_info'] .= ', '.$customer->landline;
                 }

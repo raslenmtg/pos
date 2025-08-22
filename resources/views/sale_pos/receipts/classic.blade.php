@@ -116,8 +116,16 @@
 
         /* --- Footer --- */
         .invoice-footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); text-align: center; font-size: 12px; color: var(--text-muted-color); }
-        .furl a { color: var(--text-muted-color); text-decoration: none; }
-          .qr-code {
+        .furl{
+                 position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                font-size: 12px;
+                color: #333;
+        }
+        .qr-code {
             width: 30%;
             text-align: right;
         }
@@ -143,7 +151,7 @@
                 width: 100% !important;
                 max-width: 100% !important;
             }
-            .furl { display: none !important; }
+           
 
             .invoice-header, .invoice-parties, .invoice-summary, .items-table thead {
                 page-break-inside: avoid;
@@ -236,7 +244,7 @@
             <div class="summary-left">
                 @if(!empty($receipt_details->payments))
                     <div class="summary-section">
-                        <h3>Méthode de Paiement</h3>
+                        <h3>Mode de Paiement</h3>
                         <table class="payments-table">
                             @foreach($receipt_details->payments as $payment)
                                 <tr>

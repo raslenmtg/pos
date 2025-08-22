@@ -482,4 +482,6 @@ Route::middleware(['setData', 'auth', 'SetSessionData', 'language', 'timezone'])
 // routes/web.php
 Route::get('/notifications/template/{id}/{template_for}', [NotificationController::class, 'getTemplate'])
     ->name('notifications.getTemplate');
+    Route::post('/notifications/send', [NotificationController::class, 'send'])
+    ->name('notifications.send');
 });

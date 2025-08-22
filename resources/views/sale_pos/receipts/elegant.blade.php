@@ -367,7 +367,7 @@
         <section class="invoice-summary">
             <div class="summary-left">
                 @if(!empty($receipt_details->payments))
-                    <span style="font-size: 16px;font-weight:bold">Méthode de Paiement:</span>
+                    <span style="font-size: 16px;font-weight:bold">Mode de Paiement:</span>
                     <table class="payments-table">
                         @foreach($receipt_details->payments as $payment)
                             <tr>

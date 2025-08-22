@@ -1025,6 +1025,7 @@ return [
     'receive_purchase_return_due' => 'Recevoir un retour d\'achat impayés',
     'received' => 'Reçu',
     'received_by' => 'Reçu par',
+    'received_in' => 'Reçu le',
     'recent_product_quantity' => 'Aller à la quantité de produit',
     'recent_transactions' => 'Transactions récentes',
     'recomended_for_58mm' => 'Recommandé pour les imprimantes de tickets de ligne thermique, format papier 80 mm et 58 mm',
