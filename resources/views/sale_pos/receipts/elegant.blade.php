@@ -447,7 +447,7 @@
                     {!! $receipt_details->footer_text !!}
                 @endif
             </div>
-             @if($receipt_details->show_barcode || $receipt_details->show_qr_code)
+             @if( $receipt_details->show_qr_code)
                 <div class="qr-code">
                     @if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
                         <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54])}}">

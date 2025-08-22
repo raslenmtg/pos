@@ -45,7 +45,7 @@
      'purchase_add_success' => 'Achat ajouté avec succès',
      'purchase_update_success' => 'Achat mis à jour avec succès',
      'purchase_details' => "Les détails d'achat",
-     'unit_cost_after_tax' => 'Prix unitaire de revient (après impôt)',
+     'unit_cost_after_tax' => 'P.U finale',
      'total_after_tax' => 'Total après impôt',
      'no_payments' => 'Aucun paiement trouvé',
      'allow_purchase_different_currency' => 'Achats dans une autre monnaie',

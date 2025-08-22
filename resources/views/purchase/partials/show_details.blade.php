@@ -4,7 +4,7 @@
       $title = $purchase->type == 'purchase_order' ? __('lang_v1.purchase_order_details') : __('purchase.purchase_details');
       $custom_labels = json_decode(session('business.custom_labels'), true);
     @endphp
-    <h4 class="modal-title" id="modalTitle"> {{$title}} (<b>@lang('purchase.ref_no'):</b> #{{ $purchase->ref_no }})
+    <h4 class="modal-title" id="modalTitle"> {{$title}} <b>N°:</b> #{{ $purchase->ref_no }}
     </h4>
 </div>
 <div class="modal-body">
@@ -146,7 +146,7 @@
           <thead>
             <tr class="bg-green">
               <th>#</th>
-              <th>@lang('product.product_name')</th>
+              <th>Désignation</th>
               <th>@lang('product.sku')</th>
               @if($purchase->type == 'purchase_order')
                 <th class="text-right">@lang( 'lang_v1.quantity_remaining' )</th>
@@ -382,6 +382,7 @@
     </div>
   </div>
   <div class="row">
+     @if(!empty($purchase->shipping_details))
     <div class="col-sm-6">
       <strong>@lang('purchase.shipping_details'):</strong><br>
       <p class="well well-sm no-shadow bg-gray">
@@ -404,6 +405,8 @@
         @endif
       </p>
     </div>
+     @endif
+          @if(!empty($purchase->additional_notes))
     <div class="col-sm-6">
       <strong>@lang('purchase.additional_notes'):</strong><br>
       <p class="well well-sm no-shadow bg-gray">
@@ -414,6 +417,7 @@
         @endif
       </p>
     </div>
+       @endif
   </div>
   @if(!empty($activities))
   <div class="row">
@@ -424,10 +428,5 @@
   </div>
   @endif
 
-  {{-- Barcode --}}
-  <div class="row print_section">
-    <div class="col-xs-12">
-      <img class="center-block" src="data:image/png;base64,{{DNS1D::getBarcodePNG($purchase->ref_no, 'C128', 2,30,array(39, 48, 54), true)}}">
-    </div>
-  </div>
+ 
 </div>
