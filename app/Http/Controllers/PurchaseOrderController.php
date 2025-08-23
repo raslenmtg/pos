@@ -17,6 +17,7 @@ use App\Utils\ProductUtil;
 use App\Utils\TransactionUtil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Log;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -835,7 +836,7 @@ class PurchaseOrderController extends Controller
         //Logo
         $logo = $invoice_layout->show_logo != 0 && ! empty($invoice_layout->logo) && file_exists(public_path('uploads/invoice_logos/'.$invoice_layout->logo)) ? asset('uploads/invoice_logos/'.$invoice_layout->logo) : false;
 
-        $word_format = $invoice_layout->common_settings['num_to_word_format'] ? $invoice_layout->common_settings['num_to_word_format'] : 'international';
+        $word_format = 'international';
         $total_in_words = $this->transactionUtil->numToWord($purchase->final_total, null, $word_format);
 
         $custom_labels = json_decode(session('business.custom_labels'), true);
@@ -857,9 +858,8 @@ class PurchaseOrderController extends Controller
             'format' => 'A4',
         ]);
 
+       
         $mpdf->useSubstitutions = true;
-        $mpdf->SetWatermarkText($purchase->business->name, 0.1);
-        $mpdf->showWatermarkText = true;
         $mpdf->SetTitle('PO-'.$purchase->ref_no.'.pdf');
         $mpdf->WriteHTML($body);
         $mpdf->Output('PO-'.$purchase->ref_no.'.pdf', 'I');

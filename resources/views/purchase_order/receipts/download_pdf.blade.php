@@ -1,9 +1,4 @@
-@php
-	$pdf_generation_for = ['Original for Buyer'];
-@endphp
-
-@foreach($pdf_generation_for as $pdf_for)
-	<link rel="stylesheet" href="{{ asset('css/app.css?v='.$asset_v) }}">
+	
 	<style type="text/css">
 		table.tpdf {
 		  width: 100% !important;
@@ -19,38 +14,51 @@
 		.box {
 			border: 1px solid black;
 		}
+		.width-100{
+			width: 100%;
+		}
+		.font-17{
+			font-size: 17px;
+		}
+		.mb-10{
+			margin-bottom: 10px;
+		}
+		.mt-10{
+    margin-top: 10px;
+}
+.f-left {
+  float: left;
+}.width-40{
+    width: 40% !important;
+}
+.width-60{
+    width: 60% !important;
+}
+.font-23{
+    font-size: 23px !important;
+}
+.width-50{
+    width: 50% !important;
+}
 
+ .table-pdf {
+            width: 100%;
+            border-collapse: collapse;
+			
+        }
+
+		  .items-table th, .items-table td {
+          table-layout: auto;
+			    text-align: left;
+        }
+		
 	</style>
-	<div class="width-100">
-		<div class="width-100 f-left" align="center">
+		<div class="width-100 f-left mb-10" align="center" >
 			<strong class="font-17">@lang('lang_v1.purchase_order')</strong>
 		</div>
-		{{-- <div class="width-50 f-left" align="right">
-			<strong>{{$pdf_for}}</strong>
-		</div> --}}
-	</div>
-	<div class="width-100 box">
-		<div class="width-100 mb-10 mt-10" align="center">
-		</div>
-		<div class="width-40 f-left" style="text-align: center;">
-			@if(!empty($logo))
-	          <img src="{{$logo}}" alt="Logo" style="width: 85%; height: 60%; margin: auto;padding-left: 30px;">
-	        @endif
-	        <div style="margin-left: 30px;margin-top: 0px;padding-top: 0px;">
-	        	@if(!empty($location_details->custom_field1) && !empty($custom_labels['location']['custom_field_1']))
-					{{$custom_labels['location']['custom_field_1']}} : {{$location_details->custom_field1}}
-		        @endif
-	        	<br>
-	        	@if(!empty($purchase->business->tax_number_1))
-		          <br>{{$purchase->business->tax_label_1}}: {{$purchase->business->tax_number_1}}
-		        @endif
-
-		        @if(!empty($purchase->business->tax_number_2))
-		          , {{$purchase->business->tax_label_2}}: {{$purchase->business->tax_number_2}}
-		        @endif
-	        </div>
-		</div>
-		<div class="width-60 f-left" align="center" style="color: #22489B;padding-top: 5px;">
+	
+		
+		<div class="width-100  box" align="center" style="padding-top: 5px; display: flex; justify-content: center;">
 			<strong class="font-23">
 	    		{!!$purchase->business->name!!}
 	    	</strong>
@@ -86,11 +94,11 @@
 	          <br>{{$custom_labels['location']['custom_field_4']}} : {{$location_details->custom_field4}}
 	        @endif
 		</div>
-	</div>
+	
 	<table class="tpdf">
 		<tr>
 			<td class="width-50">
-				<strong>@lang('lang_v1.po_no'):</strong> #{{ $purchase->ref_no }} <br>
+				<strong>N°:</strong> #{{ $purchase->ref_no }} <br>
 				<strong>@lang('lang_v1.order_date'):</strong> {{ @format_date($purchase->transaction_date) }}
 			</td>
 			<td class="width-50">
@@ -187,24 +195,17 @@
 		        @endif
 			</td>
 			<td class="width-50">
-				<strong>@lang('lang_v1.delivery_at')</strong><br>
+				<strong>@lang('lang_v1.delivered_to')</strong><br>
 				{!! $purchase->location->location_address !!}
-		        <br>
-		        {{--<strong>@lang('lang_v1.dispatch_from'):</strong>
-				@if(!empty($purchase->contact->city))
-					{{$purchase->contact->city}}
-				@else
-					{{'-'}}
-				@endif --}}
 			</td>
 		</tr>
 	</table>
 	<div class="box">
 	<table class="table-pdf td-border">
 		@php
-			$show_cat_code = !empty($invoice_layout->show_cat_code) && $invoice_layout->show_cat_code == 1 ? true : false;
+			$show_cat_code =  false;
 
-			$show_brand = !empty($invoice_layout->show_brand) && $invoice_layout->show_brand == 1 ? true : false;
+			$show_brand =  false;
 
 			$show_sku = !empty($invoice_layout->show_sku) && $invoice_layout->show_sku == 1 ? true : false;
 		@endphp
@@ -213,14 +214,10 @@
 				<th>
 					#
 				</th>
-				<th style="width: 40% !important;">
+				<th style="width: 50% !important;">
 					{{$invoice_layout->table_product_label}}
 				</th>
-				@if($show_cat_code)
-					<th>
-						{{$invoice_layout->cat_code_label}}
-					</th>
-				@endif
+			
 				<th>
 					{{$invoice_layout->table_qty_label}}
 				</th>
@@ -242,7 +239,7 @@
 				<td>
 					{{$loop->iteration}}
 				</td>
-				<td style="width: 40% !important;">
+				<td style="width: 50% !important;">
 					{{ $purchase_line->product->name }} 
 	                @if( $purchase_line->product->type == 'variable')
 	                  - {{ $purchase_line->variations->product_variation->name}}
@@ -257,11 +254,7 @@
 	                , {{$purchase_line->product->brand->name ?? ''}}
 	                @endif
 				</td>
-				@if($show_cat_code)
-					<td>
-						{{ $purchase_line->product->category->short_code ?? '' }}
-					</td>
-				@endif
+			
 				<td>
 					{{@format_quantity($purchase_line->quantity)}} @if(!empty($purchase_line->sub_unit)) {{$purchase_line->sub_unit->actual_name}}  @else {{$purchase_line->product->unit->actual_name}} @endif   {{-- Display the base_unit_multiplier here --}}
 						@if($purchase_line->product->unit->sub_units)
@@ -328,21 +321,30 @@
 			@endif
 		@endforeach
 		<tr>
-			<td @if($show_cat_code) colspan="5" @else colspan="4" @endif style="text-align: center;">
-				{{$invoice_layout->sub_total_label}}
+			<td  colspan="3">
 			</td>
-			<td colspan="1">
-				<strong>
-					@format_currency($total)
-				</strong>
+				<td colspan="3">
+			{{$invoice_layout->sub_total_label}}:	@format_currency($total)
 			</td>
 		</tr>
+		  @if( !empty($purchase->discount) )
+                        <tr>
+                            <td colspan="3"></td>
+                            <td colspan="3">Remise ({!! $purchase->discount_type !!}): (-) {{$purchase->discount_amount}}</td>
+                        </tr>
+                    @endif
+                  
+
+                    @if(!empty($purchase->shipping_charges))
+                        <tr>
+                            <td colspan="3"></td>
+                            <td colspan="3">Frais livraison: (+) {{$purchase->shipping_charges}}</td>
+                        </tr>
+                    @endif
 		<tr>
-			<td @if($show_cat_code) colspan="3" @else colspan="2" @endif>
+			<td colspan="3">
 				@if($purchase->additional_notes)
 		          {{ $purchase->additional_notes }}
-		        @else
-		          --
 		        @endif
 			</td>
 			<td colspan="3">
@@ -352,52 +354,16 @@
 		        	@endforeach
 		        @endif
 				
-				{{$invoice_layout->total_label}} : @format_currency($purchase->final_total)
+					<strong>{{$invoice_layout->total_label}} : @format_currency($purchase->final_total)	</strong>
 			</td>
 		</tr>
-		<tr>
-			<td colspan="6">
-				{!!ucfirst($total_in_words)!!}
-			</td>
-		</tr>
-		<tr>
-			<td colspan="6">
-				@if(!empty($invoice_layout->footer_text))
-					{!!$invoice_layout->footer_text!!}
-				@endif
-			</td>
-		</tr>
+		
 	</table>
 	</div>
-	<table class="tpdf">
-		<tr>
-			<td colspan="2" style="text-align: center;">
-				@lang('lang_v1.checked_by')
-			</td>
-			<td colspan="2" style="text-align: center;">
-				@lang('lang_v1.prepared_by') <br>{{$purchase->sales_person->user_full_name}}
-			</td>
-			<td colspan="2" style="text-align: center;">
-				<br><br>
-				@lang('lang_v1.for_business', ['business' => $purchase->business->name])
-				<br><br>
-				@if(!empty($last_purchase))
-					{{$last_purchase->sales_person->user_full_name}}
-				@endif
-			
-			</td>
-		</tr>
-	</table>
+	
 	@php
 		$bottom = '5px';
 		if (count($purchase->purchase_lines) >= 3) {
 			$bottom = '-15px';
 		}
 	@endphp
-	<div align="center" class="fs-10" style="position: fixed;width: 100%;bottom: {{$bottom}};text-align: center;">
-		This is a computer generated document, no signature required.
-	</div>
-	@if (!$loop->last)
-		<pagebreak>
-	@endif
-@endforeach

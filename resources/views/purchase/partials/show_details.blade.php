@@ -139,6 +139,12 @@
   </div>
 
   <br>
+  @php
+    // Calculate if we have any discounts or taxes to show/hide columns
+    $has_discount = $purchase->discount_amount > 0 || $purchase->purchase_lines->contains(function($line) { return $line->discount_percent > 0; });
+    $has_tax = !empty($purchase_taxes) || $purchase->purchase_lines->contains(function($line) { return $line->item_tax > 0; });
+    $has_tax_or_discount = $has_tax || $has_discount;
+  @endphp
   <div class="row">
     <div class="col-sm-12 col-xs-12">
       <div class="table-responsive">
@@ -153,11 +159,11 @@
               @endif
               <th class="text-right">@if($purchase->type == 'purchase_order') @lang('lang_v1.order_quantity') @else @lang('purchase.purchase_quantity') @endif</th>
               <th class="text-right">@lang( 'lang_v1.unit_cost_before_discount' )</th>
-              <th class="text-right">@lang( 'lang_v1.discount_percent' )</th>
-              <th class="no-print text-right">@lang('purchase.unit_cost_before_tax')</th>
-              <th class="no-print text-right">@lang('purchase.subtotal_before_tax')</th>
-              <th class="text-right">@lang('sale.tax')</th>
-              <th class="text-right">@lang('purchase.unit_cost_after_tax')</th>
+              @if($has_discount)<th class="text-right">@lang( 'lang_v1.discount_percent' )</th>@endif
+              @if($has_tax)<th class="no-print text-right">@lang('purchase.unit_cost_before_tax')</th>
+              <th class="no-print text-right">@lang('purchase.subtotal_before_tax')</th>@endif
+              @if($has_tax)<th class="text-right">@lang('sale.tax')</th>@endif
+              @if($has_tax_or_discount)<th class="text-right">@lang('purchase.unit_cost_after_tax')</th>@endif
               @if($purchase->type != 'purchase_order')
               @if(session('business.enable_lot_number'))
                 <th>@lang('lang_v1.lot_number')</th>
@@ -212,11 +218,11 @@
 
               </td>
               <td class="text-right"><span class="display_currency" data-currency_symbol="true">{{ $purchase_line->pp_without_discount}}</span></td>
-              <td class="text-right"><span class="display_currency">{{ $purchase_line->discount_percent}}</span> %</td>
-              <td class="no-print text-right"><span class="display_currency" data-currency_symbol="true">{{ $purchase_line->purchase_price }}</span></td>
-              <td class="no-print text-right"><span class="display_currency" data-currency_symbol="true">{{ $purchase_line->quantity * $purchase_line->purchase_price }}</span></td>
-              <td class="text-right"><span class="display_currency" data-currency_symbol="true">{{ $purchase_line->item_tax }} </span> <br/><small>@if(!empty($taxes[$purchase_line->tax_id])) ( {{ $taxes[$purchase_line->tax_id]}} ) </small>@endif</td>
-              <td class="text-right"><span class="display_currency" data-currency_symbol="true">{{ $purchase_line->purchase_price_inc_tax }}</span></td>
+              @if($has_discount)<td class="text-right"><span class="display_currency">{{ $purchase_line->discount_percent}}</span> %</td>@endif
+              @if($has_tax) <td class="no-print text-right"><span class="display_currency" data-currency_symbol="true">{{ $purchase_line->purchase_price }}</span></td>
+              <td class="no-print text-right"><span class="display_currency" data-currency_symbol="true">{{ $purchase_line->quantity * $purchase_line->purchase_price }}</span></td>@endif
+              @if($has_tax)<td class="text-right"><span class="display_currency" data-currency_symbol="true">{{ $purchase_line->item_tax }} </span> <br/><small>@if(!empty($taxes[$purchase_line->tax_id])) ( {{ $taxes[$purchase_line->tax_id]}} ) </small>@endif</td>@endif
+              @if($has_tax_or_discount)<td class="text-right"><span class="display_currency" data-currency_symbol="true">{{ $purchase_line->purchase_price_inc_tax }}</span></td>@endif
               @if($purchase->type != 'purchase_order')
               @if(session('business.enable_lot_number'))
                 <td>{{$purchase_line->lot_number}}</td>
@@ -306,6 +312,7 @@
             <td></td>
             <td><span class="display_currency pull-right" data-currency_symbol="true">{{ $total_before_tax }}</span></td>
           </tr>
+          @if($has_discount)
           <tr>
             <th>@lang('purchase.discount'):</th>
             <td>
@@ -324,6 +331,8 @@
               </span>
             </td>
           </tr>
+          @endif
+          @if($has_tax)
           <tr>
             <th>@lang('purchase.purchase_tax'):</th>
             <td><b>(+)</b></td>
@@ -337,6 +346,7 @@
                 @endif
               </td>
           </tr>
+          @endif
           @if( !empty( $purchase->shipping_charges ) )
             <tr>
               <th>@lang('purchase.additional_shipping_charges'):</th>
