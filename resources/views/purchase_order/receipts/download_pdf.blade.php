@@ -302,11 +302,7 @@
 						<td>
 							&nbsp;
 						</td>
-						@if($show_cat_code)
-							<td>
-								&nbsp;
-							</td>
-						@endif
+						
 						<td>
 							&nbsp;
 						</td>
@@ -360,10 +356,3 @@
 		
 	</table>
 	</div>
-	
-	@php
-		$bottom = '5px';
-		if (count($purchase->purchase_lines) >= 3) {
-			$bottom = '-15px';
-		}
-	@endphp

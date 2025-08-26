@@ -1191,7 +1191,7 @@ class TransactionUtil extends Util
         $output['client_id'] = '';
         $output['client_id_label'] = '';
         if ($il->show_client_id == 1) {
-            $output['client_id_label'] = ! empty($il->client_id_label) ? $il->client_id_label : '';
+            $output['client_id_label'] = 'Code client: ';
             $output['client_id'] = ! empty($customer->contact_id) ? $customer->contact_id : '';
         }
 

@@ -1318,7 +1318,7 @@ class ContactController extends Controller
                 $html = view('contact.ledger_format_3')
                     ->with(compact('ledger_details', 'contact', 'location', 'is_admin', 'for_pdf'))->render();
             } else {
-                $html = view('contact.ledger')
+                $html = view('contact.ledger_pdf')
                     ->with(compact('ledger_details', 'contact', 'for_pdf', 'location'))->render();
             }
 

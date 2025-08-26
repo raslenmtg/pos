@@ -1232,3 +1232,5 @@
 #68 C:\\Users\\Med Raslen\\Desktop\\UltimatePOS_v6.5\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('C:\\\\Users\\\\Med Ra...')
 #69 {main}
 "} 
+[2025-08-25 01:11:24] local.EMERGENCY: File:C:\Users\Med Raslen\Desktop\UltimatePOS_v6.5\storage\framework\views\3986c0af13a977e93472f06fcf16886736fbf14b.phpLine:214Message:Undefined property: stdClass::$show_client_id (View: C:\Users\Med Raslen\Desktop\UltimatePOS_v6.5\resources\views\sale_pos\receipts\classic.blade.php)  
+[2025-08-25 01:11:36] local.EMERGENCY: File:C:\Users\Med Raslen\Desktop\UltimatePOS_v6.5\storage\framework\views\3986c0af13a977e93472f06fcf16886736fbf14b.phpLine:214Message:Undefined property: stdClass::$show_client_id (View: C:\Users\Med Raslen\Desktop\UltimatePOS_v6.5\resources\views\sale_pos\receipts\classic.blade.php)  

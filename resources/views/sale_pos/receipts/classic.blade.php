@@ -203,7 +203,16 @@
             @if(!empty($receipt_details->customer_info))
                 <div class="party-box to-box">
                     <h3>Client</h3>
-                    <div class="word-wrap">{!! $receipt_details->customer_info !!}</div>
+                    <div class="word-wrap">
+                        {!! $receipt_details->customer_info !!}
+                           @if(!empty($receipt_details->client_id))
+                            <br>Code client: {{ $receipt_details->client_id }}
+                        @endif
+                        @if(!empty($receipt_details->customer_tax_number))
+                            <br>M.F: {{ $receipt_details->customer_tax_number }}
+                        @endif
+                     
+                    </div>
                 </div>
             @endif
         </section>
@@ -248,8 +257,8 @@
                         <table class="payments-table">
                             @foreach($receipt_details->payments as $payment)
                                 <tr>
-                                    <td>{{$payment['method']}}</td>
-                                    <td class="mono-font">{{$payment['amount']}}</td>
+                                    <td>{{$payment['method']}}:</td>
+                                    <td class="mono-font">&nbsp;{{$payment['amount']}}</td>
                                 </tr>
                             @endforeach
                         </table>
