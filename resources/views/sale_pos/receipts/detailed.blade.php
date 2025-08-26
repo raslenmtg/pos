@@ -827,11 +827,7 @@
                     @endif
                     @if ($receipt_details->show_barcode || $receipt_details->show_qr_code)
                         <div class="@if (!empty($receipt_details->footer_text)) col-xs-4 @else col-xs-12 @endif text-center">
-                            {{-- Barcode --}}
-                            @if ($receipt_details->show_barcode)
-                                <img class="center-block"
-                                    src="data:image/png;base64,{{ DNS1D::getBarcodePNG($receipt_details->invoice_no, 'C128', 2, 30, [39, 48, 54], true) }}">
-                            @endif
+                         
 
                             @if ($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
                                 <img class="center-block mt-5"

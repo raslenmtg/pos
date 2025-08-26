@@ -676,12 +676,6 @@
 	            </p>
             @endif
 
-            {{-- Barcode --}}
-			@if($receipt_details->show_barcode)
-				<br/>
-				<img class="center-block" src="data:image/png;base64,{{DNS1D::getBarcodePNG($receipt_details->invoice_no, 'C128', 2,30,array(39, 48, 54), true)}}">
-			@endif
-
 			@if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
 				<img class="center-block mt-5" src="data:image/png;base64,{{DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE')}}">
 			@endif

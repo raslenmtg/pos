@@ -156,6 +156,6 @@
 {{-- Barcode --}}
 <div class="row print_section">
   <div class="col-xs-12">
-    <img class="center-block" src="data:image/png;base64,{{DNS1D::getBarcodePNG($sell_transfer->ref_no, 'C128', 2,30,array(39, 48, 54), true)}}">
+    <img class="center-block" src="data:image/png;base64,{{DNS1D::getBarcodePNG($sell_transfer->ref_no, 'EAN13', 2,30,array(39, 48, 54), true)}}">
   </div>
 </div>
