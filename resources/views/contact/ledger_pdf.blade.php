@@ -1,25 +1,162 @@
+<style>
+/* Basic Reset and Layout */
+* {
+  box-sizing: border-box;
+}
 
-<div class="col-md-12 col-sm-12  width-100 align-right ">
-        <p class="text-right align-right"><strong>{{$contact->business->name}}</strong>
-        	<br>
-        	@if(!empty($location))
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #333;
+  background-color: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+/* Utility Classes */
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.p-4 {
+  padding: 4px;
+}
+
+.f-left {
+  float: left;
+}
+
+.f-right {
+  float: right;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.width-50 {
+  width: 50% !important;
+}
+
+.width-100 {
+  width: 100% !important;
+}
+
+.ws-nowrap {
+  white-space: nowrap;
+}
+
+/* Column Classes */
+.col-md-12, .col-sm-12, .col-xs-12 {
+  width: 100%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.col-md-6, .col-sm-6, .col-xs-6 {
+  width: 50%;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.td-border td, .td-border th {
+  border-bottom: 1px solid lightgrey;
+  padding: 8px 5px;
+}
+
+.no-border,
+.no-border td,
+.no-border th {
+  border: none !important;
+}
+
+.row-border {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Responsive table */
+.table-responsive {
+  min-height: 0.01%;
+  overflow-x: auto;
+}
+
+/* Strong and bold text */
+strong, b {
+  font-weight: 700;
+}
+ .invoice-parties {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .party-box {
+            background-color: #f9fafb;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid black;
+        }
+        .party-box h3 { margin-top: 0; font-size: 16px; color: var(--text-color); margin-bottom: 10px; }
+        .party-box p, .party-box div { margin: 0; font-size: 13px; color: var(--text-muted-color); line-height: 1.7; }
+        .word-wrap { word-wrap: break-word; }
+</style>
+
+<h2 class="mb-0 p-4" style="text-align: center;">@lang('lang_v1.account_summary')</h2>
+
+  <div class="invoice-parties">
+            <div class="party-box from-box">
+            
+                <div class="word-wrap">
+                    <strong>{{$contact->business->name}}</strong>
+                    	@if(!empty($location))
         		{!! $location->location_address !!}
         	@else
         		{!! $contact->business->business_address !!}
         	@endif
-        </p>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-6width-50 f-left ">
-	<p class="blue-heading p-4 width-50">@lang('lang_v1.to'):</p>
-	<p><strong>{{$contact->name}}</strong><br> {!! $contact->contact_address !!} @if(!empty($contact->email)) <br>@lang('business.email'): {{$contact->email}} @endif
-	<br>@lang('contact.mobile'): {{$contact->mobile}}
-	@if(!empty($contact->tax_number)) <br>@lang('contact.tax_no'): {{$contact->tax_number}} @endif
-</p>
-</div>
+            
+                </div>
+            </div>
+            
+          
+                <div class="party-box to-box">
+                    <h3>Client</h3>
+                    <div class="word-wrap">
+                      {{$contact->name}}
+                       
+							<br>@lang('contact.mobile'): {{$contact->mobile}}
+						<br> {!! $contact->contact_address !!} 
+                      @if(!empty($contact->tax_number)) <br>@lang('contact.tax_no'): {{$contact->tax_number}} @endif
+                     
+                    </div>
+                </div>
+          
+        </div>
+
 
 <div class="col-md-6 col-sm-6 col-xs-6 text-right align-right  width-50 f-left ">
-		<h3 class="mb-0 blue-heading p-4">@lang('lang_v1.account_summary')</h3>
-	<div style="border: 1px solid #000; padding: 10px;">
+		
+	<div style="border: 1px solid black; padding: 10px;">
 		<i id="show_info_btn" class="fa fa-info-circle text-info" style="margin-right: 10px; margin-top:4px;"></i>
 		<b>{{$ledger_details['start_date']}} @lang('lang_v1.to') {{$ledger_details['end_date']}}</b>
 		<table class="table table-condensed text-left align-left no-border  table-pdf ">
@@ -62,7 +199,7 @@
 		</table>
 	</div>
 
-	<div style="border: 1px solid #000; padding: 10px;">
+	<div style="border: 1px solid black; padding: 10px;">
 		<b> @lang('lang_v1.overall_summary') </b>
 		<table class="table table-condensed text-left align-left no-border table-pdf ">
 		

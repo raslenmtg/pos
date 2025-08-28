@@ -204,7 +204,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     @component('components.widget')
-                                        @include('sell.partials.sell_list_filters', ['only' => ['sell_list_filter_payment_status', 'sell_list_filter_date_range', 'only_subscriptions']])
+                                        @include('sell.partials.sell_list_filters', ['only' => ['sell_list_filter_payment_status', 'sell_list_filter_date_range']])
                                     @endcomponent
                                 </div>
                             </div>

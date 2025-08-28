@@ -383,7 +383,6 @@ $(document).ready(function() {
             { data: 'name', name: 'name' },
             { data: 'email', name: 'email' },
             { data: 'tax_number', name: 'tax_number' },
-            { data: 'pay_term', name: 'pay_term', searchable: false, orderable: false },
             { data: 'opening_balance', name: 'opening_balance', searchable: false },
             { data: 'balance', name: 'balance', searchable: false },
             { data: 'created_at', name: 'contacts.created_at' },
@@ -411,7 +410,6 @@ $(document).ready(function() {
             { data: 'email', name: 'email' },
             { data: 'tax_number', name: 'tax_number' },
             { data: 'credit_limit', name: 'credit_limit' },
-            { data: 'pay_term', name: 'pay_term', searchable: false, orderable: false },
             { data: 'opening_balance', name: 'opening_balance', searchable: false },
             { data: 'balance', name: 'balance', searchable: false },
             { data: 'created_at', name: 'contacts.created_at' }
@@ -2174,6 +2172,8 @@ function show_invoice_preview() {
     $('#preview_format').text('#' + preview);
 }
 function pad_zero(str, max) {
+    if(str==undefined)
+        return null
     str = str.toString();
     return str.length < max ? pad_zero('0' + str, max) : str;
 }

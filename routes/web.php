@@ -142,7 +142,7 @@ Route::middleware(['setData', 'auth', 'SetSessionData', 'language', 'timezone', 
     Route::get('/contacts/update-status/{id}', [ContactController::class, 'updateStatus']);
     Route::get('/contacts/stock-report/{supplier_id}', [ContactController::class, 'getSupplierStockReport']);
     Route::get('/contacts/ledger', [ContactController::class, 'getLedger']);
-    Route::post('/contacts/send-ledger', [ContactController::class, 'sendLedger']);
+    //Route::post('/contacts/send-ledger', [ContactController::class, 'sendLedger']);
     Route::get('/contacts/import', [ContactController::class, 'getImportContacts'])->name('contacts.import');
     Route::post('/contacts/import', [ContactController::class, 'postImportContacts']);
     Route::post('/contacts/check-contacts-id', [ContactController::class, 'checkContactId']);

@@ -151,7 +151,6 @@
                                     <th>@lang('contact.name')</th>
                                     <th>@lang('business.email')</th>
                                     <th>@lang('contact.tax_no')</th>
-                                    <th>@lang('contact.pay_term')</th>
                                     <th>@lang('account.opening_balance')</th>
                                     <th>@lang('lang_v1.advance_balance')</th>
                                     <th>@lang('lang_v1.added_on')</th>
@@ -165,7 +164,6 @@
                                     <th>@lang('business.email')</th>
                                     <th>@lang('contact.tax_no')</th>
                                     <th>@lang('lang_v1.credit_limit')</th>
-                                    <th>@lang('contact.pay_term')</th>
                                     <th>@lang('account.opening_balance')</th>
                                     <th>@lang('lang_v1.advance_balance')</th>
                                     <th>@lang('lang_v1.added_on')</th>
@@ -221,12 +219,12 @@
                                 <td></td>
                                 <td></td>
                                 <td></td>
-                                <td @if ($type == 'supplier') colspan="6"
+                                <td @if ($type == 'supplier') colspan="5"
                             @elseif($type == 'customer')
                                 @if ($reward_enabled)
-                                    colspan="9"
+                                    colspan="8"
                                 @else
-                                    colspan="8" @endif
+                                    colspan="7" @endif
                                     @endif>
                                     <strong>
                                         @lang('sale.total'):

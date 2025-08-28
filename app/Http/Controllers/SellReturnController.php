@@ -546,6 +546,7 @@ class SellReturnController extends Controller
                     $output = ['success' => 1, 'receipt' => $receipt];
                 }
             } catch (\Exception $e) {
+                report($e);
                 $output = ['success' => 0,
                     'msg' => trans('messages.something_went_wrong'),
                 ];

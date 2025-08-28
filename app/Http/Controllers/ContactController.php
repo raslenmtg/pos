@@ -1311,16 +1311,16 @@ class ContactController extends Controller
         if (request()->input('action') == 'pdf') {
             $output_file_name = 'Ledger-'.str_replace(' ', '-', $contact->name).'-'.$start_date.'-'.$end_date.'.pdf';
             $for_pdf = true;
-            if ($format == 'format_2') {
+           /* if ($format == 'format_2') {
                 $html = view('contact.ledger_format_2')
                         ->with(compact('ledger_details', 'contact', 'for_pdf', 'location'))->render();
             } elseif ($format == 'format_3') {
                 $html = view('contact.ledger_format_3')
                     ->with(compact('ledger_details', 'contact', 'location', 'is_admin', 'for_pdf'))->render();
-            } else {
+            } else {*/
                 $html = view('contact.ledger_pdf')
                     ->with(compact('ledger_details', 'contact', 'for_pdf', 'location'))->render();
-            }
+           // }
 
             $mpdf = $this->getMpdf();
             $mpdf->WriteHTML($html);
