@@ -33,6 +33,7 @@ return [
     'account_number' => 'Numéro de compte',
     'account_sub_type' => 'Sous type de compte',
     'account_summary' => 'Relevé de compte',
+    'summary_for_period' => 'Résumé pour la période',
     'account_type' => 'Type de compte',
     'account_types' => 'Types de compte',
     'activate' => 'Activer',
