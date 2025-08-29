@@ -134,6 +134,10 @@
             height: auto;
         }
 
+        .total-in-words {
+            text-align: left;
+            margin-top: 5px;
+        }
 
         /* --- Print Styles --- */
         @media print {
@@ -269,6 +273,9 @@
                         <h3>Notes</h3>
                         <p>{!! nl2br($receipt_details->additional_notes) !!}</p>
                     </div>
+                @endif
+                      @if(!empty($receipt_details->total_in_words))
+                    <p class="total-in-words">Arrêté la présente {!! $receipt_details->invoice_heading !!} à la somme de : {{$receipt_details->total_in_words}}.</p>
                 @endif
             </div>
 

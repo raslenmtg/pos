@@ -1466,7 +1466,7 @@ class TransactionUtil extends Util
             $output['total'] = $this->num_f($transaction->final_total, $show_currency, $business_details);
         }
         if (! empty($il->common_settings['show_total_in_words'])) {
-            $word_format = isset($il->common_settings['num_to_word_format']) ? $il->common_settings['num_to_word_format'] : 'international';
+            $word_format =  'currency';
             $output['total_in_words'] = $this->numToWord($transaction->final_total, null, $word_format);
         }
 

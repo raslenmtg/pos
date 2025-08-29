@@ -2,6 +2,24 @@
 	$totals = ['taxable_value' => 0];
 @endphp
 
+<style>
+@media print {
+	body { margin: 0; padding: 10mm; font-size: 12px; }
+	.table { border-collapse: collapse; }
+	.table th, .table td { border: 1px solid #000; padding: 4px; }
+	.table th { background: #f0f0f0; font-weight: bold; }
+}
+body { font-family: Arial, sans-serif; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { border: 1px solid #ddd; padding: 6px; }
+.table th { background: #f5f5f5; font-weight: bold; }
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.font-23 { font-size: 14px; }
+.pull-left { float: left; }
+.pull-right { float: right; }
+</style>
+
 <table style="width:100%; color: #000000 !important;">
 	<thead>
 		<tr>

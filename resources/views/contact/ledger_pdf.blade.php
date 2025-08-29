@@ -16,11 +16,14 @@
             margin: 0 auto;
         }
         /* Header section */
-        .header {
-            display: table;
-            width: 100%;
-            margin-bottom: 30px;
-        }
+     /* Header section */
+.header {
+    display: flex; /* Changed from display: table */
+    width: 100%;
+    margin-bottom: 30px;
+    align-items: center; /* Vertically centers content */
+    justify-content: space-between; /* Distributes space between items */
+}
         .header-left, .header-right {
             display: table-cell;
             width: 50%;
@@ -135,7 +138,10 @@
         </div>
     </div>
 
-    <div class="summary-box">
+    <div style="  display:flex;flex-direction:row">
+
+
+    <div class="summary-box" style="width: 50%;">
         <h3>@lang('lang_v1.summary_for_period')</h3>
         <b>{{$ledger_details['start_date']}} @lang('lang_v1.to') {{$ledger_details['end_date']}}</b>
         <table class="summary-table">
@@ -169,7 +175,7 @@
         </table>
     </div>
 
-    <div class="summary-box">
+    <div class="summary-box"  style="width: 50%;">
         <h3>@lang('lang_v1.overall_summary')</h3>
         <table class="summary-table">
             @if( $contact->type == 'supplier' || $contact->type == 'both')
@@ -203,9 +209,14 @@
         </table>
     </div>
 
+      </div>
+
+
+
+
     <div class="ledger-table-container">
         <p class="text-center"><strong>@lang('lang_v1.ledger_table_heading', ['start_date' => $ledger_details['start_date'], 'end_date' => $ledger_details['end_date']])</strong></p>
-        <table class="ledger-table" id="ledger_table">
+        <table class="ledger-table" id="ledger_table" style="font-size: 8px;">
             <thead>
                 <tr>
                     <th width="18%">@lang('lang_v1.date')</th>

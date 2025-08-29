@@ -1355,21 +1355,22 @@ class Util
      */
     public function numToWord($number, $lang = null, $format = 'international')
     {
-        if ($format == 'indian') {
-            return $this->numToIndianFormat($number);
-        }
 
-        if (! extension_loaded('intl')) {
-            return '';
-        }
-
-        if (empty($lang)) {
-            $lang = ! empty(auth()->user()) ? auth()->user()->language : 'en';
-        }
-
-        $f = new \NumberFormatter($lang, \NumberFormatter::SPELLOUT);
-
-        return $f->format($number);
+    $formatter = new \NumberFormatter('fr', \NumberFormatter::SPELLOUT);
+    
+    // Split into whole dinars and millimes
+    $wholeDinars = (int) floor($number);
+    $millimes = round(($number - $wholeDinars) * 1000); // TND uses 1000 millimes
+    
+    $result = $formatter->format($wholeDinars) . ' dinars';
+    
+    if ($millimes > 0) {
+        // Format millimes properly (not digit-by-digit)
+        $millimesText = $formatter->format($millimes);
+        $result .= ' et ' . $millimesText . ' millimes';
+    }
+    
+    return $result;
     }
 
     /**
