@@ -703,7 +703,7 @@ class ProductController extends Controller
             $product->sku = $product_details['sku'];
             $product->alert_quantity = ! empty($product_details['alert_quantity']) ? $this->productUtil->num_uf($product_details['alert_quantity']) : $product_details['alert_quantity'];
             $product->tax_type = $product_details['tax_type'];
-            $product->weight = $product_details['weight'];
+            $product->weight = null;
             $product->product_custom_field1 = $product_details['product_custom_field1'] ?? '';
             $product->product_custom_field2 = $product_details['product_custom_field2'] ?? '';
             $product->product_custom_field3 = $product_details['product_custom_field3'] ?? '';
@@ -727,7 +727,7 @@ class ProductController extends Controller
 
             $product->product_description = $product_details['product_description'];
             $product->sub_unit_ids = ! empty($product_details['sub_unit_ids']) ? $product_details['sub_unit_ids'] : null;
-            $product->preparation_time_in_minutes = $product_details['preparation_time_in_minutes'];
+            $product->preparation_time_in_minutes = null;
             $product->warranty_id = ! empty($request->input('warranty_id')) ? $request->input('warranty_id') : null;
             $product->secondary_unit_id = ! empty($request->input('secondary_unit_id')) ? $request->input('secondary_unit_id') : null;
 
@@ -809,7 +809,7 @@ class ProductController extends Controller
                 $variation->default_purchase_price = $this->productUtil->num_uf($single_data['single_dpp']);
                 $variation->dpp_inc_tax = $this->productUtil->num_uf($single_data['single_dpp_inc_tax']);
                 $variation->profit_percent = $this->productUtil->num_uf($single_data['profit_percent']);
-                $variation->default_sell_price = $this->productUtil->num_uf($single_data['single_dsp']);
+                $variation->default_sell_price = $product_details['tax_type']=='inclusive'? $this->productUtil->num_uf($single_data['single_dsp_inc_tax']): $this->productUtil->num_uf($single_data['single_dsp']);
                 $variation->sell_price_inc_tax = $this->productUtil->num_uf($single_data['single_dsp_inc_tax']);
                 $variation->save();
 
@@ -849,7 +849,8 @@ class ProductController extends Controller
                 $variation->default_purchase_price = $this->productUtil->num_uf($request->input('item_level_purchase_price_total'));
                 $variation->dpp_inc_tax = $this->productUtil->num_uf($request->input('purchase_price_inc_tax'));
                 $variation->profit_percent = $this->productUtil->num_uf($request->input('profit_percent'));
-                $variation->default_sell_price = $this->productUtil->num_uf($request->input('selling_price'));
+                $variation->default_sell_price = $product_details['tax_type']=='inclusive'? $this->productUtil->num_uf($single_data['single_dsp_inc_tax']): $this->productUtil->num_uf($single_data['single_dsp']);
+              
                 $variation->sell_price_inc_tax = $this->productUtil->num_uf($request->input('selling_price_inc_tax'));
                 $variation->combo_variations = $combo_variations;
                 $variation->save();

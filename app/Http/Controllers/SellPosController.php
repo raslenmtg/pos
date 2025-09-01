@@ -1668,10 +1668,7 @@ class SellPosController extends Controller
         $output['enable_sr_no'] = $product->enable_sr_no;
 
         $waiters = [];
-        if ($this->productUtil->isModuleEnabled('service_staff') && !empty($pos_settings['inline_service_staff'])) {
-            $waiters_enabled = true;
-            $waiters = $this->productUtil->serviceStaffDropdown($business_id, $location_id);
-        }
+        
 
         $last_sell_line = null;
         if ($is_direct_sell) {

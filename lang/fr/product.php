@@ -2,7 +2,7 @@
 
  return [
      'exc_of_tax' => 'Exc. de taxe',
-     'inc_of_tax' => "Inc. de l'impôt",
+     'inc_of_tax' => "Inc. de taxe",
      'profit_percent' => 'x Marge (%)',
      'add_new_product' => 'Nouveau produit',
      'add_product_for_labels' => 'Ajouter des produits pour générer des étiquettes',
@@ -21,8 +21,8 @@
      'barcode_type' => 'Type de code-barres',
      'applicable_tax' => 'Taxe Applicable',
      'selling_price_tax_type' => 'Type de taxe de vente',
-     'inclusive' => 'Compris',
-     'exclusive' => 'Exclusif',
+     'inclusive' => 'TTC',
+     'exclusive' => 'Hors taxe',
      'edit_product' => 'Modifier le produit',
      'default_purchase_price' => "Prix d'achat par défaut",
      'default_selling_price' => 'Prix de vente par défaut',

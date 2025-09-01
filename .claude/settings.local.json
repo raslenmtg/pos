@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(del test_precision.js test_js_precision.html)"
     ],
     "deny": [],
     "ask": []

@@ -1581,9 +1581,8 @@ class TransactionUtil extends Util
             //Qr code related information.
             $output['show_qr_code'] = ! empty($il->show_qr_code) ? true : false;
 
-                $qr_code_details = [];
-                $qr_code_fields = ! empty($il->qr_code_fields) ? $il->qr_code_fields : [];
-                $qr_code_details[] = $this->getInvoiceUrl($transaction->id, $business_details->id);
+              
+                $qr_code_details = [$this->getInvoiceUrl($transaction->id, $business_details->id)];
                 $output['qr_code_details'] = $qr_code_details;
 
                 $qr_code_text =  implode(' ', $qr_code_details);
@@ -1687,14 +1686,7 @@ class TransactionUtil extends Util
             $output['sale_orders_invoice_date'] = implode(', ', $sale_orders_invoice_date);
         }
 
-        if (! empty($transaction->prefer_payment_method)) {
-            $payment_types = $this->payment_types(null, true, $transaction->business_id);
-            $output['preferred_payment_method'] = $payment_types[$transaction->prefer_payment_method];
-        }
-
-        if (! empty($transaction->prefer_payment_account)) {
-            $output['preferred_account_details'] = $transaction->preferredAccount->account_details;
-        }
+    
 
         //export custom fields
         $output['is_export'] = $transaction->is_export;

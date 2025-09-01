@@ -146,7 +146,7 @@
         <div class="col-sm-4">
           <div class="form-group">
             {!! Form::label('tax_type', __('product.selling_price_tax_type') . ':*') !!}
-              {!! Form::select('tax_type', ['inclusive' => __('product.inclusive'), 'exclusive' => __('product.exclusive')], 'exclusive',
+              {!! Form::select('tax_type', ['inclusive' => __('product.inclusive'), 'exclusive' => __('product.exclusive')], 'inclusive',
               ['class' => 'form-control select2', 'required']); !!}
           </div>
         </div>

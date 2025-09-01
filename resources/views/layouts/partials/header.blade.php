@@ -38,10 +38,6 @@
             </div>
 
 
-            {{-- Showing active package for SaaS Superadmin --}}
-            @if(Module::has('Superadmin'))
-                @includeIf('superadmin::layouts.partials.active_subscription')
-            @endif
 
             {{-- When using superadmin, this button is used to switch users --}}
             @if(!empty(session('previous_user_id')) && !empty(session('previous_username')))
