@@ -44,20 +44,20 @@ class ProductUtil extends Util
 
         //create product variations
         $product_variation_data = [
-            'name' => 'DUMMY',
+            'name' => '',
             'is_dummy' => 1,
         ];
         $product_variation = $product->product_variations()->create($product_variation_data);
 
         //create variations
         $variation_data = [
-            'name' => 'DUMMY',
+            'name' => '',
             'product_id' => $product->id,
             'sub_sku' => $sku,
             'default_purchase_price' => $this->num_uf($purchase_price),
             'dpp_inc_tax' => $this->num_uf($dpp_inc_tax),
             'profit_percent' => $this->num_uf($profit_percent),
-            'default_sell_price' => $product->tax_type=='inclusive'?$this->num_uf($selling_price_inc_tax): $this->num_uf($selling_price),
+            'default_sell_price' => $this->num_uf($selling_price_inc_tax),
             'sell_price_inc_tax' => $this->num_uf($selling_price_inc_tax),
             'combo_variations' => $combo_variations,
         ];

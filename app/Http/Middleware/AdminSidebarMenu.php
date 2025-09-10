@@ -789,7 +789,7 @@ class AdminSidebarMenu
                                 ['icon' => '', 'active' => in_array(request()->segment(1), ['invoice-schemes', 'invoice-layouts'])]
                             );
                         }
-                        if (auth()->user()->can('barcode_settings.access')) {
+                       /* if (auth()->user()->can('barcode_settings.access')) {
                             $sub->url(
                                 action([\App\Http\Controllers\BarcodeController::class, 'index']),
                                 __('barcode.barcode_settings'),
@@ -802,7 +802,7 @@ class AdminSidebarMenu
                                 __('printer.receipt_printers'),
                                 ['icon' => '', 'active' => request()->segment(1) == 'printers']
                             );
-                        }
+                        }*/
 
                         if (auth()->user()->can('tax_rate.view') || auth()->user()->can('tax_rate.create')) {
                             $sub->url(
@@ -812,7 +812,7 @@ class AdminSidebarMenu
                             );
                         }
 
-                        if (in_array('tables', $enabled_modules) && auth()->user()->can('access_tables')) {
+                      /*  if (in_array('tables', $enabled_modules) && auth()->user()->can('access_tables')) {
                             $sub->url(
                                 action([\App\Http\Controllers\Restaurant\TableController::class, 'index']),
                                 __('restaurant.tables'),
@@ -834,7 +834,7 @@ class AdminSidebarMenu
                                 __('lang_v1.types_of_service'),
                                 ['icon' => '', 'active' => request()->segment(1) == 'types-of-service']
                             );
-                        }
+                        }*/
                     },
                     ['icon' => '<svg aria-hidden="true" class="tw-size-5 tw-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

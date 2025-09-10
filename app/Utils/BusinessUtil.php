@@ -119,21 +119,25 @@ class BusinessUtil extends Util
         //             ]);
 
         //Add Default Unit for new business
-        $unit = [
+        $units = [
           [  'business_id' => $business_id,
             'actual_name' => 'Pièce',
             'short_name' => 'Pu',
             'allow_decimal' => 0,
-            'created_by' => $user_id],
+            'created_by' => $user_id,
+            'created_at' => now(),
+            'updated_at' => now()],
         
           [  'business_id' => $business_id,
             'actual_name' => 'Kilogramme',
             'short_name' => 'Kg',
             'allow_decimal' => 1,
-            'created_by' => $user_id],
+            'created_by' => $user_id,
+            'created_at' => now(),
+            'updated_at' => now()],
 
         ];
-        Unit::create($unit);
+        Unit::insert($units);
 
         //Create default notification templates
         $notification_templates = NotificationTemplate::defaultNotificationTemplates($business_id);

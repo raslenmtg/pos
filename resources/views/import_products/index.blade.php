@@ -139,7 +139,7 @@
                         <td>13</td>
                         <td>@lang('product.selling_price_tax_type') <small class="text-muted">(@lang('lang_v1.required'))</small></td>
                         <td>@lang('product.selling_price_tax_type') <br>
-                            <strong>@lang('lang_v1.available_options'): inclusive, exclusive</strong>
+                            <strong>@lang('lang_v1.available_options'): inclusive</strong>
                         </td>
                     </tr>
                     <tr>

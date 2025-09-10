@@ -375,7 +375,7 @@ class TransactionUtil extends Util
                     'line_discount_type' => ! empty($product['line_discount_type']) ? $product['line_discount_type'] : null,
                     'line_discount_amount' => $line_discount_amount,
                     'item_tax' => $uf_item_tax / $multiplier,
-                    'tax_id' => $product['tax_id'],
+                    'tax_id' => Product::where('id', $product['product_id'])->value('tax'),
                     'unit_price_inc_tax' => $uf_unit_price_inc_tax / $multiplier,
                     'sell_line_note' => ! empty($product['sell_line_note']) ? $product['sell_line_note'] : '',
                     'sub_unit_id' => ! empty($product['sub_unit_id']) ? $product['sub_unit_id'] : null,
@@ -597,7 +597,7 @@ class TransactionUtil extends Util
             'line_discount_type' => ! empty($product['line_discount_type']) ? $product['line_discount_type'] : null,
             'line_discount_amount' => $line_discount_amount,
             'item_tax' => $uf_data ? $this->num_uf($product['item_tax']) / $multiplier : $product['item_tax'] / $multiplier,
-            'tax_id' => $product['tax_id'],
+            'tax_id' => Product::where('id', $product['product_id'])->value('tax'),
             'unit_price_inc_tax' => $uf_data ? $this->num_uf($product['unit_price_inc_tax']) / $multiplier : $product['unit_price_inc_tax'] / $multiplier,
             'sell_line_note' => ! empty($product['sell_line_note']) ? $product['sell_line_note'] : '',
             'sub_unit_id' => ! empty($product['sub_unit_id']) ? $product['sub_unit_id'] : null,
@@ -1100,7 +1100,7 @@ class TransactionUtil extends Util
 
             if ($receipt_printer_type != 'printer') {
                 $output['customer_info'] .= $customer->contact_address;
-                $output['customer_info'] .=  ! empty($customer->mobile) ? '<br> '.__('contact.mobile').': '.$customer->mobile : '';
+                $output['customer_info'] .=  ! empty(trim($customer->mobile)) ? '<br> '.__('contact.mobile').': '.$customer->mobile : '';
                 if (! empty($customer->landline)) {
                     $output['customer_info'] .= ', '.$customer->landline;
                 }
@@ -1770,7 +1770,7 @@ class TransactionUtil extends Util
             $unit = $line->product->unit;
             $brand = $line->product->brand;
             $cat = $line->product->category;
-            $tax_details = TaxRate::find($line->tax_id);
+            $tax_details = TaxRate::find($line->product->tax);
 
             $unit_name = ! empty($unit->short_name) ? $unit->short_name : '';
             $base_unit_name = $unit_name;
@@ -1798,7 +1798,7 @@ class TransactionUtil extends Util
                 'unit_price' => $this->num_f($line->unit_price, false, $business_details),
                 'unit_price_uf' => $line->unit_price,
                 'tax' => $this->num_f($line->item_tax, false, $business_details),
-                'tax_id' => $line->tax_id,
+                'tax_id' =>$line->product->tax,
                 'tax_unformatted' => $line->item_tax,
                 'tax_name' => ! empty($tax_details) ? $tax_details->name : null,
                 'tax_percent' => ! empty($tax_details) ? $tax_details->amount : null,
@@ -1806,9 +1806,9 @@ class TransactionUtil extends Util
                 //Field for 3rd column
                 'unit_price_inc_tax' => $this->num_f($line->unit_price_inc_tax, false, $business_details),
                 'unit_price_inc_tax_uf' => $line->unit_price_inc_tax,
-                'unit_price_exc_tax' => $this->num_f($line->unit_price, false, $business_details),
+                'unit_price_exc_tax' => $this->num_f(!empty($tax_details)?$base_unit_price/(1+($tax_details->amount/100)):0, false, $business_details),
                 'base_unit_price' => $this->num_f($base_unit_price, false, $business_details),
-                'price_exc_tax' => $line->quantity * $line->unit_price,
+                'price_exc_tax' => $line->quantity * $line->unit_price_inc_tax,
                 'unit_price_before_discount' => $this->num_f($line->unit_price_before_discount, false, $business_details),
                 'unit_price_before_discount_uf' => $line->unit_price_before_discount,
                 //Fields for 4th column

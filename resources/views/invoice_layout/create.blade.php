@@ -37,30 +37,6 @@
               </span>
           </div>
 
-          <div class="form-group hide" id="columnize-taxes">
-            <div class="col-md-3">
-              <input type="text" class="form-control" 
-              name="table_tax_headings[]" required="required" 
-              placeholder="tax 1 name"
-              disabled>
-              @show_tooltip(__('lang_v1.tooltip_columnize_taxes_heading'))
-            </div>
-            <div class="col-md-3">
-              <input type="text" class="form-control" 
-              name="table_tax_headings[]" placeholder="tax 2 name"
-              disabled>
-            </div>
-            <div class="col-md-3">
-              <input type="text" class="form-control" 
-              name="table_tax_headings[]" placeholder="tax 3 name"
-              disabled>
-            </div>
-            <div class="col-md-3">
-              <input type="text" class="form-control" 
-              name="table_tax_headings[]" placeholder="tax 4 name"
-              disabled>
-            </div>
-          </div>
 
         </div>
         <div class="clearfix"></div>
@@ -442,15 +418,6 @@
   <div class="box box-solid">
     <div class="box-body">
       <div class="row">
-     
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('discounted_unit_price_label', __('lang_v1.discounted_unit_price_label') . ':' ) !!}
-            {!! Form::text('common_settings[discounted_unit_price_label]', 'Price after discount', ['class' => 'form-control',
-              'placeholder' => __('lang_v1.discounted_unit_price_label'), 'id' => 'discounted_unit_price_label' ]); !!}
-          </div>
-        </div>
-        
         <div class="col-sm-12">
           <h4>@lang('lang_v1.product_details_to_be_shown'):</h4>
         </div>
@@ -477,7 +444,7 @@
               <label>
                 {!! Form::checkbox('show_sale_description', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_sale_description')</label>
             </div>
-            <p class="help-block">@lang('lang_v1.product_imei_or_sn')</p>
+          
           </div>
         </div>
         <div class="col-sm-3">

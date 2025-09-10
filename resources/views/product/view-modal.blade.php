@@ -87,17 +87,10 @@
 							{{$expiry_array['']}}
 	      				@endif
 	      				<br>
-						@if($product->weight)
-							<b>@lang('lang_v1.weight'): </b>
-							{{$product->weight }}<br>
-						@endif
+						
 						<b>@lang('product.applicable_tax'): </b>
 						{{$product->product_tax->name ?? __('lang_v1.none') }}<br>
-						@php
-							$tax_type = ['inclusive' => __('product.inclusive'), 'exclusive' => __('product.exclusive')];
-						@endphp
-						<b>@lang('product.selling_price_tax_type'): </b>
-						{{$tax_type[$product->tax_type]  }}<br>
+					
 						<b>@lang('product.product_type'): </b>
 						@lang('lang_v1.' . $product->type)
 						

@@ -455,6 +455,7 @@ class ProductController extends Controller
 
             $product_details = $request->only($form_fields);
             $product_details['business_id'] = $business_id;
+            $product_details['tax_type'] = 'inclusive';
             $product_details['created_by'] = $request->session()->get('user.id');
 
             $product_details['enable_stock'] = (! empty($request->input('enable_stock')) && $request->input('enable_stock') == 1) ? 1 : 0;
@@ -679,7 +680,7 @@ class ProductController extends Controller
         try {
             $business_id = $request->session()->get('user.business_id');
             $product_details = $request->only(['name', 'brand_id', 'unit_id', 'category_id', 'tax', 'barcode_type', 'sku', 'alert_quantity', 'tax_type', 'weight', 'product_description', 'sub_unit_ids', 'preparation_time_in_minutes', 'product_custom_field1', 'product_custom_field2', 'product_custom_field3', 'product_custom_field4', 'product_custom_field5', 'product_custom_field6', 'product_custom_field7', 'product_custom_field8', 'product_custom_field9', 'product_custom_field10', 'product_custom_field11', 'product_custom_field12', 'product_custom_field13', 'product_custom_field14', 'product_custom_field15', 'product_custom_field16', 'product_custom_field17', 'product_custom_field18', 'product_custom_field19', 'product_custom_field20',]);
-
+            $product_details['tax_type']='inclusive';  
             DB::beginTransaction();
 
             $product = Product::where('business_id', $business_id)
@@ -809,7 +810,7 @@ class ProductController extends Controller
                 $variation->default_purchase_price = $this->productUtil->num_uf($single_data['single_dpp']);
                 $variation->dpp_inc_tax = $this->productUtil->num_uf($single_data['single_dpp_inc_tax']);
                 $variation->profit_percent = $this->productUtil->num_uf($single_data['profit_percent']);
-                $variation->default_sell_price = $product_details['tax_type']=='inclusive'? $this->productUtil->num_uf($single_data['single_dsp_inc_tax']): $this->productUtil->num_uf($single_data['single_dsp']);
+                $variation->default_sell_price = $this->productUtil->num_uf($single_data['single_dsp_inc_tax']);
                 $variation->sell_price_inc_tax = $this->productUtil->num_uf($single_data['single_dsp_inc_tax']);
                 $variation->save();
 
@@ -1470,7 +1471,7 @@ class ProductController extends Controller
                 }
             }
             $product_details = $request->only($form_fields);
-
+            $product_details['tax_type'] = 'inclusive';
             $product_details['type'] = empty($product_details['type']) ? 'single' : $product_details['type'];
             $product_details['business_id'] = $business_id;
             $product_details['created_by'] = $request->session()->get('user.id');

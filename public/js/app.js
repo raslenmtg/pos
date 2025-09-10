@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    getTotalUnreadNotifications();
     $('body').on('click', 'label', function(e) {
         var field_id = $(this).attr('for');
         if (field_id) {
@@ -1931,7 +1930,6 @@ $(document).ready(function() {
         autoclose: true
     });
 
-    setInterval(function(){ getTotalUnreadNotifications() }, __new_notification_count_interval);
 
     discounts_table = $('#discounts_table').DataTable({
                     processing: true,

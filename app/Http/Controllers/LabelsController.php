@@ -127,15 +127,7 @@ class LabelsController extends Controller
             foreach ($products as $value) {
                 $details = $this->productUtil->getDetailsFromVariation($value['variation_id'], $business_id, null, false);
 
-                if (! empty($value['exp_date'])) {
-                    $details->exp_date = $value['exp_date'];
-                }
-                if (! empty($value['packing_date'])) {
-                    $details->packing_date = $value['packing_date'];
-                }
-                if (! empty($value['lot_number'])) {
-                    $details->lot_number = $value['lot_number'];
-                }
+             
 
                 if (! empty($value['price_group_id'])) {
                     $tax_id = $print['price_type'] == 'inclusive' ?: $details->tax_id;

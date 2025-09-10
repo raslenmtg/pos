@@ -64,12 +64,6 @@
 					@endforeach
 				@endif
 
-				@if($package->trial_days != 0)
-					<i class="fa fa-check text-success"></i>
-					{{$package->trial_days}} @lang('superadmin::lang.trial_days')
-					<br/><br/>
-				@endif
-				
 				<h3 class="text-center">
 				@php
 					$interval_type = !empty($intervals[$package->interval]) ? $intervals[$package->interval] : __('lang_v1.' . $package->interval);

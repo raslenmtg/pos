@@ -108,17 +108,8 @@
 
 						<td>
 							
-							<div class="" id="price_type_div">
-								<div class="form-group">
-									{!! Form::label('print[price_type]', @trans( 'barcode.show_price' ) . ':') !!}
-									<div class="input-group">
-										<span class="input-group-addon">
-											<i class="fa fa-info"></i>
-										</span>
-										{!! Form::select('print[price_type]', ['inclusive' => __('product.inc_of_tax'), 'exclusive' => __('product.exc_of_tax')], 'inclusive', ['class' => 'form-control']); !!}
-									</div>
-								</div>
-							</div>
+						<input hidden value="inclusive" name="print[price_type]">
+						
 
 						</td>
 					</tr>

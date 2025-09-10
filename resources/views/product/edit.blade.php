@@ -307,13 +307,7 @@
               </div>
             </div>
 
-            <div class="col-sm-4 @if(!session('business.enable_price_tax')) hide @endif">
-              <div class="form-group">
-                {!! Form::label('tax_type', __('product.selling_price_tax_type') . ':*') !!}
-                  {!! Form::select('tax_type',['inclusive' => __('product.inclusive'), 'exclusive' => __('product.exclusive')], $product->tax_type,
-                  ['class' => 'form-control select2', 'required']); !!}
-              </div>
-            </div>
+            {!! Form::hidden('tax_type', 'inclusive'); !!}
 
             <div class="clearfix"></div>
             <div class="col-sm-4">

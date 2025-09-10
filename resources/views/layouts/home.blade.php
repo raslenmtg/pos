@@ -41,6 +41,18 @@
             .navbar-default .navbar-brand {
                 color: #ccc;
             }
+            @media (max-width: 768px) {
+                .navbar-default.navbar-static-top {
+                    margin: 8px !important;
+                    max-width: calc(100% - 16px) !important;
+                }
+            }
+            @media (max-width: 480px) {
+                .navbar-default.navbar-static-top {
+                    margin: 4px !important;
+                    max-width: calc(100% - 8px) !important;
+                }
+            }
         </style>
     </head>
 

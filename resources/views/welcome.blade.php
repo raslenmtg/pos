@@ -69,12 +69,14 @@
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: var(--shadow-soft);
-            position: fixed;
+            position: relative;
             top: 0;
             left: 0;
             right: 0;
             z-index: 1000;
             transition: all 0.3s ease;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         .navbar-brand img {
@@ -482,6 +484,8 @@
             padding: 120px 0;
             background: var(--gradient-primary);
             color: white;
+            max-width: 100%;
+            overflow-x: hidden;
         }
 
         .contact-info {
@@ -595,8 +599,14 @@
                 font-size: 2.5rem;
             }
 
+            .navbar-area {
+                padding: 0 10px;
+            }
+            
             .navbar-area .container-fluid {
-                padding: 10px 20px;
+                padding: 10px 15px;
+                margin: 0;
+                max-width: 100%;
             }
 
             .hero-section {
@@ -698,11 +708,29 @@
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="hero-content" data-aos="fade-up">
-                        <h1>نظم تجارتك بكل بساطة</h1>
-                        <p>حلول إدارة تجارية متكاملة لجميع أنواع الأعمال. من إدارة المخزون إلى نقاط البيع، نوفر لك كل ما تحتاجه لتنمية أعمالك بكفاءة وسهولة.</p>
-                        <a href="#" class="hero-btn">
-                            ابدأ تجربتك المجانية
-                            <i class='bx bx-arrow-back'></i>
+                        <h1 style="margin-top:2rem">نظم تجارتك بكل بساطة</h1>
+
+                            <h2>⚡ شنوة مشكلتك اليوم؟</h2>
+                                  <p>
+                                  تعبت من متابعة كريدي الحرفاء و المزودين
+
+
+                                                                              <br>      ستوك يضيع وما تفهمش وين يمشي
+
+                                                                                 <br>        شبعة فاتورات  مزلت موش خالصة
+
+                                                                                <br>    شنية شريت و بيعت كل يوم
+
+                                                                                   <br> ما عندكش رؤية على الأرباح و الخسارة في الوقت الحاضر
+
+                                                                                  <br>  عقاب الليل و انتي مازلت تحاسب في الخدامة شنيا باعو
+
+                                                                                  <br>  ما تنجمش تسيّر برشا فروع مع بعضهم
+                   </p> <br>
+
+
+                        <a href="{{ route('business.getRegister') }}" class="hero-btn">
+                            الحل مع simplex gestion
                         </a>
                     </div>
                 </div>
@@ -714,31 +742,50 @@
     <section class="stats-section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">عميل راضٍ</div>
-                    </div>
-                </div>
+                 <div class="col-lg-3 col-md-6">
+                                   <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                                       <div class="stat-number">فاتورات</div>
+                                       <div class="stat-label">
+                                                                 <div class="feature-icon">
+                                                                 <i class='bx  bx-check-circle'  ></i>
+                                                             </div>
+                                   </div>
+                               </div>
+                               </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="stat-number">99%</div>
-                        <div class="stat-label">وقت التشغيل</div>
+                        <div class="stat-number">ستوك</div>
+                        <div class="stat-label">
+                                                  <div class="feature-icon">
+                                                  <i class='bx  bx-check-circle'  ></i>
+                                              </div>
                     </div>
+                </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="stat-number">24/7</div>
-                        <div class="stat-label">دعم فني</div>
+                        <div class="stat-number">كريدي</div>
+                        <div class="stat-label">
+                            <div class="feature-icon">
+                            <i class='bx  bx-check-circle'  ></i>
+                        </div>
+                        </div>
                     </div>
+
                 </div>
                 <div class="col-lg-3 col-md-6">
                     <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="stat-number">14</div>
-                        <div class="stat-label">يوم تجربة مجانية</div>
-                    </div>
-                </div>
-            </div>
+                        <div class="stat-number">حسابات</div>
+                            <div class="stat-label">
+                                                  <div class="feature-icon">
+                                                  <i class='bx  bx-check-circle'  ></i>
+                                              </div>
+                            </div>
+                        </div>
+
+                     </div>
+        </div>
+        </div>
         </div>
     </section>
 
@@ -746,8 +793,8 @@
     <section class="features-section">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
-                <span class="sub-title">مميزات Simplex Gestion</span>
-                <h2>حلول شاملة لإدارة أعمالك</h2>
+                <span class="sub-title">Simplex Gestion</span>
+                 <h2> كل شي في سيستام واحد !!</h2>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -756,10 +803,10 @@
                             <i class='bx bx-package'></i>
                         </div>
                         <h3>إدارة المنتجات والمخزون</h3>
-                        <p>• إدارة العلامات التجارية والفئات بسهولة</p>
+                        <p>• إدارة المنتجات و النوعية بسهولة</p>
                         <p>• تنبيهات ذكية لانخفاض المخزون أو انتهاء الصلاحية</p>
-                        <p>• إدارة مخزونات متعددة في مكان واحد</p>
-                        <p>• تتبع حركة المنتجات في الوقت الفعلي</p>
+                        <p>• تصنيف المنتجات حسب الفروع، الماركات، أو الفئات</p>
+                        <p>• إعداد أسعار مختلفة لنفس المنتج (جملة/تفصيل/عرض خاص)</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -768,10 +815,10 @@
                             <i class='bx bx-store'></i>
                         </div>
                         <h3>نقطة البيع (POS)</h3>
-                        <p>• واجهة مبسطة وسريعة للبيع</p>
+                        <p>• شاشة بسيطة وسريعة للبيع</p>
                         <p>• إنشاء وطباعة الفواتير فوراً</p>
-                        <p>• إدارة العملاء والموردين</p>
-                        <p>• دعم أنواع دفع متعددة</p>
+                        <p>• كل موظف عندو شاشة خاصة</p>
+                        <p>• أنواع دفع مختلفة </p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -780,10 +827,10 @@
                             <i class='bx bx-trending-up'></i>
                         </div>
                         <h3>إدارة المبيعات والمشتريات</h3>
-                        <p>• تتبع وتحليل المبيعات بالتفصيل</p>
+                        <p>• تتبع المبيعات والمشتريات بالتفصيل</p>
                         <p>• إنشاء عروض وتخفيضات مخصصة</p>
-                        <p>• تحليل النفقات حسب الفئة</p>
-                        <p>• تذكيرات بالمدفوعات المستحقة</p>
+                        <p>• إدارة المرتجعات(retour)</p>
+                        <p>• تتبع النفقات حسب النوعية</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -792,8 +839,8 @@
                             <i class='bx bx-bar-chart-alt-2'></i>
                         </div>
                         <h3>التقارير والإحصائيات</h3>
-                        <p>• تقارير مفصلة للمبيعات والمصروفات</p>
-                        <p>• تقارير نقدية شاملة</p>
+                        <p>• تقارير مفصلة على الأرباح و الخسارة</p>
+                        <p>• تقارير المعاملات التجارية</p>
                         <p>• تقارير المخزون والمنتجات</p>
                         <p>• تحليل المنتجات الأكثر مبيعاً</p>
                     </div>
@@ -803,11 +850,11 @@
                         <div class="feature-icon">
                             <i class='bx bx-group'></i>
                         </div>
-                        <h3>إدارة العملاء والموردين</h3>
-                        <p>• قاعدة بيانات شاملة للعملاء والموردين</p>
+                        <h3>إدارة الحرفاء والموزدين</h3>
+                        <p>• قاعدة بيانات شاملة للحرفاء والموزدين</p>
                         <p>• تسجيل معلومات الاتصال والعناوين</p>
-                        <p>• تتبع تاريخ المعاملات التجارية</p>
-                        <p>• إدارة الحسابات الجارية</p>
+                        <p>• تتبع الحسابات و المعاملات التجارية</p>
+                        <p>• تقسيم الحرفاء حسب فئات</p>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
@@ -817,9 +864,9 @@
                         </div>
                         <h3>الباركود واللاصقات</h3>
                         <p>• إنشاء وطباعة الباركود بسهولة</p>
-                        <p>• قراءة الباركود السريعة</p>
+                        <p>QR code •</p>
                         <p>• طباعة اللاصقات المخصصة</p>
-                        <p>• تسريع عملية البيع والجرد</p>
+                        <p>• دعم طابعات الحرارية و العادية</p>
                     </div>
                 </div>
             </div>
@@ -926,59 +973,13 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section class="testimonials-section">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <span class="sub-title">آراء العملاء</span>
-                <h2>ماذا يقول عملاؤنا</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="testimonial-avatar">
-                            <i class='bx bx-user'></i>
-                        </div>
-                        <div class="testimonial-text">
-                            "نظام Simplex Gestion غير طريقة عملي تماماً. أصبح بإمكاني تتبع مبيعاتي ومخزوني بسهولة وسرعة."
-                        </div>
-                        <div class="testimonial-author">أحمد التونسي</div>
-                        <div class="testimonial-role">صاحب محل إلكترونيات</div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="testimonial-avatar">
-                            <i class='bx bx-user'></i>
-                        </div>
-                        <div class="testimonial-text">
-                            "النظام سهل الاستخدام والدعم الفني ممتاز. أنصح به كل تاجر يريد تطوير عمله."
-                        </div>
-                        <div class="testimonial-author">فاطمة الساحلي</div>
-                        <div class="testimonial-role">صاحبة محل ملابس</div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="testimonial-avatar">
-                            <i class='bx bx-user'></i>
-                        </div>
-                        <div class="testimonial-text">
-                            "التقارير والإحصائيات ساعدتني كثيراً في اتخاذ قرارات صحيحة لتطوير تجارتي."
-                        </div>
-                        <div class="testimonial-author">محمد الشرقي</div>
-                        <div class="testimonial-role">صاحب صيدلية</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Pricing Section -->
     <section class="pricing-section">
         <div class="container">
             <div class="section-title" data-aos="fade-up">
-                <span class="sub-title">الأسعار</span>
-                <h2>خطة واحدة، مميزات لا محدودة</h2>
+                <h2>الأسعار</h2>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-6 col-md-8">
@@ -987,30 +988,8 @@
                             <i class='bx bx-crown'></i>
                             الاشتراك الشهري
                         </div>
-                        <div class="pricing-amount">39 <span style="font-size: 1.5rem;">د.ت</span></div>
+                        <div class="pricing-amount">90 <span style="font-size: 1.5rem;">د.ت</span></div>
                         <div class="pricing-period">شهرياً</div>
-                        <div class="pricing-features">
-                            <div class="feature-item" style="padding: 10px 0; border-bottom: 1px solid #eee;">
-                                <i class='bx bx-check' style="color: var(--success-color); margin-left: 10px;"></i>
-                                تجربة مجانية 14 يوم
-                            </div>
-                            <div class="feature-item" style="padding: 10px 0; border-bottom: 1px solid #eee;">
-                                <i class='bx bx-check' style="color: var(--success-color); margin-left: 10px;"></i>
-                                جميع المميزات مفتوحة
-                            </div>
-                            <div class="feature-item" style="padding: 10px 0; border-bottom: 1px solid #eee;">
-                                <i class='bx bx-check' style="color: var(--success-color); margin-left: 10px;"></i>
-                                دعم فني 24/7
-                            </div>
-                            <div class="feature-item" style="padding: 10px 0; border-bottom: 1px solid #eee;">
-                                <i class='bx bx-check' style="color: var(--success-color); margin-left: 10px;"></i>
-                                تحديثات مجانية
-                            </div>
-                            <div class="feature-item" style="padding: 10px 0;">
-                                <i class='bx bx-check' style="color: var(--success-color); margin-left: 10px;"></i>
-                                نسخ احتياطية يومية
-                            </div>
-                        </div>
                         <div style="margin-top: 30px;">
                             <a href="#" class="hero-btn">
                                 ابدأ تجربتك المجانية
@@ -1237,22 +1216,28 @@
         function animateCounters() {
             const counters = document.querySelectorAll('.stat-number');
             counters.forEach(counter => {
-                const target = parseInt(counter.textContent);
-                const suffix = counter.textContent.replace(/[0-9]/g, '');
-                let current = 0;
-                const increment = target / 100;
+                const originalText = counter.textContent.trim();
+                const target = parseInt(originalText);
+                
+                // Only animate if the content is numeric
+                if (!isNaN(target) && target > 0) {
+                    const suffix = originalText.replace(/[0-9]/g, '');
+                    let current = 0;
+                    const increment = target / 100;
 
-                const updateCounter = () => {
-                    if (current < target) {
-                        current += increment;
-                        counter.textContent = Math.floor(current) + suffix;
-                        setTimeout(updateCounter, 20);
-                    } else {
-                        counter.textContent = target + suffix;
-                    }
-                };
+                    const updateCounter = () => {
+                        if (current < target) {
+                            current += increment;
+                            counter.textContent = Math.floor(current) + suffix;
+                            setTimeout(updateCounter, 20);
+                        } else {
+                            counter.textContent = target + suffix;
+                        }
+                    };
 
-                updateCounter();
+                    updateCounter();
+                }
+                // If not numeric, leave the text as is (no animation)
             });
         }
 

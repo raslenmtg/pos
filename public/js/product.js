@@ -532,9 +532,7 @@ $(document).ready(function() {
         }
     });
     //End for product type Variable
-    $(document).on('change', '#tax_type', function(e) {
-        toggle_dsp_input();
-    });
+    // Tax type is now always inclusive
     toggle_dsp_input();
 
     $(document).on('change', '#expiry_period_type', function(e) {
@@ -579,42 +577,23 @@ $(document).ready(function() {
 });
 
 function toggle_dsp_input() {
-    var tax_type = $('#tax_type').val();
-    if (tax_type == 'inclusive') {
-        $('.dsp_label').each(function() {
-            $(this).text(LANG.inc_tax);
-        });
-        $('#single_dsp').addClass('hide');
-        $('#single_dsp_inc_tax').removeClass('hide');
+    // Tax type is always inclusive
+    $('.dsp_label').each(function() {
+        $(this).text(LANG.inc_tax);
+    });
+    $('#single_dsp').addClass('hide');
+    $('#single_dsp_inc_tax').removeClass('hide');
 
-        $('.add-product-price-table')
-            .find('.variable_dsp_inc_tax')
-            .each(function() {
-                $(this).removeClass('hide');
-            });
-        $('.add-product-price-table')
-            .find('.variable_dsp')
-            .each(function() {
-                $(this).addClass('hide');
-            });
-    } else if (tax_type == 'exclusive') {
-        $('.dsp_label').each(function() {
-            $(this).text(LANG.exc_tax);
+    $('.add-product-price-table')
+        .find('.variable_dsp_inc_tax')
+        .each(function() {
+            $(this).removeClass('hide');
         });
-        $('#single_dsp').removeClass('hide');
-        $('#single_dsp_inc_tax').addClass('hide');
-
-        $('.add-product-price-table')
-            .find('.variable_dsp_inc_tax')
-            .each(function() {
-                $(this).addClass('hide');
-            });
-        $('.add-product-price-table')
-            .find('.variable_dsp')
-            .each(function() {
-                $(this).removeClass('hide');
-            });
-    }
+    $('.add-product-price-table')
+        .find('.variable_dsp')
+        .each(function() {
+            $(this).addClass('hide');
+        });
 }
 
 function get_product_details(rowData) {

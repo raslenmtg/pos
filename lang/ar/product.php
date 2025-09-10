@@ -1,7 +1,7 @@
 <?php
 
  return [
-     'exc_of_tax' => 'غير شامل. الضريبة',
+     'exc_of_tax' => ' شامل. الضريبة',
      'inc_of_tax' => 'شامل. الضريبة',
      'profit_percent' => 'x الهامش (٪)',
      'add_new_product' => 'منتج جديد',

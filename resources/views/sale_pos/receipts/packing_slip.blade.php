@@ -376,9 +376,7 @@
                         <td><strong>{{$receipt_details->total}}</strong></td>
                     </tr>
                 </table>
-                 @if(!empty($receipt_details->total_in_words))
-                    <p class="total-in-words">{{$receipt_details->total_in_words}}</p>
-                @endif
+                
             </div>
         </section>
 

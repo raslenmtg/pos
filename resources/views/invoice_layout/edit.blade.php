@@ -44,33 +44,6 @@
               </span>
           </div>
 
-          <div class="form-group @if($invoice_layout->design != 'columnize-taxes') hide @endif" id="columnize-taxes">
-            <div class="col-md-3">
-              <input type="text" class="form-control" 
-              name="table_tax_headings[]" required="required" placeholder="tax 1 name" value="{{$invoice_layout->table_tax_headings[0]}}"
-              @if($invoice_layout->design != 'columnize-taxes') disabled @endif>
-              @show_tooltip(__('lang_v1.tooltip_columnize_taxes_heading'))
-            </div>
-            <div class="col-md-3">
-              <input type="text" class="form-control" 
-              name="table_tax_headings[]" placeholder="tax 2 name" 
-              value="{{$invoice_layout->table_tax_headings[1]}}"
-              @if($invoice_layout->design != 'columnize-taxes') disabled @endif>
-            </div>
-            <div class="col-md-3">
-              <input type="text" class="form-control" 
-              name="table_tax_headings[]" placeholder="tax 3 name"
-              value="{{$invoice_layout->table_tax_headings[2]}}"
-              @if($invoice_layout->design != 'columnize-taxes') disabled @endif>
-            </div>
-            <div class="col-md-3">
-              <input type="text" class="form-control" 
-              name="table_tax_headings[]" placeholder="tax 4 name"
-              value="{{$invoice_layout->table_tax_headings[3]}}"
-              @if($invoice_layout->design != 'columnize-taxes') disabled @endif>
-            </div>
-
-          </div>
         </div>
         <div class="clearfix"></div>
             <div class="col-sm-6">
@@ -449,14 +422,6 @@
     <div class="box-body">
       <div class="row">
      
-        <div class="col-sm-3">
-          <div class="form-group">
-            {!! Form::label('discounted_unit_price_label', __('lang_v1.discounted_unit_price_label') . ':' ) !!}
-            {!! Form::text('common_settings[discounted_unit_price_label]', !empty($invoice_layout->common_settings['discounted_unit_price_label']) ? $invoice_layout->common_settings['discounted_unit_price_label'] : null, ['class' => 'form-control',
-              'placeholder' => __('lang_v1.discounted_unit_price_label'), 'id' => 'discounted_unit_price_label' ]); !!}
-          </div>
-        </div>
-        
         <div class="col-sm-12">
           <h4>@lang('lang_v1.product_details_to_be_shown'):</h4>
         </div>
