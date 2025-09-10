@@ -885,21 +885,21 @@
                     <div class="step-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="step-number">1</div>
                         <h4>سجل حسابك</h4>
-                        <p>أنشئ حساباً جديداً واحصل على تجربة مجانية لمدة 14 يوماً لتجربة جميع المميزات دون قيود.</p>
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="step-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="step-number">2</div>
                         <h4>أضف منتجاتك</h4>
-                        <p>أدخل تفاصيل منتجاتك وخدماتك، وقم بتنظيمها في فئات لسهولة الإدارة والبحث.</p>
+
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="step-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="step-number">3</div>
                         <h4>ابدأ البيع</h4>
-                        <p>استخدم نظام نقاط البيع المتطور لإتمام المبيعات وإنشاء الفواتير وتتبع الأرباح.</p>
+
                     </div>
                 </div>
             </div>
@@ -914,58 +914,22 @@
                 <h2>الحل المثالي لجميع أنواع التجارة</h2>
             </div>
             <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-6 col-md-6 mb-4">
                     <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="feature-icon">
                             <i class='bx bx-store-alt'></i>
                         </div>
                         <h3>محلات التجزئة</h3>
-                        <p>مثالي للمتاجر الصغيرة والمتوسطة، محلات الملابس، الأحذية، والإكسسوارات.</p>
+                        <p> محلات الملابس، الإلكترونيات،  مواد غذائية, النظارات, مستلزمات الطبية, مواد البلاستيك, قطع غيار, والإكسسوارات.....</p>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-icon">
-                            <i class='bx bx-devices'></i>
-                        </div>
-                        <h3>محلات الإلكترونيات</h3>
-                        <p>إدارة متخصصة للأجهزة الإلكترونية مع تتبع الضمانات والمواصفات التقنية.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="feature-icon">
-                            <i class='bx bx-first-aid'></i>
-                        </div>
-                        <h3>الصيدليات</h3>
-                        <p>نظام متخصص لإدارة الأدوية مع تتبع تواريخ الانتهاء والتحكم في المخزون الطبي.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="feature-icon">
-                            <i class='bx bx-food-menu'></i>
-                        </div>
-                        <h3>المطاعم والمقاهي</h3>
-                        <p>حلول مخصصة لإدارة المطاعم والمقاهي مع قوائم الطعام وإدارة الطلبات.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
-                        <div class="feature-icon">
-                            <i class='bx bx-car'></i>
-                        </div>
-                        <h3>قطع غيار السيارات</h3>
-                        <p>إدارة شاملة لقطع الغيار مع تصنيف حسب نوع السيارة والموديل.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
+                <div class="col-lg-6 col-md-6 mb-4">
                     <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
                         <div class="feature-icon">
                             <i class='bx bx-package'></i>
                         </div>
-                        <h3>تجارة الجملة</h3>
-                        <p>حلول متقدمة لتجار الجملة مع إدارة كميات كبيرة وأسعار متدرجة.</p>
+                        <h3>تجار الجملة</h3>
+                        <p>مواد الغذائية, الأدوات المدرسية, مواد الفلاحية, الإلكترونيات, مواد البناء, المشروبات, مواد التجميل, مواد التنظيف..... </p>
                     </div>
                 </div>
             </div>
@@ -991,9 +955,8 @@
                         <div class="pricing-amount">90 <span style="font-size: 1.5rem;">د.ت</span></div>
                         <div class="pricing-period">شهرياً</div>
                         <div style="margin-top: 30px;">
-                            <a href="#" class="hero-btn">
-                                ابدأ تجربتك المجانية
-                                <i class='bx bx-arrow-back'></i>
+                            <a href="{{ route('business.getRegister') }}" class="hero-btn">
+                                ابدأ تجربتك
                             </a>
                         </div>
                     </div>
@@ -1058,10 +1021,9 @@
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="section-title" style="text-align: right; margin-bottom: 50px;">
-                        <span class="sub-title" style="color: rgba(255,255,255,0.8);">تواصل معنا</span>
                         <h2 style="color: white;">هل لديك أسئلة؟</h2>
                         <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem;">
-                            فريقنا مستعد لمساعدتك في أي وقت. تواصل معنا وسنكون سعداء لخدمتك.
+                            تواصل معنا
                         </p>
                     </div>
                     <div class="contact-info">

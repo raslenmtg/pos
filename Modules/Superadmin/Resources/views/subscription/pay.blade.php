@@ -22,7 +22,7 @@
         			(<span class="display_currency" data-currency_symbol="true">{{$package->price}}</span>
 
 					<small>
-						/ {{$package->interval_count}} {{ucfirst($package->interval)}}
+						/ {{$package->interval_count}} {{$package->interval=="months"?"Mois":($package->interval=="years"?"Année":$package->interval)}}
 					</small>)
         		</h3>
         		<ul>
@@ -66,11 +66,6 @@
 						@lang('superadmin::lang.invoices')
 					</li>
 
-					@if($package->trial_days != 0)
-						<li>
-							{{$package->trial_days}} @lang('superadmin::lang.trial_days')
-						</li>
-					@endif
 				</ul>
 
 				<ul class="list-group">
