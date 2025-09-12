@@ -976,20 +976,29 @@
                 <div class="col-lg-8">
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
                         <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>هل يمكنني استخدام النظام على أكثر من جهاز؟</span>
+                            <span>نجم نخدم بيه في الهاتف أو التابليت ؟</span>
                             <i class='bx bx-chevron-down'></i>
                         </button>
                         <div class="faq-answer" style="display: none;">
-                            نعم، يمكنك الوصول إلى حسابك من أي جهاز متصل بالإنترنت. النظام يعمل عبر المتصفح ولا يحتاج إلى تثبيت برامج إضافية.
+                            نعم، يمكنك من أي جهاز متصل بالإنترنت. النظام يعمل عبر المتصفح ولا يحتاج إلى تثبيت برامج إضافية.
                         </div>
                     </div>
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
                         <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>هل بياناتي آمنة؟</span>
+                            <span>يدعم لغة عربية ؟</span>
                             <i class='bx bx-chevron-down'></i>
                         </button>
                         <div class="faq-answer" style="display: none;">
-                            بياناتك محمية بأعلى معايير الأمان. نستخدم تشفير SSL ونقوم بعمل نسخ احتياطية يومية لضمان سلامة بياناتك.
+                            نعم، يدعم العربية، الفرنسية، والإنقليزية.
+                        </div>
+                    </div>
+                    <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                        <button class="faq-question" onclick="toggleFaq(this)">
+                            <span>نجم نجرّب قبل ما نخلّص؟</span>
+                            <i class='bx bx-chevron-down'></i>
+                        </button>
+                        <div class="faq-answer" style="display: none;">
+                            نعم، تنجم تطلب فترة تجريبية.
                         </div>
                     </div>
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
@@ -998,7 +1007,7 @@
                             <i class='bx bx-chevron-down'></i>
                         </button>
                         <div class="faq-answer" style="display: none;">
-                            نعم، يمكنك إلغاء الاشتراك في أي وقت دون رسوم إضافية. ستحتفظ بإمكانية الوصول إلى بياناتك حتى نهاية فترة الاشتراك المدفوعة.
+                            نعم، يمكنك إلغاء الاشتراك في أي وقت .
                         </div>
                     </div>
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
@@ -1007,7 +1016,7 @@
                             <i class='bx bx-chevron-down'></i>
                         </button>
                         <div class="faq-answer" style="display: none;">
-                            نعم، نوفر دعماً فنياً شاملاً وتدريباً مجانياً لجميع المستخدمين. كما نوفر فيديوهات تعليمية ودليل المستخدم باللغة العربية.
+                            نعم، نوفر دعماً فنياً شاملاً وتدريباً مجانياً لجميع المستخدمين و فيديوهات تعليمية .
                         </div>
                     </div>
                 </div>
@@ -1029,11 +1038,11 @@
                     <div class="contact-info">
                         <div class="contact-item">
                             <div class="contact-icon">
-                                <i class='bx bx-envelope'></i>
+                              <i class='bx bxl-facebook'></i>
                             </div>
                             <div class="contact-text">
-                                <h5>البريد الإلكتروني</h5>
-                                <a href="mailto:contact@simplexschool.com">contact@simplexschool.com</a>
+                                <h5>صفحتنا الفيسبوك</h5>
+                                <a href="https://www.facebook.com/simplexgestion">Simplex Gestion</a>
                             </div>
                         </div>
                         <div class="contact-item">
@@ -1042,26 +1051,17 @@
                             </div>
                             <div class="contact-text">
                                 <h5>الهاتف</h5>
-                                <a href="tel:+21624327623">+216 24 327 623</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class='bx bx-time'></i>
-                            </div>
-                            <div class="contact-text">
-                                <h5>ساعات العمل</h5>
-                                <p>من الاثنين إلى الجمعة: 9:00 - 18:00</p>
+                                <a style="  direction: ltr;unicode-bidi: bidi-override;" href="tel:+21624327623">+216 24 327 623</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-right">
                     <div style="text-align: center; padding: 40px;">
-                        <a href="mailto:contact@simplexschool.com" class="hero-btn">
+                        <span class="hero-btn">
                             تواصل معنا الآن
                             <i class='bx bx-send'></i>
-                        </a>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -1076,46 +1076,19 @@
                     <div class="footer-brand">
                         <img src="img/logo.png" alt="Simplex Gestion" width="60">
                         <div class="footer-text">
-                            نظام إدارة تجاري شامل يساعدك على تنظيم وتطوير أعمالك بكل سهولة وفعالية. انضم إلى مئات التجار الذين اختاروا Simplex Gestion.
+                            سيستام إدارة تجارة شامل يساعدك على تنظيم وتطوير أعمالك بكل سهولة وفعالية.
                         </div>
                         <div class="social-links">
-                            <a href="#" class="social-link">
+                            <a href="https://www.facebook.com/simplexgestion" class="social-link">
                                 <i class='bx bxl-facebook'></i>
                             </a>
                             <a href="#" class="social-link">
                                 <i class='bx bxl-instagram'></i>
                             </a>
-                            <a href="#" class="social-link">
-                                <i class='bx bxl-twitter'></i>
-                            </a>
-                            <a href="#" class="social-link">
-                                <i class='bx bxl-linkedin'></i>
-                            </a>
-                        </div>
+                          </div>
                     </div>
                 </div>
-                <div class="col-lg-6">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h5 style="color: white; margin-bottom: 20px;">روابط مفيدة</h5>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="margin-bottom: 10px;"><a href="#" style="color: #ccc; text-decoration: none;">الرئيسية</a></li>
-                                <li style="margin-bottom: 10px;"><a href="#" style="color: #ccc; text-decoration: none;">المميزات</a></li>
-                                <li style="margin-bottom: 10px;"><a href="#" style="color: #ccc; text-decoration: none;">الأسعار</a></li>
-                                <li style="margin-bottom: 10px;"><a href="#" style="color: #ccc; text-decoration: none;">تواصل معنا</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-6">
-                            <h5 style="color: white; margin-bottom: 20px;">الدعم</h5>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="margin-bottom: 10px;"><a href="#" style="color: #ccc; text-decoration: none;">مركز المساعدة</a></li>
-                                <li style="margin-bottom: 10px;"><a href="#" style="color: #ccc; text-decoration: none;">شروط الاستخدام</a></li>
-                                <li style="margin-bottom: 10px;"><a href="#" style="color: #ccc; text-decoration: none;">سياسة الخصوصية</a></li>
-                                <li style="margin-bottom: 10px;"><a href="#" style="color: #ccc; text-decoration: none;">الأسئلة الشائعة</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+
             </div>
             <div class="footer-bottom">
                 <p>جميع الحقوق محفوظة © 2025 Simplex Gestion</p>
