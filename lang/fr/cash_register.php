@@ -4,7 +4,7 @@
      'cash_register' => 'Caisse',
      'manage_your_cash_register' => 'Gérer les caisses',
      'all_your_cash_register' => 'Toutes les caisses',
-     'cash_in_hand' => 'Liquide en main (tnd)',
+     'cash_in_hand' => 'Liquide en main (TND)',
      'open_cash_register' => 'Ouvrir caisse',
      'enter_amount' => 'Entrer le montant',
      'open_register' => 'Ouvrir',

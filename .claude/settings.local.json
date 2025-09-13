@@ -2,7 +2,9 @@
   "permissions": {
     "allow": [
       "Bash(git checkout:*)",
-      "Bash(del test_precision.js test_js_precision.html)"
+      "Bash(del test_precision.js test_js_precision.html)",
+      "Bash(move \"1757720399_1280px-Stripe_Logo%2C_revised_2016.svg.png\" \"1757720399_1280px-Stripe_Logo_revised_2016.svg.png\")",
+      "Bash(mv:*)"
     ],
     "deny": [],
     "ask": []

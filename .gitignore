@@ -12,3 +12,7 @@ storage/logs/laravel.log
 storage/logs/laravel.log
 public/uploads/temp/*
 storage/logs/*
+public/uploads/*
+storage/logs/laravel.log
+
+.claude/settings.local.json

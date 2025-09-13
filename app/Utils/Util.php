@@ -715,7 +715,9 @@ class Util
             }
 
             if ($request->$file_name->getSize() <= config('constants.document_size_limit')) {
-                $new_file_name = time().'_'.$request->$file_name->getClientOriginalName();
+                // Generate a unique 10-digit number filename
+                $extension = $request->$file_name->getClientOriginalExtension();
+                $new_file_name = time() . '.' . $extension;
                 if ($request->$file_name->storeAs($dir_name, $new_file_name)) {
                     $uploaded_file_name = $new_file_name;
                 }

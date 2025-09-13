@@ -72,13 +72,9 @@ class BusinessUtil extends Util
             'is_default' => 1,
             'business_id' => $business_id,
         ]);
-        //create default invoice layour for new business
-        InvoiceLayout::create(['name' => 'Default',
+        $input=['name' => 'Défaut',
             'header_text' => null,
-            'invoice_no_prefix' => 'Invoice No.',
-            'invoice_heading' => 'Invoice',
-            'sub_total_label' => 'Subtotal',
-            'discount_label' => 'Discount',
+        
             'tax_label' => 'Tax',
             'total_label' => 'Total',
             'show_landmark' => 1,
@@ -92,17 +88,38 @@ class BusinessUtil extends Util
             'business_id' => $business_id,
             'invoice_heading_not_paid' => '',
             'invoice_heading_paid' => '',
-            'total_due_label' => 'Total Due',
-            'paid_label' => 'Total Paid',
+            'total_due_label' => 'Total Impayé',
+            'paid_label' => 'Total Payé',
             'show_payments' => 1,
             'show_customer' => 1,
-            'customer_label' => 'Customer',
-            'table_product_label' => 'Product',
-            'table_qty_label' => 'Quantity',
-            'table_unit_price_label' => 'Unit Price',
-            'table_subtotal_label' => 'Subtotal',
+            'customer_label' => 'Client',
+            'table_product_label' => 'Désignation',
+            'table_qty_label' => 'Qté',
+            'table_unit_price_label' => 'P.U',
+            'table_subtotal_label' => 'Sous-total',
             'date_label' => 'Date',
-        ]);
+    ];
+       $input['invoice_no_prefix']='Facture n°:';
+            $input['invoice_heading']='Facture';
+            $input['quotation_no_prefix']='Devis n°:';
+            $input['sub_total_label']='Sous-total';
+            $input['discount_label']='Remise';
+            $input['tax_label']='Tax';
+            $input['total_label']='total';
+            $input['total_due_label']='Total Impayé';
+            $input['client_id_label']='ID';
+            $input['date_label']='Date';
+            $input['quotation_heading']='Devis';
+            $input['cat_code_label']='HSN';
+            $input['client_tax_label']='M.F';
+            $input['cn_heading']='Facture d\'avoir';
+            $input['cn_no_label']='Facture d\'avoir n°:';
+            $input['cn_amount_label']='Total d\'avoir';
+            $input['sales_person_label']='Vendeur:';
+            $input['change_return_label']='Rendu';
+            $input['commission_agent_label']='Comissionaire:';
+        //create default invoice layour for new business
+        InvoiceLayout::create($input);
 
         //create default barcode setting for new business
         // Barcode::create(['name' => 'Default',
@@ -129,7 +146,7 @@ class BusinessUtil extends Util
             'updated_at' => now()],
         
           [  'business_id' => $business_id,
-            'actual_name' => 'Kilogramme',
+            'actual_name' => 'Kg',
             'short_name' => 'Kg',
             'allow_decimal' => 1,
             'created_by' => $user_id,

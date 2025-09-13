@@ -166,8 +166,8 @@ class BusinessController extends Controller
             $business_details['date_format'] = 'd/m/Y';
             $business_location = $request->only(['name', 'mobile']);
             $business_location['country']='tunisia';
-            $business_location['city']='مدينة';
-            $business_location['state']='ولاية';
+            $business_location['city']=' ';
+            $business_location['state']=' ';
             $business_location['zip_code']=0000;
             $business_location['landmark']=$owner_details['email'];
 

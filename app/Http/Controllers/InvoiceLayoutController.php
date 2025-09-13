@@ -67,7 +67,33 @@ class InvoiceLayoutController extends Controller
                 'sub_heading_line3', 'sub_heading_line4', 'sub_heading_line5',
                 'table_product_label', 'table_qty_label', 'table_unit_price_label',
                 'table_subtotal_label', 'client_id_label', 'date_label', 'quotation_heading', 'quotation_no_prefix', 'design', 'client_tax_label', 'cat_code_label', 'cn_heading', 'cn_no_label', 'cn_amount_label', 'sales_person_label', 'prev_bal_label', 'date_time_format', 'common_settings', 'change_return_label', 'round_off_label', 'qr_code_fields', 'commission_agent_label', ]);
-
+            
+            $input['invoice_no_prefix']='Facture n°:';
+            $input['invoice_heading']='Facture';
+            $input['quotation_no_prefix']='Devis n°:';
+            $input['sub_total_label']='Sous-total';
+            $input['discount_label']='Remise';
+            $input['tax_label']='Tax';
+            $input['total_label']='total';
+            $input['total_due_label']='Total Impayé';
+            $input['customer_label']='Client';
+            $input['paid_label']='Total Payé';
+            $input['table_product_label']='Désignation';
+            $input['table_qty_label']='Qté';
+            $input['table_unit_price_label']='P.U';
+            $input['table_subtotal_label']='Sous-total';
+            $input['client_id_label']='ID';
+            $input['date_label']='Date';
+            $input['quotation_heading']='Devis';
+            $input['cat_code_label']='HSN';
+            $input['client_tax_label']='M.F';
+            $input['cn_heading']='Facture d\'avoir';
+            $input['cn_no_label']='Facture d\'avoir n°:';
+            $input['cn_amount_label']='Total d\'avoir';
+            $input['sales_person_label']='Vendeur:';
+            $input['change_return_label']='Rendu';
+            $input['commission_agent_label']='Comissionaire:';
+           
             $business_id = $request->session()->get('user.business_id');
             $input['business_id'] = $business_id;
 

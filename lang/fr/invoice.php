@@ -24,7 +24,7 @@
      'layout_name' => 'Nom de modèle',
      'invoice_scheme' => 'Schéma de facturation',
      'header_text' => 'En-tête',
-     'invoice_no_prefix' => 'Facture n ° préfixe',
+     'invoice_no_prefix' => 'Facture n° préfixe',
      'invoice_heading' => 'En-tête de facture',
      'sub_total_label' => 'Étiquette de sous-total',
      'discount_label' => 'Étiquette de remise',
@@ -59,7 +59,7 @@
      'number_type' => 'Numérotation',
      'sequential' => 'Incrémental',
      'random' => 'Aléatoire',
-     'invoice_scheme_for_pos'=>'le schéma du facture pour POV',
-     'invoice_scheme_for_sale'=>'le schéma du facture pour vente manuelle',
+     'invoice_scheme_for_pos'=>'le Numérotation du facture pour POV',
+     'invoice_scheme_for_sale'=>'le Numérotation du facture pour vente manuelle',
 
  ];
