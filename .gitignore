@@ -16,3 +16,4 @@ public/uploads/*
 storage/logs/laravel.log
 
 .claude/settings.local.json
+composer.lock
