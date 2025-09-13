@@ -1,8 +1,3 @@
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -21,7 +16,13 @@
 
     <title>Simplex Gestion: برنامج إدارة تجاري متكامل</title>
     <meta name="description" content="نظام إدارة تجاري شامل مع نقاط البيع (POS) لجميع أنواع التجارة">
-
+    <script type="text/javascript">
+        (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        })(window, document, "clarity", "script", "ta3w6x8bub");
+    </script>
     <style>
         :root {
             --primary-color: #2948ff;
