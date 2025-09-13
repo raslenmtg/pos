@@ -986,11 +986,11 @@
                     </div>
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
                         <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>يدعم لغة عربية ؟</span>
+                            <span>يدعم اللغة الفرنسية ؟</span>
                             <i class='bx bx-chevron-down'></i>
                         </button>
                         <div class="faq-answer" style="display: none;">
-                            نعم، يدعم العربية، الفرنسية، والإنقليزية.
+                            نعم، يدعم الفرنسية، العربية، والإنقليزية.
                         </div>
                     </div>
                     <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
@@ -1083,7 +1083,7 @@
                             <a href="https://www.facebook.com/simplexgestion" class="social-link">
                                 <i class='bx bxl-facebook'></i>
                             </a>
-                            <a href="#" class="social-link">
+                            <a href="https://www.instagram.com/simplexgestion" class="social-link">
                                 <i class='bx bxl-instagram'></i>
                             </a>
                           </div>
