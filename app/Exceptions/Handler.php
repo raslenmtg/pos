@@ -46,6 +46,18 @@ class Handler extends ExceptionHandler
     {
         \Log::error('Global Exception - File: ' . $exception->getFile() . ' Line: ' . $exception->getLine() . ' Message: ' . $exception->getMessage());
         
+        // Log additional details for validation exceptions
+        if ($exception instanceof \Illuminate\Validation\ValidationException) {
+            \Log::error('Validation Exception Details: ', [
+                'errors' => $exception->errors(),
+                'input' => request()->except(['password', 'password_confirmation']),
+                'url' => request()->fullUrl(),
+                'method' => request()->method(),
+                'user_agent' => request()->userAgent(),
+                'ip' => request()->ip()
+            ]);
+        }
+        
         parent::report($exception);
     }
 
