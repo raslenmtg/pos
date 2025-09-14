@@ -154,30 +154,10 @@ class LoginController extends Controller
 
     public function validateLogin(Request $request)
     {
-        try {
-            \Log::info('Login attempt started for user: ' . $request->input('username', 'N/A'));
-            
-            if(config('constants.enable_recaptcha')){
-                \Log::info('ReCaptcha validation enabled');
-                $this->validate($request, [
-                    $this->username() => 'required|string',
-                    'password' => 'required|string',
-                    'g-recaptcha-response' => ['required', new ReCaptcha]
-                ]);
-            }else{
-                \Log::info('ReCaptcha validation disabled');
+            \Log::info('Login attempt started for user ');
                 $this->validate($request, [
                     $this->username() => 'required|string',
                     'password' => 'required|string',
                 ]);
-            }
-            
-            \Log::info('Login validation passed for user: ' . $request->input('username', 'N/A'));
-        } catch (\Exception $e) {
-            \Log::error('Login validation failed: ' . $e->getMessage());
-            \Log::error('Full error: ' . $e->getTraceAsString());
-            throw $e;
-        }
     }
-
 }
