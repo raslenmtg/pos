@@ -67,16 +67,3 @@
         </div>
     </div>
 @endif
-@if(empty($only) || in_array('only_subscriptions', $only))
-<div class="col-md-3" style="margin-bottom: 7px;">
-    <div class="form-group">
-        <div class="checkbox">
-            <label>
-                <br>
-              {!! Form::checkbox('only_subscriptions', 1, false, 
-              [ 'class' => 'input-icheck', 'id' => 'only_subscriptions']); !!} {{ __('lang_v1.subscriptions') }}
-            </label>
-        </div>
-    </div>
-</div>
-@endif

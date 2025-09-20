@@ -4883,7 +4883,8 @@ class TransactionUtil extends Util
                     DB::raw('SUM(tsl.quantity - tsl.so_quantity_invoiced) as so_qty_remaining'),
                     'transactions.is_export',
                     DB::raw("CONCAT(COALESCE(dp.surname, ''),' ',COALESCE(dp.first_name, ''),' ',COALESCE(dp.last_name,'')) as delivery_person")
-                );
+                )
+                ->orderBy('transactions.transaction_date', 'desc');
 
         if ($sale_type == 'sell') {
             $sells->where('transactions.status', 'final');

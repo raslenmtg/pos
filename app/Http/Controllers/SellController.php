@@ -82,11 +82,11 @@ class SellController extends Controller
         }
 
         $business_id = request()->session()->get('user.business_id');
-        $is_woocommerce = $this->moduleUtil->isModuleInstalled('Woocommerce');
-        $is_crm = $this->moduleUtil->isModuleInstalled('Crm');
-        $is_tables_enabled = $this->transactionUtil->isModuleEnabled('tables');
-        $is_service_staff_enabled = $this->transactionUtil->isModuleEnabled('service_staff');
-        $is_types_service_enabled = $this->moduleUtil->isModuleEnabled('types_of_service');
+        $is_woocommerce = false;
+        $is_crm =false;
+        $is_tables_enabled = false;
+        $is_service_staff_enabled = false;
+        $is_types_service_enabled = false;
 
         if (request()->ajax()) {
             $payment_types = $this->transactionUtil->payment_types(null, true, $business_id);
