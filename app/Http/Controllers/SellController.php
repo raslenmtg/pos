@@ -345,10 +345,7 @@ class SellController extends Controller
                 }
             }
 
-            //$business_details = $this->businessUtil->getDetails($business_id);
-            if ($this->businessUtil->isModuleEnabled('subscription')) {
-                $sells->addSelect('transactions.is_recurring', 'transactions.recur_parent_id');
-            }
+       
             $sales_order_statuses = Transaction::sales_order_statuses();
             $datatable = Datatables::of($sells)
                 ->addColumn(
@@ -454,7 +451,6 @@ class SellController extends Controller
                                 }
                             }
 
-                            $html .= '<li><a href="#" data-href="'.action([\App\Http\Controllers\NotificationController::class, 'getTemplate'], [ $row->id, 'new_sale']).'" class="btn-modal" data-container=".view_modal"><i class="fa fa-envelope" aria-hidden="true"></i>'.__('lang_v1.new_sale_notification').'</a></li>';
                         } else {
                             $html .= '<li><a href="#" data-href="'.action([\App\Http\Controllers\SellController::class, 'viewMedia'], ['model_id' => $row->id, 'model_type' => \App\Transaction::class, 'model_media_type' => 'shipping_document']).'" class="btn-modal" data-container=".view_modal"><i class="fas fa-paperclip" aria-hidden="true"></i>'.__('lang_v1.shipping_documents').'</a></li>';
                         }

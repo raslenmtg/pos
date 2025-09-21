@@ -95,7 +95,8 @@ class NotificationController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function send(Request $request)
-    {abort(403, 'Unauthorized action.');
+    {
+        abort(403, 'Unauthorized action.');
         // if (!auth()->user()->can('send_notification')) {
         //     abort(403, 'Unauthorized action.');
         // }
