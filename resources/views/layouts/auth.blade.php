@@ -32,9 +32,9 @@
     @yield('content')
 
     @include('layouts.partials.javascripts')
+    @yield('javascript')
     <!-- Scripts -->
     <script src="{{ asset('js/login.js?v=' . $asset_v) }}"></script>
-    @yield('javascript')
 
     <script type="text/javascript">
         $(document).ready(function() {
