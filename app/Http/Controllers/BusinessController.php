@@ -161,7 +161,7 @@ class BusinessController extends Controller
             $business_details['currency_id'] = 142;
             $business_details['time_zone'] = 'Europe/Madrid';
             $business_details['fy_start_month'] = 1;
-            $business_details['currency_precision'] = 2;
+            $business_details['currency_precision'] = 3;
             $business_details['accounting_method'] = 'fifo';
             $business_details['date_format'] = 'd/m/Y';
             $business_location = $request->only(['name', 'mobile']);
