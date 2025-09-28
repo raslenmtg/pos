@@ -165,10 +165,10 @@ class ProductUtil extends Util
                         'variation_value_id' => $variation_value_id,
                         'product_id' => $product->id,
                         'sub_sku' => $sub_sku,
-                        'default_purchase_price' => $this->num_uf($v['default_purchase_price']),
+                        'default_purchase_price' => $this->num_uf($v['dpp_inc_tax']),
                         'dpp_inc_tax' => $this->num_uf($v['dpp_inc_tax']),
                         'profit_percent' => $this->num_uf($v['profit_percent']),
-                        'default_sell_price' => $this->num_uf($v['default_sell_price']),
+                        'default_sell_price' => $this->num_uf($v['sell_price_inc_tax']),
                         'sell_price_inc_tax' => $this->num_uf($v['sell_price_inc_tax']),
                     ];
                     $c++;

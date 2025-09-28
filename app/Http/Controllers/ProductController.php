@@ -850,7 +850,7 @@ class ProductController extends Controller
                 $variation->default_purchase_price = $this->productUtil->num_uf($request->input('item_level_purchase_price_total'));
                 $variation->dpp_inc_tax = $this->productUtil->num_uf($request->input('purchase_price_inc_tax'));
                 $variation->profit_percent = $this->productUtil->num_uf($request->input('profit_percent'));
-                $variation->default_sell_price = $product_details['tax_type']=='inclusive'? $this->productUtil->num_uf($single_data['single_dsp_inc_tax']): $this->productUtil->num_uf($single_data['single_dsp']);
+                $variation->default_sell_price =  $this->productUtil->num_uf($request->input('selling_price_inc_tax'));
               
                 $variation->sell_price_inc_tax = $this->productUtil->num_uf($request->input('selling_price_inc_tax'));
                 $variation->combo_variations = $combo_variations;

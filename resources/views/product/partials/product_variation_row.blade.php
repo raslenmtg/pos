@@ -30,12 +30,7 @@
             <tr>
                 <th>@lang('product.sku') @show_tooltip(__('tooltip.sub_sku'))</th>
                 <th>@lang('product.value')</th>
-                <th class="{{$class}}">@lang('product.default_purchase_price')
-                    <br/>
-                    <span class="pull-left"><small><i>@lang('product.exc_of_tax')</i></small></span>
-
-                    <span class="pull-right"><small><i>@lang('product.inc_of_tax')</i></small></span>
-                </th>
+                <th class="{{$class}}">@lang('product.default_purchase_price')</th>
                 <th class="{{$class}}">@lang('product.profit_percent')</th>
                 <th class="{{$class}}">@lang('product.default_selling_price')
                 <br/>
@@ -56,17 +51,11 @@
                     {!! Form::text('product_variation[' . $row_index .'][variations][0][value]', null, ['class' => 'form-control input-sm variation_value_name', 'required']); !!}
                 </td>
                 <td class="{{$class}}">
-                    <div class="width-50 f-left">
-                        {!! Form::text('product_variation[' . $row_index .'][variations][0][default_purchase_price]', $default, ['class' => 'form-control input-sm variable_dpp input_number', 'placeholder' => __('product.exc_of_tax'), 'required']); !!}
-                    </div>
-
-                    <div class="width-50 f-left">
-                        <div class="input-group">
-                            {!! Form::text('product_variation[' . $row_index .'][variations][0][dpp_inc_tax]', $default, ['class' => 'form-control input-sm variable_dpp_inc_tax input_number', 'placeholder' => __('product.inc_of_tax'), 'required']); !!}
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default bg-white btn-flat apply-all btn-sm p-5-5" data-toggle="tooltip" title="@lang('lang_v1.apply_all')" data-target-class=".variable_dpp_inc_tax"><i class="fas fa-check-double"></i></button>
-                            </span>
-                        </div>
+                    <div class="input-group">
+                        {!! Form::text('product_variation[' . $row_index .'][variations][0][dpp_inc_tax]', $default, ['class' => 'form-control input-sm variable_dpp_inc_tax input_number', 'required']); !!}
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default bg-white btn-flat apply-all btn-sm p-5-5" data-toggle="tooltip" title="@lang('lang_v1.apply_all')" data-target-class=".variable_dpp_inc_tax"><i class="fas fa-check-double"></i></button>
+                        </span>
                     </div>
                 </td>
                 <td class="{{$class}}">
@@ -79,9 +68,7 @@
                     </div>
                 </td>
                 <td class="{{$class}}">
-                    {!! Form::text('product_variation[' . $row_index .'][variations][0][default_sell_price]', $default, ['class' => 'form-control input-sm variable_dsp input_number', 'placeholder' => __('product.exc_of_tax'), 'required']); !!}
-
-                     {!! Form::text('product_variation[' . $row_index .'][variations][0][sell_price_inc_tax]', $default, ['class' => 'form-control input-sm variable_dsp_inc_tax input_number', 'placeholder' => __('product.inc_of_tax'), 'required']); !!}
+                     {!! Form::text('product_variation[' . $row_index .'][variations][0][sell_price_inc_tax]', $default, ['class' => 'form-control input-sm variable_dsp_inc_tax input_number', 'required']); !!}
                 </td>
                 <td>{!! Form::file('variation_images_' . $row_index .'_0[]', ['class' => 'variation_images', 
                     'accept' => 'image/*', 'multiple']); !!}</td>

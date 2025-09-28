@@ -253,28 +253,6 @@ $(document).ready(function() {
     //End for product type single
 
     //Start for product type Variable
-    //If purchase price exc tax is changed
-    $(document).on('change', 'input.variable_dpp', function(e) {
-        var tr_obj = $(this).closest('tr');
-
-        var purchase_exc_tax = __read_number($(this));
-        purchase_exc_tax = purchase_exc_tax == undefined ? 0 : purchase_exc_tax;
-
-        var tax_rate = $('select#tax')
-            .find(':selected')
-            .data('rate');
-        tax_rate = tax_rate == undefined ? 0 : tax_rate;
-
-        var purchase_inc_tax = __add_percent(purchase_exc_tax, tax_rate);
-        __write_number(tr_obj.find('input.variable_dpp_inc_tax'), purchase_inc_tax);
-
-        var profit_percent = __read_number(tr_obj.find('input.variable_profit_percent'));
-        var selling_price = __add_percent(purchase_exc_tax, profit_percent);
-        __write_number(tr_obj.find('input.variable_dsp'), selling_price);
-
-        var selling_price_inc_tax = __add_percent(selling_price, tax_rate);
-        __write_number(tr_obj.find('input.variable_dsp_inc_tax'), selling_price_inc_tax);
-    });
 
     //If purchase price inc tax is changed
     $(document).on('change', 'input.variable_dpp_inc_tax', function(e) {
@@ -289,7 +267,6 @@ $(document).ready(function() {
         tax_rate = tax_rate == undefined ? 0 : tax_rate;
 
         var purchase_exc_tax = __get_principle(purchase_inc_tax, tax_rate);
-        __write_number(tr_obj.find('input.variable_dpp'), purchase_exc_tax);
 
         var profit_percent = __read_number(tr_obj.find('input.variable_profit_percent'));
         var selling_price = __add_percent(purchase_exc_tax, profit_percent);
@@ -308,7 +285,9 @@ $(document).ready(function() {
         var tr_obj = $(this).closest('tr');
         var profit_percent = __read_number($(this));
 
-        var purchase_exc_tax = __read_number(tr_obj.find('input.variable_dpp'));
+        // Get purchase price inc tax and calculate exc tax from it
+        var purchase_inc_tax = __read_number(tr_obj.find('input.variable_dpp_inc_tax'));
+        var purchase_exc_tax = purchase_inc_tax == 0 ? 0 : __get_principle(purchase_inc_tax, tax_rate);
         purchase_exc_tax = purchase_exc_tax == undefined ? 0 : purchase_exc_tax;
 
         var selling_price = __add_percent(purchase_exc_tax, profit_percent);
@@ -326,7 +305,10 @@ $(document).ready(function() {
 
         var tr_obj = $(this).closest('tr');
         var selling_price = __read_number($(this));
-        var purchase_exc_tax = __read_number(tr_obj.find('input.variable_dpp'));
+
+        // Get purchase price inc tax and calculate exc tax from it
+        var purchase_inc_tax = __read_number(tr_obj.find('input.variable_dpp_inc_tax'));
+        var purchase_exc_tax = purchase_inc_tax == 0 ? 0 : __get_principle(purchase_inc_tax, tax_rate);
 
         var profit_percent = __read_number(tr_obj.find('input.variable_profit_percent'));
 
@@ -354,7 +336,10 @@ $(document).ready(function() {
         var selling_price = __get_principle(selling_price_inc_tax, tax_rate);
         __write_number(tr_obj.find('input.variable_dsp'), selling_price);
 
-        var purchase_exc_tax = __read_number(tr_obj.find('input.variable_dpp'));
+        // Get purchase price inc tax and calculate exc tax from it
+        var purchase_inc_tax = __read_number(tr_obj.find('input.variable_dpp_inc_tax'));
+        var purchase_exc_tax = purchase_inc_tax == 0 ? 0 : __get_principle(purchase_inc_tax, tax_rate);
+
         var profit_percent = __read_number(tr_obj.find('input.variable_profit_percent'));
         //if purchase price not set
         if (purchase_exc_tax == 0) {
@@ -512,21 +497,18 @@ $(document).ready(function() {
                 $(this)
                     .find('tr')
                     .each(function() {
-                        var purchase_exc_tax = __read_number($(this).find('input.variable_dpp'));
-                        purchase_exc_tax = purchase_exc_tax == undefined ? 0 : purchase_exc_tax;
-
-                        var purchase_inc_tax = __add_percent(purchase_exc_tax, tax_rate);
-                        __write_number(
-                            $(this).find('input.variable_dpp_inc_tax'),
-                            purchase_inc_tax
-                        );
-
-                        var selling_price = __read_number($(this).find('input.variable_dsp'));
-                        var selling_price_inc_tax = __add_percent(selling_price, tax_rate);
-                        __write_number(
-                            $(this).find('input.variable_dsp_inc_tax'),
-                            selling_price_inc_tax
-                        );
+                        // Update purchase inc tax to reflect new tax rate
+                        var purchase_inc_tax = __read_number($(this).find('input.variable_dpp_inc_tax'));
+                        if (purchase_inc_tax > 0) {
+                            // Keep the inclusive price as is since user entered it directly
+                            // Just update selling price inc tax
+                            var selling_price = __read_number($(this).find('input.variable_dsp'));
+                            var selling_price_inc_tax = __add_percent(selling_price, tax_rate);
+                            __write_number(
+                                $(this).find('input.variable_dsp_inc_tax'),
+                                selling_price_inc_tax
+                            );
+                        }
                     });
             });
         }
