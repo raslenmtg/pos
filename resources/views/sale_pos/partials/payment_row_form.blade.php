@@ -18,7 +18,7 @@
 			</div>
 		</div>
 	</div>
-	@if(!empty($show_date))
+	
 	<div class="{{$col_class}}">
 		<div class="form-group">
 			{!! Form::label("paid_on_$row_index" , __('lang_v1.paid_on') . ':*') !!}
@@ -26,11 +26,11 @@
               <span class="input-group-addon">
                 <i class="fa fa-calendar"></i>
               </span>
-              {!! Form::text("payment[$row_index][paid_on]", isset($payment_line['paid_on']) ? @format_datetime($payment_line['paid_on']) : @format_datetime('now'), ['class' => 'form-control paid_on', 'readonly', 'required']); !!}
+              {!! Form::text("payment[$row_index][paid_on]", isset($payment_line['paid_on']) ? @format_datetime($payment_line['paid_on']) : @format_datetime(now()), ['class' => 'form-control paid_on DateTimePicker ', 'required']); !!}
             </div>
 		</div>
 	</div>
-	@endif
+	
 	<div class="{{$col_class}}">
 		<div class="form-group">
 			{!! Form::label("method_$row_index" , __('lang_v1.payment_method') . ':*') !!}

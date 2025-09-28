@@ -746,6 +746,13 @@ $(document).ready(function() {
                         .change()
                         .select();
                     __select2($(appended).find('.select2'));
+
+                    // Initialize DateTimePicker for newly added payment row
+                    $(appended).find('.paid_on').datetimepicker({
+                        format: moment_date_format,
+                        ignoreReadonly: true,
+                    });
+
                     $(appended).find('#method_' + row_index).change();
                     $('#payment_row_index').val(parseInt(row_index) + 1);
                 }
@@ -1045,6 +1052,12 @@ $(document).ready(function() {
     //Datetime picker
     $('#transaction_date').datetimepicker({
         format: moment_date_format + ' ' + moment_time_format,
+        ignoreReadonly: true,
+    });
+
+    // Initialize DateTimePicker for payment date fields
+    $('.paid_on').datetimepicker({
+        format: moment_date_format,
         ignoreReadonly: true,
     });
 
@@ -2079,7 +2092,12 @@ function reset_pos_form(){
         $('#transaction_date').data("DateTimePicker").date(moment());
     }
     if ($('.paid_on').length > 0) {
-        $('.paid_on').data("DateTimePicker").date(moment());
+        $('.paid_on').each(function() {
+            var picker = $(this).data("DateTimePicker");
+            if (picker) {
+                picker.date(moment());
+            }
+        });
     }
     if ($('#commission_agent').length > 0) {
         $('#commission_agent').val('').trigger('change');
