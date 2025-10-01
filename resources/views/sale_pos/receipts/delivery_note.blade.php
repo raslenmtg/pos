@@ -156,9 +156,9 @@
 </div>
 
 <div class="row invoice-info color-555" style="page-break-inside: avoid !important">
-	<div  style="width: 100%;">
-		<b >&nbsp;@lang('lang_v1.received_in') : </b>
-			<img style="margin-left:50%;" src="data:image/png;base64,{{DNS1D::getBarcodePNG($receipt_details->invoice_no, 'C128', 2,30,array(39, 48, 54), true)}}">
+	<div  style="width: 100%;padding:10px;">
+		<strong style="padding:10px;">@lang('lang_v1.received_in') : </strong>
+			<img style="margin-left:50%" src="data:image/png;base64,{{DNS1D::getBarcodePNG($receipt_details->invoice_no, 'C128', 2,30,array(39, 48, 54), true)}}">
         
 	</div>
 	    <br>
