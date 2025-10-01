@@ -72,17 +72,7 @@
 		
 	</div>
 	<div class="col-md-6 invoice-col width-50 word-wrap">
-		@if(!empty($receipt_details->customer_label))
-			{{ $receipt_details->customer_label }}:
-		@endif
-
-		@if(!empty($receipt_details->customer_info))
-			{!! $receipt_details->customer_info !!}
-		@endif
-		@if(!empty($receipt_details->client_id_label))
-		
-			<strong>{{ $receipt_details->client_id_label }}</strong>: {{ $receipt_details->client_id }}<br/>
-		@endif
+        <h3>Client:  {!! $receipt_details->customer_info !!}</h3>
 	</div>
 		<div class="col-md-6 invoice-col width-50 word-wrap">
 		<strong>@lang('lang_v1.shipping_address'):</strong><br>
@@ -166,9 +156,15 @@
 </div>
 
 <div class="row invoice-info color-555" style="page-break-inside: avoid !important">
-	<div class="col-md-6 invoice-col width-80">
-		<b class="pull-left">@lang('lang_v1.received_in') : </b>
+	<div  style="width: 100%;">
+		<b >&nbsp;@lang('lang_v1.received_in') : </b>
+			<img style="margin-left:50%;" src="data:image/png;base64,{{DNS1D::getBarcodePNG($receipt_details->invoice_no, 'C128', 2,30,array(39, 48, 54), true)}}">
+        
 	</div>
+	    <br>
+	    <br>
+		
+        
 </div>
 			</td>
 		</tr>
