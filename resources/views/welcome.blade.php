@@ -1217,7 +1217,6 @@
 
         gtag('config', 'G-M57CQPB9JN');
     </script>
-    <script src="{{ asset('js/login.js?v=' . $asset_v) }}"></script>
-    @yield('javascript')
+   @yield('javascript')
 </body>
 </html>
