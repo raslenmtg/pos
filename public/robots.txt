@@ -1,2 +1,21 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /storage/
+Disallow: /vendor/
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /login
+Disallow: /register
+
+# Allow crawling of important pages
+Allow: /img/
+Allow: /css/
+Allow: /js/
+
+# Sitemap location
+Sitemap: https://simplexgestion.tn/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1

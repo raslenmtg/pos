@@ -14,8 +14,29 @@
     <!-- AOS CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
 
-    <title>Simplex Gestion: برنامج إدارة تجاري متكامل</title>
-    <meta name="description" content="نظام إدارة تجاري شامل مع نقاط البيع (POS) لجميع أنواع التجارة">
+    <title>Simplex Gestion - برنامج إدارة تجاري متكامل | نظام POS تونس</title>
+    <meta name="description" content="Simplex Gestion - نظام إدارة تجاري شامل في تونس. برنامج POS متكامل لإدارة المخزون، الفواتير، والمحاسبة. اشتراك شهري 90 دينار فقط">
+    <meta name="keywords" content="simplex gestion, برنامج إدارة تجاري, نظام POS, إدارة المخزون تونس, برنامج محاسبة, فواتير إلكترونية, نقطة البيع">
+    <meta name="author" content="Simplex Gestion">
+    <meta name="language" content="Arabic">
+    <meta name="geo.region" content="TN">
+    <meta name="geo.country" content="Tunisia">
+    <link rel="canonical" href="https://simplexgestion.tn/">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Simplex Gestion - برنامج إدارة تجاري متكامل | نظام POS تونس">
+    <meta property="og:description" content="نظام إدارة تجاري شامل في تونس. برنامج POS متكامل لإدارة المخزون، الفواتير، والمحاسبة">
+    <meta property="og:url" content="https://simplexgestion.tn/">
+    <meta property="og:site_name" content="Simplex Gestion">
+    <meta property="og:image" content="https://simplexgestion.tn/img/logo.png">
+    <meta property="og:locale" content="ar_TN">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Simplex Gestion - برنامج إدارة تجاري متكامل">
+    <meta name="twitter:description" content="نظام إدارة تجاري شامل في تونس. برنامج POS متكامل لإدارة المخزون والفواتير">
+    <meta name="twitter:image" content="https://simplexgestion.tn/img/logo.png">
     <script async type="text/javascript">
         (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -40,6 +61,66 @@
     src="https://www.facebook.com/tr?id=24661890816831066&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Simplex Gestion",
+        "description": "نظام إدارة تجاري شامل مع نقاط البيع (POS) لجميع أنواع التجارة في تونس",
+        "url": "https://simplexgestion.tn",
+        "logo": "https://simplexgestion.tn/img/logo.png",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "TN",
+            "addressRegion": "Tunisia"
+        },
+        "telephone": "+21624327623",
+        "sameAs": [
+            "https://www.facebook.com/simplexgestion",
+            "https://www.instagram.com/simplexgestion"
+        ],
+        "offers": {
+            "@type": "Offer",
+            "name": "نظام إدارة تجاري شامل",
+            "description": "برنامج POS متكامل لإدارة المخزون والفواتير",
+            "price": "90",
+            "priceCurrency": "TND",
+            "priceSpecification": {
+                "@type": "UnitPriceSpecification",
+                "price": "90",
+                "priceCurrency": "TND",
+                "unitText": "شهري"
+            }
+        },
+        "serviceType": "Business Management Software",
+        "areaServed": "Tunisia"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Simplex Gestion",
+        "description": "برنامج إدارة تجاري متكامل مع نظام POS",
+        "url": "https://simplexgestion.tn",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "90",
+            "priceCurrency": "TND"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "ratingCount": "100"
+        }
+    }
+    </script>
+
     <style>
         :root {
             --primary-color: #2948ff;
