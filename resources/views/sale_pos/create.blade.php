@@ -137,9 +137,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div class="d-flex justify-content-between">
-
-                    
+                    <div style="display: flex;justify-content: space-between;">
                     <h4 class="modal-title" id="qrScannerModalLabel">QR Code & Barcode Scanner</h4>
                     <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close">
                         <i class="fa fa-times"></i>
@@ -194,7 +192,7 @@
                             cameraId,
                             {
                                 fps: 10,
-                                qrbox: { width: 400, height: 250 },
+                                qrbox: { width: 500, height: 250 },
                                 aspectRatio: 1.4,
                                 supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
                               
