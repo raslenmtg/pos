@@ -108,6 +108,9 @@
     @endif
 @stop
 @section('javascript')
+    <!-- HTML5 QR Code Scanner -->
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+
     <script src="{{ asset('js/pos.js?v=' . $asset_v) }}"></script>
     <script src="{{ asset('js/printer.js?v=' . $asset_v) }}"></script>
     <script src="{{ asset('js/product.js?v=' . $asset_v) }}"></script>
@@ -128,4 +131,130 @@
             @endif
         @endforeach
     @endif
+
+    <!-- QR Code Scanner Modal -->
+    <div class="modal fade" id="qrScannerModal" tabindex="-1" role="dialog" aria-labelledby="qrScannerModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="d-flex justify-content-between">
+
+                    
+                    <h4 class="modal-title" id="qrScannerModalLabel">QR Code & Barcode Scanner</h4>
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="qr-scanner-container" style="width: 100%;"></div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let html5Qrcode = null;
+        let isScanning = false;
+
+        $(document).ready(function() {
+            $('#qr_scan_btn').click(function() {
+                $('#qrScannerModal').modal('show');
+                setTimeout(function() {
+                    initQRScanner();
+                }, 300);
+            });
+
+            $('#qrScannerModal').on('hidden.bs.modal', function() {
+                stopQRScanner();
+            });
+        });
+
+        function initQRScanner() {
+            if (isScanning) return;
+
+            try {
+                html5Qrcode = new Html5Qrcode("qr-scanner-container");
+
+                Html5Qrcode.getCameras().then(devices => {
+                    if (devices && devices.length) {
+                        let cameraId = devices[0].id;
+                        // Use back camera if available
+                        const backCamera = devices.find(device =>
+                            device.label.toLowerCase().includes('back') ||
+                            device.label.toLowerCase().includes('rear') ||
+                            device.label.toLowerCase().includes('environment')
+                        );
+                        if (backCamera) {
+                            cameraId = backCamera.id;
+                        }
+
+                        html5Qrcode.start(
+                            cameraId,
+                            {
+                                fps: 10,
+                                qrbox: { width: 400, height: 250 },
+                                aspectRatio: 1.4,
+                                supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+                              
+                            },
+                            onScanSuccess
+                        ).then(() => {
+                            isScanning = true;
+                        }).catch(err => {
+                            console.error('Failed to start scanner:', err);
+                            alert('permission du camera est désactivé');
+                        });
+                    } else {
+                        alert('Aucun camera');
+                    }
+                }).catch(err => {
+                    console.error('Failed to get cameras:', err);
+                    alert('Error accessing camera. Please check permissions.');
+                });
+
+            } catch (error) {
+                console.error('QR Scanner initialization error:', error);
+                alert('Error initializing QR scanner. Please make sure camera permissions are granted.');
+            }
+        }
+
+        function onScanSuccess(decodedText, decodedResult) {
+            // Set the scanned text in the search product input
+            $('#search_product').val(decodedText);
+
+            // Trigger the search product functionality
+            $('#search_product').trigger('input');
+
+            // Play success beep sound
+            try {
+                const successAudio = document.getElementById('success-audio');
+                if (successAudio) {
+                    successAudio.currentTime = 0; // Reset to start
+                    successAudio.play();
+                }
+            } catch (error) {
+                console.log('Could not play beep sound:', error);
+            }
+        }
+
+        function stopQRScanner() {
+            if (html5Qrcode && isScanning) {
+                try {
+                    html5Qrcode.stop().then(() => {
+                        html5Qrcode.clear();
+                        $('#qr-result').hide();
+                        isScanning = false;
+                    }).catch(err => {
+                        console.error('Error stopping scanner:', err);
+                        isScanning = false;
+                    });
+                } catch (error) {
+                    console.error('Error stopping QR scanner:', error);
+                    isScanning = false;
+                }
+            }
+        }
+    </script>
 @endsection
