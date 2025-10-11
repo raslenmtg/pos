@@ -367,12 +367,12 @@
                         {
                             fps: 10,
                             qrbox: function(viewfinderWidth, viewfinderHeight) {
-                                // Make qrbox responsive for mobile devices
-                                let minEdgePercentage = 0.7; // 70% of the smaller edge
-                                let qrboxSize = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * minEdgePercentage);
+                                // Make qrbox wider for barcode scanning
+                                let widthPercentage = 0.7; // 80% of width
+                                let heightPercentage = 0.3; // 30% of height
                                 return {
-                                    width: qrboxSize,
-                                    height: qrboxSize
+                                    width: Math.floor(viewfinderWidth * widthPercentage),
+                                    height: Math.floor(viewfinderHeight * heightPercentage)
                                 };
                             },
                             aspectRatio: 1.0,
