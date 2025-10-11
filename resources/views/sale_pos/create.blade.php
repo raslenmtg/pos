@@ -155,6 +155,8 @@
     <script>
         let html5Qrcode = null;
         let isScanning = false;
+        let scanCooldown = false;
+        let lastScannedCode = '';
 
         $(document).ready(function() {
             $('#qr_scan_btn').click(function() {
@@ -192,10 +194,18 @@
                             cameraId,
                             {
                                 fps: 10,
-                                qrbox: { width: 500, height: 250 },
-                                aspectRatio: 1.4,
+                                qrbox: function(viewfinderWidth, viewfinderHeight) {
+                                    // Make qrbox responsive for mobile devices
+                                    let minEdgePercentage = 0.7; // 70% of the smaller edge
+                                    let qrboxSize = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * minEdgePercentage);
+                                    return {
+                                        width: qrboxSize,
+                                        height: qrboxSize
+                                    };
+                                },
+                                aspectRatio: 1.0,
                                 supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
-                              
+
                             },
                             onScanSuccess
                         ).then(() => {
@@ -219,6 +229,15 @@
         }
 
         function onScanSuccess(decodedText, decodedResult) {
+            // Check if we're in cooldown period or same code was just scanned
+            if (scanCooldown || lastScannedCode === decodedText) {
+                return;
+            }
+
+            // Set cooldown to prevent multiple scans
+            scanCooldown = true;
+            lastScannedCode = decodedText;
+
             // Set the scanned text in the search product input
             $('#search_product').val(decodedText);
 
@@ -235,6 +254,12 @@
             } catch (error) {
                 console.log('Could not play beep sound:', error);
             }
+
+            // Reset cooldown after 2 seconds
+            setTimeout(() => {
+                scanCooldown = false;
+                lastScannedCode = '';
+            }, 2000);
         }
 
         function stopQRScanner() {
