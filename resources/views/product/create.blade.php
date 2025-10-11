@@ -20,6 +20,21 @@
     @endphp
     {!! Form::open(['url' => action([\App\Http\Controllers\ProductController::class, 'store']), 'method' => 'post',
     'id' => 'product_add_form','class' => 'product_form ' . $form_class, 'files' => true ]) !!}
+
+    <!-- QR Scanner Modal -->
+    <div class="modal fade" id="qrScannerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Scan QR Code</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="qr-scanner-container"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     @component('components.widget', ['class' => 'box-primary'])
     <div class="row">
         <div class="col-sm-4">
@@ -33,8 +48,15 @@
         <div class="col-sm-4">
             <div class="form-group">
                 {!! Form::label('sku', __('product.sku') . ':') !!} @show_tooltip(__('tooltip.sku'))
-                {!! Form::text('sku', null, ['class' => 'form-control',
-                'placeholder' => __('product.sku')]); !!}
+                <div class="input-group">
+                    {!! Form::text('sku', null, ['class' => 'form-control', 'id' => 'sku_input',
+                    'placeholder' => __('product.sku')]); !!}
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default bg-white btn-flat" id="qr_scan_sku_btn" title="Scan QR Code">
+                            <i class="fa fa-camera text-success fa-lg"></i>
+                        </button>
+                    </span>
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
@@ -282,15 +304,33 @@
 @section('javascript')
 
 <script src="{{ asset('js/product.js?v=' . $asset_v) }}"></script>
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
 <script type="text/javascript">
+    let html5Qrcode = null;
+    let isScanning = false;
+
     $(document).ready(function() {
         __page_leave_confirmation('#product_add_form');
+
+        // QR Scanner button click
+        $('#qr_scan_sku_btn').click(function() {
+            $('#qrScannerModal').modal('show');
+            setTimeout(function() {
+                initQRScanner();
+            }, 300);
+        });
+
+        // Close modal event
+        $('#qrScannerModal').on('hidden.bs.modal', function() {
+            stopQRScanner();
+        });
+
         onScan.attachTo(document, {
             suffixKeyCodes: [13], // enter-key expected at the end of a scan
             reactToPaste: true, // Compatibility to built-in scanners in paste-mode (as opposed to keyboard-mode)
             onScan: function(sCode, iQty) {
-                $('input#sku').val(sCode);
+                $('input#sku_input').val(sCode);
             },
             onScanError: function(oDebug) {
                 console.log(oDebug);
@@ -302,5 +342,86 @@
             // }
         });
     });
+
+    function initQRScanner() {
+        if (isScanning) return;
+
+        try {
+            html5Qrcode = new Html5Qrcode("qr-scanner-container");
+
+            Html5Qrcode.getCameras().then(devices => {
+                if (devices && devices.length) {
+                    let cameraId = devices[0].id;
+                    // Use back camera if available
+                    const backCamera = devices.find(device =>
+                        device.label.toLowerCase().includes('back') ||
+                        device.label.toLowerCase().includes('rear') ||
+                        device.label.toLowerCase().includes('environment')
+                    );
+                    if (backCamera) {
+                        cameraId = backCamera.id;
+                    }
+
+                    html5Qrcode.start(
+                        cameraId,
+                        {
+                            fps: 10,
+                            qrbox: function(viewfinderWidth, viewfinderHeight) {
+                                // Make qrbox responsive for mobile devices
+                                let minEdgePercentage = 0.7; // 70% of the smaller edge
+                                let qrboxSize = Math.floor(Math.min(viewfinderWidth, viewfinderHeight) * minEdgePercentage);
+                                return {
+                                    width: qrboxSize,
+                                    height: qrboxSize
+                                };
+                            },
+                            aspectRatio: 1.0,
+                            supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+                        },
+                        onScanSuccess
+                    ).then(() => {
+                        isScanning = true;
+                    }).catch(err => {
+                        console.error('Failed to start scanner:', err);
+                        alert('Camera permission denied');
+                    });
+                } else {
+                    alert('No camera found');
+                }
+            }).catch(err => {
+                console.error('Failed to get cameras:', err);
+                alert('Error accessing camera. Please check permissions.');
+            });
+
+        } catch (error) {
+            console.error('QR Scanner initialization error:', error);
+            alert('Error initializing QR scanner. Please make sure camera permissions are granted.');
+        }
+    }
+
+    function onScanSuccess(decodedText, decodedResult) {
+        // Set the scanned text in the SKU input
+        $('#sku_input').val(decodedText);
+
+        // Close the modal
+        $('#qrScannerModal').modal('hide');
+    }
+
+    function stopQRScanner() {
+        if (html5Qrcode && isScanning) {
+            try {
+                html5Qrcode.stop().then(() => {
+                    html5Qrcode.clear();
+                    isScanning = false;
+                }).catch(err => {
+                    console.error('Error stopping scanner:', err);
+                    isScanning = false;
+                });
+            } catch (error) {
+                console.error('Error in stopQRScanner:', error);
+                isScanning = false;
+            }
+        }
+    }
 </script>
 @endsection
