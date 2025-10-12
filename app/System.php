@@ -35,14 +35,18 @@ class System extends Model
      */
     public static function getProperty($key)
     {
-        $row = System::where('key', $key)
-                ->first();
+        $cacheKey = 'system_property_' . $key;
 
-        if (isset($row->value)) {
-            return $row->value;
-        } else {
-            return null;
-        }
+        return cache()->remember($cacheKey, 86400 * 180, function () use ($key) { // Cache for 6 months
+            $row = System::where('key', $key)
+                    ->first();
+
+            if (isset($row->value)) {
+                return $row->value;
+            } else {
+                return null;
+            }
+        });
     }
 
     /**
@@ -53,14 +57,19 @@ class System extends Model
      */
     public static function getProperties($keys, $pluck = false)
     {
-        if ($pluck == true) {
-            return System::whereIn('key', $keys)
-                ->pluck('value', 'key');
-        } else {
-            return System::whereIn('key', $keys)
-                ->get()
-                ->toArray();
-        }
+        // Use cache to prevent N+1 queries
+        $cacheKey = 'system_properties_' . md5(serialize($keys)) . '_' . ($pluck ? 'pluck' : 'array');
+
+        return cache()->remember($cacheKey, 86400 * 180, function () use ($keys, $pluck) { // Cache for 6 months
+            if ($pluck == true) {
+                return System::whereIn('key', $keys)
+                    ->pluck('value', 'key');
+            } else {
+                return System::whereIn('key', $keys)
+                    ->get()
+                    ->toArray();
+            }
+        });
     }
 
     /**
@@ -71,13 +80,8 @@ class System extends Model
      */
     public static function getCurrency()
     {
-        $c_id = System::where('key', 'app_currency_id')
-                ->first()
-                ->value;
-
-        $currency = Currency::find($c_id);
-
-        return $currency;
+        // Return static TND currency (ID 142) to reduce database load
+        return Currency::getTndCurrency();
     }
 
     /**
@@ -91,6 +95,9 @@ class System extends Model
     {
         System::where('key', $key)
             ->update(['value' => $value]);
+
+        // Clear related cache entries
+        self::clearSystemCache();
     }
 
     /**
@@ -103,6 +110,9 @@ class System extends Model
     {
         System::where('key', $key)
             ->delete();
+
+        // Clear related cache entries
+        self::clearSystemCache();
     }
 
     /**
@@ -118,5 +128,46 @@ class System extends Model
             ['key' => $key],
             ['value' => $value]
         );
+
+        // Clear related cache entries
+        self::clearSystemCache();
+    }
+
+    /**
+     * Clear all system properties cache
+     *
+     * @return void
+     */
+    private static function clearSystemCache()
+    {
+        // Since these values are updated rarely, we can be more aggressive with cache clearing
+        // Clear all cache entries related to system properties
+        $cache = cache();
+
+        try {
+            // Try to use cache tags if supported
+            $cache->tags(['system_properties'])->flush();
+        } catch (\Exception $e) {
+            // If tags are not supported, clear common cache patterns
+            // Clear all system property caches by getting all system keys
+            $allKeys = System::pluck('key')->toArray();
+
+            // Clear individual property caches
+            foreach ($allKeys as $key) {
+                $cache->forget('system_property_' . $key);
+            }
+
+            // Clear common multi-property caches
+            $commonKeysets = [
+                ['additional_js', 'additional_css'],
+                ['superadmin_enable_register_tc', 'superadmin_register_tc'],
+                ['enable_welcome_email', 'welcome_email_subject', 'welcome_email_body']
+            ];
+
+            foreach ($commonKeysets as $keyset) {
+                $cache->forget('system_properties_' . md5(serialize($keyset)) . '_pluck');
+                $cache->forget('system_properties_' . md5(serialize($keyset)) . '_array');
+            }
+        }
     }
 }

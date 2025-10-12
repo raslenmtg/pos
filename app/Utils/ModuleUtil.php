@@ -43,7 +43,7 @@ class ModuleUtil extends Util
      */
     public function isSuperadminInstalled()
     {
-        return $this->isModuleInstalled('Superadmin');
+        return true;
     }
 
     /**
@@ -115,13 +115,13 @@ class ModuleUtil extends Util
      */
     public function isSubscribed($business_id)
     {
-        if ($this->isSuperadminInstalled()) {
+       /* if ($this->isSuperadminInstalled()) {
             $package = \Modules\Superadmin\Entities\Subscription::active_subscription($business_id);
 
             if (empty($package)) {
                 return false;
             }
-        }
+        }*/
 
         return true;
     }

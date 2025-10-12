@@ -45,16 +45,5 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-8">
-            <div class="form-group">
-                <div class="checkbox">
-                <br>
-                  <label>
-                    {!! Form::checkbox('enable_inline_tax', 1, $business->enable_inline_tax , 
-                    [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.enable_inline_tax' ) }}
-                  </label>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

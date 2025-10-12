@@ -5,6 +5,7 @@ namespace Modules\Superadmin\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
 
 class Subscription extends Model
 {
@@ -21,6 +22,19 @@ class Subscription extends Model
         'start_date' => 'datetime',
         'end_date' => 'datetime',
         'package_details' => 'array',    ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saved(function ($subscription) {
+            self::clearSubscriptionCache($subscription->business_id);
+        });
+
+        static::deleted(function ($subscription) {
+            self::clearSubscriptionCache($subscription->business_id);
+        });
+    }
 
     /**
      * Scope a query to only include approved subscriptions.
@@ -60,6 +74,29 @@ class Subscription extends Model
      */
     public static function active_subscription($business_id)
     {
+        $cache_key = "active_subscription_business_{$business_id}";
+
+        return Cache::remember($cache_key, self::calculateCacheTTL($business_id), function () use ($business_id) {
+            $date_today = \Carbon::today()->toDateString();
+
+            $subscription = Subscription::where('business_id', $business_id)
+                                ->whereDate('start_date', '<=', $date_today)
+                                ->whereDate('end_date', '>=', $date_today)
+                                ->approved()
+                                ->first();
+
+            return $subscription;
+        });
+    }
+
+    /**
+     * Calculate cache TTL based on subscription end date
+     *
+     * @param $business_id int
+     * @return \Carbon\Carbon
+     */
+    private static function calculateCacheTTL($business_id)
+    {
         $date_today = \Carbon::today()->toDateString();
 
         $subscription = Subscription::where('business_id', $business_id)
@@ -68,7 +105,23 @@ class Subscription extends Model
                             ->approved()
                             ->first();
 
-        return $subscription;
+        if ($subscription && $subscription->end_date) {
+            return $subscription->end_date->subDay()->endOfDay();
+        }
+
+        return now()->endOfDay();
+    }
+
+    /**
+     * Clear subscription cache for a business
+     *
+     * @param $business_id int
+     * @return void
+     */
+    public static function clearSubscriptionCache($business_id)
+    {
+        $cache_key = "active_subscription_business_{$business_id}";
+        Cache::forget($cache_key);
     }
 
     /**

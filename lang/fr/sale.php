@@ -55,7 +55,7 @@
      'add_payment_row' => 'Ajouter une ligne de paiement',
      'finalize_payment' => 'Finaliser le paiement',
      'sale_date' => 'Date de vente',
-     'list_pos' => 'Liste Vente POS (PDV)',
+     'list_pos' => 'Liste Vente en POS (PDV)',
      'edit_sale' => 'Modifier la vente',
      'shipping' => 'Expédition',
      'shipping_details' => "Les détails d'expédition",

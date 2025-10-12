@@ -2854,12 +2854,12 @@ class TransactionUtil extends Util
             $currency_id = $business->currency_id;
         }
 
-        $currency = Currency::find($currency_id);
-        $output['thousand_separator'] = $currency->thousand_separator;
-        $output['decimal_separator'] = $currency->decimal_separator;
-        $output['symbol'] = $currency->symbol;
-        $output['code'] = $currency->code;
-        $output['name'] = $currency->currency;
+        // Always use TND currency static values
+        $output['thousand_separator'] = ',';
+        $output['decimal_separator'] = '.';
+        $output['symbol'] = 'د.ت';
+        $output['code'] = 'TND';
+        $output['name'] = 'Tunisian Dinar';
 
         return (object) $output;
     }

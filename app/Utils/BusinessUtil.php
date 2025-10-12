@@ -172,11 +172,8 @@ class BusinessUtil extends Util
      */
     public function allCurrencies()
     {
-        $currencies = Currency::select('id', DB::raw("concat(country, ' - ',currency, '(', code, ') ') as info"))
-                ->orderBy('country')
-                ->pluck('info', 'id');
-
-        return $currencies;
+        // Return only TND currency to reduce database load
+        return [142 => 'Tunisia - Tunisian Dinar(TND) '];
     }
 
     /**
@@ -277,34 +274,12 @@ class BusinessUtil extends Util
      */
     public function getCurrentFinancialYear($business_id)
     {
-        $business = Business::where('id', $business_id)->first();
-        $start_month = $business->fy_start_month;
-        $end_month = $start_month - 1;
-        if ($start_month == 1) {
-            $end_month = 12;
-        }
+        $current_year = date('Y');
 
-        $start_year = date('Y');
-        //if current month is less than start month change start year to last year
-        if (date('n') < $start_month) {
-            $start_year = $start_year - 1;
-        }
-
-        $end_year = date('Y');
-        //if current month is greater than end month change end year to next year
-        if (date('n') > $end_month) {
-            $end_year = $start_year + 1;
-        }
-        $start_date = $start_year.'-'.str_pad($start_month, 2, 0, STR_PAD_LEFT).'-01';
-        $end_date = $end_year.'-'.str_pad($end_month, 2, 0, STR_PAD_LEFT).'-01';
-        $end_date = date('Y-m-t', strtotime($end_date));
-
-        $output = [
-            'start' => $start_date,
-            'end' => $end_date,
+        return [
+            'start' => $current_year . '-01-01',
+            'end' => $current_year . '-12-31',
         ];
-
-        return $output;
     }
 
     /**

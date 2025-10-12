@@ -7,7 +7,6 @@ Homestead.json
 Homestead.yaml
 npm-debug.log
 .env
-storage/framework/cache/data/85/5f/855f92484c8c414d36c1b25cb24876e30229cbbf
 storage/logs/laravel.log
 storage/logs/laravel.log
 public/uploads/temp/*
@@ -17,3 +16,4 @@ storage/logs/laravel.log
 
 .claude/settings.local.json
 composer.lock
+storage/framework/cache/data/*
