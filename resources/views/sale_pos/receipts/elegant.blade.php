@@ -237,7 +237,6 @@
                     <tr>
                         <th style="width: 5%;">#</th>
                         <th>Désignation</th>
-                        @if($receipt_details->show_cat_code == 1) <th style="width: 12%;">{{$receipt_details->cat_code_label}}</th> @endif
                         <th class="text-right" style="width: 12%;">Qté</th>
                         <th class="text-right" style="width: 15%;">P.U TTC</th>
                         <th class="text-right" style="width: 15%;">Sous-total</th>
@@ -251,7 +250,6 @@
                                 {{$line['name']}} {{$line['product_variation']}} {{$line['variation']}}
                                 @if(!empty($line['sell_line_note'])) <br><small class="line-note">{!!$line['sell_line_note']!!}</small> @endif
                             </td>
-                            @if($receipt_details->show_cat_code == 1) <td class="mono-font">{{$line['cat_code'] ?? ''}}</td> @endif
                             <td class="text-right mono-font">{{$line['quantity_uf']}} </td>
                             <td class="text-right mono-font">{{$line['unit_price_before_discount']}}</td>
                             <td class="text-right mono-font">{{$line['line_total_exc_tax']}}</td>

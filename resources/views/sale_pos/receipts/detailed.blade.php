@@ -223,10 +223,6 @@
 							<td style="border: 1px solid #000; padding: 5px; text-align: left;" width="35%">
 								Désignation
 							</td>
-
-							@if($receipt_details->show_cat_code == 1)
-								<td style="border: 1px solid #000; padding: 5px; text-align: right;">{!! $receipt_details->cat_code_label !!}</td>
-							@endif
 							
 							<td style="border: 1px solid #000; padding: 5px; text-align: right;">
 								Qté
@@ -259,9 +255,7 @@
 									{{$loop->iteration}}
 								</td>
 								<td style="border: 1px solid #000; padding: 5px; text-align: left; word-break: break-all;">
-									@if(!empty($line['image']))
-										<img src="{{$line['image']}}" alt="Image" width="50" style="float: left; margin-right: 8px;">
-									@endif
+									
 									{{$line['name']}} {{$line['product_variation']}} {{$line['variation']}} 
 									@if(!empty($line['sub_sku'])), {{$line['sub_sku']}} @endif @if(!empty($line['brand'])), {{$line['brand']}} @endif
 									@if(!empty($line['product_description']))
@@ -288,15 +282,6 @@
 									</small>
 									@endif
 								</td>
-
-								@if($receipt_details->show_cat_code == 1)
-									<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-										@if(!empty($line['cat_code']))
-											{{$line['cat_code']}}
-										@endif
-									</td>
-								@endif
-
 								<td style="border: 1px solid #000; padding: 5px; text-align: right;">
 									{{$line['quantity_uf']}}
 								</td>

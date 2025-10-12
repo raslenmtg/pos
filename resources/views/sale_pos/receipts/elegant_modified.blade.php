@@ -138,20 +138,12 @@
 					<td style="background-color: #357ca5 !important; color: white !important; width: 5% !important">#</td>
 					
 					@php
-						$p_width = 35;
+						$p_width = 45;
 					@endphp
-					@if($receipt_details->show_cat_code != 1)
-						@php
-							$p_width = 45;
-						@endphp
-					@endif
+				
 					<td style="background-color: #357ca5 !important; color: white !important; width: {{$p_width}}% !important">
 						{{$receipt_details->table_product_label}}
 					</td>
-
-					@if($receipt_details->show_cat_code == 1)
-						<td style="background-color: #357ca5 !important; color: white !important; width: 10% !important;">{{$receipt_details->cat_code_label}}</td>
-					@endif
 					
 					<td style="background-color: #357ca5 !important; color: white !important; width: 15% !important;">
 						{{$receipt_details->table_qty_label}}
@@ -178,14 +170,6 @@
                             @if(!empty($line['product_expiry'])), {{$line['product_expiry_label']}}:  {{$line['product_expiry']}} @endif 
                         </td>
 
-						@if($receipt_details->show_cat_code == 1)
-	                        <td>
-	                        	@if(!empty($line['cat_code']))
-	                        		{{$line['cat_code']}}
-	                        	@endif
-	                        </td>
-	                    @endif
-
 						<td class="text-right">
 							{{$line['quantity']}} {{$line['units']}}
 						</td>
@@ -207,15 +191,6 @@
 		                            @if(!empty($modifier['sub_sku'])), {{$modifier['sub_sku']}} @endif 
 		                            @if(!empty($modifier['sell_line_note']))({{$modifier['sell_line_note']}}) @endif 
 		                        </td>
-
-								@if($receipt_details->show_cat_code == 1)
-			                        <td>
-			                        	@if(!empty($modifier['cat_code']))
-			                        		{{$modifier['cat_code']}}
-			                        	@endif
-			                        </td>
-			                    @endif
-
 								<td class="text-right">
 									{{$modifier['quantity']}} {{$modifier['units']}}
 								</td>

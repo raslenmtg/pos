@@ -259,7 +259,7 @@
             setTimeout(() => {
                 scanCooldown = false;
                 lastScannedCode = '';
-            }, 2000);
+            }, 1500);
         }
 
         function stopQRScanner() {

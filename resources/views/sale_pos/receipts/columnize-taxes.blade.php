@@ -224,9 +224,6 @@
 								Désignation
 							</td>
 
-							@if($receipt_details->show_cat_code == 1)
-								<td style="border: 1px solid #000; padding: 5px; text-align: right;">{!! $receipt_details->cat_code_label !!}</td>
-							@endif
 							
 							<td style="border: 1px solid #000; padding: 5px; text-align: right;">
 								Qté
@@ -288,14 +285,6 @@
 									</small>
 									@endif
 								</td>
-
-								@if($receipt_details->show_cat_code == 1)
-									<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-										@if(!empty($line['cat_code']))
-											{{$line['cat_code']}}
-										@endif
-									</td>
-								@endif
 
 								<td style="border: 1px solid #000; padding: 5px; text-align: right;">
 									{{$line['quantity_uf']}}

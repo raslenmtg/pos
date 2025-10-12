@@ -317,9 +317,7 @@
                     <tr>
                         <th class="text-center" style="width: 5%;">#</th>
                         <th>Désignation</th>
-                        @if($receipt_details->show_cat_code == 1)
-                            <th style="width: 12%;">{{$receipt_details->cat_code_label}}</th>
-                        @endif
+                       
                         <th class="text-right" style="width: 12%;">Qté</th>
                         <th class="text-right" style="width: 15%;">P.U TTC</th>
                         @if(!empty($receipt_details->item_discount_label))
@@ -341,9 +339,7 @@
                                     <div class="line-note">{!!$line['product_description']!!}</div>
                                 @endif
                             </td>
-                            @if($receipt_details->show_cat_code == 1)
-                                <td>{{$line['cat_code'] ?? ''}}</td>
-                            @endif
+                          
                             <td class="text-right">{{$line['quantity_uf']}}</td>
                             <td class="text-right">{{$line['unit_price_before_discount']}}</td>
                             @if(!empty($receipt_details->item_discount_label))
