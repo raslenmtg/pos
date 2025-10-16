@@ -88,3 +88,12 @@ server {
     server_name simplexgestion.tn;
     return 301 https://simplexgestion.tn$request_uri;
 }
+server {
+      listen 443 ssl;
+      server_name www.simplexgestion.tn;
+      ssl_certificate /etc/en/pos/cert/fullchain1.pem;     
+      ssl_certificate_key /etc/en/pos/cert/privkey1.pem;   
+      include /etc/letsencrypt/options-ssl-nginx.conf;     
+      ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;       
+      return 301 https://simplexgestion.tn$request_uri;    
+  }
