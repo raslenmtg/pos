@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
     public function report(Throwable $exception)
     {
         \Log::error('Global Exception - File: ' . $exception->getFile() . ' Line: ' . $exception->getLine() . ' Message: ' . $exception->getMessage());
-        
+
         // Log additional details for validation exceptions
         if ($exception instanceof \Illuminate\Validation\ValidationException) {
             \Log::error('Validation Exception Details: ', [
@@ -57,7 +57,14 @@ class Handler extends ExceptionHandler
                 'ip' => request()->ip()
             ]);
         }
-        
+
+        // Ensure CSRF errors are sent to Sentry
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+            if (app()->bound('sentry')) {
+                app('sentry')->captureException($exception);
+            }
+        }
+
         parent::report($exception);
     }
 

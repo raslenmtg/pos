@@ -1,0 +1,90 @@
+server {
+
+    server_name simplexgestion.tn www.simplexgestion.tn;
+
+ listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/en/pos/cert/fullchain1.pem; # managed by Certbot
+    ssl_certificate_key /etc/en/pos/cert/privkey1.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+    root /etc/en/pos/public;
+access_log /dev/null;
+error_log /dev/null;
+
+    add_header X-Frame-Options "SAMEORIGIN";
+    add_header X-Content-Type-Options "nosniff";
+
+    index index.php;
+
+    charset utf-8;
+
+    location / {
+        try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+   location = /index.php {
+    include fastcgi_params;
+    fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+    fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+    }
+    location ~ \.php$ {
+    deny all;
+    }
+
+location ~* (wp-includes|HNAP1|phpunit|owa|ReportServer|wlwmanifest|\+CSCOE\+|\+CSCOL\+) {
+    deny all;
+    access_log off;
+    log_not_found off;
+}
+ location ~ ^/(config|admin|wp-|wordpress|phpmyadmin|phpunit|\.env|\.git|backup|test|demo|api/v1|xmlrpc|sitemap|
+      deny all;
+      access_log off;
+      log_not_found off;
+      return 444;
+  }
+
+  # Block file extension probing
+  location ~ \.(env|json|xml|txt|log|bak|old|backup|sql|dump|zip|tar|gz)$ {
+      deny all;
+      access_log off;
+      log_not_found off;
+      return 444;
+  }
+
+
+    location ~ /\.(?!well-known).* {
+        deny all;
+    }
+
+    # Cache images for 30 days
+location ~* \.(jpg|jpeg|png|gif|ico|webp|svg)$ {
+    expires 30d;
+    access_log off;
+    add_header Cache-Control "public, max-age=2592000, immutable";
+}
+
+# Cache JS and CSS for 7 days
+location ~* \.(css|js)$ {
+    expires 30d;
+    access_log off;
+    add_header Cache-Control "public, max-age=2592000, immutable";
+}
+
+
+}
+server {
+    listen 80;
+ if ($host = simplexgestion.tn) {
+
+    return 301 https://simplexgestion.tn$request_uri;
+}
+
+ if ($host = www.simplexgestion.tn) {
+
+    return 301 https://simplexgestion.tn$request_uri;
+}
+}

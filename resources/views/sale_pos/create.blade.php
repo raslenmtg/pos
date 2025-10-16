@@ -20,6 +20,7 @@
             'method' => 'post',
             'id' => 'add_pos_sell_form',
         ]) !!}
+        @csrf
         <div class="row mb-12">
             <div class="col-md-12 tw-pt-0 tw-mb-14">
                 <div class="row tw-flex lg:tw-flex-row md:tw-flex-col sm:tw-flex-col tw-flex-col tw-items-start md:tw-gap-4">
@@ -259,7 +260,7 @@
             setTimeout(() => {
                 scanCooldown = false;
                 lastScannedCode = '';
-            }, 1500);
+            }, 2000);
         }
 
         function stopQRScanner() {
