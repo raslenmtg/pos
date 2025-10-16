@@ -57,9 +57,25 @@
     Dropzone.autoDiscover = false;
     moment.tz.setDefault('{{ Session::get('business.time_zone') }}');
     $(document).ready(function() {
+        // Enhanced CSRF token setup for Arabic/RTL compatibility
+        var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        // Fallback for cases where meta tag might not be accessible
+        if (!csrfToken) {
+            csrfToken = $('input[name="_token"]').first().val();
+        }
+
         $.ajaxSetup({
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': csrfToken,
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            beforeSend: function(xhr, settings) {
+                // Ensure CSRF token is always fresh for Arabic locale
+                var freshToken = $('meta[name="csrf-token"]').attr('content');
+                if (freshToken && app_locale === 'ar') {
+                    xhr.setRequestHeader('X-CSRF-TOKEN', freshToken);
+                }
             }
         });
 

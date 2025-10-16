@@ -46,6 +46,7 @@
 
                     <form method="POST" action="{{ route('login') }}" id="login-form">
                         {{ csrf_field() }}
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}" id="csrf-token-input">
                         <div class="form-group has-feedback {{ $errors->has('username') ? ' has-error' : '' }}">
                             <label class="tw-dw-form-control">
                                 <div class="tw-dw-label">
@@ -158,6 +159,40 @@
                 $('#password').val("{{ $password }}");
                 $('form#login-form').submit();
             });
+
+            // Enhanced CSRF token handling for Arabic language
+            @if(app()->getLocale() == 'ar' || session('user.language') == 'ar')
+            // Refresh CSRF token before form submission for Arabic users
+            $('form#login-form').on('submit', function(e) {
+                var form = this;
+
+                // Refresh CSRF token
+                $.ajax({
+                    url: '{{ route("login") }}',
+                    type: 'GET',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest'
+                    },
+                    success: function(data) {
+                        // Extract fresh CSRF token from response
+                        var match = data.match(/name="csrf-token" content="([^"]+)"/);
+                        if (match && match[1]) {
+                            $('meta[name="csrf-token"]').attr('content', match[1]);
+                            $('#csrf-token-input').val(match[1]);
+                            $('input[name="_token"]').val(match[1]);
+                        }
+                        // Submit form after token refresh
+                        form.submit();
+                    },
+                    error: function() {
+                        // If token refresh fails, try submitting anyway
+                        form.submit();
+                    }
+                });
+
+                return false; // Prevent immediate submission
+            });
+            @endif
 
             $('#show_hide_icon').on('click', function(e) {
             e.preventDefault();

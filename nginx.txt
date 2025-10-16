@@ -1,6 +1,6 @@
 server {
 
-    server_name simplexgestion.tn www.simplexgestion.tn;
+    server_name simplexgestion.tn;
 
  listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/en/pos/cert/fullchain1.pem; # managed by Certbot
@@ -40,7 +40,8 @@ location ~* (wp-includes|HNAP1|phpunit|owa|ReportServer|wlwmanifest|\+CSCOE\+|\+
     access_log off;
     log_not_found off;
 }
- location ~ ^/(config|admin|wp-|wordpress|phpmyadmin|phpunit|\.env|\.git|backup|test|demo|api/v1|xmlrpc|sitemap|
+ # Block common bot and scanner routes
+  location ~ ^/(config|admin|wp-|wordpress|phpmyadmin|phpunit|\.env|\.git|backup|test|demo|api/v1|xmlrpc|sitemap|feed|rss|atom).*$ {
       deny all;
       access_log off;
       log_not_found off;
@@ -78,13 +79,12 @@ location ~* \.(css|js)$ {
 }
 server {
     listen 80;
- if ($host = simplexgestion.tn) {
-
+    server_name www.simplexgestion.tn;
     return 301 https://simplexgestion.tn$request_uri;
 }
 
- if ($host = www.simplexgestion.tn) {
-
+server {
+    listen 80;
+    server_name simplexgestion.tn;
     return 301 https://simplexgestion.tn$request_uri;
-}
 }
