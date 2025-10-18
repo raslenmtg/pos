@@ -182,7 +182,7 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_business_name', 1, false, ['class' => 'input-icheck']); !!} @lang('invoice.show_business_name')</label>
+                {!! Form::checkbox('show_business_name', 1, true, ['class' => 'input-icheck']); !!} @lang('invoice.show_business_name')</label>
               </div>
           </div>
         </div>
@@ -399,7 +399,7 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_tax_1', 1, true, ['class' => 'input-icheck']); !!} @lang('invoice.show_tax_1')</label>
+                {!! Form::checkbox('show_tax_1', 1, false, ['class' => 'input-icheck']); !!} @lang('invoice.show_tax_1')</label>
               </div>
           </div>
         </div>
@@ -560,7 +560,7 @@
           <div class="form-group">
             <div class="checkbox">
               <label>
-                {!! Form::checkbox('show_payments', 1, true, ['class' => 'input-icheck']); !!} @lang('invoice.show_payments')</label>
+                {!! Form::checkbox('show_payments', 1, false, ['class' => 'input-icheck']); !!} @lang('invoice.show_payments')</label>
               </div>
           </div>
         </div>
@@ -578,9 +578,7 @@
           <div class="form-group">
               <label>
                 {!! Form::checkbox('common_settings[show_total_in_words]', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_total_in_words')</label> @show_tooltip(__('lang_v1.show_in_word_help'))
-                @if(!extension_loaded('intl'))
-                  <p class="help-block">@lang('lang_v1.enable_php_intl_extension')</p>
-                @endif
+              
           </div>
         </div>
       </div>
