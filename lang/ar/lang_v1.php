@@ -353,7 +353,7 @@ return [
     'show_lot_number' => 'إظهار رقم المخزن',
     'expiry' => 'منتهى الصلاحية',
     'lot' => 'مخزن',
-    'lot_n_expiry' => 'المخزن وانتهاء الصلاحية',
+    'lot_n_expiry' => 'انتهاء الصلاحية',
     'pos_edit_product_price_help' => 'تحرير سعر وحدة المنتج والضرائب',
     'name' => 'اسم',
     'payment_type' => 'نوع الدفع',

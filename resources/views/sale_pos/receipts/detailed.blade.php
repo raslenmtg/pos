@@ -355,26 +355,16 @@
 							<!-- Totals -->
 							<table style="width: 100%; border-collapse: collapse; border: 1px solid #000;">
 								<tbody>
-									@if(!empty($receipt_details->total_quantity_label))
-										<tr>
-											<td style="border: 1px solid #000; padding: 5px; width:60%">
-												{!! $receipt_details->total_quantity_label !!}
-											</td>
-											<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-												{{$receipt_details->total_quantity}}
-											</td>
-										</tr>
-									@endif
-									@if(!empty($receipt_details->total_items_label))
-										<tr>
-											<td style="border: 1px solid #000; padding: 5px;">
-												{!! $receipt_details->total_items_label !!}
-											</td>
-											<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-												{{$receipt_details->total_items}}
-											</td>
-										</tr>
-									@endif
+									
+									<tr>
+										<td style="border: 1px solid #000; padding: 5px;">
+											TOTAL H.T
+										</td>
+										<td style="border: 1px solid #000; padding: 5px; text-align: right;">
+											{{$receipt_details->subtotal_exc_tax}}
+										</td>
+									</tr>
+
 									<tr>
 										<td style="border: 1px solid #000; padding: 5px;">
 											{!! $receipt_details->subtotal_label !!}
@@ -483,16 +473,7 @@
 										@endif
 									@endif
 									
-									@if( $receipt_details->round_off_amount > 0)
-										<tr>
-											<td style="border: 1px solid #000; padding: 5px;">
-												{!! $receipt_details->round_off_label !!}
-											</td>
-											<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-												{{$receipt_details->round_off}}
-											</td>
-										</tr>
-									@endif
+							
 
 									<!-- Total -->
 									<tr>
@@ -509,7 +490,7 @@
 					</tr>
 				</table>
 
-				@if(empty($receipt_details->hide_price) && !empty($receipt_details->tax_summary_label) )
+				
 					<!-- tax -->
 					@if(!empty($receipt_details->taxes))
 						<table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin: 10px 0;">
@@ -524,7 +505,7 @@
 							@endforeach
 						</table>
 					@endif
-				@endif
+				
 
 				@if(!empty($receipt_details->additional_notes))
 					<div style="margin: 15px 0; padding: 10px; border: 1px solid #000;">

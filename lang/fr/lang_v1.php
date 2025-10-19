@@ -694,7 +694,7 @@ return [
     'logo_not_work_in_sms' => 'Le logo d\'entreprise ne fonctionnera pas dans SMS',
     'logout' => 'Se déconnecter',
     'lot' => 'Lot',
-    'lot_n_expiry' => 'Lot et expiration',
+    'lot_n_expiry' => 'expiration',
     'lot_number' => 'Numéro de lot',
     'lot_number_instructions' => 'Uniquement si le numéro de lot est activé. Vous pouvez activer le numéro de lot à partir de <br> <code> Paramètres d\'entreprise> Achats> Activer le numéro de lot </code>',
     'lot_numbers_are_used_in_sale' => 'Ne peut être supprimé, certains lots de cet achat sont déjà vendus',

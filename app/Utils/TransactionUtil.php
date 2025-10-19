@@ -1338,16 +1338,6 @@ class TransactionUtil extends Util
                 }
             }
 
-            if (! empty($il->common_settings['total_quantity_label'])) {
-                $output['total_quantity_label'] = $il->common_settings['total_quantity_label'];
-                $output['total_quantity'] = $this->num_f($total_quantity, false, $business_details, true);
-            }
-
-            if (! empty($il->common_settings['total_items_label'])) {
-                $output['total_items_label'] = $il->common_settings['total_items_label'];
-                $output['total_items'] = count($unique_items);
-            }
-
             $output['subtotal_exc_tax'] = $this->num_f($subtotal_exc_tax, true, $business_details);
             $output['total_line_discount'] = ! empty($total_line_discount) ? $this->num_f($total_line_discount, true, $business_details) : 0;
         } elseif ($transaction_type == 'sell_return') {

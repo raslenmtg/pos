@@ -201,31 +201,6 @@
 
     @component('components.widget', ['class' => 'box-primary'])
     <div class="row">
-        @if(session('business.enable_product_expiry'))
-
-        @if(session('business.expiry_type') == 'add_expiry')
-        @php
-        $expiry_period = 12;
-        $hide = true;
-        @endphp
-        @else
-        @php
-        $expiry_period = null;
-        $hide = false;
-        @endphp
-        @endif
-        <div class="col-sm-4 @if($hide) hide @endif">
-            <div class="form-group">
-                <div class="multi-input">
-                    {!! Form::label('expiry_period', __('product.expires_in') . ':') !!}<br>
-                    {!! Form::text('expiry_period', !empty($duplicate_product->expiry_period) ? @num_format($duplicate_product->expiry_period) : $expiry_period, ['class' => 'form-control pull-left input_number',
-                    'placeholder' => __('product.expiry_period'), 'style' => 'width:60%;']); !!}
-                    {!! Form::select('expiry_period_type', ['months'=>__('product.months'), 'days'=>__('product.days'), '' =>__('product.not_applicable') ], !empty($duplicate_product->expiry_period_type) ? $duplicate_product->expiry_period_type : 'months', ['class' => 'form-control select2 pull-left', 'style' => 'width:40%;', 'id' => 'expiry_period_type']); !!}
-                </div>
-            </div>
-        </div>
-        @endif
-
         <div class="col-sm-4">
             <div class="form-group">
                 <br>

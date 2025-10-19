@@ -625,9 +625,7 @@ class SellPosController extends Controller
 
                 $output = ['success' => 1, 'msg' => $msg, 'receipt' => $receipt];
 
-                if (!empty($whatsapp_link)) {
-                    $output['whatsapp_link'] = $whatsapp_link;
-                }
+            
             } else {
                 $output = ['success' => 0,
                     'msg' => trans('messages.something_went_wrong'),
@@ -1632,9 +1630,11 @@ class SellPosController extends Controller
 
         //Get lot number dropdown if enabled
         $lot_numbers = [];
-        if (request()->session()->get('business.enable_lot_number') == 1 || request()->session()->get('business.enable_product_expiry') == 1) {
+        if (request()->session()->get('business.enable_product_expiry') == 1) {
             $lot_number_obj = $this->transactionUtil->getLotNumbersFromVariation($variation_id, $business_id, $location_id, true);
             foreach ($lot_number_obj as $lot_number) {
+                if($lot_number->exp_date ==null)
+                    continue;
                 $lot_number->qty_formated = $this->productUtil->num_f($lot_number->qty_available);
                 $lot_numbers[] = $lot_number;
             }
