@@ -97,8 +97,8 @@ class TransactionUtil extends Util
             'shipping_custom_field_3' => ! empty($input['shipping_custom_field_3']) ? $input['shipping_custom_field_3'] : null,
             'shipping_custom_field_4' => ! empty($input['shipping_custom_field_4']) ? $input['shipping_custom_field_4'] : null,
             'shipping_custom_field_5' => ! empty($input['shipping_custom_field_5']) ? $input['shipping_custom_field_5'] : null,
-            'exchange_rate' => ! empty($input['exchange_rate']) ?
-                                $uf_data ? $this->num_uf($input['exchange_rate']) : $input['exchange_rate'] : 1,
+            //'exchange_rate' => ! empty($input['exchange_rate']) ?
+            //                    $uf_data ? $this->num_uf($input['exchange_rate']) : $input['exchange_rate'] : 1,
             'selling_price_group_id' => isset($input['selling_price_group_id']) ? $input['selling_price_group_id'] : null,
             'pay_term_number' => $pay_term_number,
             'pay_term_type' => $pay_term_type,
@@ -106,8 +106,8 @@ class TransactionUtil extends Util
             'is_recurring' => ! empty($input['is_recurring']) ? $input['is_recurring'] : 0,
             'recur_interval' => ! empty($input['recur_interval']) ? $input['recur_interval'] : 1,
             'recur_interval_type' => ! empty($input['recur_interval_type']) ? $input['recur_interval_type'] : null,
-            'subscription_repeat_on' => ! empty($input['subscription_repeat_on']) ? $input['subscription_repeat_on'] : null,
-            'subscription_no' => ! empty($input['subscription_no']) ? $input['subscription_no'] : null,
+           // 'subscription_repeat_on' => ! empty($input['subscription_repeat_on']) ? $input['subscription_repeat_on'] : null,
+           // 'subscription_no' => ! empty($input['subscription_no']) ? $input['subscription_no'] : null,
             'recur_repetitions' => ! empty($input['recur_repetitions']) ? $input['recur_repetitions'] : 0,
             'order_addresses' => ! empty($input['order_addresses']) ? $input['order_addresses'] : null,
             'sub_type' => ! empty($input['sub_type']) ? $input['sub_type'] : null,
@@ -118,17 +118,17 @@ class TransactionUtil extends Util
             'types_of_service_id' => ! empty($input['types_of_service_id']) ? $input['types_of_service_id'] : null,
             'packing_charge' => ! empty($input['packing_charge']) ? $input['packing_charge'] : 0,
             'packing_charge_type' => ! empty($input['packing_charge_type']) ? $input['packing_charge_type'] : null,
-            'service_custom_field_1' => ! empty($input['service_custom_field_1']) ? $input['service_custom_field_1'] : null,
-            'service_custom_field_2' => ! empty($input['service_custom_field_2']) ? $input['service_custom_field_2'] : null,
-            'service_custom_field_3' => ! empty($input['service_custom_field_3']) ? $input['service_custom_field_3'] : null,
-            'service_custom_field_4' => ! empty($input['service_custom_field_4']) ? $input['service_custom_field_4'] : null,
-            'service_custom_field_5' => ! empty($input['service_custom_field_5']) ? $input['service_custom_field_5'] : null,
-            'service_custom_field_6' => ! empty($input['service_custom_field_6']) ? $input['service_custom_field_6'] : null,
-            'round_off_amount' => ! empty($input['round_off_amount']) ? $input['round_off_amount'] : 0,
-            'import_batch' => ! empty($input['import_batch']) ? $input['import_batch'] : null,
-            'import_time' => ! empty($input['import_time']) ? $input['import_time'] : null,
-            'res_table_id' => ! empty($input['res_table_id']) ? $input['res_table_id'] : null,
-            'res_waiter_id' => ! empty($input['res_waiter_id']) ? $input['res_waiter_id'] : null,
+           // 'service_custom_field_1' => ! empty($input['service_custom_field_1']) ? $input['service_custom_field_1'] : null,
+           // 'service_custom_field_2' => ! empty($input['service_custom_field_2']) ? $input['service_custom_field_2'] : null,
+           // 'service_custom_field_3' => ! empty($input['service_custom_field_3']) ? $input['service_custom_field_3'] : null,
+           // 'service_custom_field_4' => ! empty($input['service_custom_field_4']) ? $input['service_custom_field_4'] : null,
+           // 'service_custom_field_5' => ! empty($input['service_custom_field_5']) ? $input['service_custom_field_5'] : null,
+           // 'service_custom_field_6' => ! empty($input['service_custom_field_6']) ? $input['service_custom_field_6'] : null,
+           // 'round_off_amount' => ! empty($input['round_off_amount']) ? $input['round_off_amount'] : 0,
+           // 'import_batch' => ! empty($input['import_batch']) ? $input['import_batch'] : null,
+           // 'import_time' => ! empty($input['import_time']) ? $input['import_time'] : null,
+            //'res_table_id' => ! empty($input['res_table_id']) ? $input['res_table_id'] : null,
+           // 'res_waiter_id' => ! empty($input['res_waiter_id']) ? $input['res_waiter_id'] : null,
             'sales_order_ids' => ! empty($input['sales_order_ids']) ? $input['sales_order_ids'] : null,
             'prefer_payment_method' => ! empty($input['prefer_payment_method']) ? $input['prefer_payment_method'] : null,
             'prefer_payment_account' => ! empty($input['prefer_payment_account']) ? $input['prefer_payment_account'] : null,
@@ -1329,7 +1329,7 @@ class TransactionUtil extends Util
                 if (! empty($line['tax_id']) && $line['tax_percent'] == 0) {
                     $total_exempt += $line['line_total_uf'];
                 }
-                $subtotal_exc_tax += $line['line_total_exc_tax_uf'];
+                $subtotal_exc_tax += $line['unit_price_exc_tax']*$line['quantity_uf'];
                 $total_quantity += $line['quantity_uf'];
                 $total_line_discount += ($line['line_discount_uf'] * $line['quantity_uf']);
                 $total_line_taxes += ($line['tax_unformatted'] * $line['quantity_uf']);
@@ -1778,7 +1778,7 @@ class TransactionUtil extends Util
                 'variation' => (empty($variation->name) || $variation->name == 'DUMMY') ? '' : $variation->name,
                 'product_variation' => (empty($product_variation->name) || $product_variation->name == 'DUMMY') ? '' : $product_variation->name,
                 //Field for 2nd column
-                'quantity' => $this->num_f($line->quantity, false, $business_details, true),
+                'quantity' => $line->quantity,
                 'quantity_uf' => $line->quantity,
                 'units' => $unit_name,
 
@@ -1787,7 +1787,7 @@ class TransactionUtil extends Util
                 'orig_quantity' => $this->num_f($line->orig_quantity, false, $business_details, true),
                 'unit_price' => $this->num_f($line->unit_price, false, $business_details),
                 'unit_price_uf' => $line->unit_price,
-                'tax' => $this->num_f($line->item_tax, false, $business_details),
+                'tax' => 0,
                 'tax_id' =>$line->product->tax,
                 'tax_unformatted' => $line->item_tax,
                 'tax_name' => ! empty($tax_details) ? $tax_details->name : null,
@@ -2023,20 +2023,20 @@ class TransactionUtil extends Util
 
                     $line_array['group_tax_details'] = $group_tax_details;
 
-                    // foreach ($group_tax_details as $key => $value) {
-                    //     if (!isset($output_taxes['taxes'][$key])) {
-                    //         $output_taxes['taxes'][$key] = 0;
-                    //     }
-                    //     $output_taxes['taxes'][$key] += $value;
-                    // }
+                     foreach ($group_tax_details as $key => $value) {
+                         if (!isset($output_taxes['taxes'][$key])) {
+                             $output_taxes['taxes'][$key] = 0;
+                         }
+                         $output_taxes['taxes'][$key] += $value;
+                     }
                 }
-                // else {
-                //     $tax_name = $tax_details->name;
-                //     if (!isset($output_taxes['taxes'][$tax_name])) {
-                //         $output_taxes['taxes'][$tax_name] = 0;
-                //     }
-                //     $output_taxes['taxes'][$tax_name] += ($line->quantity * $line->item_tax);
-                // }
+                 else {
+                     $tax_name = $tax_details->name;
+                     if (!isset($output_taxes['taxes'][$tax_name])) {
+                         $output_taxes['taxes'][$tax_name] = 0;
+                     }
+                     $output_taxes['taxes'][$tax_name] += ($line->quantity * $line->item_tax);
+                 }
             }
 
             if ($il->show_brand == 1) {
@@ -2848,7 +2848,7 @@ class TransactionUtil extends Util
         $output['thousand_separator'] = ',';
         $output['decimal_separator'] = '.';
         $output['symbol'] = 'د.ت';
-        $output['code'] = 'TND';
+        $output['code'] = 'DT';
         $output['name'] = 'Tunisian Dinar';
 
         return (object) $output;

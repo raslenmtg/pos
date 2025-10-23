@@ -531,6 +531,7 @@ class ProductUtil extends Util
             'vld.qty_available',
             'variations.default_sell_price',
             'variations.sell_price_inc_tax',
+            'variations.dpp_inc_tax',
             'variations.id as variation_id',
             'variations.combo_variations',  //Used in combo products
             'units.short_name as unit',
@@ -544,6 +545,7 @@ class ProductUtil extends Util
         ->firstOrFail();
 
         $product->media = $variation->media;
+        $product->item_tax=$product->sell_price_inc_tax-$product->dpp_inc_tax;
 
         if ($product->product_type == 'combo') {
             if ($check_qty) {

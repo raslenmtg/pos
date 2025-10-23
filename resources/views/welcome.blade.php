@@ -86,11 +86,11 @@
             "name": "نظام إدارة تجاري شامل",
             "description": "برنامج POS متكامل لإدارة المخزون والفواتير",
             "price": "90",
-            "priceCurrency": "TND",
+            "priceCurrency": "DT",
             "priceSpecification": {
                 "@type": "UnitPriceSpecification",
                 "price": "90",
-                "priceCurrency": "TND",
+                "priceCurrency": "DT",
                 "unitText": "شهري"
             }
         },
@@ -111,7 +111,7 @@
         "offers": {
             "@type": "Offer",
             "price": "90",
-            "priceCurrency": "TND"
+            "priceCurrency": "DT"
         },
         "aggregateRating": {
             "@type": "AggregateRating",

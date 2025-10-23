@@ -1804,7 +1804,14 @@ function pos_each_row(row_obj) {
 
     //var unit_price_inc_tax = __read_number(row_obj.find('input.pos_unit_price_inc_tax'));
 
-    __write_number(row_obj.find('input.item_tax'), unit_price_inc_tax - discounted_unit_price);
+    // Calculate item tax but preserve original value if it's already set and greater than 0
+    var calculated_tax = unit_price_inc_tax - discounted_unit_price;
+    var current_item_tax = __read_number(row_obj.find('input.item_tax'));
+
+    // Only overwrite if current tax is 0 or if calculated tax is different and valid
+    if (current_item_tax == 0 || (calculated_tax > 0 && Math.abs(calculated_tax - current_item_tax) > 0.01)) {
+        __write_number(row_obj.find('input.item_tax'), calculated_tax);
+    }
 }
 
 function pos_total_row() {

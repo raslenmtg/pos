@@ -361,11 +361,11 @@ class SellPosController extends Controller
                 $business_id = $request->session()->get('user.business_id');
 
                 //Check if subscribed or not, then check for users quota
-                if (!$this->moduleUtil->isSubscribed($business_id)) {
-                    return $this->moduleUtil->expiredResponse();
-                } elseif (!$this->moduleUtil->isQuotaAvailable('invoices', $business_id)) {
-                    return $this->moduleUtil->quotaExpiredResponse('invoices', $business_id, action([\App\Http\Controllers\SellPosController::class, 'index']));
-                }
+               // if (!$this->moduleUtil->isSubscribed($business_id)) {
+              //      return $this->moduleUtil->expiredResponse();
+              //  } elseif (!$this->moduleUtil->isQuotaAvailable('invoices', $business_id)) {
+               //     return $this->moduleUtil->quotaExpiredResponse('invoices', $business_id, action([\App\Http\Controllers\SellPosController::class, 'index']));
+               // }
 
                 $user_id = $request->session()->get('user.id');
 
@@ -392,9 +392,9 @@ class SellPosController extends Controller
                     $input['commission_agent'] = $user_id;
                 }
 
-                if (isset($input['exchange_rate']) && $this->transactionUtil->num_uf($input['exchange_rate']) == 0) {
-                    $input['exchange_rate'] = 1;
-                }
+               // if (isset($input['exchange_rate']) && $this->transactionUtil->num_uf($input['exchange_rate']) == 0) {
+               //     $input['exchange_rate'] = 1;
+               // }
 
                 //Customer group details
                 $contact_id = $request->get('contact_id', null);
@@ -419,12 +419,12 @@ class SellPosController extends Controller
                     $input['subscription_no'] = $this->transactionUtil->generateReferenceNumber('subscription', $ref_count);
                 }
 
-                if (!empty($request->input('invoice_scheme_id'))) {
-                    $input['invoice_scheme_id'] = $request->input('invoice_scheme_id');
-                }
+                //if (!empty($request->input('invoice_scheme_id'))) {
+                //    $input['invoice_scheme_id'] = $request->input('invoice_scheme_id');
+                //}
 
                 //Types of service
-                if ($this->moduleUtil->isModuleEnabled('types_of_service')) {
+                /* ($this->moduleUtil->isModuleEnabled('types_of_service')) {
                     $input['types_of_service_id'] = $request->input('types_of_service_id');
                     $price_group_id = !empty($request->input('types_of_service_price_group')) ? $request->input('types_of_service_price_group') : $price_group_id;
                     $input['packing_charge'] = !empty($request->input('packing_charge')) ?
@@ -443,6 +443,7 @@ class SellPosController extends Controller
                     $input['service_custom_field_6'] = !empty($request->input('service_custom_field_6')) ?
                     $request->input('service_custom_field_6') : null;
                 }
+                */
 
                 if ($request->input('additional_expense_value_1') != '') {
                     $input['additional_expense_key_1'] = $request->input('additional_expense_key_1');
@@ -491,30 +492,7 @@ class SellPosController extends Controller
 
                 //Check for final and do some processing.
                 if ($input['status'] == 'final') {
-                    if (!$is_direct_sale) {
-                        //set service staff timer
-                        foreach ($input['products'] as $product_line) {
-                            if (!empty($product_line['res_service_staff_id'])) {
-                                $product = Product::find($product_line['product_id']);
-
-                                if (!empty($product->preparation_time_in_minutes)) {
-                                    $service_staff = User::find($product_line['res_service_staff_id']);
-
-                                    $base_time = \Carbon::parse($transaction->transaction_date);
-
-                                    //if already assigned set base time as available_at
-                                    if (!empty($service_staff->available_at) && \Carbon::parse($service_staff->available_at)->gt(\Carbon::now())) {
-                                        $base_time = \Carbon::parse($service_staff->available_at);
-                                    }
-
-                                    $total_minutes = $product->preparation_time_in_minutes * $this->transactionUtil->num_uf($product_line['quantity']);
-
-                                    $service_staff->available_at = $base_time->addMinutes($total_minutes);
-                                    $service_staff->save();
-                                }
-                            }
-                        }
-                    }
+                    
                     //update product stock
                     foreach ($input['products'] as $product) {
                         $decrease_qty = $this->productUtil
@@ -1732,9 +1710,9 @@ class SellPosController extends Controller
             }
 
             $is_serial_no = false;
-            if (request()->get('is_serial_no') == 'true') {
-                $is_serial_no = true;
-            }
+           // if (request()->get('is_serial_no') == 'true') {
+           //     $is_serial_no = true;
+           // }
 
             if ($variation_id == 'null' && !empty($weighing_barcode)) {
                 $product_details = $this->__parseWeighingBarcode($weighing_barcode);

@@ -74,14 +74,14 @@ class InvoiceLayoutController extends Controller
             $input['sub_total_label']='Sous-total';
             $input['discount_label']='Remise';
             $input['tax_label']='Tax';
-            $input['total_label']='total';
+            $input['total_label']='Total TTC';
             $input['total_due_label']='Total Impayé';
             $input['customer_label']='Client';
             $input['paid_label']='Total Payé';
             $input['table_product_label']='Désignation';
             $input['table_qty_label']='Qté';
             $input['table_unit_price_label']='P.U';
-            $input['table_subtotal_label']='Sous-total';
+            $input['table_subtotal_label']='Total TTC';
             $input['client_id_label']='ID';
             $input['date_label']='Date';
             $input['quotation_heading']='Devis';

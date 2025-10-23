@@ -14,7 +14,7 @@ class Currency extends Model
         'id' => 142,
         'country' => 'Tunisia',
         'currency' => 'Tunisian Dinar',
-        'code' => 'TND',
+        'code' => 'DT',
         'symbol' => 'د.ت',
         'thousand_separator' => ',',
         'decimal_separator' => '.',

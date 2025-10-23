@@ -173,7 +173,7 @@ class BusinessUtil extends Util
     public function allCurrencies()
     {
         // Return only TND currency to reduce database load
-        return [142 => 'Tunisia - Tunisian Dinar(TND) '];
+        return [142 => 'Tunisia - Tunisian Dinar(DT) '];
     }
 
     /**

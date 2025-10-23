@@ -244,7 +244,7 @@
 							</td>
 							
 							<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-								{!! $receipt_details->table_subtotal_label !!}  <span class="small"> ({{$receipt_details->currency['symbol']}})</span>
+								{!! $receipt_details->table_subtotal_label !!}
 							</td>
 						</tr>
 					</thead>
@@ -269,7 +269,6 @@
 									{!!$line['sell_line_note']!!}
 									</small>
 									@endif
-									@if(!empty($line['lot_number']))<br> {{$line['lot_number_label']}}:  {{$line['lot_number']}} @endif 
 									@if(!empty($line['product_expiry'])), {{$line['product_expiry_label']}}:  {{$line['product_expiry']}} @endif 
 
 									@if(!empty($line['warranty_name'])) <br><small>{{$line['warranty_name']}} </small>@endif @if(!empty($line['warranty_exp_date'])) <small>- {{@format_date($line['warranty_exp_date'])}} </small>@endif
@@ -307,7 +306,7 @@
 									@if(!empty($line['line_discount_percent']))
 										{{$line['line_discount_percent']}}%
 										@else
-										{{$line['total_line_discount']!='0.000'?$line['total_line_discount']:'-' }}
+										{{$line['total_line_discount']!='0.000'?$line['total_line_discount']:'' }}
 									@endif
 								</td>
 							
@@ -322,43 +321,36 @@
 				</table>
 
 				<!-- Payment and Totals Section -->
-				<table style="width: 100%; border-collapse: collapse; margin: 15px 0;">
+				<table style="width: 100%; border-collapse: collapse; margin-bottom: 15px 0;">
 					<tr>
-						<td style="width: 50%; vertical-align: top; padding-right: 15px;">
-							<!-- Payment Details -->
-							@if(!empty($receipt_details->payments))
-								<table style="width: 100%; border-collapse: collapse; border: 1px solid #000;">
-									<thead>
-										<tr style="background-color: #f0f0f0 !important;">
-											<th style="border: 1px solid #000; padding: 5px;">Méthode paiement</th>
-											<th style="border: 1px solid #000; padding: 5px;">Montant</th>
-											<th style="border: 1px solid #000; padding: 5px;">Date</th>
-										</tr>
-									</thead>
-									<tbody>
-										@foreach($receipt_details->payments as $payment)
-											<tr>
-												<td style="border: 1px solid #000; padding: 5px;">{{$payment['method']}}</td>
-												<td style="border: 1px solid #000; padding: 5px;">{{$payment['amount']}}</td>
-												<td style="border: 1px solid #000; padding: 5px;">{{$payment['date']}}</td>
-											</tr>
-										@endforeach
-									</tbody>
-								</table>
-							@endif
+						<td style="width: 20%; vertical-align: top; padding-right: 15px;">
+							<!-- tax -->
+					@if(!empty($receipt_details->taxes))
+						<table style="width: 20%; border-collapse: collapse; border: 1px solid #000; margin: 10px 0;">
+							<tr>
+								<th colspan="2" style="border: 1px solid #000; padding: 8px; text-align: center; background-color: #f0f0f0 !important;">TVA</th>
+							</tr>
+							@foreach($receipt_details->taxes as $key => $val)
+								<tr>
+									<td style="border: 1px solid #000; padding: 5px; text-align: center;"><strong>{{$key}}</strong></td>
+									<td style="border: 1px solid #000; padding: 5px; text-align: center;">{{$val}}</td>
+								</tr>
+							@endforeach
+						</table>
+					@endif
 							@if(!empty($receipt_details->total_in_words))
                     			<p class="total-in-words" style="margin-top:10px">Arrêté la présente {!! $receipt_details->invoice_heading !!} à la somme de : {{$receipt_details->total_in_words}}.</p>
                 			@endif
 						</td>
 						
-						<td style="width: 50%; vertical-align: top; padding-left: 15px;">
+						<td style="width: 25%; vertical-align: top; padding-left: 15px;">
 							<!-- Totals -->
-							<table style="width: 100%; border-collapse: collapse; border: 1px solid #000;">
+							<table style="width: 25%; border-collapse: collapse; border: 1px solid #000;">
 								<tbody>
 									
 									<tr>
 										<td style="border: 1px solid #000; padding: 5px;">
-											TOTAL H.T
+											Total HT
 										</td>
 										<td style="border: 1px solid #000; padding: 5px; text-align: right;">
 											{{$receipt_details->subtotal_exc_tax}}
@@ -367,7 +359,7 @@
 
 									<tr>
 										<td style="border: 1px solid #000; padding: 5px;">
-											{!! $receipt_details->subtotal_label !!}
+											Sous-total TTC
 										</td>
 										<td style="border: 1px solid #000; padding: 5px; text-align: right;">
 											{{$receipt_details->subtotal}}
@@ -491,20 +483,27 @@
 				</table>
 
 				
-					<!-- tax -->
-					@if(!empty($receipt_details->taxes))
-						<table style="width: 100%; border-collapse: collapse; border: 1px solid #000; margin: 10px 0;">
-							<tr>
-								<th colspan="2" style="border: 1px solid #000; padding: 8px; text-align: center; background-color: #f0f0f0 !important;">{{$receipt_details->tax_summary_label}}</th>
-							</tr>
-							@foreach($receipt_details->taxes as $key => $val)
-								<tr>
-									<td style="border: 1px solid #000; padding: 5px; text-align: center;"><strong>{{$key}}</strong></td>
-									<td style="border: 1px solid #000; padding: 5px; text-align: center;">{{$val}}</td>
-								</tr>
-							@endforeach
-						</table>
-					@endif
+					<!-- Payment Details -->
+							@if(!empty($receipt_details->payments))
+								<table style="width: 250%; border-collapse: collapse; border: 1px solid #000;">
+									<thead>
+										<tr style="background-color: #f0f0f0 !important;">
+											<th style="border: 1px solid #000; padding: 5px;">Méthode paiement</th>
+											<th style="border: 1px solid #000; padding: 5px;">Montant</th>
+											<th style="border: 1px solid #000; padding: 5px;">Date</th>
+										</tr>
+									</thead>
+									<tbody>
+										@foreach($receipt_details->payments as $payment)
+											<tr>
+												<td style="border: 1px solid #000; padding: 5px;">{{$payment['method']}}</td>
+												<td style="border: 1px solid #000; padding: 5px;">{{$payment['amount']}}</td>
+												<td style="border: 1px solid #000; padding: 5px;">{{$payment['date']}}</td>
+											</tr>
+										@endforeach
+									</tbody>
+								</table>
+							@endif
 				
 
 				@if(!empty($receipt_details->additional_notes))

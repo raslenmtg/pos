@@ -245,7 +245,7 @@
 							</td>
 							
 							<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-								{!! $receipt_details->table_subtotal_label !!}  <span class="small"> ({{$receipt_details->currency['symbol']}})</span>
+								{!! $receipt_details->table_subtotal_label !!}
 							</td>
 						</tr>
 					</thead>

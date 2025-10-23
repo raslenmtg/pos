@@ -36,7 +36,7 @@
 
                            <div class="input-group">
                                 <span class="input-group-addon">
-                                    TND
+                                    DT
                                 </span>
                           {!! Form::text('single_dpp', @num_format($variation->default_purchase_price), ['class' => 'form-control input-sm dpp input_number', 'placeholder' => __('product.exc_of_tax'), 'required']); !!}
                         </div>
@@ -46,7 +46,7 @@
                           {!! Form::label('single_dpp_inc_tax', trans('product.inc_of_tax') . ':*') !!}
                          <div class="input-group">
                                 <span class="input-group-addon">
-                                    TND
+                                    DT
                                 </span>
                           {!! Form::text('single_dpp_inc_tax', @num_format($variation->dpp_inc_tax), ['class' => 'form-control input-sm dpp_inc_tax input_number', 'placeholder' => __('product.inc_of_tax'), 'required']); !!}
                         </div>
@@ -62,7 +62,7 @@
                         <label><span class="dsp_label">@lang('product.exc_of_tax')</span></label>
                          <div class="input-group ">
                                 <span class="input-group-addon">
-                                    TND
+                                    DT
                                 </span>
                         {!! Form::text('single_dsp', @num_format($variation->default_sell_price), ['class' => 'form-control input-sm dsp input_number', 'placeholder' => __('product.exc_of_tax'), 'id' => 'single_dsp', 'required']); !!}
 
