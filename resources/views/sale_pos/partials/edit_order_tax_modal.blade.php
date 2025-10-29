@@ -12,13 +12,18 @@
 				        <div class="form-group">
 				            {!! Form::label('order_tax_modal', __('sale.order_tax') . ':*' ) !!}
 				            <div class="input-group">
-				                <span class="input-group-addon">
-				                    <i class="fa fa-info"></i>
-				                </span>
 				                {!! Form::select('order_tax_modal', $taxes['tax_rates'], $selected_tax, ['placeholder' => __('messages.please_select'), 'class' => 'form-control'], $taxes['attributes']); !!}
 				            </div>
 				        </div>
 				    </div>
+ 			@if($business_details->enable_timbre)
+					<div class="col-md-12">
+				        <div class="form-group">
+			    {!! Form::label('enable_timbre',  'Timbre fiscale :') !!}
+                {!!  $business_details->timbre_value !!} DT
+				        </div>
+				    </div>
+			@endif
 				</div>
 			</div>
 			<div class="modal-footer">

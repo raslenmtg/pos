@@ -1952,10 +1952,17 @@ function pos_order_tax(price_total, discount) {
     var calculation_amount = __read_number($('#tax_calculation_amount'));
     var total_amount = price_total - discount;
 
+    var order_tax = 0;
+    
+    // Add timbre_value as default tax if enabled
+    var timbre_value = __read_number($('#timbre_value'));
+    if (timbre_value > 0) {
+        order_tax += timbre_value;
+    }
+
+    // Add regular tax if tax rate is selected
     if (tax_rate_id) {
-        var order_tax = __calculate_amount(calculation_type, calculation_amount, total_amount);
-    } else {
-        var order_tax = 0;
+        order_tax += __calculate_amount(calculation_type, calculation_amount, total_amount);
     }
 
     $('span#order_tax').text(__currency_trans_from_en(order_tax, false));
