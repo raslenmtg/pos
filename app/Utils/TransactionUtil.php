@@ -1422,13 +1422,15 @@ class TransactionUtil extends Util
         $tax = $transaction->tax;
         //$output['tax_label'] = $invoice_layout->tax_label;
         //$output['line_tax_label'] = $invoice_layout->tax_label;
-        $output['tax_label'] ='Taxe supplémentaire';
+        $output['tax_label'] ='';
         $output['line_tax_label'] ='Taxe supp';
         if (! empty($tax) && ! empty($tax->name)) {
-            $output['tax_label'] .= ' ('.$tax->name.'%)';
+            $output['tax_label'] .= 'Taxe supplémentaire ('.$tax->name.'%)';
         }
         if($business_details->enable_timbre)
-            $output['tax_label'] .='+ Timbre fisc';
+            if (! empty($tax) && ! empty($tax->name))
+                $output['tax_label'] .=' + ';
+            $output['tax_label'] .='Timbre fisc';
       
         $output['tax'] = ($transaction->tax_amount != 0) ? $this->num_f($transaction->tax_amount, $show_currency, $business_details) : 0;
 
