@@ -62,7 +62,7 @@ use Razorpay\Api\Api;
 use Stripe\Charge;
 use Stripe\Stripe;
 use Yajra\DataTables\Facades\DataTables;
-use App\Events\SellCreatedOrModified;
+//use App\Events\SellCreatedOrModified;
 
 class SellPosController extends Controller
 {
@@ -475,9 +475,9 @@ class SellPosController extends Controller
                 $transaction = $this->transactionUtil->createSellTransaction($business_id, $input, $invoice_total, $user_id);
 
                 //Upload Shipping documents
-                Media::uploadMedia($business_id, $transaction, $request, 'shipping_documents', false, 'shipping_document');
+               // Media::uploadMedia($business_id, $transaction, $request, 'shipping_documents', false, 'shipping_document');
 
-                $this->transactionUtil->createOrUpdateSellLines($transaction, $input['products'], $input['location_id']);
+               // $this->transactionUtil->createOrUpdateSellLines($transaction, $input['products'], $input['location_id']);
 
                 $change_return['amount'] = $input['change_return'] ?? 0;
                 $change_return['is_return'] = 1;
@@ -564,7 +564,7 @@ class SellPosController extends Controller
 
                 DB::commit();
 
-                SellCreatedOrModified::dispatch($transaction);
+                //SellCreatedOrModified::dispatch($transaction);
 
                 if ($request->input('is_save_and_print') == 1) {
                     $url = $this->transactionUtil->getInvoiceUrl($transaction->id, $business_id);
@@ -1377,7 +1377,7 @@ class SellPosController extends Controller
 
                 $this->transactionUtil->activityLog($transaction, 'edited', $transaction_before);
 
-                SellCreatedOrModified::dispatch($transaction);
+                //SellCreatedOrModified::dispatch($transaction);
 
                 DB::commit();
 
