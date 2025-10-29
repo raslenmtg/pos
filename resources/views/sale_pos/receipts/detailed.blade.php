@@ -445,7 +445,7 @@
 													{!! $key !!}
 												</td>
 												<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-													(+) {{$value}}
+													 {{$value}}
 												</td>
 											</tr>
 										@endforeach
@@ -456,7 +456,7 @@
 													{!! $receipt_details->tax_label !!}
 												</td>
 												<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-													(+) {{$receipt_details->tax}}
+													 {{$receipt_details->tax}}
 												</td>
 											</tr>
 										@endif
