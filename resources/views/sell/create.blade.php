@@ -35,15 +35,11 @@
 	<div class="col-sm-3">
 		<div class="form-group">
 			<div class="input-group">
-				<span class="input-group-addon">
-					<i class="fa fa-map-marker"></i>
-				</span>
+			
 			{!! Form::select('select_location_id', $business_locations, $default_location->id ?? null, ['class' => 'form-control input-sm',
 			'id' => 'select_location_id', 
 			'required', 'autofocus'], $bl_attributes); !!}
-			<span class="input-group-addon">
-					@show_tooltip(__('tooltip.sale_location'))
-				</span> 
+			
 			</div>
 		</div>
 	</div>
@@ -78,9 +74,7 @@
 									@endphp
 									{!! Form::hidden('hidden_price_group', key($price_groups), ['id' => 'hidden_price_group']) !!}
 									{!! Form::select('price_group', $price_groups, $selected_price_group, ['class' => 'form-control select2', 'id' => 'price_group']); !!}
-									<span class="input-group-addon">
-										@show_tooltip(__('lang_v1.price_group_help_text'))
-									</span> 
+									
 								</div>
 							</div>
 						</div>
@@ -418,6 +412,8 @@
 							]); !!}
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default bg-white btn-flat pos_add_quick_product" data-href="{{action([\App\Http\Controllers\ProductController::class, 'quickAdd'])}}" data-container=".quick_add_product_modal"><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
+								<button type="button" class="btn btn-default bg-white btn-flat" id="qr_scan_btn" title="Scan QR Code / Barcode"><i class="fa fa-camera text-success fa-lg"></i></button>
+				
 							</span>
 						</div>
 					</div>
@@ -889,6 +885,25 @@
 
 <div class="modal fade types_of_service_modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel"></div>
 
+ <!-- QR Code Scanner Modal -->
+    <div class="modal fade" id="qrScannerModal" tabindex="-1" role="dialog" aria-labelledby="qrScannerModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div style="display: flex;justify-content: space-between;">
+                    <h4 class="modal-title" id="qrScannerModalLabel">QR Code & Barcode Scanner</h4>
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-times"></i>
+                    </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="qr-scanner-container" style="width: 100%;"></div>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
 
 @include('sale_pos.partials.configure_search_modal')
 
@@ -898,6 +913,7 @@
 	<script src="{{ asset('js/pos.js?v=' . $asset_v) }}"></script>
 	<script src="{{ asset('js/product.js?v=' . $asset_v) }}"></script>
 	<script src="{{ asset('js/opening_stock.js?v=' . $asset_v) }}"></script>
+    <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
 	<!-- Call restaurant module if defined -->
     @if(in_array('tables' ,$enabled_modules) || in_array('modifiers' ,$enabled_modules) || in_array('service_staff' ,$enabled_modules))
@@ -976,5 +992,133 @@
 			}
 
     	});
+    </script>
+	<script>
+        let html5Qrcode = null;
+        let isScanning = false;
+        let scanCooldown = false;
+        let lastScannedCode = '';
+
+        $(document).ready(function() {
+            $('#qr_scan_btn').click(function() {
+                $('#qrScannerModal').modal('show');
+                setTimeout(function() {
+                    initQRScanner();
+                }, 300);
+            });
+
+            $('#qrScannerModal').on('hidden.bs.modal', function() {
+                stopQRScanner();
+            });
+        });
+
+        function initQRScanner() {
+            if (isScanning) return;
+
+            try {
+                html5Qrcode = new Html5Qrcode("qr-scanner-container");
+
+                Html5Qrcode.getCameras().then(devices => {
+                    if (devices && devices.length) {
+                        let cameraId = devices[0].id;
+                        // Use back camera if available
+                        const backCamera = devices.find(device =>
+                            device.label.toLowerCase().includes('back') ||
+                            device.label.toLowerCase().includes('rear') ||
+                            device.label.toLowerCase().includes('environment')
+                        );
+                        if (backCamera) {
+                            cameraId = backCamera.id;
+                        }
+
+                        html5Qrcode.start(
+                            cameraId,
+                            {
+                                fps: 10,
+                                qrbox: function(viewfinderWidth, viewfinderHeight) {
+                                    // Make qrbox wider for barcode scanning
+                                    let widthPercentage = 0.7; // 80% of width
+                                    let heightPercentage = 0.3; // 30% of height
+                                    return {
+                                        width: Math.floor(viewfinderWidth * widthPercentage),
+                                        height: Math.floor(viewfinderHeight * heightPercentage)
+                                    };
+                                },
+                                aspectRatio: 1.0,
+                                supportedScanTypes: [Html5QrcodeScanType.SCAN_TYPE_CAMERA],
+
+                            },
+                            onScanSuccess
+                        ).then(() => {
+                            isScanning = true;
+                        }).catch(err => {
+                            console.error('Failed to start scanner:', err);
+                            alert('permission du camera est désactivé');
+                        });
+                    } else {
+                        alert('Aucun camera');
+                    }
+                }).catch(err => {
+                    console.error('Failed to get cameras:', err);
+                    alert('Error accessing camera. Please check permissions.');
+                });
+
+            } catch (error) {
+                console.error('QR Scanner initialization error:', error);
+                alert('Error initializing QR scanner. Please make sure camera permissions are granted.');
+            }
+        }
+
+        function onScanSuccess(decodedText, decodedResult) {
+            // Check if we're in cooldown period or same code was just scanned
+            if (scanCooldown || lastScannedCode === decodedText) {
+                return;
+            }
+
+            // Set cooldown to prevent multiple scans
+            scanCooldown = true;
+            lastScannedCode = decodedText;
+
+            // Set the scanned text in the search product input
+            $('#search_product').val(decodedText);
+
+            // Trigger the search product functionality
+            $('#search_product').trigger('input');
+
+            // Play success beep sound
+            try {
+                const successAudio = document.getElementById('success-audio');
+                if (successAudio) {
+                    successAudio.currentTime = 0; // Reset to start
+                    successAudio.play();
+                }
+            } catch (error) {
+                console.log('Could not play beep sound:', error);
+            }
+
+            // Reset cooldown after 2 seconds
+            setTimeout(() => {
+                scanCooldown = false;
+                lastScannedCode = '';
+            }, 2000);
+        }
+
+        function stopQRScanner() {
+            if (html5Qrcode && isScanning) {
+                try {
+                    html5Qrcode.stop().then(() => {
+                        html5Qrcode.clear();
+                        $('#qr-result').hide();
+                        isScanning = false;
+                    }).catch(err => {
+                        console.error('Error stopping scanner:', err);
+                        isScanning = false;
+                    });
+                } catch (error) {
+                    console.error('Error stopping QR scanner:', error);
+                    isScanning = false;
+                }
+            }
+        }
     </script>
 @endsection
