@@ -913,7 +913,7 @@
                         <div class="feature-icon">
                             <i class='bx bx-store'></i>
                         </div>
-                        <h3>نقطة البيع (POS)</h3>
+                        <h3>نقطة بيع (POS)</h3>
                         <p>• شاشة بسيطة وسريعة للبيع</p>
                         <p>• إنشاء وطباعة الفواتير فوراً</p>
                         <p>• كل موظف عندو شاشة خاصة</p>
@@ -1183,6 +1183,9 @@
                             </a>
                             <a href="https://www.instagram.com/simplexgestion" class="social-link">
                                 <i class='bx bxl-instagram'></i>
+                            </a>
+                            <a href="https://www.tiktok.com/@simplexgestion" class="social-link">
+                                <i class='bx bxl-tiktok'></i>
                             </a>
                           </div>
                     </div>

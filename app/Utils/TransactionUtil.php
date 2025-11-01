@@ -1429,8 +1429,8 @@ class TransactionUtil extends Util
         }
         if($business_details->enable_timbre)
             if (! empty($tax) && ! empty($tax->name))
-                $output['tax_label'] .=' + ';
-            $output['tax_label'] .='Timbre fisc';
+                $output['tax_label'] .=' + <br>';
+            $output['tax_label'] .='Timbre fiscal';
       
         $output['tax'] = ($transaction->tax_amount != 0) ? $this->num_f($transaction->tax_amount, $show_currency, $business_details) : 0;
 

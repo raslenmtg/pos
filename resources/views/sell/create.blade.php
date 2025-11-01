@@ -30,6 +30,9 @@
 @if(session('business.enable_rp') == 1)
     <input type="hidden" id="reward_point_enabled">
 @endif
+@if ($business_details->enable_timbre)
+    <input type="hidden" id="timbre_value" value="{{ $business_details->timbre_value }}">
+@endif
 @if(count($business_locations) > 0)
 <div class="row">
 	<div class="col-sm-3">
@@ -502,7 +505,14 @@
 			    <div class="col-md-4 col-md-offset-4  @if($sale_type == 'sales_order') hide @endif">
 			    	<b>@lang( 'sale.order_tax' ):</b>(+) 
 					<span class="display_currency" id="order_tax">0</span>
-			    </div>				
+			    </div>
+			    <div class="clearfix"></div>
+			    @if($business_details->enable_timbre)
+			    <div class="col-md-4 col-md-offset-8  @if($sale_type == 'sales_order') hide @endif">
+			    	<b>Timbre fiscale:</b>(+) 
+					<span class="display_currency">{{ $business_details->timbre_value }}</span>
+			    </div>
+			    @endif
 				
 			    <div class="col-md-12">
 			    	<div class="form-group">

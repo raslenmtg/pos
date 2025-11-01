@@ -309,8 +309,7 @@
 										{{$line['total_line_discount']!='0.000'?$line['total_line_discount']:'' }}
 									@endif
 								</td>
-							
-
+								
 								<td style="border: 1px solid #000; padding: 5px; text-align: right;">
 									{{$line['line_total']}}
 								</td>
