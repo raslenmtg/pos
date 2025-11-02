@@ -686,6 +686,16 @@ class ProductUtil extends Util
             }
         }
 
+        // Add Timbre Tax if enabled
+        $business_id = request()->session()->get('user.business_id');
+        if ($business_id) {
+            $business = \App\Business::find($business_id);
+            if ($business && $business->enable_timbre && !empty($business->timbre_value)) {
+                $timbre_amount = $business->timbre_value;
+                $output['tax'] += $timbre_amount;
+            }
+        }
+
         //Calculate total
         $output['final_total'] = $output['total_before_tax'] + $output['tax'] - $output['discount'];
 

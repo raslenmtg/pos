@@ -1,49 +1,31 @@
 <div class="pos-tab-content">
     <div class="row">
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('tax_label_1', __('business.tax_1_name') . ':') !!}
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="fa fa-info"></i>
-                    </span>
-                    {!! Form::text('tax_label_1', $business->tax_label_1, ['class' => 'form-control','placeholder' => __('business.tax_1_placeholder')]); !!}
-                </div>
+
+  <div class="col-sm-4">
+            {!! Form::label('enable_timbre',  'Activier timbre fiscale :') !!}
+            <div class="input-group">
+                <span class="input-group-addon">
+           {!! Form::checkbox('enable_timbre', 1, $business->enable_timbre) !!}
+                </span>
+
+                <select class="form-control" id="timbre_value"
+                    name="timbre_value" 
+                    @if(!$business->enable_timbre) disabled @endif>
+                  
+                  <option value="" @if(!$business->enable_timbre) selected @endif>Selectionner Montant</option>
+                  <option value="1" @if($business->timbre_value == 1) selected @endif>1 DT</option>
+                  <option value="0.1" @if($business->timbre_value == 0.1) selected @endif>0.1 DT</option>
+                </select>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('tax_number_1', __('business.tax_1_no') . ':') !!}
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="fa fa-info"></i>
-                    </span>
-                    {!! Form::text('tax_number_1', $business->tax_number_1, ['class' => 'form-control']); !!}
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('tax_label_2', __('business.tax_2_name') . ':') !!}
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="fa fa-info"></i>
-                    </span>
-                    {!! Form::text('tax_label_2', $business->tax_label_2, ['class' => 'form-control','placeholder' => __('business.tax_1_placeholder')]); !!}
-                </div>
-            </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="col-sm-4">
-            <div class="form-group">
-                {!! Form::label('tax_number_2', __('business.tax_2_no') . ':') !!}
-                <div class="input-group">
-                    <span class="input-group-addon">
-                        <i class="fa fa-info"></i>
-                    </span>
-                    {!! Form::text('tax_number_2', $business->tax_number_2, ['class' => 'form-control']); !!}
-                </div>
-            </div>
-        </div>
+
+
+
+
+
+
+
+
+
     </div>
 </div>

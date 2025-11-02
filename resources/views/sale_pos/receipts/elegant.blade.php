@@ -252,7 +252,7 @@
                             </td>
                             <td class="text-right mono-font">{{$line['quantity_uf']}} </td>
                             <td class="text-right mono-font">{{$line['unit_price_before_discount']}}</td>
-                            <td class="text-right mono-font">{{$line['line_total_exc_tax']}}</td>
+                            <td class="text-right mono-font">{{$line['line_total']}}</td>
                         </tr>
                     @empty
                         <tr><td colspan="6" style="text-align: center;">Aucun article.</td></tr>
@@ -290,8 +290,8 @@
             <div class="summary-right">
                 <table class="totals-table mono-font">
                     <tr>
-                        <td>{!! $receipt_details->subtotal_label !!}</td>
-                        <td class="text-right">{{$receipt_details->subtotal_exc_tax}}</td>
+                        <td>Sous-total TTC</td>
+                        <td class="text-right">{{$receipt_details->subtotal}}</td>
                     </tr>
                     @if(!empty($receipt_details->discount))<tr><td>{!! $receipt_details->discount_label !!}</td><td class="text-right">(-) {{$receipt_details->discount}}</td></tr>@endif
                     @if(!empty($receipt_details->shipping_charges))<tr><td>{!! $receipt_details->shipping_charges_label !!}</td><td class="text-right">(+) {{$receipt_details->shipping_charges}}</td></tr>@endif
@@ -306,13 +306,12 @@
 
         <footer class="invoice-footer">
             @if(!empty($receipt_details->footer_text)) <div class="footer-text">{!! $receipt_details->footer_text !!}</div> @endif
-                 @if($receipt_details->show_barcode || $receipt_details->show_qr_code)
-                <div class="qr-code">
+           
+                	<div style="width: 100%; text-align: center;  display:flex;justify-content:center">
                     @if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
                         <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54])}}">
                     @endif
                 </div>
-            @endif
         </footer>
     </div>
     <div class="furl">

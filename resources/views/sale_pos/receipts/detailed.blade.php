@@ -309,8 +309,7 @@
 										{{$line['total_line_discount']!='0.000'?$line['total_line_discount']:'' }}
 									@endif
 								</td>
-							
-
+								
 								<td style="border: 1px solid #000; padding: 5px; text-align: right;">
 									{{$line['line_total']}}
 								</td>
@@ -323,10 +322,10 @@
 				<!-- Payment and Totals Section -->
 				<table style="width: 100%; border-collapse: collapse; margin-bottom: 15px 0;">
 					<tr>
-						<td style="width: 20%; vertical-align: top; padding-right: 15px;">
+						<td style="width: 40%; vertical-align: top; padding-right: 15px;">
 							<!-- tax -->
 					@if(!empty($receipt_details->taxes))
-						<table style="width: 20%; border-collapse: collapse; border: 1px solid #000; margin: 10px 0;">
+						<table style="width: 90%; border-collapse: collapse; border: 1px solid #000; margin-right: 10px 0;">
 							<tr>
 								<th colspan="2" style="border: 1px solid #000; padding: 8px; text-align: center; background-color: #f0f0f0 !important;">TVA</th>
 							</tr>
@@ -338,14 +337,11 @@
 							@endforeach
 						</table>
 					@endif
-							@if(!empty($receipt_details->total_in_words))
-                    			<p class="total-in-words" style="margin-top:10px">Arrêté la présente {!! $receipt_details->invoice_heading !!} à la somme de : {{$receipt_details->total_in_words}}.</p>
-                			@endif
 						</td>
 						
-						<td style="width: 25%; vertical-align: top; padding-left: 15px;">
+						<td style="width: 100%; vertical-align: top; padding-left: 15px;text-align: -webkit-right;">
 							<!-- Totals -->
-							<table style="width: 25%; border-collapse: collapse; border: 1px solid #000;">
+							<table style="width: 70%; border-collapse: collapse; border: 1px solid #000;">
 								<tbody>
 									
 									<tr>
@@ -448,7 +444,7 @@
 													{!! $key !!}
 												</td>
 												<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-													(+) {{$value}}
+													 {{$value}}
 												</td>
 											</tr>
 										@endforeach
@@ -459,7 +455,7 @@
 													{!! $receipt_details->tax_label !!}
 												</td>
 												<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-													(+) {{$receipt_details->tax}}
+													 {{$receipt_details->tax}}
 												</td>
 											</tr>
 										@endif
@@ -478,6 +474,9 @@
 									</tr>
 								</tbody>
 							</table>
+								@if(!empty($receipt_details->total_in_words))
+                    			<p class="total-in-words" style="margin-top:10px;text-align:end;">Arrêté la présente {!! $receipt_details->invoice_heading !!} à la somme de : {{$receipt_details->total_in_words}}.</p>
+                			@endif
 						</td>
 					</tr>
 				</table>
@@ -485,7 +484,7 @@
 				
 					<!-- Payment Details -->
 							@if(!empty($receipt_details->payments))
-								<table style="width: 250%; border-collapse: collapse; border: 1px solid #000;">
+								<table style="width: 25%;padding-top:10px; border-collapse: collapse; border: 1px solid #000;">
 									<thead>
 										<tr style="background-color: #f0f0f0 !important;">
 											<th style="border: 1px solid #000; padding: 5px;">Méthode paiement</th>

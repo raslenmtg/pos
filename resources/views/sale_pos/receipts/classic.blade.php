@@ -231,7 +231,7 @@
     <div class="invoice-container">
 
         @if(!empty($receipt_details->letter_head))
-            <img style="width: 100%; margin-bottom: 20px; width:120px; height:120px;" src="{{$receipt_details->letter_head}}" alt="Letterhead">
+            <img style="margin-bottom: 20px; width:120px; height:120px;" src="{{$receipt_details->letter_head}}" alt="Letterhead">
         @endif
         
         <header class="invoice-header">
@@ -345,7 +345,7 @@
                             @if(!empty($receipt_details->item_discount_label))
                                 <td class="text-right">{{$line['total_line_discount'] ?? '0.00'}}</td>
                             @endif
-                            <td class="text-right">{{$line['line_total_exc_tax']}}</td>
+                            <td class="text-right">{{$line['line_total']}}</td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -381,8 +381,8 @@
             <div class="summary-right">
                 <table class="totals-table">
                     <tr>
-                        <td>{!! $receipt_details->subtotal_label !!}</td>
-                        <td>{{$receipt_details->subtotal_exc_tax}}</td>
+                        <td>Sous-total TTC</td>
+                        <td>{{$receipt_details->subtotal}}</td>
                     </tr>
 
                     @if( !empty($receipt_details->discount) )
@@ -421,8 +421,8 @@
                         @endif
                     @endif
 
-                    <tr class="total-row">
-                        <td><strong>{!! $receipt_details->total_label !!}</strong></td>
+                    <tr>
+                        <td><strong>Total TTC</strong></td>
                         <td><strong>{{$receipt_details->total}}</strong></td>
                     </tr>
                 </table>
@@ -436,7 +436,8 @@
                 @endif
             </div>
              @if( $receipt_details->show_qr_code)
-                <div class="qr-code">
+               	<div style="width: 100%; text-align: center;  display:flex;justify-content:center">
+						
                     @if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
                         <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54])}}">
                     @endif

@@ -11,6 +11,9 @@
 	@if(session('business.enable_rp') == 1)
         <input type="hidden" id="reward_point_enabled">
     @endif
+    @if ($business_details->enable_timbre)
+        <input type="hidden" id="timbre_value" value="{{ $business_details->timbre_value }}">
+    @endif
     @php
 		$is_discount_enabled = $pos_settings['disable_discount'] != 1 ? true : false;
 		$is_rp_enabled = session('business.enable_rp') == 1 ? true : false;

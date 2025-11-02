@@ -927,6 +927,15 @@ $(document).ready(function() {
             }
         });
 
+         //Product expiry
+        $('input#enable_timbre').change(function() {
+            if ($(this).is(':checked')) {
+                $('select#timbre_value').attr('disabled', false);
+            } else {
+                $('select#timbre_value').attr('disabled', true);
+            }
+        });
+
         //enable_category
         $('input#enable_category').on('ifChecked', function(event) {
             $('div.enable_sub_category').removeClass('hide');
