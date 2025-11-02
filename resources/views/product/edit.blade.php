@@ -305,11 +305,6 @@
                 {!! Form::label('tax', __('product.applicable_tax') . ':') !!}
                   {!! Form::select('tax', $taxes, $product->tax, ['placeholder' => __('messages.please_select'), 'class' => 'form-control select2'], $tax_attributes); !!}
               </div>
-                <div class="form-group" id="fodec_checkbox_div" style="display: none;">
-                <label>
-                    {!! Form::checkbox('is_fodec', true, $product->is_fodec && $product->tax, ['class' => 'input-icheck','id'=>'is_fodec']); !!} <strong>Appliquer Taxe FODEC (1%)</strong>
-                </label>
-            </div>
             </div>
 
             {!! Form::hidden('tax_type', 'inclusive'); !!}
@@ -360,28 +355,6 @@
   <script type="text/javascript">
     $(document).ready( function(){
       __page_leave_confirmation('#product_add_form');
-
-       // FODEC checkbox visibility based on tax selection
-        $('select[name="tax"]').change(function() {
-            console.log($(this).val())
-            if ($(this).val()) {
-                $('#fodec_checkbox_div').show();
-            } else {
-               $('#is_fodec').prop('checked', false);
-                $('#fodec_checkbox_div').hide();
-               
-                //$('#is_fodec').attr('checked', false);
-            }
-        });
-
-        // Show FODEC checkbox on page load if tax is selected
-        if ($('select[name="tax"]').val()) {
-            $('#fodec_checkbox_div').show();
-        } else {
-            // Ensure FODEC is false when no tax is selected
-            $('#is_fodec').prop('checked', false);
-        }
-
     });
   </script>
 @endsection
