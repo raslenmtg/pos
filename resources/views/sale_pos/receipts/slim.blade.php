@@ -413,7 +413,7 @@
 				@if( !empty($receipt_details->total_line_discount) )
 					<div class="flex-box">
 						<p class="width-50 text-right">
-							Remise art:
+							{!! $receipt_details->line_discount_label !!}
 						</p>
 
 						<p class="width-50 text-right">
@@ -451,10 +451,10 @@
 				@if( !empty($receipt_details->tax) )
 					<div class="flex-box">
 						<p class="width-50 text-right">
-							Tax:
+							{!! $receipt_details->tax_label !!}
 						</p>
 						<p class="width-50 text-right">
-							(+) {{$receipt_details->tax}}
+							{{$receipt_details->tax}}
 						</p>
 					</div>
 				@endif
@@ -462,7 +462,7 @@
 
 				<div class="flex-box">
 					<p class="width-50 text-right sub-headings">
-						Total:
+					{!! $receipt_details->total_label !!}
 					</p>
 					<p class="width-50 text-right sub-headings">
 						{{$receipt_details->total}}

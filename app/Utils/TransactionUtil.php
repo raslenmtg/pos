@@ -1051,7 +1051,7 @@ class TransactionUtil extends Util
             $output['location_custom_fields'] .= implode(', ', $temp);
         }
 
-        //Tax Info
+       /* //Tax Info
         if ($il->show_tax_1 == 1 && ! empty($business_details->tax_number_1)) {
             $output['tax_label1'] = ! empty($business_details->tax_label_1) ? $business_details->tax_label_1.': ' : '';
 
@@ -1065,7 +1065,7 @@ class TransactionUtil extends Util
             $output['tax_label2'] = ! empty($business_details->tax_label_2) ? $business_details->tax_label_2.': ' : '';
 
             $output['tax_info2'] = $business_details->tax_number_2;
-        }
+        }*/
 
         //Shop Contact Info
         $output['contact'] = '';
@@ -1323,7 +1323,7 @@ class TransactionUtil extends Util
                         $output['taxes'][$line['tax_name']] = 0;
                     }
 
-                    $output['taxes'][$line['tax_name']] += ($line['tax_unformatted'] * $line['quantity_uf']);
+                    $output['taxes'][$line['tax_name']] += ((float) $line['unit_price_exc_tax'] * $line['quantity_uf']*($line['tax_percent']/100));
                 }
 
                 if (! empty($line['tax_id']) && $line['tax_percent'] == 0) {
@@ -1405,7 +1405,7 @@ class TransactionUtil extends Util
             $output['reward_point_label'] = $business_details->rp_name;
             $output['reward_point_amount'] = $this->num_f($transaction->rp_redeemed_amount, $show_currency, $business_details);
         }
-
+        
         //Format tax
         if (! empty($output['taxes'])) {
             $total_tax = 0;
@@ -1415,20 +1415,26 @@ class TransactionUtil extends Util
                 $output['taxes'][$key] = $this->num_f($value, $show_currency, $business_details);
             }
 
-            $output['taxes'][trans('lang_v1.total_tax')] = $this->num_f($total_tax, $show_currency, $business_details);
+            $output['taxes']['Total TVA'] = $this->num_f($total_tax, $show_currency, $business_details);
         }
 
         //Order Tax
         $tax = $transaction->tax;
-        $output['tax_label'] = $invoice_layout->tax_label;
-        $output['line_tax_label'] = $invoice_layout->tax_label;
+        //$output['tax_label'] = $invoice_layout->tax_label;
+        //$output['line_tax_label'] = $invoice_layout->tax_label;
+        $output['tax_label'] ='';
+        $output['line_tax_label'] ='Taxe supp';
         if (! empty($tax) && ! empty($tax->name)) {
-            $output['tax_label'] .= ' ('.$tax->name.')';
+            $output['tax_label'] .= 'Taxe supplémentaire ('.$tax->name.'%)';
         }
-        $output['tax_label'] .= ':';
+        if($business_details->enable_timbre)
+            if (! empty($tax) && ! empty($tax->name))
+                $output['tax_label'] .=' + <br>';
+            $output['tax_label'] .='Timbre fiscal';
+      
         $output['tax'] = ($transaction->tax_amount != 0) ? $this->num_f($transaction->tax_amount, $show_currency, $business_details) : 0;
 
-        if ($transaction->tax_amount != 0 && $tax->is_tax_group) {
+        if (!empty($tax)&$transaction->tax_amount != 0 && $tax->is_tax_group) {
             $transaction_group_tax_details = $this->groupTaxDetails($tax, $transaction->tax_amount);
 
             $output['group_tax_details'] = [];
@@ -1804,7 +1810,7 @@ class TransactionUtil extends Util
                 //Fields for 4th column
                 'line_total' => $this->num_f($line->unit_price_inc_tax * $line->quantity, false, $business_details),
                 'line_total_uf' => $line->unit_price_inc_tax * $line->quantity,
-                'line_total_exc_tax' => $this->num_f($line->unit_price * $line->quantity, false, $business_details),
+                'line_total_exc_tax' => $this->num_f( (float)$line->unit_price_exc_tax * $line->quantity, false, $business_details),
                 'line_total_exc_tax_uf' => $line->unit_price * $line->quantity,
                 'variation_id' => $variation->id,
             ];
