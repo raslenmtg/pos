@@ -169,7 +169,21 @@
 			font-size: 12px;
 		}
 
-		/* --- Bottom Bar (Words, Payment) --- */
+        /* Payments Table */
+        .invoice-container-bon .payments-table {
+            border: 1px solid #000;
+            margin-top: 10px;
+            width: fit-content;
+            border-collapse: collapse;
+        }
+        .invoice-container-bon .payments-table th,
+        .invoice-container-bon .payments-table td {
+            border: 1px solid #000;
+            padding: 5px;
+        }
+
+
+        /* --- Bottom Bar (Words, Payment) --- */
 		.invoice-container-bon .bottom-bar-table {
 			border: 1px solid #000;
 			padding: 8px;
@@ -435,37 +449,33 @@
 </tr>
 </table>
 
-<table class="bottom-bar-table">
-@if(!empty($receipt_details->total_in_words))
-<tr>
-<td class="total-in-words">
+        @if(!empty($receipt_details->total_in_words))
+            Arrêté Le Présent {!! $receipt_details->invoice_heading !!} à la somme de : {{$receipt_details->total_in_words}}
+        @endif
+        @if(!empty($receipt_details->payments))
+            <table class="payments-table">
 
-Arrêté Le Présent {!! $receipt_details->invoice_heading !!} à la somme de : {{$receipt_details->total_in_words}}
 
-</td>
-</tr>
-@endif
-@if(!empty($receipt_details->payments))
-<tr>
-<td>
-<strong>Méthode paiement</strong>
-</td>
-<td>
-<strong>Montant</strong>
-</td>
-<td>
-<strong>Date</strong>
-</td>
-</tr>
-@foreach($receipt_details->payments as $payment)
-    <tr>
-        <td >{{$payment['method']}}</td>
-        <td >{{$payment['amount']}}</td>
-        <td >{{$payment['date']}}</td>
-    </tr>
-@endforeach
-@endif
-</table>
+                <tr>
+                    <th>
+                        <strong>Méthode paiement</strong>
+                    </th>
+                    <th>
+                        <strong>Montant</strong>
+                    </th>
+                    <th>
+                        <strong>Date</strong>
+                    </th>
+                </tr>
+                @foreach($receipt_details->payments as $payment)
+                    <tr>
+                        <td >{{$payment['method']}}</td>
+                        <td >{{$payment['amount']}}</td>
+                        <td >{{$payment['date']}}</td>
+                    </tr>
+                @endforeach
 
-</div></body>
+            </table>
+        @endif
+    </div></body>
 </html>
