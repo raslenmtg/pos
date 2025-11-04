@@ -130,7 +130,7 @@ class TransactionUtil extends Util
             //'res_table_id' => ! empty($input['res_table_id']) ? $input['res_table_id'] : null,
            // 'res_waiter_id' => ! empty($input['res_waiter_id']) ? $input['res_waiter_id'] : null,
             'sales_order_ids' => ! empty($input['sales_order_ids']) ? $input['sales_order_ids'] : null,
-            'prefer_payment_method' => ! empty($input['prefer_payment_method']) ? $input['prefer_payment_method'] : null,
+           // 'prefer_payment_method' => ! empty($input['prefer_payment_method']) ? $input['prefer_payment_method'] : null,
             'prefer_payment_account' => ! empty($input['prefer_payment_account']) ? $input['prefer_payment_account'] : null,
             'is_export' => ! empty($input['is_export']) ? 1 : 0,
             'export_custom_fields_info' => (! empty($input['is_export']) && ! empty($input['export_custom_fields_info'])) ? $input['export_custom_fields_info'] : null,
@@ -142,7 +142,7 @@ class TransactionUtil extends Util
             'additional_expense_key_2' => ! empty($input['additional_expense_key_2']) ? $input['additional_expense_key_2'] : null,
             'additional_expense_key_3' => ! empty($input['additional_expense_key_3']) ? $input['additional_expense_key_3'] : null,
             'additional_expense_key_4' => ! empty($input['additional_expense_key_4']) ? $input['additional_expense_key_4'] : null,
-            'is_kitchen_order' => ! empty($input['is_kitchen_order']) ? 1 : 0,
+           // 'is_kitchen_order' => ! empty($input['is_kitchen_order']) ? 1 : 0,
 
         ]);
 
@@ -390,9 +390,9 @@ class TransactionUtil extends Util
                     $line[$key] = isset($product[$value]) ? $product[$value] : '';
                 }
 
-                if (! empty($product['lot_no_line_id'])) {
-                    $line['lot_no_line_id'] = $product['lot_no_line_id'];
-                }
+               // if (! empty($product['lot_no_line_id'])) {
+                //    $line['lot_no_line_id'] = $product['lot_no_line_id'];
+               // }
 
                 //Check if restaurant module is enabled then add more data related to that.
                 if ($this->isModuleEnabled('modifiers')) {
@@ -1781,8 +1781,8 @@ class TransactionUtil extends Util
                 //Field for 1st column
                 'name' => $product->name,
                 'product_description' => ! empty($show_product_description) ? $product->product_description : null,
-                'variation' => (empty($variation->name) || $variation->name == 'DUMMY') ? '' : $variation->name,
-                'product_variation' => (empty($product_variation->name) || $product_variation->name == 'DUMMY') ? '' : $product_variation->name,
+                'variation' => empty($variation->name)  ? '' : $variation->name,
+                'product_variation' => empty($product_variation->name) ? '' : $product_variation->name,
                 //Field for 2nd column
                 'quantity' => $line->quantity,
                 'quantity_uf' => $line->quantity,
@@ -1792,26 +1792,26 @@ class TransactionUtil extends Util
                 'base_unit_multiplier' => ! empty($line->multiplier) && $line->multiplier != 1 ? $this->num_f($line->multiplier, false, $business_details) : 1,
                 'orig_quantity' => $this->num_f($line->orig_quantity, false, $business_details, true),
                 'unit_price' => $this->num_f($line->unit_price, false, $business_details),
-                'unit_price_uf' => $line->unit_price,
-                'tax' => 0,
+                'unit_price_uf' => (float)$line->unit_price,
+                'tax' => $this->num_f($line->item_tax, false, $business_details),
                 'tax_id' =>$line->product->tax,
-                'tax_unformatted' => $line->item_tax,
+                'tax_unformatted' => ! empty($tax_details) ?$this->num_f( $line->unit_price_before_discount -$line->unit_price_before_discount/(1+($tax_details->amount/100))) : null,
                 'tax_name' => ! empty($tax_details) ? $tax_details->name : null,
                 'tax_percent' => ! empty($tax_details) ? $tax_details->amount : null,
 
                 //Field for 3rd column
                 'unit_price_inc_tax' => $this->num_f($line->unit_price_inc_tax, false, $business_details),
                 'unit_price_inc_tax_uf' => $line->unit_price_inc_tax,
-                'unit_price_exc_tax' => $this->num_f(!empty($tax_details)?$base_unit_price/(1+($tax_details->amount/100)):0, false, $business_details),
+                'unit_price_exc_tax' => !empty($tax_details)?$this->num_f($line->unit_price_before_discount/(1+($tax_details->amount/100)), false, $business_details):null,
                 'base_unit_price' => $this->num_f($base_unit_price, false, $business_details),
-                'price_exc_tax' => $line->quantity * $line->unit_price_inc_tax,
+                'price_exc_tax' => !empty($tax_details)?$line->unit_price_before_discount/(1+($tax_details->amount/100)):0,
                 'unit_price_before_discount' => $this->num_f($line->unit_price_before_discount, false, $business_details),
                 'unit_price_before_discount_uf' => $line->unit_price_before_discount,
                 //Fields for 4th column
                 'line_total' => $this->num_f($line->unit_price_inc_tax * $line->quantity, false, $business_details),
                 'line_total_uf' => $line->unit_price_inc_tax * $line->quantity,
-                'line_total_exc_tax' => $this->num_f( (float)$line->unit_price_exc_tax * $line->quantity, false, $business_details),
-                'line_total_exc_tax_uf' => $line->unit_price * $line->quantity,
+                'line_total_exc_tax' => $this->num_f( !empty($tax_details)?$line->unit_price_before_discount/(1+($tax_details->amount/100)) * $line->quantity:0, false, $business_details),
+                'line_total_exc_tax_uf' => !empty($tax_details)?$line->unit_price_before_discount/(1+($tax_details->amount/100)) * $line->quantity:0,
                 'variation_id' => $variation->id,
             ];
 
@@ -1912,7 +1912,7 @@ class TransactionUtil extends Util
             }
 
             //If modifier is set set modifiers line to parent sell line
-            if (! empty($line->modifiers)) {
+           /* if (! empty($line->modifiers)) {
                 foreach ($line->modifiers as $modifier_line) {
                     $product = $modifier_line->product;
                     $variation = $modifier_line->variations;
@@ -1949,7 +1949,7 @@ class TransactionUtil extends Util
 
                     $line_array['modifiers'][] = $modifier_line_array;
                 }
-            }
+            }*/
 
             $output_lines[] = $line_array;
         }

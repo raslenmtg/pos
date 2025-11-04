@@ -291,11 +291,9 @@
 								</td>
 								
 								<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-								@if(!empty($line['tax']) && $line['tax'] != 0)
-									{{$line['tax']}}
-								@else
+
 									{{empty($line['tax_percent'])?'-':$line['tax_percent'].'%'}}
-								@endif
+
 								</td>
 
 									<td style="border: 1px solid #000; padding: 5px; text-align: right;">
@@ -353,6 +351,19 @@
 										</td>
 									</tr>
 
+
+                                    @if( !empty($receipt_details->total_line_discount) )
+                                        <tr>
+                                            <td style="border: 1px solid #000; padding: 5px;">
+                                                {!! $receipt_details->line_discount_label !!}
+                                            </td>
+
+                                            <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                                                (-) {{$receipt_details->total_line_discount}}
+                                            </td>
+                                        </tr>
+                                    @endif
+
 									<tr>
 										<td style="border: 1px solid #000; padding: 5px;">
 											Sous-total TTC
@@ -399,17 +410,6 @@
 										</tr>
 									@endif
 
-									@if( !empty($receipt_details->total_line_discount) )
-										<tr>
-											<td style="border: 1px solid #000; padding: 5px;">
-												{!! $receipt_details->line_discount_label !!}
-											</td>
-
-											<td style="border: 1px solid #000; padding: 5px; text-align: right;">
-												(-) {{$receipt_details->total_line_discount}}
-											</td>
-										</tr>
-									@endif
 
 									@if( !empty($receipt_details->additional_expenses) )
 										@foreach($receipt_details->additional_expenses as $key => $val)

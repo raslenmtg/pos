@@ -477,7 +477,8 @@ class SellPosController extends Controller
                 //Upload Shipping documents
                // Media::uploadMedia($business_id, $transaction, $request, 'shipping_documents', false, 'shipping_document');
 
-               // $this->transactionUtil->createOrUpdateSellLines($transaction, $input['products'], $input['location_id']);
+                // Create sell lines for this transaction so receipt has product rows
+                $this->transactionUtil->createOrUpdateSellLines($transaction, $input['products'], $input['location_id']);
 
                 $change_return['amount'] = $input['change_return'] ?? 0;
                 $change_return['is_return'] = 1;

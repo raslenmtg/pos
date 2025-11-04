@@ -545,8 +545,8 @@ class ProductUtil extends Util
         ->firstOrFail();
 
         $product->media = $variation->media;
-        $product->item_tax=$product->sell_price_inc_tax-$product->dpp_inc_tax;
-
+       // $product->item_tax=$product->tax_id?$product->sell_price_inc_tax*$this->getTaxRatePercent($product->tax_id)/100:0;
+        $product->item_tax=0;
         if ($product->product_type == 'combo') {
             if ($check_qty) {
                 $product->qty_available = $this->calculateComboQuantity($location_id, $product->combo_variations);
