@@ -380,6 +380,12 @@
 
             <div class="summary-right">
                 <table class="totals-table">
+                    @if( !empty($receipt_details->total_line_discount) )
+                        <tr>
+                            <td>{!! $receipt_details->line_discount_label !!}</td>
+                            <td>(-) {{$receipt_details->total_line_discount}}</td>
+                        </tr>
+                    @endif
                     <tr>
                         <td>Sous-total TTC</td>
                         <td>{{$receipt_details->subtotal}}</td>
@@ -389,12 +395,6 @@
                         <tr>
                             <td>{!! $receipt_details->discount_label !!}</td>
                             <td>(-) {{$receipt_details->discount}}</td>
-                        </tr>
-                    @endif
-                    @if( !empty($receipt_details->total_line_discount) )
-                        <tr>
-                            <td>{!! $receipt_details->line_discount_label !!}</td>
-                            <td>(-) {{$receipt_details->total_line_discount}}</td>
                         </tr>
                     @endif
 
@@ -437,10 +437,7 @@
             </div>
              @if( $receipt_details->show_qr_code)
                	<div style="width: 100%; text-align: center;  display:flex;justify-content:center">
-						
-                    @if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
                         <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54])}}">
-                    @endif
                 </div>
             @endif
         </footer>

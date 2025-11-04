@@ -1,7 +1,19 @@
 @php
 	$totals = ['taxable_value' => 0];
 @endphp
-
+<style>
+    @media print {
+        .furl{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #333;
+        }
+    }
+</style>
 <table style="width:100%; color: #000000 !important; font-family: 'Times New Roman', serif; border-collapse: collapse;">
 	
 
@@ -460,13 +472,10 @@
 											</tr>
 										@endif
 									@endif
-									
-							
 
-									<!-- Total -->
 									<tr>
 										<th style="border: 1px solid #000; padding: 8px; background-color: #d0d0d0 !important">
-											{!! $receipt_details->total_label !!}
+											Total TTC
 										</th>
 										<td style="border: 1px solid #000; padding: 8px; text-align: right; background-color: #d0d0d0 !important">
 											<strong>{{$receipt_details->total}}</strong>
@@ -530,3 +539,6 @@
 		</tr>
 	</tbody>
 </table>
+<div class="furl">
+    www.simplexgestion.tn
+</div>

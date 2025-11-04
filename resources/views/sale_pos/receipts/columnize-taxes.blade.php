@@ -201,6 +201,17 @@
 			display: inline-block;
 			min-width: 10px;
 		}
+        @media print {
+        .furl{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #333;
+        }
+        }
 
 	</style>
 </head>
@@ -477,5 +488,9 @@
 
             </table>
         @endif
-    </div></body>
+    </div>
+    <div class="furl">
+        www.simplexgestion.tn
+    </div>
+</body>
 </html>
