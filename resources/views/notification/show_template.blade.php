@@ -128,7 +128,7 @@
         @endif
         {!! Form::hidden('template_for', $notification_template['template_for']); !!}
         <div class="modal-footer">
-          <button type="submit" class="tw-dw-btn tw-dw-btn-primary tw-text-white" id="send_notification_btn">@lang('lang_v1.send')</button>
+
           <button type="button" class="tw-dw-btn tw-dw-btn-neutral tw-text-white" data-dismiss="modal">@lang('messages.close')</button>
         </div>
         {!! Form::close() !!}
@@ -183,34 +183,5 @@
       }
     }
   });
-  $('#send_notification_form').submit(function(e){
-    e.preventDefault();
-    tinyMCE.triggerSave();
-    var data = $(this).serialize();
-    var btn = $('#send_notification_btn');
-    btn.text("@lang('lang_v1.sending')...");
-    btn.attr('disabled', 'disabled');
-    $.ajax({
-      method: "POST",
-      url: $(this).attr("action"),
-      dataType: "json",
-      data: $(this).serialize(),
-      beforeSend: function(xhr) {
-          __disable_submit_button(btn);
-      },
-      success: function(result){
-        if(result.success == true){
-          if (result.whatsapp_link) {
-            window.open(result.whatsapp_link);
-          }
-          $('div.view_modal').modal('hide');
-          toastr.success(result.msg);
-        } else {
-          toastr.error(result.msg);
-        }
-        $('#send_notification_btn').text("@lang('lang_v1.send')");
-        $('#send_notification_btn').removeAttr('disabled');
-      }
-    });
-  });
+
 </script>

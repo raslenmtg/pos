@@ -351,7 +351,7 @@
 					<table class="table table-condensed table-bordered table-striped table-responsive" id="pos_table">
 						<thead>
 							<tr>
-								<th class="text-center">#</th>
+
 								<th class="text-center">	
 									@lang('sale.product')
 								</th>

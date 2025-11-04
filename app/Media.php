@@ -80,10 +80,7 @@ class Media extends Model
      */
     public static function uploadMedia($business_id, $model, $request, $file_name, $is_single = false, $model_media_type = null)
     {
-        //If app environment is demo return null
-        if (config('app.env') == 'demo') {
-            return null;
-        }
+
 
         $uploaded_files = [];
 

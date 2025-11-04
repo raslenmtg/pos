@@ -557,7 +557,7 @@ class SellPosController extends Controller
                     $this->transactionUtil->updateSalesOrderStatus($transaction->sales_order_ids);
                 }
 
-                $this->moduleUtil->getModuleData('after_sale_saved', ['transaction' => $transaction, 'input' => $input]);
+                //$this->moduleUtil->getModuleData('after_sale_saved', ['transaction' => $transaction, 'input' => $input]);
 
                 Media::uploadMedia($business_id, $transaction, $request, 'documents');
 
@@ -594,9 +594,9 @@ class SellPosController extends Controller
                     $print_invoice = false;
                 }
 
-                if (!auth()->user()->can('print_invoice')) {
+             /*   if (!auth()->user()->can('print_invoice')) {
                     $print_invoice = false;
-                }
+                }*/
 
                 if ($print_invoice) {
                     $receipt = $this->receiptContent($business_id, $input['location_id'], $transaction->id, null, false, true, $invoice_layout_id);

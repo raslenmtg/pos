@@ -92,9 +92,7 @@
                         @if($key == 'payment_reminder')
                             <p class="help-block">@lang('lang_v1.payment_reminder_help')</p>
 
-                        @elseif($key == 'new_sale')
-                            <p class="help-block">@lang('lang_v1.new_sale_notification_help')</p>
-                        @endif
+
                     </div>
                 @endif
                 </div>

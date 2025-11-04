@@ -633,9 +633,9 @@ class ContactController extends Controller
             DB::beginTransaction();
             $output = $this->contactUtil->createNewContact($input);
 
-            event(new ContactCreatedOrModified($input, 'added'));
+            //event(new ContactCreatedOrModified($input, 'added'));
 
-            $this->moduleUtil->getModuleData('after_contact_saved', ['contact' => $output['data'], 'input' => $request->input()]);
+            //$this->moduleUtil->getModuleData('after_contact_saved', ['contact' => $output['data'], 'input' => $request->input()]);
 
             $this->contactUtil->activityLog($output['data'], 'added');
 

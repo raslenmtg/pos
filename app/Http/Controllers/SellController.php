@@ -1367,20 +1367,10 @@ class SellController extends Controller
                                     <a href="#" class="print-invoice" data-href="'.route('sell.printInvoice', [$row->id]).'"><i class="fas fa-print" aria-hidden="true"></i>'.__('messages.print').'</a>
                                 </li>';
 
-                        if (config('constants.enable_download_pdf')) {
-                            $sub_status = $row->sub_status == 'proforma' ? 'proforma' : '';
-                            $html .= '<li>
-                                        <a href="'.route('quotation.downloadPdf', ['id' => $row->id, 'sub_status' => $sub_status]).'" target="_blank">
-                                            <i class="fas fa-print" aria-hidden="true"></i>'.__('lang_v1.download_pdf').'
-                                        </a>
-                                    </li>';
-                        }
-
-                        if ((auth()->user()->can('sell.create') || auth()->user()->can('direct_sell.access')) && config('constants.enable_convert_draft_to_invoice')) {
-                            $html .= '<li>
+                        $html .= '<li>
                                         <a href="'.action([\App\Http\Controllers\SellPosController::class, 'convertToInvoice'], [$row->id]).'" class="convert-draft"><i class="fas fa-sync-alt"></i>'.__('lang_v1.convert_to_invoice').'</a>
                                     </li>';
-                        }
+
 
                         if ($row->sub_status != 'proforma') {
                             $html .= '<li>
@@ -1399,10 +1389,6 @@ class SellController extends Controller
                                         <a href="'.action([\App\Http\Controllers\SellPosController::class, 'copyQuotation'],[$row->id]).'" 
                                         class="copy_quotation"><i class="fas fa-copy"></i>'.
                                         __("lang_v1.copy_quotation").'</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" data-href="'.action("\App\Http\Controllers\NotificationController@getTemplate", [ $row->id, "new_quotation"]).'" class="btn-modal" data-container=".view_modal"><i class="fa fa-envelope" aria-hidden="true"></i>' . __("lang_v1.new_quotation_notification") . '
-                                        </a>
                                     </li>';
 
                             $html .= '<li>
