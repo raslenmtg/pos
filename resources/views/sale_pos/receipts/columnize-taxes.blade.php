@@ -296,7 +296,7 @@
 				<td class="signature-box">
 					<strong>Cachet & Signature</strong>
 				</td>
-				
+                @if(!empty($receipt_details->taxes))
 				<td class="tva-box">
 					<table class="tva-table">
 						<thead>
@@ -309,7 +309,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							@if(!empty($receipt_details->taxes))
+
 								@foreach($receipt_details->taxes as $key => $val)
 									<tr>
 										<td class="text-center">{{$key}}</td>
@@ -317,12 +317,12 @@
 									</tr>
 								@endforeach
 
-							@endif
+
 						
 						</tbody>
 					</table>
 				</td>
-				
+                @endif
 				<td class="totals-box">
 					<table class="totals-table">
 						<thead>
@@ -337,10 +337,13 @@
 								<td>TOTAL HT.</td>
 								<td>{{$receipt_details->subtotal_exc_tax }}</td>
 							</tr>
+                            @if(!empty($receipt_details->taxes))
 							<tr>
 								<td>TOTAL TVA</td>
 								<td>{{$receipt_details->taxes['Total TVA'] }}</td>
 							</tr>
+                            @endif
+
                             @if(!empty($receipt_details->total_line_discount ))
                             <tr>
                                 <td>TOTAL REM.</td>
@@ -353,6 +356,14 @@
                             <td>{{$receipt_details->discount }}</td>
                         </tr>
                         @endif
+                            <tr>
+                                <td style="border: 1px solid #000; padding: 5px;">
+                                    Sous-total TTC
+                                </td>
+                                <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                                    {{$receipt_details->subtotal}}
+                                </td>
+                            </tr>
 
             @if( !empty($receipt_details->additional_expenses) )
                 @foreach($receipt_details->additional_expenses as $key => $val)

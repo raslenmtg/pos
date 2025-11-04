@@ -18,7 +18,10 @@
 				    </div>
  			@if($business_details->enable_timbre)
 					<div class="col-md-12">
-				        <div class="form-group">
+				        <div class="form-group" style="font-weight: bold;border: solid;
+
+    width: fit-content;
+    padding: 10px;">
 			    {!! Form::label('enable_timbre',  'Timbre fiscale :') !!}
                 {!!  $business_details->timbre_value !!} DT
 				        </div>
