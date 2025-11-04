@@ -709,7 +709,6 @@
                                             id="sales_order_table">
                                             <thead>
                                                 <tr>
-                                                    <th>@lang('messages.action')</th>
                                                     <th>@lang('messages.date')</th>
                                                     <th>@lang('restaurant.order_no')</th>
                                                     <th>@lang('sale.customer_name')</th>
@@ -777,7 +776,7 @@
                                             id="purchase_requisition_table" style="width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>@lang('messages.action')</th>
+
                                                     <th>@lang('messages.date')</th>
                                                     <th>@lang('purchase.ref_no')</th>
                                                     <th>@lang('purchase.location')</th>
@@ -839,7 +838,6 @@
                                             id="purchase_order_table" style="width: 100%;">
                                             <thead>
                                                 <tr>
-                                                    <th>@lang('messages.action')</th>
                                                     <th>@lang('messages.date')</th>
                                                     <th>@lang('purchase.ref_no')</th>
                                                     <th>@lang('purchase.location')</th>
@@ -900,7 +898,7 @@
                                         <table class="table table-bordered table-striped ajax_view" id="shipments_table">
                                             <thead>
                                                 <tr>
-                                                    <th>@lang('messages.action')</th>
+
                                                     <th>@lang('messages.date')</th>
                                                     <th>@lang('sale.invoice_no')</th>
                                                     <th>@lang('sale.customer_name')</th>
@@ -943,71 +941,7 @@
                         </div>
                     </div>
                 @endif
-                @if (auth()->user()->can('account.access') && config('constants.show_payments_recovered_today') == true)
-                    <div
-                        class="tw-transition-all lg:tw-col-span-2 tw-duration-200 tw-bg-white tw-shadow-sm tw-rounded-xl tw-ring-1 hover:tw-shadow-md hover:tw--translate-y-0.5 tw-ring-gray-200">
-                        <div class="tw-p-4 sm:tw-p-5">
-                            <div class="tw-flex tw-items-center tw-gap-2.5">
-                                <div
-                                    class="tw-border-2 tw-flex tw-items-center tw-justify-center tw-rounded-full tw-w-10 tw-h-10">
-                                    <svg aria-hidden="true" class="tw-text-yellow-500 tw-size-5 tw-shrink-0"
-                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2"
-                                        stroke="currentColor" fill="none" stroke-linecap="round"
-                                        stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                        <path d="M12 9v4"></path>
-                                        <path
-                                            d="M10.363 3.591l-8.106 13.534a1.914 1.914 0 0 0 1.636 2.871h16.214a1.914 1.914 0 0 0 1.636 -2.87l-8.106 -13.536a1.914 1.914 0 0 0 -3.274 0z">
-                                        </path>
-                                        <path d="M12 16h.01"></path>
-                                    </svg>
-                                </div>
-                                <div class="tw-flex tw-items-center tw-flex-1 tw-min-w-0 tw-gap-1">
-                                    <div class="tw-w-full sm:tw-w-1/2 md:tw-w-1/2">
-                                        <h3 class="tw-font-bold tw-text-base lg:tw-text-xl">
-                                            @lang('lang_v1.payment_recovered_today')
-                                        </h3>
-                                    </div>
 
-                                </div>
-                            </div>
-                            <div class="tw-flow-root tw-mt-5  tw-border-gray-200">
-                                <div class="tw--mx-4 tw--my-2 tw-overflow-x-auto sm:tw--mx-5">
-                                    <div class="tw-inline-block tw-min-w-full tw-py-2 tw-align-middle sm:tw-px-5">
-                                        <table class="table table-bordered table-striped" id="cash_flow_table">
-                                            <thead>
-                                                <tr>
-                                                    <th>@lang('messages.date')</th>
-                                                    <th>@lang('account.account')</th>
-                                                    <th>@lang('lang_v1.description')</th>
-                                                    <th>@lang('lang_v1.payment_method')</th>
-                                                    <th>@lang('lang_v1.payment_details')</th>
-                                                    <th>@lang('account.credit')</th>
-                                                    <th>@lang('lang_v1.account_balance')
-                                                        @show_tooltip(__('lang_v1.account_balance_tooltip'))</th>
-                                                    <th>@lang('lang_v1.total_balance')
-                                                        @show_tooltip(__('lang_v1.total_balance_tooltip'))</th>
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr class="bg-gray font-17 footer-total text-center">
-                                                    <td colspan="5"><strong>@lang('sale.total'):</strong></td>
-                                                    <td class="footer_total_credit"></td>
-                                                    <td colspan="2"></td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-                {{-- @if (!empty($widgets['after_dashboard_reports']))
-                    @foreach ($widgets['after_dashboard_reports'] as $widget)
-                        {!! $widget !!}
-                    @endforeach
-                @endif --}}
             </div>
         </div>
     @endif
@@ -1065,10 +999,7 @@
                     "orderable": false,
                     "searchable": false
                 }],
-                columns: [{
-                        data: 'action',
-                        name: 'action'
-                    },
+                columns: [
                     {
                         data: 'transaction_date',
                         name: 'transaction_date'
@@ -1199,12 +1130,7 @@
                             }
                         },
                     },
-                    columns: [{
-                            data: 'action',
-                            name: 'action',
-                            orderable: false,
-                            searchable: false
-                        },
+                    columns: [
                         {
                             data: 'transaction_date',
                             name: 'transaction_date'
@@ -1264,12 +1190,7 @@
                             }
                         },
                     },
-                    columns: [{
-                            data: 'action',
-                            name: 'action',
-                            orderable: false,
-                            searchable: false
-                        },
+                    columns: [
                         {
                             data: 'transaction_date',
                             name: 'transaction_date'
@@ -1348,12 +1269,7 @@
                         }
                     }
                 },
-                columns: [{
-                        data: 'action',
-                        name: 'action',
-                        searchable: false,
-                        orderable: false
-                    },
+                columns: [
                     {
                         data: 'transaction_date',
                         name: 'transaction_date'
