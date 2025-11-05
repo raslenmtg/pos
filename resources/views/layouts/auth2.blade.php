@@ -27,21 +27,14 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '24661890816831066');
+    fbq('init', '768128085832071');
     fbq('track', 'PageView');
     </script>
     <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=24661890816831066&ev=PageView&noscript=1"
+    src="https://www.facebook.com/tr?id=768128085832071&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=G-M57CQPB9JN"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
 
-        gtag('config', 'G-M57CQPB9JN');
-    </script>
 
 </head>
 
