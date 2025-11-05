@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Third Party Services
@@ -31,4 +30,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'facebook' => [
+        'pixel_id' => env('FACEBOOK_PIXEL_ID'),
+        'api_access_token' => env('FACEBOOK_CONVERSIONS_API_ACCESS_TOKEN'),
+        'test_event_code' => env('CONVERSIONS_API_TEST_CODE'),
+    ],
 ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\FacebookConversionsApi;
 use App\Business;
 use App\Currency;
 use App\Notifications\TestEmailNotification;
@@ -21,6 +22,7 @@ use Spatie\Permission\Models\Permission;
 
 class BusinessController extends Controller
 {
+    use FacebookConversionsApi;
     /*
     |--------------------------------------------------------------------------
     | BusinessController
@@ -103,7 +105,7 @@ class BusinessController extends Controller
         $package_id = request()->package;
 
         $system_settings = System::getProperties(['superadmin_enable_register_tc', 'superadmin_register_tc'], true);
-
+        $this->sendFacebookApiEvent(request(), 'InitiateCheckout');
         return view('business.register', compact(
             'currencies',
             'timezone_list',
@@ -198,6 +200,22 @@ class BusinessController extends Controller
             Permission::create(['name' => 'location.'.$new_location->id]);
 
             DB::commit();
+
+            $customData = [
+                'value' => 1, // or the actual value of the registration/package
+                'currency' => 'USD', // or the currency from your application settings
+                'content_name' => 'Business Registration',
+                'content_ids' => [$business->id],
+            ];
+
+            $userData = [
+                'em' => $user->email,
+                'ph' => null, // If you collect phone number
+                'fn' => $user->first_name,
+                'ln' => $user->last_name,
+            ];
+
+            $this->sendFacebookApiEvent($request, 'Purchase', $customData, $userData);
 
             $output = ['success' => 1,
                 'msg' => __('business.business_created_succesfully'),
