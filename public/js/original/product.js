@@ -88,34 +88,13 @@ $(document).ready(function() {
         // Use Decimal.js to round to currency precision to avoid floating point precision issues
         purchase_exc_tax = new Decimal(purchase_exc_tax).toDecimalPlaces(3).toNumber();
         __write_number($('input#single_dpp'), purchase_exc_tax);
-        $('input#single_dpp').change();
 
         var profit_percent = __read_number($('#profit_percent'));
         profit_percent = profit_percent == undefined ? 0 : profit_percent;
         var selling_price = __add_percent(purchase_exc_tax, profit_percent);
         __write_number($('input#single_dsp'), selling_price);
 
-        var selling_price_inc_tax = __add_percent(selling_price, tax_rate);
-        __write_number($('input#single_dsp_inc_tax'), selling_price_inc_tax);
-    });
-
-    $(document).on('change', 'input#profit_percent', function(e) {
-        var tax_rate = $('select#tax')
-            .find(':selected')
-            .data('rate');
-        tax_rate = tax_rate == undefined ? 0 : tax_rate;
-
-        var purchase_inc_tax = __read_number($('input#single_dpp_inc_tax'));
-        purchase_inc_tax = purchase_inc_tax == undefined ? 0 : purchase_inc_tax;
-
-        var purchase_exc_tax = __read_number($('input#single_dpp'));
-        purchase_exc_tax = purchase_exc_tax == undefined ? 0 : purchase_exc_tax;
-
-        var profit_percent = __read_number($('input#profit_percent'));
-        var selling_price = __add_percent(purchase_exc_tax, profit_percent);
-        __write_number($('input#single_dsp'), selling_price);
-
-        var selling_price_inc_tax = __add_percent(selling_price, tax_rate);
+        var selling_price_inc_tax = __add_percent(purchase_inc_tax, profit_percent);
         __write_number($('input#single_dsp_inc_tax'), selling_price_inc_tax);
     });
 
@@ -222,7 +201,7 @@ $(document).ready(function() {
             }
 
             variation_skus.push({sku: element.val(), variation_id: row_variation_id});
-            
+
         });
 
         if (variation_skus.length > 0) {
@@ -248,7 +227,7 @@ $(document).ready(function() {
                 $('form#product_add_form').submit();
             }
         }
-        
+
     });
     //End for product type single
 
@@ -455,8 +434,8 @@ $(document).ready(function() {
         }).then(willDelete => {
             if (willDelete) {
                 $(this)
-                .closest('.variation_row')
-                .remove();
+                    .closest('.variation_row')
+                    .remove();
             }
         });
     });

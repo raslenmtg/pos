@@ -55,7 +55,7 @@
 
                     <td>
                         <br/>
-                        {!! Form::text('profit_percent', @num_format($variation->profit_percent), ['class' => 'form-control input-sm input_number', 'id' => 'profit_percent', 'required']); !!}
+                        {!! Form::text('profit_percent', @num_format($variation->profit_percent), ['class' => 'form-control input-sm input_number', 'id' => 'profit_percent', 'required', 'readonly'=>true,'style' => 'background-color: #e9ecef; cursor: not-allowed;']); !!}
                     </td>
 
                     <td>
