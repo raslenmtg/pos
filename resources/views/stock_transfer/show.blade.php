@@ -159,11 +159,6 @@
 			            @includeIf('activity_log.activities', ['activity_type' => 'sell'])
 			        </div>
 			    </div>
-				<div class="row print_section">
-				  <div class="col-xs-12">
-				    <img class="center-block" src="data:image/png;base64,{{DNS1D::getBarcodePNG($sell_transfer->ref_no, 'EAN13', 2,30,array(39, 48, 54), true)}}">
-				  </div>
-				</div>
 		</div>
 		<div class="modal-footer">
 			<button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white no-print" aria-label="Print" 
