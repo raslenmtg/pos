@@ -118,7 +118,7 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-				<div class="col-md-4">
+				<div class="col-md-4" style="display: none">
 					<div class="form-group">
 						{!! Form::label('tax_id', __('purchase.purchase_tax') . ':') !!}
 						<select name="tax_id" id="tax_id" class="form-control select2" placeholder="'Please Select'">
