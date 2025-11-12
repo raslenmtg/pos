@@ -5,7 +5,172 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+            /* Add this to your existing styles or replace the @media print section */
+
+            @media print {
+                * {
+                    font-size: 10px !important;
+                    font-family: 'Times New Roman';
+                    word-break: break-word;
+                }
+
+                body {
+                    margin: 0;
+                    padding: 0;
+                    width: 58mm;
+                }
+
+                .f-8 {
+                    font-size: 7px !important;
+                }
+
+                .headings {
+                    font-size: 12px !important;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                }
+
+                .sub-headings {
+                    font-size: 11px !important;
+                    font-weight: 700;
+                }
+
+                /* Fix image sizes */
+                img {
+                    max-width: 50px !important;
+                    height: auto !important;
+                    width: auto !important;
+                }
+
+                /* Simplify layout for narrow paper */
+                .ticket {
+                    width: 58mm;
+                    max-width: 58mm;
+                    padding: 2mm;
+                    box-sizing: border-box;
+                }
+
+                /* Stack textbox-info items vertically */
+                .textbox-info {
+                    width: 100%;
+                    margin-bottom: 2px;
+                }
+
+                .textbox-info p {
+                    display: block;
+                    width: 100% !important;
+                    margin: 0;
+                    padding: 0;
+                    text-align: left;
+                }
+
+                .textbox-info .f-left {
+                    display: inline;
+                    font-weight: bold;
+                }
+
+                .textbox-info .f-right {
+                    display: inline;
+                    float: none;
+                }
+
+                /* Fix flex-box for narrow paper */
+                .flex-box {
+                    display: table;
+                    width: 100%;
+                    margin-bottom: 2px;
+                }
+
+                .flex-box p {
+                    display: table-cell;
+                    width: 50%;
+                    padding: 1px 0;
+                    font-size: 9px !important;
+                }
+
+                .flex-box .left,
+                .flex-box .width-50:first-child {
+                    text-align: left;
+                }
+
+                .flex-box .width-50:last-child {
+                    text-align: right;
+                }
+
+                /* Product table adjustments */
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                }
+
+                td.description {
+                    width: 100%;
+                    max-width: 100%;
+                    padding: 2px 0;
+                }
+
+                td.description > div {
+                    display: block !important;
+                    width: 100% !important;
+                }
+
+                /* Stack quantity and price */
+                td.description p {
+                    display: block;
+                    width: 100% !important;
+                    margin: 1px 0 !important;
+                    font-size: 9px !important;
+                }
+
+                .quantity {
+                    text-align: left !important;
+                }
+
+                .price {
+                    text-align: right !important;
+                }
+
+                /* Center aligned content */
+                .centered {
+                    text-align: center;
+                    display: block;
+                    width: 100%;
+                }
+
+                /* Remove excessive spacing */
+                br {
+                    line-height: 0.5;
+                }
+
+                .border-bottom {
+                    border-bottom: 1px solid #000;
+                    margin: 2px 0;
+                }
+
+                .bb-lg {
+                    border-bottom: 1px dashed #000;
+                    padding-bottom: 2px;
+                }
+
+                /* QR Code */
+                .centered img {
+                    max-width: 40mm !important;
+                    height: auto !important;
+                }
+
+                .hidden-print,
+                .hidden-print * {
+                    display: none !important;
+                }
+
+                /* Ensure no content overflows */
+                * {
+                    max-width: 54mm;
+                    box-sizing: border-box;
+                }
+            }
+        </style>
     </head>
     <body>
         <div class="ticket">
@@ -497,157 +662,3 @@
     </body>
 </html>
 
-<style type="text/css">
-.f-8 {
-	font-size: 8px !important;
-}
-body {
-	color: #000000;
-}
-.centered {
-    text-align: center;
-    align-content: center;
-	display: flex;
-	justify-content: center;
-}
-@media print {
-	* {
-    	font-size: 12px;
-    	font-family: 'Times New Roman';
-    	word-break: break-all;
-	}
-	.f-8 {
-		font-size: 8px !important;
-	}
-
-.headings{
-	font-size: 16px;
-	font-weight: 700;
-	text-transform: uppercase;
-}
-
-.sub-headings{
-	font-size: 15px;
-	font-weight: 700;
-}
-
-.border-top{
-    border-top: 1px solid #242424;
-}
-.border-bottom{
-	border-bottom: 1px solid #242424;
-}
-
-.border-bottom-dotted{
-	border-bottom: 1px dotted darkgray;
-}
-
-td.serial_number, th.serial_number{
-	width: 5%;
-    max-width: 5%;
-}
-
-td.description,
-th.description {
-    width: 35%;
-    max-width: 35%;
-}
-
-td.quantity,
-th.quantity {
-    width: 15%;
-    max-width: 15%;
-    word-break: break-all;
-}
-td.unit_price, th.unit_price{
-	width: 25%;
-    max-width: 25%;
-    word-break: break-all;
-}
-
-td.price,
-th.price {
-    width: 20%;
-    max-width: 20%;
-    word-break: break-all;
-}
-
-.centered {
-    text-align: center;
-    align-content: center;
-	display: flex;
-	justify-content: center;
-}
-
-.ticket {
-    width: 100%;
-    max-width: 100%;
-}
-
-img {
-    max-width: inherit;
-    width: auto;
-}
-
-    .hidden-print,
-    .hidden-print * {
-        display: none !important;
-    }
-}
-.table-info {
-	width: 100%;
-}
-.table-info tr:first-child td, .table-info tr:first-child th {
-	padding-top: 8px;
-}
-.table-info th {
-	text-align: left;
-}
-.table-info td {
-	text-align: right;
-}
-.logo {
-	float: left;
-	width:35%;
-	padding: 10px;
-}
-
-.text-with-image {
-	float: left;
-	width:65%;
-}
-.text-box {
-	width: 100%;
-	height: auto;
-}
-.m-0 {
-	margin:0;
-}
-.textbox-info {
-	clear: both;
-}
-.textbox-info p {
-	margin-bottom: 0px
-}
-.flex-box {
-	display: flex;
-	width: 100%;
-}
-.flex-box p {
-	width: 50%;
-	margin-bottom: 0px;
-	white-space: nowrap;
-}
-
-.table-f-12 th, .table-f-12 td {
-	font-size: 12px;
-	word-break: break-word;
-}
-
-.bw {
-	word-break: break-word;
-}
-.bb-lg {
-	border-bottom: 1px solid lightgray;
-}
-</style>

@@ -5,7 +5,287 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+        /* === PRINT STYLES FOR 80MM === */
+            @media print {
+                @page {
+                    size: 80mm auto;
+                    margin: 0;
+                }
+
+                body {
+                    width: 302px; /* 80mm ~ 302px at 96dpi */
+                    font-size: 10px;
+                    line-height: 1.3;
+                    margin: 0;
+                    padding: 5px;
+                    -webkit-print-color-adjust: exact;
+                }
+
+                .ticket {
+                    width: 100%;
+                    max-width: 302px;
+                    word-wrap: break-word;
+                }
+
+                * {
+                    font-family: "Courier New", monospace !important;
+                    color: #000;
+                    box-sizing: border-box;
+                }
+
+                .centered {
+                    text-align: center;
+                }
+
+                .f-8 {
+                    font-size: 8px !important;
+                }
+
+                .headings {
+                    font-size: 13px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                }
+
+                .sub-headings {
+                    font-size: 11px;
+                    font-weight: 700;
+                }
+
+                /* === IMAGE SIZING === */
+                img {
+                    max-width: 60px !important;
+                    max-height: 60px !important;
+                    display: block;
+                    margin: 0 auto;
+                }
+
+                /* === TEXT BOX INFO === */
+                .textbox-info {
+                    width: 100%;
+                    clear: both;
+                    overflow: hidden;
+                    margin-bottom: 2px;
+                }
+
+                .textbox-info p {
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.2;
+                }
+
+                .textbox-info .f-left {
+                    float: left;
+                    width: 45%;
+                    text-align: left;
+                }
+
+                .textbox-info .f-right {
+                    float: right;
+                    width: 54%;
+                    text-align: right;
+                }
+
+                /* === TABLE LAYOUT === */
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 5px;
+                }
+
+                th, td {
+                    padding: 2px 1px;
+                    vertical-align: top;
+                    word-break: break-word;
+                    font-size: 9px;
+                }
+
+                thead th {
+                    font-weight: 700;
+                    border-bottom: 1px dashed #000;
+                    padding-bottom: 3px;
+                }
+
+                /* Column widths for product table */
+                td.serial_number, th.serial_number {
+                    width: 6%;
+                    text-align: center;
+                }
+
+                td.description, th.description {
+                    width: 34%;
+                    text-align: left;
+                }
+
+                td.quantity, th.quantity {
+                    width: 10%;
+                    text-align: right;
+                }
+
+                td.unit_price, th.unit_price {
+                    width: 18%;
+                    text-align: right;
+                }
+
+                td.price, th.price {
+                    width: 18%;
+                    text-align: right;
+                }
+
+                /* If discount columns are shown */
+                .table-f-12 th,
+                .table-f-12 td {
+                    font-size: 9px;
+                }
+
+                /* === BORDERS === */
+                .border-bottom-dotted {
+                    border-bottom: 1px dotted #000;
+                    padding-bottom: 2px;
+                }
+
+                .border-top {
+                    border-top: 1px solid #000;
+                    padding-top: 2px;
+                }
+
+                .border-bottom {
+                    border-bottom: 1px solid #000;
+                    padding-bottom: 2px;
+                }
+
+                /* === FLEX BOX FOR TOTALS === */
+                .flex-box {
+                    display: flex;
+                    justify-content: space-between;
+                    width: 100%;
+                    margin: 1px 0;
+                }
+
+                .flex-box p {
+                    margin: 0;
+                    padding: 0;
+                    line-height: 1.3;
+                }
+
+                .flex-box .left,
+                .flex-box .width-50:first-child {
+                    width: 60%;
+                    text-align: left;
+                }
+
+                .flex-box .width-50:last-child {
+                    width: 39%;
+                    text-align: right;
+                }
+
+                /* === ALIGNMENTS === */
+                .text-right { text-align: right; }
+                .text-left { text-align: left; }
+                .f-left { float: left; }
+                .f-right { float: right; }
+
+                /* === SPACING === */
+                .mb-10 { margin-bottom: 3px; }
+                .m-0 { margin: 0; }
+                .mt-5 { margin-top: 2px; }
+
+                br {
+                    line-height: 1;
+                }
+
+                /* === QR CODE === */
+                .centered img[src*="base64"] {
+                    max-width: 80px !important;
+                    max-height: 80px !important;
+                    margin: 5px auto;
+                }
+
+                /* === FOOTER === */
+                .footer {
+                    margin-top: 8px;
+                    text-align: center;
+                    font-size: 9px;
+                }
+
+                /* === SMALL TEXT === */
+                small {
+                    font-size: 8px;
+                }
+
+                /* === WIDTH UTILITIES === */
+                .width-100 { width: 100%; }
+                .width-60 { width: 60%; }
+                .width-50 { width: 50%; }
+                .width-40 { width: 40%; }
+
+                /* === HIDE NON-PRINT ELEMENTS === */
+                .hidden-print,
+                .hidden-print * {
+                    display: none !important;
+                }
+
+                /* === RESPONSIVE TABLE ADJUSTMENTS === */
+                /* When discount column is present, adjust widths */
+                table.has-discount td.description,
+                table.has-discount th.description {
+                    width: 28%;
+                }
+
+                table.has-discount td.quantity,
+                table.has-discount th.quantity {
+                    width: 8%;
+                }
+
+                table.has-discount td.unit_price,
+                table.has-discount th.unit_price {
+                    width: 15%;
+                }
+
+                table.has-discount td.price,
+                table.has-discount th.price {
+                    width: 15%;
+                }
+
+                /* Discount column */
+                table.has-discount td.discount,
+                table.has-discount th.discount {
+                    width: 12%;
+                    text-align: right;
+                }
+
+                /* === ENSURE NO OVERFLOW === */
+                * {
+                    max-width: 100%;
+                }
+
+                /* === LINE SPACING FOR READABILITY === */
+                tbody tr {
+                    border-bottom: 1px dotted #ddd;
+                }
+
+                tbody tr:last-child {
+                    border-bottom: none;
+                }
+
+                /* === PAYMENT SECTION === */
+                .payment-section {
+                    margin-top: 5px;
+                    border-top: 1px dashed #000;
+                    padding-top: 3px;
+                }
+
+                /* === NOTES SECTION === */
+                .additional-notes {
+                    margin-top: 5px;
+                    font-size: 9px;
+                    text-align: center;
+                    border-top: 1px dashed #000;
+                    padding-top: 3px;
+                }
+            }
+            </style>
     </head>
     <body>
         <div class="ticket">
@@ -280,7 +560,7 @@
                         @if(!empty($receipt_details->item_discount_label))
 							<th class="text-right">{{$receipt_details->item_discount_label}}</th>
 						@endif
-                        <th class="price text-right">Sous-total</th>
+                        <th class="price text-right">total</th>
                         @endif
                     </tr>
                 </thead>
@@ -496,14 +776,6 @@
 	            	{!! nl2br($receipt_details->additional_notes) !!}
 	            </p>
             @endif
-
-			@if( $receipt_details->show_qr_code)
-							<div style="width: 100%; text-align: center;  display:flex;justify-content:center">
-								@if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
-									<img style="max-width: 100px;" src="data:image/png;base64,{{DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54])}}">
-								@endif
-							</div>
-						@endif
 			
 		@if(!empty($receipt_details->footer_text))
 						<div style="width:100%  text-align: center; margin-top:5px;margin-bottom:5px; display:flex;justify-content:center">
@@ -517,145 +789,3 @@
     </body>
 </html>
 
-<style type="text/css">
-.f-8 {
-	font-size: 8px !important;
-}
-body {
-	color: #000000;
-}
-@media print {
-	* {
-    	font-size: 12px;
-    	font-family: 'Times New Roman';
-    	word-break: break-all;
-	}
-	.f-8 {
-		font-size: 8px !important;
-	}
-	
-.headings{
-	font-size: 16px;
-	font-weight: 700;
-	text-transform: uppercase;
-	white-space: nowrap;
-}
-
-.sub-headings{
-	font-size: 15px !important;
-	font-weight: 700 !important;
-}
-
-.border-top{
-    border-top: 1px solid #242424;
-}
-.border-bottom{
-	border-bottom: 1px solid #242424;
-}
-
-.border-bottom-dotted{
-	border-bottom: 1px dotted darkgray;
-}
-
-td.serial_number, th.serial_number{
-	width: 5%;
-    max-width: 5%;
-}
-
-td.description,
-th.description {
-    width: 35%;
-    max-width: 35%;
-}
-
-td.quantity,
-th.quantity {
-    width: 15%;
-    max-width: 15%;
-    word-break: break-all;
-}
-td.unit_price, th.unit_price{
-	width: 25%;
-    max-width: 25%;
-    word-break: break-all;
-}
-
-td.price,
-th.price {
-    width: 20%;
-    max-width: 20%;
-    word-break: break-all;
-}
-
-.centered {
-    text-align: center;
-    align-content: center;
-}
-
-.ticket {
-    width: 100%;
-    max-width: 100%;
-}
-
-img {
-    max-width: inherit;
-    width: auto;
-}
-
-    .hidden-print,
-    .hidden-print * {
-        display: none !important;
-    }
-}
-.table-info {
-	width: 100%;
-}
-.table-info tr:first-child td, .table-info tr:first-child th {
-	padding-top: 8px;
-}
-.table-info th {
-	text-align: left;
-}
-.table-info td {
-	text-align: right;
-}
-.logo {
-	float: left;
-	width:35%;
-	padding: 10px;
-}
-
-.text-with-image {
-	float: left;
-	width:65%;
-}
-.text-box {
-	width: 100%;
-	height: auto;
-}
-
-.textbox-info {
-	clear: both;
-}
-.textbox-info p {
-	margin-bottom: 0px
-}
-.flex-box {
-	display: flex;
-	width: 100%;
-}
-.flex-box p {
-	width: 50%;
-	margin-bottom: 0px;
-	white-space: nowrap;
-}
-
-.table-f-12 th, .table-f-12 td {
-	font-size: 12px;
-	word-break: break-word;
-}
-
-.bw {
-	word-break: break-word;
-}
-</style>

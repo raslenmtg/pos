@@ -134,8 +134,8 @@ class SellPosController extends Controller
             $commission_agents = User::forDropdown($business_id, false, true, true);
         }
 
-        $is_tables_enabled = $this->transactionUtil->isModuleEnabled('tables');
-        $is_service_staff_enabled = $this->transactionUtil->isModuleEnabled('service_staff');
+        $is_tables_enabled = false;
+        $is_service_staff_enabled = false;
 
         //Service staff filter
         $service_staffs = null;

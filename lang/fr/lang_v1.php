@@ -1035,7 +1035,7 @@ return [
     'received_in' => 'Reçu le',
     'recent_product_quantity' => 'Aller à la quantité de produit',
     'recent_transactions' => 'Transactions récentes',
-    'recomended_for_58mm' => 'Recommandé pour les imprimantes de tickets de ligne thermique, format papier 80 mm et 58 mm',
+    'recomended_for_58mm' => 'Recommandé pour les imprimantes de tickets de ligne thermique, format papier 58 mm',
     'recomended_for_80mm' => 'Recommandé pour les imprimantes de tickets de ligne thermique, format papier 80 mm',
     'recur_details' => 'Détails récurrents',
     'recur_expense_repetition_help' => 'Si une dépense vierge sera générée des fois infinies',
