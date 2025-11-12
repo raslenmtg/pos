@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Thermal Printer - RPP02N</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            width: 100%;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+        }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 5px;
+            display: none;
+        }
+        .status.info {
+            background: #2196F3;
+            color: white;
+            display: block;
+        }
+        .status.success {
+            background: #4CAF50;
+            color: white;
+            display: block;
+        }
+        .status.error {
+            background: #f44336;
+            color: white;
+            display: block;
+        }
+        .info-box {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #2196F3;
+        }
+        .warning-box {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            border-left: 4px solid #ff9800;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🖨️ Thermal Printer Test</h1>
+        <p>Test your thermal printer (RPP02N, RPP300, or any ESC/POS Bluetooth printer)</p>
+
+        <div class="info-box">
+            <strong>📱 For Mobile (Android):</strong><br>
+            1. Turn ON your Bluetooth printer<br>
+            2. Pair it in phone Settings → Bluetooth<br>
+            3. Open this page in <strong>Chrome browser</strong><br>
+            4. Click "Connect Printer" below
+        </div>
+
+        <div class="warning-box">
+            <strong>⚠️ Important:</strong> This only works in Chrome browser (desktop or Android). Safari and Firefox don't support Bluetooth printing yet.
+        </div>
+
+        <div id="status" class="status"></div>
+
+        <button id="connectBtn" onclick="connectPrinter()">📡 Connect to Printer</button>
+        <button id="testBtn" onclick="printTest()" disabled>🖨️ Print Test Receipt</button>
+        <button id="disconnectBtn" onclick="disconnectPrinter()" disabled>🔌 Disconnect</button>
+
+        <div class="info-box" style="margin-top: 30px;">
+            <strong>🔍 Status Information:</strong><br>
+            <p id="printerInfo">No printer connected</p>
+        </div>
+    </div>
+
+    <script src="thermal-printer-client.js"></script>
+    <script>
+        let printer = null;
+
+        function showStatus(message, type) {
+            const status = document.getElementById('status');
+            status.className = 'status ' + type;
+            status.textContent = message;
+            status.style.display = 'block';
+        }
+
+        function updatePrinterInfo(info) {
+            document.getElementById('printerInfo').innerHTML = info;
+        }
+
+        async function connectPrinter() {
+            const btn = document.getElementById('connectBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Connecting...';
+
+            try {
+                // Check browser support
+                if (!('bluetooth' in navigator)) {
+                    throw new Error('Bluetooth not supported. Please use Chrome browser.');
+                }
+
+                showStatus('Please select your printer from the list...', 'info');
+
+                printer = new ThermalPrinterClient();
+                const connected = await printer.autoConnect();
+
+                if (connected) {
+                    showStatus('✅ Printer connected successfully!', 'success');
+                    document.getElementById('testBtn').disabled = false;
+                    document.getElementById('disconnectBtn').disabled = false;
+                    btn.textContent = '✅ Connected';
+                    updatePrinterInfo('<span style="color: green;">✅ Printer connected and ready</span>');
+                } else {
+                    throw new Error('Could not connect to printer');
+                }
+            } catch (error) {
+                showStatus('❌ Connection failed: ' + error.message, 'error');
+                btn.disabled = false;
+                btn.textContent = '📡 Connect to Printer';
+                updatePrinterInfo('<span style="color: red;">❌ Not connected</span>');
+
+                console.error('Connection error:', error);
+            }
+        }
+
+        async function printTest() {
+            if (!printer) {
+                showStatus('❌ Please connect printer first', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('testBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Printing...';
+
+            try {
+                showStatus('🖨️ Printing test receipt...', 'info');
+
+                // Sample receipt data for testing
+                const testReceipt = {
+                    business_name: 'My Store',
+                    location_custom_field1: '123 Main Street',
+                    location_custom_field2: 'City, State 12345',
+                    location_custom_field3: 'Tel: (555) 123-4567',
+                    location_custom_field4: '',
+                    invoice_no: 'TEST-001',
+                    invoice_date: new Date().toLocaleString(),
+                    customer_name: 'Test Customer',
+                    customer_tax_number: '',
+                    lines: [
+                        {
+                            name: 'Test Product 1',
+                            quantity: 2,
+                            line_total: 10.00,
+                            variation: ''
+                        },
+                        {
+                            name: 'Test Product 2',
+                            quantity: 1,
+                            line_total: 25.00,
+                            variation: 'Size: Large'
+                        }
+                    ],
+                    subtotal: 35.00,
+                    discount_amount: 0,
+                    tax_amount: 3.50,
+                    shipping_charges: 0,
+                    total: 38.50,
+                    payments: [
+                        {
+                            method: 'Cash',
+                            amount: 40.00
+                        }
+                    ],
+                    currency: {
+                        symbol: '$',
+                        thousand_separator: ',',
+                        decimal_separator: '.'
+                    },
+                    footer_text: 'Thank you for your business!',
+                    invoice_url: ''
+                };
+
+                await printer.printSlim2Invoice(testReceipt);
+
+                showStatus('✅ Test receipt printed successfully!', 'success');
+                btn.disabled = false;
+                btn.textContent = '🖨️ Print Test Receipt';
+            } catch (error) {
+                showStatus('❌ Print failed: ' + error.message, 'error');
+                btn.disabled = false;
+                btn.textContent = '🖨️ Print Test Receipt';
+
+                console.error('Print error:', error);
+            }
+        }
+
+        function disconnectPrinter() {
+            if (printer) {
+                printer.disconnect();
+                printer = null;
+            }
+
+            document.getElementById('testBtn').disabled = true;
+            document.getElementById('disconnectBtn').disabled = true;
+            document.getElementById('connectBtn').disabled = false;
+            document.getElementById('connectBtn').textContent = '📡 Connect to Printer';
+
+            showStatus('🔌 Printer disconnected', 'info');
+            updatePrinterInfo('No printer connected');
+        }
+
+        // Check browser support on load
+        window.addEventListener('load', function() {
+            if (!('bluetooth' in navigator)) {
+                showStatus('⚠️ Bluetooth not supported in this browser. Please use Chrome.', 'error');
+                document.getElementById('connectBtn').disabled = true;
+            } else {
+                showStatus('✅ Browser supports Bluetooth. Ready to connect!', 'success');
+            }
+        });
+    </script>
+</body>
+</html>
+

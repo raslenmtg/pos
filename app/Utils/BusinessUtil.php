@@ -10,12 +10,15 @@ use App\Currency;
 use App\InvoiceLayout;
 use App\InvoiceScheme;
 use App\NotificationTemplate;
-use App\Printer;
 use App\Unit;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 use App\VariationLocationDetails;
+use Mike42\Escpos\PrintConnectors\WindowsPrintConnector;
+use Mike42\Escpos\Printer;
+use Mike42\Escpos\PrintConnectors\NetworkPrintConnector;
+use Mike42\Escpos\PrintConnectors\FilePrintConnector;
 
 
 class BusinessUtil extends Util
@@ -373,7 +376,7 @@ class BusinessUtil extends Util
      */
     public function printerConfig($business_id, $printer_id)
     {
-        $printer = Printer::where('business_id', $business_id)
+      /*  $printer = Printer::where('business_id', $business_id)
                     ->find($printer_id);
 
         $output = [];
@@ -388,7 +391,8 @@ class BusinessUtil extends Util
             $output['server_url'] = $printer->server_url;
         }
 
-        return $output;
+        return $output;*/
+        return [];
     }
 
     /**
@@ -443,4 +447,91 @@ class BusinessUtil extends Util
         return ['url' => '', 'send_to_param_name' => 'to', 'msg_param_name' => 'text', 'request_method' => 'post', 'param_1' => '', 'param_val_1' => '', 'param_2' => '', 'param_val_2' => '', 'param_3' => '', 'param_val_3' => '', 'param_4' => '', 'param_val_4' => '', 'param_5' => '', 'param_val_5' => ''];
     }
 
+    /**
+     * Directly print receipt to thermal printer
+     *
+     * @param  array  $receipt_details
+     * @param  int  $printer_id
+     * @return array
+     */
+    public function directPrint($receipt_details)
+    {
+        try {
+            //TODO: Update with your printer details.
+            $printer_details = (object)[
+                'connection_type' => env('PRINTER_CONNECTION_TYPE', 'windows'), // Supported: 'windows', 'network', 'linux'
+                'path' => env('PRINTER_PATH', 'YOUR_PRINTER_NAME'), // For windows and linux type. REPLACE YOUR_PRINTER_NAME with your printer's name.
+                'ip_address' => env('PRINTER_IP_ADDRESS', '192.168.1.123'), // For network type
+                'port' => env('PRINTER_PORT', 9100), // For network type
+            ];
+
+            if (empty($printer_details)) {
+                return ['success' => 0, 'msg' => 'Printer not found. Please configure a printer.'];
+            }
+
+            $connector = null;
+            if ($printer_details->connection_type == 'windows') {
+                $connector = new WindowsPrintConnector($printer_details->path);
+            } elseif ($printer_details->connection_type == 'network') {
+                $connector = new NetworkPrintConnector($printer_details->ip_address, $printer_details->port);
+            } elseif ($printer_details->connection_type == 'linux') {
+                $connector = new FilePrintConnector($printer_details->path);
+            } else {
+                return ['success' => 0, 'msg' => 'Invalid printer connection type'];
+            }
+
+            $printer = new Printer($connector);
+
+            //Print receipt
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            $printer->text($receipt_details->business_name . "\n");
+            $printer->text($receipt_details->location_name . "\n");
+            $printer->text($receipt_details->location_address . "\n");
+            if(!empty($receipt_details->contact)){
+                $printer->text($receipt_details->contact . "\n");
+            }
+            if(!empty($receipt_details->tax_info1)){
+                $printer->text($receipt_details->tax_label1 . " " . $receipt_details->tax_info1 . "\n");
+            }
+            if(!empty($receipt_details->tax_info2)){
+                $printer->text($receipt_details->tax_label2 . " " . $receipt_details->tax_info2 . "\n");
+            }
+            $printer->text("\n");
+            $printer->setJustification(Printer::JUSTIFY_LEFT);
+            $printer->text($receipt_details->invoice_no_prefix . $receipt_details->invoice_no . "\n");
+            $printer->text($receipt_details->date_label . " " . $receipt_details->invoice_date . "\n");
+
+            if(!empty($receipt_details->customer_name)){
+                $printer->text($receipt_details->customer_label . ": " . $receipt_details->customer_name . "\n");
+            }
+
+            $printer->text("--------------------------------\n");
+            foreach ($receipt_details->lines as $line) {
+                $printer->text($line['name'] . "\n");
+                $printer->text($line['quantity'] . " " . $line['units'] . " x " . $line['unit_price_inc_tax'] . " = " . $line['line_total'] . "\n");
+            }
+            $printer->text("--------------------------------\n");
+
+            if(!empty($receipt_details->subtotal)){
+                $printer->text($receipt_details->subtotal_label . " " . $receipt_details->subtotal . "\n");
+            }
+            if(!empty($receipt_details->total)){
+                $printer->text($receipt_details->total_label . " " . $receipt_details->total . "\n");
+            }
+
+            $printer->text("\n");
+            $printer->setJustification(Printer::JUSTIFY_CENTER);
+            if(!empty($receipt_details->footer_text)){
+                $printer->text($receipt_details->footer_text . "\n");
+            }
+
+            $printer->cut();
+            $printer->close();
+
+            return ['success' => 1, 'msg' => 'Receipt printed successfully'];
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            return ['success' => 0, 'msg' => $e->getMessage()];
+        }
+    }
 }

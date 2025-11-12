@@ -54,6 +54,7 @@ use App\Utils\ProductUtil;
 use App\Utils\TransactionUtil;
 use App\Variation;
 use App\Warranty;
+use App\Services\ThermalPrinterService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -728,15 +729,32 @@ class SellPosController extends Controller
 
         $output['print_title'] = $receipt_details->invoice_no;
         //If print type browser - return the content, printer - return printer config data, and invoice format config
-        if ($receipt_printer_type == 'printer') {
-            $output['print_type'] = 'printer';
-            $output['printer_config'] = $this->businessUtil->printerConfig($business_id, $location_details->printer_id);
-            $output['data'] = $receipt_details;
-        } else {
-            $layout = !empty($receipt_details->design) ? 'sale_pos.receipts.' . $receipt_details->design : 'sale_pos.receipts.classic';
+     /*   if ($receipt_printer_type == 'printer') {
+            //For direct printing
 
-            $output['html_content'] = view($layout, compact('receipt_details'))->render();
+
+                $output['print_type'] = 'printer';
+                $output['printer_config'] = $this->businessUtil->printerConfig($business_id, $location_details->printer_id);
+                $output['data'] = $receipt_details;
+
+        } else {*/
+        if($receipt_details->design=='slim2'||$receipt_details->design=='slim'){
+            // Client-side thermal printer for SaaS (supports mobile Bluetooth like RPP02N, desktop USB/WiFi)
+            // Each user connects their own printer from their browser/mobile device
+            $output['success'] = 1;
+            $output['msg'] = 'Receipt ready for printing';
+            $output['print_type'] = 'thermal_client';
+            $output['receipt_data'] = $receipt_details;
+            // Also provide HTML fallback
+            $output['html_content'] = view('sale_pos.receipts.slim2', compact('receipt_details'))->render();
+
+            return $output;
         }
+            $layout = !empty($receipt_details->design) ? 'sale_pos.receipts.' . $receipt_details->design : 'sale_pos.receipts.classic';
+            $output['success'] = 1;
+            $output['msg'] = 'Receipt printed successfully';
+            $output['html_content'] = view($layout, compact('receipt_details'))->render();
+        //}
 
         return $output;
     }
