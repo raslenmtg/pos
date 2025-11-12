@@ -290,11 +290,6 @@
     <body>
         <div class="ticket">
         	@if(empty($receipt_details->letter_head))
-				@if(!empty($receipt_details->logo))
-					<div class="text-box centered">
-						<img style="max-height: 100px; width: 70px; height: 70px;" src="{{$receipt_details->logo}}" alt="Logo">
-					</div>
-				@endif
 				<div class="text-box">
 				<!-- Logo -->
 				<p class="centered">
@@ -353,11 +348,7 @@
 				
 				</p>
 				</div>
-				@if(!empty($receipt_details->letter_head))
-					<div class="text-box">
-						<img style="width: 100%;margin-bottom: 10px; width: 70px; height: 70px;" src="{{$receipt_details->letter_head}}">
-					</div>
-				@endif
+
 			
 			<div class="textbox-info">
 				<p class="f-left"><strong>Date: </strong></p>

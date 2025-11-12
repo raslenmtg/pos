@@ -175,11 +175,7 @@
     <body>
         <div class="ticket">
 			@if(empty($receipt_details->letter_head))
-				@if(!empty($receipt_details->logo))
-					<div class="text-box centered">
-						<img style="max-height: 100px;  width: 70px; height: 70px;" src="{{$receipt_details->logo}}" alt="Logo">
-					</div>
-				@endif
+
 				<div style="width:100%; text-align:center;">
 			
 					<!-- Header text -->
@@ -234,11 +230,7 @@
 				
 				</div>
 			@endif
-				@if(!empty($receipt_details->letter_head))
-					<div class="text-box">
-						<img style="width: 100%;margin-bottom: 10px; width: 70px; height: 70px;" src="{{$receipt_details->letter_head}}">
-					</div>
-				@endif
+
 		
 			<div class="textbox-info">
 				<p class="f-left"><strong>Date</strong></p>
@@ -643,13 +635,7 @@
 	            </p>
             @endif
 
-				@if( $receipt_details->show_qr_code)
-							<div style="width: 100%; text-align: center;  display:flex;justify-content:center">
-								@if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
-									<img style="max-width: 100px;" src="data:image/png;base64,{{DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54])}}">
-								@endif
-							</div>
-						@endif
+
 			
 		@if(!empty($receipt_details->footer_text))
 						<div style="width:100%  text-align: center; margin-top:5px;margin-bottom:5px; display:flex;justify-content:center">
