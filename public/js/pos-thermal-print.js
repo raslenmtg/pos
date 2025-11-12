@@ -31,7 +31,7 @@
     window.pos_print = function(response) {
         // Check if this is client-side thermal printing
         if (response.print_type === 'thermal_client' && response.receipt_data) {
-            handleThermalClientPrint(response.receipt_data);
+            handleThermalClientPrint(response); // Pass entire response (includes receipt_data and html_content)
         } else if (original_pos_print) {
             // Fall back to original print function
             original_pos_print(response);
@@ -44,7 +44,7 @@
     /**
      * Handle thermal client-side printing
      */
-    function handleThermalClientPrint(receiptData) {
+    function handleThermalClientPrint(response) {
         if (!thermalPrinter) {
             toastr.error('Thermal printer service not initialized');
             return;
@@ -58,7 +58,7 @@
             .then(function() {
                 isPrinterConnected = true;
                 showPrinterStatus('Printing invoice...');
-                return thermalPrinter.printSlim2Invoice(receiptData);
+                return thermalPrinter.printSlim2Invoice(response.receipt_data);
             })
             .then(function() {
                 showPrinterStatus('Invoice printed successfully!', 'success');
@@ -96,82 +96,25 @@
                     dangerMode: false
                 }).then(function(useBrowserPrint) {
                     if (useBrowserPrint) {
-                        // Fall back to HTML printing
-                        printHTML(receiptData);
+                        // Fall back to HTML printing using actual slim2 template
+                        printHTML(response.html_content);
                     }
                 });
             });
     }
 
     /**
-     * Fallback HTML printing
+     * Fallback HTML printing - uses actual slim2 template
      */
-    function printHTML(receiptData) {
-        // Generate HTML receipt
-        let html = generateHTMLReceipt(receiptData);
-
-        if (html) {
-            $('#receipt_section').html(html);
+    function printHTML(html_content) {
+        // Use the actual slim2 template HTML from server
+        if (html_content) {
+            $('#receipt_section').html(html_content);
             __currency_convert_recursively($('#receipt_section'));
             __print_receipt('receipt_section');
         }
     }
 
-    /**
-     * Generate HTML receipt from receipt data
-     */
-    function generateHTMLReceipt(data) {
-        let html = '<div class="receipt-print">';
-        html += '<div style="text-align: center; font-weight: bold; font-size: 18px;">' + (data.business_name || '') + '</div>';
-        html += '<div style="text-align: center;">' + (data.location_custom_field1 || '') + '</div>';
-        html += '<div style="text-align: center;">' + (data.location_custom_field2 || '') + '</div>';
-        html += '<hr>';
-        html += '<div><strong>Invoice:</strong> ' + (data.invoice_no || '') + '</div>';
-        html += '<div><strong>Date:</strong> ' + (data.invoice_date || '') + '</div>';
-
-        if (data.customer_name) {
-            html += '<div><strong>Customer:</strong> ' + data.customer_name + '</div>';
-        }
-
-        html += '<hr>';
-        html += '<table style="width:100%">';
-        html += '<thead><tr><th>Item</th><th>Qty</th><th>Price</th></tr></thead>';
-        html += '<tbody>';
-
-        if (data.lines && data.lines.length > 0) {
-            data.lines.forEach(function(line) {
-                html += '<tr>';
-                html += '<td>' + (line.name || line.product_name || '') + '</td>';
-                html += '<td>' + (line.quantity || 0) + '</td>';
-                html += '<td style="text-align:right">' + formatCurrency(line.line_total || 0, data.currency) + '</td>';
-                html += '</tr>';
-            });
-        }
-
-        html += '</tbody></table>';
-        html += '<hr>';
-        html += '<div style="text-align:right"><strong>TOTAL: ' + formatCurrency(data.total || 0, data.currency) + '</strong></div>';
-        html += '<hr>';
-        html += '<div style="text-align:center">Thank You!</div>';
-        html += '</div>';
-
-        return html;
-    }
-
-    /**
-     * Format currency helper
-     */
-    function formatCurrency(amount, currency) {
-        const symbol = currency.symbol || '$';
-        const decimal = currency.decimal_separator || '.';
-        const thousand = currency.thousand_separator || ',';
-
-        const formatted = Number(amount).toFixed(2);
-        const parts = formatted.split('.');
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, thousand);
-
-        return symbol + parts.join(decimal);
-    }
 
     /**
      * Legacy print handling

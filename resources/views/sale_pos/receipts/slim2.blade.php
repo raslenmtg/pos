@@ -419,25 +419,8 @@
 	                        		
 	                        		<p class="text-left m-0 mt-5 pull-left">{{$line['name']}}  
 			                        	@if(!empty($line['sub_sku'])), {{$line['sub_sku']}} @endif @if(!empty($line['brand'])), {{$line['brand']}} @endif @if(!empty($line['cat_code'])), {{$line['cat_code']}}@endif
-			                        	@if(!empty($line['product_custom_fields'])), {{$line['product_custom_fields']}} @endif
-			                        	@if(!empty($line['product_description']))
-			                        		<br>
-			                            	<span class="f-8">
-			                            		{!!$line['product_description']!!}
-			                            	</span>
-			                            @endif
-			                        	@if(!empty($line['sell_line_note']))
-			                        	<br>
-	                        			<span class="f-8">
-			                        	{!!$line['sell_line_note']!!}
-			                        	</span>
-			                        	@endif 
-			                        
-			                        	@if(!empty($line['variation']))
-			                        		,
-			                        		{{$line['product_variation']}} {{$line['variation']}}
-			                        	@endif
-			                        
+
+
 
 			                            @if($receipt_details->show_base_unit_details && $line['quantity'] && $line['base_unit_multiplier'] !== 1)
 				                            <br><small>
