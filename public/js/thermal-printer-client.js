@@ -62,7 +62,6 @@ class ThermalPrinterClient {
      */
     async connectBluetooth() {
         try {
-            console.log('Requesting Bluetooth printer...');
 
             // Request Bluetooth device with Serial Port Profile
             this.device = await navigator.bluetooth.requestDevice({
@@ -80,16 +79,12 @@ class ThermalPrinterClient {
                 ]
             });
 
-            console.log('Connecting to GATT Server...');
             const server = await this.device.gatt.connect();
 
-            console.log('Getting service...');
             const service = await this.getService(server);
 
-            console.log('Getting characteristic...');
             this.characteristic = await this.getCharacteristic(service);
 
-            console.log('Bluetooth printer connected successfully!');
             return true;
         } catch (error) {
             console.error('Bluetooth connection error:', error);
@@ -173,7 +168,6 @@ class ThermalPrinterClient {
                 e => e.direction === 'out'
             );
 
-            console.log('USB printer connected successfully!');
             return true;
         } catch (error) {
             console.error('USB connection error:', error);
@@ -310,7 +304,6 @@ class ThermalPrinterClient {
             // Send all commands to printer
             await this.sendCommands(commands);
 
-            console.log('Invoice printed successfully!');
             return true;
         } catch (error) {
             console.error('Printing error:', error);

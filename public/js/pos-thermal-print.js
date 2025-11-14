@@ -9,12 +9,51 @@
     // Initialize thermal printer when DOM is ready
     let thermalPrinter = null;
     let isPrinterConnected = false;
+    let selectedDevice = null; // Store the selected device
+    const PRINTER_STORAGE_KEY = 'thermal_printer_device';
 
     // Wait for ThermalPrinterClient to be available
     function initThermalPrinter() {
         if (typeof ThermalPrinterClient !== 'undefined') {
             thermalPrinter = new ThermalPrinterClient();
-            console.log('Thermal Printer Client initialized');
+            // Try to restore previously selected printer
+            restoreSavedPrinter();
+        }
+    }
+
+    /**
+     * Restore previously selected printer from localStorage
+     */
+    function restoreSavedPrinter() {
+        try {
+            const savedDeviceId = localStorage.getItem(PRINTER_STORAGE_KEY);
+            if (savedDeviceId && navigator.bluetooth) {
+                // Try to get the device from browser's paired devices
+                navigator.bluetooth.getDevices().then(devices => {
+                    const device = devices.find(d => d.id === savedDeviceId);
+                    if (device) {
+                        selectedDevice = device;
+                    }
+                }).catch(err => {
+                    console.log('Could not restore saved printer:', err);
+                });
+            }
+        } catch (error) {
+            console.log('Error restoring printer:', error);
+        }
+    }
+
+    /**
+     * Save selected printer to localStorage
+     */
+    function savePrinterDevice(device) {
+        try {
+            if (device && device.id) {
+                localStorage.setItem(PRINTER_STORAGE_KEY, device.id);
+                selectedDevice = device;
+            }
+        } catch (error) {
+            console.log('Error saving printer:', error);
         }
     }
 
@@ -42,64 +81,79 @@
     };
 
     /**
-     * Handle thermal client-side printing
+     * Handle thermal client-side printing - Silent mode with device persistence
      */
     function handleThermalClientPrint(response) {
         if (!thermalPrinter) {
-            toastr.error('Thermal printer service not initialized');
+            printHTML(response.html_content);
             return;
         }
 
-        // Show connecting message
-        showPrinterStatus('Connecting to thermal printer...');
-
-        // Try to connect and print
-        thermalPrinter.autoConnect()
-            .then(function() {
-                isPrinterConnected = true;
-                showPrinterStatus('Printing invoice...');
-                return thermalPrinter.printSlim2Invoice(response.receipt_data);
-            })
-            .then(function() {
-                showPrinterStatus('Invoice printed successfully!', 'success');
-                thermalPrinter.disconnect();
-                isPrinterConnected = false;
-            })
+        // Try to connect using saved device first
+        connectAndPrint(response)
             .catch(function(error) {
                 console.error('Thermal printing error:', error);
                 isPrinterConnected = false;
+                // Silent fallback to HTML printing
+                printHTML(response.html_content);
+            });
+    }
 
-                // Show helpful error message
-                let errorMsg = 'Failed to print: ' + error.message;
+    /**
+     * Connect to printer and print - handles device persistence
+     */
+    function connectAndPrint(response) {
+        return new Promise(function(resolve, reject) {
+            // If we have a saved device, try to use it directly
+            if (selectedDevice && selectedDevice.gatt) {
 
-                if (error.message.includes('Bluetooth')) {
-                    errorMsg += '<br><br><strong>Tips for Bluetooth printing:</strong><br>';
-                    errorMsg += '• Make sure Bluetooth is enabled<br>';
-                    errorMsg += '• Printer is paired with your device<br>';
-                    errorMsg += '• Use Chrome browser (required for Bluetooth printing)<br>';
-                    errorMsg += '• Click "Print" button again and select your printer';
-                } else if (error.message.includes('USB')) {
-                    errorMsg += '<br><br><strong>Tips for USB printing:</strong><br>';
-                    errorMsg += '• Check USB cable connection<br>';
-                    errorMsg += '• Printer is powered ON<br>';
-                    errorMsg += '• Use Chrome browser for USB printing';
+                selectedDevice.gatt.connect()
+                    .then(function(server) {
+                        isPrinterConnected = true;
+                        // Update the thermalPrinter's device reference
+                        thermalPrinter.device = selectedDevice;
+                        thermalPrinter.server = server;
+                        return thermalPrinter.printSlim2Invoice(response.receipt_data);
+                    })
+                    .then(function() {
+                        isPrinterConnected = false;
+                        if (selectedDevice && selectedDevice.gatt.connected) {
+                            selectedDevice.gatt.disconnect();
+                        }
+                        resolve();
+                    })
+                    .catch(function(error) {
+                        console.log('Saved device failed, trying autoConnect:', error);
+                        // Saved device failed, clear it and try fresh connection
+                        selectedDevice = null;
+                        localStorage.removeItem(PRINTER_STORAGE_KEY);
+                        tryAutoConnect(response).then(resolve).catch(reject);
+                    });
+            } else {
+                // No saved device, use autoConnect (will show device picker on first use)
+                tryAutoConnect(response).then(resolve).catch(reject);
+            }
+        });
+    }
+
+    /**
+     * Try auto connect and save the device for future use
+     */
+    function tryAutoConnect(response) {
+        return thermalPrinter.autoConnect()
+            .then(function() {
+                isPrinterConnected = true;
+
+                // Save the device that was just connected
+                if (thermalPrinter.device) {
+                    savePrinterDevice(thermalPrinter.device);
                 }
 
-                showPrinterStatus(errorMsg, 'error');
-
-                // Ask if user wants to try browser print instead
-                swal({
-                    title: 'Thermal Printer Not Found',
-                    text: 'Would you like to print using your browser instead?',
-                    icon: 'warning',
-                    buttons: ['Cancel', 'Browser Print'],
-                    dangerMode: false
-                }).then(function(useBrowserPrint) {
-                    if (useBrowserPrint) {
-                        // Fall back to HTML printing using actual slim2 template
-                        printHTML(response.html_content);
-                    }
-                });
+                return thermalPrinter.printSlim2Invoice(response.receipt_data);
+            })
+            .then(function() {
+                thermalPrinter.disconnect();
+                isPrinterConnected = false;
             });
     }
 
@@ -120,19 +174,7 @@
      * Legacy print handling
      */
     function handleLegacyPrint(response) {
-        if (response.print_type === 'printer') {
-            // Server-side printer
-            let data = response;
-            data.type = 'print-receipt';
-            if (socket && socket.readyState === 1) {
-                socket.send(JSON.stringify(data));
-            } else {
-                initializeSocket();
-                setTimeout(function() {
-                    socket.send(JSON.stringify(data));
-                }, 700);
-            }
-        } else if (response.html_content && response.html_content !== '') {
+       if (response.html_content && response.html_content !== '') {
             // Browser printing
             let currentTitle = document.title;
             if (response.print_title) {
@@ -149,79 +191,6 @@
         }
     }
 
-    /**
-     * Show printer status to user
-     */
-    function showPrinterStatus(message, type) {
-        type = type || 'info';
-
-        if (type === 'success') {
-            toastr.success(message);
-        } else if (type === 'error') {
-            toastr.error(message, 'Printing Error', {
-                timeOut: 8000,
-                closeButton: true,
-                progressBar: true
-            });
-        } else {
-            toastr.info(message, 'Printer Status', {
-                timeOut: 3000
-            });
-        }
-    }
-
-    /**
-     * Add manual connect button to POS interface
-     */
-    function addManualConnectButton() {
-        // Only add if slim2 design is available
-        if ($('#pos-finalize').length > 0) {
-            let button = $('<button>')
-                .attr('type', 'button')
-                .attr('id', 'connect-thermal-printer')
-                .attr('class', 'btn btn-info btn-flat')
-                .attr('title', 'Connect Thermal Printer')
-                .html('<i class="fa fa-print"></i> Connect Printer')
-                .css({
-                    'margin-left': '5px'
-                });
-
-            button.on('click', function() {
-                if (!thermalPrinter) {
-                    toastr.error('Thermal printer service not initialized');
-                    return;
-                }
-
-                $(this).prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Connecting...');
-
-                thermalPrinter.autoConnect()
-                    .then(function() {
-                        isPrinterConnected = true;
-                        toastr.success('Thermal printer connected successfully!');
-                        $('#connect-thermal-printer')
-                            .prop('disabled', false)
-                            .removeClass('btn-info')
-                            .addClass('btn-success')
-                            .html('<i class="fa fa-check"></i> Printer Connected');
-                    })
-                    .catch(function(error) {
-                        isPrinterConnected = false;
-                        toastr.error('Failed to connect: ' + error.message);
-                        $('#connect-thermal-printer')
-                            .prop('disabled', false)
-                            .html('<i class="fa fa-print"></i> Connect Printer');
-                    });
-            });
-
-            // Add button next to finalize button
-            $('#pos-finalize').after(button);
-        }
-    }
-
-    // Add button when document is ready
-    $(document).ready(function() {
-        setTimeout(addManualConnectButton, 1000);
-    });
 
     // Export for global access
     window.thermalPrinterClient = function() {

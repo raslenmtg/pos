@@ -5,9 +5,6 @@ $(document).ready(function() {
     } else {
         pos_form_obj = $('form#add_pos_sell_form');
     }
-    if ($('form#sell_return_form').length > 0 || $('form#add_pos_sell_form').length > 0) {
-        initialize_printer();
-    }
 
     //Date picker
     $('#transaction_date').datetimepicker({
@@ -45,28 +42,8 @@ $(document).ready(function() {
     });
 });
 
-function initialize_printer() {
-    if ($('input#location_id').data('receipt_printer_type') == 'printer') {
-        initializeSocket();
-    }
-}
-
 function pos_print(receipt) {
-    //If printer type then connect with websocket
-    if (receipt.print_type == 'printer') {
-        var content = receipt;
-        content.type = 'print-receipt';
-
-        //Check if ready or not, then print.
-        if (socket.readyState != 1) {
-            initializeSocket();
-            setTimeout(function() {
-                socket.send(JSON.stringify(content));
-            }, 700);
-        } else {
-            socket.send(JSON.stringify(content));
-        }
-    } else if (receipt.html_content != '') {
+   if (receipt.html_content != '') {
         var title = document.title;
         if (typeof receipt.print_title != 'undefined') {
             document.title = receipt.print_title;

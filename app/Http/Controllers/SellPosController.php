@@ -728,16 +728,7 @@ class SellPosController extends Controller
         }
 
         $output['print_title'] = $receipt_details->invoice_no;
-        //If print type browser - return the content, printer - return printer config data, and invoice format config
-     /*   if ($receipt_printer_type == 'printer') {
-            //For direct printing
 
-
-                $output['print_type'] = 'printer';
-                $output['printer_config'] = $this->businessUtil->printerConfig($business_id, $location_details->printer_id);
-                $output['data'] = $receipt_details;
-
-        } else {*/
         if($receipt_details->design=='slim2'||$receipt_details->design=='slim'){
             // Client-side thermal printer for SaaS (supports mobile Bluetooth like RPP02N, desktop USB/WiFi)
             // Each user connects their own printer from their browser/mobile device

@@ -925,10 +925,7 @@
 	<script src="{{ asset('js/opening_stock.js?v=' . $asset_v) }}"></script>
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 
-	<!-- Call restaurant module if defined -->
-    @if(in_array('tables' ,$enabled_modules) || in_array('modifiers' ,$enabled_modules) || in_array('service_staff' ,$enabled_modules))
-    	<script src="{{ asset('js/restaurant.js?v=' . $asset_v) }}"></script>
-    @endif
+
     <script type="text/javascript">
     	$(document).ready( function() {
     		$('#status').change(function(){

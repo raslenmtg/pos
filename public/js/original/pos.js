@@ -2244,22 +2244,7 @@ function round_row_to_iraqi_dinnar(row) {
 }
 
 function pos_print(receipt) {
-    //If printer type then connect with websocket
-    if (receipt.print_type == 'printer') {
-        var content = receipt;
-        content.type = 'print-receipt';
-
-        //Check if ready or not, then print.
-        if (socket != null && socket.readyState == 1) {
-            socket.send(JSON.stringify(content));
-        } else {
-            initializeSocket();
-            setTimeout(function() {
-                socket.send(JSON.stringify(content));
-            }, 700);
-        }
-
-    } else if (receipt.html_content != '') {
+  if (receipt.html_content != '') {
         var title = document.title;
         if (typeof receipt.print_title != 'undefined') {
             document.title = receipt.print_title;
