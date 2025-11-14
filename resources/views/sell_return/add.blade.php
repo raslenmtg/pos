@@ -170,7 +170,6 @@
 </section>
 @stop
 @section('javascript')
-<script src="{{ asset('js/printer.js?v=' . $asset_v) }}"></script>
 <script src="{{ asset('js/sell_return.js?v=' . $asset_v) }}"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
