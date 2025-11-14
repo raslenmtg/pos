@@ -229,31 +229,31 @@ class ThermalPrinterClient {
 
             // Sales Person
             if (receiptData.sales_person) {
-                const label = receiptData.sales_person_label || 'Sales Person';
+                const label = receiptData.sales_person_label;
                 commands.push(this.cmd_text(label + ': ' + receiptData.sales_person + '\n'));
             }
 
             // Commission Agent
             if (receiptData.commission_agent) {
-                const label = receiptData.commission_agent_label || 'Commission Agent';
+                const label = receiptData.commission_agent_label ;
                 commands.push(this.cmd_text(label + ': ' + receiptData.commission_agent + '\n'));
             }
 
             // Sell custom fields 1-4
             if (receiptData.sell_custom_field_1_value) {
-                const label = receiptData.sell_custom_field_1_label || 'Field 1';
+                const label = receiptData.sell_custom_field_1_label ;
                 commands.push(this.cmd_text(this.stripHtml(label) + ': ' + receiptData.sell_custom_field_1_value + '\n'));
             }
             if (receiptData.sell_custom_field_2_value) {
-                const label = receiptData.sell_custom_field_2_label || 'Field 2';
+                const label = receiptData.sell_custom_field_2_label ;
                 commands.push(this.cmd_text(this.stripHtml(label) + ': ' + receiptData.sell_custom_field_2_value + '\n'));
             }
             if (receiptData.sell_custom_field_3_value) {
-                const label = receiptData.sell_custom_field_3_label || 'Field 3';
+                const label = receiptData.sell_custom_field_3_label ;
                 commands.push(this.cmd_text(this.stripHtml(label) + ': ' + receiptData.sell_custom_field_3_value + '\n'));
             }
             if (receiptData.sell_custom_field_4_value) {
-                const label = receiptData.sell_custom_field_4_label || 'Field 4';
+                const label = receiptData.sell_custom_field_4_label ;
                 commands.push(this.cmd_text(this.stripHtml(label) + ': ' + receiptData.sell_custom_field_4_value + '\n'));
             }
 
@@ -299,13 +299,7 @@ class ThermalPrinterClient {
                 commands.push(this.cmd_text(this.stripHtml(receiptData.shipping_custom_field_5_label) + ': ' + this.stripHtml(receiptData.shipping_custom_field_5_value) + '\n'));
             }
 
-            // Sale orders
-            if (receiptData.sale_orders_invoice_no) {
-                commands.push(this.cmd_text('Order No: ' + this.stripHtml(receiptData.sale_orders_invoice_no) + '\n'));
-            }
-            if (receiptData.sale_orders_invoice_date) {
-                commands.push(this.cmd_text('Order Date: ' + this.stripHtml(receiptData.sale_orders_invoice_date) + '\n'));
-            }
+
 
             // ============ PRODUCTS TABLE ============
             commands.push(this.cmd_feed(1));
@@ -441,7 +435,7 @@ class ThermalPrinterClient {
                     commands.push(this.cmd_feed(1));
                     commands.push(this.cmd_text('Methode paiement:\n'));
                     receiptData.payments.forEach(payment => {
-                        const method = payment.method || 'Cash';
+                        const method = payment.method || 'ESPECES';
                         const date = payment.date || '';
                         commands.push(this.cmd_text(
                             this.pad(method + ' (' + date + ')', 20) +
