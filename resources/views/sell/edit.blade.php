@@ -845,10 +845,7 @@
 	<script src="{{ asset('js/pos.js?v=' . $asset_v) }}"></script>
 	<script src="{{ asset('js/product.js?v=' . $asset_v) }}"></script>
 	<script src="{{ asset('js/opening_stock.js?v=' . $asset_v) }}"></script>
-	<!-- Call restaurant module if defined -->
-    @if(in_array('tables' ,$enabled_modules) || in_array('modifiers' ,$enabled_modules) || in_array('service_staff' ,$enabled_modules))
-    	<script src="{{ asset('js/restaurant.js?v=' . $asset_v) }}"></script>
-    @endif
+
     <script type="text/javascript">
     	$(document).ready( function(){
     		$('#shipping_documents').fileinput({

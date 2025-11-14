@@ -271,8 +271,4 @@
 	<script src="{{ asset('js/opening_stock.js?v=' . $asset_v) }}"></script>
 	@include('sale_pos.partials.keyboard_shortcuts')
 
-	<!-- Call restaurant module if defined -->
-    @if(in_array('tables' ,$enabled_modules) || in_array('modifiers' ,$enabled_modules) || in_array('service_staff' ,$enabled_modules))
-    	<script src="{{ asset('js/restaurant.js?v=' . $asset_v) }}"></script>
-    @endif
 @endsection
