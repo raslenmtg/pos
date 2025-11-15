@@ -737,7 +737,7 @@ class SellPosController extends Controller
             $output['print_type'] = 'thermal_client';
             $output['receipt_data'] = $receipt_details;
             // Also provide HTML fallback
-            $output['html_content'] = view('sale_pos.receipts.slim2', compact('receipt_details'))->render();
+            $output['html_content'] = view('sale_pos.receipts.'.$receipt_details->design, compact('receipt_details'))->render();
 
             return $output;
         }

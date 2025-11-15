@@ -6,33 +6,36 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <style>
-        /* === PRINT STYLES FOR 80MM === */
+            /* === SCREEN STYLES === */
             @media print {
                 @page {
                     size: 80mm auto;
                     margin: 0;
                 }
+            body {
+                width: 80mm;
+                max-width: 80mm;
+                font-size: 10px;
+                line-height: 1.3;
+                margin: 0 auto;
+                padding: 0;
+                font-family: "Courier New", monospace;
+            }
 
-                body {
-                    width: 302px; /* 80mm ~ 302px at 96dpi */
-                    font-size: 10px;
-                    line-height: 1.3;
-                    margin: 0;
-                    padding: 5px;
-                    -webkit-print-color-adjust: exact;
-                }
+            .ticket {
+                width: 80mm;
+                max-width: 80mm;
+                margin: 0;
+                padding: 3mm;
+                word-wrap: break-word;
+                box-sizing: border-box;
+            }
 
-                .ticket {
-                    width: 100%;
-                    max-width: 302px;
-                    word-wrap: break-word;
-                }
+            * {
+                box-sizing: border-box;
+            }
 
-                * {
-                    font-family: "Courier New", monospace !important;
-                    color: #000;
-                    box-sizing: border-box;
-                }
+
 
                 .centered {
                     text-align: center;
@@ -77,13 +80,13 @@
 
                 .textbox-info .f-left {
                     float: left;
-                    width: 45%;
+                    width: 40%;
                     text-align: left;
                 }
 
                 .textbox-info .f-right {
                     float: right;
-                    width: 54%;
+                    width: 59%;
                     text-align: right;
                 }
 
@@ -92,10 +95,11 @@
                     width: 100%;
                     border-collapse: collapse;
                     margin-top: 5px;
+                    table-layout: fixed;
                 }
 
                 th, td {
-                    padding: 2px 1px;
+                    padding: 2px 0;
                     vertical-align: top;
                     word-break: break-word;
                     font-size: 9px;
@@ -109,27 +113,27 @@
 
                 /* Column widths for product table */
                 td.serial_number, th.serial_number {
-                    width: 6%;
+                    width: 5%;
                     text-align: center;
                 }
 
                 td.description, th.description {
-                    width: 34%;
+                    width: 40%;
                     text-align: left;
                 }
 
                 td.quantity, th.quantity {
-                    width: 10%;
+                    width: 12%;
                     text-align: right;
                 }
 
                 td.unit_price, th.unit_price {
-                    width: 18%;
+                    width: 21%;
                     text-align: right;
                 }
 
                 td.price, th.price {
-                    width: 18%;
+                    width: 22%;
                     text-align: right;
                 }
 
@@ -306,7 +310,7 @@
 						</span>
 						<br/>
 					@endif
-					
+
 					@if(!empty($receipt_details->address))
 						{!! $receipt_details->address !!}
 						<br/>
@@ -316,7 +320,7 @@
 						{!! $receipt_details->contact !!}
 					@endif
 					@if(!empty($receipt_details->contact) && !empty($receipt_details->website))
-						, 
+						,
 					@endif
 					@if(!empty($receipt_details->website))
 						{{ $receipt_details->website }}
@@ -336,27 +340,27 @@
 					@endif
 					@if(!empty($receipt_details->sub_heading_line4))
 						{{ $receipt_details->sub_heading_line4 }}<br/>
-					@endif		
+					@endif
 					@if(!empty($receipt_details->sub_heading_line5))
 						{{ $receipt_details->sub_heading_line5 }}<br/>
 					@endif
 
-				
+
 				@endif
-				
+
 						<br/><span class="sub-headings">{!! $receipt_details->invoice_no_prefix !!}{{$receipt_details->invoice_no}}</span>
-				
+
 				</p>
 				</div>
 
-			
+
 			<div class="textbox-info">
 				<p class="f-left"><strong>Date: </strong></p>
 				<p class="f-right">
 					{{$receipt_details->invoice_date}}
 				</p>
 			</div>
-		
+
 	@if(!empty($receipt_details->sales_person))
 		<div class="textbox-info">
 				<p class="f-left"><strong>{{ $receipt_details->sales_person_label }}: </strong></p>
@@ -372,11 +376,11 @@
 					{{$receipt_details->commission_agent}}
 				</p>
 			</div>
-								
+
 								@endif
 
-		
-		
+
+
 
 			@if (!empty($receipt_details->sell_custom_field_1_value))
 				<div class="textbox-info">
@@ -428,7 +432,7 @@
 					</p>
 				</div>
 			@endif
-			
+
 			@if(!empty($receipt_details->customer_tax_number))
 				<div class="textbox-info">
 					<p class="f-left"><strong>
@@ -447,7 +451,7 @@
 					</p>
 				</div>
 			@endif
-			
+
 			@if(!empty($receipt_details->customer_rp_label))
 				<div class="textbox-info">
 					<p class="f-left"><strong>
@@ -461,7 +465,7 @@
 			@if(!empty($receipt_details->shipping_custom_field_1_label))
 				<div class="textbox-info">
 					<p class="f-left"><strong>
-						{!!$receipt_details->shipping_custom_field_1_label!!} 
+						{!!$receipt_details->shipping_custom_field_1_label!!}
 					</strong></p>
 					<p class="f-right">
 						{!!$receipt_details->shipping_custom_field_1_value ?? ''!!}
@@ -471,7 +475,7 @@
 			@if(!empty($receipt_details->shipping_custom_field_2_label))
 				<div class="textbox-info">
 					<p class="f-left"><strong>
-						{!!$receipt_details->shipping_custom_field_2_label!!} 
+						{!!$receipt_details->shipping_custom_field_2_label!!}
 					</strong></p>
 					<p class="f-right">
 						{!!$receipt_details->shipping_custom_field_2_value ?? ''!!}
@@ -481,7 +485,7 @@
 			@if(!empty($receipt_details->shipping_custom_field_3_label))
 				<div class="textbox-info">
 					<p class="f-left"><strong>
-						{!!$receipt_details->shipping_custom_field_3_label!!} 
+						{!!$receipt_details->shipping_custom_field_3_label!!}
 					</strong></p>
 					<p class="f-right">
 						{!!$receipt_details->shipping_custom_field_3_value ?? ''!!}
@@ -491,7 +495,7 @@
 			@if(!empty($receipt_details->shipping_custom_field_4_label))
 				<div class="textbox-info">
 					<p class="f-left"><strong>
-						{!!$receipt_details->shipping_custom_field_4_label!!} 
+						{!!$receipt_details->shipping_custom_field_4_label!!}
 					</strong></p>
 					<p class="f-right">
 						{!!$receipt_details->shipping_custom_field_4_value ?? ''!!}
@@ -501,7 +505,7 @@
 			@if(!empty($receipt_details->shipping_custom_field_5_label))
 				<div class="textbox-info">
 					<p class="f-left"><strong>
-						{!!$receipt_details->shipping_custom_field_5_label!!} 
+						{!!$receipt_details->shipping_custom_field_5_label!!}
 					</strong></p>
 					<p class="f-right">
 						{!!$receipt_details->shipping_custom_field_5_value ?? ''!!}
@@ -533,7 +537,7 @@
                 <thead class="border-bottom-dotted">
                     <tr>
                         <th class="description" width="30%">
-                        	Desgn
+                        	Des
                         </th>
                         <th class="quantity text-right">
                         	Qt
@@ -580,9 +584,9 @@
 										&nbsp;
 									</td>
 									<td>
-			                            {{$modifier['name']}} {{$modifier['variation']}} 
+			                            {{$modifier['name']}} {{$modifier['variation']}}
 			                            @if(!empty($modifier['sub_sku'])), {{$modifier['sub_sku']}} @endif @if(!empty($modifier['cat_code'])), {{$modifier['cat_code']}}@endif
-			                            @if(!empty($modifier['sell_line_note']))({!!$modifier['sell_line_note']!!}) @endif 
+			                            @if(!empty($modifier['sell_line_note']))({!!$modifier['sell_line_note']!!}) @endif
 			                        </td>
 									<td class="text-right">{{$modifier['quantity']}} {{$modifier['units']}} </td>
 									@if(empty($receipt_details->hide_price))
@@ -607,11 +611,11 @@
                     </tr>
                 </tbody>
             </table>
-		
+
 			@if(empty($receipt_details->hide_price))
                 <div class="flex-box">
                     <p class="left text-right sub-headings">
-                    	ST:
+                    	Sous-Total:
                     </p>
                     <p class="width-50 text-right sub-headings">
                     	{{$receipt_details->subtotal}}
@@ -719,24 +723,24 @@
 					@endforeach
 				@endif
 
-			
 
-			
+
+
 			@endif
-          
+
 
             @if(!empty($receipt_details->additional_notes))
 	            <p class="centered">
 	            	{!! nl2br($receipt_details->additional_notes) !!}
 	            </p>
             @endif
-			
+
 		@if(!empty($receipt_details->footer_text))
-						<div style="width:100%  text-align: center; margin-top:5px;margin-bottom:5px; display:flex;justify-content:center">
+						<div style="width:100%; text-align: center; margin-top:5px; margin-bottom:5px; display:flex; justify-content:center;">
 							{!! $receipt_details->footer_text !!}
 						</div>
 						@endif
-			
+
         </div>
         <!-- <button id="btnPrint" class="hidden-print">Print</button>
         <script src="script.js"></script> -->

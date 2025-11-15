@@ -113,7 +113,16 @@
                         // Update the thermalPrinter's device reference
                         thermalPrinter.device = selectedDevice;
                         thermalPrinter.server = server;
-                        return thermalPrinter.printSlim2Invoice(response.receipt_data);
+
+                        // Detect receipt design and call appropriate function
+                        // slim = 80mm (48 chars), slim2 = 58mm (32 chars)
+                        const design = response.receipt_data.design || 'slim';
+                        console.log(design)
+                        if (design === 'slim2') {
+                            return thermalPrinter.printSlim2Invoice(response.receipt_data);
+                        } else {
+                            return thermalPrinter.printSlimInvoice(response.receipt_data);
+                        }
                     })
                     .then(function() {
                         isPrinterConnected = false;
@@ -149,7 +158,14 @@
                     savePrinterDevice(thermalPrinter.device);
                 }
 
-                return thermalPrinter.printSlim2Invoice(response.receipt_data);
+                // Detect receipt design and call appropriate function
+                // slim = 80mm (48 chars), slim2 = 58mm (32 chars)
+                const design = response.receipt_data.design || 'slim';
+                if (design === 'slim2') {
+                    return thermalPrinter.printSlim2Invoice(response.receipt_data);
+                } else {
+                    return thermalPrinter.printSlimInvoice(response.receipt_data);
+                }
             })
             .then(function() {
                 thermalPrinter.disconnect();
