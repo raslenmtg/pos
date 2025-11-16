@@ -104,18 +104,23 @@
      */
     function connectAndPrint(response) {
         return new Promise(function(resolve, reject) {
+            console.log('connectAndPrint called');
+
             // Try to get previously paired device from browser
             if (navigator.bluetooth && navigator.bluetooth.getDevices) {
                 const savedDeviceId = localStorage.getItem(PRINTER_STORAGE_KEY);
+                console.log('Saved device ID:', savedDeviceId);
 
                 if (savedDeviceId) {
                     navigator.bluetooth.getDevices()
                         .then(function(devices) {
+                            console.log('Found paired devices:', devices.length);
                             const device = devices.find(d => d.id === savedDeviceId);
                             if (device && device.gatt) {
+                                console.log('Using saved device:', device.name);
                                 return connectToDevice(device, response);
                             } else {
-                                // Device not found in paired list, try fresh connection
+                                console.log('Saved device not found, showing picker');
                                 return tryAutoConnect(response);
                             }
                         })
@@ -123,15 +128,15 @@
                         .catch(function(error) {
                             console.log('Failed to use saved device:', error);
                             localStorage.removeItem(PRINTER_STORAGE_KEY);
-                            return tryAutoConnect(response);
-                        })
-                        .then(resolve)
-                        .catch(reject);
+                            return tryAutoConnect(response).then(resolve).catch(reject);
+                        });
                 } else {
+                    console.log('No saved device, showing picker');
                     // No saved device, use autoConnect
                     tryAutoConnect(response).then(resolve).catch(reject);
                 }
             } else {
+                console.log('getDevices not supported, using autoConnect');
                 // Web Bluetooth API not available or getDevices not supported
                 tryAutoConnect(response).then(resolve).catch(reject);
             }
@@ -231,6 +236,14 @@
     // Export for global access
     window.thermalPrinterClient = function() {
         return thermalPrinter;
+    };
+
+    // Export function to clear/forget saved printer
+    window.forgetThermalPrinter = function() {
+        localStorage.removeItem(PRINTER_STORAGE_KEY);
+        selectedDevice = null;
+        console.log('Thermal printer forgotten. Next print will show device picker.');
+        return true;
     };
 
 })();
