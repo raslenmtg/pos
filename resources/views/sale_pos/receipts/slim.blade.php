@@ -742,8 +742,9 @@
 						@endif
 
         </div>
-        <!-- <button id="btnPrint" class="hidden-print">Print</button>
-        <script src="script.js"></script> -->
+        <!-- Thermal Printer Client-Side Scripts for SaaS (Mobile Bluetooth RPP02N Support) -->
+        <script src="{{ asset('js/thermal-printer-client.js?v=' . $asset_v) }}"></script>
+        <script src="{{ asset('js/pos-thermal-print.js?v=' . $asset_v) }}"></script>
     </body>
 </html>
 
