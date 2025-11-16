@@ -93,7 +93,8 @@
 	<script src="{{ asset('js/product.js?v=' . $asset_v) }}"></script>
 	<script src="{{ asset('js/opening_stock.js?v=' . $asset_v) }}"></script>
 	@include('sale_pos.partials.keyboard_shortcuts')
-
+    <script src="{{ asset('js/thermal-printer-client.js?v=' . $asset_v) }}"></script>
+    <script src="{{ asset('js/pos-thermal-print.js?v=' . $asset_v) }}"></script>
     <!-- include module js -->
     @if(!empty($pos_module_data))
 	    @foreach($pos_module_data as $key => $value)
