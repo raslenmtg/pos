@@ -104,44 +104,65 @@
      */
     function connectAndPrint(response) {
         return new Promise(function(resolve, reject) {
-            // If we have a saved device, try to use it directly
-            if (selectedDevice && selectedDevice.gatt) {
+            // Try to get previously paired device from browser
+            if (navigator.bluetooth && navigator.bluetooth.getDevices) {
+                const savedDeviceId = localStorage.getItem(PRINTER_STORAGE_KEY);
 
-                selectedDevice.gatt.connect()
-                    .then(function(server) {
-                        isPrinterConnected = true;
-                        // Update the thermalPrinter's device reference
-                        thermalPrinter.device = selectedDevice;
-                        thermalPrinter.server = server;
-
-                        // Detect receipt design and call appropriate function
-                        // slim = 80mm (48 chars), slim2 = 58mm (32 chars)
-                        const design = response.receipt_data.design || 'slim';
-                        if (design === 'slim2') {
-                            return thermalPrinter.printSlim2Invoice(response.receipt_data);
-                        } else {
-                            return thermalPrinter.printSlimInvoice(response.receipt_data);
-                        }
-                    })
-                    .then(function() {
-                        isPrinterConnected = false;
-                        if (selectedDevice && selectedDevice.gatt.connected) {
-                            selectedDevice.gatt.disconnect();
-                        }
-                        resolve();
-                    })
-                    .catch(function(error) {
-                        console.log('Saved device failed, trying autoConnect:', error);
-                        // Saved device failed, clear it and try fresh connection
-                        selectedDevice = null;
-                        localStorage.removeItem(PRINTER_STORAGE_KEY);
-                        tryAutoConnect(response).then(resolve).catch(reject);
-                    });
+                if (savedDeviceId) {
+                    navigator.bluetooth.getDevices()
+                        .then(function(devices) {
+                            const device = devices.find(d => d.id === savedDeviceId);
+                            if (device && device.gatt) {
+                                return connectToDevice(device, response);
+                            } else {
+                                // Device not found in paired list, try fresh connection
+                                return tryAutoConnect(response);
+                            }
+                        })
+                        .then(resolve)
+                        .catch(function(error) {
+                            console.log('Failed to use saved device:', error);
+                            localStorage.removeItem(PRINTER_STORAGE_KEY);
+                            return tryAutoConnect(response);
+                        })
+                        .then(resolve)
+                        .catch(reject);
+                } else {
+                    // No saved device, use autoConnect
+                    tryAutoConnect(response).then(resolve).catch(reject);
+                }
             } else {
-                // No saved device, use autoConnect (will show device picker on first use)
+                // Web Bluetooth API not available or getDevices not supported
                 tryAutoConnect(response).then(resolve).catch(reject);
             }
         });
+    }
+
+    /**
+     * Connect to specific device and print
+     */
+    function connectToDevice(device, response) {
+        return device.gatt.connect()
+            .then(function(server) {
+                isPrinterConnected = true;
+                thermalPrinter.device = device;
+                thermalPrinter.server = server;
+                selectedDevice = device;
+
+                const design = response.receipt_data.design || 'slim';
+                if (design === 'slim2') {
+                    return thermalPrinter.printSlim2Invoice(response.receipt_data);
+                } else {
+                    return thermalPrinter.printSlimInvoice(response.receipt_data);
+                }
+            })
+            .then(function() {
+                if (device.gatt.connected) {
+                    device.gatt.disconnect();
+                }
+                isPrinterConnected = false;
+                savePrinterDevice(device);
+            });
     }
 
     /**
