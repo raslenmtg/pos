@@ -875,9 +875,9 @@ class ThermalPrinterClient {
             return ''; // Handle non-string input gracefully
         }
         return text
-            .normalize("NFD") // Decompose the characters (e.g., 'é' becomes 'e' + '́')
-            .replace(/[\u0300-\u036f]/g, "") // Remove the diacritical marks (the '́' part)
-            .replace(/[^\w\s-]/g, "");
+            .normalize("NFD")                     // Decompose accented chars
+            .replace(/[\u0300-\u036f]/g, "")      // Remove diacritics
+            .replace(/[^\w\s\/\-\:\(\)]/g, "");
     }
     cmd_feed(lines) { return this.ESC + 'd' + String.fromCharCode(lines); }
     cmd_cut() { return this.GS + 'V' + '\x00'; }
