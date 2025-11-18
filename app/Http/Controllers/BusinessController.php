@@ -18,6 +18,8 @@ use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Modules\Superadmin\Entities\Package;
+use Modules\Superadmin\Entities\Subscription;
 use Spatie\Permission\Models\Permission;
 
 class BusinessController extends Controller
@@ -163,6 +165,7 @@ class BusinessController extends Controller
             $business_details['currency_precision'] = 3;
             $business_details['accounting_method'] = 'fifo';
             $business_details['date_format'] = 'd/m/Y';
+
             $business_location = $request->only(['name', 'mobile']);
             $business_location['country']='Tunisia';
             $business_location['city']=' ';
@@ -185,6 +188,13 @@ class BusinessController extends Controller
             $business_details['enabled_modules'] = ['purchases', 'add_sale', 'pos_sale', 'stock_transfers', 'stock_adjustment', 'expenses'];
 
             $business = $this->businessUtil->createNewBusiness($business_details);
+
+            try {
+                $superadminBase = new \Modules\Superadmin\Http\Controllers\BaseController();
+                $superadminBase->_add_subscription($business->id, 4, 'offline', 001, 1, true);
+            } catch (\Exception $ex) {
+               \Log::error('Error while adding subscription for business ID: '.($business->id ?? 'unknown').". Message: ".$ex->getMessage());
+            }
 
             //Update user with business id
             $user->business_id = $business->id;
