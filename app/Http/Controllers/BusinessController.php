@@ -88,9 +88,6 @@ class BusinessController extends Controller
      */
     public function getRegister()
     {
-        if (! config('constants.allow_registration')) {
-            return redirect('/');
-        }
 
         $currencies = $this->businessUtil->allCurrencies();
 

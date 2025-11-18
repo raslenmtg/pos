@@ -186,6 +186,10 @@ class BusinessUtil extends Util
      */
     public function allTimeZones()
     {
+        return [
+            'Africa/Tunis' => 'Africa/Tunis',
+
+        ];
         $datetime = new \DateTimeZone('EDT');
 
         $timezones = $datetime->listIdentifiers();
