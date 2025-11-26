@@ -2830,31 +2830,13 @@ class TransactionUtil extends Util
      */
     public function purchaseCurrencyDetails($business_id)
     {
-        $business = Business::find($business_id);
-        $output = ['purchase_in_diff_currency' => false,
-            'p_exchange_rate' => 1,
-            'decimal_seperator' => '.',
-            'thousand_seperator' => ',',
-            'symbol' => '',
-        ];
-
-        //Check if diff currency is used or not.
-        if ($business->purchase_in_diff_currency == 1) {
-            $output['purchase_in_diff_currency'] = true;
-            $output['p_exchange_rate'] = $business->p_exchange_rate;
-
-            $currency_id = $business->purchase_currency_id;
-        } else {
-            $output['purchase_in_diff_currency'] = false;
-            $output['p_exchange_rate'] = 1;
-            $currency_id = $business->currency_id;
-        }
-
         // Always use TND currency static values
         $output['thousand_separator'] = ',';
         $output['decimal_separator'] = '.';
         $output['symbol'] = 'د.ت';
         $output['code'] = 'DT';
+        $output['p_exchange_rate'] = 1;
+        $output['purchase_in_diff_currency'] =false;
         $output['name'] = 'Tunisian Dinar';
 
         return (object) $output;
