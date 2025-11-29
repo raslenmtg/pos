@@ -90,11 +90,11 @@
         </td>
         <td>
             @php
-                $pp_without_discount = !empty($purchase_order_line) ? $purchase_order_line->pp_without_discount/$purchase_order->exchange_rate : $variation->default_purchase_price;
+                $pp_without_discount =  $variation->dpp_inc_tax;
 
                 $discount_percent = !empty($purchase_order_line) ? $purchase_order_line->discount_percent : 0;
 
-                $purchase_price = !empty($purchase_order_line) ? $purchase_order_line->purchase_price/$purchase_order->exchange_rate : $variation->default_purchase_price;
+                $purchase_price = $variation->dpp_inc_tax;
 
                 $tax_id = !empty($purchase_order_line) ? $purchase_order_line->tax_id : $product->tax;
 

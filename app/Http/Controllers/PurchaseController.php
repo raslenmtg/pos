@@ -322,10 +322,10 @@ class PurchaseController extends Controller
             ]);
 
             $user_id = $request->session()->get('user.id');
-            $enable_product_editing = $request->session()->get('business.enable_editing_product_from_purchase');
-
+            //$enable_product_editing = $request->session()->get('business.enable_editing_product_from_purchase');
+            $enable_product_editing =0;
             //Update business exchange rate.
-            Business::update_business($business_id, ['p_exchange_rate' => ($transaction_data['exchange_rate'])]);
+           // Business::update_business($business_id, ['p_exchange_rate' => ($transaction_data['exchange_rate'])]);
 
             $currency_details = $this->transactionUtil->purchaseCurrencyDetails($business_id);
 
