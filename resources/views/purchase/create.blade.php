@@ -541,9 +541,11 @@
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-md-12 text-right">
-				{!! Form::hidden('final_total', 0 , ['id' => 'grand_total_hidden']); !!}
-						<b>@lang('purchase.purchase_total'): </b><span id="grand_total" class="display_currency" data-currency_symbol='true'>0</span>
+			<div class="col-md-12 text-center">
+				<div style="background-color: #f2f2f2; padding: 10px; border: 1px solid #ddd; margin-top: 10px;">
+					{!! Form::hidden('final_total', 0 , ['id' => 'grand_total_hidden']); !!}
+					<b class="tw-text-xl">@lang('purchase.purchase_total'): </b><span id="grand_total" class="display_currency tw-text-2xl" data-currency_symbol='true'>0</span>
+				</div>
 			</div>
 		</div>
 	@endcomponent
@@ -558,8 +560,10 @@
 			@include('sale_pos.partials.payment_row_form', ['row_index' => 0, 'show_date' => true, 'show_denomination' => true])
 			<hr>
 			<div class="row">
-				<div class="col-sm-12">
-					<div class="pull-right"><strong>@lang('purchase.payment_due'):</strong> <span id="payment_due">0.00</span></div>
+				<div class="col-sm-12 text-center">
+					<div style="background-color: #f2f2f2; padding: 10px; border: 1px solid #ddd;">
+						<strong class="tw-text-2xl">@lang('purchase.payment_due'):</strong> <span id="payment_due" class="tw-text-2xl">0.00</span>
+					</div>
 				</div>
 			</div>
 			<br>
