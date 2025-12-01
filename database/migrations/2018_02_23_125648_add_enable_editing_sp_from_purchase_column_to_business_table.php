@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('business', function (Blueprint $table) {
-            $table->boolean('enable_editing_product_from_purchase')->default(1)->after('keyboard_shortcuts');
+            $table->boolean('enable_editing_product_from_purchase')->default(0)->after('keyboard_shortcuts');
         });
     }
 

@@ -236,7 +236,7 @@ $(document).ready(function() {
         var quantity = __read_number($(this), true);
         var purchase_before_tax = __read_number(row.find('input.purchase_unit_cost'), true);
         var purchase_after_tax = __read_number(
-            row.find('input.purchase_unit_cost_after_tax'),
+            row.find('input.purchase_unit_cost'),
             true
         );
 

@@ -77,7 +77,6 @@ class BusinessUtil extends Util
         ]);
         $input=['name' => 'Défaut',
             'header_text' => null,
-        
             'tax_label' => 'Tax',
             'total_label' => 'Total',
             'show_landmark' => 1,

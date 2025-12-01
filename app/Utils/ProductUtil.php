@@ -905,7 +905,7 @@ class ProductUtil extends Util
         $variation_details = Variation::where('id', $variation_data['variation_id'])
                                         ->with(['product', 'product.product_tax'])
                                         ->first();
-        $tax_rate = 0;
+      /*  $tax_rate = 0;
         if (! empty($variation_details->product->product_tax->amount)) {
             $tax_rate = $variation_details->product->product_tax->amount;
         }
@@ -917,13 +917,14 @@ class ProductUtil extends Util
         if (($variation_details->default_purchase_price != $variation_data['pp_without_discount']) ||
             ($variation_details->sell_price_inc_tax != $variation_data['sell_price_inc_tax'])
             ) {
+      */
             //Set default purchase price exc. tax
             $variation_details->default_purchase_price = $variation_data['pp_without_discount'];
 
             //Set default purchase price inc. tax
            // $variation_details->dpp_inc_tax = $this->calc_percentage($variation_details->default_purchase_price, $tax_rate, $variation_details->default_purchase_price);
             $variation_details->dpp_inc_tax = $variation_details->default_purchase_price;
-
+/*
             //Set default sell price inc. tax
             $variation_details->sell_price_inc_tax = $variation_data['sell_price_inc_tax'];
 
@@ -934,7 +935,7 @@ class ProductUtil extends Util
             $variation_details->profit_percent = $this->get_percent($variation_details->default_purchase_price, $variation_details->default_sell_price);
 
             $variation_details->save();
-        }
+        }*/
     }
 
     /**
