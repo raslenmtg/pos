@@ -75,13 +75,20 @@
         <div class="col-xs-12">
             @component('components.widget')
                 @slot('title')
-                    {{ __('lang_v1.tax_overall') }} @show_tooltip(__('tooltip.tax_overall'))
-                @endslot
-                <h3 class="text-muted">
-                    {{ __('lang_v1.output_tax_minus_input_tax') }}: 
-                    <span class="tax_diff">
+                    {{ __('lang_v1.tax_overall') }} @show_tooltip(__('tooltip.tax_overall')):   <span class="tax_diff">
                         <i class="fas fa-sync fa-spin fa-fw"></i>
                     </span>
+                @endslot
+                <h3 class="text-muted">
+                    {{ __('lang_v1.output_tax') }}: <span class="output_tax_label">
+                        <i class="fas fa-sync fa-spin fa-fw"></i>
+                    </span>
+
+                </h3> <h3 class="text-muted">
+                    {{ __('lang_v1.input_tax') }}: <span class="input_tax_label">
+                        <i class="fas fa-sync fa-spin fa-fw"></i>
+                    </span>
+
                 </h3>
             @endcomponent
         </div>
@@ -117,7 +124,7 @@
                     <li>
                         <a href="#expense_tax_tab" data-toggle="tab" aria-expanded="true"><i class="fa fas fa-minus-circle" aria-hidden="true"></i> @lang('lang_v1.expense_tax')</a>
                     </li>
-                    @if(!empty($tax_report_tabs))
+                  {{--  @if(!empty($tax_report_tabs))
                         @foreach($tax_report_tabs as $key => $tabs)
                             @foreach ($tabs as $index => $value)
                                 @if(!empty($value['tab_menu_path']))
@@ -128,7 +135,7 @@
                                 @endif
                             @endforeach
                         @endforeach
-                    @endif
+                    @endif--}}
                 </ul>
 
                 <div class="tab-content">
@@ -432,7 +439,7 @@
         });
     });
 </script>
-@if(!empty($tax_report_tabs))
+{{--@if(!empty($tax_report_tabs))
     @foreach($tax_report_tabs as $key => $tabs)
         @foreach ($tabs as $index => $value)
             @if(!empty($value['module_js_path']))
@@ -440,6 +447,6 @@
             @endif
         @endforeach
     @endforeach
-@endif
+@endif--}}
 <script src="{{ asset('js/report.js?v=' . $asset_v) }}"></script>
 @endsection

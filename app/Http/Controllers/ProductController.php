@@ -868,10 +868,10 @@ class ProductController extends Controller
                 $this->productUtil->updateRackDetails($business_id, $product->id, $product_racks_update);
             }
 
-            //Set Module fields
+         /*   //Set Module fields
             if (! empty($request->input('has_module_data'))) {
                 $this->moduleUtil->getModuleData('after_product_saved', ['product' => $product, 'request' => $request]);
-            }
+            }*/
 
             Media::uploadMedia($product->business_id, $product, $request, 'product_brochure', true);
 
@@ -2130,7 +2130,7 @@ class ProductController extends Controller
                     $variation->default_purchase_price = $this->productUtil->num_uf($value['default_purchase_price']);
                     $variation->dpp_inc_tax = $this->productUtil->num_uf($value['dpp_inc_tax']);
                     $variation->profit_percent = $this->productUtil->num_uf($value['profit_percent']);
-                    $variation->default_sell_price = $this->productUtil->num_uf($value['default_sell_price']);
+                    $variation->default_sell_price = $this->productUtil->num_uf($value['sell_price_inc_tax']);
                     $variation->sell_price_inc_tax = $this->productUtil->num_uf($value['sell_price_inc_tax']);
                     $variations_data[] = $variation;
 

@@ -2398,67 +2398,44 @@ class TransactionUtil extends Util
     public function getInputTax($business_id, $start_date = null, $end_date = null, $location_id = null, $contact_id = null)
     {
         //Calculate purchase taxes
-        $query1 = Transaction::where('transactions.business_id', $business_id)
-                        ->leftjoin('tax_rates as T', 'transactions.tax_id', '=', 'T.id')
-                        ->whereIn('type', ['purchase', 'purchase_return'])
-                        ->whereNotNull('transactions.tax_id')
-                        ->select(
-                            DB::raw("SUM( IF(type='purchase', transactions.tax_amount, -1 * transactions.tax_amount) ) as transaction_tax"),
-                            'T.name as tax_name',
-                            'T.id as tax_id',
-                            'T.is_tax_group'
-                        );
-
-        //Calculate purchase line taxes
-        $query2 = Transaction::where('transactions.business_id', $business_id)
-                        ->leftjoin('purchase_lines as pl', 'transactions.id', '=', 'pl.transaction_id')
-                        ->leftjoin('tax_rates as T', 'pl.tax_id', '=', 'T.id')
-                        ->where('type', 'purchase')
-                        ->whereNotNull('pl.tax_id')
-                        ->select(
-                            DB::raw('SUM( (pl.quantity - pl.quantity_returned) * pl.item_tax ) as product_tax'),
-                            'T.name as tax_name',
-                            'T.id as tax_id',
-                            'T.is_tax_group'
-                        );
+        $query = Transaction::where('transactions.business_id', $business_id)
+            ->leftjoin('purchase_lines as pl', 'transactions.id', '=', 'pl.transaction_id')
+            ->leftjoin('tax_rates as T', 'pl.tax_id', '=', 'T.id')
+            ->whereIn('type', ['purchase', 'purchase_return'])
+            ->whereNotNull('pl.tax_id')
+            ->select(
+                DB::raw('SUM( 
+                    IF(transactions.type = "purchase", 1, -1) * 
+                    ( pl.quantity- pl.quantity_returned) * 
+                    (pl.purchase_price_inc_tax * (T.amount / (100 + T.amount)))
+                ) as tax_amount'),
+                'T.name as tax_name',
+                'T.id as tax_id',
+                'T.is_tax_group'
+            );
 
         //Check for permitted locations of a user
         $permitted_locations = auth()->user()->permitted_locations();
         if ($permitted_locations != 'all') {
-            $query1->whereIn('transactions.location_id', $permitted_locations);
-            $query2->whereIn('transactions.location_id', $permitted_locations);
+            $query->whereIn('transactions.location_id', $permitted_locations);
         }
 
         if (! empty($start_date) && ! empty($end_date)) {
-            $query1->whereBetween(DB::raw('date(transaction_date)'), [$start_date, $end_date]);
-            $query2->whereBetween(DB::raw('date(transaction_date)'), [$start_date, $end_date]);
+            $query->whereBetween(DB::raw('date(transaction_date)'), [$start_date, $end_date]);
         }
 
         if (! empty($location_id)) {
-            $query1->where('transactions.location_id', $location_id);
-            $query2->where('transactions.location_id', $location_id);
+            $query->where('transactions.location_id', $location_id);
         }
 
         if (! empty($contact_id)) {
-            $query1->where('transactions.contact_id', $contact_id);
-            $query2->where('transactions.contact_id', $contact_id);
+            $query->where('transactions.contact_id', $contact_id);
         }
 
-        $transaction_tax_details = $query1->groupBy('T.id')
-                                    ->get();
 
-        $product_tax_details = $query2->groupBy('T.id')
-                                    ->get();
-        $tax_details = [];
-        foreach ($transaction_tax_details as $transaction_tax) {
-            $tax_details[$transaction_tax->tax_id]['tax_name'] = $transaction_tax->tax_name;
-            $tax_details[$transaction_tax->tax_id]['tax_amount'] = $transaction_tax->transaction_tax;
 
-            $tax_details[$transaction_tax->tax_id]['is_tax_group'] = false;
-            if ($transaction_tax->is_tax_group == 1) {
-                $tax_details[$transaction_tax->tax_id]['is_tax_group'] = true;
-            }
-        }
+        $product_tax_details = $query->groupBy('T.id')
+                                    ->get();
 
         foreach ($product_tax_details as $product_tax) {
             if (! isset($tax_details[$product_tax->tax_id])) {
@@ -2482,7 +2459,7 @@ class TransactionUtil extends Util
         }
 
         $output['tax_details'] = $tax_details;
-        $output['total_tax'] = $transaction_tax_details->sum('transaction_tax') + $product_tax_details->sum('product_tax');
+        $output['total_tax'] = $product_tax_details->sum('tax_amount');
 
         return $output;
     }
@@ -2497,94 +2474,61 @@ class TransactionUtil extends Util
      */
     public function getOutputTax($business_id, $start_date = null, $end_date = null, $location_id = null, $contact_id = null)
     {
-        //Calculate sell taxes
-        $query1 = Transaction::where('transactions.business_id', $business_id)
-                        ->leftjoin('tax_rates as T', 'transactions.tax_id', '=', 'T.id')
-                        ->whereIn('type', ['sell', 'sell_return'])
-                        ->whereNotNull('transactions.tax_id')
-                        ->where('transactions.status', '=', 'final')
-                        ->select(
-                            DB::raw("SUM( IF(type='sell', transactions.tax_amount, -1 * transactions.tax_amount) ) as transaction_tax"),
-                            'T.name as tax_name',
-                            'T.id as tax_id',
-                            'T.is_tax_group'
-                        );
+        // Combined query for sell and sell_return taxes
+        $query = Transaction::where('transactions.business_id', $business_id)
+            ->leftjoin('transaction_sell_lines as tsl', 'transactions.id', '=', 'tsl.transaction_id')
+            ->leftjoin('tax_rates as T', 'tsl.tax_id', '=', 'T.id')
+            ->whereIn('type', ['sell', 'sell_return'])
+            ->whereNotNull('tsl.tax_id')
+            ->where('transactions.status', '=', 'final')
+            ->select(
+                DB::raw('SUM( 
+                IF(transactions.type = "sell", 1, -1) * 
+                (tsl.quantity - tsl.quantity_returned) * 
+                (tsl.unit_price_inc_tax * (T.amount / (100 + T.amount)))
+            ) as tax_amount'),
+                'T.name as tax_name',
+                'T.id as tax_id',
+                'T.is_tax_group'
+            );
 
-        //Calculate sell line taxes
-        $query2 = Transaction::where('transactions.business_id', $business_id)
-                        ->leftjoin('transaction_sell_lines as tsl', 'transactions.id', '=', 'tsl.transaction_id')
-                        ->leftjoin('tax_rates as T', 'tsl.tax_id', '=', 'T.id')
-                        ->where('type', 'sell')
-                        ->whereNotNull('tsl.tax_id')
-                        ->where('transactions.status', '=', 'final')
-                        ->select(
-                            DB::raw('SUM( (tsl.quantity - tsl.quantity_returned) * tsl.item_tax ) as product_tax'),
-                            'T.name as tax_name',
-                            'T.id as tax_id',
-                            'T.is_tax_group'
-                        );
-
-        ///Check for permitted locations of a user
+        // Check for permitted locations of a user
         $permitted_locations = auth()->user()->permitted_locations();
         if ($permitted_locations != 'all') {
-            $query1->whereIn('transactions.location_id', $permitted_locations);
-            $query2->whereIn('transactions.location_id', $permitted_locations);
+            $query->whereIn('transactions.location_id', $permitted_locations);
         }
 
-        if (! empty($start_date) && ! empty($end_date)) {
-            $query1->whereBetween(DB::raw('date(transaction_date)'), [$start_date, $end_date]);
-            $query2->whereBetween(DB::raw('date(transaction_date)'), [$start_date, $end_date]);
+        if (!empty($start_date) && !empty($end_date)) {
+            $query->whereBetween(DB::raw('date(transaction_date)'), [$start_date, $end_date]);
         }
 
-        if (! empty($location_id)) {
-            $query1->where('transactions.location_id', $location_id);
-            $query2->where('transactions.location_id', $location_id);
+        if (!empty($location_id)) {
+            $query->where('transactions.location_id', $location_id);
         }
 
-        if (! empty($contact_id)) {
-            $query1->where('transactions.contact_id', $contact_id);
-            $query2->where('transactions.contact_id', $contact_id);
+        if (!empty($contact_id)) {
+            $query->where('transactions.contact_id', $contact_id);
         }
 
-        $transaction_tax_details = $query1->groupBy('T.id')
-                                    ->get();
+        $tax_details_raw = $query->groupBy('T.id', 'T.name', 'T.is_tax_group')->get();
 
-        $product_tax_details = $query2->groupBy('T.id')
-                                    ->get();
+        // Format the results
         $tax_details = [];
-        foreach ($transaction_tax_details as $transaction_tax) {
-            $tax_details[$transaction_tax->tax_id]['tax_name'] = $transaction_tax->tax_name;
-            $tax_details[$transaction_tax->tax_id]['tax_amount'] = $transaction_tax->transaction_tax;
-
-            $tax_details[$transaction_tax->tax_id]['is_tax_group'] = false;
-            if ($transaction_tax->is_tax_group == 1) {
-                $tax_details[$transaction_tax->tax_id]['is_tax_group'] = true;
-            }
+        foreach ($tax_details_raw as $tax) {
+            $tax_details[$tax->tax_id]['tax_name'] = $tax->tax_name;
+            $tax_details[$tax->tax_id]['tax_amount'] = $tax->tax_amount;
+            $tax_details[$tax->tax_id]['is_tax_group'] = $tax->is_tax_group == 1;
         }
 
-        foreach ($product_tax_details as $product_tax) {
-            if (! isset($tax_details[$product_tax->tax_id])) {
-                $tax_details[$product_tax->tax_id]['tax_name'] = $product_tax->tax_name;
-                $tax_details[$product_tax->tax_id]['tax_amount'] = $product_tax->product_tax;
-
-                $tax_details[$product_tax->tax_id]['is_tax_group'] = false;
-                if ($product_tax->is_tax_group == 1) {
-                    $tax_details[$product_tax->tax_id]['is_tax_group'] = true;
-                }
-            } else {
-                $tax_details[$product_tax->tax_id]['tax_amount'] += $product_tax->product_tax;
+        // If group tax add group tax details
+        foreach ($tax_details as $key => $value) {
+            if ($value['is_tax_group']) {
+                $tax_details[$key]['group_tax_details'] = $this->groupTaxDetails($key, $value['tax_amount']);
             }
         }
-
-        //If group tax add group tax details
-        // foreach ($tax_details as $key => $value) {
-        //     if ($value['is_tax_group']) {
-        //         $tax_details[$key]['group_tax_details'] = $this->groupTaxDetails($key, $value['tax_amount']);
-        //     }
-        // }
 
         $output['tax_details'] = $tax_details;
-        $output['total_tax'] = $transaction_tax_details->sum('transaction_tax') + $product_tax_details->sum('product_tax');
+        $output['total_tax'] = $tax_details_raw->sum('tax_amount');
 
         return $output;
     }

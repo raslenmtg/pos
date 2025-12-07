@@ -307,7 +307,7 @@
                             @if(!empty($receipt_details->item_discount_label))
                                 <td class="text-right">{{$line['total_line_discount'] ?? '0.00'}}</td>
                             @endif
-                            <td class="text-right">{{$line['line_total_exc_tax']}}</td>
+                            <td class="text-right">{{$line['line_total']}}</td>
                         </tr>
                     @endforeach
                     <!-- Removed the empty row generation code -->
@@ -332,7 +332,7 @@
                 <table class="totals-table">
                     <tr>
                         <td>{!! $receipt_details->subtotal_label !!}</td>
-                        <td>{{$receipt_details->subtotal_exc_tax}}</td>
+                        <td>{{$receipt_details->subtotal}}</td>
                     </tr>
 
                     @if( !empty($receipt_details->discount) )

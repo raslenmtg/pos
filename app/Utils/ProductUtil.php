@@ -215,7 +215,7 @@ class ProductUtil extends Util
                         'default_purchase_price' => $this->num_uf($v['dpp_inc_tax']),
                         'dpp_inc_tax' => $this->num_uf($v['dpp_inc_tax']),
                         'profit_percent' => $this->num_uf($v['profit_percent']),
-                        'default_sell_price' => $this->num_uf($v['default_sell_price']),
+                        'default_sell_price' => $this->num_uf($v['sell_price_inc_tax']),
                         'sell_price_inc_tax' => $this->num_uf($v['sell_price_inc_tax']),
                     ];
                     if (! empty($v['sub_sku'])) {
@@ -1251,14 +1251,14 @@ class ProductUtil extends Util
                     $this->updateProductQuantity($transaction->location_id, $data['product_id'], $data['variation_id'], $new_quantity_f, 0, $currency_details);
                 }
             }
-
+            $product=Product::find($data['product_id']);
             $purchase_line->quantity = $new_quantity;
-            $purchase_line->pp_without_discount = ($this->num_uf($data['pp_without_discount'], $currency_details) * $exchange_rate) / $multiplier;
+            $purchase_line->pp_without_discount = $this->num_uf($data['pp_without_discount'], $currency_details) ;
             $purchase_line->discount_percent = $this->num_uf($data['discount_percent'], $currency_details);
-            $purchase_line->purchase_price = ($this->num_uf($data['purchase_price'], $currency_details) * $exchange_rate) / $multiplier;
-            $purchase_line->purchase_price_inc_tax = ($this->num_uf($data['purchase_price_inc_tax'], $currency_details) * $exchange_rate) / $multiplier;
-            $purchase_line->item_tax = ($this->num_uf($data['item_tax'], $currency_details) * $exchange_rate) / $multiplier;
-            $purchase_line->tax_id = $data['purchase_line_tax_id'];
+            $purchase_line->purchase_price = $this->num_uf($data['purchase_price'], $currency_details) ;
+            $purchase_line->purchase_price_inc_tax = $this->num_uf($data['purchase_price'], $currency_details);
+            $purchase_line->item_tax = $this->num_uf($data['item_tax'], $currency_details) ;
+            $purchase_line->tax_id = $product->tax??null;
             $purchase_line->lot_number = ! empty($data['lot_number']) ? $data['lot_number'] : null;
             $purchase_line->mfg_date = ! empty($data['mfg_date']) ? $this->uf_date($data['mfg_date']) : null;
             $purchase_line->exp_date = ! empty($data['exp_date']) ? $this->uf_date($data['exp_date']) : null;
@@ -1274,9 +1274,9 @@ class ProductUtil extends Util
 
             //Edit product price
             if ($enable_product_editing == 1 && $transaction->type == 'purchase') {
-                if (isset($data['default_sell_price'])) {
+              /*  if (isset($data['default_sell_price'])) {
                     $variation_data['sell_price_inc_tax'] = ($this->num_uf($data['default_sell_price'], $currency_details)) / $multiplier;
-                }
+                }*/
                 $variation_data['pp_without_discount'] = ($this->num_uf($data['pp_without_discount'], $currency_details) * $exchange_rate) / $multiplier;
                 $variation_data['variation_id'] = $purchase_line->variation_id;
                 $variation_data['purchase_price'] = $purchase_line->purchase_price;

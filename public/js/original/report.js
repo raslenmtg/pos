@@ -41,15 +41,15 @@ $(document).ready(function() {
                 d.contact_type = $('#contact_type').val();
                 d.location_id = $('#cs_report_location_id').val();
                 var start = $('input#scr_date_filter')
-                            .data('daterangepicker')
-                            .startDate.format('YYYY-MM-DD');
+                    .data('daterangepicker')
+                    .startDate.format('YYYY-MM-DD');
                 var end = $('input#scr_date_filter')
                     .data('daterangepicker')
                     .endDate.format('YYYY-MM-DD');
                 d.start_date = start;
                 d.end_date = end;
                 d.contact_id = $('#scr_contact_id').val();
-    }
+            }
         },
         columnDefs: [
             { targets: [5], orderable: false, searchable: false },
@@ -100,32 +100,32 @@ $(document).ready(function() {
     }
 
     var stock_report_cols = [
-            { data: 'action', name: 'action', searchable: false, orderable: false },
-            { data: 'sku', name: 'variations.sub_sku' },
-            { data: 'product', name: 'p.name' },
-            { data: 'variation', name: 'variation' },
-            { data: 'category_name', name: 'c.name' },
-            { data: 'location_name', name: 'l.name' },
-            { data: 'unit_price', name: 'variations.sell_price_inc_tax' },
-            { data: 'stock', name: 'stock', searchable: false },
-        ];
-        if ($('th.stock_price').length) {
-            stock_report_cols.push({ data: 'stock_price', name: 'stock_price', searchable: false });
-            stock_report_cols.push({ data: 'stock_value_by_sale_price', name: 'stock_value_by_sale_price', searchable: false, orderable: false });
-            stock_report_cols.push({ data: 'potential_profit', name: 'potential_profit', searchable: false, orderable: false });
-        }
+        { data: 'action', name: 'action', searchable: false, orderable: false },
+        { data: 'sku', name: 'variations.sub_sku' },
+        { data: 'product', name: 'p.name' },
+        { data: 'variation', name: 'variation' },
+        { data: 'category_name', name: 'c.name' },
+        { data: 'location_name', name: 'l.name' },
+        { data: 'unit_price', name: 'variations.sell_price_inc_tax' },
+        { data: 'stock', name: 'stock', searchable: false },
+    ];
+    if ($('th.stock_price').length) {
+        stock_report_cols.push({ data: 'stock_price', name: 'stock_price', searchable: false });
+        stock_report_cols.push({ data: 'stock_value_by_sale_price', name: 'stock_value_by_sale_price', searchable: false, orderable: false });
+        stock_report_cols.push({ data: 'potential_profit', name: 'potential_profit', searchable: false, orderable: false });
+    }
 
-        stock_report_cols.push({ data: 'total_sold', name: 'total_sold', searchable: false });
-        stock_report_cols.push({ data: 'total_transfered', name: 'total_transfered', searchable: false });
-        stock_report_cols.push({ data: 'total_adjusted', name: 'total_adjusted', searchable: false });
-        stock_report_cols.push({ data: 'product_custom_field1', name: 'p.product_custom_field1'});
-        stock_report_cols.push({ data: 'product_custom_field2', name: 'p.product_custom_field2'});
-        stock_report_cols.push({ data: 'product_custom_field3', name: 'p.product_custom_field3'});
-        stock_report_cols.push({ data: 'product_custom_field4', name: 'p.product_custom_field4'});
+    stock_report_cols.push({ data: 'total_sold', name: 'total_sold', searchable: false });
+    stock_report_cols.push({ data: 'total_transfered', name: 'total_transfered', searchable: false });
+    stock_report_cols.push({ data: 'total_adjusted', name: 'total_adjusted', searchable: false });
+    stock_report_cols.push({ data: 'product_custom_field1', name: 'p.product_custom_field1'});
+    stock_report_cols.push({ data: 'product_custom_field2', name: 'p.product_custom_field2'});
+    stock_report_cols.push({ data: 'product_custom_field3', name: 'p.product_custom_field3'});
+    stock_report_cols.push({ data: 'product_custom_field4', name: 'p.product_custom_field4'});
 
-        if ($('th.current_stock_mfg').length) {
-            stock_report_cols.push({ data: 'total_mfg_stock', name: 'total_mfg_stock', searchable: false });
-        }
+    if ($('th.current_stock_mfg').length) {
+        stock_report_cols.push({ data: 'total_mfg_stock', name: 'total_mfg_stock', searchable: false });
+    }
     //Stock report table
     stock_report_table = $('#stock_report_table').DataTable({
         processing: true,
@@ -161,29 +161,29 @@ $(document).ready(function() {
             var total_potential_profit = 0;
             var footer_total_mfg_stock = 0;
             for (var r in data){
-                footer_total_stock += $(data[r].stock).data('orig-value') ? 
-                parseFloat($(data[r].stock).data('orig-value')) : 0;
+                footer_total_stock += $(data[r].stock).data('orig-value') ?
+                    parseFloat($(data[r].stock).data('orig-value')) : 0;
 
-                footer_total_sold += $(data[r].total_sold).data('orig-value') ? 
-                parseFloat($(data[r].total_sold).data('orig-value')) : 0;
+                footer_total_sold += $(data[r].total_sold).data('orig-value') ?
+                    parseFloat($(data[r].total_sold).data('orig-value')) : 0;
 
-                footer_total_transfered += $(data[r].total_transfered).data('orig-value') ? 
-                parseFloat($(data[r].total_transfered).data('orig-value')) : 0;
+                footer_total_transfered += $(data[r].total_transfered).data('orig-value') ?
+                    parseFloat($(data[r].total_transfered).data('orig-value')) : 0;
 
-                total_adjusted += $(data[r].total_adjusted).data('orig-value') ? 
-                parseFloat($(data[r].total_adjusted).data('orig-value')) : 0;
+                total_adjusted += $(data[r].total_adjusted).data('orig-value') ?
+                    parseFloat($(data[r].total_adjusted).data('orig-value')) : 0;
 
-                total_stock_price += $(data[r].stock_price).data('orig-value') ? 
-                parseFloat($(data[r].stock_price).data('orig-value')) : 0;
+                total_stock_price += $(data[r].stock_price).data('orig-value') ?
+                    parseFloat($(data[r].stock_price).data('orig-value')) : 0;
 
-                footer_stock_value_by_sale_price += $(data[r].stock_value_by_sale_price).data('orig-value') ? 
-                parseFloat($(data[r].stock_value_by_sale_price).data('orig-value')) : 0;
+                footer_stock_value_by_sale_price += $(data[r].stock_value_by_sale_price).data('orig-value') ?
+                    parseFloat($(data[r].stock_value_by_sale_price).data('orig-value')) : 0;
 
-                total_potential_profit += $(data[r].potential_profit).data('orig-value') ? 
-                parseFloat($(data[r].potential_profit).data('orig-value')) : 0;
+                total_potential_profit += $(data[r].potential_profit).data('orig-value') ?
+                    parseFloat($(data[r].potential_profit).data('orig-value')) : 0;
 
-                footer_total_mfg_stock += $(data[r].total_mfg_stock).data('orig-value') ? 
-                parseFloat($(data[r].total_mfg_stock).data('orig-value')) : 0;
+                footer_total_mfg_stock += $(data[r].total_mfg_stock).data('orig-value') ?
+                    parseFloat($(data[r].total_mfg_stock).data('orig-value')) : 0;
             }
 
             $('.footer_total_stock').html(__currency_trans_from_en(footer_total_stock, false));
@@ -214,8 +214,8 @@ $(document).ready(function() {
         $('#trending_product_date_range').on('apply.daterangepicker', function(ev, picker) {
             $(this).val(
                 picker.startDate.format(moment_date_format) +
-                    ' ~ ' +
-                    picker.endDate.format(moment_date_format)
+                ' ~ ' +
+                picker.endDate.format(moment_date_format)
             );
         });
 
@@ -276,8 +276,8 @@ $(document).ready(function() {
         $('#register_report_date_range').on('apply.daterangepicker', function(ev, picker) {
             $(this).val(
                 picker.startDate.format(moment_date_format) +
-                    ' ~ ' +
-                    picker.endDate.format(moment_date_format)
+                ' ~ ' +
+                picker.endDate.format(moment_date_format)
             );
             updateRegisterReport();
         });
@@ -334,47 +334,47 @@ $(document).ready(function() {
             var total_custom_pay_7 = 0;
             var total = 0;
             for (var r in data){
-                total_card_payment += $(data[r].total_card_payment).data('orig-value') ? 
-                parseFloat($(data[r].total_card_payment).data('orig-value')) : 0;
+                total_card_payment += $(data[r].total_card_payment).data('orig-value') ?
+                    parseFloat($(data[r].total_card_payment).data('orig-value')) : 0;
 
-                total_cheque_payment += $(data[r].total_cheque_payment).data('orig-value') ? 
-                parseFloat($(data[r].total_cheque_payment).data('orig-value')) : 0;
+                total_cheque_payment += $(data[r].total_cheque_payment).data('orig-value') ?
+                    parseFloat($(data[r].total_cheque_payment).data('orig-value')) : 0;
 
-                total_cash_payment += $(data[r].total_cash_payment).data('orig-value') ? 
-                parseFloat($(data[r].total_cash_payment).data('orig-value')) : 0;
+                total_cash_payment += $(data[r].total_cash_payment).data('orig-value') ?
+                    parseFloat($(data[r].total_cash_payment).data('orig-value')) : 0;
 
-                total_bank_transfer_payment += $(data[r].total_bank_transfer_payment).data('orig-value') ? 
-                parseFloat($(data[r].total_bank_transfer_payment).data('orig-value')) : 0;
+                total_bank_transfer_payment += $(data[r].total_bank_transfer_payment).data('orig-value') ?
+                    parseFloat($(data[r].total_bank_transfer_payment).data('orig-value')) : 0;
 
-                total_other_payment += $(data[r].total_other_payment).data('orig-value') ? 
-                parseFloat($(data[r].total_other_payment).data('orig-value')) : 0;
+                total_other_payment += $(data[r].total_other_payment).data('orig-value') ?
+                    parseFloat($(data[r].total_other_payment).data('orig-value')) : 0;
 
-                total_advance_payment += $(data[r].total_advance_payment).data('orig-value') ? 
-                parseFloat($(data[r].total_advance_payment).data('orig-value')) : 0;
+                total_advance_payment += $(data[r].total_advance_payment).data('orig-value') ?
+                    parseFloat($(data[r].total_advance_payment).data('orig-value')) : 0;
 
-                total_custom_pay_1 += $(data[r].total_custom_pay_1).data('orig-value') ? 
-                parseFloat($(data[r].total_custom_pay_1).data('orig-value')) : 0;
+                total_custom_pay_1 += $(data[r].total_custom_pay_1).data('orig-value') ?
+                    parseFloat($(data[r].total_custom_pay_1).data('orig-value')) : 0;
 
-                total_custom_pay_2 += $(data[r].total_custom_pay_2).data('orig-value') ? 
-                parseFloat($(data[r].total_custom_pay_2).data('orig-value')) : 0;
+                total_custom_pay_2 += $(data[r].total_custom_pay_2).data('orig-value') ?
+                    parseFloat($(data[r].total_custom_pay_2).data('orig-value')) : 0;
 
-                total_custom_pay_3 += $(data[r].total_custom_pay_3).data('orig-value') ? 
-                parseFloat($(data[r].total_custom_pay_3).data('orig-value')) : 0;
+                total_custom_pay_3 += $(data[r].total_custom_pay_3).data('orig-value') ?
+                    parseFloat($(data[r].total_custom_pay_3).data('orig-value')) : 0;
 
-                total_custom_pay_4 += $(data[r].total_custom_pay_4).data('orig-value') ? 
-                parseFloat($(data[r].total_custom_pay_4).data('orig-value')) : 0;
+                total_custom_pay_4 += $(data[r].total_custom_pay_4).data('orig-value') ?
+                    parseFloat($(data[r].total_custom_pay_4).data('orig-value')) : 0;
 
-                total_custom_pay_5 += $(data[r].total_custom_pay_5).data('orig-value') ? 
-                parseFloat($(data[r].total_custom_pay_5).data('orig-value')) : 0;
+                total_custom_pay_5 += $(data[r].total_custom_pay_5).data('orig-value') ?
+                    parseFloat($(data[r].total_custom_pay_5).data('orig-value')) : 0;
 
-                total_custom_pay_6 += $(data[r].total_custom_pay_6).data('orig-value') ? 
-                parseFloat($(data[r].total_custom_pay_6).data('orig-value')) : 0;
+                total_custom_pay_6 += $(data[r].total_custom_pay_6).data('orig-value') ?
+                    parseFloat($(data[r].total_custom_pay_6).data('orig-value')) : 0;
 
-                total_custom_pay_7 += $(data[r].total_custom_pay_7).data('orig-value') ? 
-                parseFloat($(data[r].total_custom_pay_7).data('orig-value')) : 0;
+                total_custom_pay_7 += $(data[r].total_custom_pay_7).data('orig-value') ?
+                    parseFloat($(data[r].total_custom_pay_7).data('orig-value')) : 0;
 
-                total += $(data[r].total).data('orig-value') ? 
-                parseFloat($(data[r].total).data('orig-value')) : 0;
+                total += $(data[r].total).data('orig-value') ?
+                    parseFloat($(data[r].total).data('orig-value')) : 0;
             }
 
             $('.footer_total_card_payment').html(__currency_trans_from_en(total_card_payment));
@@ -417,8 +417,8 @@ $(document).ready(function() {
         $('input#sr_date_filter').on('apply.daterangepicker', function(ev, picker) {
             $(this).val(
                 picker.startDate.format(moment_date_format) +
-                    ' ~ ' +
-                    picker.endDate.format(moment_date_format)
+                ' ~ ' +
+                picker.endDate.format(moment_date_format)
             );
         });
 
@@ -436,44 +436,44 @@ $(document).ready(function() {
         }
 
         if ($('#sr_payments_with_commission_table').length > 0) {
-            sr_payments_with_commission_report = 
-            $('table#sr_payments_with_commission_table').DataTable({
-                processing: true,
-                serverSide: true,
-                fixedHeader:false,
-                aaSorting: [[1, 'desc']],
-                ajax: {
-                    url: '/reports/sell-payment-report',
-                    data: function(d) {
+            sr_payments_with_commission_report =
+                $('table#sr_payments_with_commission_table').DataTable({
+                    processing: true,
+                    serverSide: true,
+                    fixedHeader:false,
+                    aaSorting: [[1, 'desc']],
+                    ajax: {
+                        url: '/reports/sell-payment-report',
+                        data: function(d) {
 
-                        var start = $('input#sr_date_filter')
-                            .data('daterangepicker')
-                            .startDate.format('YYYY-MM-DD');
-                        var end = $('input#sr_date_filter')
-                            .data('daterangepicker')
-                            .endDate.format('YYYY-MM-DD');
-                        var commission_agent = $('select#sr_id').val();
-                        d.commission_agent = commission_agent != '' ? $('select#sr_id').val() : 0;
-                        d.location_id = $('select#sr_business_id').val();
-                        d.start_date = start;
-                        d.end_date = end;
+                            var start = $('input#sr_date_filter')
+                                .data('daterangepicker')
+                                .startDate.format('YYYY-MM-DD');
+                            var end = $('input#sr_date_filter')
+                                .data('daterangepicker')
+                                .endDate.format('YYYY-MM-DD');
+                            var commission_agent = $('select#sr_id').val();
+                            d.commission_agent = commission_agent != '' ? $('select#sr_id').val() : 0;
+                            d.location_id = $('select#sr_business_id').val();
+                            d.start_date = start;
+                            d.end_date = end;
+                        },
                     },
-                },
-                columns: [
-                    { data: 'payment_ref_no', name: 'payment_ref_no' },
-                    { data: 'paid_on', name: 'paid_on' },
-                    { data: 'amount', name: 'transaction_payments.amount' },
-                    { data: 'customer', orderable: false, searchable: false },
-                    { data: 'method', name: 'method' },
-                    { data: 'invoice_no', name: 't.invoice_no' },
-                    { data: 'action', orderable: false, searchable: false },
-                ],
-                fnDrawCallback: function(oSettings) {
-                    var total_amount = sum_table_col($('#sr_payments_with_commission_table'), 'paid-amount');
-                    $('#footer_total_amount').text(total_amount);
-                    __currency_convert_recursively($('#sr_payments_with_commission_table'));
-                }
-            });
+                    columns: [
+                        { data: 'payment_ref_no', name: 'payment_ref_no' },
+                        { data: 'paid_on', name: 'paid_on' },
+                        { data: 'amount', name: 'transaction_payments.amount' },
+                        { data: 'customer', orderable: false, searchable: false },
+                        { data: 'method', name: 'method' },
+                        { data: 'invoice_no', name: 't.invoice_no' },
+                        { data: 'action', orderable: false, searchable: false },
+                    ],
+                    fnDrawCallback: function(oSettings) {
+                        var total_amount = sum_table_col($('#sr_payments_with_commission_table'), 'paid-amount');
+                        $('#footer_total_amount').text(total_amount);
+                        __currency_convert_recursively($('#sr_payments_with_commission_table'));
+                    }
+                });
         }
 
         //Sales representative report -> Sales
@@ -859,7 +859,7 @@ $(document).ready(function() {
     //Product Sell Report
     if ($('table#product_sell_report_table').length == 1) {
         $('#product_sr_date_filter').daterangepicker(
-            dateRangeSettings, 
+            dateRangeSettings,
             function(start, end) {
                 $('#product_sr_date_filter').val(
                     start.format(moment_date_format) + ' ~ ' + end.format(moment_date_format)
@@ -1580,11 +1580,11 @@ function updateStockAdjustmentReport() {
     stock_adjustment_table.ajax
         .url(
             '/stock-adjustments?location_id=' +
-                location_id +
-                '&start_date=' +
-                start +
-                '&end_date=' +
-                end
+            location_id +
+            '&start_date=' +
+            start +
+            '&end_date=' +
+            end
         )
         .load();
 }
@@ -1811,6 +1811,11 @@ function updateTaxReport() {
         success: function(data) {
             $('.tax_diff').html(__currency_trans_from_en(data.tax_diff, true));
             __highlight(data.tax_diff, $('.tax_diff'));
-        },
+            $('.output_tax_label').html(__currency_trans_from_en(data.output_tax, true));
+            __highlight(data.output_tax, $('.output_tax_label'));
+            $('.input_tax_label').html(__currency_trans_from_en(data.input_tax, true));
+            __highlight(data.input_tax, $('.input_tax_label'));
+
+        }
     });
 }

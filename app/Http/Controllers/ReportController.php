@@ -753,6 +753,11 @@ class ReportController extends Controller
             if ($type == 'purchase') {
                 $sells->where('transactions.type', 'purchase')
                     ->where('transactions.status', 'received')
+                    ->leftJoin('transactions as returns', function($join) {
+                        $join->on('returns.return_parent_id', '=', 'transactions.id')
+                            ->where('returns.type', '=', 'purchase_return');
+                    })
+                    ->whereNull('returns.id')
                     ->where(function ($query) {
                         $query->whereHas('purchase_lines', function ($q) {
                             $q->whereNotNull('purchase_lines.tax_id');
@@ -942,19 +947,15 @@ class ReportController extends Controller
 
             $expense_tax_details = $this->transactionUtil->getExpenseTax($business_id, $start_date, $end_date, $location_id, $contact_id);
 
-            $module_output_taxes = $this->moduleUtil->getModuleData('getModuleOutputTax', ['start_date' => $start_date, 'end_date' => $end_date]);
-
-            $total_module_output_tax = 0;
-            foreach ($module_output_taxes as $key => $module_output_tax) {
-                $total_module_output_tax += $module_output_tax;
-            }
-
-            $total_output_tax = $output_tax_details['total_tax'] + $total_module_output_tax;
+            $total_output_tax = $output_tax_details['total_tax'] ;
 
             $tax_diff = $total_output_tax - $input_tax_details['total_tax'] - $expense_tax_details['total_tax'];
 
             return [
                 'tax_diff' => $tax_diff,
+                'output_tax' => $total_output_tax,
+                'input_tax' => $input_tax_details['total_tax'],
+                'expense_tax' => $expense_tax_details['total_tax'],
             ];
         }
 
@@ -962,7 +963,8 @@ class ReportController extends Controller
 
         $taxes = TaxRate::forBusiness($business_id);
 
-        $tax_report_tabs = $this->moduleUtil->getModuleData('getTaxReportViewTabs');
+        //$tax_report_tabs = $this->moduleUtil->getModuleData('getTaxReportViewTabs');
+        $tax_report_tabs = [];
 
         $contact_dropdown = Contact::contactDropdown($business_id, false, false);
 

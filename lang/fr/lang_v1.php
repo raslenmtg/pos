@@ -811,6 +811,8 @@ return [
     'others' => 'Autres',
     'out' => 'En dehors',
     'output_tax_minus_input_tax' => 'Taxe de sortie - Taxe d\'entrée',
+    'output_tax'=>'Taxe de sortie',
+    'input_tax'=>'Taxe de d\'entrée',
     'over_90_days_past_due' => 'Plus de 90 jours passés',
     'overall' => 'Globalement',
     'overall_summary' => 'Résumé global',
