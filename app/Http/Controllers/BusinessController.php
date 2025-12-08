@@ -351,7 +351,7 @@ class BusinessController extends Controller
         try {
           
 
-            $business_details = $request->only(['name', 'start_date', 'timbre_value', 'default_profit_percent', 'default_sales_tax', 'default_sales_discount', 'sell_price_tax', 'sku_prefix', 'time_zone', 'fy_start_month', 'accounting_method', 'transaction_edit_days', 'sales_cmsn_agnt', 'item_addition_method', 'currency_symbol_placement', 'on_product_expiry',
+            $business_details = $request->only(['name', 'start_date', 'timbre_value', 'default_profit_percent', 'default_sales_tax', 'default_sales_discount', 'sell_price_tax', 'sku_prefix', 'tax_number_1', 'fy_start_month', 'accounting_method', 'transaction_edit_days', 'sales_cmsn_agnt', 'item_addition_method', 'currency_symbol_placement', 'on_product_expiry',
                 'stop_selling_before', 'default_unit', 'expiry_type', 'date_format',
                 'time_format', 'ref_no_prefixes', 'theme_color', 'rp_name', 'amount_for_unit_rp',
                 'min_order_total_for_rp', 'max_rp_per_order',
@@ -379,11 +379,12 @@ class BusinessController extends Controller
                 $business_details['start_date'] = $this->businessUtil->uf_date($business_details['start_date']);
             }
 
-            if (! empty($request->input('enable_tooltip')) && $request->input('enable_tooltip') == 1) {
+            $business_details['enable_tooltip'] = 1;
+           /* if (! empty($request->input('enable_tooltip')) && $request->input('enable_tooltip') == 1) {
                 $business_details['enable_tooltip'] = 1;
             } else {
                 $business_details['enable_tooltip'] = 0;
-            }
+            }*/
 
             $business_details['enable_product_expiry'] = ! empty($request->input('enable_product_expiry')) && $request->input('enable_product_expiry') == 1 ? 1 : 0;
             if ($business_details['on_product_expiry'] == 'keep_selling') {
