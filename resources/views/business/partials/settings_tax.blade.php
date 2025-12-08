@@ -1,6 +1,4 @@
 <div class="pos-tab-content">
-    <div class="row">
-
   <div class="col-sm-4">
             {!! Form::label('enable_timbre',  'Activier timbre fiscale :') !!}
             <div class="input-group">
@@ -19,13 +17,15 @@
             </div>
         </div>
 
-
-
-
-
-
-
-
-
+        <div class="col-sm-4">
+            <div class="form-group">
+                {!! Form::label('tax_number_1','Matricule Fiscale:') !!}
+                <div class="input-group">
+                    <span class="input-group-addon">
+                       M.F
+                    </span>
+                    {!! Form::text('tax_number_1', $business->tax_number_1, ['class' => 'form-control']); !!}
+                </div>
+            </div>
+        </div>
     </div>
-</div>

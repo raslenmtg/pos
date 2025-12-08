@@ -33,8 +33,8 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        {!! Form::label('city', __( 'business.city' ) . ':*') !!}
-                        {!! Form::text('city', $location->city, ['class' => 'form-control', 'placeholder' => __( 'business.city'), 'required' ]); !!}
+                        {!! Form::label('city', __( 'business.city' ) ) !!}
+                        {!! Form::text('city', $location->city, ['class' => 'form-control', 'placeholder' => __( 'business.city') ]); !!}
                     </div>
                 </div>
                 <div class="col-sm-6">
@@ -46,16 +46,16 @@
                 <div class="clearfix"></div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        {!! Form::label('state', __( 'business.state' ) . ':*') !!}
-                        {!! Form::text('state', $location->state, ['class' => 'form-control', 'placeholder' => __( 'business.state'), 'required' ]); !!}
+                        {!! Form::label('state', __( 'business.state' ) ) !!}
+                        {!! Form::text('state', $location->state, ['class' => 'form-control', 'placeholder' => __( 'business.state'),  ]); !!}
                     </div>
                 </div>
-                <div class="col-sm-6">
+               {{-- <div class="col-sm-6">
                     <div class="form-group">
-                        {!! Form::label('country', __( 'business.country' ) . ':*') !!}
-                        {!! Form::text('country', $location->country, ['class' => 'form-control', 'placeholder' => __( 'business.country'), 'required' ]); !!}
+                        {!! Form::label('country', __( 'business.country' ) ) !!}
+                        {!! Form::text('country', $location->country, ['class' => 'form-control', 'placeholder' => __( 'business.country')]); !!}
                     </div>
-                </div>
+                </div>--}}
                 <div class="clearfix"></div>
                 <div class="col-sm-6">
                     <div class="form-group">

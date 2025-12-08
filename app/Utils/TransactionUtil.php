@@ -1051,21 +1051,21 @@ class TransactionUtil extends Util
             $output['location_custom_fields'] .= implode(', ', $temp);
         }
 
-       /* //Tax Info
+       //Tax Info
         if ($il->show_tax_1 == 1 && ! empty($business_details->tax_number_1)) {
-            $output['tax_label1'] = ! empty($business_details->tax_label_1) ? $business_details->tax_label_1.': ' : '';
+            $output['tax_label1'] = 'M.F';
 
             $output['tax_info1'] = $business_details->tax_number_1;
         }
-        if ($il->show_tax_2 == 1 && ! empty($business_details->tax_number_2)) {
-            if (! empty($output['tax_info1'])) {
-                $output['tax_info1'] .= ', ';
-            }
+        /*  if ($il->show_tax_2 == 1 && ! empty($business_details->tax_number_2)) {
+             if (! empty($output['tax_info1'])) {
+                 $output['tax_info1'] .= ', ';
+             }
 
-            $output['tax_label2'] = ! empty($business_details->tax_label_2) ? $business_details->tax_label_2.': ' : '';
+             $output['tax_label2'] = ! empty($business_details->tax_label_2) ? $business_details->tax_label_2.': ' : '';
 
-            $output['tax_info2'] = $business_details->tax_number_2;
-        }*/
+             $output['tax_info2'] = $business_details->tax_number_2;
+         }*/
 
         //Shop Contact Info
         $output['contact'] = '';

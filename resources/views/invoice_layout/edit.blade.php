@@ -407,14 +407,6 @@
               </div>
           </div>
         </div>
-        <div class="col-sm-3">
-          <div class="form-group">
-            <div class="checkbox">
-              <label>
-                {!! Form::checkbox('show_tax_2', 1, $invoice_layout->show_tax_2, ['class' => 'input-icheck']); !!} @lang('invoice.show_tax_2')</label>
-              </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>

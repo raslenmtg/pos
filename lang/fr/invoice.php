@@ -42,7 +42,7 @@
      'show_mobile_number' => 'Numéro de portable',
      'show_alternate_number' => 'Autre numéro',
      'show_email' => 'Email',
-     'show_tax_1' => 'Détails Taxe 1',
+     'show_tax_1' => 'Afficher matricule fiscale',
      'show_tax_2' => 'Détails Taxe 2',
      'fields_to_shown_for_communication' => 'Champs pour les détails de la communication',
      'fields_to_shown_for_tax' => 'Champs pour les détails fiscaux',
