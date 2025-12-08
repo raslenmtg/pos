@@ -1,0 +1,59 @@
+/* Force text font for all elements */
+html, body, * {
+  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+/* FontAwesome 5 icons - restore proper font */
+.fa, .fas, .far, .fal, .fad {
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 900;
+}
+.fab {
+  font-family: "Font Awesome 5 Brands" !important;
+  font-weight: 400;
+}
+
+/* Glyphicons - Bootstrap icons */
+.glyphicon, [class^="glyphicon-"], [class*=" glyphicon-"] {
+  font-family: "Glyphicons Halflings" !important;
+}
+
+/* Ionicons */
+.ion, [class^="ion-"], [class*=" ion-"] {
+  font-family: "Ionicons" !important;
+}
+
+/* Material Icons */
+.material-icons {
+  font-family: "Material Icons" !important;
+}
+
+/* DataTables sorting icons fix */
+table.dataTable thead .sorting:before,
+table.dataTable thead .sorting:after,
+table.dataTable thead .sorting_asc:before,
+table.dataTable thead .sorting_asc:after,
+table.dataTable thead .sorting_desc:before,
+table.dataTable thead .sorting_desc:after {
+  font-family: "Font Awesome 5 Free" !important;
+}
+
+/* Any icon-based elements */
+[class*="icon-"] {
+  font-family: "Font Awesome 5 Free", "Glyphicons Halflings", "Ionicons" !important;
+}
+
+/* AdminLTE specific icon fixes */
+.sidebar-menu .fa,
+.sidebar-menu .fas,
+.sidebar-menu .far,
+.main-header .fa,
+.main-header .fas,
+.main-header .far,
+.btn .fa,
+.btn .fas,
+.btn .far {
+  font-family: "Font Awesome 5 Free" !important;
+  font-weight: 900;
+}
+
