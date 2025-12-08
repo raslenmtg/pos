@@ -3,39 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  html, body {
-    font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
-  }
-
-  * {
-    font-family: inherit;
-  }
-
-  /* FontAwesome icons */
-  .fa, .fas, .far, .fal, .fad {
-    font-family: "Font Awesome 5 Free" !important;
-  }
-  .fab {
-    font-family: "Font Awesome 5 Brands" !important;
-  }
-  [class^="fa-"], [class*=" fa-"] {
-    font-family: "Font Awesome 5 Free", "Font Awesome 5 Brands" !important;
-  }
-
-  /* Glyphicons */
-  .glyphicon, [class^="glyphicon-"], [class*=" glyphicon-"] {
-    font-family: "Glyphicons Halflings" !important;
-  }
-
-  /* Ionicons */
-  .ion, [class^="ion-"], [class*=" ion-"] {
-    font-family: "Ionicons" !important;
-  }
-
-  /* Material Icons */
-  .material-icons {
-    font-family: "Material Icons" !important;
-  }
 }
 @layer components {
 }
