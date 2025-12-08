@@ -24,7 +24,7 @@
      'sale_tax' => "Définir la taxe de vente par défaut' pour toutes les ventes dans les paramètres d'entreprise.Cliquez sur l'icône de modification ci-dessous pour ajouter / mettre à jour la taxe de commande. ",
      'default_profit_percent' => "Marge bénéficiaire par défaut d'un produit. <br> <small class = 'text-muted'> Utilisé pour calculer le prix de vente en fonction du prix d'achat saisi. <br/> Vous pouvez modifier cette valeur pour les produits individuels en ajoutant </small> ",
      'fy_start_month' => "Début du mois de l'année financière pour votre entreprise",
-     'business_tax' => 'Numéro de taxe enregistré pour votre entreprise.',
+     'business_tax' => 'Informations fiscale pour votre entreprise.',
      'invoice_scheme' => "Schéma de facture signifie le format de numérotation des factures.Sélectionnez le schéma à utiliser pour cet emplacement d'entreprise <br> <small class = 'text-muted'> <i> Vous pouvez ajouter un nouveau schéma de facture </b> dans les paramètres de facture </ i > </small> ",
      'invoice_layout' => "Mise en page de facture à utiliser pour cet établissement <br> <small class ='text-muted'> (<i> Vous pouvez ajouter une nouvelle <b> Mise en page de facture </b> dans <b> Paramètres de facture <b> < / i>) </small> ",
      'invoice_scheme_name' => 'Donnez un nom court et significatif au système de facturation.',
