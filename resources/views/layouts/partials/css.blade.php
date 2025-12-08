@@ -10,6 +10,13 @@
 	<link rel="stylesheet" href="{{ asset('css/rtl.css?v='.$asset_v) }}">
 @endif
 
+<style>
+    /* Global font stack with safe fallbacks */
+    * {
+        font-family: "Roboto", "Arial", "Tahoma", "Segoe UI", sans-serif;
+    }
+</style>
+
 @yield('css')
 
 <!-- app css -->
@@ -79,4 +86,9 @@
 @if(!empty($__system_settings['additional_css']))
     {!! $__system_settings['additional_css'] !!}
 @endif
-
+<style>
+    /* Global font stack with safe fallbacks */
+    * {
+        font-family: "Roboto", "Arial", "Tahoma", "Segoe UI", sans-serif;
+    }
+</style>
