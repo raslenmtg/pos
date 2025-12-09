@@ -815,12 +815,12 @@ class ReportController extends Controller
                     if ($type == 'sell') {
                         foreach ($row->sell_lines as $sell_line) {
                             if ($sell_line->tax_id == $tax['id']) {
-                                $tax_amount += ($sell_line->item_tax * ($sell_line->quantity - $sell_line->quantity_returned));
+                                $tax_amount += ( ($sell_line->unit_price_inc_tax* ($tax['amount'] / (100 + $tax['amount'])) ) * ($sell_line->quantity - $sell_line->quantity_returned));
                             }
 
                             //break group tax
                             if ($sell_line->line_tax->is_tax_group == 1 && array_key_exists($tax['id'], $group_taxes[$sell_line->tax_id]['sub_taxes'])) {
-                                $group_tax_details = $this->transactionUtil->groupTaxDetails($sell_line->line_tax, $sell_line->item_tax);
+                                $group_tax_details = $this->transactionUtil->groupTaxDetails($sell_line->line_tax, ($sell_line->unit_price_inc_tax* ($tax['amount'] / (100 + $tax['amount'])) ));
 
                                 $sub_tax_share = 0;
                                 foreach ($group_tax_details as $sub_tax_details) {
@@ -835,12 +835,12 @@ class ReportController extends Controller
                     } elseif ($type == 'purchase') {
                         foreach ($row->purchase_lines as $purchase_line) {
                             if ($purchase_line->tax_id == $tax['id']) {
-                                $tax_amount += ($purchase_line->item_tax * ($purchase_line->quantity - $purchase_line->quantity_returned));
+                               $tax_amount += ( ($purchase_line->purchase_price_inc_tax * ($tax['amount'] / (100 + $tax['amount']))) * ($purchase_line->quantity - $purchase_line->quantity_returned));
                             }
 
                             //break group tax
                             if ($purchase_line->line_tax->is_tax_group == 1 && array_key_exists($tax['id'], $group_taxes[$purchase_line->tax_id]['sub_taxes'])) {
-                                $group_tax_details = $this->transactionUtil->groupTaxDetails($purchase_line->line_tax, $purchase_line->item_tax);
+                                $group_tax_details = $this->transactionUtil->groupTaxDetails($purchase_line->line_tax,($purchase_line->purchase_price_inc_tax * ($tax['amount'] / (100 + $tax['amount']))));
 
                                 $sub_tax_share = 0;
                                 foreach ($group_tax_details as $sub_tax_details) {
