@@ -13,7 +13,7 @@
 								<tr class="bg-green">
 									<th>@lang( 'product.product_name' )</th>
 									<th>@lang( 'lang_v1.quantity_left' )</th>
-									<th>@lang( 'purchase.unit_cost_before_tax' )</th>
+									<th>@lang( 'purchase.unit_cost_before_tax' ) @show_tooltip(__('tooltip.opening_stock_first_price'))</th>
 									@if($enable_expiry == 1 && $product->enable_stock == 1)
 										<th>Exp. Date</th>
 									@endif

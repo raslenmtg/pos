@@ -51,6 +51,7 @@
      'purchase_different_currency' => 'Sélectionnez cette option si vous achetez dans une devise différente de votre monnaie commerciale',
      'currency_exchange_factor' => "1 Devise d'achat =? Devise de base <br> <small class='text-muted'> Vous pouvez activer / désactiver 'Acheter dans une autre devise' dans les paramètres d'entreprise. </small>",
      'accounting_method' => 'Méthode comptable',
+     'opening_stock_first_price' => 'Premier prix d\'achat du stock d\'ouverture',
      'transaction_edit_days' => "Nombre de jours à partir de la date de transaction jusqu'à laquelle une transaction peut être modifiée.",
      'stock_expiry_alert' => "Liste des stocks expirant dans :days jours <br> <small class='text-muted'> Vous pouvez définir le nombre de jours dans les paramètres d'entreprise </small>",
  ];
