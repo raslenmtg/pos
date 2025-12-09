@@ -5,9 +5,9 @@
 
 <!-- Content Header (Page header) -->
 <section class="content-header">
-    <h1 class="tw-text-xl md:tw-text-3xl tw-font-bold tw-text-black">@lang('stock_adjustment.stock_adjustments')
-        <small></small>
-    </h1>
+    <h1 class="tw-text-xl md:tw-text-3xl tw-font-bold tw-text-black">@lang('stock_adjustment.stock_adjustments') @show_tooltip(__('tooltip.adjustment_title'))</h1>
+
+    <small style="color: gray;">{{__('tooltip.adjustment_title')}}</small>
 </section>
 
 <!-- Main content -->
