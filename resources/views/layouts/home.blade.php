@@ -11,7 +11,6 @@
         <title>@yield('title')</title>
 
         <!-- Fonts -->
-        <!-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,300,600" rel="stylesheet" type="text/css"> -->
 
         <link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
 
