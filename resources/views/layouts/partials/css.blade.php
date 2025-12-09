@@ -12,6 +12,7 @@
     /* Global font stack with safe fallbacks */
     * {
         font-family: "Roboto", "Arial", "Tahoma", "Segoe UI", sans-serif;
+        font-weight: 600;
     }
 </style>
 
@@ -84,9 +85,3 @@
 @if(!empty($__system_settings['additional_css']))
     {!! $__system_settings['additional_css'] !!}
 @endif
-<style>
-    /* Global font stack with safe fallbacks */
-    * {
-        font-family: "Roboto", "Arial", "Tahoma", "Segoe UI", sans-serif;
-    }
-</style>
