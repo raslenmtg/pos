@@ -20,6 +20,9 @@
 @if(session('business.enable_rp') == 1)
     <input type="hidden" id="reward_point_enabled">
 @endif
+    @if ($business_details->enable_timbre)
+        <input type="hidden" id="timbre_value" value="{{ $business_details->timbre_value }}">
+    @endif
 @php
 	$custom_labels = json_decode(session('business.custom_labels'), true);
 	$common_settings = session()->get('business.common_settings');
@@ -457,6 +460,13 @@
 			    	<b>@lang( 'sale.order_tax' ):</b>(+) 
 					<span class="display_currency" id="order_tax">{{$transaction->tax_amount}}</span>
 			    </div>
+                    <div class="clearfix"></div>
+                    @if($business_details->enable_timbre)
+                        <div class="col-md-4 col-md-offset-8  @if($transaction->type == 'sales_order') hide @endif">
+                            <b>Timbre fiscale:</b>(+)
+                            <span class="display_currency">{{ $business_details->timbre_value }}</span>
+                        </div>
+                    @endif
 			    <div class="col-md-12">
 			    	<div class="form-group">
 						{!! Form::label('sell_note',__('sale.sell_note') . ':') !!}
