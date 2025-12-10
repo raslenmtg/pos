@@ -17,10 +17,7 @@
 									@if($enable_expiry == 1 && $product->enable_stock == 1)
 										<th>Exp. Date</th>
 									@endif
-									@if($enable_lot == 1)
-										<th>@lang( 'lang_v1.lot_number' )</th>
-									@endif
-									<th>@lang( 'purchase.subtotal_before_tax' )</th>
+									<th>@lang( 'lang_v1.subtotal_label' )</th>
 									<th>@lang( 'lang_v1.date' )</th>
 									<th>@lang( 'brand.note' )</th>
 									<th>&nbsp;</th>
@@ -34,7 +31,7 @@
 	@if(empty($purchases[$key][$variation->id]))
 		@php
 			$purchases[$key][$variation->id][] = ['quantity' => 0, 
-			'purchase_price' => $variation->default_purchase_price,
+			'purchase_price' => $variation->dpp_inc_tax,
 			'purchase_line_id' => null,
 			'lot_number' => null,
 			'transaction_date' => null,
@@ -52,7 +49,6 @@
 	$qty = $var['quantity'];
 
 	$purcahse_price = $var['purchase_price'];
-
 	$row_total = $qty * $purcahse_price;
 
 	$subtotal += $row_total;
@@ -165,7 +161,7 @@
 								<tfoot>
 								<tr>
 									<td colspan="@if($enable_expiry == 1 && $product->enable_stock == 1 && $enable_lot == 1) 5 @elseif(($enable_expiry == 1 && $product->enable_stock == 1) || $enable_lot == 1) @else 3 @endif"></td>
-									<td><strong>@lang( 'lang_v1.total_amount_exc_tax' ): </strong> <span id="total_subtotal">{{@num_format($subtotal)}}</span>
+									<td><strong>@lang( 'lang_v1.total_amount_with_tax' ): </strong> <span id="total_subtotal">{{@num_format($subtotal)}}</span>
 									<input type="hidden" id="total_subtotal_hidden" value=0>
 									</td>
 								</tr>

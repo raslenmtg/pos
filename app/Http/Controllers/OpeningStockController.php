@@ -78,6 +78,7 @@ class OpeningStockController extends Controller
                     //Show only remaining quantity for editing opening stock.
                     $purchase_lines[$purchase_line->variation_id][$k]['quantity'] = $purchase_line->quantity_remaining;
                     $purchase_lines[$purchase_line->variation_id][$k]['purchase_price'] = $purchase_line->purchase_price;
+                    $purchase_lines[$purchase_line->variation_id][$k]['purchase_price_inc_tax'] = $purchase_line->purchase_price_inc_tax;
                     $purchase_lines[$purchase_line->variation_id][$k]['purchase_line_id'] = $purchase_line->id;
                     $purchase_lines[$purchase_line->variation_id][$k]['exp_date'] = $purchase_line->exp_date;
                     $purchase_lines[$purchase_line->variation_id][$k]['lot_number'] = $purchase_line->lot_number;
