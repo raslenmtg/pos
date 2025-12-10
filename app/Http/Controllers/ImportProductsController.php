@@ -140,23 +140,7 @@ class ImportProductsController extends Controller
                         break;
                     }
 
-                    //image name
-                    $image_name = trim($value[29]);
-                    if (! empty($image_name)) {
-                        if (filter_var($image_name, FILTER_VALIDATE_URL)) {
-                            $source_image = file_get_contents($image_name);
 
-                            $path = parse_url($image_name, PHP_URL_PATH);
-                            $new_name = time().'_'.basename($path);
-                            $dest_img = public_path().'/uploads/'.config('constants.product_img_path').'/'.$new_name;
-                            file_put_contents($dest_img, $source_image);
-                            $product_array['image'] = $new_name;
-                        } else {
-                            $product_array['image'] = $image_name;
-                        }
-                    } else {
-                        $product_array['image'] = '';
-                    }
 
                     $product_array['product_description'] = isset($value[30]) ? $value[30] : null;
 
@@ -202,9 +186,10 @@ class ImportProductsController extends Controller
                     } elseif ($product_type == 'combo') {
                         continue;
                     } else {
-                        $is_valid = false;
-                        $error_msg = "Invalid value for PRODUCT TYPE in row no. $row_no";
-                        break;
+                        $product_array['type'] = 'single';
+                      //  $is_valid = false;
+                      //  $error_msg = "Invalid value for PRODUCT TYPE in row no. $row_no";
+                      //  break;
                     }
 
                     //Add unit
@@ -229,16 +214,7 @@ class ImportProductsController extends Controller
                     }
 
                     //Add barcode type
-                    $barcode_type = strtoupper(trim($value[6]));
-                    if (empty($barcode_type)) {
-                        $product_array['barcode_type'] = 'C128';
-                    } elseif (array_key_exists($barcode_type, $this->barcode_types)) {
-                        $product_array['barcode_type'] = $barcode_type;
-                    } else {
-                        $is_valid = false;
-                        $error_msg = "$barcode_type barcode type is not valid in row no. $row_no. Please, check for allowed barcode types in the instructions";
-                        break;
-                    }
+                        $product_array['barcode_type'] = 'EAN13';
 
                     //Add Tax
                     $tax_name = trim($value[11]);
@@ -262,9 +238,10 @@ class ImportProductsController extends Controller
                     if (in_array($tax_type, ['inclusive', 'exclusive'])) {
                         $product_array['tax_type'] = $tax_type;
                     } else {
-                        $is_valid = false;
+                        $product_array['tax_type'] = 'inclusive';
+                      /*  $is_valid = false;
                         $error_msg = "Invalid value for Selling Price Tax Type in row no. $row_no";
-                        break;
+                        break;*/
                     }
 
                     //Add alert quantity
@@ -319,39 +296,6 @@ class ImportProductsController extends Controller
                         }
                     } else {
                         $product_array['sku'] = ' ';
-                    }
-
-                    //Add product expiry
-                    $expiry_period = trim($value[9]);
-                    $expiry_period_type = strtolower(trim($value[10]));
-                    if (! empty($expiry_period) && in_array($expiry_period_type, ['months', 'days'])) {
-                        $product_array['expiry_period'] = $expiry_period;
-                        $product_array['expiry_period_type'] = $expiry_period_type;
-                    } else {
-                        //If Expiry Date is set then make expiry_period 12 months.
-                        if (! empty($value[23])) {
-                            $product_array['expiry_period'] = 12;
-                            $product_array['expiry_period_type'] = 'months';
-                        }
-                    }
-
-                    //Enable IMEI or Serial Number
-                    $enable_sr_no = trim($value[24]);
-                    if (in_array($enable_sr_no, [0, 1])) {
-                        $product_array['enable_sr_no'] = $enable_sr_no;
-                    } elseif (empty($enable_sr_no)) {
-                        $product_array['enable_sr_no'] = 0;
-                    } else {
-                        $is_valid = false;
-                        $error_msg = "Invalid value for ENABLE IMEI OR SERIAL NUMBER  in row no. $row_no";
-                        break;
-                    }
-
-                    //Weight
-                    if (isset($value[25])) {
-                        $product_array['weight'] = trim($value[25]);
-                    } else {
-                        $product_array['weight'] = '';
                     }
 
                     if ($product_array['type'] == 'single') {
@@ -497,18 +441,6 @@ class ImportProductsController extends Controller
                             }
                         }
 
-                        //Map profit margin with variation values
-                        $profit_margin = [];
-                        if (! empty($profit_margin_string)) {
-                            $profit_margin = array_map('trim', explode(
-                                '|',
-                                $profit_margin_string
-                                ));
-                        } else {
-                            foreach ($variation_values as $k => $v) {
-                                $profit_margin[$k] = $default_profit_percent;
-                            }
-                        }
 
                         //Check if length of prices array is equal to variation values array length
                         $array_lengths_count = [count($variation_values), count($dpp_inc_tax), count($dpp_exc_tax), count($selling_price), count($profit_margin)];
@@ -548,10 +480,10 @@ class ImportProductsController extends Controller
                             $product_array['variation']['variations'][] = [
                                 'value' => $v,
                                 'variation_value_id' => $variation_value->id,
-                                'default_purchase_price' => $variation_prices['dpp_exc_tax'],
+                                'default_purchase_price' => $variation_prices['dpp_inc_tax'],
                                 'dpp_inc_tax' => $variation_prices['dpp_inc_tax'],
                                 'profit_percent' => $this->productUtil->num_f($profit_margin[$k]),
-                                'default_sell_price' => $variation_prices['dsp_exc_tax'],
+                                'default_sell_price' => $variation_prices['dsp_inc_tax'],
                                 'sell_price_inc_tax' => $variation_prices['dsp_inc_tax'],
                                 'sub_sku' => ! empty($variation_skus[$k]) ? $variation_skus[$k] : '',
                             ];
@@ -626,16 +558,6 @@ class ImportProductsController extends Controller
                             $product->sku = $sku;
                             $product->save();
                         }
-
-                        //Rack, Row & Position.
-                        $this->rackDetails(
-                            $imported_data[$index][26],
-                            $imported_data[$index][27],
-                            $imported_data[$index][28],
-                            $business_id,
-                            $product->id,
-                            $index + 1
-                        );
 
                         //Product locations
                         if (! empty($imported_data[$index][36])) {
