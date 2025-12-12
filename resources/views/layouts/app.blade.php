@@ -136,9 +136,9 @@
                 @includeIf($additional_view)
             @endforeach
         @endif
-        <div>
 
             <div class="overlay tw-hidden"></div>
+    </div>
 </body>
 <style>
     @media print {
@@ -174,8 +174,6 @@
         position:relative;
     }
     
-
-
 
 </style>
 
