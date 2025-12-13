@@ -57,24 +57,49 @@
 </style>
 <table class="print-scale" style="width:100%; color: #000000 !important; font-family: 'Times New Roman', serif; border-collapse: collapse;">
     <tbody>
-    <tr>
-        <td style="text-align: center; line-height: 15px !important; padding-bottom: 10px !important; border-bottom: 1px solid #000;" class="invoice-header">
-            @if(empty($receipt_details->letter_head))
-                @if(!empty($receipt_details->header_text))
-                    <div style="margin-bottom: 10px;">{!! $receipt_details->header_text !!}</div>
-                @endif
+    <td style="width: 100%; padding-bottom: 10px; border-bottom: 1px solid #000;">
+        <table style="width:100%; border-collapse: collapse;">
+            <tr>
+                <!-- LOGO (LEFT) -->
+                <td style="width: 20%; vertical-align: middle; text-align: left;">
+                    @if(!empty($receipt_details->logo))
+                        <img src="{{$receipt_details->logo}}" style="max-width: 180px; max-height: 100px;">
+                    @endif
+                </td>
 
-                @php
-                    $sub_headings = implode('<br/>', array_filter([$receipt_details->sub_heading_line1, $receipt_details->sub_heading_line2, $receipt_details->sub_heading_line3, $receipt_details->sub_heading_line4, $receipt_details->sub_heading_line5]));
-                @endphp
+                <!-- CENTER TEXT -->
+                <td style="width: 60%; text-align: center; line-height: 15px;">
+                    @if(empty($receipt_details->letter_head))
+                        @if(!empty($receipt_details->header_text))
+                            <div style="margin-bottom: 6px;">{!! $receipt_details->header_text !!}</div>
+                        @endif
 
-                @if(!empty($sub_headings))
-                    <div style="margin-bottom: 15px;">{!! $sub_headings !!}</div>
-                @endif
-            @endif
-            <p style="font-weight: bold; font-size: 24px !important; line-height: 1; margin: 10px 0;">{!! $receipt_details->invoice_no_prefix !!} {{$receipt_details->invoice_no}}</p>
-        </td>
-    </tr>
+                        @php
+                            $sub_headings = implode('<br/>', array_filter([
+                                $receipt_details->sub_heading_line1,
+                                $receipt_details->sub_heading_line2,
+                                $receipt_details->sub_heading_line3,
+                                $receipt_details->sub_heading_line4,
+                                $receipt_details->sub_heading_line5
+                            ]));
+                        @endphp
+
+                        @if(!empty($sub_headings))
+                            <div style="margin-bottom: 8px;">{!! $sub_headings !!}</div>
+                        @endif
+                    @endif
+
+                    <div style="font-weight: bold; font-size: 24px; margin-top: 8px;">
+                        {!! $receipt_details->invoice_no_prefix !!} {{$receipt_details->invoice_no}}
+                    </div>
+                </td>
+
+                <!-- EMPTY RIGHT (BALANCE) -->
+                <td style="width: 20%;"></td>
+            </tr>
+        </table>
+    </td>
+
 
     <tr>
         <td style="padding: 10px 0;" class="customer-info">
