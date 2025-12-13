@@ -284,7 +284,7 @@
                     <td style="border: 1px solid #000; padding: 5px; text-align: right;">TVA</td>
                     <td style="border: 1px solid #000; padding: 5px; text-align: right;">P.U TTC</td>
                     <td style="border: 1px solid #000; padding: 5px;">Remise</td>
-                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">{!! $receipt_details->table_subtotal_label !!}</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">TOTAL TTC</td>
                 </tr>
                 </thead>
                 <tbody>

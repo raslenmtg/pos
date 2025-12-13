@@ -106,9 +106,9 @@
 			width: 100%;
 			table-layout: fixed;
 		}
-		.invoice-container-bon .items-table .col-code { width: 12%; }
+
 		.invoice-container-bon .items-table .col-designation { width: 30%; }
-		.invoice-container-bon .items-table .col-qty { width: 8%; }
+
 		.invoice-container-bon .items-table .col-pu { width: 10%; }
 		.invoice-container-bon .items-table .col-netht { width: 10%; }
 		.invoice-container-bon .items-table .col-tva { width: 8%; }
@@ -259,7 +259,7 @@
 		<table class="doc-info-table">
 			<tr>
 				<td><strong>Date Le :</strong> {{$receipt_details->invoice_date}}</td>
-				<td class="doc-number">
+				<td class="doc-number" style="font-size: 14px">
 					<strong>{!! $receipt_details->invoice_heading !!} N° :</strong> {{$receipt_details->invoice_no}} <br>
 
 				</td>
@@ -268,14 +268,14 @@
 		<table class="items-table">
 			<thead>
 				<tr>
-					<th class="col-code">#</th>
-					<th class="col-designation">DESIGNATION</th>
-					<th class="col-qty">QUANTITE</th>
-					<th class="col-pu">P.U. HT</th>
-					<th class="col-netht">TOTAL HT</th>
-					<th class="col-tva">TVA</th>
-					<th class="col-tva">Remise</th>
-					<th class="col-ttc">TOTAL TTC</th>
+                    <td style="border: 1px solid #000; padding: 5px;width: 10px">#</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: left;" width="45%">DESIGNATION</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">Qté</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">P.U. HT</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">TOTAL HT</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">TVA</td>
+                    <td style="border: 1px solid #000; padding: 5px;">Remise</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">TOTAL TTC</td>
 				</tr>
 			</thead>
 			<tbody>
