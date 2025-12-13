@@ -43,9 +43,19 @@
             page-break-inside: avoid !important;
             break-inside: avoid !important;
         }
+        @page {
+            size: A4;
+            margin: 8mm;
+        }
+
+        body {
+            zoom: 0.7;
+        }
+
+
     }
 </style>
-<table style="width:100%; color: #000000 !important; font-family: 'Times New Roman', serif; border-collapse: collapse;">
+<table class="print-scale" style="width:100%; color: #000000 !important; font-family: 'Times New Roman', serif; border-collapse: collapse;">
     <tbody>
     <tr>
         <td style="text-align: center; line-height: 15px !important; padding-bottom: 10px !important; border-bottom: 1px solid #000;" class="invoice-header">
@@ -424,7 +434,7 @@
 
                 <!-- Payment Details -->
                 @if(!empty($receipt_details->payments))
-                    <table style="width: 35%; padding-top:10px; border-collapse: collapse; border: 1px solid #000;" class="payment-section no-break">
+                    <table style="width: fit-content; padding-top:10px; border-collapse: collapse; border: 1px solid #000;" class="payment-section no-break">
                         <thead>
                         <tr style="background-color: #f0f0f0 !important;">
                             <th style="border: 1px solid #000; padding: 5px;">Méthode paiement</th>
@@ -451,7 +461,6 @@
                     </div>
                 @endif
 
-                <hr/>
                 @if(!empty($receipt_details->footer_text))
                     <div style="width:100%; text-align: center; margin-top:5px; margin-bottom:5px; display:flex; justify-content:center">
                         {!! $receipt_details->footer_text !!}
