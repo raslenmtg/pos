@@ -279,8 +279,8 @@
                         <th>{{$receipt_details->table_product_label}}</th>
                         <th class="text-right" style="width: 12%;">{{$receipt_details->table_qty_label}}</th>
                         <th class="text-right" style="width: 15%;">{{$receipt_details->table_unit_price_label}}</th>
-                        @if(!empty($receipt_details->item_discount_label))
-                            <th class="text-right" style="width: 12%;">{{$receipt_details->item_discount_label}}</th>
+                        @if( !empty($receipt_details->total_line_discount) )
+                            <th class="text-right" style="width: 12%;">Remise</th>
                         @endif
                         <th class="text-right" style="width: 15%;">{{$receipt_details->table_subtotal_label}}</th>
                     </tr>
@@ -301,7 +301,7 @@
                           
                             <td class="text-right">{{$line['quantity']}} {{$line['units']}}</td>
                             <td class="text-right">{{$line['unit_price_before_discount']}}</td>
-                            @if(!empty($receipt_details->item_discount_label))
+                            @if( !empty($receipt_details->total_line_discount) )
                                 <td class="text-right">{{$line['total_line_discount'] ?? '0.00'}}</td>
                             @endif
                             <td class="text-right">{{$line['line_total']}}</td>
@@ -327,10 +327,6 @@
 
             <div class="summary-right">
                 <table class="totals-table">
-                    <tr>
-                        <td>{!! $receipt_details->subtotal_label !!}</td>
-                        <td>{{$receipt_details->subtotal}}</td>
-                    </tr>
 
                     @if( !empty($receipt_details->discount) )
                         <tr>
@@ -344,6 +340,11 @@
                             <td>(-) {{$receipt_details->total_line_discount}}</td>
                         </tr>
                     @endif
+
+                    <tr>
+                        <td>{!! $receipt_details->subtotal_label !!}</td>
+                        <td>{{$receipt_details->subtotal}}</td>
+                    </tr>
 
                     @if(!empty($receipt_details->shipping_charges))
                         <tr>

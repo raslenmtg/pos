@@ -314,8 +314,8 @@
                        
                         <th class="text-right" style="width: 12%;">Qté</th>
                         <th class="text-right" style="width: 15%;">P.U TTC</th>
-                        @if(!empty($receipt_details->item_discount_label))
-                            <th class="text-right" style="width: 12%;">{{$receipt_details->item_discount_label}}</th>
+                        @if( !empty($receipt_details->total_line_discount) )
+                            <th class="text-right" style="width: 12%;">Remise</th>
                         @endif
                         <th class="text-right" style="width: 15%;">Sous-total</th>
                     </tr>
@@ -336,7 +336,7 @@
                           
                             <td class="text-right">{{$line['quantity_uf']}}</td>
                             <td class="text-right">{{$line['unit_price_before_discount']}}</td>
-                            @if(!empty($receipt_details->item_discount_label))
+                            @if( !empty($receipt_details->total_line_discount) )
                                 <td class="text-right">{{$line['total_line_discount'] ?? '0.00'}}</td>
                             @endif
                             <td class="text-right">{{$line['line_total']}}</td>

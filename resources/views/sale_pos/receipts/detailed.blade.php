@@ -148,11 +148,7 @@
 
                     <td style="width: 50%; vertical-align: top; border-left: 1px solid #000; padding-left: 15px;">
                         <div>
-                            @if(!empty($receipt_details->customer_label))
-                                <strong>{{ $receipt_details->customer_label }}</strong>
-                            @endif
-
-                            <!-- customer info -->
+                                <strong>Client: </strong>
                             @if(!empty($receipt_details->customer_info))
                                 {!! $receipt_details->customer_info !!}
                             @endif
@@ -162,7 +158,7 @@
                             @endif
                             @if(!empty($receipt_details->customer_tax_number))
                                 <br/>
-                                <strong>M.F</strong> {{ $receipt_details->customer_tax_number }}
+                                <strong>M.F:</strong> {{ $receipt_details->customer_tax_number }}
                             @endif
                             @if(!empty($receipt_details->customer_custom_fields))
                                 <br/>{!! $receipt_details->customer_custom_fields !!}
@@ -283,7 +279,7 @@
                     <td style="border: 1px solid #000; padding: 5px; text-align: right;">P.U HT</td>
                     <td style="border: 1px solid #000; padding: 5px; text-align: right;">TVA</td>
                     <td style="border: 1px solid #000; padding: 5px; text-align: right;">P.U TTC</td>
-                    <td style="border: 1px solid #000; padding: 5px;">Remise</td>
+                    <td style="border: 1px solid #000; padding: 5px;width: 20px">Remise</td>
                     <td style="border: 1px solid #000; padding: 5px; text-align: right;">TOTAL TTC</td>
                 </tr>
                 </thead>

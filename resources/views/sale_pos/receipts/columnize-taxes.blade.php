@@ -258,7 +258,7 @@
 
 		<table class="doc-info-table">
 			<tr>
-				<td><strong>Date Le :</strong> {{$receipt_details->invoice_date}}</td>
+				<td><strong>Date le :</strong> {{$receipt_details->invoice_date}}</td>
 				<td class="doc-number" style="font-size: 14px">
 					<strong>{!! $receipt_details->invoice_heading !!} N° :</strong> {{$receipt_details->invoice_no}} <br>
 
@@ -271,11 +271,12 @@
                     <td style="border: 1px solid #000; padding: 5px;width: 10px">#</td>
                     <td style="border: 1px solid #000; padding: 5px; text-align: left;" width="45%">DESIGNATION</td>
                     <td style="border: 1px solid #000; padding: 5px; text-align: right;">Qté</td>
-                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">P.U. HT</td>
-                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">TOTAL HT</td>
-                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">TVA</td>
-                    <td style="border: 1px solid #000; padding: 5px;">Remise</td>
-                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">TOTAL TTC</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: center;">P.U. HT</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: center;">TOTAL HT</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: center;width: 10px">TVA</td>
+                    <td style="border: 1px solid #000; padding: 5px;text-align: center;">Remise</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: center;width: 10%">P.U TTC</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: center;">TOTAL TTC</td>
 				</tr>
 			</thead>
 			<tbody>
@@ -307,7 +308,9 @@
                                 {{$line['total_line_discount']!='0.000'?$line['total_line_discount']:'' }}
                             @endif
                         </td>
-
+                        <td style="border: 1px solid #000; padding: 5px; text-align: right;">
+                            {{$line['base_unit_price']}}
+                        </td>
 						<td class="col-ttc text-right">
 								{{$line['line_total']}}
 						</td>

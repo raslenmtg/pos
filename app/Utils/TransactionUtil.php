@@ -1323,8 +1323,8 @@ class TransactionUtil extends Util
                     if (! isset($output['taxes'][$line['tax_name']])) {
                         $output['taxes'][$line['tax_name']] = 0;
                     }
-
-                    $output['taxes'][$line['tax_name']] += ((float) $line['unit_price_exc_tax'] * $line['quantity_uf']*($line['tax_percent']/100));
+                //   $output['taxes'][$line['tax_name']] += ((float) $line['line_total_exc_tax'] * ($line['tax_percent']/100))*($line['tax_percent']/100);
+                    $output['taxes'][$line['tax_name']] += (float) $line['tax_unformatted']* $line['quantity_uf'];
                 }
 
                 if (! empty($line['tax_id']) && $line['tax_percent'] == 0) {
@@ -1796,7 +1796,7 @@ class TransactionUtil extends Util
                 'unit_price_uf' => (float)$line->unit_price,
                 'tax' => $this->num_f($line->item_tax, false, $business_details),
                 'tax_id' =>$line->product->tax,
-                'tax_unformatted' => ! empty($tax_details) ?$this->num_f( $line->unit_price_before_discount -$line->unit_price_before_discount/(1+($tax_details->amount/100))) : null,
+                'tax_unformatted' => ! empty($tax_details) ?$this->num_f( $line->unit_price_inc_tax -$line->unit_price_inc_tax/(1+($tax_details->amount/100))) : null,
                 'tax_name' => ! empty($tax_details) ? $tax_details->name : null,
                 'tax_percent' => ! empty($tax_details) ? $tax_details->amount : null,
 
