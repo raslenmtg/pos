@@ -346,9 +346,9 @@
                 <!-- Payment and Totals Section -->
                 <table style="width: 100%; border-collapse: collapse; margin: 15px 0;" class="totals-section no-break">
                     <tr>
-                        @if(!empty($receipt_details->taxes))
                         <td style="width: 40%; vertical-align: top; padding-right: 15px;">
                             <!-- tax -->
+                            @if(!empty($receipt_details->taxes))
                                 <table style="width: 90%; border-collapse: collapse; border: 1px solid #000; margin: 10px 0;">
                                     <tr>
                                         <th colspan="2" style="border: 1px solid #000; padding: 8px; text-align: center; background-color: #f0f0f0 !important;">TVA</th>
@@ -360,7 +360,6 @@
                                         </tr>
                                     @endforeach
                                 </table>
-                        </td>
                             @else
                                 @if(!empty($receipt_details->payments))
                                     <table style="width: fit-content; padding-top:10px; border-collapse: collapse; border: 1px solid #000;" class="payment-section no-break">
@@ -383,7 +382,7 @@
                                     </table>
                                 @endif
                             @endif
-
+                        </td>
 
                         <td style="width: 60%; vertical-align: top; padding-left: 15px; text-align: -webkit-right;">
                             <!-- Totals -->
