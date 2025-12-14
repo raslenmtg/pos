@@ -28,13 +28,13 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #000000ff;
-            margin-bottom: 30px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 5px;
         }
         .header-left .logo {
-            max-width: 180px;
-            max-height: 100px;
+            max-width: 380px;
+            max-height: 120px;
         }
         .header-left .business-name {
             font-size: 24px;
@@ -154,9 +154,8 @@
 
         /* --- Footer --- */
         .invoice-footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+            margin-top: 5px;
+            padding-top: 5px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -223,23 +222,21 @@
 
     <div class="invoice-container">
 
-     
-        
+
+
         <header class="invoice-header">
             <div class="header-left">
-                @if(empty($receipt_details->letter_head))
-                    @if(!empty($receipt_details->logo))
-                        <img class="logo" src="{{$receipt_details->logo}}" alt="Logo">
-                    @endif
-                    <div class="business-name">
-                        @if(!empty($receipt_details->display_name))
-                            {{$receipt_details->display_name}}
-                        @endif
-                    </div>
+                @if(!empty($receipt_details->logo))
+                    <img class="logo" src="{{$receipt_details->logo}}" alt="Logo">
                 @endif
             </div>
             <div class="header-right">
-          <span style="font-size:28px"> @lang('lang_v1.packing_slip')</span>
+                <span style="font-size:28px"> @lang('lang_v1.packing_slip')</span>
+                    @if(!empty($receipt_details->business_name))
+                        <br>
+                    <span style="font-size:28px">   {{$receipt_details->business_name}}</span>
+
+                    @endif
             </div>
         </header>
 
@@ -379,8 +376,6 @@
                 
             </div>
         </section>
-
-   
     </div>
 	     <footer class="invoice-footer">
             <div class="footer-text" style="text-align:center">
@@ -388,12 +383,6 @@
                     {!! $receipt_details->footer_text !!}
                 @endif
             </div>
-            <br>
-			  <div class="qr-code">
-                        <img src="data:image/png;base64,{{DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54])}}">
-                </div>
-                <br>
-			<img class="center-block" src="data:image/png;base64,{{DNS1D::getBarcodePNG($receipt_details->invoice_no, 'C128', 2,30,array(39, 48, 54), true)}}">
         </footer>
 		  
  <div class="furl">

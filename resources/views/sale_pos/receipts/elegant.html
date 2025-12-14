@@ -1,480 +1,392 @@
-@php
-// This variable is used to calculate the pre-discount total for the totals box
-$total_pre_discount_ht = 0;
-@endphp
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{!! $receipt_details->invoice_heading ?? 'Bon de Livraison' !!} - {{$receipt_details->invoice_no}}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@lang('lang_v1.packing_slip')</title>
     <style>
-        /* --- ALL STYLES ARE NOW SCOPED TO .invoice-container-bon --- */
-        .invoice-container-bon {
-            font-family: 'Arial', sans-serif;
-            font-size: 10px;
-            color: #000;
-            line-height: 1.4;
-            width: 100%;
-            margin: 0 auto;
-        }
-        .invoice-container-bon table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        /* Use classes for specific table styles */
-        .invoice-container-bon .header-table,
-        .invoice-container-bon .doc-info-table,
-        .invoice-container-bon .items-table,
-        .invoice-container-bon .footer-table,
-        .invoice-container-bon .bottom-bar-table {
-            margin-bottom: 10px;
-        }
-
-        /* --- Header Table (Business/Customer) --- */
-        .invoice-container-bon .header-table td {
-            padding: 5px;
-            vertical-align: top;
-        }
-        .invoice-container-bon .header-table .business-info {
-            width: 50%;
-            font-size: 11px;
-            line-height: 1.5;
-        }
-        .invoice-container-bon .header-table .customer-info-box {
-            width: 50%;
-            border: 1px solid #000;
-            padding: 8px;
-            height: 100%;
-        }
-        .invoice-container-bon .business-info strong {
+        body {
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #333;
+            background-color: #f4f4f4;
+            line-height: 1.6;
             font-size: 14px;
-            font-weight: bold;
+            margin: 0;
+            padding: 0;
+        }
+        .invoice-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 30px;
+            background: #fff;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border: 1px solid #ddd;
         }
 
-        /* --- Doc Info Table (Date/Title/N°) --- */
-        .invoice-container-bon .doc-info-table {
+        /* --- Header --- */
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 5px;
+        }
+        .header-left .logo {
+            max-width: 180px;
+            max-height: 100px;
+        }
+        .header-left .business-name {
+            font-size: 24px;
+            font-weight: bold;
             margin-top: 10px;
+            color: #000;
         }
-        .invoice-container-bon .doc-info-table td {
-            padding: 5px;
-            font-size: 12px;
-        }
-        .invoice-container-bon .doc-info-table .doc-title {
-            text-align: center;
-            font-weight: bold;
-            font-size: 14px;
-        }
-        .invoice-container-bon .doc-info-table .doc-number {
+        .header-right {
             text-align: right;
         }
-
-
-        /* --- Items Table --- */
-        .invoice-container-bon .items-table {
-            /*border: 1px solid #000;*/
-        }
-        .invoice-container-bon .items-table th {
-            background-color: #eee;
-            border: 1px solid #000;
-            padding: 6px;
+        .header-right h2 {
+            margin: 0;
+            font-size: 40px;
             font-weight: bold;
-            text-align: center;
-        }
-        .invoice-container-bon .items-table td {
-            border: 1px solid #000;
-            padding: 5px;
-            vertical-align: top;
-        }
-        .invoice-container-bon .items-table .text-right {
-            text-align: right;
-        }
-        .invoice-container-bon .items-table .text-center {
-            text-align: center;
-        }
-        /* This creates the "big box" effect by ensuring the body has a minimum height */
-        /* Removed display block to allow proper pagination */
-        .invoice-container-bon .items-table tbody {
-            /* display: block; */
-        }
-        .invoice-container-bon .items-table tr {
-            /* display: table; */
-            width: 100%;
-            table-layout: fixed;
-        }
-        .invoice-container-bon .items-table thead {
-            /* display: table; */
-            width: 100%;
-            table-layout: fixed;
-        }
-        .invoice-container-bon .items-table .col-code { width: 12%; }
-        .invoice-container-bon .items-table .col-designation { width: 30%; }
-        .invoice-container-bon .items-table .col-qty { width: 8%; }
-        .invoice-container-bon .items-table .col-pu { width: 10%; }
-        .invoice-container-bon .items-table .col-netht { width: 10%; }
-        .invoice-container-bon .items-table .col-tva { width: 8%; }
-        .invoice-container-bon .items-table .col-ttc { width: 12%; }
-
-        .invoice-container-bon .items-table small {
-            font-size: 9px;
             color: #333;
         }
-
-        /* --- Footer Tables (Signature, TVA, Totals) --- */
-        .invoice-container-bon .footer-table > tbody > tr > td {
-            vertical-align: top;
-            padding: 0 5px;
-        }
-        .invoice-container-bon .footer-table .signature-box {
-            width: 30%;
-            border: 1px solid #000;
-            padding: 5px;
-            min-height: 120px;
-        }
-        .invoice-container-bon .footer-table .tva-box {
-            width: 35%;
-        }
-        .invoice-container-bon .footer-table .totals-box {
-            width: 35%;
+        .header-right p {
+            margin: 2px 0;
+            font-size: 14px;
         }
 
-        /* Nested TVA Table */
-        .invoice-container-bon .tva-table, .invoice-container-bon .totals-table {
-            border: 1px solid #000;
+        /* --- Parties: Business & Customer Details --- */
+        .invoice-parties {
+            display: block;
+
+            margin-bottom: 30px;
         }
-        .invoice-container-bon .tva-table th, .invoice-container-bon .totals-table th {
-            border: 1px solid #000;
-            padding: 4px;
-            background-color: #eee;
-            font-weight: bold;
+        .party-box {
+            width: 48%;
         }
-        .invoice-container-bon .tva-table td, .invoice-container-bon .totals-table td {
-            border: 1px solid #000;
-            padding: 4px;
+        .party-box h3 {
+            margin-top: 0;
+            font-size: 16px;
+
+            padding-bottom: 5px;
+            margin-bottom: 10px;
         }
-        .invoice-container-bon .tva-table .header-row th {
-            text-align: center;
+        .party-box p, .party-box div {
+            margin: 2px 0;
+            font-size: 13px;
+        }
+        .word-wrap {
+            word-wrap: break-word;
         }
 
-        /* Nested Totals Table */
-        .invoice-container-bon .totals-table td:first-child {
-            font-weight: bold;
-            width: 60%;
+        /* --- Invoice Items Table --- */
+        .invoice-body {
+            margin-bottom: 30px;
         }
-        .invoice-container-bon .totals-table td:last-child {
-            text-align: right;
-        }
-        .invoice-container-bon .totals-table .net-a-payer {
-            background-color: #eee;
-            font-weight: bold;
-            font-size: 12px;
-        }
-
-        /* --- Bottom Bar (Words, Payment) --- */
-        .invoice-container-bon .bottom-bar-table {
-            border: 1px solid #000;
-            padding: 8px;
-        }
-        .invoice-container-bon .bottom-bar-table td {
-            padding: 2px 5px;
-        }
-        .invoice-container-bon .bottom-bar-table .total-in-words {
-            font-weight: bold;
-        }
-
-        /* Payments Table */
-        .invoice-container-bon .payments-table {
-            border: 1px solid #000;
-            margin-top: 10px;
-            width: fit-content;
+        .items-table {
+            width: 100%;
             border-collapse: collapse;
         }
-        .invoice-container-bon .payments-table th,
-        .invoice-container-bon .payments-table td {
-            border: 1px solid #000;
-            padding: 5px;
+        .items-table th, .items-table td {
+            padding: 2px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        .items-table thead {
+            background-color: #f8f8f8;
+        }
+        .items-table th {
+            font-weight: bold;
+            font-size: 14px;
+        }
+        .items-table .text-right { text-align: right; }
+        .items-table .text-center { text-align: center; }
+        .items-table .line-note {
+            font-size: 12px;
+            color: #555;
+        }
+        /* Removed empty row styling */
+
+        /* --- Totals & Summary Section --- */
+        .invoice-summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-top: 20px;
+            page-break-inside: avoid;
+        }
+        .summary-left {
+            width: 55%;
+        }
+        .summary-right {
+            width: 40%;
+        }
+        .payments-table, .totals-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+        .totals-table td {
+            padding: 3px;
+            border: 1px solid ;
+            border-collapse: collapse;
+        }
+        .total-row{
+            font-size:16px
         }
 
-        /* small adjustments for page-number inline */
-        .invoice-container-bon .doc-number .pagenum,
-        .invoice-container-bon .doc-number .pagecount {
-            display: inline-block;
-            min-width: 10px;
+        .payments-table td {
+            padding: 3px;
+            border: 1px solid ;
+            border-collapse: collapse;
         }
 
+        .total-in-words {
+            text-align: right;
+            font-size: 12px;
+            font-style: italic;
+            margin-top: 5px;
+        }
+        .additional-notes {
+            margin-top: 20px;
+        }
+
+        /* --- Footer --- */
+        .invoice-footer {
+            margin-top: 5px;
+            padding-top: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            color: #777;
+        }
+        .footer-text {
+            width: 70%;
+        }
+        .qr-code {
+            width: 30%;
+            text-align: right;
+        }
+        .qr-code img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        /* --- Utility Classes --- */
+        .text-right { text-align: right; }
+        .font-weight-bold { font-weight: bold; }
+
+        /* --- Print-Specific Styles --- */
+        @media print {
+            body {
+                background-color: #fff;
+                font-size: 12px;
+            }
+            .invoice-container {
+                box-shadow: none;
+                border: none;
+                margin: 0;
+                padding: 0;
+                max-width: 100%;
+            }
+            .invoice-header, .invoice-parties, .invoice-body, .invoice-summary, .invoice-footer {
+                page-break-inside: avoid;
+            }
+            .items-table tr, .items-table td {
+                page-break-inside: avoid;
+            }
+            .totals-table tr.total-row {
+
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            .totals-table tr.total-row td {
+                color: #fff !important;
+                border: 1px solid;
+            }
+            .furl{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                text-align: center;
+                font-size: 12px;
+                color: #333;
+            }
+        }
     </style>
 </head>
 <body>
-<div class="invoice-container-bon">
 
-    <table class="header-table">
-        <tr>
-            <td class="business-info">
-                @if(empty($receipt_details->letter_head))
-                @if(!empty($receipt_details->display_name))
-                <strong>{{$receipt_details->display_name}}</strong>
-                @endif
-                @if(!empty($receipt_details->address))
-                <div>{!! $receipt_details->address !!}</div>
-                @endif
-                @if(!empty($receipt_details->contact))
-                <div>{!! $receipt_details->contact !!}</div>
-                @endif
-                @if(!empty($receipt_details->tax_info1))
-                <div>{{ $receipt_details->tax_label1 }}: {{ $receipt_details->tax_info1 }}</div>
-                @endif
-                @if(!empty($receipt_details->tax_info2))
-                <div>{{ $receipt_details->tax_label2 }}: {{ $receipt_details->tax_info2 }}</div>
-                @endif
-                @endif
-            </td>
-            <td class="customer-info-box">
-                @if(!empty($receipt_details->client_id))
-                <div><strong>Code client:</strong> {{ $receipt_details->client_id }}</div>
-                @endif
-                @if(!empty($receipt_details->customer_info))
-                <div>{!! $receipt_details->customer_info !!}</div>
-                @endif
-                @if(!empty($receipt_details->customer_tax_number))
-                <div><strong>M.F:</strong> {{ $receipt_details->customer_tax_number }}</div>
-                @endif
-                @if(!empty($receipt_details->customer_custom_fields))
-                <div>{!! $receipt_details->customer_custom_fields !!}</div>
-                @endif
-            </td>
-        </tr>
-    </table>
-
-    <table class="doc-info-table">
-        <tr>
-            <td><strong>Date Le :</strong> {{$receipt_details->invoice_date}}</td>
-            <td class="doc-number">
-                <strong>{!! $receipt_details->invoice_heading !!} N° :</strong> {{$receipt_details->invoice_no}} <br>
-
-            </td>
-        </tr>
-    </table>
-    <table class="items-table">
-        <thead>
-        <tr>
-            <th class="col-code">#</th>
-            <th class="col-designation">DESIGNATION</th>
-            <th class="col-qty">QUANTITE</th>
-            <th class="col-pu">P.U. HT</th>
-            <th class="col-netht">TOTAL HT</th>
-            <th class="col-tva">TVA</th>
-            <th class="col-tva">Remise</th>
-            <th class="col-ttc">TOTAL TTC</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($receipt_details->lines as $line)
-
-        <tr>
-            <td class="col-code">	{{$loop->iteration}}</td>
-            <td class="col-designation">
-                {{$line['name']}} {{$line['product_variation']}} {{$line['variation']}}
-                @if(!empty($line['brand'])), {{$line['brand']}} @endif
-                @if(!empty($line['product_description']))
-                <br><small>{!!$line['product_description']!!}</small>
-                @endif
-                @if(!empty($line['sell_line_note']))
-                <br><small>{!!$line['sell_line_note']!!}</small>
-                @endif
-                @if(!empty($line['warranty_name'])) <br><small>{{$line['warranty_name']}} </small>@endif @if(!empty($line['warranty_exp_date'])) <small>- {{@format_date($line['warranty_exp_date'])}} </small>@endif
-            </td>
-            <td class="col-qty text-center">{{$line['quantity_uf']}}</td>
-            <td class="col-pu text-right">{{$line['unit_price_exc_tax']??'-'}}</td>
-            <td class="col-netht text-right">{{$line['line_total_exc_tax']!='0.000'?$line['line_total_exc_tax']:'-' }}</td>
-            <td class="col-tva text-center">
-                {{empty($line['tax_percent'])?'-':$line['tax_percent'].'%'}}
-            </td>
-            <td class="col-tva text-center">
-                @if(!empty($line['line_discount_percent']))
-                {{$line['line_discount_percent']}}%
-                @else
-                {{$line['total_line_discount']!='0.000'?$line['total_line_discount']:'' }}
-                @endif
-            </td>
-
-            <td class="col-ttc text-right">
-                {{$line['line_total']}}
-            </td>
-        </tr>
-        @endforeach
-        </tbody>
-    </table>
-
-    <table class="footer-table">
-        <tr>
-            <td class="signature-box">
-                <strong>Cachet & Signature</strong>
-            </td>
-            @if(!empty($receipt_details->taxes))
-            <td class="tva-box">
-                <table class="tva-table">
-                    <thead>
-                    <tr class="header-row">
-                        <th colspan="3">T . V . A</th>
-                    </tr>
-                    <tr>
-                        <th>TAUX</th>
-                        <th>MONT. TVA.</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-
-                    @foreach($receipt_details->taxes as $key => $val)
-                    <tr>
-                        <td class="text-center">{{$key}}</td>
-                        <td class="text-right">{{$val}}</td>
-                    </tr>
-                    @endforeach
+<div class="invoice-container">
 
 
 
-                    </tbody>
-                </table>
-            </td>
+    <header class="invoice-header">
+        <div class="header-left">
+            @if(!empty($receipt_details->logo))
+            <img class="logo" src="{{$receipt_details->logo}}" alt="Logo">
             @endif
-            <td class="totals-box">
-                <table class="totals-table">
-                    <thead>
-                    <tr>
-                        <th colspan="2" style="text-align: center">T  O  T  A  U  X</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+        </div>
+        <div class="header-right">
+            <span style="font-size:28px"> @lang('lang_v1.packing_slip')</span>
+            <div class="business-name">
+                @if(!empty($receipt_details->display_name))
+                {{$receipt_details->display_name}}
+                @endif
+            </div>
+        </div>
+    </header>
 
+    <section class="invoice-parties">
+        @if(!empty($receipt_details->customer_info))
 
-                    <tr>
-                        <td>TOTAL HT.</td>
-                        <td>{{$receipt_details->subtotal_exc_tax }}</td>
-                    </tr>
-                    @if(!empty($receipt_details->taxes))
-                    <tr>
-                        <td>TOTAL TVA</td>
-                        <td>{{$receipt_details->taxes['Total TVA'] }}</td>
-                    </tr>
+        <h3>Client:  {!! $receipt_details->customer_info !!}</h3>
+        <div class="word-wrap" style="font-size:20px">
+                 <span> <strong>@lang('lang_v1.shipping_address'):</strong>
+				 {!! $receipt_details->shipping_address !!}</span>
+            @if(!empty($receipt_details->shipping_details))
+            <br><strong>{!!$receipt_details->shipping_details_label!!} :</strong> {!!$receipt_details->shipping_details ?? ''!!}
+            @endif
+
+            @if(!empty($receipt_details->shipping_custom_field_2_label))
+            <br><strong>{!!$receipt_details->shipping_custom_field_2_label!!}:</strong> {!!$receipt_details->shipping_custom_field_2_value ?? ''!!}
+            @endif
+
+            @if(!empty($receipt_details->shipping_custom_field_3_label))
+            <br><strong>{!!$receipt_details->shipping_custom_field_3_label!!}:</strong> {!!$receipt_details->shipping_custom_field_3_value ?? ''!!}
+            @endif
+
+            @if(!empty($receipt_details->shipping_custom_field_4_label))
+            <br><strong>{!!$receipt_details->shipping_custom_field_4_label!!}:</strong> {!!$receipt_details->shipping_custom_field_4_value ?? ''!!}
+            @endif
+
+            @if(!empty($receipt_details->shipping_custom_field_5_label))
+            <br><strong>{!!$receipt_details->shipping_custom_field_2_label!!}:</strong> {!!$receipt_details->shipping_custom_field_5_value ?? ''!!}
+            @endif
+
+        </div>
+        @endif
+    </section>
+
+    <section class="invoice-body">
+        <table class="items-table">
+            <thead>
+            <tr>
+                <th class="text-center" style="width: 5%;">#</th>
+                <th>{{$receipt_details->table_product_label}}</th>
+                <th class="text-right" style="width: 12%;">{{$receipt_details->table_qty_label}}</th>
+                <th class="text-right" style="width: 15%;">{{$receipt_details->table_unit_price_label}}</th>
+                @if(!empty($receipt_details->item_discount_label))
+                <th class="text-right" style="width: 12%;">{{$receipt_details->item_discount_label}}</th>
+                @endif
+                <th class="text-right" style="width: 15%;">{{$receipt_details->table_subtotal_label}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach($receipt_details->lines as $line)
+            <tr>
+                <td class="text-center">{{$loop->iteration}}</td>
+                <td>
+                    {{$line['name']}} {{$line['product_variation']}} {{$line['variation']}}
+                    @if(!empty($line['sell_line_note']))
+                    <br><small class="line-note">{!!$line['sell_line_note']!!}</small>
                     @endif
-
-                    @if(!empty($receipt_details->total_line_discount ))
-                    <tr>
-                        <td>TOTAL REM.</td>
-                        <td>{{$receipt_details->total_line_discount }}</td>
-                    </tr>
+                    @if(!empty($line['product_description']))
+                    <div class="line-note">{!!$line['product_description']!!}</div>
                     @endif
-                    @if(!empty($receipt_details->discount ))
-                    <tr>
-                        <td>REMISE</td>
-                        <td>{{$receipt_details->discount }}</td>
-                    </tr>
-                    @endif
-                    <tr>
-                        <td style="border: 1px solid #000; padding: 5px;">
-                            Sous-total TTC
-                        </td>
-                        <td style="border: 1px solid #000; padding: 5px; text-align: right;">
-                            {{$receipt_details->subtotal}}
-                        </td>
-                    </tr>
+                </td>
 
-                    @if( !empty($receipt_details->additional_expenses) )
-                    @foreach($receipt_details->additional_expenses as $key => $val)
-                    <tr>
-                        <td style="border: 1px solid #000; padding: 5px;">
-                            {{$key}}:
-                        </td>
+                <td class="text-right">{{$line['quantity']}} {{$line['units']}}</td>
+                <td class="text-right">{{$line['unit_price_before_discount']}}</td>
+                @if(!empty($receipt_details->item_discount_label))
+                <td class="text-right">{{$line['total_line_discount'] ?? '0.00'}}</td>
+                @endif
+                <td class="text-right">{{$line['line_total']}}</td>
+            </tr>
+            @endforeach
+            <!-- Removed the empty row generation code -->
+            </tbody>
+        </table>
+    </section>
 
-                        <td style="border: 1px solid #000; padding: 5px; text-align: right;">
-                            (+) {{$val}}
-                        </td>
-                    </tr>
-                    @endforeach
-                    @endif
-                    <!-- Shipping Charges -->
-                    @if(!empty($receipt_details->shipping_charges))
-                    <tr>
-                        <td style="border: 1px solid #000; padding: 5px;">
-                            {!! $receipt_details->shipping_charges_label !!}
-                        </td>
-                        <td style="border: 1px solid #000; padding: 5px; text-align: right;">
-                            {{$receipt_details->shipping_charges}}
-                        </td>
-                    </tr>
-                    @endif
+    <section class="invoice-summary">
+        <div class="summary-left">
+            @if(!empty($receipt_details->additional_notes))
+            <div class="additional-notes">
+                <h3 style="font-size: 16px;">Notes</h3>
+                <p>{!! nl2br($receipt_details->additional_notes) !!}</p>
+            </div>
+            @endif
+            @if(!empty($receipt_details->total_in_words))
+            <p class="total-in-words">Arrêté la présente {!! $receipt_details->invoice_heading !!} à la somme de : {{$receipt_details->total_in_words}}.</p>
+            @endif
+        </div>
 
-                    @if( !empty($receipt_details->reward_point_label) )
-                    <tr>
-                        <td style="border: 1px solid #000; padding: 5px;">
-                            {!! $receipt_details->reward_point_label !!}
-                        </td>
+        <div class="summary-right">
+            <table class="totals-table">
+                <tr>
+                    <td>{!! $receipt_details->subtotal_label !!}</td>
+                    <td>{{$receipt_details->subtotal}}</td>
+                </tr>
 
-                        <td style="border: 1px solid #000; padding: 5px; text-align: right;">
-                            (-) {{$receipt_details->reward_point_amount}}
-                        </td>
-                    </tr>
-                    @endif
+                @if( !empty($receipt_details->discount) )
+                <tr>
+                    <td>{!! $receipt_details->discount_label !!}</td>
+                    <td>(-) {{$receipt_details->discount}}</td>
+                </tr>
+                @endif
+                @if( !empty($receipt_details->total_line_discount) )
+                <tr>
+                    <td>{!! $receipt_details->line_discount_label !!}</td>
+                    <td>(-) {{$receipt_details->total_line_discount}}</td>
+                </tr>
+                @endif
 
-                    @if(!empty($receipt_details->group_tax_details))
-                    @foreach($receipt_details->group_tax_details as $key => $value)
-                    <tr>
-                        <td style="border: 1px solid #000; padding: 5px;">
-                            {!! $key !!}
-                        </td>
-                        <td style="border: 1px solid #000; padding: 5px; text-align: right;">
-                            {{$value}}
-                        </td>
-                    </tr>
-                    @endforeach
-                    @else
-                    @if( !empty($receipt_details->tax) )
-                    <tr>
-                        <td style="border: 1px solid #000; padding: 5px;">
-                            {!! $receipt_details->tax_label !!}
-                        </td>
-                        <td style="border: 1px solid #000; padding: 5px; text-align: right;">
-                            {{$receipt_details->tax}}
-                        </td>
-                    </tr>
-                    @endif
-                    @endif
-                    <tr class="net-a-payer">
-                        <td>NET A PAYER</td>
-                        <td>{{$receipt_details->total }}</td>
-                    </tr>
-                    </tbody>
-                </table>
-            </td>
-        </tr>
-    </table>
+                @if(!empty($receipt_details->shipping_charges))
+                <tr>
+                    <td>{!! $receipt_details->shipping_charges_label !!}</td>
+                    <td>(+) {{$receipt_details->shipping_charges}}</td>
+                </tr>
+                @endif
 
-    @if(!empty($receipt_details->total_in_words))
-    Arrêté Le Présent {!! $receipt_details->invoice_heading !!} à la somme de : {{$receipt_details->total_in_words}}
-    @endif
-    @if(!empty($receipt_details->payments))
-    <table class="payments-table">
+                @if(!empty($receipt_details->group_tax_details))
+                @foreach($receipt_details->group_tax_details as $key => $value)
+                <tr>
+                    <td>{!! $key !!}</td>
+                    <td>(+) {{$value}}</td>
+                </tr>
+                @endforeach
+                @else
+                @if( !empty($receipt_details->tax) )
+                <tr>
+                    <td>{!! $receipt_details->tax_label !!}</td>
+                    <td>(+) {{$receipt_details->tax}}</td>
+                </tr>
+                @endif
+                @endif
 
+                <tr class="total-row">
+                    <td><strong>{!! $receipt_details->total_label !!}</strong></td>
+                    <td><strong>{{$receipt_details->total}}</strong></td>
+                </tr>
+            </table>
 
-        <tr>
-            <th>
-                <strong>Méthode paiement</strong>
-            </th>
-            <th>
-                <strong>Montant</strong>
-            </th>
-            <th>
-                <strong>Date</strong>
-            </th>
-        </tr>
-        @foreach($receipt_details->payments as $payment)
-        <tr>
-            <td >{{$payment['method']}}</td>
-            <td >{{$payment['amount']}}</td>
-            <td >{{$payment['date']}}</td>
-        </tr>
-        @endforeach
+        </div>
+    </section>
+</div>
+<footer class="invoice-footer">
+    <div class="footer-text" style="text-align:center">
+        @if(!empty($receipt_details->footer_text))
+        {!! $receipt_details->footer_text !!}
+        @endif
+    </div>
+</footer>
 
-    </table>
-    @endif
-</div></body>
+<div class="furl">
+    www.simplexgestion.tn
+</div>
+</body>
 </html>

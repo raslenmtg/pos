@@ -982,6 +982,7 @@ class TransactionUtil extends Util
 
         //Display name
         $output['display_name'] = $output['business_name'];
+        $output['business_name'] = $output['business_name'];
         if (! empty($output['location_name'])) {
             if (! empty($output['display_name'])) {
                 $output['display_name'] .= ', ';

@@ -19,8 +19,6 @@
             margin: 20px auto;
             padding: 30px;
             background: #fff;
-            box-shadow: 0 0 15px rgba(0,0,0,0.05);
-            border: 1px solid #ddd;
         }
         
         /* --- Header --- */
@@ -28,9 +26,9 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #000000ff;
-            margin-bottom: 30px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 5px;
         }
         .header-left .logo {
             max-width: 180px;
@@ -75,9 +73,6 @@
         .party-box p, .party-box div {
             margin: 2px 0;
             font-size: 13px;
-        }
-        .word-wrap {
-            word-wrap: break-word;
         }
 
         /* --- Invoice Items Table --- */
@@ -161,9 +156,8 @@
 
         /* --- Footer --- */
         .invoice-footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+            margin-top: 5px;
+            padding-top: 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -288,20 +282,20 @@
                 <h3>Client:  {!! $receipt_details->customer_info !!}</h3>
                 <div class="word-wrap">
                  	@if(!empty($receipt_details->client_id))
-									<br/>
 									<strong>Code client:</strong> {{ $receipt_details->client_id }}
+									<br/>
 								@endif
                                 	@if(!empty($receipt_details->customer_tax_number))
+									<strong>M.F: </strong> {{ $receipt_details->customer_tax_number }}
 									<br/>
-									<strong>{{ $receipt_details->customer_tax_label }}</strong> {{ $receipt_details->customer_tax_number }}
 								@endif
-                  	@if(!empty($receipt_details->sales_person))
-									<br/>
+                            	@if(!empty($receipt_details->sales_person))
 									<strong>{{ $receipt_details->sales_person_label }}</strong> {{ $receipt_details->sales_person }}
-								@endif
-               	@if(!empty($receipt_details->commission_agent))
 									<br/>
+								@endif
+                             	@if(!empty($receipt_details->commission_agent))
 									<strong>{{ $receipt_details->commission_agent_label }}</strong> {{ $receipt_details->commission_agent }}
+									<br/>
 								@endif
                     @if(!empty($receipt_details->customer_rp_label))
                          <p><span >{{ $receipt_details->customer_rp_label }}:</span> {{ $receipt_details->customer_total_rp }}</p>
