@@ -2438,6 +2438,7 @@ class TransactionUtil extends Util
         $product_tax_details = $query->groupBy('T.id')
                                     ->get();
 
+        $tax_details=[];
         foreach ($product_tax_details as $product_tax) {
             if (! isset($tax_details[$product_tax->tax_id])) {
                 $tax_details[$product_tax->tax_id]['tax_name'] = $product_tax->tax_name;
