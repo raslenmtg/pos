@@ -360,6 +360,27 @@
                                         </tr>
                                     @endforeach
                                 </table>
+                            @else
+                                @if(!empty($receipt_details->payments))
+                                    <table style="width: fit-content; padding-top:10px; border-collapse: collapse; border: 1px solid #000;" class="payment-section no-break">
+                                        <thead>
+                                        <tr style="background-color: #f0f0f0 !important;">
+                                            <th style="border: 1px solid #000; padding: 5px;">Méthode paiement</th>
+                                            <th style="border: 1px solid #000; padding: 5px;">Montant</th>
+                                            <th style="border: 1px solid #000; padding: 5px;">Date</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        @foreach($receipt_details->payments as $payment)
+                                            <tr>
+                                                <td style="border: 1px solid #000; padding: 5px;">{{$payment['method']}}</td>
+                                                <td style="border: 1px solid #000; padding: 5px;">{{$payment['amount']}}</td>
+                                                <td style="border: 1px solid #000; padding: 5px;">{{$payment['date']}}</td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                @endif
                             @endif
                         </td>
 
@@ -454,7 +475,7 @@
                 </table>
 
                 <!-- Payment Details -->
-                @if(!empty($receipt_details->payments))
+                @if(!empty($receipt_details->payments)&&!empty($receipt_details->taxes))
                     <table style="width: fit-content; padding-top:10px; border-collapse: collapse; border: 1px solid #000;" class="payment-section no-break">
                         <thead>
                         <tr style="background-color: #f0f0f0 !important;">
