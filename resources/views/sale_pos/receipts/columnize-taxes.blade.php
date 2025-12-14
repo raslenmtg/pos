@@ -223,7 +223,7 @@
 				<td class="business-info">
 					@if(empty($receipt_details->letter_head))
 						@if(!empty($receipt_details->display_name))
-							<strong>{{$receipt_details->display_name}}</strong>
+							<strong style="font-size: 16px">{{$receipt_details->display_name}}</strong>
 						@endif
 						@if(!empty($receipt_details->address))
 							<div>{!! $receipt_details->address !!}</div>
@@ -244,7 +244,7 @@
 						<div><strong>Code client:</strong> {{ $receipt_details->client_id }}</div>
 					@endif
 					@if(!empty($receipt_details->customer_info))
-						<div>{!! $receipt_details->customer_info !!}</div>
+						<div>Client: {!! $receipt_details->customer_info !!}</div>
 					@endif
 					@if(!empty($receipt_details->customer_tax_number))
 						<div><strong>M.F:</strong> {{ $receipt_details->customer_tax_number }}</div>
