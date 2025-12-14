@@ -2453,11 +2453,11 @@ class TransactionUtil extends Util
         }
 
         //If group tax add group tax details
-        foreach ($tax_details as $key => $value) {
+       /* foreach ($tax_details as $key => $value) {
             if ($value['is_tax_group']) {
                 $tax_details[$key]['group_tax_details'] = $this->groupTaxDetails($key, $value['tax_amount']);
             }
-        }
+        }*/
 
         $output['tax_details'] = $tax_details;
         $output['total_tax'] = $product_tax_details->sum('tax_amount');
@@ -2522,11 +2522,11 @@ class TransactionUtil extends Util
         }
 
         // If group tax add group tax details
-        foreach ($tax_details as $key => $value) {
-            if ($value['is_tax_group']) {
-                $tax_details[$key]['group_tax_details'] = $this->groupTaxDetails($key, $value['tax_amount']);
-            }
-        }
+//        foreach ($tax_details as $key => $value) {
+//            if ($value['is_tax_group']) {
+//                $tax_details[$key]['group_tax_details'] = $this->groupTaxDetails($key, $value['tax_amount']);
+//            }
+//        }
 
         $output['tax_details'] = $tax_details;
         $output['total_tax'] = $tax_details_raw->sum('tax_amount');
