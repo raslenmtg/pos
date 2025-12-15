@@ -354,7 +354,8 @@ class TransactionUtil extends Util
                     }
                 }
                 $uf_quantity = $uf_data ? $this->num_uf($product['quantity']) : $product['quantity'];
-                $uf_item_tax = $uf_data ? $this->num_uf($product['item_tax']) : $product['item_tax'];
+                $tax=Product::find($product['product_id'])->product_tax()->value('amount');
+                $uf_item_tax =( $unit_price-$unit_price/(1+($tax/100)))*$product['quantity'];
                 $uf_unit_price_inc_tax = $uf_data ? $this->num_uf($product['unit_price_inc_tax']) : $product['unit_price_inc_tax'];
 
                 $line_discount_amount = 0;
@@ -374,7 +375,7 @@ class TransactionUtil extends Util
                     'unit_price' => $unit_price,
                     'line_discount_type' => ! empty($product['line_discount_type']) ? $product['line_discount_type'] : null,
                     'line_discount_amount' => $line_discount_amount,
-                    'item_tax' => $uf_item_tax / $multiplier,
+                    'item_tax' => $uf_item_tax ,
                     'tax_id' => Product::where('id', $product['product_id'])->value('tax'),
                     'unit_price_inc_tax' => $uf_unit_price_inc_tax / $multiplier,
                     'sell_line_note' => ! empty($product['sell_line_note']) ? $product['sell_line_note'] : '',
@@ -1811,8 +1812,8 @@ class TransactionUtil extends Util
                 //Fields for 4th column
                 'line_total' => $this->num_f($line->unit_price_inc_tax * $line->quantity, false, $business_details),
                 'line_total_uf' => $line->unit_price_inc_tax * $line->quantity,
-                'line_total_exc_tax' => $this->num_f( !empty($tax_details)?$line->unit_price_before_discount/(1+($tax_details->amount/100)) * $line->quantity:0, false, $business_details),
-                'line_total_exc_tax_uf' => !empty($tax_details)?$line->unit_price_before_discount/(1+($tax_details->amount/100)) * $line->quantity:0,
+                'line_total_exc_tax' => $this->num_f( !empty($tax_details)?$line->unit_price/(1+($tax_details->amount/100)) * $line->quantity:0, false, $business_details),
+                'line_total_exc_tax_uf' => !empty($tax_details)?$line->unit_price/(1+($tax_details->amount/100)) * $line->quantity:0,
                 'variation_id' => $variation->id,
             ];
 

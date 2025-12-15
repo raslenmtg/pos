@@ -850,6 +850,9 @@ class SellController extends Controller
                 $order_taxes[$sell->tax->name] = $sell->tax_amount;
             }
         }
+        if(!empty($sell->tax_amount)&&empty($sell->tax_id)){
+            $order_taxes['Timbre fiscale'] = $sell->tax_amount;
+        }
 
         $business_details = $this->businessUtil->getDetails($business_id);
         $pos_settings = empty($business_details->pos_settings) ? $this->businessUtil->defaultPosSettings() : json_decode($business_details->pos_settings, true);

@@ -51,13 +51,6 @@
                     <br><span class="label @if($sell_line->res_line_order_status == 'cooked' ) bg-red @elseif($sell_line->res_line_order_status == 'served') bg-green @else bg-light-blue @endif">@lang('restaurant.order_statuses.' . $sell_line->res_line_order_status) </span>
                 @endif
             </td>
-            @if( session()->get('business.enable_lot_number') == 1 && empty($for_ledger))
-                <td>{{ $sell_line->lot_details->lot_number ?? '--' }}
-                    @if( session()->get('business.enable_product_expiry') == 1 && !empty($sell_line->lot_details->exp_date))
-                    ({{@format_date($sell_line->lot_details->exp_date)}})
-                    @endif
-                </td>
-            @endif
             @if($sell->type == 'sales_order')
                 <td><span class="display_currency" data-currency_symbol="false" data-is_quantity="true">{{ $sell_line->quantity - $sell_line->so_quantity_invoiced }}</span> @if(!empty($sell_line->sub_unit)) {{$sell_line->sub_unit->short_name}} @else {{$sell_line->product->unit->short_name}} @endif</td>
             @endif
@@ -79,11 +72,6 @@
                     {{$sell_line->product->second_unit->short_name}}
                 @endif
             </td>
-            @if(!empty($pos_settings['inline_service_staff']))
-                <td>
-                {{ $sell_line->service_staff->user_full_name ?? '' }}
-                </td>
-            @endif
             <td>
                 @if(!empty($for_ledger))
                     @format_currency($sell_line->unit_price_before_discount)
