@@ -6,7 +6,7 @@
 <html lang="fr">
 <head>
 	<meta charset="UTF-8">
-	<title>{!! $receipt_details->invoice_heading ?? 'Bon de Livraison' !!} - {{$receipt_details->invoice_no}}</title>
+	<title>{!! $receipt_details->invoice_heading ?? 'Facture' !!} - {{$receipt_details->invoice_no}}</title>
 	<style>
 		/* --- ALL STYLES ARE NOW SCOPED TO .invoice-container-bon --- */
 		.invoice-container-bon {
