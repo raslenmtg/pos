@@ -36,6 +36,17 @@
         .border th, .border td {
             border: 1px solid #000;
         }
+        @media print {
+        .furl{
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #333;
+        }
+        }
     </style>
 </head>
 
@@ -117,6 +128,8 @@
 </table>
 <br>
 <span style="margin-top: 10px"> <strong>@lang('lang_v1.received_in') :</strong></span>
-<p class="text-center" style="margin-top: 15px;">simplexgestion.tn</p>
 </body>
+<div class="furl">
+    www.simplexgestion.tn
+</div>
 </html>
