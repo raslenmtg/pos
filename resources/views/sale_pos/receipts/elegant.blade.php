@@ -122,7 +122,7 @@
                 left: 0;
                 width: 100%;
                 text-align: center;
-                font-size: 12px;
+                font-size: 10px;
                 color: #333;
         }
         .qr-code {
@@ -141,6 +141,13 @@
 
         /* --- Print Styles --- */
         @media print {
+            @page {
+                @bottom-center {
+                    content: "www.simplexgestion.tn";
+                    font-size: 10px;
+                    color: #333;
+                }
+            }
             body {
                 background-color: #fff;
                 font-size: 10pt;
@@ -319,9 +326,6 @@
                     @endif
                 </div>
         </footer>
-    </div>
-    <div class="furl">
-        www.simplexgestion.tn
     </div>
 </body>
 </html>

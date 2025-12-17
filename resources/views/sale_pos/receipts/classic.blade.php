@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>@if(!empty($receipt_details->invoice_heading)){{$receipt_details->invoice_heading}}@else Facture @endif</title>
     <style>
         body {
@@ -182,6 +182,14 @@
 
         /* --- Print-Specific Styles --- */
         @media print {
+            @page {
+                @bottom-center {
+                    content: "www.simplexgestion.tn";
+                    font-size: 10px;
+                    color: #333;
+                }
+            }
+
             body {
                 background-color: #fff;
                 font-size: 12px;
@@ -208,15 +216,7 @@
                  color: #fff !important;
                  border: 1px solid;
             }
-            .furl{
-                 position: fixed;
-                bottom: 0;
-                left: 0;
-                width: 100%;
-                text-align: center;
-                font-size: 12px;
-                color: #333;
-            }
+
         }
     </style>
 </head>
@@ -436,8 +436,6 @@
             @endif
         </footer>
     </div>
- <div class="furl">
-         www.simplexgestion.tn
-    </div>
+
 </body>
 </html>

@@ -3,14 +3,12 @@
 @endphp
 <style>
     @media print {
-        .furl{
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 12px;
-            color: #333;
+        @page {
+            @bottom-center {
+                content: "www.simplexgestion.tn";
+                font-size: 10px;
+                color: #333;
+            }
         }
 
         /* Allow page breaks in tables but not in rows */
@@ -519,6 +517,3 @@
     </tr>
     </tbody>
 </table>
-<div class="furl">
-    www.simplexgestion.tn
-</div>
