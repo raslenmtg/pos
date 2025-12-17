@@ -14,7 +14,7 @@
         }
 
         /* Allow page breaks in tables but not in rows */
-        table { page-break-inside: auto; }
+        table { page-break-inside: auto;font-size: 12px; }
         tr { page-break-inside: avoid; page-break-after: auto; }
 
         /* Repeat table headers on each page */
