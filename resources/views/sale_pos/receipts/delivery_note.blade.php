@@ -25,6 +25,10 @@
         @media print {
             tr { page-break-inside: avoid; }
         }
+        @page {
+            size: A4 portrait;
+            margin: 12mm;
+        }
 
         /* Helpers */
         .text-right { text-align: right; }
@@ -118,5 +122,6 @@
 </table>
 <br>
 <span style="margin-top: 10px"> <strong>@lang('lang_v1.received_in') :</strong></span>
+<p class="text-center" style="margin-top: 15px;">simplexgestion.tn</p>
 </body>
 </html>
