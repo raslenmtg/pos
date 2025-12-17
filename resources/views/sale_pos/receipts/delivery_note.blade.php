@@ -20,10 +20,6 @@
         p {
             margin: 0 0 4px 0;
         }
-        @page {
-            size: A4 portrait;
-            margin: 12mm;
-        }
 
         /* Helpers */
         .text-right { text-align: right; }
