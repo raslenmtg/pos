@@ -14,7 +14,7 @@
         }
 
         /* Allow page breaks in tables but not in rows */
-        table { page-break-inside: auto;font-size: 12px; }
+        table { page-break-inside: auto;}
         tr { page-break-inside: avoid; page-break-after: auto; }
 
         /* Repeat table headers on each page */
@@ -48,9 +48,9 @@
             margin: 8mm;
         }
 
-        /*body {*/
-        /*    zoom: 0.7;*/
-        /*}*/
+        body {
+            zoom: 0.7;
+        }
 
 
     }
