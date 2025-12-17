@@ -15,7 +15,7 @@
 
         /* Allow page breaks in tables but not in rows */
         table { page-break-inside: auto;}
-        tr { page-break-inside: avoid; page-break-after: auto; }
+
 
         /* Repeat table headers on each page */
         thead { display: table-header-group; }
@@ -27,6 +27,9 @@
         /* Items table can break naturally */
         .items-table { page-break-inside: auto; }
         .items-table tbody tr { page-break-inside: auto; }
+        .items-row {
+            page-break-inside: auto;
+        }
 
         /* Prevent page breaks in critical sections */
         .invoice-header { page-break-after: auto; }
@@ -57,6 +60,7 @@
 </style>
 <table class="print-scale" style="width:100%; color: #000000 !important; font-family: 'Times New Roman', serif; border-collapse: collapse;">
     <tbody>
+    <tr>
     <td style="width: 100%; padding-bottom: 10px; border-bottom: 1px solid #000;">
         <table style="width:100%; border-collapse: collapse;">
             <tr>
@@ -99,7 +103,7 @@
             </tr>
         </table>
     </td>
-
+    </tr>
 
     <tr>
         <td style="padding: 10px 0;" class="customer-info">
