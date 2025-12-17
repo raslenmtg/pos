@@ -179,6 +179,7 @@
             body {
                 background-color: #fff;
                 font-size: 12px;
+                margin-bottom: 30px;
             }
             .invoice-container {
                 box-shadow: none;
@@ -248,15 +249,26 @@
                 color: #fff !important;
                 border: 1px solid;
             }
-
-            .furl {
+            body::after {
+                content: "www.simplexgestion.tn";
                 position: fixed;
                 bottom: 0;
                 left: 0;
-                width: 100%;
+                right: 0;
                 text-align: center;
                 font-size: 12px;
                 color: #333;
+                background: white;
+                padding: 5px 0;
+            }
+
+            .furl {
+                display: block;
+                width: 100%;
+                text-align: center;
+                font-size: 10px;
+                color: #333;
+                margin-top: 100%;
             }
         }
     </style>
