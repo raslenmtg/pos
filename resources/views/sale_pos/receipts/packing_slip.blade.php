@@ -249,26 +249,12 @@
                 color: #fff !important;
                 border: 1px solid;
             }
-            body::after {
-                content: "www.simplexgestion.tn";
-                position: fixed;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                text-align: center;
-                font-size: 12px;
-                color: #333;
-                background: white;
-                padding: 5px 0;
-            }
-
-            .furl {
-                display: block;
-                width: 100%;
-                text-align: center;
-                font-size: 10px;
-                color: #333;
-                margin-top: 100%;
+            @page {
+                @bottom-center {
+                    content: "www.simplexgestion.tn";
+                    font-size: 10px;
+                    color: #333;
+                }
             }
         }
     </style>
@@ -426,16 +412,6 @@
     </section>
 </div>
 
-<footer class="invoice-footer">
-    <div class="footer-text" style="text-align:center">
-        @if(!empty($receipt_details->footer_text))
-            {!! $receipt_details->footer_text !!}
-        @endif
-    </div>
-</footer>
 
-<div class="furl">
-    www.simplexgestion.tn
-</div>
 </body>
 </html>
