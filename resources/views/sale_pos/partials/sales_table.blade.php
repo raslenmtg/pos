@@ -24,8 +24,7 @@
             <th>@lang('sale.sell_note')</th>
             <th>@lang('sale.staff_note')</th>
             <th>@lang('sale.shipping_details')</th>
-            <th>@lang('restaurant.table')</th>
-            <th>@lang('restaurant.service_staff')</th>
+
         </tr>
     </thead>
     <tfoot>
@@ -38,8 +37,7 @@
             <td class="footer_total_remaining"></td>
             <td class="footer_total_sell_return_due"></td>
             <td colspan="2"></td>
-            <td class="service_type_count"></td>
-            <td colspan="7"></td>
+
         </tr>
     </tfoot>
 </table>

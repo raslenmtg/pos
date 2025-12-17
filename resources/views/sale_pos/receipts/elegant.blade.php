@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@if(!empty($receipt_details->invoice_heading)){{$receipt_details->invoice_heading}}@else Facture @endif</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* --- Print Styles --- */
+        @media print {
         :root {
             --bg-color: #f7fafc;
             --card-color: #ffffff;
@@ -20,9 +22,7 @@
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
-            font-size: 14px;
-            margin: 0;
-            padding: 20px;
+            font-size: 12px;
         }
 
         .mono-font {
@@ -139,8 +139,7 @@
             margin-top: 5px;
         }
 
-        /* --- Print Styles --- */
-        @media print {
+
             @page {
                 @bottom-center {
                     content: "www.simplexgestion.tn";
@@ -162,7 +161,7 @@
                 width: 100% !important;
                 max-width: 100% !important;
             }
-           
+
 
             .invoice-header, .invoice-parties, .invoice-summary, .items-table thead {
                 page-break-inside: avoid;
@@ -186,7 +185,7 @@
             <div class="header-left">
                 @if(empty($receipt_details->letter_head))
                     @if(!empty($receipt_details->logo)) <img class="logo" src="{{$receipt_details->logo}}" alt="Logo"> @endif
-                    <div class="business-name">@if(!empty($receipt_details->display_name)) {{$receipt_details->display_name}} @endif</div>
+                    <div class="business-name"> {{$receipt_details->business_name}} </div>
                 @endif
             </div>
             <div class="header-right">
@@ -233,7 +232,6 @@
 									<br/>
 									<strong>{{ $receipt_details->commission_agent_label }}</strong> {{ $receipt_details->commission_agent }}
 								@endif
-                </div>
                 </div>
             @endif
         </section>
