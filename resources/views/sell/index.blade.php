@@ -91,8 +91,7 @@
                             <th>@lang('sale.sell_note')</th>
                             <th>@lang('sale.staff_note')</th>
                             <th>@lang('sale.shipping_details')</th>
-                            <th>@lang('restaurant.table')</th>
-                            <th>@lang('restaurant.service_staff')</th>
+
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -106,8 +105,7 @@
                             <td class="footer_total_remaining"></td>
                             <td class="footer_total_sell_return_due"></td>
                             <td colspan="2"></td>
-                            <td class="service_type_count"></td>
-                            <td colspan="7"></td>
+
                         </tr>
                     </tfoot>
                 </table>
@@ -312,21 +310,7 @@
                     {
                         data: 'shipping_details',
                         name: 'shipping_details'
-                    },
-                    {
-                        data: 'table_name',
-                        name: 'tables.name',
-                        @if (empty($is_tables_enabled))
-                            visible: false
-                        @endif
-                    },
-                    {
-                        data: 'waiter',
-                        name: 'ss.first_name',
-                        @if (empty($is_service_staff_enabled))
-                            visible: false
-                        @endif
-                    },
+                    }
                 ],
                 "fnDrawCallback": function(oSettings) {
                     __currency_convert_recursively($('#sell_table'));
