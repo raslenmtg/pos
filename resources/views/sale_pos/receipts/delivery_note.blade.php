@@ -20,11 +20,6 @@
         p {
             margin: 0 0 4px 0;
         }
-
-        /* Print stability */
-        @media print {
-            tr { page-break-inside: avoid; }
-        }
         @page {
             size: A4 portrait;
             margin: 12mm;
