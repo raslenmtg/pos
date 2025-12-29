@@ -49,8 +49,6 @@ class RecurringInvoice extends Command
     public function handle()
     {
         try {
-            ini_set('max_execution_time', 0);
-            ini_set('memory_limit', '512M');
             $transactions = Transaction::where('is_recurring', 1)
                                 ->where('type', 'sell')
                                 ->where('status', 'final')

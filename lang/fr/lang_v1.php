@@ -1109,6 +1109,7 @@ return [
     'sales_order_heading' => 'En-tête de commande client',
     'sales_order_help_text' => 'La commande client, parfois abrégée SO, est une commande émise par une entreprise ou un commerçant individuel à un client. Une commande client peut concerner des produits et / ou des services.',
     'sales_orders' => 'Commandes',
+    'upcoming_invoice_payment_due'=>'Paiement de la facture :invoice_no à venir le :paid_on Montant dû: :amount, Méthode de paiement: :method :card_number :cheque_number :bank_account_number',
     'sales_payment_dues' => 'Paiement de vente dû',
     'sales_person_label' => 'Étiquette du vendeur(se)',
     'sales_with_commission' => 'Ventes à la Commission',

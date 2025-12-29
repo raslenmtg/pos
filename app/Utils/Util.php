@@ -1293,7 +1293,7 @@ class Util
         $notifications_data = [];
         foreach ($notifications as $notification) {
             $data = $notification->data;
-            if (in_array($notification->type, [\App\Notifications\RecurringInvoiceNotification::class, \App\Notifications\RecurringExpenseNotification::class])) {
+            if (in_array($notification->type, [\App\Notifications\RecurringInvoiceNotification::class, \App\Notifications\RecurringExpenseNotification::class, \App\Notifications\UpcomingPaymentAlert::class])) {
                 $msg = '';
                 $icon_class = '';
                 $link = '';
@@ -1322,6 +1322,15 @@ class Util
                     );
                     $icon_class = 'fas fa-recycle bg-green';
                     $link = action([\App\Http\Controllers\ExpenseController::class, 'index']);
+                } elseif (
+                    $notification->type ==
+                    \App\Notifications\UpcomingPaymentAlert::class
+                ) {
+                    $msg = __(
+                        'lang_v1.upcoming_invoice_payment_due',
+                       $data
+                    );
+                    $icon_class = 'fas fa-exclamation-circle bg-yellow';
                 }
 
                 $notifications_data[] = [

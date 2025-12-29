@@ -32,7 +32,7 @@
      'discount_amount' => 'Montant de remise',
      'no_recent_transactions' => 'Aucune transaction récente',
      'final' => 'Final',
-     'invoice_no' => 'Facture n°.',
+     'invoice_no' => 'Facture n°',
      'customer_name' => 'Nom du client',
      'payment_status' => 'Statut de paiement',
      'status' => 'Statut',
