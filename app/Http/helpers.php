@@ -84,9 +84,7 @@ if (! function_exists('isFileImage')) {
 
 function isAppInstalled()
 {
-    $envPath = base_path('.env');
-
-    return file_exists($envPath);
+    return true;
 }
 
 /**

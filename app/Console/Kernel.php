@@ -16,31 +16,22 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $env = config('app.env');
-        $email = config('mail.username');
 
-        if ($env === 'live') {
+        if ($env === 'production') {
             //Scheduling backup, specify the time when the backup will get cleaned & time when it will run.
             
-           /* $schedule->command('backup:clean')->daily()->at('01:00');
-            $schedule->command('backup:run')->daily()->at('01:30');
+            $schedule->command('backup:clean')->daily()->at('03:00');
+            $schedule->command('backup:run')->daily()->at('03:00');
 
 
             //Schedule to create recurring invoices
-            $schedule->command('pos:generateSubscriptionInvoices')->dailyAt('23:30');
+            /*  $schedule->command('pos:generateSubscriptionInvoices')->dailyAt('23:30');
             $schedule->command('pos:updateRewardPoints')->dailyAt('23:45');
 
             $schedule->command('pos:autoSendPaymentReminder')->dailyAt('8:00');*/
             $schedule->command('pos:updateRewardPoints')->dailyAt('03:00');
             $schedule->command('pos:sendUpcomingPaymentAlerts')->dailyAt('03:00');
 
-        }
-
-        if ($env === 'demo') {
-            //IMPORTANT NOTE: This command will delete all business details and create dummy business, run only in demo server.
-            $schedule->command('pos:dummyBusiness')
-                    ->cron('0 */3 * * *')
-                    //->everyThirtyMinutes()
-                    ->emailOutputTo($email);
         }
     }
 

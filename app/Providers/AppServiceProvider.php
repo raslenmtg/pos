@@ -94,7 +94,6 @@ class AppServiceProvider extends ServiceProvider
         View::composer(
             ['layouts.*'],
             function ($view) {
-                if (isAppInstalled()) {
                     $keys = ['additional_js', 'additional_css'];
                     $__system_settings = System::getProperties($keys, true);
 
@@ -129,7 +128,6 @@ class AppServiceProvider extends ServiceProvider
                     $view->with('__additional_views', $additional_views);
                     $view->with('__additional_html', $additional_html);
                     $view->with('__system_settings', $__system_settings);
-                }
             }
         );
 
