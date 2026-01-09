@@ -12,6 +12,7 @@
                   
                   <option value="" @if(!$business->enable_timbre) selected @endif>Selectionner Montant</option>
                   <option value="1" @if($business->timbre_value == 1) selected @endif>1 DT</option>
+                  <option value="0.6" @if($business->timbre_value == 0.6) selected @endif>0.6 DT</option>
                   <option value="0.1" @if($business->timbre_value == 0.1) selected @endif>0.1 DT</option>
                 </select>
             </div>

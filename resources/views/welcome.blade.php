@@ -371,7 +371,7 @@
             font-size: 3.5rem;
             font-weight: 800;
             margin-bottom: 10px;
-            color: var(--accent-color);
+            color: white;
         }
 
         .stat-label {
@@ -1187,7 +1187,7 @@
 
             </div>
             <div class="footer-bottom">
-                <p>جميع الحقوق محفوظة © 2025 Simplex Gestion</p>
+                <p>جميع الحقوق محفوظة © 2026 Simplex Gestion</p>
             </div>
         </div>
     </footer>
@@ -1242,50 +1242,6 @@
                 navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
         });
-
-        // Counter animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.stat-number');
-            counters.forEach(counter => {
-                const originalText = counter.textContent.trim();
-                const target = parseInt(originalText);
-                
-                // Only animate if the content is numeric
-                if (!isNaN(target) && target > 0) {
-                    const suffix = originalText.replace(/[0-9]/g, '');
-                    let current = 0;
-                    const increment = target / 100;
-
-                    const updateCounter = () => {
-                        if (current < target) {
-                            current += increment;
-                            counter.textContent = Math.floor(current) + suffix;
-                            setTimeout(updateCounter, 20);
-                        } else {
-                            counter.textContent = target + suffix;
-                        }
-                    };
-
-                    updateCounter();
-                }
-                // If not numeric, leave the text as is (no animation)
-            });
-        }
-
-        // Trigger counter animation when section is visible
-        const statsSection = document.querySelector('.stats-section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounters();
-                    observer.unobserve(entry.target);
-                }
-            });
-        });
-
-        if (statsSection) {
-            observer.observe(statsSection);
-        }
     </script>
 
    @yield('javascript')
