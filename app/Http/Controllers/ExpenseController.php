@@ -171,6 +171,7 @@ class ExpenseController extends Controller
             }
 
             return Datatables::of($expenses)
+                ->addColumn('#','<input type="checkbox" class="row_checkbox" value="{{$id}}">')
                 ->addColumn(
                     'action',
                     '<div class="btn-group">
@@ -268,7 +269,7 @@ class ExpenseController extends Controller
 
                     return $ref_no;
                 })
-                ->rawColumns(['final_total', 'action', 'payment_status', 'contact_name', 'payment_due', 'ref_no', 'recur_details'])
+                ->rawColumns(['#', 'final_total', 'action', 'payment_status', 'contact_name', 'payment_due', 'ref_no', 'recur_details'])
                 ->make(true);
         }
 
@@ -878,6 +879,26 @@ class ExpenseController extends Controller
 
         return redirect('import-expense')->with('status', $output);
 
+    }
+
+    public function exportTEJ(Request $request)
+    {
+        if (! auth()->user()->can('all_expense.access') && ! auth()->user()->can('view_own_expense')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        // Selected IDs are accepted for future use (currently returning empty XML as requested)
+        $request->validate([
+            'ids' => 'nullable|array',
+            'ids.*' => 'integer',
+        ]);
+
+        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<TEJ></TEJ>\n";
+        $fileName = 'export-tej-' . now()->format('Ymd_His') . '.xml';
+
+        return response($xml, 200)
+            ->header('Content-Type', 'application/xml; charset=UTF-8')
+            ->header('Content-Disposition', 'attachment; filename="' . $fileName . '"');
     }
 
 }

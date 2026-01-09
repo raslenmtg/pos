@@ -317,6 +317,7 @@ Route::middleware([ 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'C
     Route::resource('expenses', ExpenseController::class);
     Route::get('import-expense', [ExpenseController::class, 'importExpense']);
     Route::post('store-import-expense', [ExpenseController::class, 'storeExpenseImport']);
+    Route::post('expenses/exportTEJ', [ExpenseController::class, 'exportTEJ']);
 
     //Transaction payments...
     // Route::get('/payments/opening-balance/{contact_id}', 'TransactionPaymentController@getOpeningBalancePayments');

@@ -1540,5 +1540,5 @@ return [
     'your_username_will_be' => 'Votre nom d\'utilisateur sera',
     'payroll_for'=>'paie pour',
     'shortcut_help'=>'aide sur les raccourcis',
-    
+    'please_select_at_least_one_row'=>'Veuillez sélectionner au moins une ligne.',
 ]; 

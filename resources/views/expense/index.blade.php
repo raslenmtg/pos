@@ -71,8 +71,6 @@
                 @can('expense.add')
                     @slot('tool')
                         <div class="box-tools">
-                            {{-- <a class="btn btn-block btn-primary" href="{{action([\App\Http\Controllers\ExpenseController::class, 'create'])}}">
-                            <i class="fa fa-plus"></i> @lang('messages.add')</a> --}}
                             <a class="tw-dw-btn tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 tw-font-bold tw-text-white tw-border-none tw-rounded-full pull-right tw-m-2"
                                 href="{{action([\App\Http\Controllers\ExpenseController::class, 'create'])}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -93,6 +91,16 @@
                                         <path d="M5 12l14 0" />
                                 </svg> @lang('expense.import_expense')
                         </a>
+                            <button id="exportTEJbtn"
+                                    class="tw-dw-btn tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 tw-font-bold tw-text-white tw-border-none tw-rounded-full pull-right tw-m-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24">
+                                    <!-- File outline -->
+                                    <path fill="white" d="M64 0C28.7 0 0 28.7 0 64V448c0 35.3 28.7 64 64 64H320c35.3 0 64-28.7 64-64V160H256c-17.7 0-32-14.3-32-32V0H64zM256 0V128H384L256 0z"/>
+
+                                    <!-- "XML" text -->
+                                    <text x="192" y="340" font-family="Arial, sans-serif" font-size="102" font-weight="bold" fill="black" text-anchor="middle">XML</text>
+                                </svg>   Exporter TEJ
+                            </button>
                         </div>
                     @endslot
                 @endcan
@@ -100,6 +108,9 @@
                     <table class="table table-bordered table-striped" id="expense_table">
                         <thead>
                             <tr>
+                                <th>
+                                    <input type="checkbox" id="expense_select_all" />
+                                </th>
                                 <th>@lang('messages.action')</th>
                                 <th>@lang('messages.date')</th>
                                 <th>@lang('purchase.ref_no')</th>
@@ -110,7 +121,7 @@
                                 <th>@lang('sale.payment_status')</th>
                                 <th>@lang('product.tax')</th>
                                 <th>@lang('sale.total_amount')</th>
-                                <th>@lang('purchase.payment_due')
+                                <th>@lang('purchase.payment_due')</th>
                                 <th>@lang('expense.expense_for')</th>
                                 <th>@lang('contact.contact')</th>
                                 <th>@lang('expense.expense_note')</th>
@@ -146,4 +157,86 @@
 @stop
 @section('javascript')
  <script src="{{ asset('js/payment.js?v=' . $asset_v) }}"></script>
+ <script>
+    $(function () {
+        // Use json_encode to emit proper JS literals without Blade directives (keeps IDE happy)
+        const exportTejUrl = {!! json_encode(url('expenses/exportTEJ')) !!};
+        const pleaseSelectMsg = {!! json_encode(__('lang_v1.please_select_at_least_one_row')) !!};
+        const exportFailedMsg = {!! json_encode(__('messages.something_went_wrong')) !!};
+        const csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+        $(document).on('click', "#exportTEJbtn", function (e) {
+            e.preventDefault();
+
+            let ids = $('#expense_table tbody input.row_checkbox:checked')
+                .map(function () { return $(this).val(); })
+                .get();
+
+            if (!ids || !ids.length) {
+                if (typeof toastr !== 'undefined') {
+                    toastr.warning(pleaseSelectMsg);
+                }
+                return;
+            }
+
+            $.ajax({
+                url: exportTejUrl,
+                method: 'POST',
+                data: { ids: ids },
+                headers: {
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (data, status, xhr) {
+                    // Try to extract filename from Content-Disposition
+                    let filename = 'export-tej.xml';
+                    let disposition = xhr.getResponseHeader('Content-Disposition');
+                    if (disposition && disposition.indexOf('filename=') !== -1) {
+                        let matches = /filename\*=UTF-8''([^;]+)|filename="?([^";]+)"?/i.exec(disposition);
+                        if (matches) {
+                            filename = decodeURIComponent(matches[1] || matches[2]);
+                        }
+                    }
+
+                    let blob = new Blob([data], { type: 'application/xml' });
+                    let link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = filename;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(link.href);
+                },
+                error: function () {
+                    if (typeof toastr !== 'undefined') {
+                        toastr.error(exportFailedMsg);
+                    }
+                }
+            });
+        });
+
+        $(document).on('change', "#expense_select_all", function () {
+            var isChecked = $(this).is(':checked');
+            $('#expense_table tbody input.row_checkbox').prop('checked', isChecked);
+        });
+
+        // Keep header checkbox synced when any row checkbox changes
+        $(document).on('change', "#expense_table tbody input.row_checkbox", function () {
+            var $all = $('#expense_table tbody input.row_checkbox');
+            var $checked = $('#expense_table tbody input.row_checkbox:checked');
+            $('#expense_select_all').prop('checked', $all.length > 0 && $all.length === $checked.length);
+        });
+
+        // If DataTable exists, update header checkbox state after draw (paging/filtering)
+        if (typeof expense_table !== 'undefined' && expense_table) {
+            expense_table.on('draw', function () {
+                var $all = $('#expense_table tbody input.row_checkbox');
+                var $checked = $('#expense_table tbody input.row_checkbox:checked');
+                $('#expense_select_all').prop('checked', $all.length > 0 && $all.length === $checked.length);
+            });
+        }
+    });
+ </script>
 @endsection
