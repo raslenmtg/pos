@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
             
             $schedule->command('backup:clean')->daily()->at('03:00');
             $schedule->command('backup:run')->daily()->at('03:10');
+            $schedule->command('pos:generateRecurringExpense')->daily()->at('00:01');
 
 
             //Schedule to create recurring invoices
@@ -30,7 +31,7 @@ class Kernel extends ConsoleKernel
 
             $schedule->command('pos:autoSendPaymentReminder')->dailyAt('8:00');*/
             $schedule->command('pos:updateRewardPoints')->dailyAt('03:00');
-            $schedule->command('pos:sendUpcomingPaymentAlerts')->dailyAt('03:00');
+            $schedule->command('pos:sendUpcomingPaymentAlerts')->dailyAt('01:00');
 
         }
     }
