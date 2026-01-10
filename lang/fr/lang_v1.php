@@ -740,7 +740,7 @@ return [
     'min_reward_points_used' => 'Minimum le :name peut être utilisé',
     'minimum_sale_price_help' => 'Si cette option est activée, sur les écrans de PDV ou de vente, le prix de vente par défaut correspond au prix de vente minimum du produit. Vous ne pouvez pas définir un prix inférieur au prix de vente par défaut.',
     'minimum_selling_price_error_msg' => 'Prix minimum de vente est :price',
-    'mobile_already_registered' => ': mobile déjà inscrit pour: contacts',
+    'mobile_already_registered' => ':mobile déjà réservé pour :contacts',
     'mobile_number' => 'Numéro de portable',
     'module_new_version' => 'Il existe une nouvelle version de: Module disponible <a href = ": link" class = "tw-dw-btn tw-dw-btn-info tw-pl-2"> update </a>',
     'modules' => 'Modules',
@@ -1540,5 +1540,4 @@ return [
     'your_username_will_be' => 'Votre nom d\'utilisateur sera',
     'payroll_for'=>'paie pour',
     'shortcut_help'=>'aide sur les raccourcis',
-    'please_select_at_least_one_row'=>'Veuillez sélectionner au moins une ligne.',
 ]; 
