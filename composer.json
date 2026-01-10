@@ -32,6 +32,7 @@
         "laravel/ui": "4.x",
         "laravelcollective/html": "^6.3",
         "league/flysystem-aws-s3-v3": "^3.0",
+        "league/flysystem-google-cloud-storage": "^3.30",
         "maatwebsite/excel": "^3.1.8",
         "mike42/escpos-php": "^4.0",
         "milon/barcode": "^9.0",

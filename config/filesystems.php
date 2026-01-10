@@ -60,6 +60,19 @@ return [
             'driver' => 'dropbox',
             'authorization_token' => env('DROPBOX_ACCESS_TOKEN'),
         ],
+        'gcs' => [
+            'driver' => 'gcs',
+            'project_id' => env('GOOGLE_CLOUD_PROJECT_ID'),
+            'key_file' => json_decode(
+                file_get_contents(env('GOOGLE_CLOUD_KEY_FILE')),
+                true
+            ),
+            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET'),
+            'path_prefix' => 'laravel-backups',
+            'visibility' => 'private',
+        ],
+
+
 
     ],
 

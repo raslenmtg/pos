@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "simplex-gestion",
+  "private_key_id": "4f9b7ac334574419245823d7ba3420678e6ad3a2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCuiGKrEZ7RqJzo\n5VOZagqYV5Ze0g9AcNEJTnv9c96jFcbnOhFYYNLx059lP+xC0XlEOCqEt1PCGspd\nSAs/47cWZSGS9VY5Q4s81zz8UC6pbbwJndPOChg7HE8j21kuXgJPal85LbPc/vNw\nB+g44xUWaKrgMw59vSAIy9UdxPT6xadOuCKppbBq7027nt984al0JCcR5j3oIGVj\nrqUaC+6QM5q810U/fhEj/Oh5Ks8phxoEm98xru22LQyaEa9uceDMynxqzsZiLSba\n/7t2cdAkxhARWiVS8asKFNoF1QgP3dMaDu8l5ZaoBmriM38GYsnCR8NOMGLdMYaU\nfRzBAkN7AgMBAAECggEAEGKEZMvwLX2XUXPp/76JRRj/6GHvBZ0xup5wHHCqx4Ot\nWxrD8xiP5Rz5W09/dhxlNobRUwlE5zWNpukzCSnvD76pwrqegBy7rxgDxSof308K\ndpqm/jJLaQ00zshyXFx9+geh7ePA/W+/2dYcMm77FVH5LLgOVbaSEdFU7gkF+J66\n7/5JBO7nuZXwmuegDH0bfWKb0DmMCBYvHPVtO/WKCshTC3unPzX+OwkWEeAzPU2Q\nBeCALefibi0QYTUzVLC3ca10xdadsjQyUbERk1WvvBCKG9c0v+lIdap7SSeBRw5z\nUEjjhkbNwwzjcoc39D3JEmKOtMP9gPQRJ+SXDglucQKBgQDVnKmMdiIC5pNCB08w\nXi7huji//yCkgWCQnWTP5ML6bn57Nz2abZUZFq3QzSoOW4gs1gwJ6U3tXIcRl5fC\nLkGHphdmZdPzgyREewzBWRnuRouPkBszwG3mffhvwUAo/w9cs4CE6HHNKEA9+HPB\n/h6oY+KRRCV7gLFh15itpODo6wKBgQDRKobgzBkcPT4kQprVABFL0I0BDgNww7dF\nrMfGi7IZi7EC0dHkdEeR1onHGPH00OAEpuT2iERcPcqSydJ4JX6hU5mU6jrRLDlb\noN0u+6Zaq27mw6QSIGaASim7ZmXLIeCmrZ3Bgh1NDWe+YcjKBBhi2rfJJmltrYgG\nHX+YtrVrsQKBgQCWhCxIKBlxF82dkg7vkv3P2msQhpIWuH81h2I4xwXIdsEyy0ri\nHOMZaYySe25t7Xs3tJ+JAFcDsNYPxFSP5A4SqisE4S2HAdo1Uss7FjCaYCUIxM8W\nGTqXVh4PiQlPmeHWPTmK7Ur696jEweO3RvuNRcyo9W6/5n+W5NbVTD+afwKBgC2M\n1VKfH9jGfYHn/0/jc+DOyeYw5w7nkEHcHqVeRqrJgQLcLplRuURJNDfndsmZsy9Q\nKQyHIFv2GOdejDcd8zWuvwNu/uAOgW8y2PgiVVfpfX1DnbdU1v2ZKP1mj0RtXD7w\nECrT6w2cnbsYEGHuAmGEwAFOHCeGYtjyE5duMpQBAoGAchwvyZ0/gMeMjgXKBvsM\nOUWHYbJfNb14XmgDNrZaNM+vFD8DF5/begAfUz3N+mSQjU6DRikTzEU/CX1qtT4Y\n3RUgiJUZXtDqim+oliNht/wzs4rkBM7BGzzoDf5ezCjvPqUckEAxerLjg9uH8uwz\nUxBb8HbqeteTo3MWSIAzg8w=\n-----END PRIVATE KEY-----\n",
+  "client_email": "simplex-backup-service@simplex-gestion.iam.gserviceaccount.com",
+  "client_id": "113315643100856185397",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/simplex-backup-service%40simplex-gestion.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
