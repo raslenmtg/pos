@@ -62,14 +62,18 @@ return [
         ],
         'gcs' => [
             'driver' => 'gcs',
-            'project_id' => env('GOOGLE_CLOUD_PROJECT_ID'),
-            'key_file' => json_decode(
-                file_get_contents(env('GOOGLE_CLOUD_KEY_FILE')),
-                true
-            ),
-            'bucket' => env('GOOGLE_CLOUD_STORAGE_BUCKET'),
-            'path_prefix' => 'laravel-backups',
-            'visibility' => 'private',
+            'key_file_path' => env('GOOGLE_CLOUD_KEY_FILE'),
+            'project_id' => env('GOOGLE_CLOUD_PROJECT_ID', 'simplex-gestion'),
+            'bucket' => env('GOOGLE_CLOUD_BUCKET', 'simplex-bucket'),
+            'path_prefix' => env('GOOGLE_CLOUD_PATH_PREFIX', ''),
+            'storage_api_uri' => env('GOOGLE_CLOUD_STORAGE_API_URI', null),
+
+            // Important for buckets with Uniform Bucket-Level Access (UBLA):
+            // don't try to apply object-level ACLs during upload.
+            'visibility' => null,
+            'visibilityHandler' => \League\Flysystem\GoogleCloudStorage\UniformBucketLevelAccessVisibility::class,
+
+            'throw' => env('GOOGLE_CLOUD_THROW', true),
         ],
 
 
