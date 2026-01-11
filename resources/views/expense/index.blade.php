@@ -91,7 +91,7 @@
                                         <path d="M5 12l14 0" />
                                 </svg> @lang('expense.import_expense')
                         </a>
-                            <button id="exportTEJbtn"
+                            <a id="exportTEJbtn" href="{{action([\App\Http\Controllers\ExpenseController::class, 'exportTEJ'])}}"
                                     class="tw-dw-btn tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 tw-font-bold tw-text-white tw-border-none tw-rounded-full pull-right tw-m-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="24" height="24">
                                     <!-- File outline -->
@@ -100,7 +100,7 @@
                                     <!-- "XML" text -->
                                     <text x="192" y="340" font-family="Arial, sans-serif" font-size="102" font-weight="bold" fill="black" text-anchor="middle">XML</text>
                                 </svg>   Exporter TEJ
-                            </button>
+                            </a>
                         </div>
                     @endslot
                 @endcan
@@ -145,8 +145,6 @@
     </div>
 
 </section>
-<!-- /.content -->
-<!-- /.content -->
 <div class="modal fade payment_modal" tabindex="-1" role="dialog" 
     aria-labelledby="gridSystemModalLabel">
 </div>
@@ -159,13 +157,7 @@
  <script src="{{ asset('js/payment.js?v=' . $asset_v) }}"></script>
  <script>
     $(function () {
-        // Use json_encode to emit proper JS literals without Blade directives (keeps IDE happy)
-        const exportTejUrl = {!! json_encode(url('expenses/exportTEJ')) !!};
-        const pleaseSelectMsg = {!! json_encode(__('lang_v1.please_select_at_least_one_row')) !!};
-        const exportFailedMsg = {!! json_encode(__('messages.something_went_wrong')) !!};
-        const csrfToken = $('meta[name="csrf-token"]').attr('content');
-
-        $(document).on('click', "#exportTEJbtn", function (e) {
+        $(document).on('click', '#exportTEJbtn', function(e) {
             e.preventDefault();
 
             let ids = $('#expense_table tbody input.row_checkbox:checked')
@@ -174,47 +166,37 @@
 
             if (!ids || !ids.length) {
                 if (typeof toastr !== 'undefined') {
-                    toastr.warning(pleaseSelectMsg);
+                    toastr.warning('Veuillez sélectionner au moins une ligne.');
                 }
                 return;
             }
-
-            $.ajax({
-                url: exportTejUrl,
-                method: 'POST',
-                data: { ids: ids },
-                headers: {
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                xhrFields: {
-                    responseType: 'blob'
-                },
-                success: function (data, status, xhr) {
-                    // Try to extract filename from Content-Disposition
-                    let filename = 'export-tej.xml';
-                    let disposition = xhr.getResponseHeader('Content-Disposition');
-                    if (disposition && disposition.indexOf('filename=') !== -1) {
-                        let matches = /filename\*=UTF-8''([^;]+)|filename="?([^";]+)"?/i.exec(disposition);
-                        if (matches) {
-                            filename = decodeURIComponent(matches[1] || matches[2]);
-                        }
-                    }
-
-                    let blob = new Blob([data], { type: 'application/xml' });
-                    let link = document.createElement('a');
-                    link.href = window.URL.createObjectURL(blob);
-                    link.download = filename;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                    window.URL.revokeObjectURL(link.href);
-                },
-                error: function () {
-                    if (typeof toastr !== 'undefined') {
-                        toastr.error(exportFailedMsg);
-                    }
-                }
+            const csrfToken = $('meta[name="csrf-token"]').attr('content');
+            // Create a temporary form
+            var form = $('<form>', {
+                'method': 'POST',
+                'action': $(this).attr('href') // or $(this).data('href') if you add data-href
             });
+
+            // Add CSRF token
+            form.append($('<input>', {
+                'type': 'hidden',
+                'name': '_token',
+                'value': csrfToken
+            }));
+
+            // Add ids as array
+            ids.forEach(function(id) {
+                form.append($('<input>', {
+                    'type': 'hidden',
+                    'name': 'ids[]',
+                    'value': id
+                }));
+            });
+
+            // Submit form and remove it
+            $('body').append(form);
+            form.submit();
+            form.remove();
         });
 
         $(document).on('change', "#expense_select_all", function () {
@@ -237,6 +219,6 @@
                 $('#expense_select_all').prop('checked', $all.length > 0 && $all.length === $checked.length);
             });
         }
-    });
+    })
  </script>
 @endsection

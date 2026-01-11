@@ -360,11 +360,6 @@ class ExpenseController extends Controller
         try {
             $business_id = $request->session()->get('user.business_id');
 
-            //Check if subscribed or not
-            if (! $this->moduleUtil->isSubscribed($business_id)) {
-                return $this->moduleUtil->expiredResponse(action([\App\Http\Controllers\ExpenseController::class, 'index']));
-            }
-
             //Validate document size
             $request->validate([
                 'document' => 'file|max:'.(config('constants.document_size_limit') / 1000),
@@ -383,7 +378,7 @@ class ExpenseController extends Controller
 
             $this->transactionUtil->activityLog($expense, 'added');
 
-            event(new ExpenseCreatedOrModified($expense));
+           // event(new ExpenseCreatedOrModified($expense));
 
             DB::commit();
 
@@ -883,15 +878,8 @@ class ExpenseController extends Controller
 
     public function exportTEJ(Request $request)
     {
-        if (! auth()->user()->can('all_expense.access') && ! auth()->user()->can('view_own_expense')) {
-            abort(403, 'Unauthorized action.');
-        }
-
-        // Selected IDs are accepted for future use (currently returning empty XML as requested)
-        $request->validate([
-            'ids' => 'nullable|array',
-            'ids.*' => 'integer',
-        ]);
+        $ids = $request->input('ids', []);
+        $expenses = Transaction::whereIn('id', $ids)->get();
 
         $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<TEJ></TEJ>\n";
         $fileName = 'export-tej-' . now()->format('Ymd_His') . '.xml';
@@ -899,6 +887,6 @@ class ExpenseController extends Controller
         return response($xml, 200)
             ->header('Content-Type', 'application/xml; charset=UTF-8')
             ->header('Content-Disposition', 'attachment; filename="' . $fileName . '"');
-    }
 
+    }
 }
