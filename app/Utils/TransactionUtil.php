@@ -5501,7 +5501,27 @@ class TransactionUtil extends Util
     {
         $transaction_data = $request->only(['ref_no', 'transaction_date',
             'location_id', 'final_total', 'expense_for', 'additional_notes',
-            'expense_category_id', 'tax_id', 'contact_id', ]);
+            'expense_category_id', 'tax_id', 'contact_id','code_rs' ]);
+
+        $taxRates = [
+            'RS3_000001' => '20',
+            'RS8_000001' => '20',
+            'RS6_000001' => '2.5',
+            'RS6_000002' => '2.5',
+            'RS5_000001' => '10',
+            'RS1_000001' => '5',
+            'RS1_000002' => '10',
+            'RS7_000003' => '0.5',
+            'RS7_000002' => '1',
+            'RS7_000004' => '1.5',
+            'RS7_000005' => '1',
+            'RS7_000001' => '1.5',
+            'RS2_000001' => '10',
+            'RS2_000002' => '3',
+            'RS2_000003' => '3',
+            'RS2_000004' => '5',
+            'RS11_000001' => '25',
+        ];
 
         $transaction_data['business_id'] = $business_id;
         $transaction_data['created_by'] = $user_id;
@@ -5526,6 +5546,16 @@ class TransactionUtil extends Util
             $tax_details = TaxRate::find($transaction_data['tax_id']);
             $transaction_data['total_before_tax'] = $this->calc_percentage_base($transaction_data['final_total'], $tax_details->amount);
             $transaction_data['tax_amount'] = $transaction_data['final_total'] - $transaction_data['total_before_tax'];
+        }
+
+        // Calculate and deduct RS from final_total
+        if (!empty($transaction_data['code_rs']) && isset($taxRates[$transaction_data['code_rs']])) {
+            $rsRate = floatval($taxRates[$transaction_data['code_rs']]);
+            $HT = $transaction_data['total_before_tax']; // This is already calculated above
+            $rsDeduction = $HT * ($rsRate / 100);
+
+            // Deduct RS from final_total
+            $transaction_data['final_total'] = $transaction_data['final_total'] - $rsDeduction;
         }
 
         if ($request->has('is_recurring')) {

@@ -23,5 +23,8 @@
      'expense_delete_success' => 'Dépenses effacées avec succès',
      'expense_for' => 'Dépense pour',
      'expense_for_help' => 'Choisissez l’utilisateur (email/nom d’utilisateur) auquel la dépense est liée (Optionnel)',
-    'import_expense' => 'Importer la dépense'
+    'import_expense' => 'Importer la dépense',
+    'operation_type' => 'Type d\'opération',
+    'operation' => 'Opération',
+    'rs_rate' => 'Taux RS',
  ];
