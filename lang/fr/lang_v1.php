@@ -496,7 +496,7 @@ return [
     'exempt' => 'Exempter',
     'exp_date_instructions' => 'Uniquement si l\'expiration du produit est activée. Vous pouvez activer l\'expiration des produits à partir de <br> <code> Paramètres d\'entreprise> Produit> Activer l\'expiration du produit </code>',
     'expense' => 'Frais',
-    'expense_for_contact' => 'Frais de contact',
+    'expense_for_contact' => 'Dépense de la part',
     'expense_payment' => 'Paiement des dépenses',
     'expense_tax' => 'Taxe sur les dépenses',
     'expense_tax_tooltip' => 'Total total versé aux dépenses de l\'entreprise pour la période sélectionnée',

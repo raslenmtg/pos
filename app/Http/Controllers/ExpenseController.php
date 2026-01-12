@@ -365,6 +365,17 @@ class ExpenseController extends Controller
                 'document' => 'file|max:'.(config('constants.document_size_limit') / 1000),
             ]);
 
+            // Validate that if code_rs is provided, contact_id and tax_id must also be provided
+            if (!empty($request->input('code_rs'))) {
+                $request->validate([
+                    'contact_id' => 'required',
+                    'tax_id' => 'required',
+                ], [
+                    'contact_id.required' => __('expense.contact_required_for_rs'),
+                    'tax_id.required' => __('expense.tax_required_for_rs'),
+                ]);
+            }
+
             $user_id = $request->session()->get('user.id');
 
             DB::beginTransaction();

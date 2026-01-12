@@ -27,4 +27,6 @@
     'operation_type' => 'Type d\'opération',
     'operation' => 'Opération',
     'rs_rate' => 'Taux RS',
+    'contact_required_for_rs' => 'Le fournisseur est requis lorsque le RS est sélectionné.',
+    'tax_required_for_rs' => 'La taxe est requise lorsque le RS est sélectionné.',
  ];

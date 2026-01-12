@@ -189,6 +189,11 @@
             ignoreReadonly: true,
         });
 
+        // Disable tax_category initially if no tax is selected
+        if (!$('select#tax_id').val()) {
+            $('#tax_category').prop('disabled', true);
+        }
+
         const taxCodes = {
             "capitalIncome": [
                 { value: "RS3_000001", text: "Revenus de capitaux mobiliers (autres que les dépôts en devise ou en dinars convertible) servis aux résidents soumi à l'impots (IS ou IRPP) - 20%", rate: "20" }
@@ -229,13 +234,13 @@
         $('#tax_category').on('change', function() {
             const selectedCategory = $(this).val();
             const $taxCodeSelect = $('#code_rs');
-
+           // let $taxSelect = $('select#tax_id').val()
             // Clear existing options
             $taxCodeSelect.empty();
             $taxCodeSelect.append('<option value="">{{ __("messages.please_select") }}</option>');
 
             // If a category is selected, populate the tax codes
-            if (selectedCategory && taxCodes[selectedCategory]) {
+            if (selectedCategory && taxCodes[selectedCategory] ) {
                 $taxCodeSelect.prop('disabled', false);
 
                 $.each(taxCodes[selectedCategory], function(index, code) {
@@ -286,6 +291,29 @@
 	});
 	
 	__page_leave_confirmation('#add_expense_form');
+
+	// Add form validation before submission
+	$('#add_expense_form').on('submit', function(e) {
+		var codeRs = $('#code_rs').val();
+		var contactId = $('#contact_id').val();
+		var taxId = $('#tax_id').val();
+
+		// If RS code is selected, validate that contact and tax are also selected
+		if (codeRs && codeRs !== '') {
+			if (!contactId || contactId === '') {
+				e.preventDefault();
+				toastr.error('{{ __("expense.contact_required_for_rs") }}');
+				return false;
+			}
+
+			if (!taxId || taxId === '') {
+				e.preventDefault();
+				toastr.error('{{ __("expense.tax_required_for_rs") }}');
+				return false;
+			}
+		}
+	});
+
 	$(document).on('change', 'input#final_total, input.payment-amount', function() {
 		// Check if RS is enabled and calculate accordingly
 		if ($('#is_rs').is(':checked')) {
@@ -338,9 +366,13 @@
             if (!selectedVal || selectedVal === '' || selectedVal === null) {
                 $display.text('');
                 $error.show();
+                // Disable tax_category when no tax is selected
+                $('#tax_category').prop('disabled', true);
             } else {
                 $display.text(selectedText);
                 $error.hide();
+                // Enable tax_category when tax is selected
+                $('#tax_category').prop('disabled', false);
 
                 // Calculate RS deduction when tax is selected
                 calculateRSDeduction();
@@ -348,6 +380,8 @@
         } else {
             $display.text('');
             $error.show();
+            // Disable tax_category when tax select doesn't exist
+            $('#tax_category').prop('disabled', true);
         }
     }
 
@@ -361,6 +395,8 @@
 
         // Get the tax percentage from tax_id select
         var $taxSelect = $('select#tax_id');
+        if(!$taxSelect.val())
+            return;
         var selectedTaxOption = $taxSelect.find('option:selected');
         var taxPercentage = parseFloat(selectedTaxOption.data('rate')) || 0;
 
