@@ -330,6 +330,14 @@ class ExpenseController extends Controller
 
         $contacts = Contact::contactDropdown($business_id, false, false);
 
+        // Get full contact details with mobile, address and tax_number for validation
+        $contacts_details = Contact::where('business_id', $business_id)
+            ->where('type', '!=', 'lead')
+            ->where('contact_status', 'active')
+            ->select('id', 'mobile', 'address_line_1', 'city', 'state', 'tax_number')
+            ->get()
+            ->keyBy('id');
+
         //Accounts
         $accounts = [];
         if ($this->moduleUtil->isModuleEnabled('account')) {
@@ -338,11 +346,11 @@ class ExpenseController extends Controller
 
         if (request()->ajax()) {
             return view('expense.add_expense_modal')
-                ->with(compact('expense_categories', 'business_locations', 'users', 'taxes', 'payment_line', 'payment_types', 'accounts', 'bl_attributes', 'contacts'));
+                ->with(compact('expense_categories', 'business_locations', 'users', 'taxes', 'payment_line', 'payment_types', 'accounts', 'bl_attributes', 'contacts', 'contacts_details'));
         }
 
         return view('expense.create')
-            ->with(compact('expense_categories', 'business_locations', 'users', 'taxes', 'payment_line', 'payment_types', 'accounts', 'bl_attributes', 'contacts'));
+            ->with(compact('expense_categories', 'business_locations', 'users', 'taxes', 'payment_line', 'payment_types', 'accounts', 'bl_attributes', 'contacts', 'contacts_details'));
     }
 
     /**
@@ -890,14 +898,326 @@ class ExpenseController extends Controller
     public function exportTEJ(Request $request)
     {
         $ids = $request->input('ids', []);
-        $expenses = Transaction::whereIn('id', $ids)->get();
 
-        $xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<TEJ></TEJ>\n";
-        $fileName = 'export-tej-' . now()->format('Ymd_His') . '.xml';
+        // Get expenses with related data
+        $expenses = Transaction::whereIn('id', $ids)
+            ->with(['contact', 'tax', 'business', 'location'])
+            ->where('type', 'expense')
+            ->get();
 
-        return response($xml, 200)
-            ->header('Content-Type', 'application/xml; charset=UTF-8')
-            ->header('Content-Disposition', 'attachment; filename="' . $fileName . '"');
+        if ($expenses->isEmpty()) {
+            return response()->json(['error' => 'No expenses found'], 404);
+        }
 
+        // Get business information for declarant (the company making the declaration)
+        $business = $expenses->first()->business;
+
+        // Get month and year from the first expense
+        $firstExpense = $expenses->first();
+        $transactionDate = \Carbon\Carbon::parse($firstExpense->transaction_date);
+
+        // Extract business matricule fiscal for declarant (from business)
+        $declarantMatriculeFiscal = $business->tax_number_1 ?? '';
+
+        // Code acte (0 for initial declaration)
+        $codeActe = '1';
+
+        // Group expenses by beneficiary (contact)
+        $groupedByContact = $expenses->groupBy('contact_id');
+
+        // Create XML
+        $xml = new \DOMDocument('1.0', 'UTF-8');
+        $xml->formatOutput = true;
+        $xml->standalone = true;
+
+        // Root element
+        $root = $xml->createElement('DeclarationsRS');
+        $root->setAttribute('VersionSchema', '1.0');
+        $xml->appendChild($root);
+
+        // Declarant section
+        $declarant = $xml->createElement('Declarant');
+        $root->appendChild($declarant);
+
+        $typeIdentifiant = $xml->createElement('TypeIdentifiant', '1'); // 1 for Matricule Fiscal
+        $declarant->appendChild($typeIdentifiant);
+
+        // Declarant is the business (the company making the declaration)
+        $identifiant = $xml->createElement('Identifiant', $declarantMatriculeFiscal);
+        $declarant->appendChild($identifiant);
+
+        $categorieContribuable = $xml->createElement('CategorieContribuable', 'PM'); // PM for Personne Morale
+        $declarant->appendChild($categorieContribuable);
+
+        // Reference Declaration
+        $referenceDeclaration = $xml->createElement('ReferenceDeclaration');
+        $root->appendChild($referenceDeclaration);
+
+        $acteDepot = $xml->createElement('ActeDepot', $codeActe); // 0 for initial declaration
+        $referenceDeclaration->appendChild($acteDepot);
+
+        $anneeDepot = $xml->createElement('AnneeDepot', $transactionDate->format('Y'));
+        $referenceDeclaration->appendChild($anneeDepot);
+
+        $moisDepot = $xml->createElement('MoisDepot', $transactionDate->format('m'));
+        $referenceDeclaration->appendChild($moisDepot);
+
+        // Ajouter Certificats
+        $ajouterCertificats = $xml->createElement('AjouterCertificats');
+        $root->appendChild($ajouterCertificats);
+
+        // Process each beneficiary
+        foreach ($groupedByContact as $contactId => $contactExpenses) {
+            $contact = $contactExpenses->first()->contact;
+
+            if (!$contact) {
+                continue; // Skip if no contact
+            }
+
+            // Create certificate for this beneficiary
+            $certificat = $xml->createElement('Certificat');
+            $ajouterCertificats->appendChild($certificat);
+
+            // Beneficiaire section
+            $beneficiaire = $xml->createElement('Beneficiaire');
+            $certificat->appendChild($beneficiaire);
+
+            // IdTaxpayer
+            $idTaxpayer = $xml->createElement('IdTaxpayer');
+            $beneficiaire->appendChild($idTaxpayer);
+
+            $matriculeFiscal = $xml->createElement('MatriculeFiscal');
+            $idTaxpayer->appendChild($matriculeFiscal);
+
+            $typeIdBenef = $xml->createElement('TypeIdentifiant', '1');
+            $matriculeFiscal->appendChild($typeIdBenef);
+
+            // Beneficiary is the contact (supplier/beneficiary receiving payment)
+            $identifiantBenef = $xml->createElement('Identifiant', $contact->tax_number ?? '');
+            $matriculeFiscal->appendChild($identifiantBenef);
+
+            // Determine if contact is PM or PP based on type
+            $categorieBenef = $contact->contact_type === 'individual' ? 'PP' : 'PM';
+            $categorieContribuableBenef = $xml->createElement('CategorieContribuable', $categorieBenef);
+            $matriculeFiscal->appendChild($categorieContribuableBenef);
+
+            // Resident (1 for resident, 0 for non-resident)
+            $resident = $xml->createElement('Resident', '1');
+            $beneficiaire->appendChild($resident);
+
+            // Name
+            $nomBenef = $xml->createElement('NometprenonOuRaisonsociale');
+            $nomBenef->appendChild($xml->createTextNode($contact->name ?? ''));
+            $beneficiaire->appendChild($nomBenef);
+
+            // Address
+            $adresseBenef = $xml->createElement('Adresse');
+            $adresseBenef->appendChild($xml->createTextNode($this->formatAddress($contact)));
+            $beneficiaire->appendChild($adresseBenef);
+
+            // Contact Info
+            $infosContact = $xml->createElement('InfosContact');
+            $beneficiaire->appendChild($infosContact);
+
+            $email = $xml->createElement('AdresseMail', $contact->email ?? '');
+            $infosContact->appendChild($email);
+
+            $tel = $xml->createElement('NumTel', $contact->mobile ?? '');
+            $infosContact->appendChild($tel);
+
+            // Date Payment (use the last payment date or transaction date)
+            $lastExpense = $contactExpenses->sortByDesc('transaction_date')->first();
+            $datePayement = $xml->createElement('DatePayement',
+                \Carbon\Carbon::parse($lastExpense->transaction_date)->format('d/m/Y')
+            );
+            $certificat->appendChild($datePayement);
+
+            // Reference certificate
+            $refCertif = $xml->createElement('Ref_certif_chez_declarant', $lastExpense->ref_no ?? $lastExpense->invoice_no ?? '');
+            $certificat->appendChild($refCertif);
+
+            // Liste Operations
+            $listeOperations = $xml->createElement('ListeOperations');
+            $certificat->appendChild($listeOperations);
+
+            // Totals for this certificate
+            $totalHT = 0;
+            $totalTVA = 0;
+            $totalTTC = 0;
+            $totalRS = 0;
+            $totalNetServi = 0;
+
+            // Process each expense for this contact
+            foreach ($contactExpenses as $expense) {
+                if (!$expense->code_rs) {
+                    continue; // Skip if no RS code
+                }
+
+                $operation = $xml->createElement('Operation');
+                $operation->setAttribute('IdTypeOperation', $expense->code_rs);
+                $listeOperations->appendChild($operation);
+
+                // Get RS rate from code_rs mapping
+                $rsRate = $this->getRSRate($expense->code_rs);
+
+                // Calculate amounts in millimes (1 TND = 1000 millimes)
+                $montantTTC = intval($expense->final_total * 1000);
+                $tauxTVA = $expense->tax ? floatval($expense->tax->amount) : 0;
+
+                // Calculate HT (before tax)
+                $montantHT = $tauxTVA > 0
+                    ? intval(($expense->final_total / (1 + ($tauxTVA / 100))) * 1000)
+                    : $montantTTC;
+
+                $montantTVA = $montantTTC - $montantHT;
+
+                // Calculate RS amount
+                $montantRS = intval(($montantHT / 1000) * ($rsRate / 100) * 1000);
+
+                // Net amount served
+                $montantNetServi = $montantTTC - $montantRS;
+
+                // Add to totals
+                $totalHT += $montantHT;
+                $totalTVA += $montantTVA;
+                $totalTTC += $montantTTC;
+                $totalRS += $montantRS;
+                $totalNetServi += $montantNetServi;
+
+                // Build operation XML
+                $anneeFacturation = $xml->createElement('AnneeFacturation',
+                    \Carbon\Carbon::parse($expense->transaction_date)->format('Y')
+                );
+                $operation->appendChild($anneeFacturation);
+
+                $cnpc = $xml->createElement('CNPC', '0');
+                $operation->appendChild($cnpc);
+
+                $pCharge = $xml->createElement('P_Charge', '0');
+                $operation->appendChild($pCharge);
+
+                $montantHTElem = $xml->createElement('MontantHT', $montantHT);
+                $operation->appendChild($montantHTElem);
+
+                $tauxRSElem = $xml->createElement('TauxRS', number_format($rsRate, 2, '.', ''));
+                $operation->appendChild($tauxRSElem);
+
+                $tauxTVAElem = $xml->createElement('TauxTVA', number_format($tauxTVA, 2, '.', ''));
+                $operation->appendChild($tauxTVAElem);
+
+                $montantTVAElem = $xml->createElement('MontantTVA', $montantTVA);
+                $operation->appendChild($montantTVAElem);
+
+                $montantTTCElem = $xml->createElement('MontantTTC', $montantTTC);
+                $operation->appendChild($montantTTCElem);
+
+                $montantRSElem = $xml->createElement('MontantRS', $montantRS);
+                $operation->appendChild($montantRSElem);
+
+                $montantNetServiElem = $xml->createElement('MontantNetServi', $montantNetServi);
+                $operation->appendChild($montantNetServiElem);
+            }
+
+            // Total Payement section
+            $totalPayement = $xml->createElement('TotalPayement');
+            $certificat->appendChild($totalPayement);
+
+            $totalMontantHT = $xml->createElement('TotalMontantHT', $totalHT);
+            $totalPayement->appendChild($totalMontantHT);
+
+            $totalMontantTVA = $xml->createElement('TotalMontantTVA', $totalTVA);
+            $totalPayement->appendChild($totalMontantTVA);
+
+            $totalMontantTTC = $xml->createElement('TotalMontantTTC', $totalTTC);
+            $totalPayement->appendChild($totalMontantTTC);
+
+            $totalMontantRS = $xml->createElement('TotalMontantRS', $totalRS);
+            $totalPayement->appendChild($totalMontantRS);
+
+            $totalMontantNetServi = $xml->createElement('TotalMontantNetServi', $totalNetServi);
+            $totalPayement->appendChild($totalMontantNetServi);
+        }
+
+        // Generate filename according to TEJ format
+        // [MATRICULEFISCAL]-[EXERCICE]-[MOIS]-[CODE_ACTE].xml
+        $exercice = $transactionDate->format('Y');  // 4 digits year
+        $mois = $transactionDate->format('m');      // 2 digits month (01-12)
+
+        // Remove any spaces or special characters from matricule fiscal
+        $cleanMatricule = str_replace([' ', '/', '\\'], '', $declarantMatriculeFiscal);
+
+        $filename = sprintf(
+            '%s-%s-%s-%s.xml',
+            $cleanMatricule,
+            $exercice,
+            $mois,
+            $codeActe
+        );
+
+        // Example: 1234056A-2026-01-0.xml
+
+        // Return XML as download
+        return response($xml->saveXML(), 200)
+            ->header('Content-Type', 'application/xml')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+    }
+
+    /**
+     * Format contact address
+     */
+    private function formatAddress($contact)
+    {
+        $addressParts = array_filter([
+            $contact->address_line_1,
+            $contact->address_line_2,
+            $contact->city,
+            $contact->state,
+            $contact->zip_code
+        ]);
+
+        return implode(', ', $addressParts);
+    }
+
+    /**
+     * Get RS rate from code_rs
+     */
+    private function getRSRate($codeRS)
+    {
+        $rsRates = [
+            // Capital Income
+            'RS3_000001' => 20,
+
+            // Board Compensation
+            'RS8_000001' => 20,
+
+            // Asset Transfers
+            'RS6_000001' => 2.5,
+            'RS6_000002' => 2.5,
+
+            // Dividends
+            'RS5_000001' => 10,
+
+            // Rentals
+            'RS1_000001' => 5,
+            'RS1_000002' => 10,
+
+            // Acquisitions
+            'RS7_000001' => 1.5,
+            'RS7_000002' => 1,
+            'RS7_000003' => 0.5,
+            'RS7_000004' => 1.5,
+            'RS7_000005' => 1,
+
+            // Professional Services
+            'RS2_000001' => 10,
+            'RS2_000002' => 3,
+            'RS2_000003' => 3,
+            'RS2_000004' => 5,
+
+            // Gambling
+            'RS11_000001' => 25,
+        ];
+
+        return $rsRates[$codeRS] ?? 0;
     }
 }

@@ -294,7 +294,7 @@ return [
     'current_address' => 'Adresse actuelle',
     'current_sale' => 'Vente en cours',
     'custom_field' => 'Champ personnalisé :number',
-    'custom_labels' => 'Étiquettes personnalisées',
+    'custom_labels' => 'Champs personnalisées',
     'custom_payment' => 'Paiement personnalisé :number',
     'custom_payment_1' => 'Paiement personnalisé 1',
     'custom_payment_2' => 'Paiement personnalisé 2',

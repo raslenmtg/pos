@@ -5551,8 +5551,8 @@ class TransactionUtil extends Util
         // Calculate and deduct RS from final_total
         if (!empty($transaction_data['code_rs']) && isset($taxRates[$transaction_data['code_rs']])) {
             $rsRate = floatval($taxRates[$transaction_data['code_rs']]);
-            $HT = $transaction_data['total_before_tax']; // This is already calculated above
-            $rsDeduction = $HT * ($rsRate / 100);
+            $TTC = $transaction_data['final_total']; // This is already calculated above
+            $rsDeduction = $TTC * ($rsRate / 100);
 
             // Deduct RS from final_total
             $transaction_data['final_total'] = $transaction_data['final_total'] - $rsDeduction;

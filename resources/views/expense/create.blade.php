@@ -129,6 +129,10 @@
                 <div class="tw-mb-1">
                    <h5> TVA: <span id="selected_tax"></span>
                     <span id="tax_error" class="text-danger" style="display:none;">Aucun taxe appliquée, séléctionner un taxe</span></h5>
+                   <h5>
+                    <span id="contact_mobile_error" class="text-danger" style="display:none;">Le contact sélectionné n'a pas de numéro de téléphone</span>
+                    <span id="contact_address_error" class="text-danger" style="display:none;">Le contact sélectionné n'a pas d'adresse</span>
+                    <span id="contact_tax_number_error" class="text-danger" style="display:none;">Le contact sélectionné n'a pas de matricule fiscale</span></h5>
                 </div>
                 <div class="col-5">
                     <div class="form-group">
@@ -156,10 +160,11 @@
                         </div>
                     </div>
             </div>
-                <div class="col-2">
-                    <h5 id="tax_rate_display" class="form-text" style="display: none;">
+                <div class="tw-flex-row width-50 tw-justify-between" style="display: none" id="tax_rate_display">
+                    <h4  class="form-text">
                        {{ __('expense.rs_rate') }}: <span id="tax_rate_value"></span>%
-                    </h5>
+                    </h4>
+                    <h4 > {{ __('lang_v1.total_amount_exc_tax') }}: <span id="ht_rs"></span></h4>
                 </div>
 
         </div>
@@ -183,6 +188,8 @@
 @endsection
 @section('javascript')
 <script type="text/javascript">
+	const contactsDetails = @json($contacts_details ?? []);
+
 	$(document).ready( function(){
 		$('.paid_on').datetimepicker({
             format: moment_date_format + ' ' + moment_time_format,
@@ -278,7 +285,7 @@
                 let HT = finalTotal / (1 + (taxPercentage / 100));
                 let taxAmount = finalTotal - HT;
                 $('#tax_calculation_amount').val(taxAmount);
-
+                $('#ht_rs').text(__currency_trans_from_en(HT,false,false));
                 // Recalculate payment due with RS deduction
                 calculateRSDeduction();
             } else {
@@ -385,46 +392,94 @@
         }
     }
 
-    function calculateRSDeduction() {
-        // Get the final total (TTC)
-        var finalTotal = __read_number($('input#final_total'));
+    function updateSelectedContactDisplay() {
+        let $display = $('#selected_contact');
+        let $mobileError = $('#contact_mobile_error');
+        let $addressError = $('#contact_address_error');
+        let $taxNumberError = $('#contact_tax_number_error');
+        if ($contactSelect.length) {
+            let selectedVal = $contactSelect.val();
 
+
+            // Reset errors
+            $mobileError.hide();
+            $addressError.hide();
+            $taxNumberError.hide();
+            if (!selectedVal || selectedVal === '' || selectedVal === null) {
+                $display.text('');
+            } else {
+                var contact = contactsDetails[selectedVal];
+                if (contact) {
+                    // Check if mobile exists
+                    if (!contact.mobile || contact.mobile.trim() === '') {
+                        $mobileError.show();
+                    } else {
+                        $mobileError.hide();
+                    }
+
+                    var hasAddress = false;
+                    if ((contact.address_line_1 && contact.address_line_1.trim() !== '') ||
+                        (contact.city && contact.city.trim() !== '') ||
+                        (contact.state && contact.state.trim() !== '')) {
+                        hasAddress = true;
+                    }
+
+                    if (!hasAddress) {
+                        $addressError.show();
+                    } else {
+                        $addressError.hide();
+                    }
+
+                    if (!contact.tax_number || contact.tax_number.trim() === '') {
+                        $taxNumberError.show();
+                    } else {
+                        $taxNumberError.hide();
+                    }
+                } else {
+                    $mobileError.show();
+                    $addressError.show();
+                    $taxNumberError.show();
+                }
+            }
+        } else {
+            $display.text('');
+        }
+    }
+
+    function calculateRSDeduction() {
+        let finalTotal = __read_number($('input#final_total'));
         if (!finalTotal || finalTotal <= 0) {
             return;
         }
-
-        // Get the tax percentage from tax_id select
-        var $taxSelect = $('select#tax_id');
+        let $taxSelect = $('select#tax_id');
         if(!$taxSelect.val())
             return;
-        var selectedTaxOption = $taxSelect.find('option:selected');
-        var taxPercentage = parseFloat(selectedTaxOption.data('rate')) || 0;
 
-        // Calculate HT (amount without tax)
-        var HT = finalTotal / (1 + (taxPercentage / 100));
+        let $codeRsSelect = $('#code_rs');
+        let selectedRsOption = $codeRsSelect.find('option:selected');
+        let rsRate = parseFloat(selectedRsOption.data('rate')) || 0;
 
-        // Get the RS rate if selected
-        var $codeRsSelect = $('#code_rs');
-        var selectedRsOption = $codeRsSelect.find('option:selected');
-        var rsRate = parseFloat(selectedRsOption.data('rate')) || 0;
-
-        // Calculate RS deduction from HT
-        var rsDeduction = 0;
+        let rsDeduction = 0;
         if (rsRate > 0 && $('#is_rs').is(':checked')) {
-            rsDeduction = HT * (rsRate / 100);
+            rsDeduction = finalTotal * (rsRate / 100);
         }
 
-        // Update the payment due
-        var payment_amount = __read_number($('input.payment-amount'));
-        var payment_due = finalTotal - payment_amount - rsDeduction;
+        let payment_amount = __read_number($('input.payment-amount'));
+        let payment_due = finalTotal - payment_amount - rsDeduction;
         $('#payment_due').text(__currency_trans_from_en(payment_due, true, false));
     }
     $(document).ready( function(){
         updateSelectedTaxDisplay();
+        updateSelectedContactDisplay();
     });
     // update when tax select changes
     $(document).on('change', 'select#tax_id', function() {
         updateSelectedTaxDisplay();
+    });
+
+    // update when contact select changes
+    $(document).on('change', 'select#contact_id', function() {
+        updateSelectedContactDisplay();
     });
 
 	$(document).on('change', '.payment_types_dropdown, #location_id', function(e) {
