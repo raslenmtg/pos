@@ -17,7 +17,7 @@
         <div class="col-md-4">
           <div class="well">
             <strong>
-            @if(in_array($transaction->type, ['purchase', 'purchase_return']))
+            @if(in_array($transaction->type, ['purchase', 'purchase_return','expense']))
               @lang('purchase.supplier') 
             @elseif(in_array($transaction->type, ['sell', 'sell_return']))
               @lang('contact.customer') 
