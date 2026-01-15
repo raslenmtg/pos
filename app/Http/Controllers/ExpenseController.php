@@ -930,9 +930,6 @@ fill="green" viewBox="0 0 24 24" >
         // Code acte (0 for initial declaration)
         $codeActe = '1';
 
-        // Group expenses by beneficiary (contact)
-        $groupedByContact = $expenses->groupBy('contact_id');
-
         // Create XML
         $xml = new \DOMDocument('1.0', 'UTF-8');
         $xml->formatOutput = true;
@@ -974,12 +971,12 @@ fill="green" viewBox="0 0 24 24" >
         $ajouterCertificats = $xml->createElement('AjouterCertificats');
         $root->appendChild($ajouterCertificats);
 
-        // Process each beneficiary
-        foreach ($groupedByContact as $contactId => $contactExpenses) {
-            $contact = $contactExpenses->first()->contact;
+        // Process each expense (one certificate per transaction)
+        foreach ($expenses as $expense) {
+            $contact = $expense->contact;
 
-            if (!$contact) {
-                continue; // Skip if no contact
+            if (!$contact || !$expense->code_rs) {
+                continue; // Skip if no contact or no RS code
             }
 
             // Create certificate for this beneficiary
@@ -1033,114 +1030,93 @@ fill="green" viewBox="0 0 24 24" >
             $tel = $xml->createElement('NumTel', $contact->mobile ?? '');
             $infosContact->appendChild($tel);
 
-            // Date Payment (use the last payment date or transaction date)
-            $lastExpense = $contactExpenses->sortByDesc('transaction_date')->first();
+            // Date Payment (use the transaction date)
             $datePayement = $xml->createElement('DatePayement',
-                \Carbon\Carbon::parse($lastExpense->transaction_date)->format('d/m/Y')
+                \Carbon\Carbon::parse($expense->transaction_date)->format('d/m/Y')
             );
             $certificat->appendChild($datePayement);
 
             // Reference certificate
-            $refCertif = $xml->createElement('Ref_certif_chez_declarant', $lastExpense->ref_no ?? $lastExpense->invoice_no ?? '');
+            $refCertif = $xml->createElement('Ref_certif_chez_declarant', $expense->ref_no ?? $expense->invoice_no ?? '');
             $certificat->appendChild($refCertif);
 
             // Liste Operations
             $listeOperations = $xml->createElement('ListeOperations');
             $certificat->appendChild($listeOperations);
 
-            // Totals for this certificate
-            $totalHT = 0;
-            $totalTVA = 0;
-            $totalTTC = 0;
-            $totalRS = 0;
-            $totalNetServi = 0;
+            // Create operation for this expense
+            $operation = $xml->createElement('Operation');
+            $operation->setAttribute('IdTypeOperation', $expense->code_rs);
+            $listeOperations->appendChild($operation);
 
-            // Process each expense for this contact
-            foreach ($contactExpenses as $expense) {
-                if (!$expense->code_rs) {
-                    continue; // Skip if no RS code
-                }
+            // Get RS rate from code_rs mapping
+            $rsRate = $this->getRSRate($expense->code_rs);
 
-                $operation = $xml->createElement('Operation');
-                $operation->setAttribute('IdTypeOperation', $expense->code_rs);
-                $listeOperations->appendChild($operation);
+            // Calculate amounts in millimes (1 TND = 1000 millimes)
+            $montantTTC = intval(($expense->final_total/(1-($rsRate / 100)))* 1000);
+            $tauxTVA = $expense->tax ? floatval($expense->tax->amount) : 0;
 
-                // Get RS rate from code_rs mapping
-                $rsRate = $this->getRSRate($expense->code_rs);
+            // Calculate HT (before tax)
+            $montantHT =intval( $montantTTC / (1 + ($tauxTVA / 100)));
 
-                // Calculate amounts in millimes (1 TND = 1000 millimes)
-                $montantTTC = intval(($expense->final_total/(1-($rsRate / 100)))* 1000);
-                $tauxTVA = $expense->tax ? floatval($expense->tax->amount) : 0;
+            $montantTVA = $montantTTC - $montantHT;
 
-                // Calculate HT (before tax)
-                $montantHT =intval( $montantTTC / (1 + ($tauxTVA / 100)));
+            // Calculate RS amount
+            $montantRS =intval( $montantTTC  * ($rsRate / 100));
 
-                $montantTVA = $montantTTC - $montantHT;
+            // Net amount served
+            $montantNetServi = intval($expense->final_total* 1000);
 
-                // Calculate RS amount
-                $montantRS =intval( $montantTTC  * ($rsRate / 100));
+            // Build operation XML
+            $anneeFacturation = $xml->createElement('AnneeFacturation',
+                \Carbon\Carbon::parse($expense->transaction_date)->format('Y')
+            );
+            $operation->appendChild($anneeFacturation);
 
-                // Net amount served
-                $montantNetServi = intval($expense->final_total* 1000);
+            $cnpc = $xml->createElement('CNPC', '0');
+            $operation->appendChild($cnpc);
 
-                // Add to totals
-                $totalHT += $montantHT;
-                $totalTVA += $montantTVA;
-                $totalTTC += $montantTTC;
-                $totalRS += $montantRS;
-                $totalNetServi += $montantNetServi;
+            $pCharge = $xml->createElement('P_Charge', '0');
+            $operation->appendChild($pCharge);
 
-                // Build operation XML
-                $anneeFacturation = $xml->createElement('AnneeFacturation',
-                    \Carbon\Carbon::parse($expense->transaction_date)->format('Y')
-                );
-                $operation->appendChild($anneeFacturation);
+            $montantHTElem = $xml->createElement('MontantHT', $montantHT);
+            $operation->appendChild($montantHTElem);
 
-                $cnpc = $xml->createElement('CNPC', '0');
-                $operation->appendChild($cnpc);
+            $tauxRSElem = $xml->createElement('TauxRS', number_format($rsRate, 2, '.', ''));
+            $operation->appendChild($tauxRSElem);
 
-                $pCharge = $xml->createElement('P_Charge', '0');
-                $operation->appendChild($pCharge);
+            $tauxTVAElem = $xml->createElement('TauxTVA', number_format($tauxTVA, 2, '.', ''));
+            $operation->appendChild($tauxTVAElem);
 
-                $montantHTElem = $xml->createElement('MontantHT', $montantHT);
-                $operation->appendChild($montantHTElem);
+            $montantTVAElem = $xml->createElement('MontantTVA', $montantTVA);
+            $operation->appendChild($montantTVAElem);
 
-                $tauxRSElem = $xml->createElement('TauxRS', number_format($rsRate, 2, '.', ''));
-                $operation->appendChild($tauxRSElem);
+            $montantTTCElem = $xml->createElement('MontantTTC', $montantTTC);
+            $operation->appendChild($montantTTCElem);
 
-                $tauxTVAElem = $xml->createElement('TauxTVA', number_format($tauxTVA, 2, '.', ''));
-                $operation->appendChild($tauxTVAElem);
+            $montantRSElem = $xml->createElement('MontantRS', $montantRS);
+            $operation->appendChild($montantRSElem);
 
-                $montantTVAElem = $xml->createElement('MontantTVA', $montantTVA);
-                $operation->appendChild($montantTVAElem);
+            $montantNetServiElem = $xml->createElement('MontantNetServi', $montantNetServi);
+            $operation->appendChild($montantNetServiElem);
 
-                $montantTTCElem = $xml->createElement('MontantTTC', $montantTTC);
-                $operation->appendChild($montantTTCElem);
-
-                $montantRSElem = $xml->createElement('MontantRS', $montantRS);
-                $operation->appendChild($montantRSElem);
-
-                $montantNetServiElem = $xml->createElement('MontantNetServi', $montantNetServi);
-                $operation->appendChild($montantNetServiElem);
-            }
-
-            // Total Payement section
+            // Total Payement section (same as the single operation amounts)
             $totalPayement = $xml->createElement('TotalPayement');
             $certificat->appendChild($totalPayement);
 
-            $totalMontantHT = $xml->createElement('TotalMontantHT', $totalHT);
+            $totalMontantHT = $xml->createElement('TotalMontantHT', $montantHT);
             $totalPayement->appendChild($totalMontantHT);
 
-            $totalMontantTVA = $xml->createElement('TotalMontantTVA', $totalTVA);
+            $totalMontantTVA = $xml->createElement('TotalMontantTVA', $montantTVA);
             $totalPayement->appendChild($totalMontantTVA);
 
-            $totalMontantTTC = $xml->createElement('TotalMontantTTC', $totalTTC);
+            $totalMontantTTC = $xml->createElement('TotalMontantTTC', $montantTTC);
             $totalPayement->appendChild($totalMontantTTC);
 
-            $totalMontantRS = $xml->createElement('TotalMontantRS', $totalRS);
+            $totalMontantRS = $xml->createElement('TotalMontantRS', $montantRS);
             $totalPayement->appendChild($totalMontantRS);
 
-            $totalMontantNetServi = $xml->createElement('TotalMontantNetServi', $totalNetServi);
+            $totalMontantNetServi = $xml->createElement('TotalMontantNetServi', $montantNetServi);
             $totalPayement->appendChild($totalMontantNetServi);
         }
 
