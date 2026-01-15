@@ -342,7 +342,7 @@ fill="green" viewBox="0 0 24 24" >
         $contacts_details = Contact::where('business_id', $business_id)
             ->where('type', '!=', 'lead')
             ->where('contact_status', 'active')
-            ->select('id', 'mobile', 'address_line_1', 'city', 'state', 'tax_number')
+            ->select('id', 'mobile', 'address_line_1', 'city', 'state', 'tax_number','email')
             ->get()
             ->keyBy('id');
 
