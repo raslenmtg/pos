@@ -129,10 +129,12 @@
                 <div class="tw-mb-1">
                    <h5> TVA: <span id="selected_tax"></span>
                     <span id="tax_error" class="text-danger" style="display:none;">Aucun taxe appliquée, séléctionner un taxe</span></h5>
-                   <h5>
+                   <div style="display: grid">
                     <span id="contact_mobile_error" class="text-danger" style="display:none;">Le contact sélectionné n'a pas de numéro de téléphone</span>
+                    <span id="contact_email_error" class="text-danger" style="display:none;">Le contact sélectionné n'a pas d'email</span>
                     <span id="contact_address_error" class="text-danger" style="display:none;">Le contact sélectionné n'a pas d'adresse</span>
-                    <span id="contact_tax_number_error" class="text-danger" style="display:none;">Le contact sélectionné n'a pas de matricule fiscale</span></h5>
+                    <span id="contact_tax_number_error" class="text-danger" style="display:none;">Le contact sélectionné n'a pas de matricule fiscale</span>
+                   </div>
                 </div>
                 <div class="col-5">
                     <div class="form-group">
@@ -393,8 +395,10 @@
     }
 
     function updateSelectedContactDisplay() {
+        var $contactSelect = $('select#contact_id');
         let $display = $('#selected_contact');
         let $mobileError = $('#contact_mobile_error');
+        let $emailError = $('#contact_email_error');
         let $addressError = $('#contact_address_error');
         let $taxNumberError = $('#contact_tax_number_error');
         if ($contactSelect.length) {
@@ -403,6 +407,7 @@
 
             // Reset errors
             $mobileError.hide();
+            $emailError.hide();
             $addressError.hide();
             $taxNumberError.hide();
             if (!selectedVal || selectedVal === '' || selectedVal === null) {
@@ -415,6 +420,13 @@
                         $mobileError.show();
                     } else {
                         $mobileError.hide();
+                    }
+
+                    // Check if email exists
+                    if (!contact.email || contact.email.trim() === '') {
+                        $emailError.show();
+                    } else {
+                        $emailError.hide();
                     }
 
                     var hasAddress = false;
@@ -437,6 +449,7 @@
                     }
                 } else {
                     $mobileError.show();
+                    $emailError.show();
                     $addressError.show();
                     $taxNumberError.show();
                 }
