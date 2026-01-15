@@ -1457,7 +1457,7 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         fixedHeader:false,
-        aaSorting: [[1, 'desc']],
+        aaSorting: [[2, 'desc']],
         ajax: {
             url: '/expenses',
             data: function(d) {
@@ -1476,12 +1476,14 @@ $(document).ready(function() {
             },
         },
         columns: [
+            { data: '#', name: '#', orderable: false, searchable: false },
             { data: 'action', name: 'action', orderable: false, searchable: false },
             { data: 'transaction_date', name: 'transaction_date' },
             { data: 'ref_no', name: 'ref_no' },
             { data: 'recur_details', name: 'recur_details', orderable: false, searchable: false },
             { data: 'category', name: 'ec.name' },
             { data: 'sub_category', name: 'esc.name' },
+            { data: 'code_rs', name: 'code_rs', orderable: false, searchable: false },
             { data: 'location_name', name: 'bl.name' },
             { data: 'payment_status', name: 'payment_status', orderable: false },
             { data: 'tax', name: 'tr.name' },

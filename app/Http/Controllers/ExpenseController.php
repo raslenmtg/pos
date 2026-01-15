@@ -83,6 +83,7 @@ class ExpenseController extends Controller
                             'additional_notes',
                             'final_total',
                             'transactions.is_recurring',
+                            'transactions.code_rs',
                             'transactions.recur_interval',
                             'transactions.recur_interval_type',
                             'transactions.recur_repetitions',
@@ -215,9 +216,16 @@ class ExpenseController extends Controller
                                 . (!empty($row->contact_id) ? '('. $row->contact_id . ')' : '')
                                 . (!empty($row->supplier_business_name) ? '/'. $row->supplier_business_name  : '') . '</span>';
                         }
+                        return '';
                     }
                 )
                 ->editColumn('transaction_date', '{{@format_datetime($transaction_date)}}')
+                ->editColumn('code_rs', function ($row){
+                        return !empty($row->code_rs)? '<svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24"  
+fill="green" viewBox="0 0 24 24" >
+<path d="M9 15.59 4.71 11.3 3.3 12.71l5 5c.2.2.45.29.71.29s.51-.1.71-.29l11-11-1.41-1.41L9.02 15.59Z"></path>
+</svg>':'';
+                })
                 ->editColumn(
                     'payment_status',
                     '<a href="{{ action([\App\Http\Controllers\TransactionPaymentController::class, \'show\'], [$id])}}" class="view_payment_modal payment-status" data-orig-value="{{$payment_status}}" data-status-name="{{__(\'lang_v1.\' . $payment_status)}}"><span class="label @payment_status($payment_status)">{{__(\'lang_v1.\' . $payment_status)}}
@@ -269,7 +277,7 @@ class ExpenseController extends Controller
 
                     return $ref_no;
                 })
-                ->rawColumns(['#', 'final_total', 'action', 'payment_status', 'contact_name', 'payment_due', 'ref_no', 'recur_details'])
+                ->rawColumns(['#', 'final_total', 'action', 'payment_status', 'contact_name', 'payment_due', 'ref_no', 'recur_details', 'code_rs'])
                 ->make(true);
         }
 

@@ -622,6 +622,7 @@ return [
     'is_recurring' => 'Est récurrent',
     'is_refund' => 'Est remboursé',
     'is_rs' => 'Appliquer retenue à la source',
+    'rs' => 'Retenue à la source',
     'is_refund_help' => 'Si vérifié, les dépenses seront remboursées et seront ajoutées au bénéfice net',
     'is_required' => 'Est requis',
     'is_service_staff_required' => 'Le personnel de service est-il nécessaire',

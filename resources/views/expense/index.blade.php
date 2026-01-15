@@ -117,6 +117,7 @@
                                 <th>@lang('lang_v1.recur_details')</th>
                                 <th>@lang('expense.expense_category')</th>
                                 <th>@lang('product.sub_category')</th>
+                                <th>@lang('lang_v1.rs')</th>
                                 <th>@lang('business.location')</th>
                                 <th>@lang('sale.payment_status')</th>
                                 <th>@lang('product.tax')</th>
@@ -130,7 +131,7 @@
                         </thead>
                         <tfoot>
                             <tr class="bg-gray font-17 text-center footer-total">
-                                <td colspan="7"><strong>@lang('sale.total'):</strong></td>
+                                <td colspan="9"><strong>@lang('sale.total'):</strong></td>
                                 <td class="footer_payment_status_count"></td>
                                 <td></td>
                                 <td class="footer_expense_total"></td>
