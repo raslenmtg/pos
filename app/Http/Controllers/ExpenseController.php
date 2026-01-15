@@ -1061,21 +1061,19 @@ class ExpenseController extends Controller
                 $rsRate = $this->getRSRate($expense->code_rs);
 
                 // Calculate amounts in millimes (1 TND = 1000 millimes)
-                $montantTTC = intval($expense->final_total * 1000);
+                $montantTTC = intval(($expense->final_total/(1-($rsRate / 100)))* 1000);
                 $tauxTVA = $expense->tax ? floatval($expense->tax->amount) : 0;
 
                 // Calculate HT (before tax)
-                $montantHT = $tauxTVA > 0
-                    ? intval(($expense->final_total / (1 + ($tauxTVA / 100))) * 1000)
-                    : $montantTTC;
+                $montantHT =intval( $montantTTC / (1 + ($tauxTVA / 100)));
 
                 $montantTVA = $montantTTC - $montantHT;
 
                 // Calculate RS amount
-                $montantRS = intval(($montantHT / 1000) * ($rsRate / 100) * 1000);
+                $montantRS =intval( $montantTTC  * ($rsRate / 100));
 
                 // Net amount served
-                $montantNetServi = $montantTTC - $montantRS;
+                $montantNetServi = intval($expense->final_total* 1000);
 
                 // Add to totals
                 $totalHT += $montantHT;
