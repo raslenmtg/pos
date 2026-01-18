@@ -44,7 +44,13 @@ class TransactionUtil extends Util
     {
         $sale_type = ! empty($input['type']) ? $input['type'] : 'sell';
         $invoice_scheme_id = ! empty($input['invoice_scheme_id']) ? $input['invoice_scheme_id'] : null;
-        $invoice_no = ! empty($input['invoice_no']) ? $input['invoice_no'] : $this->getInvoiceNumber($business_id, $input['status'], $input['location_id'], $invoice_scheme_id, $sale_type);
+
+        // Allow skipping invoice number generation if skip_invoice_number flag is set
+        if (!empty($input['counter_sale'])) {
+            $invoice_no = null;
+        } else {
+            $invoice_no = ! empty($input['invoice_no']) ? $input['invoice_no'] : $this->getInvoiceNumber($business_id, $input['status'], $input['location_id'], $invoice_scheme_id, $sale_type);
+        }
 
         $final_total = $uf_data ? $this->num_uf($input['final_total']) : $input['final_total'];
 

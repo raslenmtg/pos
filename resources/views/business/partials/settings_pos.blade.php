@@ -188,6 +188,19 @@
                 <div class="checkbox">
                 <br>
                   <label>
+                    {!! Form::checkbox('pos_settings[activate_counter_sale]', 1,  $pos_settings['activate_counter_sale'] ,
+                    [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.activate_counter_sale' ) }}
+                  </label>
+                    @show_tooltip(__('lang_v1.activate_counter_sale_help_text'))
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <div class="checkbox">
+                <br>
+                  <label>
                     {!! Form::checkbox('pos_settings[is_pos_subtotal_editable]', 1,  
                     empty($pos_settings['is_pos_subtotal_editable']) ? 0 : 1 , 
                     [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.subtotal_editable' ) }}

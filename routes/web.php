@@ -78,6 +78,10 @@ use Illuminate\Support\Facades\Route;
         return view('welcome');
     });
 
+    Route::get('/fr', function () {
+        return view('fr.welcome-fr');
+    });
+
     Auth::routes();
 
     Route::get('/business/register', [BusinessController::class, 'getRegister'])->name('business.getRegister');
@@ -118,7 +122,7 @@ Route::middleware([ 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'C
     Route::post('/attach-medias-to-model', [HomeController::class, 'attachMediasToGivenModel'])->name('attach.medias.to.model');
     Route::get('/calendar', [HomeController::class, 'getCalendar'])->name('calendar');
 
-   
+
     Route::get('/business/settings', [BusinessController::class, 'getBusinessSettings'])->name('business.getBusinessSettings');
     Route::post('/business/update', [BusinessController::class, 'postBusinessSettings'])->name('business.postBusinessSettings');
     Route::get('/user/profile', [UserController::class, 'getProfile'])->name('user.getProfile');
@@ -420,7 +424,7 @@ Route::middleware([ 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'C
 
     Route::resource('account-types', AccountTypeController::class);
 
-   
+
 
     Route::resource('types-of-service', TypesOfServiceController::class);
     Route::get('sells/edit-shipping/{id}', [SellController::class, 'editShipping']);

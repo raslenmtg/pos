@@ -54,6 +54,15 @@
 		</div>
 	</div>
 	@endif
+        @if(!empty($pos_settings['activate_counter_sale']))
+            <div class="col-md-4 col-sm-6">
+                <div class="form-group">
+                    <label>
+                        {!! Form::checkbox('counter_sale', 1, false, ['class' => 'input-icheck']); !!} @lang('lang_v1.counter_sale')
+                    </label>
+                </div>
+            </div>
+        @endif
 	<input type="hidden" name="pay_term_number" id="pay_term_number" value="{{$walk_in_customer['pay_term_number'] ?? ''}}">
 	<input type="hidden" name="pay_term_type" id="pay_term_type" value="{{$walk_in_customer['pay_term_type'] ?? ''}}">
 	
@@ -76,18 +85,6 @@
 						<i class="fa fa-calendar"></i>
 					</span>
 					{!! Form::text('transaction_date', $default_datetime, ['class' => 'form-control', 'readonly', 'required', 'id' => 'transaction_date']); !!}
-				</div>
-			</div>
-		</div>
-	@endif
-	@if(config('constants.enable_sell_in_diff_currency') == true)
-		<div class="col-md-4 col-sm-6">
-			<div class="form-group">
-				<div class="input-group">
-					<span class="input-group-addon">
-						<i class="fas fa-exchange-alt"></i>
-					</span>
-					{!! Form::text('exchange_rate', config('constants.currency_exchange_rate'), ['class' => 'form-control input-sm input_number', 'placeholder' => __('lang_v1.currency_exchange_rate'), 'id' => 'exchange_rate']); !!}
 				</div>
 			</div>
 		</div>

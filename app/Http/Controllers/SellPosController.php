@@ -315,6 +315,12 @@ class SellPosController extends Controller
             $is_direct_sale = true;
         }
 
+        // Check if invoice number should be skipped
+        $skip_invoice_number = false;
+        if (!empty($request->input('counter_sale'))) {
+            $skip_invoice_number = true;
+        }
+
         //Check if there is a open register, if no then redirect to Create Register screen.
         if (!$is_direct_sale && $this->cashRegisterUtil->countOpenedRegister() == 0) {
             return redirect()->action([\App\Http\Controllers\CashRegisterController::class, 'create']);
@@ -384,6 +390,10 @@ class SellPosController extends Controller
                 }
                 if ($is_direct_sale) {
                     $input['is_direct_sale'] = 1;
+                }
+
+                if ($skip_invoice_number) {
+                    $input['skip_invoice_number'] = 1;
                 }
 
                 //Set commission agent
