@@ -59,7 +59,7 @@
      'number_type' => 'Numérotation',
      'sequential' => 'Incrémental',
      'random' => 'Aléatoire',
-     'invoice_scheme_for_pos'=>'le Numérotation du facture pour POV',
+     'invoice_scheme_for_pos'=>'le Numérotation du facture pour la caisse',
      'invoice_scheme_for_sale'=>'le Numérotation du facture pour vente manuelle',
 
  ];
