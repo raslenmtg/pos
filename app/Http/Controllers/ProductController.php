@@ -1578,6 +1578,8 @@ class ProductController extends Controller
                         ->with(['brand', 'unit', 'category', 'sub_category', 'product_tax', 'variations', 'variations.product_variation', 'variations.group_prices', 'variations.media', 'product_locations', 'warranty', 'media'])
                         ->findOrFail($id);
 
+            $product_tax_rate = optional($product->product_tax)->amount;
+
             $price_groups = SellingPriceGroup::where('business_id', $business_id)->active()->pluck('name', 'id');
 
             $allowed_group_prices = [];
@@ -1607,7 +1609,8 @@ class ProductController extends Controller
                 'rack_details',
                 'allowed_group_prices',
                 'group_price_details',
-                'combo_variations'
+                'combo_variations',
+                'product_tax_rate'
             ));
         } catch (\Exception $e) {
             \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
