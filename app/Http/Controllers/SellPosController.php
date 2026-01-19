@@ -580,8 +580,14 @@ class SellPosController extends Controller
 
                 if ($request->input('is_save_and_print') == 1) {
                     $url = $this->transactionUtil->getInvoiceUrl($transaction->id, $business_id);
+                    $invoice_layout_id = $request->input('invoice_layout_id');
 
-                    return redirect()->to($url . '?print_on_load=true');
+                    $url .= '?print_on_load=true';
+                    if (!empty($invoice_layout_id)) {
+                        $url .= '&invoice_layout_id=' . $invoice_layout_id;
+                    }
+
+                    return redirect()->to($url);
                 }
 
                 $msg = trans('sale.pos_sale_added');
@@ -2055,14 +2061,20 @@ class SellPosController extends Controller
         $transaction = Transaction::where('invoice_token', $token)->with(['business', 'location'])->first();
 
         if (!empty($transaction)) {
-            $invoice_layout_id = $transaction->is_direct_sale ? $transaction->location->sale_invoice_layout_id : null;
+            // Check if invoice_layout_id is provided in the query string
+            $invoice_layout_id = request()->input('invoice_layout_id');
+
+            // If not provided, use the default from location settings
+            if (empty($invoice_layout_id)) {
+                $invoice_layout_id = $transaction->is_direct_sale ? $transaction->location->sale_invoice_layout_id : null;
+            }
 
             $receipt = $this->receiptContent($transaction->business_id, $transaction->location_id, $transaction->id, 'browser', false, false, $invoice_layout_id);
             $pos_settings = empty($transaction->business->pos_settings) ? $this->businessUtil->defaultPosSettings() : json_decode($transaction->business->pos_settings, true);
             $payment_link = '';
-            if (!empty($pos_settings['enable_payment_link']) && $transaction->payment_status != 'paid') {
+          /*  if (!empty($pos_settings['enable_payment_link']) && $transaction->payment_status != 'paid') {
                 $payment_link = $this->transactionUtil->getInvoicePaymentLink($transaction->id, $transaction->business_id);
-            }
+            }*/
 
             $title = $transaction->business->name . ' | ' . $transaction->invoice_no;
 

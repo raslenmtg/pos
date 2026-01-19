@@ -2,11 +2,6 @@
 @section('title',  __('invoice.add_invoice_layout'))
 
 @section('content')
-<style type="text/css">
-
-
-
-</style>
 @php
   $custom_labels = json_decode(session('business.custom_labels'), true);
 @endphp

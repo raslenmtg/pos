@@ -278,10 +278,11 @@ class InvoiceLayoutController extends Controller
 
     private function getDesigns()
     {
-        return ['classic' => __('lang_v1.classic').' ('.__('lang_v1.for_normal_printer').')',
-            'elegant' => __('lang_v1.elegant').' ('.__('lang_v1.for_normal_printer').')',
-            'detailed' => __('lang_v1.detailed').' ('.__('lang_v1.for_normal_printer').')',
-            'columnize-taxes' => __('lang_v1.columnize_taxes').' ('.__('lang_v1.for_normal_printer').')',
+        return ['classic' => __('lang_v1.classic'),
+            'elegant' => __('lang_v1.elegant'),
+            'detailed' => __('lang_v1.detailed'),
+            'columnize-taxes' => __('lang_v1.columnize_taxes'),
+            'ht' => 'Hors Taxe',
             'slim' => __('lang_v1.slim').' ('.__('lang_v1.recomended_for_80mm').')',
             'slim2' => __('lang_v1.slim').' 2 ('.__('lang_v1.recomended_for_58mm').')',
         ];

@@ -222,14 +222,14 @@
 						</div>
 					</div>
 				@endif
-				@if($sale_type != 'sales_order')
+
 					<div class="col-sm-3">
 						<div class="form-group">
-							{!! Form::label('invoice_scheme_id', __('invoice.invoice_scheme') . ':') !!}
-							{!! Form::select('invoice_scheme_id', $invoice_schemes, $default_invoice_schemes->id, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select')]); !!}
+							{!! Form::label('invoice_layout_id', __('invoice.invoice_layouts') . ':') !!}
+							{!! Form::select('invoice_layout_id', $invoice_layouts, null, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select')]); !!}
 						</div>
 					</div>
-				@endif
+
 					@can('edit_invoice_number')
 					<div class="col-sm-3">
 						<div class="form-group">

@@ -7,6 +7,7 @@ use App\Business;
 use App\BusinessLocation;
 use App\Contact;
 use App\CustomerGroup;
+use App\InvoiceLayout;
 use App\InvoiceScheme;
 use App\Media;
 use App\Product;
@@ -712,19 +713,22 @@ class SellController extends Controller
             $default_invoice_schemes = InvoiceScheme::where('business_id', $business_id)
                                         ->findorfail($default_location->sale_invoice_scheme_id);
         }
+
+        $invoice_layouts = InvoiceLayout::forDropdown($business_id);
+
         $shipping_statuses = $this->transactionUtil->shipping_statuses();
 
         //Types of service
         $types_of_service = [];
-        if ($this->moduleUtil->isModuleEnabled('types_of_service')) {
+       /* if ($this->moduleUtil->isModuleEnabled('types_of_service')) {
             $types_of_service = TypesOfService::forDropdown($business_id);
-        }
+        }*/
 
         //Accounts
         $accounts = [];
-        if ($this->moduleUtil->isModuleEnabled('account')) {
+      /*  if ($this->moduleUtil->isModuleEnabled('account')) {
             $accounts = Account::forDropdown($business_id, true, false);
-        }
+        }*/
 
         $status = request()->get('status', '');
 
@@ -735,7 +739,7 @@ class SellController extends Controller
         }
 
         $is_order_request_enabled = false;
-        $is_crm = $this->moduleUtil->isModuleInstalled('Crm');
+      /*  $is_crm = $this->moduleUtil->isModuleInstalled('Crm');
         if ($is_crm) {
             $crm_settings = Business::where('id', auth()->user()->business_id)
                                 ->value('crm_settings');
@@ -744,7 +748,7 @@ class SellController extends Controller
             if (! empty($crm_settings['enable_order_request'])) {
                 $is_order_request_enabled = true;
             }
-        }
+        }*/
 
         //Added check because $users is of no use if enable_contact_assign if false
         $users = config('constants.enable_contact_assign') ? User::forDropdown($business_id, false, false, false, true) : [];
@@ -769,6 +773,7 @@ class SellController extends Controller
                 'pos_settings',
                 'invoice_schemes',
                 'default_invoice_schemes',
+                'invoice_layouts',
                 'types_of_service',
                 'accounts',
                 'shipping_statuses',
