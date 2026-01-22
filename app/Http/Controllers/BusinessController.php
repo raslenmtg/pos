@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Traits\FacebookConversionsApi;
 use App\Business;
-use App\Currency;
 use App\Notifications\TestEmailNotification;
 use App\System;
 use App\TaxRate;
@@ -13,13 +12,11 @@ use App\User;
 use App\Utils\BusinessUtil;
 use App\Utils\ModuleUtil;
 use App\Utils\RestaurantUtil;
-use Carbon\Carbon;
 use DateTimeZone;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Modules\Superadmin\Entities\Package;
-use Modules\Superadmin\Entities\Subscription;
+//use Modules\Superadmin\Entities\Package;
+//use Modules\Superadmin\Entities\Subscription;
 use Spatie\Permission\Models\Permission;
 
 class BusinessController extends Controller
@@ -188,13 +185,13 @@ class BusinessController extends Controller
             $business_details['enabled_modules'] = ['purchases', 'add_sale', 'pos_sale', 'stock_transfers', 'stock_adjustment', 'expenses'];
 
             $business = $this->businessUtil->createNewBusiness($business_details);
-
+/*
             try {
                 $superadminBase = new \Modules\Superadmin\Http\Controllers\BaseController();
                 $superadminBase->_add_subscription($business->id, 4, 'offline', 001, 1, true);
             } catch (\Exception $ex) {
                \Log::error('Error while adding subscription for business ID: '.($business->id ?? 'unknown').". Message: ".$ex->getMessage());
-            }
+            }*/
 
             //Update user with business id
             $user->business_id = $business->id;
