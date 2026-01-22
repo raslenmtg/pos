@@ -19,7 +19,7 @@
      'total_due' => 'Impayés',
      'contacts' => 'Rapport fournisseur et client',
      'contact' => 'Contact',
-     'stock_report' => 'Rapport de stock',
+     'stock_report' => 'État de stock',
      'products' => 'Produits',
      'current_stock' => 'Stock actuel',
      'total_unit_sold' => 'Unité totale vendue',

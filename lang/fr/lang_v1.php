@@ -949,7 +949,7 @@ return [
     'product_sku' => 'Référence produit',
     'product_sold_details_register' => 'Détails des produits vendus',
     'product_stock_details' => 'Détails du produit',
-    'product_stock_history' => 'Historique du stock produit',
+    'product_stock_history' => 'Suivi du stock',
     'product_unit' => 'Unité de produit',
     'products_could_not_be_deleted' => 'Certains produits ne peuvent pas être supprimés car des transactions y sont associées.',
     'products_deactivated_success' => 'Produits désactivés avec succès',
