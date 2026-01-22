@@ -463,7 +463,7 @@ return [
     'enable_category' => 'Activer les catégories',
     'enable_custom_fields' => 'Activer les champs personnalisés',
     'enable_disable_modules' => 'Activer / Désactiver les modules',
-    'enable_editing_product_from_purchase' => 'Synchronise automatiquement le prix d\'achat du produit à partir la commande d\'achat.',
+    'enable_editing_product_from_purchase' => 'mettre à jour automatiquement le prix d\'achat du produit à partir la commande d\'achat.',
     'enable_export' => 'Activer l\'exportation',
     'enable_imei_or_sr_no' => 'Activer IMEI ou numéro de série',
     'enable_inline_tax' => 'Activer la taxe manuelle dans l\'achat et la vente',
