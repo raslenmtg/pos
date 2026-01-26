@@ -5,27 +5,6 @@
     @php
         $username = old('username');
         $password = null;
-        if (config('app.env') == 'demo') {
-            $username = 'admin';
-            $password = '123456';
-
-            $demo_types = [
-                'all_in_one' => 'admin',
-                'super_market' => 'admin',
-                'pharmacy' => 'admin-pharmacy',
-                'electronics' => 'admin-electronics',
-                'services' => 'admin-services',
-                'restaurant' => 'admin-restaurant',
-                'superadmin' => 'superadmin',
-                'woocommerce' => 'woocommerce_user',
-                'essentials' => 'admin-essentials',
-                'manufacturing' => 'manufacturer-demo',
-            ];
-
-            if (!empty($_GET['demo_type']) && array_key_exists($_GET['demo_type'], $demo_types)) {
-                $username = $demo_types[$_GET['demo_type']];
-            }
-        }
     @endphp
     <div class="row">
         <div class="col-md-4">
@@ -72,11 +51,6 @@
                                 <div class="tw-dw-label">
                                     <span
                                         class="tw-text-xs md:tw-text-sm tw-font-medium tw-text-black">@lang('lang_v1.password')</span>
-                                    @if (config('app.env') != 'demo')
-                                        <a href="{{ route('password.request') }}"
-                                            class="tw-text-xs md:tw-text-sm tw-font-medium tw-bg-gradient-to-r tw-from-indigo-500 tw-to-blue-500 tw-inline-block tw-text-transparent tw-bg-clip-text hover:tw-text-[#467BF5]"
-                                            tabindex="-1">@lang('lang_v1.forgot_your_password')</a>
-                                    @endif
                                 </div>
 
                                 <input

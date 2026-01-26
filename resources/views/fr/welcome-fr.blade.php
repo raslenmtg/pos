@@ -15,7 +15,7 @@
         :root {
             --primary: #2948ff;
             --primary-dark: #1a35cc;
-            --secondary: #64748b;
+            --secondary: #333d50;
             --accent: #ff6b35;
             --success: #10b981;
             --warning: #f59e0b;
@@ -351,12 +351,115 @@
             100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
         }
 
+        /* --- SECTION STYLES --- */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section.bg-light {
+            background-color: #f8fafc;
+        }
+
+        .section-title {
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- FEATURE CARD --- */
+        .feature-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 35px;
+            height: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            color: var(--primary);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+            color: white;
+        }
+
+        .feature-card .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-card .feature-list li {
+            padding: 8px 0;
+            color: var(--secondary);
+            font-size: 0.95rem;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .feature-card .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
         /* Responsiveness */
         @media (max-width: 991px) {
             .hero-title { font-size: 2.8rem; }
             .feature-block { text-align: center; }
             .feature-list li { justify-content: flex-start; text-align: left; }
             .pricing-table { padding: 40px 20px; }
+            .section-title h2 { font-size: 2rem; }
+            .feature-card { padding: 25px; }
         }
     </style>
 </head>
@@ -366,13 +469,13 @@
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center w-100 py-3">
             <div class="d-flex align-items-center">
-                <a href="{{ route('login') }}" class="btn btn-outline">
-                    <i class='bx bx-log-in'></i>
-                    Login
-                </a>
-                <a href="{{ route('business.getRegister') }}" class="btn btn-primary" style="margin: 0 10px">
+                <a href="{{ route('business.getRegister') }}" class="btn btn-outline" style="margin: 0 10px">
                   Inscription
                     <i class='bx bx-plus'></i>
+                </a>
+                <a href="{{ route('login') }}" class="btn btn-primary">
+                    <i class='bx bx-log-in'></i>
+                    Se connecter
                 </a>
             </div>
             <div class="d-flex align-items-center">
@@ -479,7 +582,7 @@
             <div class="col-md-4">
                 <div class="bg-white p-4 rounded-4 shadow-sm h-100">
                     <div class="mb-3 text-primary fs-1"><i class="bx bx-lock-alt"></i></div>
-                    <h4 class="fw-bold">Sécurité Bancaire</h4>
+                    <h4 class="fw-bold">Sécurité</h4>
                     <p class="text-secondary small">Vos données sont cryptées et sauvegardées sur des serveurs sécurisés.</p>
                 </div>
             </div>
@@ -498,7 +601,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 order-lg-2" data-aos="fade-left">
-                <img src="https://via.placeholder.com/600x400/e2e8f0/94a3b8?text=Interface+Vente+POS" alt="POS System" class="img-fluid rounded-4 shadow-sm">
+                <img src="img/5a48e9c5e6ac71dd20df009ebd73fe69.jpg" alt="selling with cloud pos" class="img-fluid rounded-4 shadow-sm">
             </div>
             <div class="col-lg-6 order-lg-1" data-aos="fade-right">
                 <h2 class="feature-title">Vendez au comptoir ou en déplacement.</h2>
@@ -544,10 +647,9 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6" data-aos="fade-right">
-                <img src="https://via.placeholder.com/600x400/e2e8f0/94a3b8?text=Gestion+Stock+Inventaire" alt="Stock Management" class="img-fluid rounded-4 shadow-sm">
+                <img src="img/bb3d548ae26c998d987766d20f5a8d11.jpg" alt="Stock Management" class="img-fluid rounded-4 shadow-sm">
             </div>
             <div class="col-lg-6" data-aos="fade-left">
-                <span class="feature-tag">Logistique & Inventaire</span>
                 <h2 class="feature-title">Un stock juste, tout le temps.</h2>
                 <p class="lead text-secondary mb-4">
                     Fini le stock fantôme et les ruptures surprises. Ayez une vision claire de ce qui entre et ce qui sort.
@@ -587,31 +689,32 @@
     </div>
 </section>
 
-<section class="feature-block" id="finance">
+<section class="feature-block" id="legal">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 order-lg-2" data-aos="fade-left">
-                <img src="https://via.placeholder.com/600x400/e2e8f0/94a3b8?text=Comptabilite+Fiscale" alt="Finance Compliance" class="img-fluid rounded-4 shadow-sm">
+                <img src="img/tax_lock.jpg" alt="Finance Compliance" class="img-fluid rounded-4 shadow-sm">
             </div>
             <div class="col-lg-6 order-lg-1" data-aos="fade-right">
-                <span class="feature-tag">Finance & Légal</span>
                 <h2 class="feature-title">Dormez tranquille, vous êtes conforme.</h2>
                 <p class="lead text-secondary mb-4">
                     La législation tunisienne est complexe. Simplex Gestion l'automatise pour vous éviter les redressements.
                 </p>
                 <ul class="list-unstyled feature-list">
                     <li>
-                        <i class='bx bxs-shield-check'></i>
+                        <i class='bx bxs-shield'></i>
                         <div>
-                            <strong>FODEC & TVA Automatiques</strong>
-                            <p class="small mb-0">Calcul automatique du FODEC (0.1% ou 1%) et application des taux de TVA (7, 13, 19%) selon l'article.</p>
+                            <strong>Timbre & TVA Automatiques</strong>
+                            <p class="small mb-0">Calcul automatique du Timbre fiscale et application des taux de TVA selon l'article.</p>
                         </div>
                     </li>
                     <li>
                         <i class='bx bxs-file-pdf'></i>
                         <div>
-                            <strong>Retenue à la Source & Timbre</strong>
-                            <p class="small mb-0">Génération automatique des certificats de retenue à la source fournisseurs. Application du timbre fiscal.</p>
+                            <strong>Retenue à la Source & TEJ </strong>
+                            <p class="small mb-0">
+                                Générez votre fichier de déclaration RS en un clic, prêt à être déposé sur la plateforme TEJ.
+                            </p>
                         </div>
                     </li>
                     <li>
@@ -624,8 +727,8 @@
                     <li>
                         <i class='bx bxs-report'></i>
                         <div>
-                            <strong>Exports Comptables</strong>
-                            <p class="small mb-0">Envoyez vos journaux de vente et d'achat à votre expert-comptable en un clic (Excel/PDF).</p>
+                            <strong>Invitez votre comptable</strong>
+                            <p class="small mb-0">Créez un compte gratuit pour votre comptable. Définissez ses permissions. Il récupère ses documents sans vous déranger.</p>
                         </div>
                     </li>
                 </ul>
@@ -634,9 +737,9 @@
     </div>
 </section>
 
-<section class="section bg-light" id="fonctionnalites">
+<section class="section bg-light">
     <div class="container">
-        <div class="section-title">
+        <div class="section-title text-center">
             <h2>Une Gestion à 360°</h2>
             <p class="text-muted">Des outils puissants pour piloter votre activité.</p>
         </div>
@@ -646,22 +749,22 @@
                 <div class="feature-card">
                     <div class="d-flex align-items-center mb-4">
                         <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;"><i class="bx bx-cart"></i></div>
-                        <h3 class="mb-0">Gestion des Ventes &amp; POS</h3>
+                        <h3 class="mb-0">Gestion des Ventes</h3>
                     </div>
                     <p>Du devis à l'encaissement, fluidifiez votre cycle de vente. Idéal pour la vente au comptoir ou en gros.</p>
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="feature-list mt-0">
-                                <li>Point de vente tactile (POS)</li>
-                                <li>Tickets de caisse &amp; Factures A4</li>
-                                <li>Suivi des commerciaux &amp; commissions</li>
+                                <li>6 Modèles du facture personnalisables</li>
+                                <li>Impression tickets/factures instantanée</li>
+                                <li>Grilles tarifaires par client</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul class="feature-list mt-0">
                                 <li>Suivi des règlements temps réel</li>
                                 <li>Gestion des impayés &amp; plafonds</li>
-                                <li>Grilles tarifaires par client</li>
+                                <li>Gestion des soldes et promotion saisonnières</li>
                             </ul>
                         </div>
                     </div>
@@ -680,14 +783,14 @@
                             <ul class="feature-list mt-0">
                                 <li>Alertes de réapprovisionnement</li>
                                 <li>Multi-dépôts &amp; transferts</li>
-                                <li>Gestion par Code-barres</li>
+                                <li>Traçabilité complète des mouvements</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul class="feature-list mt-0">
-                                <li>Articles composés &amp; Kits</li>
+                                <li>Articles composés &amp; pack</li>
                                 <li>Inventaire physique &amp; global</li>
-                                <li>Valorisation CMP (Coût Moyen)</li>
+                                <li>Valorisation CMP (Coût Moyen Pondéré)</li>
                             </ul>
                         </div>
                     </div>
@@ -697,15 +800,16 @@
             <div class="col-lg-6">
                 <div class="feature-card">
                     <div class="d-flex align-items-center mb-4">
-                        <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;"><i class="bx bx-purchase-tag"></i></div>
+                        <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                            <i class="bx bx-purchase-tag"></i></div>
                         <h3 class="mb-0">Achats &amp; Dépenses</h3>
                     </div>
                     <p>Maîtrisez vos coûts et gérez vos relations fournisseurs.</p>
                     <ul class="feature-list">
                         <li>Suivi commandes fournisseurs &amp; réceptions</li>
-                        <li>Calcul automatique du Prix de Revient</li>
+                        <li>Historique transactions complet</li>
                         <li>Gestion des dépenses &amp; notes de frais</li>
-                        <li>Achats import en devises (Multi-devises)</li>
+                        <li>Gestion des Retours & Avoirs</li>
                     </ul>
                 </div>
             </div>
@@ -713,18 +817,21 @@
             <div class="col-lg-6">
                 <div class="feature-card">
                     <div class="d-flex align-items-center mb-4">
-                        <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;"><i class="bx bx-shield-quarter"></i></div>
-                        <h3 class="mb-0">Sécurité &amp; Permissions</h3>
+                        <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                            <i class="bx bx-stats"></i>
+                        </div>
+                        <h3 class="mb-0">Statistiques & Décisions</h3>
                     </div>
-                    <p>Assurez la sécurité des données en gérant finement qui peut accéder à quoi.</p>
+                    <p>Des rapports clairs pour savoir exactement où vous gagnez de l'argent.</p>
                     <ul class="feature-list">
-                        <li>Masquage des prix d'achat/marges</li>
-                        <li>Permissions par rôle utilisateur</li>
-                        <li>Traçabilité complète des mouvements</li>
-                        <li>Sauvegarde automatique</li>
+                        <li><strong>Profit & Perte :</strong> Suivi du bénéfice net en temps réel</li>
+                        <li><strong>Tendances :</strong> Identifiez vos produits les plus rentables</li>
+                        <li><strong>Rapport Caisse :</strong> Contrôle des espèces et de la clôture</li>
+                        <li><strong>Commerciaux :</strong> Suivi des ventes et commissions</li>
                     </ul>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
@@ -738,24 +845,20 @@
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="bg-white text-dark rounded-4 p-5 shadow-lg">
-                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3">OFFRE POPULAIRE</span>
-                        <div class="display-2 fw-bold mb-2">90 <span class="fs-4 text-muted">DT/mois</span></div>
-                        <p class="text-muted mb-4">Ou achat licence à vie (Nous contacter)</p>
+                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3">Sans engagement</span>
+                        <div class="display-2 fw-bold mb-2">3 <span class="fs-4 text-muted">DT/jour</span></div>
 
                         <ul class="list-unstyled text-start mb-5 d-inline-block mx-auto">
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Utilisateurs Illimités</strong></li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Tous les modules</strong> (Vente, Achat, Stock)</li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Formation</strong> sur site ou en ligne</li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Installation</strong> et configuration</li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Mises à jour</strong> légales gratuites</li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Facturation Illimités</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Support Technique 24/7</strong> </li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Formation sur site ou en ligne</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Configuration gratuite</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Mises à jour automatiques</strong> </li>
                         </ul>
 
                         <div class="d-grid gap-3">
                             <a href="https://wa.me/21600000000" class="btn btn-primary btn-lg fw-bold">
-                                <i class='bx bxl-whatsapp me-2'></i> Commander sur WhatsApp
-                            </a>
-                            <a href="tel:+21600000000" class="btn btn-outline-dark fw-bold">
-                                Appeler le Commercial
+                                <i class='bx bxl-whatsapp me-2'></i> Démarrer Maintenant
                             </a>
                         </div>
                     </div>
@@ -778,39 +881,29 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                Le logiciel fonctionne-t-il sans internet ?
+                                Puis-je tester avant de payer ?
                             </button>
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                <strong>Oui, absolument.</strong> Simplex Gestion est un logiciel hybride. Il s'installe localement sur votre ordinateur pour garantir une vitesse maximale et fonctionne parfaitement sans connexion internet. La synchronisation cloud (optionnelle) se fait quand internet revient.
-                            </div>
+                                <strong>Oui, absolument.</strong> Vous pouvez demander une période d'essai gratuite. C'est l'occasion idéale pour découvrir toutes les fonctionnalités et valider que le logiciel correspond à vos besoins, sans aucun engagement. </div>
                         </div>
                     </div>
+
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                Est-ce compatible avec mon imprimante ticket ?
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                Mes données sont-elles en sécurité ?
                             </button>
                         </h2>
-                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Oui. Simplex est compatible avec 99% du matériel disponible en Tunisie : imprimantes thermiques (Epson, Xprinter, etc.), douchettes code-barres, tiroirs-caisses et imprimantes A4/A5 standard.
+                                Oui. Nous utilisons des serveurs hautement sécurisés avec chiffrement des données et effectuons des sauvegardes quotidiennes automatiques.
                             </div>
                         </div>
                     </div>
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
-                                Comment gérer le FODEC et la Retenue à la source ?
-                            </button>
-                        </h2>
-                        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                                C'est automatique. Vous cochez simplement "Assujetti au FODEC" dans la fiche client ou fournisseur. Le logiciel calcule tout seul les montants. Pour la retenue à la source, un bouton permet d'imprimer le certificat officiel directement.
-                            </div>
-                        </div>
-                    </div>
+
+
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
@@ -823,18 +916,23 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                Mes données sont-elles en sécurité ?
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Puis-je annuler mon abonnement à tout moment ?
                             </button>
                         </h2>
-                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Vos données sont stockées chez vous, sur votre machine. Personne d'autre n'y a accès. De plus, le système effectue des sauvegardes automatiques que vous pouvez copier sur un disque dur externe ou sur Google Drive pour une double sécurité.
+                                <strong>Oui, en toute liberté.</strong> Nos offres sont sans engagement de durée. Vous pouvez arrêter votre abonnement quand vous le souhaitez, sans frais cachés ni pénalités.
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
             </div>
         </div>
@@ -845,42 +943,31 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4 mb-4">
-                <h3 class="fw-bold mb-4">Simplex<span class="text-primary">.</span></h3>
+                <h3 class="fw-bold mb-4">Simplex<span class="text-primary">Gestion</span></h3>
                 <p class="text-secondary">
-                    Le logiciel ERP de référence pour les PME en Tunisie. Conçu pour simplifier la gestion quotidienne des commerçants, grossistes et prestataires de services.
+                    Le logiciel de gestion commerciale tout-en-un conçu pour le marché tunisien. Facturation, Stock, POS et Comptabilité.
                 </p>
                 <div class="d-flex gap-3 mt-4">
-                    <a href="#" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
-                    <a href="#" class="text-white fs-4"><i class='bx bxl-linkedin-square'></i></a>
-                    <a href="#" class="text-white fs-4"><i class='bx bxl-instagram-alt'></i></a>
-                    <a href="#" class="text-white fs-4"><i class='bx bxl-youtube'></i></a>
+                    <a href="https://www.facebook.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
+                    <a href="https://www.tiktok.com/@simplexgestion" class="text-white fs-4"><i class='bx bxl-tiktok'></i></a>
+                    <a href="https://www.instagram.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-instagram-alt'></i></a>
                 </div>
             </div>
+            <div class="col-lg-2 col-6"></div>
             <div class="col-lg-2 col-6 mb-4">
-                <h5 class="fw-bold mb-3">Produit</h5>
+                <h5 class="fw-bold mb-3">Raccourcis</h5>
                 <ul class="list-unstyled text-secondary">
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Facturation</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Point de Vente</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Gestion de Stock</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Achats</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">CRM</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-2 col-6 mb-4">
-                <h5 class="fw-bold mb-3">Secteurs</h5>
-                <ul class="list-unstyled text-secondary">
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Commerce de Détail</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Grossistes</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Quincaillerie</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Superettes</a></li>
-                    <li class="mb-2"><a href="#" class="text-decoration-none text-secondary hover-white">Services</a></li>
+                    <li class="mb-2"><a href="#accueil" class="text-decoration-none text-secondary hover-white">Accueil</a></li>
+                    <li class="mb-2"><a href="#ventes" class="text-decoration-none text-secondary hover-white">Ventes</a></li>
+                    <li class="mb-2"><a href="#stock" class="text-decoration-none text-secondary hover-white">Stock</a></li>
+                    <li class="mb-2"><a href="#legal" class="text-decoration-none text-secondary hover-white">Légal</a></li>
+                    <li class="mb-2"><a href="#contact" class="text-decoration-none text-secondary hover-white">Contact</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 mb-4">
                 <h5 class="fw-bold mb-3">Nous Contacter</h5>
                 <ul class="list-unstyled text-secondary">
-                    <li class="mb-3 d-flex align-items-center"><i class='bx bx-map me-2 text-primary'></i> Les Berges du Lac, Tunis</li>
-                    <li class="mb-3 d-flex align-items-center"><i class='bx bx-phone me-2 text-primary'></i> +216 00 000 000</li>
+                    <li class="mb-3 d-flex align-items-center"><i class='bx bx-phone me-2 text-primary'></i> +216 24 327 623</li>
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-envelope me-2 text-primary'></i> contact@simplexgestion.tn</li>
                     <li class="mb-3 d-flex align-items-center"><i class='bx bxl-whatsapp me-2 text-primary'></i> Support WhatsApp 7j/7</li>
                 </ul>

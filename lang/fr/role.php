@@ -34,7 +34,7 @@
      'sell.delete' => 'Supprimer les ventes de POS',
      'purchase_n_sell_report.view' => "Voir le rapport d'achat et de vente",
      'contacts_report.view' => 'Voir le rapport des fournisseurs et des clients',
-     'stock_report.view' => "Afficher le rapport de stock, le rapport d'ajustement des stocks et le rapport d'expiration des stocks",
+     'stock_report.view' => "Afficher le rapport de stock, le rapport perte des stocks et le rapport d'expiration des stocks",
      'tax_report.view' => "Voir le rapport d'impôt",
      'trending_product_report.view' => 'Afficher le rapport sur les tendances',
      'register_report.view' => 'Afficher le rapport du caisse',
