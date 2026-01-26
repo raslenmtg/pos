@@ -1,15 +1,237 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- Essential Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Logiciel de gestion commerciale complet pour la Tunisie. Simplex Gestion centralise Facturation, Stock, POS, Achats et Conformité Fiscale (FODEC, TVA).">
-    <title>Simplex Gestion | La Suite ERP Complète pour Entreprises Tunisiennes</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <!-- Primary Meta Tags -->
+    <title>Simplex Gestion - Gestion Commerciale Tunisie | Facturation, Stock & POS 2026</title>
+    <meta name="title" content="Simplex Gestion - Gestion Commerciale Tunisie | Facturation, Stock & POS 2026">
+    <meta name="description" content="Logiciel de gestion commerciale #1 en Tunisie. Gérez facturation, stock, point de vente (POS), achats avec conformité fiscale (retenue à la source, TVA). Essai gratuit. Support 24/7.">
+    <meta name="keywords" content="logiciel gestion tunisie, gestion commerciale tunisie, logiciel facturation tunisie, gestion stock tunisie, pos tunisie, point de vente tunisie, logiciel commercial tunisie, facturation électronique tunisie, gestion entreprise tunisie, logiciel comptabilité tunisie">
+    <meta name="author" content="Simplex Gestion">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.simplexgestion.tn/">
+
+    <!-- Language and Region -->
+    <meta name="language" content="French">
+    <meta name="geo.region" content="TN">
+    <meta name="geo.placename" content="Tunisia">
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.simplexgestion.tn/">
+    <meta property="og:title" content="Simplex Gestion - Logiciel Gestion Commerciale #1 en Tunisie | Facturation, Stock & POS">
+    <meta property="og:description" content="Logiciel de gestion commerciale tout-en-un pour entreprises tunisiennes. Facturation, Stock, POS, Achats et Conformité Fiscale. Essai gratuit - 3 DT/jour.">
+    <meta property="og:image" content="https://www.simplexgestion.tn/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_TN">
+    <meta property="og:site_name" content="Simplex Gestion">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.simplexgestion.tn/">
+    <meta name="twitter:title" content="Simplex Gestion - Logiciel Gestion Commerciale #1 en Tunisie">
+    <meta name="twitter:description" content="Logiciel de gestion commerciale tout-en-un. Facturation, Stock, POS. Essai gratuit - Support 24/7.">
+    <meta name="twitter:image" content="https://www.simplexgestion.tn/images/twitter-card.jpg">
+
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- DNS Prefetch & Preconnect for Performance -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '768128085832071');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=768128085832071&ev=PageView&noscript=1"
+        /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- JSON-LD Structured Data - Organization -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Simplex Gestion",
+          "url": "https://www.simplexgestion.tn",
+          "logo": "https://www.simplexgestion.tn/logo.png",
+          "description": "Logiciel de gestion commerciale pour entreprises tunisiennes",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "TN",
+            "addressRegion": "Tunis"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+216-24-327-623",
+            "contactType": "Customer Service",
+            "areaServed": "TN",
+            "availableLanguage": ["French", "Arabic"]
+          },
+          "sameAs": [
+            "https://www.facebook.com/simplexgestion",
+            "https://www.instagram.com/simplexgestion",
+            "https://www.tiktok.com/@simplexgestion"
+          ]
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data - SoftwareApplication -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Simplex Gestion",
+          "operatingSystem": "Web, Windows, macOS",
+          "applicationCategory": "BusinessApplication",
+          "description": "Logiciel complet pour la gestion commerciale en Tunisie - Facturation, Stock, POS, Achats",
+          "offers": {
+            "@type": "Offer",
+            "price": "3",
+            "priceCurrency": "TND",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "3",
+              "priceCurrency": "TND",
+              "unitText": "DAY"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "250"
+          },
+          "featureList": "Facturation, Gestion Stock, Point de Vente (POS), Achats, Conformité Fiscale, Rapports"
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data - LocalBusiness -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Simplex Gestion",
+          "image": "https://www.simplexgestion.tn/logo.png",
+          "@id": "https://www.simplexgestion.tn",
+          "url": "https://www.simplexgestion.tn",
+          "telephone": "+216-24-327-623",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "TN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 36.8065,
+            "longitude": 10.1815
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data - FAQPage -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Puis-je tester Simplex Gestion avant de payer ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui, absolument. Vous pouvez demander une période d'essai gratuite. C'est l'occasion idéale pour découvrir toutes les fonctionnalités et valider que le logiciel correspond à vos besoins, sans aucun engagement."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Mes données sont-elles en sécurité avec Simplex Gestion ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui. Nous utilisons des serveurs hautement sécurisés avec chiffrement des données et effectuons des sauvegardes quotidiennes automatiques."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Puis-je récupérer mes anciennes données ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui, nous proposons un module d'importation Excel. Vous pouvez importer votre liste de clients, fournisseurs et votre catalogue articles (avec stock initial) en quelques minutes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Puis-je annuler mon abonnement à tout moment ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui, en toute liberté. Nos offres sont sans engagement de durée. Vous pouvez arrêter votre abonnement quand vous le souhaitez, sans frais cachés ni pénalités."
+              }
+            }
+          ]
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data - BreadcrumbList -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Accueil",
+              "item": "https://www.simplexgestion.tn/"
+            }
+          ]
+        }
+    </script>
+
 
     <style>
         :root {
@@ -482,7 +704,7 @@
                 <span class="navbar-brand m-0" style="align-self: end"> Simplex<span class="text-primary">.</span></span>
                 <a href="/" class="navbar-brand">
 
-                    <img src="img/logo.png" alt="Simplex Gestion Logo" width="40" height="40">
+                    <img src="img/logo.png" alt="Logo Simplex Gestion Tunisie - Logiciel Gestion commerciale" width="40" height="40">
                 </a>
             </div>
         </div>
@@ -518,7 +740,7 @@
             <div class="col-lg-5 mt-5 mt-lg-0" data-aos="fade-left">
                 <div class="position-relative">
                     <div class="bg-white p-2 rounded-4 shadow-lg border">
-                        <img src="img/Screenshot_simplex.png" alt="Dashboard Simplex" class="img-fluid rounded-3">
+                        <img src="img/Screenshot_simplex.png" alt="Tableau de bord Simplex Gestion - Suivi Chiffre d'affaire et Stock" class="img-fluid rounded-3">
                     </div>
                     <div class="position-absolute top-0 end-0 translate-middle-y bg-white p-3 rounded-4 shadow-lg border d-none d-md-block" style="margin-top: -10px; margin-right: -20px;">
                         <div class="d-flex align-items-center gap-3">
@@ -547,8 +769,8 @@
 <div class="stats-strip">
     <div class="container">
         <div class="section-title text-center">
-            <h1>Conçue pour les entreprises tunisiennes</h1>
-            <p class="w-50 mx-auto">Simplex Gestion intègre toutes les spécificités fiscales tunisiennes.</p>
+            <h3 style="font-size: 2.2rem;">Conçue pour les entreprises tunisiennes</h3>
+            <p class="w-50 mx-auto text-white">Simplex Gestion intègre toutes les spécificités fiscales tunisiennes.</p>
         </div>
 
         <div class="compliance-badges">
@@ -601,7 +823,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 order-lg-2" data-aos="fade-left">
-                <img src="img/5a48e9c5e6ac71dd20df009ebd73fe69.jpg" alt="selling with cloud pos" class="img-fluid rounded-4 shadow-sm">
+                <img src="img/5a48e9c5e6ac71dd20df009ebd73fe69.jpg" loading="lazy" alt="Logiciel de caisse POS cloud sur tablette" class="img-fluid rounded-4 shadow-sm">
             </div>
             <div class="col-lg-6 order-lg-1" data-aos="fade-right">
                 <h2 class="feature-title">Vendez au comptoir ou en déplacement.</h2>
@@ -647,7 +869,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6" data-aos="fade-right">
-                <img src="img/bb3d548ae26c998d987766d20f5a8d11.jpg" alt="Stock Management" class="img-fluid rounded-4 shadow-sm">
+                <img src="img/bb3d548ae26c998d987766d20f5a8d11.jpg" loading="lazy" alt="Gestion de Stock et Inventaire Tunisie" class="img-fluid rounded-4 shadow-sm">
             </div>
             <div class="col-lg-6" data-aos="fade-left">
                 <h2 class="feature-title">Un stock juste, tout le temps.</h2>
@@ -693,7 +915,7 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 order-lg-2" data-aos="fade-left">
-                <img src="img/tax_lock.jpg" alt="Finance Compliance" class="img-fluid rounded-4 shadow-sm">
+                <img src="img/tax_lock.jpg" loading="lazy" alt="Conformité Fiscale Tunisie Retenue à la source" class="img-fluid rounded-4 shadow-sm">
             </div>
             <div class="col-lg-6 order-lg-1" data-aos="fade-right">
                 <h2 class="feature-title">Dormez tranquille, vous êtes conforme.</h2>
@@ -857,7 +1079,7 @@
                         </ul>
 
                         <div class="d-grid gap-3">
-                            <a href="https://wa.me/21600000000" class="btn btn-primary btn-lg fw-bold">
+                            <a href="{{ route('business.getRegister') }}" class="btn btn-primary btn-lg fw-bold">
                                 <i class='bx bxl-whatsapp me-2'></i> Démarrer Maintenant
                             </a>
                         </div>

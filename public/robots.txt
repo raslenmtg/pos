@@ -1,21 +1,21 @@
 User-agent: *
 Allow: /
+
+# Block non-public / non-SEO areas
 Disallow: /admin/
 Disallow: /api/
 Disallow: /storage/
 Disallow: /vendor/
 Disallow: /*.json$
-Disallow: /*.xml$
+
+# Auth / app entry points (usually not useful in Google)
 Disallow: /login
 Disallow: /register
 
-# Allow crawling of important pages
+# Allow crawling of important static assets
 Allow: /img/
 Allow: /css/
 Allow: /js/
 
 # Sitemap location
 Sitemap: https://simplexgestion.tn/sitemap.xml
-
-# Crawl delay (optional)
-Crawl-delay: 1
