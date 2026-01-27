@@ -266,6 +266,10 @@
             --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         }
 
+        html {
+            overflow-x: hidden;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             color: #0f172a; /* Fallback */
@@ -273,6 +277,8 @@
             background-color: #fff;
             line-height: 1.7;
             overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
         }
 
         /* --- UI COMPONENTS --- */
@@ -752,28 +758,114 @@
             .section-title h2 { font-size: 2rem; }
             .feature-card { padding: 25px; }
         }
+
+        @media (max-width: 768px) {
+            .navbar .container-fluid {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+
+            .navbar .d-flex.justify-content-between {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .navbar .d-flex.align-items-center {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+            }
+
+            .navbar .btn {
+                font-size: 0.875rem;
+                padding: 0.5rem 1rem;
+                margin: 0 0.25rem !important;
+            }
+
+            .navbar-brand {
+                font-size: 1.25rem;
+            }
+
+            .navbar .me-5 {
+                margin-right: 0.5rem !important;
+            }
+
+            .navbar svg {
+                width: 30px !important;
+                height: 25px !important;
+            }
+
+            .navbar img {
+                width: 30px !important;
+                height: 30px !important;
+            }
+
+            /* Prevent horizontal overflow */
+            .container, .container-fluid {
+                overflow-x: hidden;
+                max-width: 100%;
+            }
+
+            .row {
+                margin-left: 0;
+                margin-right: 0;
+            }
+
+            /* Hide floating stat cards on mobile that cause overflow */
+            .position-absolute.top-0.end-0,
+            .position-absolute.bottom-0.start-0 {
+                display: none !important;
+            }
+
+            .hero-section .position-relative {
+                overflow: visible;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar .container-fluid {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            .navbar .py-3 {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+
+            .navbar .btn {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.75rem;
+                white-space: nowrap;
+            }
+
+            .navbar .btn i {
+                display: none;
+            }
+
+            .navbar-brand {
+                font-size: 1rem;
+            }
+
+            .navbar svg {
+                width: 25px !important;
+                height: 20px !important;
+            }
+
+            .navbar img {
+                width: 25px !important;
+                height: 25px !important;
+            }
+        }
     </style>
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
 
 <nav class="navbar fixed-top">
     <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center w-100 py-3">
-            <div class="d-flex align-items-center">
-                <a href="{{ route('business.getRegister') }}" class="btn btn-outline" style="margin: 0 10px">
-                  Inscription
-                    <i class='bx bx-plus'></i>
-                </a>
-                <a href="{{ route('login') }}" class="btn btn-primary">
-                    <i class='bx bx-log-in'></i>
-                    Se connecter
-                </a>
-            </div>
-
-
-
-            <div class="d-flex align-items-center">
-                <span class="me-5">
+        <div class="d-flex justify-content-between align-items-center w-100 py-3 flex-wrap">
+            <div class="d-flex align-items-center order-md-2 order-1 mb-2 mb-md-0">
+                <span class="me-3 me-md-5">
                     <a href="/" >
                      <svg width="40px" height="35px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#E70013" d="M32 5H4a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h28a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4z"></path><circle fill="#FFF" cx="18" cy="18" r="6.5"></circle><path fill="#E70013" d="M15.4 18a3.9 3.9 0 0 1 6.541-2.869a4.875 4.875 0 1 0 0 5.738A3.9 3.9 0 0 1 15.4 18z"></path><path fill="#E70013" d="M19.645 16.937l-1.249-1.719v2.125L16.375 18l2.021.657v2.125l1.249-1.719l2.021.656L20.417 18l1.249-1.719z"></path></svg>
                     </a>
@@ -781,6 +873,17 @@
                 <span class="navbar-brand m-0" style="align-self: end"> Simplex<span class="text-primary">.</span></span>
                 <a href="#" class="navbar-brand">
                     <img src="img/logo.png" alt="Logo Simplex Gestion Tunisie - Logiciel Gestion commerciale" width="40" height="40">
+                </a>
+            </div>
+
+            <div class="d-flex align-items-center order-md-1 order-2">
+                <a href="{{ route('business.getRegister') }}" class="btn btn-outline" style="margin: 0 5px">
+                  Inscription
+                    <i class='bx bx-plus'></i>
+                </a>
+                <a href="{{ route('login') }}" class="btn btn-primary" style="margin: 0 5px">
+                    <i class='bx bx-log-in'></i>
+                    Se connecter
                 </a>
             </div>
         </div>
@@ -1122,10 +1225,10 @@
                     </div>
                     <p>Des rapports clairs pour savoir exactement où vous gagnez de l'argent.</p>
                     <ul class="feature-list">
-                        <li><strong>Profit & Perte :</strong> Suivi du bénéfice net en temps réel</li>
-                        <li><strong>Tendances :</strong> Identifiez vos produits les plus rentables</li>
-                        <li><strong>Rapport Caisse :</strong> Contrôle des espèces et de la clôture</li>
-                        <li><strong>Commerciaux :</strong> Suivi des ventes et commissions</li>
+                        <li>Profit & Perte: Suivi du bénéfice net en temps réel</li>
+                        <li>Rapport Caisse: Contrôle des espèces et de la clôture</li>
+                        <li>Identifiez vos produits les plus rentables</li>
+                        <li>uivi des ventes et commissions</li>
                     </ul>
                 </div>
             </div>
