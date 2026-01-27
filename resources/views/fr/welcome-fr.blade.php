@@ -863,7 +863,7 @@
 
 <nav class="navbar fixed-top">
     <div class="container-fluid">
-        <div class="d-flex justify-content-between align-items-center w-100 py-3 flex-wrap">
+        <div class="d-flex justify-content-between align-items-center w-100 py-1 py-md-3 flex-wrap">
             <div class="d-flex align-items-center order-md-2 order-1 mb-2 mb-md-0">
                 <span class="me-3 me-md-5">
                     <a href="/" >
@@ -903,7 +903,7 @@
                     <strong>100% Conforme</strong> à la législation tunisienne (TVA, Retenue à la source TEJ).
                 </p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a href="#contact" class="btn btn-primary btn-lg">
+                    <a href="#contact" class="btn btn-primary btn-md">
                         <i class='bx bx-rocket me-2'></i> Commencer Maintenant
                     </a>
 
