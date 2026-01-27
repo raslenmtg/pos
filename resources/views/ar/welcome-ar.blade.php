@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="ar" dir="rtl">
 <head>
     <!-- Essential Meta Tags -->
     <meta charset="UTF-8">
@@ -306,6 +306,7 @@
             font-size: 1.6rem;
             letter-spacing: -0.5px;
         }
+
 
         .nav-link {
             font-weight: 600;
@@ -759,6 +760,7 @@
             .feature-card { padding: 25px; }
         }
 
+
         @media (max-width: 768px) {
             .navbar .container-fluid {
                 padding-left: 1rem;
@@ -810,6 +812,7 @@
                 margin-left: 0;
                 margin-right: 0;
             }
+
 
             /* Hide floating stat cards on mobile that cause overflow */
             .position-absolute.top-0.end-0,
@@ -865,25 +868,24 @@
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center w-100 py-1 py-md-3 flex-wrap">
             <div class="d-flex align-items-center order-md-2 order-1 mb-2 mb-md-0">
-                <span class="me-3 me-md-5">
+                <span class="ml-3 ml-md-5">
                     <a href="/" >
-                     <svg width="40px" height="35px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#E70013" d="M32 5H4a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h28a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4z"></path><circle fill="#FFF" cx="18" cy="18" r="6.5"></circle><path fill="#E70013" d="M15.4 18a3.9 3.9 0 0 1 6.541-2.869a4.875 4.875 0 1 0 0 5.738A3.9 3.9 0 0 1 15.4 18z"></path><path fill="#E70013" d="M19.645 16.937l-1.249-1.719v2.125L16.375 18l2.021.657v2.125l1.249-1.719l2.021.656L20.417 18l1.249-1.719z"></path></svg>
-                    </a>
+<svg width="40px" height="35px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#ED2939" d="M36 27a4 4 0 0 1-4 4h-8V5h8a4 4 0 0 1 4 4v18z"></path><path fill="#002495" d="M4 5a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h8V5H4z"></path><path fill="#EEE" d="M12 5h12v26H12z"></path></svg>  </a>
                 </span>
-                <span class="navbar-brand m-0" style="align-self: end"> Simplex<span class="text-primary">.</span></span>
                 <a href="#" class="navbar-brand">
                     <img src="img/logo.png" alt="Logo Simplex Gestion Tunisie - Logiciel Gestion commerciale" width="40" height="40">
                 </a>
+                <span class="navbar-brand m-0" style="align-self: end"> Simplex</span>
             </div>
 
             <div class="d-flex align-items-center order-md-1 order-2">
                 <a href="{{ route('business.getRegister') }}" class="btn btn-outline" style="margin: 0 5px">
-                  Inscription
+                    إنشاء حساب
                     <i class='bx bx-plus'></i>
                 </a>
                 <a href="{{ route('login') }}" class="btn btn-primary" style="margin: 0 5px">
                     <i class='bx bx-log-in'></i>
-                    Se connecter
+                    تسجيل الدخول
                 </a>
             </div>
         </div>
@@ -894,28 +896,33 @@
 <section class="hero-section" id="accueil">
     <div class="container">
         <div class="row align-items-center">
+
+
+
             <div class="col-lg-7" data-aos="fade-right">
                 <h1 class="hero-title">
-                    Solution de Gestion Commerciale pour les Grossistes, Distributeurs et PME.<br>
+                    برنامج متكامل باش تنضم مشروعك
+                    موجّه لتجّار الجملة، الموزّعين، والمؤسّسات الصغرى والمتوسّطة<br>
                 </h1>
                 <p class="hero-lead">
-                    Synchronisez vos stocks, vos operations et votre facturation en temps réel.
-                    <strong>100% Conforme</strong> à la législation tunisienne (TVA, Retenue à la source TEJ).
+                    الستوك و الحسابات و الفاتورات في بلاصة وحدة<br>
+                    <strong>100% مطابق</strong> للقوانين التونسية (TVA, الخصم من المورد TEJ).
                 </p>
                 <div class="d-flex flex-wrap gap-3">
                     <a href="#contact" class="btn btn-primary btn-md">
-                        <i class='bx bx-rocket me-2'></i> Commencer Maintenant
+                        <i class='bx bx-rocket me-2'></i> ابدأ توا
                     </a>
 
                 </div>
                 <div class="mt-4 text-muted small">
-                    <i class='bx bx-check-circle text-success'></i> Configuration rapide
+                    <i class='bx bx-check-circle text-success'></i> تهيئة سريعة
                     <span class="mx-2">•</span>
-                    <i class='bx bx-check-circle text-success'></i> Données sécurisées
+                    <i class='bx bx-check-circle text-success'></i> معطياتك مؤمّنة
                     <span class="mx-2">•</span>
-                    <i class='bx bx-check-circle text-success'></i> Support 7j/7
+                    <i class='bx bx-check-circle text-success'></i> دعم 7/7
                 </div>
             </div>
+
             <div class="col-lg-5 mt-5 mt-lg-0" data-aos="fade-left">
                 <div class="position-relative">
                     <div class="bg-white p-2 rounded-4 shadow-lg border">
@@ -925,7 +932,7 @@
                         <div class="d-flex align-items-center gap-3">
                             <div class="bg-success bg-opacity-10 p-2 rounded-circle text-success"><i class='bx bx-trending-up fs-4'></i></div>
                             <div>
-                                <small class="text-muted d-block">Chiffre d'affaire du jour</small>
+                                <small class="text-muted d-block">رقم معملات اليوم</small>
                                 <span class="fw-bold">1,250DT</span>
                             </div>
                         </div>
@@ -934,13 +941,14 @@
                         <div class="d-flex align-items-center gap-3">
                             <div class="bg-warning bg-opacity-10 p-2 rounded-circle text-warning"><i class='bx bx-bell fs-4'></i></div>
                             <div>
-                                <small class="text-muted d-block">Alerte Stock</small>
-                                <span class="fw-bold text-danger">3 articles critiques</span>
+                                <small class="text-muted d-block">تنبيه</small>
+                                <span class="fw-bold text-danger">3 مواد ناقصة</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </section>
@@ -948,16 +956,16 @@
 <div class="stats-strip">
     <div class="container">
         <div class="section-title text-center">
-            <h3 style="font-size: 2.2rem;">Conçue pour les entreprises tunisiennes</h3>
-            <p class="w-50 mx-auto text-white">Simplex Gestion intègre toutes les spécificités fiscales tunisiennes.</p>
+            <h3 style="font-size: 2.2rem;">مصمم خصيصًا للشركات التونسية</h3>
+            <p class="w-50 mx-auto text-white">Simplex Gestion يشمل جميع الخصائص الضريبية التونسية.</p>
         </div>
 
         <div class="compliance-badges">
             <span class="compliance-badge"><i class="bx bx-check"></i> TVA Multiple (7%, 13%, 19%)</span>
-            <span class="compliance-badge"><i class="bx bx-check"></i> Retenue à la Source</span>
-            <span class="compliance-badge"><i class="bx bx-check"></i> Timbre Fiscal</span>
+            <span class="compliance-badge"><i class="bx bx-check"></i> الخصم من المورد</span>
+            <span class="compliance-badge"><i class="bx bx-check"></i> الطابع الجبائي</span>
             <span class="compliance-badge"><i class="bx bx-check"></i> FODEC</span>
-            <span class="compliance-badge"><i class="bx bx-check"></i> Numérotation Séquentielle</span>
+            <span class="compliance-badge"><i class="bx bx-check"></i> ترقيم تسلسلي للفواتير</span>
         </div>
 
 
@@ -967,31 +975,31 @@
 <section class="py-5 bg-light" id="cloud">
     <div class="container py-5">
         <div class="text-center mb-5">
-            <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">TECHNOLOGIE</span>
-            <h2 class="fw-800 display-6">Pourquoi passer au Cloud ?</h2>
-            <p class="text-muted">Fini les serveurs poussiéreux dans le placard. Place à la sécurité.</p>
+            <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">تكنولوجيا</span>
+            <h2 class="fw-800 display-6">علاش تختار الـ Cloud</h2>
+            <p class="text-muted">ادخل منين تحب، وقت ما تحب. </p>
         </div>
 
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="bg-white p-4 rounded-4 shadow-sm h-100">
                     <div class="mb-3 text-primary fs-1"><i class="bx bx-server"></i></div>
-                    <h4 class="fw-bold">Zéro Installation</h4>
-                    <p class="text-secondary small">Aucun materiél à acheter. Aucun technicien à appeler pour une panne. Connectez-vous simplement.</p>
+                    <h4 class="fw-bold">من غير صبان</h4>
+                    <p class="text-secondary small">ما ثماش معدات، ما ثماش تقني. تدخل كان بالإنترنت وتخدم.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="bg-white p-4 rounded-4 shadow-sm h-100">
                     <div class="mb-3 text-primary fs-1"><i class="bx bx-lock-alt"></i></div>
-                    <h4 class="fw-bold">Sécurité</h4>
-                    <p class="text-secondary small">Vos données sont cryptées et sauvegardées sur des serveurs sécurisés.</p>
+                    <h4 class="fw-bold">أمان</h4>
+                    <p class="text-secondary small">معطياتك مشفّرة ومتخزّنة في سيرفرات آمنة.</p>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="bg-white p-4 rounded-4 shadow-sm h-100">
                     <div class="mb-3 text-primary fs-1"><i class="bx bx-refresh"></i></div>
-                    <h4 class="fw-bold">Toujours à Jour</h4>
-                    <p class="text-secondary small">Profitez des nouvelles fonctionnalités et des mises à jour instantanément, sans frais.</p>
+                    <h4 class="fw-bold">مواكب الحدث</h4>
+                    <p class="text-secondary small">آخر التحديثات والخاصيات توصلك أوتوماتيك ومن غير مصاريف.</p>
                 </div>
             </div>
         </div>
@@ -1005,37 +1013,37 @@
                 <img src="img/5a48e9c5e6ac71dd20df009ebd73fe69.jpg" loading="lazy" alt="Logiciel de caisse POS cloud sur tablette" class="img-fluid rounded-4 shadow-sm">
             </div>
             <div class="col-lg-6 order-lg-1" data-aos="fade-right">
-                <h2 class="feature-title">Vendez au comptoir ou en déplacement.</h2>
+                <h2 class="feature-title">تبيع في المغازة ولا إنت متنقّل.</h2>
                 <p class="lead text-secondary mb-4">
-                    Vos commerciaux sont sur le terrain ? Vos vendeurs sont en boutique ? Simplex synchronise tout en temps réel.
+                    الموظفين موجودين في ميدان و لا في المحل ؟ Simplex Gestion يواكبك وين ما تمشي.
                 </p>
                 <ul class="list-unstyled feature-list">
                     <li>
                         <i class='bx bxs-check-circle'></i>
                         <div>
-                            <strong>Synchronisation Temps Réel</strong>
-                            <p class="small mb-0">Une vente faite à Sfax est visible instantanément à Tunis. Plus besoin d'attendre le soir.</p>
+                            <strong>التزامن</strong>
+                            <p class="small mb-0">عملية بيع تصير في صفاقس، تتشاف فورًا في تونس.</p>
                         </div>
                     </li>
                     <li>
                         <i class='bx bxs-check-circle'></i>
                         <div>
-                            <strong>Accessible sur Tablette & Mobile & ordinateur</strong>
-                            <p class="small mb-0">Faites des devis directement chez le client depuis votre smartphone. Validez les commandes à distance.</p>
+                            <strong>ادخل على التابليت، التليفون، والكمبيوتر</strong>
+                            <p class="small mb-0">اعمل devis عند الحريف من التليفون متاعك و عدي طلبية عن بعد.</p>
                         </div>
                     </li>
                     <li>
                         <i class='bx bxs-check-circle'></i>
                         <div>
-                            <strong>Transformation Devis → Facture en 1 Clic</strong>
-                            <p class="small mb-0">Ne ressaisissez jamais une information. Convertissez un devis accepté en facture instantanément.</p>
+                            <strong>تحويل Devis → Facture بكليك وحدة</strong>
+                            <p class="small mb-0">ما تعاودش إدخل. devis يتحوّل لفاتورة في ثانية.</p>
                         </div>
                     </li>
                     <li>
                         <i class='bx bxs-check-circle'></i>
                         <div>
-                            <strong>Multi-Tarifs & Grilles de Prix</strong>
-                            <p class="small mb-0">Prix Gros, Demi-Gros, Détail. Assignez automatiquement le bon tarif selon la catégorie du client.</p>
+                            <strong>أسعار متعدّدة</strong>
+                            <p class="small mb-0">جملة، نصف جملة، تفصيل. السعر يتحدّد أوتوماتيك حسب نوع البيعة.</p>
                         </div>
                     </li>
                 </ul>
@@ -1051,37 +1059,37 @@
                 <img src="img/bb3d548ae26c998d987766d20f5a8d11.jpg" loading="lazy" alt="Gestion de Stock et Inventaire Tunisie" class="img-fluid rounded-4 shadow-sm">
             </div>
             <div class="col-lg-6" data-aos="fade-left">
-                <h2 class="feature-title">Un stock juste, tout le temps.</h2>
+                <h2 class="feature-title">الستوك ديما واضح</h2>
                 <p class="lead text-secondary mb-4">
-                    Fini le stock fantôme et les ruptures surprises. Ayez une vision claire de ce qui entre et ce qui sort.
+                    انسا مشكلة الستوك و نقصان على غفلة تبع سلعتك مليح و اعرف شنيا دخلت و شنيا خرجت
                 </p>
                 <ul class="list-unstyled feature-list">
                     <li>
                         <i class='bx bxs-bell-ring'></i>
                         <div>
-                            <strong>Alertes de Réapprovisionnement</strong>
-                            <p class="small mb-0">Définissez des seuils minimums. Le logiciel vous prévient avant la rupture de stock.</p>
+                            <strong>تنبيهات إعادة التزويد</strong>
+                            <p class="small mb-0">حدّد حدّ أدنى والبرنامج ينبهك قبل ما ينقص الستوك.</p>
                         </div>
                     </li>
                     <li>
                         <i class='bx bxs-buildings'></i>
                         <div>
-                            <strong>Multi-Dépôts & Transferts</strong>
-                            <p class="small mb-0">Gérez plusieurs magasins ou entrepôts. Effectuez des bons de transfert inter-agences suivis.</p>
+                            <strong>مخازن متعدّدة</strong>
+                            <p class="small mb-0">اعمل تحويلات بين الفروع بسهولة.</p>
                         </div>
                     </li>
                     <li>
                         <i class='bx bxs-layer'></i>
                         <div>
-                            <strong>Articles Composés & Kits</strong>
-                            <p class="small mb-0">Assemblez plusieurs produits en un seul "Kit". Le stock des composants est déduit automatiquement à la vente.</p>
+                            <strong>Pack</strong>
+                            <p class="small mb-0">ركّب أكثر من منتوج في pack واحد، والستوك يتحسّب أوتوماتيك.</p>
                         </div>
                     </li>
                     <li>
                         <i class='bx bxs-barcode'></i>
                         <div>
-                            <strong>Inventaire & Étiquetage</strong>
-                            <p class="small mb-0">Générez et imprimez vos propres codes-barres. Réalisez des inventaires partiels ou globaux facilement.</p>
+                            <strong>الجرد و اللاصقات</strong>
+                            <p class="small mb-0">اطبع باركوداتك بنفسك واعمل جرد كلي ولا جزئي بكل سهولة</p>
                         </div>
                     </li>
                 </ul>
@@ -1097,39 +1105,40 @@
                 <img src="img/tax_lock.jpg" loading="lazy" alt="Conformité Fiscale Tunisie Retenue à la source" class="img-fluid rounded-4 shadow-sm">
             </div>
             <div class="col-lg-6 order-lg-1" data-aos="fade-right">
-                <h2 class="feature-title">Dormez tranquille, vous êtes conforme.</h2>
+                <h2 class="feature-title">أرقد وضميرك مرتاح.</h2>
                 <p class="lead text-secondary mb-4">
-                    La législation tunisienne est complexe. Simplex Gestion l'automatise pour vous éviter les redressements.
+                    القانون الجبائي التونسي معقد, simplex يتكفّل بكل شئ ويجنّبك المشاكل والمخالفات
                 </p>
                 <ul class="list-unstyled feature-list">
                     <li>
                         <i class='bx bxs-shield'></i>
                         <div>
-                            <strong>Timbre & TVA Automatiques</strong>
-                            <p class="small mb-0">Calcul automatique du Timbre fiscale et application des taux de TVA selon l'article.</p>
+                            <strong>TVA والطابع الجبائي</strong>
+                            <p class="small mb-0">حساب الطابع الجبائي وتطبيق TVA حسب كل منتج.</p>
                         </div>
                     </li>
                     <li>
                         <i class='bx bxs-file-pdf'></i>
                         <div>
-                            <strong>Retenue à la Source & TEJ </strong>
+                            <strong>الخصم من المورد TEJ </strong>
                             <p class="small mb-0">
-                                Générez votre fichier de déclaration RS en un clic, prêt à être déposé sur la plateforme TEJ.
+                                خرّج ملف التصريح RS بكليك وحدة، جاهز للتحميل على منصة TEJ.
                             </p>
                         </div>
                     </li>
                     <li>
                         <i class='bx bxs-user-account'></i>
                         <div>
-                            <strong>Gestion des Crédits Clients</strong>
-                            <p class="small mb-0">Plafonnez l'encours de vos clients. Bloquez la facturation si le seuil de crédit est dépassé.</p>
+                            <strong>ديون الحرفاء</strong>
+                            <p class="small mb-0">حدّد سقف ديون، وإذا تعدّى الحريف الحد، الفوترة تتسكر أوتوماتيك.</p>
                         </div>
                     </li>
                     <li>
                         <i class='bx bxs-report'></i>
                         <div>
-                            <strong>Invitez votre comptable</strong>
-                            <p class="small mb-0">Créez un compte gratuit pour votre comptable. Définissez ses permissions. Il récupère ses documents sans vous déranger.</p>
+                            <strong>اعطي حساب للمحاسب متاعك</strong>
+                            <p class="small mb-0">حساب مجاني للمحاسب مع صلاحيات محدّدة،
+                                يطلّع على الوثائق من غير ما يزعجك.</p>
                         </div>
                     </li>
                 </ul>
@@ -1141,8 +1150,8 @@
 <section class="section bg-light">
     <div class="container">
         <div class="section-title text-center">
-            <h2>Une Gestion à 360°</h2>
-            <p class="text-muted">Des outils puissants pour piloter votre activité.</p>
+            <h2>رؤية شاملة 360°</h2>
+            <p class="text-muted">أدوات قوية باش تنضم خدمتك.</p>
         </div>
 
         <div class="row g-4">
@@ -1150,22 +1159,23 @@
                 <div class="feature-card">
                     <div class="d-flex align-items-center mb-4">
                         <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;"><i class="bx bx-cart"></i></div>
-                        <h3 class="mb-0">Gestion des Ventes</h3>
+                        <h3 class="mb-0">المبيعات</h3>
                     </div>
-                    <p>Du devis à l'encaissement, fluidifiez votre cycle de vente. Idéal pour la vente au comptoir ou en gros.</p>
+                    <p> تبع المبيعات من devis للخلاص
+                    </p>
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="feature-list mt-0">
-                                <li>6 Modèles du facture personnalisables</li>
-                                <li>Impression tickets/factures instantanée</li>
-                                <li>Grilles tarifaires par client</li>
+                                <li>6 نماذج فواتير قابلة لتعديل</li>
+                                <li>طباعة فورية للفواتير والتذاكر</li>
+                                <li>أسعار مختلفة لنفس المنتج</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul class="feature-list mt-0">
-                                <li>Suivi des règlements temps réel</li>
-                                <li>Gestion des impayés &amp; plafonds</li>
-                                <li>Gestion des soldes et promotion saisonnières</li>
+                                <li>متابعة الخلاص في الوقت الحقيقي</li>
+                                <li>الديون وسقف دين</li>
+                                <li>تخفيضات وعروض موسمية</li>
                             </ul>
                         </div>
                     </div>
@@ -1176,22 +1186,22 @@
                 <div class="feature-card">
                     <div class="d-flex align-items-center mb-4">
                         <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;"><i class="bx bx-package"></i></div>
-                        <h3 class="mb-0">Stock &amp; Approvisionnement</h3>
+                        <h3 class="mb-0">الستوك والتزويد</h3>
                     </div>
-                    <p>Ne soyez plus jamais en rupture. Une gestion proactive pour assurer la continuité de votre activité.</p>
+                    <p>ما عادش نقص في البضاعة.</p>
                     <div class="row">
                         <div class="col-md-6">
                             <ul class="feature-list mt-0">
-                                <li>Alertes de réapprovisionnement</li>
-                                <li>Multi-dépôts &amp; transferts</li>
-                                <li>Traçabilité complète des mouvements</li>
+                                <li>تنبيهات إعادة التزويد</li>
+                                <li>مخازن متعدّدة</li>
+                                <li> تتبّع كامل لحركات الستوك</li>
                             </ul>
                         </div>
                         <div class="col-md-6">
                             <ul class="feature-list mt-0">
-                                <li>Articles composés &amp; pack</li>
-                                <li>Inventaire physique &amp; global</li>
-                                <li>Valorisation CMP (Coût Moyen Pondéré)</li>
+                                <li>اصنع pack</li>
+                                <li>جرد فعلي وكلي</li>
+                                <li>احتساب الكلفة CMP</li>
                             </ul>
                         </div>
                     </div>
@@ -1203,14 +1213,14 @@
                     <div class="d-flex align-items-center mb-4">
                         <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
                             <i class="bx bx-purchase-tag"></i></div>
-                        <h3 class="mb-0">Achats &amp; Dépenses</h3>
+                        <h3 class="mb-0">الشراء والمصاريف</h3>
                     </div>
-                    <p>Maîtrisez vos coûts et gérez vos relations fournisseurs.</p>
+                    <p>تبع التكاليف وتعاملاتك مع المزوّدين.</p>
                     <ul class="feature-list">
-                        <li>Suivi commandes fournisseurs &amp; réceptions</li>
-                        <li>Historique transactions complet</li>
-                        <li>Gestion des dépenses &amp; notes de frais</li>
-                        <li>Gestion des Retours & Avoirs</li>
+                        <li>متابعة طلبيات المزوّدين والاستلام</li>
+                        <li>أرشيف كامل للمعاملات</li>
+                        <li>مصاريف ونفقات</li>
+                        <li>إرجاع المنتجات</li>
                     </ul>
                 </div>
             </div>
@@ -1221,14 +1231,14 @@
                         <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
                             <i class="bx bx-stats"></i>
                         </div>
-                        <h3 class="mb-0">Statistiques & Décisions</h3>
+                        <h3 class="mb-0">الإحصائيات</h3>
                     </div>
-                    <p>Des rapports clairs pour savoir exactement où vous gagnez de l'argent.</p>
+                    <p>أرقام واضحة باش تعرف وين تربح.</p>
                     <ul class="feature-list">
-                        <li>Profit & Perte: Suivi du bénéfice net en temps réel</li>
-                        <li>Rapport Caisse: Contrôle des espèces et de la clôture</li>
-                        <li>Identifiez vos produits les plus rentables</li>
-                        <li>uivi des ventes et commissions</li>
+                        <li>متابعة الربح الصافي لحظة بلحظة</li>
+                        <li>مراقبة السيولة وإغلاق الكاسة</li>
+                        <li>اعرف أكثر المنتجات ربحية</li>
+                        <li>متابعة مبيعات الموكلين</li>
                     </ul>
                 </div>
             </div>
@@ -1240,26 +1250,26 @@
 <section class="py-5" id="contact">
     <div class="container">
         <div class="pricing-table text-center">
-            <h2 class="display-4 fw-bold mb-4">L'offre Tout-en-Un</h2>
-            <p class="lead text-white-50 mb-5">Tout ce dont vous avez besoin pour gérer votre entreprise, sans frais cachés.</p>
+            <h2 class="display-4 fw-bold mb-4">كل ما تحتاجه لتسيير مشروعك</h2>
+            <p class="lead text-white-50 mb-5">عرض محدود</p>
 
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="bg-white text-dark rounded-4 p-5 shadow-lg">
-                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3">Sans engagement</span>
-                        <div class="display-2 fw-bold mb-2">3 <span class="fs-4 text-muted">DT/jour</span></div>
+                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3">من غير التزام</span>
+                        <div class="display-2 fw-bold mb-2">3 <span class="fs-4 text-muted">د.ت/يوم</span></div>
 
-                        <ul class="list-unstyled text-start mb-5 d-inline-block mx-auto">
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Facturation Illimités</strong></li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Support Technique 24/7</strong> </li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Formation sur site ou en ligne</strong></li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Configuration gratuite</strong></li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Mises à jour automatiques</strong> </li>
+                        <ul class="list-unstyled text-end mb-5 d-inline-block mx-auto">
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>فاتورات بلا حدود</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>دعم تقني 24/7</strong> </li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>تكوين</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>إعداد مجاني</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>تحديثات أوتوماتيك</strong> </li>
                         </ul>
 
                         <div class="d-grid gap-3">
                             <a href="{{ route('business.getRegister') }}" class="btn btn-primary btn-lg fw-bold">
-                                <i class='bx bxl-whatsapp me-2'></i> Démarrer Maintenant
+                                <i class='bx bxl-whatsapp me-2'></i> ابــــــــــدأ تــــــــــوا
                             </a>
                         </div>
                     </div>
@@ -1272,8 +1282,8 @@
 <section class="section py-5 bg-light">
     <div class="container">
         <div class="text-center mb-5">
-            <h2 class="fw-bold">Questions Fréquentes</h2>
-            <p class="text-muted">Tout ce que vous devez savoir avant de commencer.</p>
+            <h2 class="fw-bold">الأسئلة</h2>
+            <p class="text-muted">كل ما تحتاج لمعرفته قبل أن تبدأ.</p>
         </div>
 
         <div class="row justify-content-center">
@@ -1282,24 +1292,25 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
-                                Puis-je tester avant de payer ?
+                                نجم نجرّب قبل ما نخلّص؟
                             </button>
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                <strong>Oui, absolument.</strong> Vous pouvez demander une période d'essai gratuite. C'est l'occasion idéale pour découvrir toutes les fonctionnalités et valider que le logiciel correspond à vos besoins, sans aucun engagement. </div>
+                                إي نعم. تنجم تطلب فترة تجربة مجانية
+                                باش تكتشف الخصائص الكل وتتأكّد اللي البرنامج يناسبك، من غير أي التزام. </div>
                         </div>
                     </div>
 
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
-                                Mes données sont-elles en sécurité ?
+                                هل معطياتي آمنة؟
                             </button>
                         </h2>
                         <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Oui. Nous utilisons des serveurs hautement sécurisés avec chiffrement des données et effectuons des sauvegardes quotidiennes automatiques.
+                                نعم. نستخدم خوادم عالية الأمان مع تشفير البيانات ونقوم بعمل نسخ احتياطية .
                             </div>
                         </div>
                     </div>
@@ -1308,12 +1319,12 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
-                                Puis-je récupérer mes anciennes données ?
+                                نجم نستخدم معطياتي القديمة؟
                             </button>
                         </h2>
                         <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                Oui, nous proposons un module d'importation Excel. Vous pouvez importer votre liste de clients, fournisseurs et votre catalogue articles (avec stock initial) en quelques minutes.
+                                نعم يمكنك استيراد قائمة عملائك ومورديك و منتجاتك (بما في ذلك المخزون الأولي) في دقائق.
                             </div>
                         </div>
                     </div>
@@ -1322,13 +1333,12 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
-                                Puis-je annuler mon abonnement à tout moment ?
+                                نجم نوقّف الاشتراك في أي وقت؟
                             </button>
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                <strong>Oui, en toute liberté.</strong> Nos offres sont sans engagement de durée. Vous pouvez arrêter votre abonnement quand vous le souhaitez, sans frais cachés ni pénalités.
-                            </div>
+                                نعم يمكنك إلغاء اشتراكك متى شئت على راحتك    </div>
                         </div>
                     </div>
 
@@ -1346,7 +1356,7 @@
             <div class="col-lg-4 mb-4">
                 <h3 class="fw-bold mb-4">Simplex<span class="text-primary">Gestion</span></h3>
                 <p class="text-secondary">
-                    Le logiciel de gestion commerciale tout-en-un conçu pour le marché tunisien. Facturation, Stock, POS et Comptabilité.
+                    برنامج إدارة الأعمال المتكامل المصمم خصيصاً للسوق التونسية. يشمل إصدار الفواتير، وإدارة المخزون، ونظام كاسة، والمحاسبة.
                 </p>
                 <div class="d-flex gap-3 mt-4">
                     <a href="https://www.facebook.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
@@ -1356,18 +1366,18 @@
             </div>
             <div class="col-lg-2 col-6"></div>
             <div class="col-lg-2 col-6 mb-4">
-                <h5 class="fw-bold mb-3">Raccourcis</h5>
-                <ul class="list-unstyled text-secondary">
-                    <li class="mb-2"><a href="#accueil" class="text-decoration-none text-secondary hover-white">Accueil</a></li>
-                    <li class="mb-2"><a href="#ventes" class="text-decoration-none text-secondary hover-white">Ventes</a></li>
-                    <li class="mb-2"><a href="#stock" class="text-decoration-none text-secondary hover-white">Stock</a></li>
-                    <li class="mb-2"><a href="#legal" class="text-decoration-none text-secondary hover-white">Légal</a></li>
-                    <li class="mb-2"><a href="#contact" class="text-decoration-none text-secondary hover-white">Contact</a></li>
+                <h5 class="fw-bold mb-3">اختصارات</h5>
+                <ul class="list-unstyled text-secondary p-0">
+                    <li class="mb-2"><a href="#accueil" class="text-decoration-none text-secondary hover-white">إستقبال</a></li>
+                    <li class="mb-2"><a href="#ventes" class="text-decoration-none text-secondary hover-white">مبيعات</a></li>
+                    <li class="mb-2"><a href="#stock" class="text-decoration-none text-secondary hover-white">الستوك</a></li>
+                    <li class="mb-2"><a href="#legal" class="text-decoration-none text-secondary hover-white">ضريبة</a></li>
+                    <li class="mb-2"><a href="#contact" class="text-decoration-none text-secondary hover-white">اتصل بنا</a></li>
                 </ul>
             </div>
             <div class="col-lg-4 mb-4">
-                <h5 class="fw-bold mb-3">Nous Contacter</h5>
-                <ul class="list-unstyled text-secondary">
+                <h5 class="fw-bold mb-3">اتصل بنا</h5>
+                <ul class="list-unstyled text-secondary p-0">
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-phone me-2 text-primary'></i> +216 24 327 623</li>
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-envelope me-2 text-primary'></i> contact@simplexgestion.tn</li>
                     <li class="mb-3 d-flex align-items-center"><i class='bx bxl-whatsapp me-2 text-primary'></i> Support WhatsApp 7j/7</li>
@@ -1377,7 +1387,7 @@
         <hr class="border-secondary my-4 opacity-25">
         <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start text-secondary small">
-                &copy; 2026 Simplex Gestion Tunisie. Tous droits réservés.
+                &copy; 2026 Simplex Gestion جميع الحقوق محفوظة
             </div>
             <div class="col-md-6 text-center text-md-end text-secondary small">
                 <a href="#" class="text-secondary text-decoration-none me-3">Mentions Légales</a>

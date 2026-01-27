@@ -1,1249 +1,1417 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr">
 <head>
+    <!-- Essential Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index,archive">
-    <link rel="icon" type="image/png" href="img/logo.png">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Boxicons CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
-    <!-- Animate CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <!-- AOS CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>Simplex Gestion - برنامج إدارة تجاري متكامل | نظام POS تونس</title>
-    <meta name="description" content="Simplex Gestion - نظام إدارة تجاري شامل في تونس. برنامج POS متكامل لإدارة المخزون، الفواتير، والمحاسبة. اشتراك شهري 90 دينار فقط">
-    <meta name="keywords" content="simplex gestion, برنامج إدارة تجاري, نظام POS, إدارة المخزون تونس, برنامج محاسبة, فواتير إلكترونية, نقطة البيع">
-    <meta name="author" content="Simplex Gestion">
-    <meta name="language" content="Arabic">
-    <meta name="geo.region" content="TN">
-    <meta name="geo.country" content="Tunisia">
-    <link rel="canonical" href="https://simplexgestion.tn/">
-
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Simplex Gestion - برنامج إدارة تجاري متكامل | نظام POS تونس">
-    <meta property="og:description" content="نظام إدارة تجاري شامل في تونس. برنامج POS متكامل لإدارة المخزون، الفواتير، والمحاسبة">
-    <meta property="og:url" content="https://simplexgestion.tn/">
-    <meta property="og:site_name" content="Simplex Gestion">
-    <meta property="og:image" content="https://simplexgestion.tn/img/logo.png">
-    <meta property="og:locale" content="ar_TN">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Simplex Gestion - برنامج إدارة تجاري متكامل">
-    <meta name="twitter:description" content="نظام إدارة تجاري شامل في تونس. برنامج POS متكامل لإدارة المخزون والفواتير">
-    <meta name="twitter:image" content="https://simplexgestion.tn/img/logo.png">
-
-    <!-- Meta Pixel Code -->
-    <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '768128085832071');
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=768128085832071&ev=PageView&noscript=1"
-    /></noscript>
-    <!-- End Meta Pixel Code -->
-
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Simplex Gestion",
-        "description": "نظام إدارة تجاري شامل مع نقاط البيع (POS) لجميع أنواع التجارة في تونس",
-        "url": "https://simplexgestion.tn",
-        "logo": "https://simplexgestion.tn/img/logo.png",
-        "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "TN",
-            "addressRegion": "Tunisia"
-        },
-        "telephone": "+21624327623",
-        "sameAs": [
-            "https://www.facebook.com/simplexgestion",
-            "https://www.instagram.com/simplexgestion"
-        ],
-        "offers": {
-            "@type": "Offer",
-            "name": "نظام إدارة تجاري شامل",
-            "description": "برنامج POS متكامل لإدارة المخزون والفواتير",
-            "price": "90",
-            "priceCurrency": "DT",
-            "priceSpecification": {
-                "@type": "UnitPriceSpecification",
-                "price": "90",
-                "priceCurrency": "DT",
-                "unitText": "شهري"
-            }
-        },
-        "serviceType": "Business Management Software",
-        "areaServed": "Tunisia"
-    }
-    </script>
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Simplex Gestion",
-        "description": "برنامج إدارة تجاري متكامل مع نظام POS",
-        "url": "https://simplexgestion.tn",
-        "applicationCategory": "BusinessApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {
-            "@type": "Offer",
-            "price": "90",
-            "priceCurrency": "DT"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5",
-            "ratingCount": "100"
-        }
-    }
-    </script>
-
+    <!--[if lt IE 10]>
     <style>
-        :root {
-            --primary-color: #2948ff;
-            --secondary-color: #6c7ae0;
-            --accent-color: #ff6b35;
-            --success-color: #28a745;
-            --dark-color: #1a202c;
-            --light-color: #f8f9fa;
-            --gradient-primary: linear-gradient(135deg, #2948ff 0%, #6c7ae0 100%);
-            --gradient-secondary: linear-gradient(135deg, #ff6b35 0%, #ff8a5b 100%);
-            --shadow-soft: 0 10px 30px rgba(41, 72, 255, 0.1);
-            --shadow-hover: 0 15px 40px rgba(41, 72, 255, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
-            overflow-x: hidden;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--light-color);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 10px;
-        }
-
-        /* Navbar */
-        .navbar-area {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: var(--shadow-soft);
-            position: relative;
+        .outdated-browser-warning {
+            background: #f59e0b;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            z-index: 1000;
-            transition: all 0.3s ease;
-            max-width: 100%;
+            z-index: 99999;
+        }
+    </style>
+    <![endif]-->
+
+    <!-- Primary Meta Tags -->
+    <title>Simplex Gestion - Gestion Commerciale Tunisie | Facturation, Stock & POS 2026</title>
+    <meta name="title" content="Simplex Gestion - Gestion Commerciale Tunisie | Facturation, Stock & POS 2026">
+    <meta name="description" content="Logiciel de gestion commerciale #1 en Tunisie. Gérez facturation, stock, point de vente (POS), achats avec conformité fiscale (retenue à la source, TVA). Essai gratuit. Support 24/7.">
+    <meta name="keywords" content="logiciel gestion tunisie, gestion commerciale tunisie, logiciel facturation tunisie, gestion stock tunisie, pos tunisie, point de vente tunisie, logiciel commercial tunisie, facturation électronique tunisie, gestion entreprise tunisie, logiciel comptabilité tunisie">
+    <meta name="author" content="Simplex Gestion">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://www.simplexgestion.tn/">
+
+    <!-- Language and Region -->
+    <meta name="language" content="French">
+    <meta name="geo.region" content="TN">
+    <meta name="geo.placename" content="Tunisia">
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.simplexgestion.tn/">
+    <meta property="og:title" content="Simplex Gestion - Logiciel Gestion Commerciale #1 en Tunisie | Facturation, Stock & POS">
+    <meta property="og:description" content="Logiciel de gestion commerciale tout-en-un pour entreprises tunisiennes. Facturation, Stock, POS, Achats et Conformité Fiscale. Essai gratuit - 3 DT/jour.">
+    <meta property="og:image" content="https://www.simplexgestion.tn/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_TN">
+    <meta property="og:site_name" content="Simplex Gestion">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.simplexgestion.tn/">
+    <meta name="twitter:title" content="Simplex Gestion - Logiciel Gestion Commerciale #1 en Tunisie">
+    <meta name="twitter:description" content="Logiciel de gestion commerciale tout-en-un. Facturation, Stock, POS. Essai gratuit - Support 24/7.">
+    <meta name="twitter:image" content="https://www.simplexgestion.tn/images/twitter-card.jpg">
+
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <!-- DNS Prefetch & Preconnect for Performance -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+            n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+            if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+            n.queue=[];t=b.createElement(e);t.async=!0;
+            t.src=v;s=b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t,s)}(window, document,'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '768128085832071');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+                   src="https://www.facebook.com/tr?id=768128085832071&ev=PageView&noscript=1"
+        /></noscript>
+    <!-- End Meta Pixel Code -->
+
+    <!-- JSON-LD Structured Data - Organization -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Simplex Gestion",
+          "url": "https://www.simplexgestion.tn",
+          "logo": "https://www.simplexgestion.tn/logo.png",
+          "description": "Logiciel de gestion commerciale pour entreprises tunisiennes",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "TN",
+            "addressRegion": "Tunis"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+216-24-327-623",
+            "contactType": "Customer Service",
+            "areaServed": "TN",
+            "availableLanguage": ["French", "Arabic"]
+          },
+          "sameAs": [
+            "https://www.facebook.com/simplexgestion",
+            "https://www.instagram.com/simplexgestion",
+            "https://www.tiktok.com/@simplexgestion"
+          ]
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data - SoftwareApplication -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "SoftwareApplication",
+          "name": "Simplex Gestion",
+          "operatingSystem": "Web, Windows, macOS",
+          "applicationCategory": "BusinessApplication",
+          "description": "Logiciel complet pour la gestion commerciale en Tunisie - Facturation, Stock, POS, Achats",
+          "offers": {
+            "@type": "Offer",
+            "price": "3",
+            "priceCurrency": "TND",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "3",
+              "priceCurrency": "TND",
+              "unitText": "DAY"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "250"
+          },
+          "featureList": "Facturation, Gestion Stock, Point de Vente (POS), Achats, Conformité Fiscale, Rapports"
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data - LocalBusiness -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          "name": "Simplex Gestion",
+          "image": "https://www.simplexgestion.tn/logo.png",
+          "@id": "https://www.simplexgestion.tn",
+          "url": "https://www.simplexgestion.tn",
+          "telephone": "+216-24-327-623",
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "TN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 36.8065,
+            "longitude": 10.1815
+          },
+          "openingHoursSpecification": {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "00:00",
+            "closes": "23:59"
+          }
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data - FAQPage -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Puis-je tester Simplex Gestion avant de payer ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui, absolument. Vous pouvez demander une période d'essai gratuite. C'est l'occasion idéale pour découvrir toutes les fonctionnalités et valider que le logiciel correspond à vos besoins, sans aucun engagement."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Mes données sont-elles en sécurité avec Simplex Gestion ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui. Nous utilisons des serveurs hautement sécurisés avec chiffrement des données et effectuons des sauvegardes quotidiennes automatiques."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Puis-je récupérer mes anciennes données ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui, nous proposons un module d'importation Excel. Vous pouvez importer votre liste de clients, fournisseurs et votre catalogue articles (avec stock initial) en quelques minutes."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Puis-je annuler mon abonnement à tout moment ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui, en toute liberté. Nos offres sont sans engagement de durée. Vous pouvez arrêter votre abonnement quand vous le souhaitez, sans frais cachés ni pénalités."
+              }
+            }
+          ]
+        }
+    </script>
+
+    <!-- JSON-LD Structured Data - BreadcrumbList -->
+    <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Accueil",
+              "item": "https://www.simplexgestion.tn/"
+            }
+          ]
+        }
+    </script>
+
+
+    <style>
+        :root {
+            --primary: #2948ff;
+            --primary-dark: #1a35cc;
+            --secondary: #333d50;
+            --accent: #ff6b35;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gradient: linear-gradient(135deg, #2948ff 0%, #6366f1 100%);
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        html {
             overflow-x: hidden;
         }
 
-        .navbar-brand img {
-            transition: transform 0.3s ease;
+        body {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #0f172a; /* Fallback */
+            color: var(--dark);
+            background-color: #fff;
+            line-height: 1.7;
+            overflow-x: hidden;
+            width: 100%;
+            max-width: 100vw;
         }
 
-        .navbar-brand:hover img {
-            transform: scale(1.1);
+        /* --- UI COMPONENTS --- */
+
+        /* Navbar */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95); /* Fallback */
+            background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(12px); /* Safari */
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 0;
+            transition: all 0.3s;
+            width: 100%;
         }
 
-        .btn-login {
-            background: var(--gradient-primary);
-            color: white;
+        .navbar .container-fluid {
+            width: 100%;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            color: #333d50; /* Fallback */
+            color: var(--secondary);
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #2948ff; /* Fallback */
+            color: var(--primary);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: #2948ff; /* Fallback */
+            background: var(--primary);
             border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            box-shadow: 0 4px 14px rgba(41, 72, 255, 0.3);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-primary:hover {
+            background: #1a35cc; /* Fallback */
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(41, 72, 255, 0.4);
+        }
+
+        .btn-outline {
+            border: 2px solid #e2e8f0;
+            color: #0f172a; /* Fallback */
+            color: var(--dark);
             padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-soft);
-            margin-left: 15px;
-        }
-
-        .btn-login:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-            color: white;
-        }
-
-        .btn-register {
+            border-radius: 12px;
+            font-weight: 700;
             background: transparent;
-            color: var(--primary-color);
-            border: 2px solid var(--primary-color);
-            padding: 10px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            transition: all 0.3s;
         }
 
-        .btn-register:hover {
-            background: var(--primary-color);
+        .btn-outline:hover {
+            border-color: #0f172a; /* Fallback */
+            border-color: var(--dark);
+            background: #0f172a; /* Fallback */
+            background: var(--dark);
             color: white;
-            transform: translateY(-2px);
         }
 
-        /* Hero Section */
+        /* --- HERO SECTION --- */
         .hero-section {
-            background: var(--gradient-primary);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
+            padding: 100px 0 100px;
+            background: radial-gradient(circle at 100% 0%, #eff4ff 0%, #ffffff 50%);
             position: relative;
             overflow: hidden;
         }
 
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="500" cy="500" r="400" fill="rgba(255,255,255,0.1)"/><circle cx="300" cy="300" r="200" fill="rgba(255,255,255,0.05)"/><circle cx="700" cy="700" r="150" fill="rgba(255,255,255,0.03)"/></svg>');
-            animation: float 20s ease-in-out infinite;
+        .hero-badge {
+            background: rgba(41, 72, 255, 0.1);
+            color: #2948ff; /* Fallback */
+            color: var(--primary);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
+            display: inline-flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 1.5rem;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            color: white;
-            text-align: center;
-        }
-
-        .hero-content h1 {
+        .hero-title {
             font-size: 4rem;
             font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
             margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: #1e293b; /* Fallback for browsers without gradient text */
+            background: -webkit-linear-gradient(315deg, #1e293b 0%, #334155 74%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .hero-content p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
+        /* Fallback for browsers that don't support background-clip: text */
+        @supports not (-webkit-background-clip: text) {
+            .hero-title {
+                background: none;
+                color: #1e293b;
+            }
+        }
+
+        .hero-lead {
+            font-size: 1.25rem;
+            color: #333d50; /* Fallback */
+            color: var(--secondary);
+            margin-bottom: 2.5rem;
             max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
-        .hero-btn {
-            background: var(--gradient-secondary);
+        /* --- STATS & TRUST --- */
+        .stats-strip {
+            background: #0f172a; /* Fallback */
+            background: var(--dark);
+            padding: 60px 0;
             color: white;
-            border: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-size: 1.2rem;
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+            border-radius: 0;
+        }
+
+        .stat-item h3 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ff6b35; /* Fallback */
+            color: var(--accent);
+            margin-bottom: 0;
+        }
+
+        .stat-item p {
+            color: #94a3b8;
+            font-size: 0.9rem;
             font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
-            display: inline-block;
-        }
-
-        .hero-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 53, 0.4);
-            color: white;
-        }
-
-        /* Features Section */
-        .features-section {
-            padding: 120px 0;
-            background: var(--light-color);
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 80px;
-        }
-
-        .section-title .sub-title {
-            color: var(--primary-color);
-            font-weight: 600;
-            font-size: 1.1rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        /* --- FEATURE BLOCKS (Deep Dive) --- */
+        .feature-block {
+            padding: 100px 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .feature-block:last-child {
+            border-bottom: none;
+        }
+
+        .feature-tag {
+            color: #2948ff; /* Fallback */
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
             display: block;
         }
 
-        .section-title h2 {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--dark-color);
-            margin-bottom: 20px;
+        .feature-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: #0f172a; /* Fallback */
+            color: var(--dark);
         }
 
+        .feature-list li {
+            margin-bottom: 15px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: start;
+            -ms-flex-align: start;
+            align-items: start;
+            font-size: 1.05rem;
+            color: #333d50; /* Fallback */
+            color: var(--secondary);
+        }
+
+        .feature-list i {
+            color: #10b981; /* Fallback */
+            color: var(--success);
+            font-size: 1.4rem;
+            margin-right: 12px;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            margin-top: 3px;
+        }
+
+        /* --- CARDS & GRID --- */
+        .module-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 40px;
+            height: 100%;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); /* Fallback */
+            box-shadow: var(--shadow-lg);
+            border-color: #2948ff; /* Fallback */
+            border-color: var(--primary);
+        }
+
+        .module-icon {
+            width: 64px;
+            height: 64px;
+            background: #eff6ff;
+            color: #2948ff; /* Fallback */
+            color: var(--primary);
+            border-radius: 16px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+
+        /* --- COMPLIANCE SECTION --- */
+        .compliance-section {
+            background: #f8fafc;
+            padding: 100px 0;
+        }
+
+        .compliance-check {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Fallback */
+            box-shadow: var(--shadow-sm);
+            font-weight: 600;
+        }
+
+        .compliance-check i {
+            color: #2948ff; /* Fallback */
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        /* --- STEPS / PROCESS --- */
+        .step-number {
+            font-size: 4rem;
+            font-weight: 900;
+            color: #e2e8f0;
+            line-height: 1;
+            margin-bottom: 1rem;
+        }
+
+        /* --- PRICING --- */
+        .pricing-table {
+            background: var(--dark);
+            color: white;
+            border-radius: 30px;
+            padding: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-table::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: var(--primary);
+            filter: blur(100px);
+            opacity: 0.3;
+            border-radius: 50%;
+        }
+
+        /* --- FAQ --- */
+        .accordion-item {
+            border: none;
+            margin-bottom: 15px;
+            background: transparent;
+        }
+
+        .accordion-button {
+            background: white !important;
+            padding: 25px;
+            border-radius: 16px !important;
+            font-weight: 700;
+            color: var(--dark);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+
+        .accordion-button:not(.collapsed) {
+            color: var(--primary);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .accordion-body {
+            background: white;
+            border-radius: 0 0 16px 16px;
+            padding: 25px;
+            color: var(--secondary);
+            margin-top: -10px;
+        }
+
+        .compliance-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+
+        .compliance-badge {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* --- SECTION STYLES --- */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section.bg-light {
+            background-color: #f8fafc;
+        }
+
+        .section-title {
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .section-title p {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* --- FEATURE CARD --- */
         .feature-card {
             background: white;
+            border: 1px solid #e2e8f0;
             border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            box-shadow: var(--shadow-soft);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px;
             height: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
         }
 
         .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 30px;
-            font-size: 2rem;
-            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary);
         }
 
         .feature-card h3 {
             font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--dark-color);
+            font-weight: 700;
+            color: var(--dark);
         }
 
         .feature-card p {
-            color: #666;
-            line-height: 1.8;
-            margin-bottom: 10px;
+            color: var(--secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
 
-        /* Statistics Section */
-        .stats-section {
-            padding: 100px 0;
-            background: var(--gradient-primary);
-            color: white;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 30px;
-        }
-
-        .stat-number {
-            font-size: 3.5rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .stat-label {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        /* How It Works Section */
-        .how-it-works {
-            padding: 120px 0;
-            background: white;
-        }
-
-        .step-card {
-            text-align: center;
-            padding: 40px 20px;
-            border-radius: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .step-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .step-number {
+        .feature-card .feature-icon {
             width: 60px;
             height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            color: var(--primary);
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 30px;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-        }
-
-        .step-card h4 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--dark-color);
-        }
-
-        .step-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Testimonials Section */
-        .testimonials-section {
-            padding: 120px 0;
-            background: var(--light-color);
-        }
-
-        .testimonial-card {
-            background: white;
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: var(--shadow-soft);
-            text-align: center;
-            transition: all 0.3s ease;
-            height: 100%;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .testimonial-avatar {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            margin: 0 auto 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .testimonial-text {
-            font-style: italic;
-            color: #666;
+            font-size: 1.8rem;
             margin-bottom: 20px;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .testimonial-author {
-            font-weight: 600;
-            color: var(--dark-color);
-        }
-
-        .testimonial-role {
-            color: var(--primary-color);
-            font-size: 0.9rem;
-        }
-
-        /* Pricing Section */
-        .pricing-section {
-            padding: 120px 0;
-            background: white;
-        }
-
-        .pricing-card {
-            background: white;
-            border-radius: 20px;
-            padding: 50px 40px;
-            text-align: center;
-            box-shadow: var(--shadow-soft);
-            border: 3px solid transparent;
             transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, var(--primary) 0%, #6366f1 100%);
+            color: white;
+        }
+
+        .feature-card .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-card .feature-list li {
+            padding: 8px 0;
+            color: var(--secondary);
+            font-size: 0.95rem;
             position: relative;
-            overflow: hidden;
+            padding-left: 25px;
         }
 
-        .pricing-card::before {
-            content: '';
+        .feature-card .feature-list li::before {
+            content: '✓';
             position: absolute;
-            top: 0;
             left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--gradient-primary);
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary-color);
-        }
-
-        .pricing-badge {
-            background: var(--gradient-secondary);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            display: inline-block;
-        }
-
-        .pricing-amount {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .pricing-period {
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        /* FAQ Section */
-        .faq-section {
-            padding: 120px 0;
-            background: var(--light-color);
-        }
-
-        .faq-item {
-            background: white;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow-soft);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .faq-item:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .faq-question {
-            background: var(--gradient-primary);
-            color: white;
-            padding: 25px 30px;
-            font-weight: 600;
+            color: var(--success);
+            font-weight: bold;
             font-size: 1.1rem;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            text-align: right;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
         }
 
-        .faq-answer {
-            padding: 30px;
-            color: #666;
-            line-height: 1.8;
-            background: white;
+        /* Responsiveness */
+        @media (max-width: 991px) {
+            .hero-title { font-size: 2.8rem; }
+            .feature-block { text-align: center; }
+            .feature-list li { justify-content: flex-start; text-align: left; }
+            .pricing-table { padding: 40px 20px; }
+            .section-title h2 { font-size: 2rem; }
+            .feature-card { padding: 25px; }
         }
 
-        /* Contact Section */
-        .contact-section {
-            padding: 120px 0;
-            background: var(--gradient-primary);
-            color: white;
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-
-        .contact-info {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 40px;
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: 20px;
-            font-size: 1.2rem;
-        }
-
-        .contact-text a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .contact-text a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Footer */
-        .footer-section {
-            background: var(--dark-color);
-            color: white;
-            padding: 80px 0 30px;
-        }
-
-        .footer-brand {
-            margin-bottom: 30px;
-        }
-
-        .footer-brand img {
-            margin-bottom: 20px;
-        }
-
-        .footer-text {
-            color: #ccc;
-            line-height: 1.8;
-            margin-bottom: 30px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-        }
-
-        .social-link {
-            width: 45px;
-            height: 45px;
-            background: var(--primary-color);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-link:hover {
-            background: var(--accent-color);
-            transform: translateY(-3px);
-            color: white;
-        }
-
-        .footer-bottom {
-            border-top: 1px solid #333;
-            padding-top: 30px;
-            margin-top: 50px;
-            text-align: center;
-            color: #ccc;
-        }
-
-        /* Responsive Design */
         @media (max-width: 768px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
+            .navbar .container-fluid {
+                padding-left: 1rem;
+                padding-right: 1rem;
             }
 
-            .hero-content p {
-                font-size: 1.1rem;
+            .navbar .d-flex.justify-content-between {
+                flex-direction: column;
+                gap: 1rem;
             }
 
-            .section-title h2 {
-                font-size: 2rem;
+            .navbar .d-flex.align-items-center {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
             }
 
-            .stat-number {
-                font-size: 2.5rem;
+            .navbar .btn {
+                font-size: 0.875rem;
+                padding: 0.5rem 1rem;
+                margin: 0 0.25rem !important;
             }
 
-            .pricing-amount {
-                font-size: 2.5rem;
+            .navbar-brand {
+                font-size: 1.25rem;
             }
 
-            .navbar-area {
-                padding: 0 10px;
+            .navbar .me-5 {
+                margin-right: 0.5rem !important;
             }
-            
-            .navbar-area .container-fluid {
-                padding: 10px 15px;
-                margin: 0;
+
+            .navbar svg {
+                width: 30px !important;
+                height: 25px !important;
+            }
+
+            .navbar img {
+                width: 30px !important;
+                height: 30px !important;
+            }
+
+            /* Prevent horizontal overflow */
+            .container, .container-fluid {
+                overflow-x: hidden;
                 max-width: 100%;
             }
 
-            .hero-section {
-                padding: 100px 0 50px;
+            .row {
+                margin-left: 0;
+                margin-right: 0;
             }
 
-            .features-section,
-            .how-it-works,
-            .testimonials-section,
-            .pricing-section,
-            .faq-section,
-            .contact-section {
-                padding: 80px 0;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero-content h1 {
-                font-size: 2rem;
+            /* Hide floating stat cards on mobile that cause overflow */
+            .position-absolute.top-0.end-0,
+            .position-absolute.bottom-0.start-0 {
+                display: none !important;
             }
 
-            .section-title h2 {
-                font-size: 1.8rem;
-            }
-
-            .feature-card,
-            .testimonial-card,
-            .pricing-card {
-                padding: 30px 20px;
-            }
-
-            .btn-login,
-            .btn-register {
-                padding: 10px 20px;
-                font-size: 0.9rem;
+            .hero-section .position-relative {
+                overflow: visible;
             }
         }
 
-        /* Animation Classes */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
-        }
+        @media (max-width: 480px) {
+            .navbar .container-fluid {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
 
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+            .navbar .py-3 {
+                padding-top: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
 
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s ease;
-        }
+            .navbar .btn {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.75rem;
+                white-space: nowrap;
+            }
 
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+            .navbar .btn i {
+                display: none;
+            }
 
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s ease;
-        }
+            .navbar-brand {
+                font-size: 1rem;
+            }
 
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
+            .navbar svg {
+                width: 25px !important;
+                height: 20px !important;
+            }
+
+            .navbar img {
+                width: 25px !important;
+                height: 25px !important;
+            }
         }
     </style>
 </head>
-<body>
-    <!-- Navbar -->
-    <nav class="navbar-area">
-        <div class="container-fluid">
-            <div class="d-flex justify-content-between align-items-center py-3">
-                <a href="/" class="navbar-brand">
-                    <img src="img/logo.png" alt="Simplex Gestion Logo" width="40" height="40">
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
+
+<nav class="navbar fixed-top">
+    <div class="container-fluid">
+        <div class="d-flex justify-content-between align-items-center w-100 py-1 py-md-3 flex-wrap">
+            <div class="d-flex align-items-center order-md-2 order-1 mb-2 mb-md-0">
+                <span class="me-3 me-md-5">
+                    <a href="/ar" >
+                     <svg width="40px" height="35px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#E70013" d="M32 5H4a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h28a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4z"></path><circle fill="#FFF" cx="18" cy="18" r="6.5"></circle><path fill="#E70013" d="M15.4 18a3.9 3.9 0 0 1 6.541-2.869a4.875 4.875 0 1 0 0 5.738A3.9 3.9 0 0 1 15.4 18z"></path><path fill="#E70013" d="M19.645 16.937l-1.249-1.719v2.125L16.375 18l2.021.657v2.125l1.249-1.719l2.021.656L20.417 18l1.249-1.719z"></path></svg>
+                    </a>
+                </span>
+                <span class="navbar-brand m-0" style="align-self: end"> Simplex<span class="text-primary">.</span></span>
+                <a href="#" class="navbar-brand">
+                    <img src="img/logo.png" alt="Logo Simplex Gestion Tunisie - Logiciel Gestion commerciale" width="40" height="40">
                 </a>
-                <div class="d-flex align-items-center">
-                    <a href="{{ route('login') }}" class="btn-login">
-                        <i class='bx bx-log-in'></i>
-                        تسجيل الدخول
+            </div>
+
+            <div class="d-flex align-items-center order-md-1 order-2">
+                <a href="{{ route('business.getRegister') }}" class="btn btn-outline" style="margin: 0 5px">
+                    Inscription
+                    <i class='bx bx-plus'></i>
+                </a>
+                <a href="{{ route('login') }}" class="btn btn-primary" style="margin: 0 5px">
+                    <i class='bx bx-log-in'></i>
+                    Se connecter
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+
+<section class="hero-section" id="accueil">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7" data-aos="fade-right">
+                <h1 class="hero-title">
+                    Solution de Gestion Commerciale pour les Grossistes, Distributeurs et PME.<br>
+                </h1>
+                <p class="hero-lead">
+                    Synchronisez vos stocks, vos operations et votre facturation en temps réel.
+                    <strong>100% Conforme</strong> à la législation tunisienne (TVA, Retenue à la source TEJ).
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <a href="#contact" class="btn btn-primary btn-md">
+                        <i class='bx bx-rocket me-2'></i> Commencer Maintenant
                     </a>
-                    <a href="{{ route('business.getRegister') }}" class="btn-register">
-                        إنشاء حساب
-                        <i class='bx bx-plus'></i>
-                    </a>
+
+                </div>
+                <div class="mt-4 text-muted small">
+                    <i class='bx bx-check-circle text-success'></i> Configuration rapide
+                    <span class="mx-2">•</span>
+                    <i class='bx bx-check-circle text-success'></i> Données sécurisées
+                    <span class="mx-2">•</span>
+                    <i class='bx bx-check-circle text-success'></i> Support 7j/7
+                </div>
+            </div>
+            <div class="col-lg-5 mt-5 mt-lg-0" data-aos="fade-left">
+                <div class="position-relative">
+                    <div class="bg-white p-2 rounded-4 shadow-lg border">
+                        <img src="img/Screenshot_simplex.png" alt="Tableau de bord Simplex Gestion - Suivi Chiffre d'affaire et Stock" class="img-fluid rounded-3">
+                    </div>
+                    <div class="position-absolute top-0 end-0 translate-middle-y bg-white p-3 rounded-4 shadow-lg border d-none d-md-block" style="margin-top: -10px; margin-right: -20px;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-success bg-opacity-10 p-2 rounded-circle text-success"><i class='bx bx-trending-up fs-4'></i></div>
+                            <div>
+                                <small class="text-muted d-block">Chiffre d'affaire du jour</small>
+                                <span class="fw-bold">1,250DT</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="position-absolute bottom-0 start-0 translate-middle-x bg-white p-3 rounded-4 shadow-lg border d-none d-md-block" style="margin-bottom: -70px; margin-left: 80px;">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-warning bg-opacity-10 p-2 rounded-circle text-warning"><i class='bx bx-bell fs-4'></i></div>
+                            <div>
+                                <small class="text-muted d-block">Alerte Stock</small>
+                                <span class="fw-bold text-danger">3 articles critiques</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </nav>
+    </div>
+</section>
 
-    <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
+<div class="stats-strip">
+    <div class="container">
+        <div class="section-title text-center">
+            <h3 style="font-size: 2.2rem;">Conçue pour les entreprises tunisiennes</h3>
+            <p class="w-50 mx-auto text-white">Simplex Gestion intègre toutes les spécificités fiscales tunisiennes.</p>
+        </div>
+
+        <div class="compliance-badges">
+            <span class="compliance-badge"><i class="bx bx-check"></i> TVA Multiple (7%, 13%, 19%)</span>
+            <span class="compliance-badge"><i class="bx bx-check"></i> Retenue à la Source</span>
+            <span class="compliance-badge"><i class="bx bx-check"></i> Timbre Fiscal</span>
+            <span class="compliance-badge"><i class="bx bx-check"></i> FODEC</span>
+            <span class="compliance-badge"><i class="bx bx-check"></i> Numérotation Séquentielle</span>
+        </div>
+
+
+    </div>
+</div>
+
+<section class="py-5 bg-light" id="cloud">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">TECHNOLOGIE</span>
+            <h2 class="fw-800 display-6">Pourquoi passer au Cloud ?</h2>
+            <p class="text-muted">Accédez depuis n'importe où, n'importe quand, sécurité renforcée. Sans soucis technique.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-4 text-center">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100">
+                    <div class="mb-3 text-primary fs-1"><i class="bx bx-server"></i></div>
+                    <h4 class="fw-bold">Zéro Installation</h4>
+                    <p class="text-secondary small">Aucun materiél à acheter. Aucun technicien à appeler pour une panne. Connectez-vous simplement.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100">
+                    <div class="mb-3 text-primary fs-1"><i class="bx bx-lock-alt"></i></div>
+                    <h4 class="fw-bold">Sécurité</h4>
+                    <p class="text-secondary small">Vos données sont cryptées et sauvegardées sur des serveurs sécurisés.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="bg-white p-4 rounded-4 shadow-sm h-100">
+                    <div class="mb-3 text-primary fs-1"><i class="bx bx-refresh"></i></div>
+                    <h4 class="fw-bold">Toujours à Jour</h4>
+                    <p class="text-secondary small">Profitez des nouvelles fonctionnalités et des mises à jour instantanément, sans frais.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="feature-block" id="ventes">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2" data-aos="fade-left">
+                <img src="img/5a48e9c5e6ac71dd20df009ebd73fe69.jpg" loading="lazy" alt="Logiciel de caisse POS cloud sur tablette" class="img-fluid rounded-4 shadow-sm">
+            </div>
+            <div class="col-lg-6 order-lg-1" data-aos="fade-right">
+                <h2 class="feature-title">Vendez au comptoir ou en déplacement.</h2>
+                <p class="lead text-secondary mb-4">
+                    Vos commerciaux sont sur le terrain ? Vos vendeurs sont en boutique ? Simplex synchronise tout en temps réel.
+                </p>
+                <ul class="list-unstyled feature-list">
+                    <li>
+                        <i class='bx bxs-check-circle'></i>
+                        <div>
+                            <strong>Synchronisation Temps Réel</strong>
+                            <p class="small mb-0">Une vente faite à Sfax est visible instantanément à Tunis. Plus besoin d'attendre le soir.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class='bx bxs-check-circle'></i>
+                        <div>
+                            <strong>Accessible sur Tablette & Mobile & ordinateur</strong>
+                            <p class="small mb-0">Faites des devis directement chez le client depuis votre smartphone. Validez les commandes à distance.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class='bx bxs-check-circle'></i>
+                        <div>
+                            <strong>Transformation Devis → Facture en 1 Clic</strong>
+                            <p class="small mb-0">Ne ressaisissez jamais une information. Convertissez un devis accepté en facture instantanément.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class='bx bxs-check-circle'></i>
+                        <div>
+                            <strong>Multi-Tarifs & Grilles de Prix</strong>
+                            <p class="small mb-0">Prix Gros, Demi-Gros, Détail. Assignez automatiquement le bon tarif selon la catégorie du client.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="feature-block bg-light" id="stock">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6" data-aos="fade-right">
+                <img src="img/bb3d548ae26c998d987766d20f5a8d11.jpg" loading="lazy" alt="Gestion de Stock et Inventaire Tunisie" class="img-fluid rounded-4 shadow-sm">
+            </div>
+            <div class="col-lg-6" data-aos="fade-left">
+                <h2 class="feature-title">Un stock juste, tout le temps.</h2>
+                <p class="lead text-secondary mb-4">
+                    Fini le stock fantôme et les ruptures surprises. Ayez une vision claire de ce qui entre et ce qui sort.
+                </p>
+                <ul class="list-unstyled feature-list">
+                    <li>
+                        <i class='bx bxs-bell-ring'></i>
+                        <div>
+                            <strong>Alertes de Réapprovisionnement</strong>
+                            <p class="small mb-0">Définissez des seuils minimums. Le logiciel vous prévient avant la rupture de stock.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class='bx bxs-buildings'></i>
+                        <div>
+                            <strong>Multi-Dépôts & Transferts</strong>
+                            <p class="small mb-0">Gérez plusieurs magasins ou entrepôts. Effectuez des bons de transfert inter-agences suivis.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class='bx bxs-layer'></i>
+                        <div>
+                            <strong>Articles Composés & pack</strong>
+                            <p class="small mb-0">Assemblez plusieurs produits en un seul "pack". Le stock des composants est déduit automatiquement à la vente.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class='bx bxs-barcode'></i>
+                        <div>
+                            <strong>Inventaire & Étiquetage</strong>
+                            <p class="small mb-0">Générez et imprimez vos propres codes-barres. Réalisez des inventaires partiels ou globaux facilement.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="feature-block" id="legal">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2" data-aos="fade-left">
+                <img src="img/tax_lock.jpg" loading="lazy" alt="Conformité Fiscale Tunisie Retenue à la source" class="img-fluid rounded-4 shadow-sm">
+            </div>
+            <div class="col-lg-6 order-lg-1" data-aos="fade-right">
+                <h2 class="feature-title">Dormez tranquille, vous êtes conforme.</h2>
+                <p class="lead text-secondary mb-4">
+                    La législation tunisienne est complexe. Simplex Gestion l'automatise pour vous éviter les redressements.
+                </p>
+                <ul class="list-unstyled feature-list">
+                    <li>
+                        <i class='bx bxs-shield'></i>
+                        <div>
+                            <strong>Timbre & TVA Automatiques</strong>
+                            <p class="small mb-0">Calcul automatique du Timbre fiscale et application des taux de TVA selon l'article.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class='bx bxs-file-pdf'></i>
+                        <div>
+                            <strong>Retenue à la Source & TEJ </strong>
+                            <p class="small mb-0">
+                                Générez votre fichier de déclaration RS en un clic, prêt à être déposé sur la plateforme TEJ.
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class='bx bxs-user-account'></i>
+                        <div>
+                            <strong>Gestion des Crédits Clients</strong>
+                            <p class="small mb-0">Plafonnez l'encours de vos clients. Bloquez la facturation si le seuil de crédit est dépassé.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i class='bx bxs-report'></i>
+                        <div>
+                            <strong>Invitez votre comptable</strong>
+                            <p class="small mb-0">Créez un compte gratuit pour votre comptable. Définissez ses permissions. Il récupère ses documents sans vous déranger.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section bg-light">
+    <div class="container">
+        <div class="section-title text-center">
+            <h2>Une Gestion à 360°</h2>
+            <p class="text-muted">Des outils puissants pour piloter votre activité.</p>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="feature-card">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;"><i class="bx bx-cart"></i></div>
+                        <h3 class="mb-0">Gestion des Ventes</h3>
+                    </div>
+                    <p>Du devis à l'encaissement, fluidifiez votre cycle de vente. Idéal pour la vente au comptoir ou en gros.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="feature-list mt-0">
+                                <li>6 Modèles du facture personnalisables</li>
+                                <li>Impression tickets/factures instantanée</li>
+                                <li>Grilles tarifaires par client</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="feature-list mt-0">
+                                <li>Suivi des règlements temps réel</li>
+                                <li>Gestion des impayés &amp; plafonds</li>
+                                <li>Gestion des soldes et promotion saisonnières</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="feature-card">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;"><i class="bx bx-package"></i></div>
+                        <h3 class="mb-0">Stock &amp; Approvisionnement</h3>
+                    </div>
+                    <p>Ne soyez plus jamais en rupture. Une gestion proactive pour assurer la continuité de votre activité.</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="feature-list mt-0">
+                                <li>Alertes de réapprovisionnement</li>
+                                <li>Multi-dépôts &amp; transferts</li>
+                                <li>Traçabilité complète des mouvements</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="feature-list mt-0">
+                                <li>Articles composés &amp; pack</li>
+                                <li>Inventaire physique &amp; global</li>
+                                <li>Valorisation CMP (Coût Moyen Pondéré)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="feature-card">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                            <i class="bx bx-purchase-tag"></i></div>
+                        <h3 class="mb-0">Achats &amp; Dépenses</h3>
+                    </div>
+                    <p>Maîtrisez vos coûts et gérez vos relations fournisseurs.</p>
+                    <ul class="feature-list">
+                        <li>Suivi commandes fournisseurs &amp; réceptions</li>
+                        <li>Historique transactions complet</li>
+                        <li>Gestion des dépenses &amp; notes de frais</li>
+                        <li>Gestion des Retours & Avoirs</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="feature-card">
+                    <div class="d-flex align-items-center mb-4">
+                        <div class="feature-icon mb-0 me-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                            <i class="bx bx-stats"></i>
+                        </div>
+                        <h3 class="mb-0">Statistiques & Décisions</h3>
+                    </div>
+                    <p>Des rapports clairs pour savoir exactement où vous gagnez de l'argent.</p>
+                    <ul class="feature-list">
+                        <li>Profit & Perte: Suivi du bénéfice net en temps réel</li>
+                        <li>Rapport Caisse: Contrôle des espèces et de la clôture</li>
+                        <li>Identifiez vos produits les plus rentables</li>
+                        <li>uivi des ventes et commissions</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="py-5" id="contact">
+    <div class="container">
+        <div class="pricing-table text-center">
+            <h2 class="display-4 fw-bold mb-4">L'offre Tout-en-Un</h2>
+            <p class="lead text-white-50 mb-5">Tout ce dont vous avez besoin pour gérer votre entreprise, sans frais cachés.</p>
+
             <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="hero-content" data-aos="fade-up">
-                        <h1 style="margin-top:2rem">نظم تجارتك بكل بساطة</h1>
-
-                            <h2>⚡ شنوة مشكلتك اليوم؟</h2>
-                                  <p>
-                                  تعبت من متابعة كريدي الحرفاء و المزودين
-
-
-                                                                              <br>      ستوك يضيع وما تفهمش وين يمشي
-
-                                                                                 <br>        شبعة فاتورات  مزلت موش خالصة
-
-                                                                                <br>    شنية شريت و بيعت كل يوم
-
-                                                                                   <br> ما عندكش رؤية على الأرباح و الخسارة في الوقت الحاضر
-
-                                                                                  <br>  عقاب الليل و انتي مازلت تحاسب في الخدامة شنيا باعو
-
-                                                                                  <br>  ما تنجمش تسيّر برشا فروع مع بعضهم
-                   </p> <br>
-
-
-                        <a href="{{ route('business.getRegister') }}" class="hero-btn">
-                            الحل مع simplex gestion
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Statistics Section -->
-    <section class="stats-section">
-        <div class="container">
-            <div class="row">
-                 <div class="col-lg-3 col-md-6">
-                                   <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                                       <div class="stat-number">فاتورات</div>
-                                       <div class="stat-label">
-                                                                 <div class="feature-icon">
-                                                                 <i class='bx  bx-check-circle'  ></i>
-                                                             </div>
-                                   </div>
-                               </div>
-                               </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
-                        <div class="stat-number">ستوك</div>
-                        <div class="stat-label">
-                                                  <div class="feature-icon">
-                                                  <i class='bx  bx-check-circle'  ></i>
-                                              </div>
-                    </div>
-                </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
-                        <div class="stat-number">كريدي</div>
-                        <div class="stat-label">
-                            <div class="feature-icon">
-                            <i class='bx  bx-check-circle'  ></i>
-                        </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="stat-item" data-aos="fade-up" data-aos-delay="400">
-                        <div class="stat-number">حسابات</div>
-                            <div class="stat-label">
-                                                  <div class="feature-icon">
-                                                  <i class='bx  bx-check-circle'  ></i>
-                                              </div>
-                            </div>
-                        </div>
-
-                     </div>
-        </div>
-        </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <span class="sub-title">Simplex Gestion</span>
-                 <h2> كل شي في سيستام واحد !!</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="feature-icon">
-                            <i class='bx bx-package'></i>
-                        </div>
-                        <h3>إدارة المنتجات والمخزون</h3>
-                        <p>• إدارة المنتجات و النوعية بسهولة</p>
-                        <p>• تنبيهات ذكية لانخفاض المخزون أو انتهاء الصلاحية</p>
-                        <p>• تصنيف المنتجات حسب الفروع، الماركات، أو الفئات</p>
-                        <p>• إعداد أسعار مختلفة لنفس المنتج (جملة/تفصيل/عرض خاص)</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="feature-icon">
-                            <i class='bx bx-store'></i>
-                        </div>
-                        <h3>نقطة بيع (POS)</h3>
-                        <p>• شاشة بسيطة وسريعة للبيع</p>
-                        <p>• إنشاء وطباعة الفواتير فوراً</p>
-                        <p>• كل موظف عندو شاشة خاصة</p>
-                        <p>• أنواع دفع مختلفة </p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="feature-icon">
-                            <i class='bx bx-trending-up'></i>
-                        </div>
-                        <h3>إدارة المبيعات والمشتريات</h3>
-                        <p>• تتبع المبيعات والمشتريات بالتفصيل</p>
-                        <p>• إنشاء عروض وتخفيضات مخصصة</p>
-                        <p>• إدارة المرتجعات(retour)</p>
-                        <p>• تتبع النفقات حسب النوعية</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="feature-icon">
-                            <i class='bx bx-bar-chart-alt-2'></i>
-                        </div>
-                        <h3>التقارير والإحصائيات</h3>
-                        <p>• تقارير مفصلة على الأرباح و الخسارة</p>
-                        <p>• تقارير المعاملات التجارية</p>
-                        <p>• تقارير المخزون والمنتجات</p>
-                        <p>• تحليل المنتجات الأكثر مبيعاً</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
-                        <div class="feature-icon">
-                            <i class='bx bx-group'></i>
-                        </div>
-                        <h3>إدارة الحرفاء والموزدين</h3>
-                        <p>• قاعدة بيانات شاملة للحرفاء والموزدين</p>
-                        <p>• تسجيل معلومات الاتصال والعناوين</p>
-                        <p>• تتبع الحسابات و المعاملات التجارية</p>
-                        <p>• تقسيم الحرفاء حسب فئات</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
-                        <div class="feature-icon">
-                            <i class='bx bx-qr-scan'></i>
-                        </div>
-                        <h3>الباركود واللاصقات</h3>
-                        <p>• إنشاء وطباعة الباركود بسهولة</p>
-                        <p>QR code •</p>
-                        <p>• طباعة اللاصقات المخصصة</p>
-                        <p>• دعم طابعات الحرارية و العادية</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works Section -->
-    <section class="how-it-works">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <span class="sub-title">كيف يعمل النظام</span>
-                <h2>ثلاث خطوات بسيطة للبدء</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="step-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="step-number">1</div>
-                        <h4>سجل حسابك</h4>
-
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="step-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="step-number">2</div>
-                        <h4>أضف منتجاتك</h4>
-
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 mb-4">
-                    <div class="step-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="step-number">3</div>
-                        <h4>ابدأ البيع</h4>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Business Types Section -->
-    <section class="business-types-section" style="padding: 120px 0; background: white;">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <span class="sub-title">أنواع الأعمال المدعومة</span>
-                <h2>الحل المثالي لجميع أنواع التجارة</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="feature-icon">
-                            <i class='bx bx-store-alt'></i>
-                        </div>
-                        <h3>محلات التجزئة</h3>
-                        <p> محلات الملابس، الإلكترونيات،  مواد غذائية, النظارات, مستلزمات الطبية, مواد البلاستيك, قطع غيار, والإكسسوارات.....</p>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 mb-4">
-                    <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
-                        <div class="feature-icon">
-                            <i class='bx bx-package'></i>
-                        </div>
-                        <h3>تجار الجملة</h3>
-                        <p>مواد الغذائية, الأدوات المدرسية, مواد الفلاحية, الإلكترونيات, مواد البناء, المشروبات, مواد التجميل, مواد التنظيف..... </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-
-
-    <!-- Pricing Section -->
-    <section class="pricing-section">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <h2>الأسعار</h2>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-6 col-md-8">
-                    <div class="pricing-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="pricing-badge">
-                            <i class='bx bx-crown'></i>
-                            الاشتراك الشهري
-                        </div>
-                        <div class="pricing-amount">90 <span style="font-size: 1.5rem;">د.ت</span></div>
-                        <div class="pricing-period">شهرياً</div>
-                        <div style="margin-top: 30px;">
-                            <a href="{{ route('business.getRegister') }}" class="hero-btn">
-                                ابدأ تجربتك
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="section-title" data-aos="fade-up">
-                <span class="sub-title">الأسئلة الشائعة</span>
-                <h2>إجابات على أسئلتك</h2>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
-                        <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>نجم نخدم بيه في الهاتف أو التابليت ؟</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="faq-answer" style="display: none;">
-                            نعم، يمكنك من أي جهاز متصل بالإنترنت. النظام يعمل عبر المتصفح ولا يحتاج إلى تثبيت برامج إضافية.
-                        </div>
-                    </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
-                        <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>يدعم اللغة الفرنسية ؟</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="faq-answer" style="display: none;">
-                            نعم، يدعم الفرنسية، العربية، والإنقليزية.
-                        </div>
-                    </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
-                        <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>نجم نجرّب قبل ما نخلّص؟</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="faq-answer" style="display: none;">
-                            نعم، تنجم تطلب فترة تجريبية.
-                        </div>
-                    </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
-                        <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>هل يمكنني إلغاء الاشتراك في أي وقت؟</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="faq-answer" style="display: none;">
-                            نعم، يمكنك إلغاء الاشتراك في أي وقت .
-                        </div>
-                    </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="400">
-                        <button class="faq-question" onclick="toggleFaq(this)">
-                            <span>هل يوجد تدريب على استخدام النظام؟</span>
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                        <div class="faq-answer" style="display: none;">
-                            نعم، نوفر دعماً فنياً شاملاً وتدريباً مجانياً لجميع المستخدمين و فيديوهات تعليمية .
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6" data-aos="fade-left">
-                    <div class="section-title" style="text-align: right; margin-bottom: 50px;">
-                        <h2 style="color: white;">هل لديك أسئلة؟</h2>
-                        <p style="color: rgba(255,255,255,0.8); font-size: 1.1rem;">
-                            تواصل معنا
-                        </p>
-                    </div>
-                    <div class="contact-info">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                              <i class='bx bxl-facebook'></i>
-                            </div>
-                            <div class="contact-text">
-                                <h5>صفحتنا الفيسبوك</h5>
-                                <a href="https://www.facebook.com/simplexgestion">Simplex Gestion</a>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class='bx bx-phone'></i>
-                            </div>
-                            <div class="contact-text">
-                                <h5>الهاتف</h5>
-                                <a style="  direction: ltr;unicode-bidi: bidi-override;" href="tel:+21624327623">+216 24 327 623</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6" data-aos="fade-right">
-                    <div style="text-align: center; padding: 40px;">
-                        <span class="hero-btn">
-                            تواصل معنا الآن
-                            <i class='bx bx-send'></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer-section">
-        <div class="container">
-            <div class="row">
                 <div class="col-lg-6">
-                    <div class="footer-brand">
-                        <img src="img/logo.png" alt="Simplex Gestion" width="60">
-                        <div class="footer-text">
-                            سيستام إدارة تجارة شامل يساعدك على تنظيم وتطوير أعمالك بكل سهولة وفعالية.
+                    <div class="bg-white text-dark rounded-4 p-5 shadow-lg">
+                        <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3">Sans engagement</span>
+                        <div class="display-2 fw-bold mb-2">3 <span class="fs-4 text-muted">DT/jour</span></div>
+
+                        <ul class="list-unstyled text-start mb-5 d-inline-block mx-auto">
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Facturation Illimités</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Support Technique 24/7</strong> </li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Formation sur site ou en ligne</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Configuration gratuite</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Mises à jour automatiques</strong> </li>
+                        </ul>
+
+                        <div class="d-grid gap-3">
+                            <a href="{{ route('business.getRegister') }}" class="btn btn-primary btn-lg fw-bold">
+                                <i class='bx bxl-whatsapp me-2'></i> Démarrer Maintenant
+                            </a>
                         </div>
-                        <div class="social-links">
-                            <a href="https://www.facebook.com/simplexgestion" class="social-link">
-                                <i class='bx bxl-facebook'></i>
-                            </a>
-                            <a href="https://www.instagram.com/simplexgestion" class="social-link">
-                                <i class='bx bxl-instagram'></i>
-                            </a>
-                            <a href="https://www.tiktok.com/@simplexgestion" class="social-link">
-                                <i class='bx bxl-tiktok'></i>
-                            </a>
-                          </div>
                     </div>
                 </div>
-
-            </div>
-            <div class="footer-bottom">
-                <p>جميع الحقوق محفوظة © 2026 Simplex Gestion</p>
             </div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<section class="section py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Questions Fréquentes</h2>
+            <p class="text-muted">Tout ce que vous devez savoir avant de commencer.</p>
+        </div>
 
-    <script>
-        // Initialize AOS
-        AOS.init({
-            duration: 1000,
-            once: true
-        });
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                Puis-je tester avant de payer ?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <strong>Oui, absolument.</strong> Vous pouvez demander une période d'essai gratuite. C'est l'occasion idéale pour découvrir toutes les fonctionnalités et valider que le logiciel correspond à vos besoins, sans aucun engagement. </div>
+                        </div>
+                    </div>
 
-        // FAQ Toggle Function
-        function toggleFaq(button) {
-            const answer = button.nextElementSibling;
-            const icon = button.querySelector('i');
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                Mes données sont-elles en sécurité ?
+                            </button>
+                        </h2>
+                        <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Oui. Nous utilisons des serveurs hautement sécurisés avec chiffrement des données et effectuons des sauvegardes quotidiennes automatiques.
+                            </div>
+                        </div>
+                    </div>
 
-            if (answer.style.display === 'none' || answer.style.display === '') {
-                answer.style.display = 'block';
-                icon.classList.remove('bx-chevron-down');
-                icon.classList.add('bx-chevron-up');
-            } else {
-                answer.style.display = 'none';
-                icon.classList.remove('bx-chevron-up');
-                icon.classList.add('bx-chevron-down');
-            }
-        }
 
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                Puis-je récupérer mes anciennes données ?
+                            </button>
+                        </h2>
+                        <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Oui, nous proposons un module d'importation Excel. Vous pouvez importer votre liste de clients, fournisseurs et votre catalogue articles (avec stock initial) en quelques minutes.
+                            </div>
+                        </div>
+                    </div>
 
-        // Navbar scroll effect
+
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                Puis-je annuler mon abonnement à tout moment ?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <strong>Oui, en toute liberté.</strong> Nos offres sont sans engagement de durée. Vous pouvez arrêter votre abonnement quand vous le souhaitez, sans frais cachés ni pénalités.
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-dark text-white pt-5 pb-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <h3 class="fw-bold mb-4">Simplex<span class="text-primary">Gestion</span></h3>
+                <p class="text-secondary">
+                    Le logiciel de gestion commerciale tout-en-un conçu pour le marché tunisien. Facturation, Stock, POS et Comptabilité.
+                </p>
+                <div class="d-flex gap-3 mt-4">
+                    <a href="https://www.facebook.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
+                    <a href="https://www.tiktok.com/@simplexgestion" class="text-white fs-4"><i class='bx bxl-tiktok'></i></a>
+                    <a href="https://www.instagram.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-instagram-alt'></i></a>
+                </div>
+            </div>
+            <div class="col-lg-2 col-6"></div>
+            <div class="col-lg-2 col-6 mb-4">
+                <h5 class="fw-bold mb-3">Raccourcis</h5>
+                <ul class="list-unstyled text-secondary">
+                    <li class="mb-2"><a href="#accueil" class="text-decoration-none text-secondary hover-white">Accueil</a></li>
+                    <li class="mb-2"><a href="#ventes" class="text-decoration-none text-secondary hover-white">Ventes</a></li>
+                    <li class="mb-2"><a href="#stock" class="text-decoration-none text-secondary hover-white">Stock</a></li>
+                    <li class="mb-2"><a href="#legal" class="text-decoration-none text-secondary hover-white">Impôt</a></li>
+                    <li class="mb-2"><a href="#contact" class="text-decoration-none text-secondary hover-white">Contact</a></li>
+                </ul>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <h5 class="fw-bold mb-3">Nous Contacter</h5>
+                <ul class="list-unstyled text-secondary">
+                    <li class="mb-3 d-flex align-items-center"><i class='bx bx-phone me-2 text-primary'></i> +216 24 327 623</li>
+                    <li class="mb-3 d-flex align-items-center"><i class='bx bx-envelope me-2 text-primary'></i> contact@simplexgestion.tn</li>
+                    <li class="mb-3 d-flex align-items-center"><i class='bx bxl-whatsapp me-2 text-primary'></i> Support WhatsApp 7j/7</li>
+                </ul>
+            </div>
+        </div>
+        <hr class="border-secondary my-4 opacity-25">
+        <div class="row align-items-center">
+            <div class="col-md-6 text-center text-md-start text-secondary small">
+                &copy; 2026 Simplex Gestion. Tous droits réservés.
+            </div>
+            <div class="col-md-6 text-center text-md-end text-secondary small">
+                <a href="#" class="text-secondary text-decoration-none me-3">Mentions Légales</a>
+                <a href="#" class="text-secondary text-decoration-none">Politique de Confidentialité</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    // Init Animate On Scroll
+    AOS.init({
+        duration: 800,
+        once: true,
+        offset: 100
+    });
+
+    // Navbar Transition - Compatible with older browsers
+    if (window.addEventListener) {
         window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('.navbar-area');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            var navbar = document.querySelector('.navbar');
+            if (navbar) {
+                if (window.scrollY > 50 || window.pageYOffset > 50) {
+                    navbar.classList.add('shadow-sm');
+                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                } else {
+                    navbar.classList.remove('shadow-sm');
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                }
             }
         });
-    </script>
-
-   @yield('javascript')
+    }
+</script>
 </body>
 </html>

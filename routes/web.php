@@ -78,8 +78,8 @@ use Illuminate\Support\Facades\Route;
         return view('welcome');
     });
 
-    Route::get('/fr', function () {
-        return view('fr.welcome-fr');
+    Route::get('/ar', function () {
+        return view('ar.welcome-ar');
     });
 
     Auth::routes();
