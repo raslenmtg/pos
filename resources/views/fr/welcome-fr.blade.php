@@ -6,6 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
+    <!--[if lt IE 10]>
+    <style>
+        .outdated-browser-warning {
+            background: #f59e0b;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 99999;
+        }
+    </style>
+    <![endif]-->
+
     <!-- Primary Meta Tags -->
     <title>Simplex Gestion - Gestion Commerciale Tunisie | Facturation, Stock & POS 2026</title>
     <meta name="title" content="Simplex Gestion - Gestion Commerciale Tunisie | Facturation, Stock & POS 2026">
@@ -250,7 +267,8 @@
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #0f172a; /* Fallback */
             color: var(--dark);
             background-color: #fff;
             line-height: 1.7;
@@ -261,7 +279,9 @@
 
         /* Navbar */
         .navbar {
+            background: rgba(255, 255, 255, 0.95); /* Fallback */
             background: var(--glass-bg);
+            -webkit-backdrop-filter: blur(12px); /* Safari */
             backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(0,0,0,0.05);
             padding: 0;
@@ -283,17 +303,20 @@
 
         .nav-link {
             font-weight: 600;
+            color: #333d50; /* Fallback */
             color: var(--secondary);
             margin: 0 10px;
             transition: color 0.3s;
         }
 
         .nav-link:hover, .nav-link.active {
+            color: #2948ff; /* Fallback */
             color: var(--primary);
         }
 
         /* Buttons */
         .btn-primary {
+            background: #2948ff; /* Fallback */
             background: var(--primary);
             border: none;
             padding: 14px 32px;
@@ -304,6 +327,7 @@
         }
 
         .btn-primary:hover {
+            background: #1a35cc; /* Fallback */
             background: var(--primary-dark);
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(41, 72, 255, 0.4);
@@ -311,6 +335,7 @@
 
         .btn-outline {
             border: 2px solid #e2e8f0;
+            color: #0f172a; /* Fallback */
             color: var(--dark);
             padding: 12px 30px;
             border-radius: 12px;
@@ -320,7 +345,9 @@
         }
 
         .btn-outline:hover {
+            border-color: #0f172a; /* Fallback */
             border-color: var(--dark);
+            background: #0f172a; /* Fallback */
             background: var(--dark);
             color: white;
         }
@@ -335,12 +362,17 @@
 
         .hero-badge {
             background: rgba(41, 72, 255, 0.1);
+            color: #2948ff; /* Fallback */
             color: var(--primary);
             padding: 8px 16px;
             border-radius: 50px;
             font-weight: 700;
             font-size: 0.9rem;
+            display: -webkit-inline-box;
+            display: -ms-inline-flexbox;
             display: inline-flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
             align-items: center;
             gap: 8px;
             margin-bottom: 1.5rem;
@@ -352,13 +384,24 @@
             line-height: 1.1;
             letter-spacing: -1.5px;
             margin-bottom: 1.5rem;
+            color: #1e293b; /* Fallback for browsers without gradient text */
             background: -webkit-linear-gradient(315deg, #1e293b 0%, #334155 74%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Fallback for browsers that don't support background-clip: text */
+        @supports not (-webkit-background-clip: text) {
+            .hero-title {
+                background: none;
+                color: #1e293b;
+            }
         }
 
         .hero-lead {
             font-size: 1.25rem;
+            color: #333d50; /* Fallback */
             color: var(--secondary);
             margin-bottom: 2.5rem;
             max-width: 600px;
@@ -366,6 +409,7 @@
 
         /* --- STATS & TRUST --- */
         .stats-strip {
+            background: #0f172a; /* Fallback */
             background: var(--dark);
             padding: 60px 0;
             color: white;
@@ -378,6 +422,7 @@
         .stat-item h3 {
             font-size: 2.5rem;
             font-weight: 800;
+            color: #ff6b35; /* Fallback */
             color: var(--accent);
             margin-bottom: 0;
         }
@@ -401,6 +446,7 @@
         }
 
         .feature-tag {
+            color: #2948ff; /* Fallback */
             color: var(--primary);
             font-weight: 700;
             text-transform: uppercase;
@@ -414,21 +460,29 @@
             font-size: 2.5rem;
             font-weight: 800;
             margin-bottom: 1.5rem;
+            color: #0f172a; /* Fallback */
             color: var(--dark);
         }
 
         .feature-list li {
             margin-bottom: 15px;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-align: start;
+            -ms-flex-align: start;
             align-items: start;
             font-size: 1.05rem;
+            color: #333d50; /* Fallback */
             color: var(--secondary);
         }
 
         .feature-list i {
+            color: #10b981; /* Fallback */
             color: var(--success);
             font-size: 1.4rem;
             margin-right: 12px;
+            -ms-flex-negative: 0;
             flex-shrink: 0;
             margin-top: 3px;
         }
@@ -447,7 +501,9 @@
 
         .module-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); /* Fallback */
             box-shadow: var(--shadow-lg);
+            border-color: #2948ff; /* Fallback */
             border-color: var(--primary);
         }
 
@@ -455,10 +511,17 @@
             width: 64px;
             height: 64px;
             background: #eff6ff;
+            color: #2948ff; /* Fallback */
             color: var(--primary);
             border-radius: 16px;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
             align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
             justify-content: center;
             font-size: 2rem;
             margin-bottom: 25px;
@@ -475,13 +538,19 @@
             padding: 20px 30px;
             border-radius: 12px;
             margin-bottom: 15px;
+            display: -webkit-box;
+            display: -ms-flexbox;
             display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
             align-items: center;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Fallback */
             box-shadow: var(--shadow-sm);
             font-weight: 600;
         }
 
         .compliance-check i {
+            color: #2948ff; /* Fallback */
             color: var(--primary);
             font-size: 1.5rem;
             margin-right: 15px;
@@ -700,10 +769,17 @@
                     Se connecter
                 </a>
             </div>
-            <div class="d-flex align-items-center">
-                <span class="navbar-brand m-0" style="align-self: end"> Simplex<span class="text-primary">.</span></span>
-                <a href="/" class="navbar-brand">
 
+
+
+            <div class="d-flex align-items-center">
+                <span class="me-5">
+                    <a href="/" >
+                     <svg width="40px" height="35px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#E70013" d="M32 5H4a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h28a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4z"></path><circle fill="#FFF" cx="18" cy="18" r="6.5"></circle><path fill="#E70013" d="M15.4 18a3.9 3.9 0 0 1 6.541-2.869a4.875 4.875 0 1 0 0 5.738A3.9 3.9 0 0 1 15.4 18z"></path><path fill="#E70013" d="M19.645 16.937l-1.249-1.719v2.125L16.375 18l2.021.657v2.125l1.249-1.719l2.021.656L20.417 18l1.249-1.719z"></path></svg>
+                    </a>
+                </span>
+                <span class="navbar-brand m-0" style="align-self: end"> Simplex<span class="text-primary">.</span></span>
+                <a href="#" class="navbar-brand">
                     <img src="img/logo.png" alt="Logo Simplex Gestion Tunisie - Logiciel Gestion commerciale" width="40" height="40">
                 </a>
             </div>
@@ -1218,16 +1294,21 @@
         offset: 100
     });
 
-    // Navbar Transition
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 50) {
-            document.querySelector('.navbar').classList.add('shadow-sm');
-            document.querySelector('.navbar').style.background = 'rgba(255, 255, 255, 0.98)';
-        } else {
-            document.querySelector('.navbar').classList.remove('shadow-sm');
-            document.querySelector('.navbar').style.background = 'rgba(255, 255, 255, 0.95)';
-        }
-    });
+    // Navbar Transition - Compatible with older browsers
+    if (window.addEventListener) {
+        window.addEventListener('scroll', function() {
+            var navbar = document.querySelector('.navbar');
+            if (navbar) {
+                if (window.scrollY > 50 || window.pageYOffset > 50) {
+                    navbar.classList.add('shadow-sm');
+                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                } else {
+                    navbar.classList.remove('shadow-sm');
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                }
+            }
+        });
+    }
 </script>
 </body>
 </html>
