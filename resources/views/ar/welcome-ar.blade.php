@@ -926,7 +926,7 @@
             <div class="col-lg-5 mt-5 mt-lg-0" data-aos="fade-left">
                 <div class="position-relative">
                     <div class="bg-white p-2 rounded-4 shadow-lg border">
-                        <img src="img/Screenshot_simplex.png" alt="Tableau de bord Simplex Gestion - Suivi Chiffre d'affaire et Stock" class="img-fluid rounded-3">
+                        <img src="img/dashboard_simplex.png" alt="Tableau de bord Simplex Gestion - Suivi Chiffre d'affaire et Stock" class="img-fluid rounded-3">
                     </div>
                     <div class="position-absolute top-0 end-0 translate-middle-y bg-white p-3 rounded-4 shadow-lg border d-none d-md-block" style="margin-top: -10px; margin-right: -20px;">
                         <div class="d-flex align-items-center gap-3">
