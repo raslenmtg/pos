@@ -253,7 +253,6 @@ class AppServiceProvider extends ServiceProvider
     protected function registerCommands()
     {
         $this->commands([
-            InstallCommand::class,
             ClientCommand::class,
             KeysCommand::class,
         ]);
