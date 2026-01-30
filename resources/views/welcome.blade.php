@@ -307,18 +307,7 @@
             letter-spacing: -0.5px;
         }
 
-        .nav-link {
-            font-weight: 600;
-            color: #333d50; /* Fallback */
-            color: var(--secondary);
-            margin: 0 10px;
-            transition: color 0.3s;
-        }
 
-        .nav-link:hover, .nav-link.active {
-            color: #2948ff; /* Fallback */
-            color: var(--primary);
-        }
 
         /* Buttons */
         .btn-primary {
@@ -366,23 +355,6 @@
             overflow: hidden;
         }
 
-        .hero-badge {
-            background: rgba(41, 72, 255, 0.1);
-            color: #2948ff; /* Fallback */
-            color: var(--primary);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            display: -webkit-inline-box;
-            display: -ms-inline-flexbox;
-            display: inline-flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 1.5rem;
-        }
 
         .hero-title {
             font-size: 4rem;
@@ -451,17 +423,6 @@
             border-bottom: none;
         }
 
-        .feature-tag {
-            color: #2948ff; /* Fallback */
-            color: var(--primary);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-size: 0.85rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
         .feature-title {
             font-size: 2.5rem;
             font-weight: 800;
@@ -493,82 +454,14 @@
             margin-top: 3px;
         }
 
-        /* --- CARDS & GRID --- */
-        .module-card {
-            background: white;
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
-            padding: 40px;
-            height: 100%;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
 
-        .module-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); /* Fallback */
-            box-shadow: var(--shadow-lg);
-            border-color: #2948ff; /* Fallback */
-            border-color: var(--primary);
-        }
 
-        .module-icon {
-            width: 64px;
-            height: 64px;
-            background: #eff6ff;
-            color: #2948ff; /* Fallback */
-            color: var(--primary);
-            border-radius: 16px;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            -webkit-box-pack: center;
-            -ms-flex-pack: center;
-            justify-content: center;
-            font-size: 2rem;
-            margin-bottom: 25px;
-        }
-
-        /* --- COMPLIANCE SECTION --- */
-        .compliance-section {
-            background: #f8fafc;
-            padding: 100px 0;
-        }
-
-        .compliance-check {
-            background: white;
-            padding: 20px 30px;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            display: -webkit-box;
-            display: -ms-flexbox;
-            display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
-            align-items: center;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Fallback */
-            box-shadow: var(--shadow-sm);
-            font-weight: 600;
-        }
 
         .compliance-check i {
             color: #2948ff; /* Fallback */
             color: var(--primary);
             font-size: 1.5rem;
             margin-right: 15px;
-        }
-
-        /* --- STEPS / PROCESS --- */
-        .step-number {
-            font-size: 4rem;
-            font-weight: 900;
-            color: #e2e8f0;
-            line-height: 1;
-            margin-bottom: 1rem;
         }
 
         /* --- PRICING --- */
@@ -704,6 +597,25 @@
             font-size: 1rem;
             line-height: 1.7;
             margin-bottom: 1.5rem;
+        }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
         }
 
         .feature-card .feature-icon {
@@ -1339,7 +1251,9 @@
         </div>
     </div>
 </section>
-
+<a href="https://wa.me/21624327623" class="whatsapp-float" target="_blank" title="Contactez-nous sur WhatsApp">
+    <i class='bx bxl-whatsapp'></i>
+</a>
 <footer class="bg-dark text-white pt-5 pb-3">
     <div class="container">
         <div class="row">

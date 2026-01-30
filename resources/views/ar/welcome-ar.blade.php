@@ -750,6 +750,25 @@
             font-size: 1.1rem;
         }
 
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
         /* Responsiveness */
         @media (max-width: 991px) {
             .hero-title { font-size: 2.8rem; }
@@ -1349,7 +1368,9 @@
         </div>
     </div>
 </section>
-
+<a href="https://wa.me/21624327623" class="whatsapp-float" target="_blank" title="Contactez-nous sur WhatsApp">
+    <i class='bx bxl-whatsapp'></i>
+</a>
 <footer class="bg-dark text-white pt-5 pb-3">
     <div class="container">
         <div class="row">
