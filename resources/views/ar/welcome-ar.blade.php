@@ -798,10 +798,6 @@
             </div>
 
             <div class="d-flex align-items-center order-md-1 order-2">
-                <a href="{{ route('business.getRegister') }}" class="btn btn-outline" style="margin: 0 5px">
-                    إنشاء حساب
-                    <i class='bx bx-plus'></i>
-                </a>
                 <a href="{{ route('login') }}" class="btn btn-primary" style="margin: 0 5px">
                     <i class='bx bx-log-in'></i>
                     تسجيل الدخول
@@ -824,19 +820,19 @@
                     موجّه لتجّار الجملة، الموزّعين، والمؤسّسات الصغرى والمتوسّطة<br>
                 </h1>
                 <p class="hero-lead">
-                    الستوك و الحسابات و الفاتورات في بلاصة وحدة<br>
-                    <strong>100% مطابق</strong> للقوانين التونسية (TVA, الخصم من المورد TEJ).
+                    الستوك و الحسابات و الفاتورات في بلاصة وحدة اربح الوقت وكبر خدمتك مع simplex gestion<br>
+
                 </p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a href="#contact" class="btn btn-primary btn-md">
-                        <i class='bx bx-rocket me-2'></i> ابدأ توا
+                    <a  href="tel:+21624327623"  class="btn btn-primary btn-md">
+                        <i class='bx bx-phone-call me-2'></i> احكي مع خبير
                     </a>
 
                 </div>
                 <div class="mt-4 text-muted small">
-                    <i class='bx bx-check-circle text-success'></i> تهيئة سريعة
+                    <i class='bx bx-check-circle text-success'></i> تحضير الحساب بمعطياتك
                     <span class="mx-2">•</span>
-                    <i class='bx bx-check-circle text-success'></i> معطياتك مؤمّنة
+                    <i class='bx bx-check-circle text-success'></i> شرح البرنامج
                     <span class="mx-2">•</span>
                     <i class='bx bx-check-circle text-success'></i> دعم 7/7
                 </div>
@@ -1179,16 +1175,32 @@
                         <div class="display-2 fw-bold mb-2">3 <span class="fs-4 text-muted">د.ت/يوم</span></div>
 
                         <ul class="list-unstyled text-end mb-5 d-inline-block mx-auto">
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>فاتورات بلا حدود</strong></li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>دعم تقني 24/7</strong> </li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>تكوين</strong></li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>إعداد مجاني</strong></li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>تحديثات أوتوماتيك</strong> </li>
+                            <li class="mb-3">
+                                <i class='bx bxs-check-circle text-primary me-2'></i>
+                                <strong>نحضرولك البرنامج كامل من أوّلو لآخرو</strong>
+                            </li>
+                            <li class="mb-3">
+                                <i class='bx bxs-check-circle text-primary me-2'></i>
+                                <strong>نمشيو معاك خطوة بخطوة باش تنجح</strong>
+                            </li>
+                            <li class="mb-3">
+                                <i class='bx bxs-check-circle text-primary me-2'></i>
+                                <strong>دورة تكوينية</strong>
+                            </li>
+                            <li class="mb-3">
+                                <i class='bx bxs-check-circle text-primary me-2'></i>
+                                <strong>دعم سريع بالتليفون و بالواتساب</strong>
+                            </li>
+                            <li class="mb-3">
+                                <i class='bx bxs-check-circle text-primary me-2'></i>
+                                <strong>تحديثات وخصائص جديدة ديما مضمونة</strong>
+                            </li>
                         </ul>
 
+
                         <div class="d-grid gap-3">
-                            <a href="{{ route('business.getRegister') }}" class="btn btn-primary btn-lg fw-bold">
-                                <i class='bx bxl-whatsapp me-2'></i> ابــــــــــدأ تــــــــــوا
+                            <a href="https://wa.me/21624327623?text=Bonjour%20Simplex,%20je%20souhaite%20une%20démonstration%20pour%20mon%20projet." class="btn btn-primary btn-lg fw-bold">
+                                <i class='bx bxl-whatsapp me-2'></i>احجز ديمو متاعك
                             </a>
                         </div>
                     </div>
@@ -1216,9 +1228,8 @@
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                إي نعم. تنجم تطلب فترة تجربة مجانية
-                                باش تكتشف الخصائص الكل وتتأكّد اللي البرنامج يناسبك، من غير أي التزام. </div>
-                        </div>
+                                <strong>إي، أكيد.</strong> احنا نعطيوك فترة تجريبية بالمنتجات والزبائن متاعك انت. تجرب المنصة في ظروفك الحقيقية، مع مرافقتنا الكاملة. ما فماش حتى التزام.
+                            </div>
                     </div>
 
                     <div class="accordion-item">
@@ -1298,10 +1309,9 @@
             </div>
             <div class="col-lg-4 mb-4">
                 <h5 class="fw-bold mb-3">اتصل بنا</h5>
-                <ul class="list-unstyled text-secondary p-0">
+                <ul class="list-unstyled text-secondary p-0" style="direction: ltr">
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-phone me-2 text-primary'></i> +216 24 327 623</li>
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-envelope me-2 text-primary'></i> contact@simplexgestion.tn</li>
-                    <li class="mb-3 d-flex align-items-center"><i class='bx bxl-whatsapp me-2 text-primary'></i> Support WhatsApp 7j/7</li>
                 </ul>
             </div>
         </div>

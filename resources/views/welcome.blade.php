@@ -789,10 +789,6 @@
             </div>
 
             <div class="d-flex align-items-center order-md-1 order-2">
-                <a href="{{ route('business.getRegister') }}" class="btn btn-outline" style="margin: 0 5px">
-                    Inscription
-                    <i class='bx bx-plus'></i>
-                </a>
                 <a href="{{ route('login') }}" class="btn btn-primary" style="margin: 0 5px">
                     <i class='bx bx-log-in'></i>
                     Se connecter
@@ -811,19 +807,18 @@
                     Solution de Gestion Commerciale pour les Grossistes, Distributeurs et PME.<br>
                 </h1>
                 <p class="hero-lead">
-                    Synchronisez vos stocks, vos operations et votre facturation en temps réel.
-                    <strong>100% Conforme</strong> à la législation tunisienne (TVA, Retenue à la source TEJ).
+                    Synchronisez vos stocks, vos operations et votre facturation en temps réel. Gagnez du temps et développez votre activité avec Simplex Gestion.
                 </p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a href="#contact" class="btn btn-primary btn-md">
-                        <i class='bx bx-rocket me-2'></i> Commencer Maintenant
+                    <a  href="tel:+21624327623"  class="btn btn-primary btn-md">
+                        <i class='bx bx-phone-call me-2'></i> Parlez à un Expert
                     </a>
 
                 </div>
                 <div class="mt-4 text-muted small">
-                    <i class='bx bx-check-circle text-success'></i> Configuration rapide
+                    <i class='bx bx-check-circle text-success'></i> Intégration assistée
                     <span class="mx-2">•</span>
-                    <i class='bx bx-check-circle text-success'></i> Données sécurisées
+                    <i class='bx bx-check-circle text-success'></i> Démonstration en direct
                     <span class="mx-2">•</span>
                     <i class='bx bx-check-circle text-success'></i> Support 7j/7
                 </div>
@@ -1153,25 +1148,23 @@
     <div class="container">
         <div class="pricing-table text-center">
             <h2 class="display-4 fw-bold mb-4">L'offre Tout-en-Un</h2>
-            <p class="lead text-white-50 mb-5">Tout ce dont vous avez besoin pour gérer votre entreprise, sans frais cachés.</p>
+            <p class="lead text-white-50 mb-5">Tout ce dont vous avez besoin pour gérer votre commerce, sans frais cachés.</p>
 
             <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="bg-white text-dark rounded-4 p-5 shadow-lg">
                         <span class="badge bg-warning text-dark px-3 py-2 rounded-pill fw-bold mb-3">Sans engagement</span>
                         <div class="display-2 fw-bold mb-2">3 <span class="fs-4 text-muted">DT/jour</span></div>
-
                         <ul class="list-unstyled text-start mb-5 d-inline-block mx-auto">
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Facturation Illimités</strong></li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Support Technique 24/7</strong> </li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Formation sur site ou en ligne</strong></li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Configuration gratuite</strong></li>
-                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Mises à jour automatiques</strong> </li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Configuration complète par notre équipe</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Accompagnement continu pour réussir</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Formation personnalisée</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Support réactif par téléphone et WhatsApp</strong></li>
+                            <li class="mb-3"><i class='bx bxs-check-circle text-primary me-2'></i> <strong>Mises à jour et nouvelles fonctionnalités incluses</strong></li>
                         </ul>
-
                         <div class="d-grid gap-3">
-                            <a href="{{ route('business.getRegister') }}" class="btn btn-primary btn-lg fw-bold">
-                                <i class='bx bxl-whatsapp me-2'></i> Démarrer Maintenant
+                            <a href="https://wa.me/21624327623?text=Bonjour%20Simplex,%20je%20souhaite%20une%20démonstration%20pour%20mon%20commerce." target="_blank" class="btn btn-primary btn-lg fw-bold">
+                                <i class='bx bxl-whatsapp me-2'></i> Réservez Votre Démonstration
                             </a>
                         </div>
                     </div>
@@ -1199,8 +1192,8 @@
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                             <div class="accordion-body">
-                                <strong>Oui, absolument.</strong> Vous pouvez demander une période d'essai gratuite. C'est l'occasion idéale pour découvrir toutes les fonctionnalités et valider que le logiciel correspond à vos besoins, sans aucun engagement. </div>
-                        </div>
+                                <strong>Oui, absolument.</strong> Nous configurons votre période d'essai avec vos propres produits et clients. Vous testez la plateforme dans vos conditions réelles, avec notre accompagnement complet. Aucun engagement jusqu'à ce que vous soyez convaincu.
+                            </div>
                     </div>
 
                     <div class="accordion-item">
@@ -1284,7 +1277,6 @@
                 <ul class="list-unstyled text-secondary">
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-phone me-2 text-primary'></i> +216 24 327 623</li>
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-envelope me-2 text-primary'></i> contact@simplexgestion.tn</li>
-                    <li class="mb-3 d-flex align-items-center"><i class='bx bxl-whatsapp me-2 text-primary'></i> Support WhatsApp 7j/7</li>
                 </ul>
             </div>
         </div>
