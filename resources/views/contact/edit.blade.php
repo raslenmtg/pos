@@ -281,6 +281,17 @@
               <p class="help-block">@lang('lang_v1.credit_limit_help')</p>
           </div>
         </div>
+            @php
+                $common_settings = session()->get('business.common_settings');
+            @endphp
+            @if(!empty($common_settings['is_enabled_export']))
+                <div class="col-md-4" style="margin-top: 1em;">
+                    <div class="form-check">
+                        {!! Form::checkbox('common_settings[is_enabled_export]', null, $contact->is_export ,
+                     [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.enable_export' ) }}
+                    </div>
+                </div>
+            @endif
           
       <div class="col-md-12">
         <hr/>
@@ -513,28 +524,8 @@
                 </div>
             </div>
         @endif
-        @php
-          $common_settings = session()->get('business.common_settings');
-        @endphp
-        @if(!empty($common_settings['is_enabled_export']))
-            <div class="col-md-12 mb-12">
-                <div class="form-check">
-                    <input type="checkbox" name="is_export" class="form-check-input" id="is_customer_export" @if(!empty($contact->is_export)) checked @endif>
-                    <label class="form-check-label" for="is_customer_export">@lang('lang_v1.is_export')</label>
-                </div>
-            </div>
-            @php
-                $i = 1;
-            @endphp
-            @for($i; $i <= 6 ; $i++)
-                <div class="col-md-4 export_div" style="display: none;">
-                    <div class="form-group">
-                        {!! Form::label('export_custom_field_'.$i, __('lang_v1.export_custom_field'.$i).':' ) !!}
-                        {!! Form::text('export_custom_field_'.$i, !empty($contact['export_custom_field_'.$i]) ? $contact['export_custom_field_'.$i] : null, ['class' => 'form-control','placeholder' => __('lang_v1.export_custom_field'.$i)]); !!}
-                    </div>
-                </div>
-            @endfor
-        @endif
+
+
     </div>
 </div>
     </div>

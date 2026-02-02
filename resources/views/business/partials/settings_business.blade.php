@@ -35,7 +35,7 @@
 
 
     </div>
-     {{-- code --}}
+     {{-- code
     <div class="row hide">
         <div class="col-sm-6">
             <div class="form-group">
@@ -81,14 +81,15 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row hide">
+    </div>--}}
+    <div class="row">
         <div class="col-sm-8">
             <div class="form-group">
                 <label>
                     {!! Form::checkbox('common_settings[is_enabled_export]', true, !empty($common_settings['is_enabled_export']) ? true : false , 
                     [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.enable_export' ) }}
                 </label>
+                @show_tooltip(__('tooltip.enable_export'))
             </div>
         </div>
     </div>

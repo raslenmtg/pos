@@ -1,13 +1,13 @@
 @extends('layouts.app')
 @section('title', __('lang_v1.' . $type . 's'))
-@php
+{{--@php
     $api_key = env('GOOGLE_MAP_API_KEY');
 @endphp
 @if (!empty($api_key))
     @section('css')
         @include('contact.partials.google_map_styles')
     @endsection
-@endif
+@endif--}}
 @section('content')
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -176,39 +176,7 @@
                                     <th>@lang('contact.total_sale_due')</th>
                                     <th>@lang('lang_v1.total_sell_return_due')</th>
                                 @endif
-                                @php
-                                    $custom_labels = json_decode(session('business.custom_labels'), true);
-                                @endphp
-                                <th>
-                                    {{ $custom_labels['contact']['custom_field_1'] ?? __('lang_v1.contact_custom_field1') }}
-                                </th>
-                                <th>
-                                    {{ $custom_labels['contact']['custom_field_2'] ?? __('lang_v1.contact_custom_field2') }}
-                                </th>
-                                <th>
-                                    {{ $custom_labels['contact']['custom_field_3'] ?? __('lang_v1.contact_custom_field3') }}
-                                </th>
-                                <th>
-                                    {{ $custom_labels['contact']['custom_field_4'] ?? __('lang_v1.contact_custom_field4') }}
-                                </th>
-                                <th>
-                                    {{ $custom_labels['contact']['custom_field_5'] ?? __('lang_v1.custom_field', ['number' => 5]) }}
-                                </th>
-                                <th>
-                                    {{ $custom_labels['contact']['custom_field_6'] ?? __('lang_v1.custom_field', ['number' => 6]) }}
-                                </th>
-                                <th>
-                                    {{ $custom_labels['contact']['custom_field_7'] ?? __('lang_v1.custom_field', ['number' => 7]) }}
-                                </th>
-                                <th>
-                                    {{ $custom_labels['contact']['custom_field_8'] ?? __('lang_v1.custom_field', ['number' => 8]) }}
-                                </th>
-                                <th>
-                                    {{ $custom_labels['contact']['custom_field_9'] ?? __('lang_v1.custom_field', ['number' => 9]) }}
-                                </th>
-                                <th>
-                                    {{ $custom_labels['contact']['custom_field_10'] ?? __('lang_v1.custom_field', ['number' => 10]) }}
-                                </th>
+
                             </tr>
                         </thead>
                         <tfoot>
@@ -232,16 +200,7 @@
                                 </td>
                                 <td class="footer_contact_due"></td>
                                 <td class="footer_contact_return_due"></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+
                             </tr>
                         </tfoot>
                     </table>
@@ -257,7 +216,7 @@
     </section>
     <!-- /.content -->
 @stop
-@section('javascript')
+{{--@section('javascript')
     @if (!empty($api_key))
         <script>
             // This example adds a search box to a map, using the Google Place Autocomplete
@@ -357,4 +316,4 @@
             });
         </script>
     @endif
-@endsection
+@endsection--}}

@@ -263,6 +263,16 @@ class ContactController extends Controller
             ->removeColumn('purchase_paid')
             ->removeColumn('total_purchase_return')
             ->removeColumn('purchase_return_paid')
+            ->removeColumn('custom_field1')
+            ->removeColumn('custom_field2')
+            ->removeColumn('custom_field3')
+            ->removeColumn('custom_field4')
+            ->removeColumn('custom_field5')
+            ->removeColumn('custom_field6')
+            ->removeColumn('custom_field7')
+            ->removeColumn('custom_field8')
+            ->removeColumn('custom_field9')
+            ->removeColumn('custom_field10')
             ->filterColumn('address', function ($query, $keyword) {
                 $query->where(function ($q) use ($keyword) {
                     $q->where('address_line_1', 'like', "%{$keyword}%")
@@ -508,6 +518,16 @@ class ContactController extends Controller
             ->removeColumn('is_default')
             ->removeColumn('total_sell_return')
             ->removeColumn('sell_return_paid')
+            ->removeColumn('custom_field1')
+            ->removeColumn('custom_field2')
+            ->removeColumn('custom_field3')
+            ->removeColumn('custom_field4')
+            ->removeColumn('custom_field5')
+            ->removeColumn('custom_field6')
+            ->removeColumn('custom_field7')
+            ->removeColumn('custom_field8')
+            ->removeColumn('custom_field9')
+            ->removeColumn('custom_field10')
             ->filterColumn('address', function ($query, $keyword) {
                 $query->where(function ($q) use ($keyword) {
                     $q->where('address_line_1', 'like', "%{$keyword}%")

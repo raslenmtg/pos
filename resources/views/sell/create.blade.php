@@ -218,7 +218,7 @@
 					<div class="@if(!empty($commission_agent)) col-sm-3 @else col-sm-4 @endif">
 						<div class="form-group">
 							{!! Form::label('status', __('sale.status') . ':*') !!}
-							{!! Form::select('status', $statuses, null, ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
+							{!! Form::select('status', $statuses, 'final', ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
 						</div>
 					</div>
 				@endif
@@ -731,27 +731,7 @@
 			@endcomponent
 		</div>
 	</div>
-	@if(!empty($common_settings['is_enabled_export']) && $sale_type != 'sales_order')
-		@component('components.widget', ['class' => 'box-solid', 'title' => __('lang_v1.export')])
-			<div class="col-md-12 mb-12">
-                <div class="form-check">
-                    <input type="checkbox" name="is_export" class="form-check-input" id="is_export" @if(!empty($walk_in_customer['is_export'])) checked @endif>
-                    <label class="form-check-label" for="is_export">@lang('lang_v1.is_export')</label>
-                </div>
-            </div>
-	        @php
-	            $i = 1;
-	        @endphp
-	        @for($i; $i <= 6 ; $i++)
-	            <div class="col-md-4 export_div" @if(empty($walk_in_customer['is_export'])) style="display: none;" @endif>
-	                <div class="form-group">
-	                    {!! Form::label('export_custom_field_'.$i, __('lang_v1.export_custom_field'.$i).':') !!}
-	                    {!! Form::text('export_custom_fields_info['.'export_custom_field_'.$i.']', !empty($walk_in_customer['export_custom_field_'.$i]) ? $walk_in_customer['export_custom_field_'.$i] : null, ['class' => 'form-control','placeholder' => __('lang_v1.export_custom_field'.$i), 'id' => 'export_custom_field_'.$i]); !!}
-	                </div>
-	            </div>
-	        @endfor
-		@endcomponent
-	@endif
+
 	@php
 		$is_enabled_download_pdf = config('constants.enable_download_pdf');
 		$payment_body_id = 'payment_rows_div';
@@ -762,7 +742,7 @@
 	@if((empty($status) || (!in_array($status, ['quotation', 'draft'])) || $is_enabled_download_pdf) && $sale_type != 'sales_order')
 		@can('sell.payments')
 			@component('components.widget', ['class' => 'box-solid', 'id' => $payment_body_id, 'title' => __('purchase.add_payment')])
-			@if($is_enabled_download_pdf)
+			{{--@if($is_enabled_download_pdf)
 				<div class="well row">
 					<div class="col-md-6">
 						<div class="form-group">
@@ -789,7 +769,7 @@
 						</div>
 					</div>
 				</div>
-			@endif
+			@endif--}}
 			@if(empty($status) || !in_array($status, ['quotation', 'draft']))
 				<div class="payment_row" @if($is_enabled_download_pdf) id="payment_rows_div" @endif>
 					<div class="row">

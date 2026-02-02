@@ -164,12 +164,12 @@ class SellPosController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        //Check if subscribed or not, then check for users quota
+     /*   //Check if subscribed or not, then check for users quota
         if (!$this->moduleUtil->isSubscribed($business_id)) {
             return $this->moduleUtil->expiredResponse(action([\App\Http\Controllers\HomeController::class, 'index']));
         } elseif (!$this->moduleUtil->isQuotaAvailable('invoices', $business_id)) {
             return $this->moduleUtil->quotaExpiredResponse('invoices', $business_id, action([\App\Http\Controllers\SellPosController::class, 'index']));
-        }
+        }*/
 
         //like:repair
         $sub_type = request()->get('sub_type');

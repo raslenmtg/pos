@@ -6,7 +6,7 @@
      'start_date' => 'Date de début',
      'currency' => 'Devise',
      'currency_placeholder' => 'Sélectionnez la devise',
-     'upload_logo' => 'Télécharger le logo',
+     'upload_logo' => 'Importer le logo',
      'country' => 'Pays',
      'state' => 'Wilaya',
      'city' => 'Ville',
