@@ -632,12 +632,6 @@ class ContactController extends Controller
 
             if (! empty($request->input('is_export'))) {
                 $input['is_export'] = true;
-                $input['export_custom_field_1'] = $request->input('export_custom_field_1');
-                $input['export_custom_field_2'] = $request->input('export_custom_field_2');
-                $input['export_custom_field_3'] = $request->input('export_custom_field_3');
-                $input['export_custom_field_4'] = $request->input('export_custom_field_4');
-                $input['export_custom_field_5'] = $request->input('export_custom_field_5');
-                $input['export_custom_field_6'] = $request->input('export_custom_field_6');
             }
 
             if (! empty($input['dob'])) {
