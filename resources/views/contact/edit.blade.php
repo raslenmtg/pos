@@ -284,10 +284,10 @@
             @php
                 $common_settings = session()->get('business.common_settings');
             @endphp
-            @if(!empty($common_settings['is_enabled_export']))
-                <div class="col-md-4" style="margin-top: 1em;">
+            @if(!empty($common_settings['is_enabled_export']) )
+                <div class="col-md-4 customer_fields" style="margin-top: 1em;">
                     <div class="form-check">
-                        {!! Form::checkbox('common_settings[is_enabled_export]', null, $contact->is_export ,
+                        {!! Form::checkbox('is_export', null, $contact->is_export ,
                      [ 'class' => 'input-icheck']); !!} {{ __( 'lang_v1.enable_export' ) }}
                     </div>
                 </div>

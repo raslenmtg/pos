@@ -290,10 +290,11 @@
                 </div>
 
                 @if(!empty($common_settings['is_enabled_export']))
-                    <div class="col-md-4" style="margin-top: 1em;">
+                    <div class="col-md-4 customer_fields" style="margin-top: 1em;">
                         <div class="form-check">
                             <input type="checkbox" name="is_export" class="form-check-input" id="is_customer_export">
                             <label class="form-check-label" for="is_customer_export">@lang('lang_v1.is_export')</label>
+                            @show_tooltip(__('tooltip.enable_export'))
                         </div>
                     </div>
                 @endif

@@ -818,9 +818,6 @@ class ContactController extends Controller
 
                 $input['is_export'] = ! empty($request->input('is_export')) ? 1 : 0;
 
-                if (! $input['is_export']) {
-                    unset($input['export_custom_field_1'], $input['export_custom_field_2'], $input['export_custom_field_3'], $input['export_custom_field_4'], $input['export_custom_field_5'], $input['export_custom_field_6']);
-                }
 
                 if (! empty($input['dob'])) {
                     $input['dob'] = $this->commonUtil->uf_date($input['dob']);
