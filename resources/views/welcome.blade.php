@@ -80,6 +80,7 @@
 
 
     <!-- Meta Pixel Code -->
+    @if(!in_array(request()->getHost(), ['localhost', '127.0.0.1']))
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -95,6 +96,7 @@
     <noscript><img height="1" width="1" style="display:none"
                    src="https://www.facebook.com/tr?id=768128085832071&ev=PageView&noscript=1"
         /></noscript>
+    @endif
     <!-- End Meta Pixel Code -->
 
     <!-- JSON-LD Structured Data - Organization -->
