@@ -1695,14 +1695,6 @@ class TransactionUtil extends Util
         //export custom fields
         $output['is_export'] = $transaction->is_export;
         $export_custom_fields_info = $transaction->export_custom_fields_info;
-        if (! empty($transaction->is_export)) {
-            $output['export_custom_fields_info']['export_custom_field_1'] = $export_custom_fields_info['export_custom_field_1'] ?? '';
-            $output['export_custom_fields_info']['export_custom_field_2'] = $export_custom_fields_info['export_custom_field_2'] ?? '';
-            $output['export_custom_fields_info']['export_custom_field_3'] = $export_custom_fields_info['export_custom_field_3'] ?? '';
-            $output['export_custom_fields_info']['export_custom_field_4'] = $export_custom_fields_info['export_custom_field_4'] ?? '';
-            $output['export_custom_fields_info']['export_custom_field_5'] = $export_custom_fields_info['export_custom_field_5'] ?? '';
-            $output['export_custom_fields_info']['export_custom_field_6'] = $export_custom_fields_info['export_custom_field_6'] ?? '';
-        }
 
         $output['design'] = $il->design;
         $output['table_tax_headings'] = ! empty($il->table_tax_headings) ? array_filter(json_decode($il->table_tax_headings), 'strlen') : null;

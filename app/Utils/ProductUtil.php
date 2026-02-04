@@ -1727,7 +1727,7 @@ class ProductUtil extends Util
             $query->ForLocation($location_id);
         }
 
-        $query->select(
+      /*  $query->select(
                 'products.id as product_id',
                 'products.name',
                 'products.type',
@@ -1738,7 +1738,7 @@ class ProductUtil extends Util
                 'variations.sell_price_inc_tax as selling_price',
                 'variations.sub_sku',
                 'U.short_name as unit'
-            );
+            );*/
 
         if (! empty($price_group_id)) {
             $query->addSelect(DB::raw('IF (VGP.price_type = "fixed", VGP.price_inc_tax, VGP.price_inc_tax * variations.sell_price_inc_tax / 100) as variation_group_price'));

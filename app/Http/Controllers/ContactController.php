@@ -959,12 +959,6 @@ class ContactController extends Controller
                 'cg.selling_price_group_id',
                 'shipping_custom_field_details',
                 'is_export',
-                'export_custom_field_1',
-                'export_custom_field_2',
-                'export_custom_field_3',
-                'export_custom_field_4',
-                'export_custom_field_5',
-                'export_custom_field_6'
             );
 
             if (request()->session()->get('business.enable_rp') == 1) {
