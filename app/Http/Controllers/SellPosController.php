@@ -1611,6 +1611,27 @@ class SellPosController extends Controller
 
         $product = $this->productUtil->getDetailsFromVariation($variation_id, $business_id, $location_id, $check_qty);
 
+        //START: Fix for export customer to use price excluding tax
+        $customer_id = request()->get('customer_id', null);
+        if (!empty($customer_id)) {
+             $contact = \App\Contact::where('business_id', $business_id)->find($customer_id);
+             if ($contact && $contact->is_export) {
+                 $tax_amount = 0;
+                 if (!empty($product->tax_id)) {
+                     $tax = \App\TaxRate::find($product->tax_id);
+                     if ($tax) {
+                         $tax_amount = $tax->amount;
+                     }
+                 }
+
+                 $sell_price_exc_tax = $product->sell_price_inc_tax / (1 + ($tax_amount / 100));
+
+                 $product->default_sell_price = $sell_price_exc_tax;
+                 $product->sell_price_inc_tax = $sell_price_exc_tax;
+             }
+        }
+        //END: Fix for export customer
+
         if (!isset($product->quantity_ordered)) {
             $product->quantity_ordered = $quantity;
         }
@@ -1755,18 +1776,6 @@ class SellPosController extends Controller
 
             $output = $this->getSellLineRow($variation_id, $location_id, $quantity, $row_count, $is_direct_sell, $is_serial_no);
 
-            if ($this->transactionUtil->isModuleEnabled('modifiers') && !$is_direct_sell) {
-                $variation = Variation::find($variation_id);
-                $business_id = request()->session()->get('user.business_id');
-                $this_product = Product::where('business_id', $business_id)
-                    ->with(['modifier_sets'])
-                    ->find($variation->product_id);
-                if (count($this_product->modifier_sets) > 0) {
-                    $product_ms = $this_product->modifier_sets;
-                    $output['html_modifier'] = view('restaurant.product_modifier_set.modifier_for_product')
-                        ->with(compact('product_ms', 'row_count'))->render();
-                }
-            }
         } catch (\Exception $e) {
             \Log::emergency('File:' . $e->getFile() . 'Line:' . $e->getLine() . 'Message:' . $e->getMessage());
 

@@ -500,11 +500,13 @@ $(document).ready((function() {
             var i = '<li class="ui-state-disabled">' + t.name;
             'variable' == t.type && (i += '-' + t.variation);
             var o = t.selling_price;
+            if(t.sell_price_exc_tax){ o = t.sell_price_exc_tax; }
             return t.variation_group_price && (o = t.variation_group_price), i += ' (' + t.sub_sku + ')<br> Price: ' + __currency_trans_from_en(o, !1, !1, __currency_precision, !0) + ' (Out of stock) </li>', $(i).appendTo(e);
         }
         i = '<div>' + t.name;
         'variable' == t.type && (i += '-' + t.variation);
         o = t.selling_price;
+        if(t.sell_price_exc_tax){ o = t.sell_price_exc_tax; }
         return t.variation_group_price && (o = t.variation_group_price), i += ' (' + t.sub_sku + ')<br> Price: ' + __currency_trans_from_en(o, !1, !1, __currency_precision, !0), 1 == t.enable_stock && (i += ' - ' + __currency_trans_from_en(t.qty_available, !1, !1, __currency_precision, !0) + t.unit), i += '</div>', $('<li>').append(i).appendTo(e);
     }), $('table#pos_table tbody').on('change', 'input.pos_quantity', (function() {
         pos_form_validator && pos_form_validator.element($(this));
