@@ -1250,6 +1250,7 @@ class ProductController extends Controller
             $price_group_id = request()->input('price_group', null);
             $business_id = request()->session()->get('user.business_id');
             $not_for_selling = request()->get('not_for_selling', null);
+            $is_export = request()->get('is_export');
             $price_group_id = request()->input('price_group', '');
             $product_types = request()->get('product_types', []);
 
@@ -1258,7 +1259,7 @@ class ProductController extends Controller
                 $search_fields[] = 'sub_sku';
             }
 
-            $result = $this->productUtil->filterProduct($business_id, $search_term, $location_id, $not_for_selling, $price_group_id, $product_types, $search_fields, $check_qty);
+            $result = $this->productUtil->filterProduct($business_id, $search_term, $location_id, $not_for_selling, $price_group_id, $product_types, $search_fields, $check_qty, 'like',(int) $is_export);
 
             return json_encode($result);
         }

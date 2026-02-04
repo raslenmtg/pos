@@ -2662,7 +2662,7 @@ class SellPosController extends Controller
             $qty = (float) $qty_int + (float) $qty_decimal;
 
             //Find the variation id
-            $result = $this->productUtil->filterProduct($business_id, $sku, null, false, null, [], ['sub_sku'], false, 'exact')->first();
+            $result = $this->productUtil->filterProduct($business_id, $sku, null, false, null, [], ['sub_sku'], false, 'exact',false)->first();
 
             if (!empty($result)) {
                 return ['variation_id' => $result->variation_id,

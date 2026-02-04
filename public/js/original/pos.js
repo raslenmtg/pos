@@ -450,12 +450,21 @@ $(document).ready((function() {
             var a = '', n = [];
             $('.search_fields:checked').each((function(e) {
                 n[e] = $(this).val();
-            })), $('#price_group').length > 0 && (a = $('#price_group').val()), $.getJSON('/products/list', {
+            })), $('#price_group').length > 0 && (a = $('#price_group').val());
+            var is_export = 0;
+            if ($('#customer_id').length > 0) {
+                var customer_data = $('#customer_id').select2('data');
+                if (customer_data && customer_data.length > 0 && customer_data[0].is_export) {
+                    is_export = customer_data[0].is_export;
+                }
+            }
+            $.getJSON('/products/list', {
                 price_group: a,
                 location_id: $('input#location_id').val(),
                 term: e.term,
                 not_for_selling: 0,
                 search_fields: n,
+                is_export: is_export,
             }, t);
         }, minLength: 2, response: function(e, t) {
             if (1 == t.content.length) {
