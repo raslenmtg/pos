@@ -451,20 +451,12 @@ $(document).ready((function() {
             $('.search_fields:checked').each((function(e) {
                 n[e] = $(this).val();
             })), $('#price_group').length > 0 && (a = $('#price_group').val());
-            var is_export = 0;
-            if ($('#customer_id').length > 0) {
-                var customer_data = $('#customer_id').select2('data');
-                if (customer_data && customer_data.length > 0 && customer_data[0].is_export) {
-                    is_export = customer_data[0].is_export;
-                }
-            }
             $.getJSON('/products/list', {
                 price_group: a,
                 location_id: $('input#location_id').val(),
                 term: e.term,
                 not_for_selling: 0,
                 search_fields: n,
-                is_export: is_export,
             }, t);
         }, minLength: 2, response: function(e, t) {
             if (1 == t.content.length) {
@@ -1055,94 +1047,9 @@ $(document).ready((function() {
             1 == e.success ? window.location = e.redirect_url : toastr.error(e.msg);
         },
     });
-})), $(document).on('click', '#send_for_sercice_staff_replacement', (function(e) {
-    var t = $('#send_for_sell_service_staff_invoice_no').val();
-    t && $.ajax({
-        method: 'get',
-        url: /validate-invoice-to-service-staff-replacement/ + encodeURI(t),
-        dataType: 'json',
-        success: function(e) {
-            1 == e.success ? ($('#service_staff_replacement').popover('hide'), $('#service_staff_modal').html(e.msg), $('#service_staff_modal').modal('show')) : toastr.error(e.msg);
-        },
-    });
-})), $(document).on('shown.bs.modal', '#service_staff_modal', (function() {
-    $('#change_service_staff').validate();
-})), $(document).on('submit', 'form#change_service_staff', (function(e) {
-    e.preventDefault();
-    var t = $(this).serialize();
-    $.ajax({
-        method: 'POST', url: $(this).attr('action'), dataType: 'json', data: t, success: function(e) {
-            1 == e.success ? ($('#service_staff_modal').modal('hide'), toastr.success(e.msg)) : toastr.error(e.msg);
-        },
-    });
-})), $(document).on('ifChanged', 'input[name="search_fields[]"]', (function(e) {
-    var t = [];
-    $('input[name="search_fields[]"]:checked').each((function() {
-        t.push($(this).val());
-    })), localStorage.setItem('pos_search_fields', t);
-})), $(document).on('click', '#show_service_staff_availability', (function() {
-    loadServiceStaffAvailability();
-})), $(document).on('click', '#refresh_service_staff_availability_status', (function() {
-    loadServiceStaffAvailability(!1);
-})), $(document).on('click', 'button.pause_resume_timer', (function(e) {
-    $('.view_modal').find('.overlay').removeClass('hide'), $.ajax({
-        method: 'get',
-        url: $(this).attr('data-href'),
-        dataType: 'json',
-        success: function(e) {
-            loadServiceStaffAvailability(!1);
-        },
-    });
-})), $(document).on('click', '.mark_as_available', (function(e) {
-    e.preventDefault(), $('.view_modal').find('.overlay').removeClass('hide'), $.ajax({
-        method: 'get',
-        url: $(this).attr('href'),
-        dataType: 'json',
-        success: function(e) {
-            loadServiceStaffAvailability(!1);
-        },
-    });
-}));
-var service_staff_availability_interval = null;
-
-function loadServiceStaffAvailability(e = !0) {
-    var t = $('[name="location_id"]').val();
-    $.ajax({
-        method: 'get',
-        url: $('#show_service_staff_availability').attr('data-href'),
-        dataType: 'html',
-        data: { location_id: t },
-        success: function(t) {
-            $('.view_modal').html(t), e && ($('.view_modal').modal('show'), service_staff_availability_interval = setInterval((function() {
-                loadServiceStaffAvailability(!1);
-            }), 6e4));
-        },
-    });
-}
-
+})),
 function update_serial_no() {
     $('.product_row').each((function(e) {
         $(this).find('td:first').hasClass('serial_no') && $(this).find('td:first').text(e + 1);
     }));
 }
-
-$(document).on('hidden.bs.modal', '.view_modal', (function() {
-    null !== service_staff_availability_interval && clearInterval(service_staff_availability_interval), service_staff_availability_interval = null;
-})), $(document).on('change', '#res_waiter_id', (function(e) {
-    $(this).find('option:selected').data('is_enable') && swal({
-        text: LANG.enter_pin_here,
-        buttons: !0,
-        dangerMode: !0,
-        content: { element: 'input', attributes: { placeholder: LANG.enter_pin_here, type: 'password' } },
-    }).then((e => {
-        null !== e ? $.ajax({
-            method: 'get',
-            url: '/modules/data/check-staff-pin',
-            dataType: 'json',
-            data: { service_staff_pin: e, user_id: $('#res_waiter_id').val() },
-            success: e => {
-                0 == e ? (toastr.error(LANG.authentication_failed), $('#res_waiter_id').val('')) : toastr.success(LANG.authentication_successfull);
-            },
-        }) : $('#res_waiter_id').val('');
-    }));
-}));

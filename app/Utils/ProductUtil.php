@@ -1611,7 +1611,7 @@ class ProductUtil extends Util
      * @param  string  $search_type (like or exact)
      * @return object
      */
-    public function filterProduct($business_id, $search_term, $location_id = null, $not_for_selling = null, $price_group_id = null, $product_types = [], $search_fields = [], $check_qty = false, $search_type = 'like', $is_export = null)
+    public function filterProduct($business_id, $search_term, $location_id = null, $not_for_selling = null, $price_group_id = null, $product_types = [], $search_fields = [], $check_qty = false, $search_type = 'like')
     {
         $query = Product::join('variations', 'products.id', '=', 'variations.product_id')
                 ->active()
@@ -1648,10 +1648,7 @@ class ProductUtil extends Util
             );
         }
 
-        // Join tax_rates table when is_export is 1 to calculate price excluding tax
-        if ($is_export == 1) {
-            $query->leftjoin('tax_rates as TR', 'products.tax', '=', 'TR.id');
-        }
+
 
         $query->where('products.business_id', $business_id)
                 ->where('products.type', '!=', 'modifier');
@@ -1745,14 +1742,6 @@ class ProductUtil extends Util
                 'U.short_name as unit'
             );
 
-        // Add tax details and price excluding tax when is_export is 1
-        if ($is_export == 1) {
-            $query->addSelect(
-                'TR.amount as tax_rate',
-                'products.tax as tax_id',
-                DB::raw('ROUND(variations.sell_price_inc_tax / (1 + (COALESCE(TR.amount, 0) / 100)), 2) as sell_price_exc_tax')
-            );
-        }
 
         if (! empty($price_group_id)) {
             $query->addSelect(DB::raw('IF (VGP.price_type = "fixed", VGP.price_inc_tax, VGP.price_inc_tax * variations.sell_price_inc_tax / 100) as variation_group_price'));
