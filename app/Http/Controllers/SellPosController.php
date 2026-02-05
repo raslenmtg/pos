@@ -758,6 +758,12 @@ class SellPosController extends Controller
             return $output;
         }
             $layout = !empty($receipt_details->design) ? 'sale_pos.receipts.' . $receipt_details->design : 'sale_pos.receipts.classic';
+
+            $transaction_receipt = Transaction::where('id', $transaction_id)->with(['contact'])->first();
+            if(!empty($transaction_receipt) && !empty($transaction_receipt->contact) && $transaction_receipt->contact->is_export){
+                 $layout = 'sale_pos.receipts.ht';
+            }
+
             $output['success'] = 1;
             $output['msg'] = 'Receipt printed successfully';
             $output['html_content'] = view($layout, compact('receipt_details'))->render();

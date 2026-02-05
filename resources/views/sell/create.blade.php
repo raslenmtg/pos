@@ -508,7 +508,7 @@
 			    </div>
 			    <div class="clearfix"></div>
 			    @if($business_details->enable_timbre)
-			    <div class="col-md-4 col-md-offset-8  @if($sale_type == 'sales_order') hide @endif">
+			    <div class="col-md-4 col-md-offset-8  @if($sale_type == 'sales_order') hide @endif" id="timbre_label">
 			    	<b>Timbre fiscale:</b>(+) 
 					<span class="display_currency">{{ $business_details->timbre_value }}</span>
 			    </div>

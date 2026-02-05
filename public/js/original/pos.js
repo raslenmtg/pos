@@ -344,7 +344,7 @@ function update_shipping_address(e) {
         let t = null != e.shipping_custom_field_details ? e.shipping_custom_field_details.shipping_custom_field_5 : '';
         $('#shipping_custom_field_5').val(t);
     }
-    e.is_export ? ($('#is_export').prop('checked', !0), $('div.export_div').show(), $('#export_custom_field_1').length && $('#export_custom_field_1').val(e.export_custom_field_1), $('#export_custom_field_2').length && $('#export_custom_field_2').val(e.export_custom_field_2), $('#export_custom_field_3').length && $('#export_custom_field_3').val(e.export_custom_field_3), $('#export_custom_field_4').length && $('#export_custom_field_4').val(e.export_custom_field_4), $('#export_custom_field_5').length && $('#export_custom_field_5').val(e.export_custom_field_5), $('#export_custom_field_6').length && $('#export_custom_field_6').val(e.export_custom_field_6)) : ($('#export_custom_field_1, #export_custom_field_2, #export_custom_field_3, #export_custom_field_4, #export_custom_field_5, #export_custom_field_6').val(''), $('#is_export').prop('checked', !1), $('div.export_div').hide()), $('#shipping_address_modal').val(e.shipping_address), $('#shipping_address').val(e.shipping_address);
+//    e.is_export ? ($('#is_export').prop('checked', !0), $('div.export_div').show(), $('#export_custom_field_1').length && $('#export_custom_field_1').val(e.export_custom_field_1), $('#export_custom_field_2').length && $('#export_custom_field_2').val(e.export_custom_field_2), $('#export_custom_field_3').length && $('#export_custom_field_3').val(e.export_custom_field_3), $('#export_custom_field_4').length && $('#export_custom_field_4').val(e.export_custom_field_4), $('#export_custom_field_5').length && $('#export_custom_field_5').val(e.export_custom_field_5), $('#export_custom_field_6').length && $('#export_custom_field_6').val(e.export_custom_field_6)) : ($('#export_custom_field_1, #export_custom_field_2, #export_custom_field_3, #export_custom_field_4, #export_custom_field_5, #export_custom_field_6').val(''), $('#is_export').prop('checked', !1), $('div.export_div').hide()), $('#shipping_address_modal').val(e.shipping_address), $('#shipping_address').val(e.shipping_address);
 }
 
 function get_sales_orders() {
@@ -444,7 +444,27 @@ $(document).ready((function() {
         },
     }), $('#customer_id').on('select2:select', (function(e) {
         var t = e.params.data;
-        t.pay_term_number ? $('input#pay_term_number').val(t.pay_term_number) : $('input#pay_term_number').val(''), t.pay_term_type ? ($('#add_sell_form select[name="pay_term_type"]').val(t.pay_term_type), $('#edit_sell_form select[name="pay_term_type"]').val(t.pay_term_type)) : ($('#add_sell_form select[name="pay_term_type"]').val(''), $('#edit_sell_form select[name="pay_term_type"]').val('')), update_shipping_address(t), $('#advance_balance_text').text(__currency_trans_from_en(t.balance), !0), $('#advance_balance').val(t.balance), 'selling_price_group' == t.price_calculation_type && ($('#price_group').val(t.selling_price_group_id), $('#price_group').change()), $('.contact_due_text').length && get_contact_due(t.id);
+        t.pay_term_number ? $('input#pay_term_number').val(t.pay_term_number) : $('input#pay_term_number').val(''), t.pay_term_type ? ($('#add_sell_form select[name="pay_term_type"]').val(t.pay_term_type), $('#edit_sell_form select[name="pay_term_type"]').val(t.pay_term_type)) : ($('#add_sell_form select[name="pay_term_type"]').val(''), $('#edit_sell_form select[name="pay_term_type"]').val('')), update_shipping_address(t);
+
+                // New logic: Check is_export and set timbre_value to 0 if true
+                if(t.is_export){
+                    // Store original timbre value if not already stored
+                    if(!$('#timbre_value').data('original-val')){
+                        $('#timbre_value').data('original-val', $('#timbre_value').val());
+                    }
+                    $('#timbre_value').val(0);
+                    $('#timbre_label').addClass('hide');
+                } else {
+                     // Restore timbre value
+                    if($('#timbre_value').data('original-val')){
+                        $('#timbre_value').val($('#timbre_value').data('original-val'));
+                    }
+                    $('#timbre_label').removeClass('hide');
+                }
+                pos_total_row(); // Recalculate totals
+
+                $('#advance_balance_text').text(__currency_trans_from_en(t.balance), !0);
+                $('#advance_balance').val(t.balance), 'selling_price_group' == t.price_calculation_type && ($('#price_group').val(t.selling_price_group_id), $('#price_group').change()), $('.contact_due_text').length && get_contact_due(t.id);
     })), set_default_customer(), $('#search_product').length && ($('#search_product').autocomplete({
         delay: 1e3, source: function(e, t) {
             var a = '', n = [];
@@ -1047,9 +1067,10 @@ $(document).ready((function() {
             1 == e.success ? window.location = e.redirect_url : toastr.error(e.msg);
         },
     });
-})),
+}))
 function update_serial_no() {
     $('.product_row').each((function(e) {
         $(this).find('td:first').hasClass('serial_no') && $(this).find('td:first').text(e + 1);
     }));
 }
+
