@@ -301,7 +301,7 @@
                             {{$line['quantity_uf']}}
                         </td>
                         <td style="border: 1px solid #000; padding: 5px; text-align: right;">
-                            {{!empty($line['unit_price_exc_tax'])?$line['unit_price_exc_tax']: $line['unit_price_before_discount']}}
+                            {{!empty($line['unit_price_before_discount'])?$line['unit_price_before_discount']: $line['unit_price']}}
                         </td>
 
                         <td style="border: 1px solid #000; padding: 5px; text-align: right;">
@@ -312,7 +312,7 @@
                             @endif
                         </td>
                         <td style="border: 1px solid #000; padding: 5px; text-align: right;">
-                            {{$line['line_total_exc_tax']!='0.000'?$line['line_total_exc_tax']:$line['line_total']}}
+                            {{$line['line_total']}}
                         </td>
                     </tr>
                 @endforeach
@@ -337,7 +337,7 @@
                 <tbody>
                 <tr>
                     <td style="border: 1px solid #000; padding: 5px;">Total HT</td>
-                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">{{$receipt_details->subtotal_exc_tax}}</td>
+                    <td style="border: 1px solid #000; padding: 5px; text-align: right;">{{$receipt_details->subtotal}}</td>
                 </tr>
 
 
@@ -362,12 +362,12 @@
                 @endif
                 <tr class="net-a-payer">
                     <td>NET A PAYER</td>
-                    <td>{{$receipt_details->subtotal_exc_tax }}</td>
+                    <td>{{$receipt_details->total }}</td>
                 </tr>
                 </tbody>
             </table>
             @if(!empty($receipt_details->total_in_words))
-                <p class="total-in-words" style="margin-top:10px; text-align:end;">Arrêté la présente {!! $receipt_details->invoice_heading !!} à la somme de : {{$receipt_details->subtotal_exc_tax}}.</p>
+                <p class="total-in-words" style="margin-top:10px; text-align:end;">Arrêté la présente {!! $receipt_details->invoice_heading !!} à la somme de : {{$receipt_details->total}}.</p>
             @endif
         </td>
     </tr>
