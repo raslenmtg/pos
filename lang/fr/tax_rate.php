@@ -1,11 +1,11 @@
 <?php
 
  return [
-     'tax_rates' => "Les taux d'imposition",
-     'manage_your_tax_rates' => "Gérez vos taux d'imposition",
-     'all_your_tax_rates' => "Tous vos taux d'imposition",
+     'tax_rates' => "Gestion des taxes",
+     'manage_your_tax_rates' => "Gérez vos TVA et groupes de taxes",
+     'all_your_tax_rates' => "Tous vos taxes",
      'name' => 'Nom',
-     'rate' => "Taux d'imposition %",
+     'rate' => "Taux %",
      'added_success' => "Taux d'imposition ajouté avec succès",
      'updated_success' => "Taux d'imposition mis à jour avec succès",
      'deleted_success' => "Taux d'imposition supprimé avec succès",
