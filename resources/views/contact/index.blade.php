@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('title', __('lang_v1.' . $type . 's'))
+@php
+    $common_settings = session()->get('business.common_settings');
+    $is_export_enabled = !empty($common_settings['is_enabled_export']) ? true : false;
+@endphp
 {{--@php
     $api_key = env('GOOGLE_MAP_API_KEY');
 @endphp
@@ -170,6 +174,9 @@
                                     @if ($reward_enabled)
                                         <th id="rp_col">{{ session('business.rp_name') }}</th>
                                     @endif
+                                    @if($is_export_enabled)
+                                        <th id="is_export_col">@lang('lang_v1.is_export')</th>
+                                    @endif
                                     <th>@lang('lang_v1.customer_group')</th>
                                     <th>@lang('business.address')</th>
                                     <th>@lang('contact.mobile')</th>
@@ -189,10 +196,16 @@
                                 <td></td>
                                 <td @if ($type == 'supplier') colspan="5"
                             @elseif($type == 'customer')
-                                @if ($reward_enabled)
-                                    colspan="8"
-                                @else
-                                    colspan="7" @endif
+                                @php
+                                    $colspan = 7;
+                                    if ($reward_enabled) {
+                                        $colspan++;
+                                    }
+                                    if ($is_export_enabled) {
+                                        $colspan++;
+                                    }
+                                @endphp
+                                colspan="{{ $colspan }}"
                                     @endif>
                                     <strong>
                                         @lang('sale.total'):

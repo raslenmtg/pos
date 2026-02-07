@@ -55,7 +55,7 @@
 					</div>
 				@endif
 
-				@if(in_array('types_of_service', $enabled_modules) && !empty($transaction->types_of_service))
+			{{--	@if(in_array('types_of_service', $enabled_modules) && !empty($transaction->types_of_service))
 					<div class="col-md-4 col-sm-6">
 						<div class="form-group">
 							<div class="input-group">
@@ -78,7 +78,7 @@
 						@include('types_of_service.pos_form_modal', ['types_of_service' => $transaction->types_of_service])
 						@endif
 					</div>
-				@endif
+				@endif--}}
 
 				@if(in_array('subscription', $enabled_modules))
 					<div class="col-md-4 pull-right col-sm-6">
@@ -100,8 +100,11 @@
 							<input type="hidden" id="default_customer_id" 
 							value="{{ $transaction->contact->id }}" >
 							<input type="hidden" id="default_customer_name" 
-							value="{{ $transaction->contact->name }}" >
-							{!! Form::select('contact_id', 
+							value="{{ empty($transaction->contact->name)?$transaction->contact->supplier_business_name:$transaction->contact->name }}" >
+							<input type="hidden" id="default_customer_balance" value="{{ $transaction->contact->balance ?? 0 }}">
+							<input type="hidden" id="default_customer_address" value="{{ $transaction->contact->contact_address ?? '' }}">
+							<input type="hidden" id="default_customer_is_export" value="{{ !empty($transaction->contact->is_export) ? 1 : 0 }}">
+							{!! Form::select('contact_id',
 								[], null, ['class' => 'form-control mousetrap', 'id' => 'customer_id', 'placeholder' => 'Enter Customer name / phone', 'required']); !!}
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default bg-white btn-flat add_new_customer" data-name=""><i class="fa fa-plus-circle text-primary fa-lg"></i></button>
@@ -462,7 +465,7 @@
 			    </div>
                     <div class="clearfix"></div>
                     @if($business_details->enable_timbre)
-                        <div class="col-md-4 col-md-offset-8  @if($transaction->type == 'sales_order') hide @endif">
+                        <div class="col-md-4 col-md-offset-8  @if($transaction->type == 'sales_order') hide @endif" id="timbre_label">
                             <b>Timbre fiscale:</b>(+)
                             <span class="display_currency">{{ $business_details->timbre_value }}</span>
                         </div>
@@ -687,33 +690,12 @@
 				</div>
 		    </div>
 			@endcomponent
-			@if(!empty($common_settings['is_enabled_export']) && $transaction->type != 'sales_order')
-				@component('components.widget', ['class' => 'box-solid', 'title' => __('lang_v1.export')])
-					<div class="col-md-12 mb-12">
-		                <div class="form-check">
-		                    <input type="checkbox" name="is_export" class="form-check-input" id="is_export" @if(!empty($transaction->is_export)) checked @endif>
-		                    <label class="form-check-label" for="is_export">@lang('lang_v1.is_export')</label>
-		                </div>
-		            </div>
-			        @php
-	                	$i = 1;
-		            @endphp
-		            @for($i; $i <= 6 ; $i++)
-		                <div class="col-md-4 export_div" @if(empty($transaction->is_export)) style="display: none;" @endif>
-		                    <div class="form-group">
-		                        {!! Form::label('export_custom_field_'.$i, __('lang_v1.export_custom_field'.$i).':') !!}
-		                        {!! Form::text('export_custom_fields_info['.'export_custom_field_'.$i.']', !empty($transaction->export_custom_fields_info['export_custom_field_'.$i]) ? $transaction->export_custom_fields_info['export_custom_field_'.$i] : null, ['class' => 'form-control','placeholder' => __('lang_v1.export_custom_field'.$i), 'id' => 'export_custom_field_'.$i]); !!}
-		                    </div>
-		                </div>
-		            @endfor
-				@endcomponent
-			@endif
 		</div>
 	</div>
 	@php
 		$is_enabled_download_pdf = config('constants.enable_download_pdf');
 	@endphp
-	@if($is_enabled_download_pdf && $transaction->type != 'sales_order')
+	{{--@if($is_enabled_download_pdf && $transaction->type != 'sales_order')
 		@can('sell.payments')
 			@component('components.widget', ['class' => 'box-solid', 'title' => __('purchase.add_payment')])
 				<div class="well row">
@@ -744,7 +726,7 @@
 				</div>
 			@endcomponent
 		@endcan
-	@endif
+	@endif--}}
 
 	@if($transaction->type = 'sell')
 	@can('sell.payments')

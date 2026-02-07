@@ -191,12 +191,37 @@ function reset_pos_form() {
 }
 
 function set_default_customer() {
-    var e = $('#default_customer_id').val(), t = $('#default_customer_name').val(),
-        a = $('#default_customer_balance').val(), n = $('#default_customer_address').val();
-    if (0 == (e ? $('select#customer_id option[value=' + e + ']').length : 0) && e && $('select#customer_id').append($('<option>', {
-        value: e,
-        text: t,
-    })), $('#advance_balance_text').text(__currency_trans_from_en(a), !0), $('#advance_balance').val(a), $('#shipping_address_modal').val(n), n && $('#shipping_address').val(n), $('select#customer_id').val(e).trigger('change'), $('#default_selling_price_group').length && ($('#price_group').val($('#default_selling_price_group').val()), $('#price_group').change()), $('textarea#repair_defects').length > 0 && !customer_set) {
+    var default_customer_id = $('#default_customer_id').val();
+    var default_customer_name = $('#default_customer_name').val();
+    var default_customer_balance = $('#default_customer_balance').val();
+    var default_customer_address = $('#default_customer_address').val();
+    var is_export = $('#default_customer_is_export').val();
+
+    if (default_customer_id) {
+        if ($('select#customer_id').find("option[value='" + default_customer_id + "']").length) {
+            $('select#customer_id').val(default_customer_id).trigger('change');
+        } else {
+            // Create a DOM Option and pre-select by default
+            var newOption = new Option(default_customer_name, default_customer_id, true, true);
+            // Append it to the select
+            $('select#customer_id').append(newOption).trigger('change');
+        }
+    }
+
+    // Set other fields
+    $('#advance_balance_text').text(__currency_trans_from_en(default_customer_balance), !0);
+    $('#advance_balance').val(default_customer_balance);
+    $('#shipping_address_modal').val(default_customer_address);
+    if (default_customer_address) {
+        $('#shipping_address').val(default_customer_address);
+    }
+
+    if ($('#default_selling_price_group').length) {
+        $('#price_group').val($('#default_selling_price_group').val());
+        $('#price_group').change();
+    }
+
+    if ($('textarea#repair_defects').length > 0 && !customer_set) {
         let e = [];
         $('input#pos_repair_defects_suggestion').length > 0 && $('input#pos_repair_defects_suggestion').val().length > 2 && (e = JSON.parse($('input#pos_repair_defects_suggestion').val()));
         let t = document.querySelector('textarea#repair_defects');
@@ -206,7 +231,19 @@ function set_default_customer() {
             dropdown: { maxItems: 100, classname: 'tags-look', enabled: 0, closeOnSelect: !1 },
         });
     }
+
     customer_set = !0;
+
+    if(default_customer_id && is_export == 1){
+        if(!$('#timbre_value').data('original-val')){
+            $('#timbre_value').data('original-val', $('#timbre_value').val());
+        }
+        $('#timbre_value').val(0);
+        $('#timbre_label').addClass('hide');
+        if(typeof pos_total_row == 'function'){
+            pos_total_row();
+        }
+    }
 }
 
 function set_location() {

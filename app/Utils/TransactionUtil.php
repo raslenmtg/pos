@@ -2482,6 +2482,7 @@ class TransactionUtil extends Util
             ->whereIn('type', ['sell', 'sell_return'])
             ->whereNotNull('tsl.tax_id')
             ->where('transactions.status', '=', 'final')
+            ->where('transactions.is_export', '!=', 1)
             ->select(
                 DB::raw('SUM( 
                 IF(transactions.type = "sell", 1, -1) * 

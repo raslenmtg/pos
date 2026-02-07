@@ -67,3 +67,22 @@
         </div>
     </div>
 @endif
+@php
+    $common_settings = session()->get('business.common_settings');
+    $is_export_enabled = !empty($common_settings['is_enabled_export']) ? true : false;
+@endphp
+@if($is_export_enabled)
+@if(empty($only) || in_array('only_export', $only))
+    <div class="col-md-3">
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <br>
+                    {!! Form::checkbox('only_export', 1, false,
+                    [ 'class' => 'input-icheck', 'id' => 'only_export']); !!} {{ __('lang_v1.is_export') }}
+                </label>
+            </div>
+        </div>
+    </div>
+@endif
+@endif

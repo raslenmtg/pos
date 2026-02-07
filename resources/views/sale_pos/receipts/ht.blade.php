@@ -340,8 +340,20 @@
                     <td style="border: 1px solid #000; padding: 5px; text-align: right;">{{$receipt_details->subtotal}}</td>
                 </tr>
 
+                @if( !empty($receipt_details->total_line_discount) )
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5px;">{!! $receipt_details->line_discount_label !!}</td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: right;">(-) {{$receipt_details->total_line_discount}}</td>
+                    </tr>
+                @endif
 
-
+                <!-- Discount -->
+                @if( !empty($receipt_details->discount) )
+                    <tr>
+                        <td style="border: 1px solid #000; padding: 5px;">{!! $receipt_details->discount_label !!}</td>
+                        <td style="border: 1px solid #000; padding: 5px; text-align: right;">(-) {{$receipt_details->discount}}</td>
+                    </tr>
+                @endif
 
                 <!-- Shipping Charges -->
                 @if(!empty($receipt_details->shipping_charges))
@@ -360,9 +372,9 @@
                         </tr>
                     @endforeach
                 @endif
-                <tr class="net-a-payer">
-                    <td>NET A PAYER</td>
-                    <td>{{$receipt_details->total }}</td>
+                <tr class="net-a-payer" >
+                    <td style="padding: 7px">NET A PAYER</td>
+                    <td style="padding: 7px">{{$receipt_details->total }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -391,14 +403,6 @@
                 @if(!empty($receipt_details->footer_text))
                     <div style="margin:10px auto; text-align:center; display:block; width:100%;">
                         {!! $receipt_details->footer_text !!}
-                    </div>
-                @endif
-
-                @if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
-                    <div style="margin:10px auto; text-align:center; display:block;">
-                        <img
-                                src="data:image/png;base64,{{ DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54]) }}"
-                                style="display:block; margin:0 auto;">
                     </div>
                 @endif
 

@@ -412,6 +412,14 @@ class SellPosController extends Controller
                 $cg = $this->contactUtil->getCustomerGroup($business_id, $contact_id);
                 $input['customer_group_id'] = (empty($cg) || empty($cg->id)) ? null : $cg->id;
 
+                // Check if customer has is_export flag set
+                if (!empty($contact_id)) {
+                    $contact = \App\Contact::find($contact_id);
+                    if (!empty($contact) && !empty($contact->is_export)) {
+                        $input['is_export'] = 1;
+                    }
+                }
+
                 //set selling price group id
                 $price_group_id = $request->has('price_group') ? $request->input('price_group') : null;
 
@@ -759,8 +767,8 @@ class SellPosController extends Controller
         }
             $layout = !empty($receipt_details->design) ? 'sale_pos.receipts.' . $receipt_details->design : 'sale_pos.receipts.classic';
 
-            $transaction_receipt = Transaction::where('id', $transaction_id)->with(['contact'])->first();
-            if(!empty($transaction_receipt) && !empty($transaction_receipt->contact) && $transaction_receipt->contact->is_export){
+            // Check if transaction is marked as export to use HT receipt
+            if(!empty($receipt_details->is_export) && $receipt_details->is_export == 1){
                  $layout = 'sale_pos.receipts.ht';
             }
 

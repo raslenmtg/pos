@@ -26,7 +26,7 @@
                 </div>
             @endif
 
-            @if (!empty($sources))
+          {{--  @if (!empty($sources))
                 <div class="col-md-3">
                     <div class="form-group">
                         {!! Form::label('sell_list_filter_source', __('lang_v1.sources') . ':') !!}
@@ -38,7 +38,7 @@
                         ]) !!}
                     </div>
                 </div>
-            @endif
+            @endif--}}
         @endcomponent
         @component('components.widget', ['class' => 'box-primary', 'title' => __('lang_v1.all_sales')])
             @can('direct_sell.access')
@@ -80,13 +80,6 @@
                             <th>@lang('lang_v1.sell_return_due')</th>
                             <th>@lang('lang_v1.shipping_status')</th>
                             <th>@lang('lang_v1.total_items')</th>
-                            <th>@lang('lang_v1.types_of_service')</th>
-                            <th>{{ $custom_labels['types_of_service']['custom_field_1'] ?? __('lang_v1.service_custom_field_1') }}
-                            </th>
-                            <th>{{ $custom_labels['sell']['custom_field_1'] ?? '' }}</th>
-                            <th>{{ $custom_labels['sell']['custom_field_2'] ?? '' }}</th>
-                            <th>{{ $custom_labels['sell']['custom_field_3'] ?? '' }}</th>
-                            <th>{{ $custom_labels['sell']['custom_field_4'] ?? '' }}</th>
                             <th>@lang('lang_v1.added_by')</th>
                             <th>@lang('sale.sell_note')</th>
                             <th>@lang('sale.staff_note')</th>
@@ -104,7 +97,7 @@
                             <td class="footer_total_paid"></td>
                             <td class="footer_total_remaining"></td>
                             <td class="footer_total_sell_return_due"></td>
-                            <td colspan="2"></td>
+                            <td colspan="6"></td>
 
                         </tr>
                     </tfoot>
@@ -181,6 +174,10 @@
                             d.only_subscriptions = 1;
                         }
 
+                         if($('#only_export').length && $('#only_export').is(':checked')) {
+                            d.only_export = 1;
+                        }
+
                         if ($('#payment_method').length) {
                             d.payment_method = $('#payment_method').val();
                         }
@@ -254,48 +251,6 @@
                         "searchable": false
                     },
                     {
-                        data: 'types_of_service_name',
-                        name: 'tos.name',
-                        @if (empty($is_types_service_enabled))
-                            visible: false
-                        @endif
-                    },
-                    {
-                        data: 'service_custom_field_1',
-                        name: 'service_custom_field_1',
-                        @if (empty($is_types_service_enabled))
-                            visible: false
-                        @endif
-                    },
-                    {
-                        data: 'custom_field_1',
-                        name: 'transactions.custom_field_1',
-                        @if (empty($custom_labels['sell']['custom_field_1']))
-                            visible: false
-                        @endif
-                    },
-                    {
-                        data: 'custom_field_2',
-                        name: 'transactions.custom_field_2',
-                        @if (empty($custom_labels['sell']['custom_field_2']))
-                            visible: false
-                        @endif
-                    },
-                    {
-                        data: 'custom_field_3',
-                        name: 'transactions.custom_field_3',
-                        @if (empty($custom_labels['sell']['custom_field_3']))
-                            visible: false
-                        @endif
-                    },
-                    {
-                        data: 'custom_field_4',
-                        name: 'transactions.custom_field_4',
-                        @if (empty($custom_labels['sell']['custom_field_4']))
-                            visible: false
-                        @endif
-                    },
-                    {
                         data: 'added_by',
                         name: 'u.first_name'
                     },
@@ -339,7 +294,6 @@
                     $('.footer_sale_total').html(__currency_trans_from_en(footer_sale_total));
 
                     $('.footer_payment_status_count').html(__count_status(data, 'payment_status'));
-                    $('.service_type_count').html(__count_status(data, 'types_of_service_name'));
                     $('.payment_method_count').html(__count_status(data, 'payment_methods'));
                 },
                 createdRow: function(row, data, dataIndex) {
@@ -354,6 +308,9 @@
                 });
 
             $('#only_subscriptions').on('ifChanged', function(event) {
+                sell_table.ajax.reload();
+            });
+            $('#only_export').on('ifChanged', function(event) {
                 sell_table.ajax.reload();
             });
         });

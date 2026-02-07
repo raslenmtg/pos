@@ -1879,6 +1879,7 @@ class ReportController extends Controller
                     'c.contact_id',
                     't.id as transaction_id',
                     't.invoice_no',
+                    't.is_export',
                     't.transaction_date as transaction_date',
                     'transaction_sell_lines.unit_price_before_discount as unit_price',
                     'transaction_sell_lines.unit_price_inc_tax as unit_sale_price',
@@ -1979,6 +1980,9 @@ class ReportController extends Controller
                     @endif
                     ')
                 ->editColumn('tax', function ($row) {
+                    if ($row->is_export == 1) {
+                         return  '';
+                    }
                     return $this->transactionUtil->num_f($row->item_tax, true)
                      .'<br>'.'<span data-orig-value="'.$row->item_tax.'" 
                      class="tax" data-unit="'.$row->tax.'"><small>('.$row->tax.')</small></span>';

@@ -387,6 +387,7 @@
                     </tr>
                 @endif
 
+                    @if($receipt_details->is_export!=1)
                 @if(!empty($receipt_details->group_tax_details))
                     @foreach($receipt_details->group_tax_details as $key => $value)
                         <tr>
@@ -402,9 +403,10 @@
                         </tr>
                     @endif
                 @endif
+                @endif
 
                 <tr class="total-row">
-                    <td><strong>{!! $receipt_details->total_label !!}</strong></td>
+                    <td><strong>NET A PAYER</strong></td>
                     <td><strong>{{$receipt_details->total}}</strong></td>
                 </tr>
             </table>

@@ -18,6 +18,10 @@ $(document).on('change', '#sell_list_filter_location_id, #sell_list_filter_custo
     sell_table.ajax.reload();
 });
 
+$('#only_export').on('ifChanged', function(event) {
+    sell_table.ajax.reload();
+});
+
 sell_table = $('#sell_table').DataTable({
         processing: true,
         serverSide: true,
@@ -64,6 +68,10 @@ sell_table = $('#sell_table').DataTable({
 
                 if($('#only_subscriptions').length && $('#only_subscriptions').is(':checked')) {
                     d.only_subscriptions = 1;
+                }
+
+                if($('#only_export').length && $('#only_export').is(':checked')) {
+                    d.only_export = 1;
                 }
 
                 d = __datatable_ajax_callback(d);

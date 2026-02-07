@@ -407,12 +407,31 @@ $(document).ready(function() {
         if ($('#rp_col').length) {
             columns.push({ data: 'total_rp', name: 'total_rp' });
         }
-        Array.prototype.push.apply(columns, [{ data: 'customer_group', name: 'cg.name' },
-            { data: 'address', name: 'address', orderable: false },
-            { data: 'mobile', name: 'mobile' },
-            { data: 'due', searchable: false, orderable: false },
-            { data: 'return_due', searchable: false, orderable: false },
-            ]);
+
+        // Build the remaining columns array
+        var remaining_columns = [];
+
+        // Check if export column is enabled by checking if the column exists in the table
+        if ($('#is_export_col').length) {
+            remaining_columns.push({
+                data: 'is_export',
+                name: 'is_export',
+                render: function(data, type, row) {
+                    if (data == 1) {
+                        return 'oui';
+                    }
+                    return '';
+                }
+            });
+        }
+
+        remaining_columns.push({ data: 'customer_group', name: 'cg.name' });
+        remaining_columns.push({ data: 'address', name: 'address', orderable: false });
+        remaining_columns.push({ data: 'mobile', name: 'mobile' });
+        remaining_columns.push({ data: 'due', searchable: false, orderable: false });
+        remaining_columns.push({ data: 'return_due', searchable: false, orderable: false });
+
+        Array.prototype.push.apply(columns, remaining_columns);
     }
     
     contact_table = $('#contact_table').DataTable({

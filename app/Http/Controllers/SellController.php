@@ -243,6 +243,10 @@ class SellController extends Controller
                 }
             }
 
+            if (! empty(request()->input('only_export')) && request()->input('only_export') == 1) {
+                $sells->where('transactions.is_export', 1);
+            }
+
             if (request()->only_subscriptions) {
                 $sells->where(function ($q) {
                     $q->whereNotNull('transactions.recur_parent_id')
@@ -316,13 +320,13 @@ class SellController extends Controller
 
                 $with = ['sell_lines'];
 
-                if ($is_tables_enabled) {
+              /*  if ($is_tables_enabled) {
                     $with[] = 'table';
                 }
 
                 if ($is_service_staff_enabled) {
                     $with[] = 'service_staff';
-                }
+                }*/
 
                 $sales = $sells->where('transactions.is_suspend', 1)
                             ->with($with)
@@ -612,24 +616,24 @@ class SellController extends Controller
             $commission_agents = User::forDropdown($business_id, false, true, true);
         }
 
-        //Service staff filter
-        $service_staffs = null;
-        if ($this->productUtil->isModuleEnabled('service_staff')) {
-            $service_staffs = $this->productUtil->serviceStaffDropdown($business_id);
-        }
+        /* //Service staff filter
+         $service_staffs = null;
+         if ($this->productUtil->isModuleEnabled('service_staff')) {
+             $service_staffs = $this->productUtil->serviceStaffDropdown($business_id);
+         }*/
 
         $shipping_statuses = $this->transactionUtil->shipping_statuses();
 
-        $sources = $this->transactionUtil->getSources($business_id);
+     /*   $sources = $this->transactionUtil->getSources($business_id);
         if ($is_woocommerce) {
             $sources['woocommerce'] = 'Woocommerce';
-        }
+        }*/
 
         $payment_types = $this->transactionUtil->payment_types(null, true, $business_id);
 
 
         return view('sell.index')
-        ->with(compact('business_locations', 'customers', 'is_woocommerce', 'sales_representative', 'is_cmsn_agent_enabled', 'commission_agents', 'service_staffs', 'is_tables_enabled', 'is_service_staff_enabled', 'is_types_service_enabled', 'shipping_statuses', 'sources', 'payment_types'));
+        ->with(compact('business_locations', 'customers', 'sales_representative', 'is_cmsn_agent_enabled', 'commission_agents', 'shipping_statuses', 'payment_types'));
     }
 
     /**
@@ -965,6 +969,8 @@ class SellController extends Controller
                         ->select(
                             DB::raw("IF(pv.is_dummy = 0, CONCAT(p.name, ' (', pv.name, ':',variations.name, ')'), p.name) AS product_name"),
                             'p.id as product_id',
+                            'p.tax as product_tax_id',
+                            'variations.sell_price_inc_tax as master_sell_price_inc_tax',
                             'p.image as product_image',
                             'p.enable_stock',
                             'p.name as product_actual_name',
@@ -1002,10 +1008,29 @@ class SellController extends Controller
                         ->get();
 
         if (! empty($sell_details)) {
+            $contact = \App\Contact::where('business_id', $business_id)->find($transaction->contact_id);
+
             foreach ($sell_details as $key => $value) {
 
                 $variation = Variation::with('media')->findOrFail($value->variation_id);
                 $sell_details[$key]->media = $variation->media;
+
+                //START: Fix for export customer to use price excluding tax
+                if ($contact && $contact->is_export) {
+                    $tax_amount = 0;
+                    if (!empty($value->product_tax_id)) {
+                        $tax = \App\TaxRate::find($value->product_tax_id);
+                        if ($tax) {
+                            $tax_amount = $tax->amount;
+                        }
+                    }
+
+                    $sell_price_exc_tax = $value->master_sell_price_inc_tax / (1 + ($tax_amount / 100));
+
+                    $sell_details[$key]->default_sell_price = $sell_price_exc_tax;
+                    $sell_details[$key]->sell_price_inc_tax = $sell_price_exc_tax;
+                }
+                //END: Fix for export customer
 
                 //If modifier or combo sell line then unset
                 if (! empty($sell_details[$key]->parent_sell_line_id)) {

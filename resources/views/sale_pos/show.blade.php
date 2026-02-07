@@ -283,6 +283,7 @@
                 <td> <span class="display_currency pull-right" data-currency_symbol="true">{{ $sell->rp_redeemed_amount }}</span></td>
               </tr>
             @endif
+            @if($sell->is_export!=1)
             <tr>
               <th>{{ __('sale.order_tax') }}:</th>
               <td><b>(+)</b></td>
@@ -310,6 +311,7 @@
                 @endif
               </td>
             </tr>
+            @endif
             @endif
             <tr>
               <th>{{ __('sale.shipping') }}: @if($sell->shipping_details)({{$sell->shipping_details}}) @endif</th>

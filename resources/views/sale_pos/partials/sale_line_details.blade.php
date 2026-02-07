@@ -16,7 +16,7 @@
         @endif
         <th>{{ __('sale.unit_price') }}</th>
         <th>{{ __('sale.discount') }}</th>
-        <th>{{ __('sale.tax') }}</th>
+            @if($sell->is_export!=1)  <th>{{ __('sale.tax') }}</th>@endif
         <th>{{ __('sale.price_inc_tax') }}</th>
         <th>{{ __('sale.subtotal') }}</th>
     </tr>
@@ -87,6 +87,7 @@
                 @endif
                 @if($sell_line->line_discount_type == 'percentage') ({{$sell_line->line_discount_amount}}%) @endif
             </td>
+            @if($sell->is_export!=1)
             <td>
                 @if(!empty($for_ledger))
                     @format_currency($sell_line->item_tax)
@@ -97,6 +98,7 @@
                 ( {{ $taxes[$sell_line->tax_id]}} )
                 @endif
             </td>
+            @endif
             <td>
                 @if(!empty($for_ledger))
                     @format_currency($sell_line->unit_price_inc_tax)
