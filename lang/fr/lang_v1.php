@@ -1157,7 +1157,7 @@ return [
     'sell_line_description_help' => 'Ajouter une description du produit ou caractéristiques',
     'sell_not_found' => 'Vente non trouvé',
     'sell_payment' => 'Paiement de vente',
-    'sell_payment_report' => 'Rapport de paiement des ventes',
+    'sell_payment_report' => 'Rapport des encaissements',
     'sell_payments' => 'Permission d’ajouter / modifier / supprimer des paiements dans la liste des ventes / de la liste des points de vente.',
     'sell_permissions_tooltip' => 'Pour afficher les ventes sur la base de l\'état de paiement <b> Afficher toutes les ventes </b> L\'autorisation est requise, sinon il filtrera uniquement les ventes créées par l\'utilisateur enregistré',
     'sell_quantity' => 'Quantité vendue',

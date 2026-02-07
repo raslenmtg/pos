@@ -1278,12 +1278,6 @@ $(document).ready(function() {
             },
         },
         columns: [
-            {
-                orderable: false,
-                searchable: false,
-                data: null,
-                defaultContent: '',
-            },
             { data: 'payment_ref_no', name: 'payment_ref_no' },
             { data: 'paid_on', name: 'paid_on' },
             { data: 'amount', name: 'transaction_payments.amount' },
@@ -1298,14 +1292,7 @@ $(document).ready(function() {
             var total_amount = sum_table_col($('#sell_payment_report_table'), 'paid-amount');
             $('#footer_total_amount').text(total_amount);
             __currency_convert_recursively($('#sell_payment_report_table'));
-        },
-        createdRow: function(row, data, dataIndex) {
-            if (!data.transaction_id) {
-                $(row)
-                    .find('td:eq(0)')
-                    .addClass('details-control');
-            }
-        },
+        }
     });
     // Array to track the ids of the details displayed rows
     var spr_detail_rows = [];

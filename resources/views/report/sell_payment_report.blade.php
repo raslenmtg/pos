@@ -77,23 +77,22 @@
                     id="sell_payment_report_table">
                         <thead>
                             <tr>
-                                <th>&nbsp;</th>
                                 <th>@lang('purchase.ref_no')</th>
-                                <th>@lang('lang_v1.paid_on')</th>
+                                <th>@lang('lang_v1.payment_date')</th>
                                 <th>@lang('sale.amount')</th>
                                 <th>@lang('contact.customer')</th>
                                 <th>@lang('lang_v1.contact_id')</th>
                                 <th>@lang('lang_v1.customer_group')</th>
                                 <th>@lang('lang_v1.payment_method')</th>
-                                <th>@lang('sale.sale')</th>
+                                <th>@lang('sale.invoice_no')</th>
                                 <th>@lang('messages.action')</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr class="bg-gray font-17 footer-total text-center">
-                                <td colspan="4"><strong>@lang('sale.total'):</strong></td>
+                                <td colspan="2"><strong>@lang('sale.total'):</strong></td>
                                 <td><span class="display_currency" id="footer_total_amount" data-currency_symbol ="true"></span></td>
-                                <td colspan="4"></td>
+                                <td colspan="6"></td>
                             </tr>
                         </tfoot>
                     </table>
