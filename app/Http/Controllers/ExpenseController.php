@@ -1127,7 +1127,7 @@ fill="green" viewBox="0 0 24 24" >
 
         // Remove any spaces or special characters from matricule fiscal
         $cleanMatricule = str_replace([' ', '/', '\\'], '', $declarantMatriculeFiscal);
-
+        $cleanMatricule =substr($cleanMatricule,0,8);
         $filename = sprintf(
             '%s-%s-%s-%s.xml',
             $cleanMatricule,
