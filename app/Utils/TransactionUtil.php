@@ -5792,7 +5792,7 @@ class TransactionUtil extends Util
 
         $input['tax_id'] = $input['tax_id'] ?? null;
 
-        $invoice_total = $productUtil->calculateInvoiceTotal($input['products'], $input['tax_id'], $discount, $uf_number);
+        $invoice_total = $productUtil->calculateInvoiceTotal($input['products'], $input['tax_id'], $discount, $uf_number, true);
 
         //Get parent sale
         $sell = Transaction::where('business_id', $business_id)

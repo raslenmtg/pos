@@ -640,7 +640,7 @@ class ProductUtil extends Util
      * @param  array  $discount['discount_type', 'discount_amount']
      * @return mixed (false, array)
      */
-    public function calculateInvoiceTotal($products, $tax_id, $discount = null, $uf_number = true)
+    public function calculateInvoiceTotal($products, $tax_id, $discount = null, $uf_number = true, $exclude_timbre = false)
     {
         if (empty($products)) {
             return false;
@@ -689,7 +689,7 @@ class ProductUtil extends Util
 
         // Add Timbre Tax if enabled
         $business_id = request()->session()->get('user.business_id');
-        if ($business_id) {
+        if ($business_id && !$exclude_timbre) {
             $business = \App\Business::find($business_id);
             if ($business && $business->enable_timbre && !empty($business->timbre_value)) {
                 $timbre_amount = $business->timbre_value;

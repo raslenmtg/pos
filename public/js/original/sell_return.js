@@ -31,6 +31,10 @@ $(document).ready(function() {
                             if (result.receipt.is_enabled) {
                                 pos_print(result.receipt);
                             }
+                            // Redirect to sell-return page after success
+                            setTimeout(function() {
+                                window.location.href = '/sell-return';
+                            }, 1500);
                         } else {
                             toastr.error(result.msg);
                         }

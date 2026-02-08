@@ -274,11 +274,11 @@ class SellReturnController extends Controller
 
             if (! empty($input['products'])) {
                 $business_id = $request->session()->get('user.business_id');
-
+/*
                 //Check if subscribed or not
                 if (! $this->moduleUtil->isSubscribed($business_id)) {
                     return $this->moduleUtil->expiredResponse(action([\App\Http\Controllers\SellReturnController::class, 'index']));
-                }
+                }*/
 
                 $user_id = $request->session()->get('user.id');
 
