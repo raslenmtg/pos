@@ -56,12 +56,10 @@
 					@if(!empty($allowed_group_prices))
 			        	<td class="td-full-width">
 			        		@foreach($allowed_group_prices as $key => $value)
-			        			<strong>{{$value}}</strong> - @if(!empty($group_price_details[$variation->id][$key]))
-			        				<span class="display_currency" data-currency_symbol="true">{{ $group_price_details[$variation->id][$key]['calculated_price'] }}</span>
-			        			@else
-			        				0
+			        			@if(!empty($group_price_details[$variation->id][$key]))
+			        				<strong>{{$value}}</strong> - <span class="display_currency" data-currency_symbol="true">{{ $group_price_details[$variation->id][$key]['calculated_price'] }}</span>
+			        				<br>
 			        			@endif
-			        			<br>
 			        		@endforeach
 			        	</td>
 			        @endif
