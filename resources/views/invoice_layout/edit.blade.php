@@ -440,7 +440,6 @@
               <label>
               {!! Form::checkbox('show_sale_description', 1, $invoice_layout->show_sale_description, ['class' => 'input-icheck']); !!} @lang('lang_v1.show_sale_description')</label>
             </div>
-            <p class="help-block">@lang('lang_v1.product_imei_or_sn')</p>
           </div>
         </div>
         <div class="col-sm-3">
