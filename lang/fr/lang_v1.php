@@ -1396,7 +1396,7 @@ return [
     'total_tax' => 'Taxe total',
     'total_transfer_shipping_charge' => 'Frais d\'expédition total de transfert',
     'total_transfer_shipping_charges' => 'Frais d\'expédition total de transfert',
-    'total_unit_adjusted' => 'Unité totale ajustée',
+    'total_unit_adjusted' => 'Unité totale perdue',
     'total_unit_transfered' => 'Unité totale transférée',
     'totals' => 'Totaux',
     'transaction' => 'Transaction',
