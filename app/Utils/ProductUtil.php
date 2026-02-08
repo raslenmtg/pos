@@ -126,6 +126,15 @@ class ProductUtil extends Util
                         ->where('product_id', $product->id)
                         ->count() + 1;
 
+                // Get tax rate for calculating price excluding tax
+                $tax_rate = 0;
+                if (!empty($product->tax)) {
+                    $tax_details = TaxRate::find($product->tax);
+                    if (!empty($tax_details)) {
+                        $tax_rate = $tax_details->amount;
+                    }
+                }
+
                 foreach ($value['variations'] as $k => $v) {
                     //skip hidden variations
                     if (isset($v['is_hidden']) && $v['is_hidden'] == 1) {
@@ -160,13 +169,19 @@ class ProductUtil extends Util
                         }
                     }
 
+                    // Calculate default_purchase_price (excluding tax) from dpp_inc_tax
+                    $dpp_inc_tax = $this->num_uf($v['dpp_inc_tax']);
+                    $default_purchase_price = $tax_rate > 0
+                        ? $this->calc_percentage_base($dpp_inc_tax, $tax_rate)
+                        : $dpp_inc_tax;
+
                     $variation_data[] = [
                         'name' => $variation_value_name,
                         'variation_value_id' => $variation_value_id,
                         'product_id' => $product->id,
                         'sub_sku' => $sub_sku,
-                        'default_purchase_price' => $this->num_uf($v['dpp_inc_tax']),
-                        'dpp_inc_tax' => $this->num_uf($v['dpp_inc_tax']),
+                        'default_purchase_price' => $default_purchase_price,
+                        'dpp_inc_tax' => $dpp_inc_tax,
                         'profit_percent' => $this->num_uf($v['profit_percent']),
                         'default_sell_price' => $this->num_uf($v['sell_price_inc_tax']),
                         'sell_price_inc_tax' => $this->num_uf($v['sell_price_inc_tax']),
@@ -196,6 +211,15 @@ class ProductUtil extends Util
     {
         $product = Product::find($product_id);
 
+        // Get tax rate for calculating price excluding tax
+        $tax_rate = 0;
+        if (!empty($product->tax)) {
+            $tax_details = TaxRate::find($product->tax);
+            if (!empty($tax_details)) {
+                $tax_rate = $tax_details->amount;
+            }
+        }
+
         //Update product variations
         $product_variation_ids = [];
         $variations_ids = [];
@@ -210,10 +234,16 @@ class ProductUtil extends Util
             //Update existing variations
             if (! empty($value['variations_edit'])) {
                 foreach ($value['variations_edit'] as $k => $v) {
+                    // Calculate default_purchase_price (excluding tax) from dpp_inc_tax
+                    $dpp_inc_tax = $this->num_uf($v['dpp_inc_tax']);
+                    $default_purchase_price = $tax_rate > 0
+                        ? $this->calc_percentage_base($dpp_inc_tax, $tax_rate)
+                        : $dpp_inc_tax;
+
                     $data = [
                         'name' => $v['value'],
-                        'default_purchase_price' => $this->num_uf($v['dpp_inc_tax']),
-                        'dpp_inc_tax' => $this->num_uf($v['dpp_inc_tax']),
+                        'default_purchase_price' => $default_purchase_price,
+                        'dpp_inc_tax' => $dpp_inc_tax,
                         'profit_percent' => $this->num_uf($v['profit_percent']),
                         'default_sell_price' => $this->num_uf($v['sell_price_inc_tax']),
                         'sell_price_inc_tax' => $this->num_uf($v['sell_price_inc_tax']),
@@ -257,21 +287,27 @@ class ProductUtil extends Util
                             ]);
                         }
 
-                        $variation_value_id = $variation_value->id;
-                    }
+                    $variation_value_id = $variation_value->id;
+                }
 
-                    $variation_data[] = [
-                        'name' => $variation_value_name,
-                        'variation_value_id' => $variation_value_id,
-                        'product_id' => $product->id,
-                        'sub_sku' => $sub_sku,
-                       // 'default_purchase_price' => $this->num_uf($v['default_purchase_price']),
-                        'default_purchase_price' => $this->num_uf($v['dpp_inc_tax']),
-                        'dpp_inc_tax' => $this->num_uf($v['dpp_inc_tax']),
-                        'profit_percent' => $this->num_uf($v['profit_percent']),
-                        'default_sell_price' => $this->num_uf($v['default_sell_price']),
-                        'sell_price_inc_tax' => $this->num_uf($v['sell_price_inc_tax']),
-                    ];
+                // Calculate default_purchase_price (excluding tax) from dpp_inc_tax
+                $dpp_inc_tax_value = $this->num_uf($v['dpp_inc_tax']);
+                $default_purchase_price = $tax_rate > 0
+                    ? $this->calc_percentage_base($dpp_inc_tax_value, $tax_rate)
+                    : $dpp_inc_tax_value;
+
+                $variation_data[] = [
+                    'name' => $variation_value_name,
+                    'variation_value_id' => $variation_value_id,
+                    'product_id' => $product->id,
+                    'sub_sku' => $sub_sku,
+                   // 'default_purchase_price' => $this->num_uf($v['default_purchase_price']),
+                    'default_purchase_price' => $default_purchase_price,
+                    'dpp_inc_tax' => $dpp_inc_tax_value,
+                    'profit_percent' => $this->num_uf($v['profit_percent']),
+                    'default_sell_price' => $this->num_uf($v['default_sell_price']),
+                    'sell_price_inc_tax' => $this->num_uf($v['sell_price_inc_tax']),
+                ];
                     $c++;
                     $media[] = 'variation_images_'.$key.'_'.$k;
                 }

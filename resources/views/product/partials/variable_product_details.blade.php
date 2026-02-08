@@ -46,12 +46,22 @@
 							{{ @num_format($variation->profit_percent) }}
 						</td>
 						@endcan
-						<td>
-							<span class="display_currency" data-currency_symbol="true">{{ $variation->default_sell_price }}</span>
-						</td>
-						<td>
-							<span class="display_currency" data-currency_symbol="true">{{ $variation->sell_price_inc_tax }}</span>
-						</td>
+						@php
+                            $sell_price_exc_tax = null;
+                            if (!is_null($variation->sell_price_inc_tax) && isset($product_tax_rate)) {
+                                $sell_price_exc_tax = is_numeric($product_tax_rate)
+                                    ? ($variation->sell_price_inc_tax / (1 + ($product_tax_rate / 100)))
+                                    : $variation->sell_price_inc_tax;
+                            }
+                        @endphp
+                        <td>
+                            @if(!is_null($sell_price_exc_tax))
+                                <span class="display_currency" data-currency_symbol="true">{{ $sell_price_exc_tax }}</span>
+                            @endif
+                        </td>
+                        <td>
+                            <span class="display_currency" data-currency_symbol="true">{{ $variation->sell_price_inc_tax }}</span>
+                        </td>
 					@endcan
 					@if(!empty($allowed_group_prices))
 			        	<td class="td-full-width">

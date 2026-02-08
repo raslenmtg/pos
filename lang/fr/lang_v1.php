@@ -141,7 +141,7 @@ return [
     'autosend_email' => 'Envoi automatique par courrier électronique',
     'autosend_sms' => 'Envoi automatique de SMS',
     'available' => 'Disponible',
-    'available_in_locations' => 'Disponible dans certains pays',
+    'available_in_locations' => 'Disponible dans les emplacements',
     'available_key_names_are' => 'Les noms de clé disponibles sont',
     'available_options' => 'Options disponibles',
     'available_stock_expired' => 'OU le stock disponible a expiré.',
