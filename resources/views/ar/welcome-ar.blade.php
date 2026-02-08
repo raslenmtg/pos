@@ -817,7 +817,7 @@
             <div class="col-lg-7" data-aos="fade-right">
                 <h1 class="hero-title">
                     برنامج متكامل باش تنضم مشروعك
-                    موجّه لتجّار الجملة، الموزّعين، والمؤسّسات الصغرى والمتوسّطة<br>
+                    موجّه لتجّار الجملة، الموزّعين، والمزوّدين<br>
                 </h1>
                 <p class="hero-lead">
                     الستوك و الحسابات و الفاتورات في بلاصة وحدة اربح الوقت وكبر خدمتك مع simplex gestion<br>
@@ -891,8 +891,8 @@
     <div class="container py-5">
         <div class="text-center mb-5">
             <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">تكنولوجيا</span>
-            <h2 class="fw-800 display-6">علاش تختار الـ Cloud</h2>
-            <p class="text-muted">ادخل منين تحب، وقت ما تحب. </p>
+            <h2 class="fw-bold display-6">علاش تختار simplex gestion</h2>
+            <p class="fw-bold" style="font-size: 1.2em;">ادخل منين تحب، وقت ما تحب </p>
         </div>
 
         <div class="row g-4">

@@ -105,7 +105,7 @@
           "name": "Simplex Gestion",
           "url": "https://www.simplexgestion.tn",
           "logo": "https://www.simplexgestion.tn/logo.png",
-          "description": "Logiciel de gestion commerciale pour entreprises tunisiennes",
+          "description": "application de gestion commerciale pour les commerces tunisiennes",
           "address": {
             "@type": "PostalAddress",
             "addressCountry": "TN",
@@ -804,7 +804,7 @@
         <div class="row align-items-center">
             <div class="col-lg-7" data-aos="fade-right">
                 <h1 class="hero-title">
-                    Solution de Gestion Commerciale pour les Grossistes, Distributeurs et PME.<br>
+                    Solution de Gestion Commerciale dédiée aux Fournisseurs, Grossistes et Distributeurs.<br>
                 </h1>
                 <p class="hero-lead">
                     Synchronisez vos stocks, vos operations et votre facturation en temps réel. Gagnez du temps et développez votre activité avec Simplex Gestion.
@@ -875,8 +875,8 @@
     <div class="container py-5">
         <div class="text-center mb-5">
             <span class="badge bg-primary px-3 py-2 rounded-pill mb-3">TECHNOLOGIE</span>
-            <h2 class="fw-800 display-6">Pourquoi passer au Cloud ?</h2>
-            <p class="text-muted">Accédez depuis n'importe où, n'importe quand, sécurité renforcée. Sans soucis technique.</p>
+            <h2 class="fw-800 display-6">Pourquoi passer à simplex gestion ?</h2>
+            <p class="fw-bold" style="font-size: 1.2em;">Accédez depuis n'importe où, n'importe quand</p>
         </div>
 
         <div class="row g-4">
