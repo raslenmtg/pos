@@ -1085,10 +1085,10 @@ class ProductUtil extends Util
         }
 
         $price_exc_tax = $price_inc_tax;
-        if (! empty($price_inc_tax) && ! empty($tax_id)) {
+     /*   if (! empty($price_inc_tax) && ! empty($tax_id)) {
             $tax_amount = TaxRate::where('id', $tax_id)->value('amount');
             $price_exc_tax = $this->calc_percentage_base($price_inc_tax, $tax_amount);
-        }
+        }*/
 
         return [
             'price_inc_tax' => $price_inc_tax,
