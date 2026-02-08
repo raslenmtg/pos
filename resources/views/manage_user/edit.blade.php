@@ -52,7 +52,7 @@
                   </div>
                 </div>
             </div>
-            <div class="col-md-3">
+           {{-- <div class="col-md-3">
               <div class="form-group">
                 <div class="checkbox">
                   <br/>
@@ -68,7 +68,7 @@
                 {!! Form::label('service_staff_pin', __( 'lang_v1.staff_pin' ) . ':') !!}
                   {!! Form::password('service_staff_pin', ['class' => 'form-control','placeholder' => __( 'lang_v1.staff_pin' ) ]); !!}
               </div>
-            </div>
+            </div>--}}
         @endcomponent
         </div>
         <div class="col-md-12">
