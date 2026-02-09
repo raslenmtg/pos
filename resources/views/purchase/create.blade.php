@@ -541,7 +541,7 @@
 			<div class="col-md-12 text-center">
 				<div style="background-color: #f2f2f2; padding: 10px; border: 1px solid #ddd; margin-top: 10px;">
 					{!! Form::hidden('final_total', 0 , ['id' => 'grand_total_hidden']); !!}
-					<b class="tw-text-xl">@lang('purchase.purchase_total'): </b><span id="grand_total" class="display_currency tw-text-2xl" data-currency_symbol='true'>0</span>
+					<b class="tw-text-xl">@lang('purchase.purchase_total'): </b><span id="grand_total" class="display_currency tw-text-2xl" >0</span>
 				</div>
 			</div>
 		</div>
