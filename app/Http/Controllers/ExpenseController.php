@@ -927,6 +927,9 @@ fill="green" viewBox="0 0 24 24" >
         // Extract business matricule fiscal for declarant (from business)
         $declarantMatriculeFiscal = $business->tax_number_1 ?? '';
 
+        // Remove any spaces or special characters from matricule fiscal
+        $cleanMatricule = str_replace([' ', '/', '\\'], '', $declarantMatriculeFiscal);
+        $cleanMatricule =substr($cleanMatricule,0,8);
         // Code acte (0 for initial declaration)
         $codeActe = '1';
 
@@ -948,7 +951,7 @@ fill="green" viewBox="0 0 24 24" >
         $declarant->appendChild($typeIdentifiant);
 
         // Declarant is the business (the company making the declaration)
-        $identifiant = $xml->createElement('Identifiant', $declarantMatriculeFiscal);
+        $identifiant = $xml->createElement('Identifiant', $cleanMatricule);
         $declarant->appendChild($identifiant);
 
         $categorieContribuable = $xml->createElement('CategorieContribuable', 'PM'); // PM for Personne Morale
@@ -998,7 +1001,10 @@ fill="green" viewBox="0 0 24 24" >
             $matriculeFiscal->appendChild($typeIdBenef);
 
             // Beneficiary is the contact (supplier/beneficiary receiving payment)
-            $identifiantBenef = $xml->createElement('Identifiant', $contact->tax_number ?? '');
+            // Remove any spaces or special characters from matricule fiscal
+            $cleanMatriculeContact = str_replace([' ', '/', '\\'], '', $contact->tax_number ?? '');
+            $cleanMatriculeContact =substr($cleanMatriculeContact,0,8);
+            $identifiantBenef = $xml->createElement('Identifiant',$cleanMatriculeContact );
             $matriculeFiscal->appendChild($identifiantBenef);
 
             // Determine if contact is PM or PP based on type
@@ -1012,7 +1018,7 @@ fill="green" viewBox="0 0 24 24" >
 
             // Name
             $nomBenef = $xml->createElement('NometprenonOuRaisonsociale');
-            $nomBenef->appendChild($xml->createTextNode($contact->name ?? ''));
+            $nomBenef->appendChild($xml->createTextNode($contact->contact_type=='business'?$contact->supplier_business_name: $contact->name ));
             $beneficiaire->appendChild($nomBenef);
 
             // Address
@@ -1125,9 +1131,7 @@ fill="green" viewBox="0 0 24 24" >
         $exercice = $transactionDate->format('Y');  // 4 digits year
         $mois = $transactionDate->format('m');      // 2 digits month (01-12)
 
-        // Remove any spaces or special characters from matricule fiscal
-        $cleanMatricule = str_replace([' ', '/', '\\'], '', $declarantMatriculeFiscal);
-        $cleanMatricule =substr($cleanMatricule,0,8);
+
         $filename = sprintf(
             '%s-%s-%s-%s.xml',
             $cleanMatricule,
