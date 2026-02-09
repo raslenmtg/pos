@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
 @php
-	if (!empty($status) && $status == 'quotation') {
+	// Normalize status once so hidden input always has a value.
+	// Default to 'final' when $status is not provided or is blank.
+	$statusValue = blank($status ?? null) ? 'final' : $status;
+
+	if (!blank($statusValue) && $statusValue == 'quotation') {
 		$title = __('lang_v1.add_quotation');
-	} else if (!empty($status) && $status == 'draft') {
+	} else if (!blank($statusValue) && $statusValue == 'draft') {
 		$title = __('lang_v1.add_draft');
 	} else {
 		$title = __('sale.add_sale');
@@ -208,20 +212,13 @@
 						</div>
 					</div>
 				</div>
-				@if(!empty($status))
-					<input type="hidden" name="status" id="status" value="{{$status}}">
 
-					@if(in_array($status, ['draft', 'quotation']))
+					<input type="hidden" name="status" id="status" value="{{ $statusValue }}">
+
+					@if(in_array($statusValue, ['draft', 'quotation']))
 						<input type="hidden" id="disable_qty_alert">
 					@endif
-				@else
-					<div class="@if(!empty($commission_agent)) col-sm-3 @else col-sm-4 @endif">
-						<div class="form-group">
-							{!! Form::label('status', __('sale.status') . ':*') !!}
-							{!! Form::select('status', $statuses, 'final', ['class' => 'form-control select2', 'placeholder' => __('messages.please_select'), 'required']); !!}
-						</div>
-					</div>
-				@endif
+
 
 					<div class="col-sm-3">
 						<div class="form-group">
@@ -723,26 +720,20 @@
 				<input type="hidden" name="round_off_amount" 
 					id="round_off_amount" value=0>
 				@endif
-		    	<div><b>@lang('sale.total_payable'): </b>
+		    	<div><h3>@lang('sale.total_payable'):<span id="total_payable">0</span></h3>
 					<input type="hidden" name="final_total" id="final_total_input">
-					<span id="total_payable">0</span>
+
 				</div>
 		    </div>
 			@endcomponent
 		</div>
 	</div>
 
-	@php
-		$is_enabled_download_pdf = config('constants.enable_download_pdf');
-		$payment_body_id = 'payment_rows_div';
-		if ($is_enabled_download_pdf) {
-			$payment_body_id = '';
-		}
-	@endphp
-	@if((empty($status) || (!in_array($status, ['quotation', 'draft'])) || $is_enabled_download_pdf) && $sale_type != 'sales_order')
+	@if((empty($status) || (!in_array($status, ['quotation', 'draft'])) || config('constants.enable_download_pdf')) && $sale_type != 'sales_order')
 		@can('sell.payments')
-			@component('components.widget', ['class' => 'box-solid', 'id' => $payment_body_id, 'title' => __('purchase.add_payment')])
-			{{--@if($is_enabled_download_pdf)
+			@component('components.widget', ['class' => 'box-solid', 'title' => __('purchase.add_payment')])
+			<div id="payment_section">
+			{{--@if(config('constants.enable_download_pdf'))
 				<div class="well row">
 					<div class="col-md-6">
 						<div class="form-group">
@@ -771,15 +762,23 @@
 				</div>
 			@endif--}}
 			@if(empty($status) || !in_array($status, ['quotation', 'draft']))
-				<div class="payment_row" @if($is_enabled_download_pdf) id="payment_rows_div" @endif>
-					<div class="row">
-						<div class="col-md-12 mb-12">
-							<strong>@lang('lang_v1.advance_balance'):</strong> <span id="advance_balance_text"></span>
-							{!! Form::hidden('advance_balance', null, ['id' => 'advance_balance', 'data-error-msg' => __('lang_v1.required_advance_balance_not_available')]); !!}
+				<div id="payment_rows_div">
+					<div class="payment_row">
+						<div class="row">
+							<div class="col-md-12 mb-12">
+								<strong>@lang('lang_v1.advance_balance'):</strong> <span id="advance_balance_text"></span>
+								{!! Form::hidden('advance_balance', null, ['id' => 'advance_balance', 'data-error-msg' => __('lang_v1.required_advance_balance_not_available')]); !!}
+							</div>
 						</div>
+						@include('sale_pos.partials.payment_row_form', ['row_index' => 0, 'show_date' => true, 'show_denomination' => true])
 					</div>
-					@include('sale_pos.partials.payment_row_form', ['row_index' => 0, 'show_date' => true, 'show_denomination' => true])
-                </div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm tw-w-full" id="add-payment-row">@lang('sale.add_payment_row')</button>
+					</div>
+				</div>
+				<input type="hidden" id="payment_row_index" value="1">
                 <div class="payment_row">
 					<div class="row">
 						<div class="col-md-12">
@@ -840,6 +839,7 @@
 					</div>
 				</div>
 			@endif
+			</div>
 			@endcomponent
 		@endcan
 	@endif
@@ -910,9 +910,9 @@
     	$(document).ready( function() {
     		$('#status').change(function(){
     			if ($(this).val() == 'final') {
-    				$('#payment_rows_div').removeClass('hide');
+    				$('#payment_section').removeClass('hide');
     			} else {
-    				$('#payment_rows_div').addClass('hide');
+    				$('#payment_section').addClass('hide');
     			}
     		});
     		$('.paid_on').datetimepicker({

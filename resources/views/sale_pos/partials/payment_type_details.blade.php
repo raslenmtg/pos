@@ -1,5 +1,5 @@
 <div class="payment_details_div @if( $payment_line['method'] !== 'card' ) {{ 'hide' }} @endif" data-type="card" >
-	<h2> {{__('lang_v1.optional')}}</h2>
+	<p> {{__('lang_v1.optional')}}</p>
 	<div class="col-md-4">
 		<div class="form-group">
 			{!! Form::label("card_number_$row_index", __('lang_v1.card_no')) !!}
