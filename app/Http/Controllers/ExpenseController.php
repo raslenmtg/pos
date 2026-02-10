@@ -943,7 +943,7 @@ fill="green" viewBox="0 0 24 24" >
         }
 
         // Code acte (0 for initial declaration)
-        $codeActe = '1';
+        $codeActe = '0';
 
         // Create XML
         $xml = new \DOMDocument('1.0', 'UTF-8');
