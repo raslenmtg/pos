@@ -927,9 +927,21 @@ fill="green" viewBox="0 0 24 24" >
         // Extract business matricule fiscal for declarant (from business)
         $declarantMatriculeFiscal = $business->tax_number_1 ?? '';
 
-        // Remove any spaces or special characters from matricule fiscal
-        $cleanMatricule = str_replace([' ', '/', '\\'], '', $declarantMatriculeFiscal);
-        $cleanMatricule =substr($cleanMatricule,0,8);
+        // Extract numbers and the first letter suffix
+        if (preg_match('/(\d+).*?([A-Z])/i', $declarantMatriculeFiscal, $matches)) {
+            $numberPart = $matches[1];
+            $letterPart = strtoupper($matches[2]);
+
+            // Format to 7 digits + 1 letter (e.g., 0123456X)
+            $cleanMatricule = str_pad($numberPart, 7, "0", STR_PAD_LEFT) . $letterPart;
+        } else {
+            $output = ['success' => 0,
+                'msg' => 'Invalid Matricule Fiscal format du declarant . Expected format: 0123456X',
+            ];
+
+            return back()->with('status', $output);
+        }
+
         // Code acte (0 for initial declaration)
         $codeActe = '1';
 
@@ -1000,10 +1012,21 @@ fill="green" viewBox="0 0 24 24" >
             $typeIdBenef = $xml->createElement('TypeIdentifiant', '1');
             $matriculeFiscal->appendChild($typeIdBenef);
 
-            // Beneficiary is the contact (supplier/beneficiary receiving payment)
-            // Remove any spaces or special characters from matricule fiscal
-            $cleanMatriculeContact = str_replace([' ', '/', '\\'], '', $contact->tax_number ?? '');
-            $cleanMatriculeContact =substr($cleanMatriculeContact,0,8);
+
+            if (preg_match('/(\d+).*?([A-Z])/i', $contact->tax_number, $matches)) {
+                $numberPart = $matches[1];
+                $letterPart = strtoupper($matches[2]);
+
+                // Format to 7 digits + 1 letter (e.g., 0123456X)
+                $cleanMatriculeContact = str_pad($numberPart, 7, "0", STR_PAD_LEFT) . $letterPart;
+            } else {
+                $output = ['success' => 0,
+                    'msg' => 'Invalid Matricule Fiscal format du '.$contact->contact_type=='business'?$contact->supplier_business_name: $contact->name.' . Expected format: 0123456X',
+                ];
+
+                return back()->with('status', $output);
+            }
+
             $identifiantBenef = $xml->createElement('Identifiant',$cleanMatriculeContact );
             $matriculeFiscal->appendChild($identifiantBenef);
 
