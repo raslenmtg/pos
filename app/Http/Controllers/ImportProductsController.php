@@ -352,7 +352,13 @@ class ImportProductsController extends Controller
 
                             //Stock expiry date
                             if (! empty($value[20])) {
-                                $product_array['opening_stock_details']['exp_date'] = \Carbon::createFromFormat('d/mY', trim($value[20]))->format('Y-m-d');
+                                $exp_date = $this->parseCsvDate(trim($value[20]));
+                                if (empty($exp_date)) {
+                                    $is_valid = false;
+                                    $error_msg = "Invalid EXPIRY DATE in row no. $row_no";
+                                    break;
+                                }
+                                $product_array['opening_stock_details']['exp_date'] = $exp_date;
                             } else {
                                 $product_array['opening_stock_details']['exp_date'] = null;
                             }
@@ -530,7 +536,13 @@ class ImportProductsController extends Controller
                                 $product_array['variation']['variations'][$k]['opening_stock_exp_date'] = null;
 
                                 if (! empty($value[20])) {
-                                    $product_array['variation']['variations'][$k]['opening_stock_exp_date'] = \Carbon::createFromFormat('d/m/Y', trim($value[20]))->format('Y-m-d');
+                                    $exp_date = $this->parseCsvDate(trim($value[20]));
+                                    if (empty($exp_date)) {
+                                        $is_valid = false;
+                                        $error_msg = "Invalid EXPIRY DATE in row no. $row_no";
+                                        break 2;
+                                    }
+                                    $product_array['variation']['variations'][$k]['opening_stock_exp_date'] = $exp_date;
                                 } else {
                                     $product_array['variation']['variations'][$k]['opening_stock_exp_date'] = null;
                                 }
@@ -697,6 +709,26 @@ class ImportProductsController extends Controller
         ];
     }
 
+    private function parseCsvDate($date)
+    {
+        $date = trim($date);
+        if ($date === '') {
+            return null;
+        }
+
+        $formats = ['d/m/Y', 'm-d-Y', 'Y-m-d', 'd-m-Y'];
+        foreach ($formats as $format) {
+            try {
+                $parsed = \Carbon::createFromFormat($format, $date);
+                return $parsed->format('Y-m-d');
+            } catch (\Exception $e) {
+                // Try the next format.
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Adds opening stock of a single product
      *
@@ -715,7 +747,8 @@ class ImportProductsController extends Controller
         $total_before_tax = $opening_stock['quantity'] * $variation->dpp_inc_tax;
 
         $transaction_date = request()->session()->get('financial_year.start');
-        $transaction_date = \Carbon::createFromFormat('d/m/Y', $transaction_date)->toDateTimeString();
+        $transaction_date = $this->parseCsvDate($transaction_date) ?? \Carbon::parse($transaction_date)->toDateString();
+        $transaction_date = \Carbon::createFromFormat('Y-m-d', $transaction_date)->toDateTimeString();
         //Add opening stock transaction
         $transaction = Transaction::create(
             [
@@ -772,7 +805,8 @@ class ImportProductsController extends Controller
         $user_id = request()->session()->get('user.id');
 
         $transaction_date = request()->session()->get('financial_year.start');
-        $transaction_date = \Carbon::createFromFormat('d/m/Y', $transaction_date)->toDateTimeString();
+        $transaction_date = $this->parseCsvDate($transaction_date) ?? \Carbon::parse($transaction_date)->toDateString();
+        $transaction_date = \Carbon::createFromFormat('Y-m-d', $transaction_date)->toDateTimeString();
 
         $total_before_tax = 0;
         $location_id = $variations['opening_stock_location'];
