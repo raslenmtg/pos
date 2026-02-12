@@ -533,7 +533,15 @@ class ImportProductsController extends Controller
 
                         //Opening stock
                         if (! empty($value[18]) && $enable_stock == 1) {
-                            $variation_os = array_map('trim', explode('|', $value[18]));
+                            // Trim the entire string first to remove trailing whitespace/tabs
+                            $opening_stock_string = trim($value[18]);
+                            $variation_os = array_map('trim', explode('|', $opening_stock_string));
+                            // Filter out empty values
+                            $variation_os = array_filter($variation_os, function($val) {
+                                return $val !== '';
+                            });
+                            // Re-index array after filtering
+                            $variation_os = array_values($variation_os);
                             // Normalize numeric values (handle comma as decimal separator)
                             $variation_os = array_map([$this, 'normalizeNumericValue'], $variation_os);
 
@@ -939,9 +947,29 @@ class ImportProductsController extends Controller
             $locations = BusinessLocation::forDropdown($business_id);
             $loc_count = count($locations);
 
-            $racks = explode('|', $rack_value);
-            $rows = explode('|', $row_value);
-            $position = explode('|', $position_value);
+            // Trim and filter rack values
+            $rack_value = trim($rack_value);
+            $racks = array_map('trim', explode('|', $rack_value));
+            $racks = array_filter($racks, function($val) {
+                return $val !== '';
+            });
+            $racks = array_values($racks);
+
+            // Trim and filter row values
+            $row_value = trim($row_value);
+            $rows = array_map('trim', explode('|', $row_value));
+            $rows = array_filter($rows, function($val) {
+                return $val !== '';
+            });
+            $rows = array_values($rows);
+
+            // Trim and filter position values
+            $position_value = trim($position_value);
+            $position = array_map('trim', explode('|', $position_value));
+            $position = array_filter($position, function($val) {
+                return $val !== '';
+            });
+            $position = array_values($position);
 
             if (count($racks) > $loc_count) {
                 $error_msg = "Invalid value for RACK in row no. $row_no";
