@@ -509,7 +509,7 @@ return [
     'expiry' => 'Expiration',
     'expiry_date' => 'Date d\'expiration',
     'expiry_date_in_business_date_format' => 'Date d\'expiration des actions au format de date de l\'entreprise <b> </b>',
-    'expiry_date_ins' => 'Date d\'expiration des actions <br> <b> Format: mm-dd-yyy; Ex: 11-25-2018 </b>',
+    'expiry_date_ins' => 'Date d\'expiration des actions <br> <b> Format: d/m/Y; Ex: 20/10/2020 </b>',
     'expiry_date_will_be_changed_in_pl' => 'La date d\expiration sera changé dans',
     'export' => 'Hors taxe',
     'export_custom_field1' => 'Exporter le champ personnalisé 1',
