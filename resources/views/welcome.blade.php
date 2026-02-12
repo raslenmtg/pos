@@ -1253,7 +1253,7 @@
             <div class="col-lg-4 mb-4">
                 <h3 class="fw-bold mb-4">Simplex<span class="text-primary">Gestion</span></h3>
                 <p class="text-secondary">
-                    Le logiciel de gestion commerciale tout-en-un conçu pour le marché tunisien. Facturation, Stock, POS et Comptabilité.
+                    Logiciel de gestion commerciale tout-en-un conçu pour le marché tunisien. Facturation, Stock, Caisse et Comptabilité.
                 </p>
                 <div class="d-flex gap-3 mt-4">
                     <a href="https://www.facebook.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>

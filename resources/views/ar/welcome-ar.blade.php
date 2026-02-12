@@ -1288,7 +1288,7 @@
             <div class="col-lg-4 mb-4">
                 <h3 class="fw-bold mb-4">Simplex<span class="text-primary">Gestion</span></h3>
                 <p class="text-secondary">
-                    برنامج إدارة الأعمال المتكامل المصمم خصيصاً للسوق التونسية. يشمل إصدار الفواتير، وإدارة المخزون، ونظام كاسة، والمحاسبة.
+                    برنامج إدارة التجارة المتكامل المصمم خصيصاً للسوق التونسية. يشمل إصدار الفواتير، وإدارة المخزون، ونظام كاسة، والمحاسبة.
                 </p>
                 <div class="d-flex gap-3 mt-4">
                     <a href="https://www.facebook.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
