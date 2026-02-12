@@ -119,6 +119,12 @@ class BusinessController extends Controller
      */
     public function postRegister(Request $request)
     {
+        if(!config('constants.allow_registration')) {
+            $output = ['success' => 0,
+                'msg' => 'Inscription est désactivée pour le moment, veuillez nous contacter.',
+            ];
+            return redirect('login')->with('status', $output);
+        }
 
 
         try {
