@@ -11,8 +11,21 @@
 
 <!-- Main content -->
 <section class="content">
+    @if (session('notification') || !empty($notification))
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    @if (!empty($notification['msg']))
+                        {{ $notification['msg'] }}
+                    @elseif(session('notification.msg'))
+                        {{ session('notification.msg') }}
+                    @endif
+                </div>
+            </div>
+        </div>
+    @endif
 
-    
     <div class="row">
         <div class="col-sm-12">
             @component('components.widget', ['class' => 'box-primary'])
@@ -86,9 +99,9 @@
                     </tr>
                     <tr>
                         <td>7</td>
-                        <td>@lang('product.barcode_type') <small class="text-muted">(@lang('lang_v1.optional'), @lang('lang_v1.default'): C128)</small></td>
+                        <td>@lang('product.barcode_type') <small class="text-muted">(@lang('lang_v1.optional'), @lang('lang_v1.default'): EAN13)</small></td>
                         <td>@lang('lang_v1.barcode_type_ins') <br>
-                            <strong>@lang('lang_v1.barcode_type_ins2'): C128, C39, EAN-13, EAN-8, UPC-A, UPC-E, ITF-14</strong>
+                            <strong>@lang('lang_v1.barcode_type_ins2'): EAN-13, C128, C39, EAN-8, UPC-A, UPC-E, ITF-14</strong>
                         </td>
                     </tr>
                     <tr>
@@ -130,7 +143,7 @@
                     </tr>
                     <tr>
                         <td>14</td>
-                        <td>@lang('product.product_type') <small class="text-muted">(@lang('lang_v1.required'))</small></td>
+                        <td>@lang('product.product_type') <small class="text-muted">(@lang('lang_v1.required'), Défaut: single)</small></td>
                         <td>@lang('product.product_type') <br>
                             <strong>@lang('lang_v1.available_options'): single, variable</strong></td>
                     </tr>
@@ -271,3 +284,4 @@
 <!-- /.content -->
 
 @endsection
+
