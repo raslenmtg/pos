@@ -389,26 +389,50 @@ class ImportProductsController extends Controller
                         }
 
                         //Variation values
+                        // Trim the entire string first to remove trailing whitespace/tabs
+                        $variation_values_string = trim($variation_values_string);
                         $variation_values = array_map('trim', explode(
                             '|',
                             $variation_values_string
                         ));
+                        // Filter out empty values
+                        $variation_values = array_filter($variation_values, function($val) {
+                            return $val !== '';
+                        });
+                        // Re-index array after filtering
+                        $variation_values = array_values($variation_values);
 
                         $variation_skus = [];
                         if (! empty($variation_sku_string)) {
+                            // Trim the entire string first to remove trailing whitespace/tabs
+                            $variation_sku_string = trim($variation_sku_string);
                             $variation_skus = array_map('trim', explode(
                             '|',
                                 $variation_sku_string
                             ));
+                            // Filter out empty values
+                            $variation_skus = array_filter($variation_skus, function($val) {
+                                return $val !== '';
+                            });
+                            // Re-index array after filtering
+                            $variation_skus = array_values($variation_skus);
                         }
 
                         //Map Purchase price with variation values
                         $dpp_inc_tax = [];
                         if (! empty($dpp_inc_tax_string)) {
+                            // Trim the entire string first to remove trailing whitespace/tabs
+                            $dpp_inc_tax_string = trim($dpp_inc_tax_string);
                             $dpp_inc_tax = array_map('trim', explode(
                                 '|',
                                 $dpp_inc_tax_string
                             ));
+                            // Filter out empty values
+                            $dpp_inc_tax = array_filter($dpp_inc_tax, function($val) {
+                                return $val !== '';
+                            });
+                            // Re-index array after filtering
+                            $dpp_inc_tax = array_values($dpp_inc_tax);
                             // Normalize numeric values (handle comma as decimal separator)
                             $dpp_inc_tax = array_map([$this, 'normalizeNumericValue'], $dpp_inc_tax);
                         } else {
@@ -432,10 +456,18 @@ class ImportProductsController extends Controller
                         //Map Selling price with variation values
                         $selling_price = [];
                         if (! empty($selling_price_string)) {
+                            // Trim the entire string first to remove trailing whitespace/tabs
+                            $selling_price_string = trim($selling_price_string);
                             $selling_price = array_map('trim', explode(
                                 '|',
                                 $selling_price_string
                                 ));
+                            // Filter out empty values
+                            $selling_price = array_filter($selling_price, function($val) {
+                                return $val !== '';
+                            });
+                            // Re-index array after filtering
+                            $selling_price = array_values($selling_price);
                             // Normalize numeric values (handle comma as decimal separator)
                             $selling_price = array_map([$this, 'normalizeNumericValue'], $selling_price);
                         } else {
