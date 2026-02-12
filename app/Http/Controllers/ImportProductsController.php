@@ -300,11 +300,11 @@ class ImportProductsController extends Controller
                             $error_msg = "PURCHASE PRICE is required in row no. $row_no";
                             break;
                         } else {
-                            $dpp_inc_tax = ($dpp_inc_tax != '') ? $dpp_inc_tax : 0;
+                            $dpp_inc_tax = ($dpp_inc_tax != '') ? $this->normalizeNumericValue($dpp_inc_tax) : 0;
                         }
 
                         //Calculate Selling price
-                        $selling_price = ! empty(trim($value[17])) ? trim($value[17]) : 0;
+                        $selling_price = ! empty(trim($value[17])) ? $this->normalizeNumericValue(trim($value[17])) : 0;
 
                         //Calculate profit margin based on purchase price and selling price
                         $profit_margin = $this->productUtil->get_percent($dpp_inc_tax, $selling_price);
@@ -321,7 +321,7 @@ class ImportProductsController extends Controller
 
                         //Opening stock
                         if (! empty($value[18]) && $enable_stock == 1) {
-                            $product_array['opening_stock_details']['quantity'] = trim($value[18]);
+                            $product_array['opening_stock_details']['quantity'] = $this->normalizeNumericValue(trim($value[18]));
 
                             //Get location from location column (index 19)
                             $location_name = '';
@@ -409,6 +409,8 @@ class ImportProductsController extends Controller
                                 '|',
                                 $dpp_inc_tax_string
                             ));
+                            // Normalize numeric values (handle comma as decimal separator)
+                            $dpp_inc_tax = array_map([$this, 'normalizeNumericValue'], $dpp_inc_tax);
                         } else {
                             foreach ($variation_values as $k => $v) {
                                 $dpp_inc_tax[$k] = 0;
@@ -434,6 +436,8 @@ class ImportProductsController extends Controller
                                 '|',
                                 $selling_price_string
                                 ));
+                            // Normalize numeric values (handle comma as decimal separator)
+                            $selling_price = array_map([$this, 'normalizeNumericValue'], $selling_price);
                         } else {
                             foreach ($variation_values as $k => $v) {
                                 $selling_price[$k] = 0;
@@ -498,6 +502,8 @@ class ImportProductsController extends Controller
                         //Opening stock
                         if (! empty($value[18]) && $enable_stock == 1) {
                             $variation_os = array_map('trim', explode('|', $value[18]));
+                            // Normalize numeric values (handle comma as decimal separator)
+                            $variation_os = array_map([$this, 'normalizeNumericValue'], $variation_os);
 
                             //$product_array['opening_stock_details']['quantity'] = $variation_os;
 
@@ -707,6 +713,29 @@ class ImportProductsController extends Controller
             'dsp_exc_tax' => $this->productUtil->num_f($dsp_exc_tax),
             'dsp_inc_tax' => $this->productUtil->num_f($dsp_inc_tax),
         ];
+    }
+
+    /**
+     * Normalize numeric value from CSV (handles comma as decimal separator)
+     *
+     * @param string|numeric $value
+     * @return float
+     */
+    private function normalizeNumericValue($value)
+    {
+        if (empty($value) || $value === '') {
+            return 0;
+        }
+
+        $value = trim($value);
+
+        // Replace comma with dot for decimal separator
+        $value = str_replace(',', '.', $value);
+
+        // Remove any thousand separators (spaces, non-breaking spaces)
+        $value = str_replace([' ', "\xc2\xa0"], '', $value);
+
+        return is_numeric($value) ? (float)$value : 0;
     }
 
     private function parseCsvDate($date)

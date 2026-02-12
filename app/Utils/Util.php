@@ -67,6 +67,9 @@ class Util
             $currency_precision = ! empty($business_details) ? $business_details->quantity_precision : session('business.quantity_precision', 2);
         }
 
+        // Ensure input is numeric for PHP 8+ compatibility
+        $input_number = is_numeric($input_number) ? (float)$input_number : 0;
+
         $formatted = number_format($input_number, $currency_precision, $decimal_separator, $thousand_separator);
 
         if ($add_symbol) {
