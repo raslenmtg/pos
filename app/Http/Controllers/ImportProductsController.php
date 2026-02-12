@@ -119,7 +119,7 @@ class ImportProductsController extends Controller
                 foreach ($imported_data as $key => $value) {
 
                     //Check if any column is missing
-                    if (count($value) < 29) {
+                    if (count($value) < 28) {
                         $is_valid = false;
                         $error_msg = 'Some of the columns are missing. Please, use latest CSV file template. Expected 29 columns.';
                         break;
@@ -167,7 +167,7 @@ class ImportProductsController extends Controller
                     }
 
                     //Add not for selling
-                    $product_array['not_for_selling'] = ! empty($value[28]) && $value[28] == 1 ? 1 : 0;
+                    $product_array['not_for_selling'] = 0;
 
                     //Add enable stock
                     $enable_stock = trim($value[6]);
