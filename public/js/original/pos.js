@@ -704,8 +704,15 @@ $(document).ready((function() {
             dataType: 'html',
             success: function(t) {
                 if (t) {
-                    var a = $('#payment_rows_div').append(t),
-                        n = __read_number($('input#final_total_input')) - __read_number($('input#total_paying_input'));
+                    // Calculate remaining balance from existing rows BEFORE appending the new one
+                    var already_paying = 0;
+                    $('#payment_rows_div').find('input.payment-amount').each(function() {
+                        already_paying += __read_number($(this));
+                    });
+                    var n = __read_number($('input#final_total_input')) - already_paying;
+                    if (n < 0) n = 0;
+
+                    var a = $('#payment_rows_div').append(t);
                     $(a).find('input.payment-amount').focus(), $(a).find('input.payment-amount').last().val(__currency_trans_from_en(n, !1)).change().select(), __select2($(a).find('.select2')), $(a).find('.paid_on').datetimepicker({
                         format: moment_date_format,
                         ignoreReadonly: !0,

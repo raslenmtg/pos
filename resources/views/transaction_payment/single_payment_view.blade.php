@@ -157,8 +157,10 @@
 
             @elseif($single_payment_line->method == "custom_pay_1")
 
-              <strong>@lang('lang_v1.transaction_number') :</strong>
-              {{ $single_payment_line->transaction_no }}
+              <strong>@lang('lang_v1.traite_date_echeance') :</strong>
+              {{@format_date( $single_payment_line->due_date )}}<br>
+                  <strong>@lang('lang_v1.transaction_number') :</strong>
+              {{ $single_payment_line->transaction_no }}<br>
             @elseif($single_payment_line->method == "custom_pay_2")
 
               <strong>@lang('lang_v1.transaction_number') :</strong>
