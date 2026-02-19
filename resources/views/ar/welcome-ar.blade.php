@@ -96,7 +96,8 @@
         fbq('track', 'Lead', {
             content_name: 'Arabic Landing Page Visit',
             content_category: 'Landing Page',
-            source: 'welcome-ar'
+            source: 'welcome-ar',
+            event_id: 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
         });
     </script>
     <noscript><img height="1" width="1" style="display:none"
