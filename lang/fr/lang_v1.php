@@ -1404,6 +1404,7 @@ return [
     'transaction_number' => 'Numéro de transaction',
     'transfer_from' => 'Transfert à partir de',
     'tuesday' => 'Mardi',
+    'traite_date_echeance' => 'Date d\'échéance',
     'twilio_sid' => 'Twilio Account SID',
     'twilio_token' => 'Twilio Access Token',
     'twitter_link' => 'Lien Twitter',

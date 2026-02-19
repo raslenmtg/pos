@@ -72,8 +72,8 @@ class TransactionPaymentController extends Controller
             }
 
             if ($transaction->payment_status != 'paid') {
-                $inputs = $request->only(['amount', 'method', 'note', 'card_number', 'card_holder_name',
-                    'card_transaction_number', 'card_type', 'card_month', 'card_year', 'card_security',
+                $inputs = $request->only(['amount', 'method', 'note',
+                    'card_transaction_number',
                     'cheque_number', 'bank_account_number', ]);
                 $inputs['paid_on'] = $this->transactionUtil->uf_date($request->input('paid_on'), true);
                 $inputs['transaction_id'] = $transaction->id;
@@ -83,6 +83,9 @@ class TransactionPaymentController extends Controller
 
                 if ($inputs['method'] == 'custom_pay_1') {
                     $inputs['transaction_no'] = $request->input('transaction_no_1');
+                    if ($request->has('due_date_1')) {
+                        $inputs['due_date'] = $this->transactionUtil->uf_date($request->input('due_date_1'), true);
+                    }
                 } elseif ($inputs['method'] == 'custom_pay_2') {
                     $inputs['transaction_no'] = $request->input('transaction_no_2');
                 } elseif ($inputs['method'] == 'custom_pay_3') {
@@ -238,14 +241,17 @@ class TransactionPaymentController extends Controller
         try {
             $business_id = request()->session()->get('user.business_id');
 
-            $inputs = $request->only(['amount', 'method', 'note', 'card_number', 'card_holder_name',
-                'card_transaction_number', 'card_type', 'card_month', 'card_year', 'card_security',
+            $inputs = $request->only(['amount', 'method', 'note',
+                'card_transaction_number',
                 'cheque_number', 'bank_account_number', ]);
             $inputs['paid_on'] = $this->transactionUtil->uf_date($request->input('paid_on'), true);
             $inputs['amount'] = $this->transactionUtil->num_uf($inputs['amount']);
 
             if ($inputs['method'] == 'custom_pay_1') {
                 $inputs['transaction_no'] = $request->input('transaction_no_1');
+                if ($request->has('due_date_1')) {
+                    $inputs['due_date'] = $this->transactionUtil->uf_date($request->input('due_date_1'), true);
+                }
             } elseif ($inputs['method'] == 'custom_pay_2') {
                 $inputs['transaction_no'] = $request->input('transaction_no_2');
             } elseif ($inputs['method'] == 'custom_pay_3') {

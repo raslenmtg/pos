@@ -759,11 +759,6 @@ class TransactionUtil extends Util
                         'business_id' => $transaction->business_id,
                         'is_return' => isset($payment['is_return']) ? $payment['is_return'] : 0,
                         'card_transaction_number' => isset($payment['card_transaction_number']) ? $payment['card_transaction_number'] : null,
-                        'card_number' => isset($payment['card_number']) ? $payment['card_number'] : null,
-                        'card_type' => isset($payment['card_type']) ? $payment['card_type'] : null,
-                        'card_holder_name' => isset($payment['card_holder_name']) ? $payment['card_holder_name'] : null,
-                        'card_month' => isset($payment['card_month']) ? $payment['card_month'] : null,
-                        'card_security' => isset($payment['card_security']) ? $payment['card_security'] : null,
                         'cheque_number' => isset($payment['cheque_number']) ? $payment['cheque_number'] : null,
                         'bank_account_number' => isset($payment['bank_account_number']) ? $payment['bank_account_number'] : null,
                         'note' => isset($payment['note']) ? $payment['note'] : null,
@@ -777,6 +772,11 @@ class TransactionUtil extends Util
                     for ($i = 1; $i < 8; $i++) {
                         if ($payment['method'] == 'custom_pay_'.$i) {
                             $payment_data['transaction_no'] = $payment["transaction_no_{$i}"];
+                            
+                            // Handle due_date for custom_pay_1 (Traite/Lettre de change)
+                            if ($i == 1 && isset($payment["due_date_{$i}"])) {
+                                $payment_data['due_date'] = $uf_data ? $this->uf_date($payment["due_date_{$i}"], true) : $payment["due_date_{$i}"];
+                            }
                         }
                     }
 
@@ -847,8 +847,16 @@ class TransactionUtil extends Util
         for ($i = 1; $i < 8; $i++) {
             if ($payment['method'] == 'custom_pay_'.$i) {
                 $payment['transaction_no'] = $payment["transaction_no_{$i}"];
+                
+                // Handle due_date for custom_pay_1 (Traite/Lettre de change)
+                if ($i == 1 && isset($payment["due_date_{$i}"])) {
+                    $payment['due_date'] = $uf_data ? $this->uf_date($payment["due_date_{$i}"], true) : $payment["due_date_{$i}"];
+                }
             }
             unset($payment["transaction_no_{$i}"]);
+            if (isset($payment["due_date_{$i}"])) {
+                unset($payment["due_date_{$i}"]);
+            }
         }
 
         if (! empty($payment['paid_on'])) {
@@ -2832,12 +2840,7 @@ class TransactionUtil extends Util
                         'method' => $parent_payment->method,
                         'transaction_no' => $parent_payment->method,
                         'card_transaction_number' => $parent_payment->card_transaction_number,
-                        'card_number' => $parent_payment->card_number,
-                        'card_type' => $parent_payment->card_type,
-                        'card_holder_name' => $parent_payment->card_holder_name,
-                        'card_month' => $parent_payment->card_month,
-                        'card_year' => $parent_payment->card_year,
-                        'card_security' => $parent_payment->card_security,
+
                         'cheque_number' => $parent_payment->cheque_number,
                         'bank_account_number' => $parent_payment->bank_account_number,
                         'paid_on' => $parent_payment->paid_on,
@@ -5689,8 +5692,8 @@ class TransactionUtil extends Util
     {
         $contact_id = $request->input('contact_id');
         $business_id = auth()->user()->business_id;
-        $inputs = $request->only(['amount', 'method', 'note', 'card_number', 'card_holder_name',
-            'card_transaction_number', 'card_type', 'card_month', 'card_year', 'card_security',
+        $inputs = $request->only(['amount', 'method', 'note',
+            'card_transaction_number',
             'cheque_number', 'bank_account_number', ]);
 
         //payment type option is available on pay contact modal

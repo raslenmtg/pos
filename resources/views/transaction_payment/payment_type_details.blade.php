@@ -23,10 +23,16 @@
 	</div>
 </div>
 <div class="payment_details_div @if( $payment_line->method !== 'custom_pay_1' ) {{ 'hide' }} @endif" data-type="custom_pay_1" >
-	<div class="col-md-12">
+	<div class="col-md-6">
 		<div class="form-group">
 			{!! Form::label("transaction_no_1", __('lang_v1.transaction_no')) !!}
 			{!! Form::text("transaction_no_1", $payment_line->transaction_no, ['class' => 'form-control', 'placeholder' => __('lang_v1.transaction_no')]); !!}
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			{!! Form::label("due_date_1", __('lang_v1.traite_date_echeance')) !!}
+			{!! Form::text("due_date_1", !empty($payment_line->due_date) ? @format_date($payment_line->due_date) : null, ['class' => 'form-control datepicker', 'placeholder' => __('lang_v1.traite_date_echeance')]); !!}
 		</div>
 	</div>
 </div>
