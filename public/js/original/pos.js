@@ -709,7 +709,7 @@ $(document).ready((function() {
                     $(a).find('input.payment-amount').focus(), $(a).find('input.payment-amount').last().val(__currency_trans_from_en(n, !1)).change().select(), __select2($(a).find('.select2')), $(a).find('.paid_on').datetimepicker({
                         format: moment_date_format,
                         ignoreReadonly: !0,
-                    }), $(a).find('#method_' + e).change(), $('#payment_row_index').val(parseInt(e) + 1);
+                    }), initDateTimePicker(a), $(a).find('#method_' + e).change(), $('#payment_row_index').val(parseInt(e) + 1);
                 }
             },
         });

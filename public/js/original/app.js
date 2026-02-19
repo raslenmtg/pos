@@ -33,6 +33,45 @@ $(document).ready(function() {
         autoclose: true,
         endDate: 'today',
     });
+
+    // Global DateTimePicker class initializer
+    // Any input with class "DateTimePicker" will automatically become a date-time picker.
+    // Add data-date-only="true" on the input to get a date-only picker instead.
+    function initDateTimePicker(context) {
+        $(context || document).find('.DateTimePicker').each(function() {
+            var $el = $(this);
+            if ($el.data('datetimepicker') || $el.data('datepicker')) {
+                return; // already initialized, skip
+            }
+            if ($el.attr('data-date-only') === 'true') {
+                // Date-only picker
+                $el.datepicker({
+                    autoclose: true,
+                    format: (typeof datepicker_date_format !== 'undefined') ? datepicker_date_format : 'yyyy-mm-dd',
+                });
+            } else {
+                // Date + time picker (default)
+                $el.datetimepicker({
+                    format: ((typeof moment_date_format !== 'undefined') ? moment_date_format : 'YYYY-MM-DD') +
+                            ' ' +
+                            ((typeof moment_time_format !== 'undefined') ? moment_time_format : 'HH:mm'),
+                    ignoreReadonly: true,
+                });
+            }
+        });
+    }
+
+    // Initialize all .DateTimePicker inputs present on page load
+    initDateTimePicker(document);
+
+    // Expose globally so other scripts (e.g. pos.js) can call it after AJAX
+    window.initDateTimePicker = initDateTimePicker;
+
+    // Re-initialize inside modals after they are shown (covers dynamically loaded modal content)
+    $(document).on('shown.bs.modal', function(e) {
+        initDateTimePicker(e.target);
+    });
+
     $(document).on('click', '.btn-modal', function(e) {
         e.preventDefault();
         var container = $(this).data('container');

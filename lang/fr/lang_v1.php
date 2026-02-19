@@ -829,7 +829,7 @@ return [
     'packing_slip' => 'Bordereau',
     'paid' => 'Payé',
     'paid_amount' => 'Montant Payé',
-    'paid_on' => 'Payé le',
+    'paid_on' => 'Payer le',
     'parent_account_type' => 'Type de compte parent',
     'parent_payment' => 'Paiement des parents',
     'parent_purchase' => 'Achat du parent',

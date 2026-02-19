@@ -34,7 +34,12 @@
 	<div class="col-md-6">
 		<div class="form-group">
 			{!! Form::label("due_date_$row_index", __('lang_v1.traite_date_echeance')) !!}
-			{!! Form::text("payment[$row_index][due_date]", !empty($payment_line['due_date']) ? @format_date($payment_line['due_date']) : null, ['class' => 'form-control datepicker', 'placeholder' => __('lang_v1.traite_date_echeance'), 'id' => "due_date_$row_index"]); !!}
+			<div class="input-group">
+              <span class="input-group-addon">
+                <i class="fa fa-calendar"></i>
+              </span>
+			{!! Form::text("payment[$row_index][due_date]", !empty($payment_line['due_date']) ? @format_date($payment_line['due_date']) : null, ['class' => 'form-control DateTimePicker ','data-date-only'=>'true', 'placeholder' => __('lang_v1.traite_date_echeance'), 'id' => "due_date_$row_index"]); !!}
+			</div>
 		</div>
 	</div>
 </div>
