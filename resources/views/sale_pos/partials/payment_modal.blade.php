@@ -215,29 +215,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-12">
-	                    <h4> {{__('lang_v1.optional')}}</h4>	
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('card_number', __('lang_v1.card_no')) !!}
-                                {!! Form::text('', null, [
-                                    'class' => 'form-control',
-                                    'placeholder' => __('lang_v1.card_no'),
-                                    'id' => 'card_number',
-                                    'autofocus',
-                                ]) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                {!! Form::label('card_holder_name', __('lang_v1.card_holder_name')) !!}
-                                {!! Form::text('', null, [
-                                    'class' => 'form-control',
-                                    'placeholder' => __('lang_v1.card_holder_name'),
-                                    'id' => 'card_holder_name',
-                                ]) !!}
-                            </div>
-                        </div>
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                             <div class="form-group">
                                 {!! Form::label('card_transaction_number', __('lang_v1.card_transaction_no')) !!}
                                 {!! Form::text('', null, [

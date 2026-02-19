@@ -385,24 +385,8 @@ class AccountController extends Controller
                                 $arr[] = '<b>'.__('lang_v1.card_transaction_no').'</b>: '.$row->card_transaction_number;
                             }
 
-                            if ($row->method == 'card' && ! empty($row->card_number)) {
-                                $arr[] = '<b>'.__('lang_v1.card_no').'</b>: '.$row->card_number;
-                            }
-                            if ($row->method == 'card' && ! empty($row->card_type)) {
-                                $arr[] = '<b>'.__('lang_v1.card_type').'</b>: '.$row->card_type;
-                            }
-                            if ($row->method == 'card' && ! empty($row->card_holder_name)) {
-                                $arr[] = '<b>'.__('lang_v1.card_holder_name').'</b>: '.$row->card_holder_name;
-                            }
-                            if ($row->method == 'card' && ! empty($row->card_month)) {
-                                $arr[] = '<b>'.__('lang_v1.month').'</b>: '.$row->card_month;
-                            }
-                            if ($row->method == 'card' && ! empty($row->card_year)) {
-                                $arr[] = '<b>'.__('lang_v1.year').'</b>: '.$row->card_year;
-                            }
-                            if ($row->method == 'card' && ! empty($row->card_security)) {
-                                $arr[] = '<b>'.__('lang_v1.security_code').'</b>: '.$row->card_security;
-                            }
+                            // Removed card details display (card_number,holder_name,type,month,year,security)
+
                             if (! empty($row->cheque_number)) {
                                 $arr[] = '<b>'.__('lang_v1.cheque_no').'</b>: '.$row->cheque_number;
                             }
@@ -1002,24 +986,8 @@ class AccountController extends Controller
                         $arr[] = '<b>'.__('lang_v1.card_transaction_no').'</b>: '.$row->card_transaction_number;
                     }
 
-                    if ($row->method == 'card' && ! empty($row->card_number)) {
-                        $arr[] = '<b>'.__('lang_v1.card_no').'</b>: '.$row->card_number;
-                    }
-                    if ($row->method == 'card' && ! empty($row->card_type)) {
-                        $arr[] = '<b>'.__('lang_v1.card_type').'</b>: '.$row->card_type;
-                    }
-                    if ($row->method == 'card' && ! empty($row->card_holder_name)) {
-                        $arr[] = '<b>'.__('lang_v1.card_holder_name').'</b>: '.$row->card_holder_name;
-                    }
-                    if ($row->method == 'card' && ! empty($row->card_month)) {
-                        $arr[] = '<b>'.__('lang_v1.month').'</b>: '.$row->card_month;
-                    }
-                    if ($row->method == 'card' && ! empty($row->card_year)) {
-                        $arr[] = '<b>'.__('lang_v1.year').'</b>: '.$row->card_year;
-                    }
-                    if ($row->method == 'card' && ! empty($row->card_security)) {
-                        $arr[] = '<b>'.__('lang_v1.security_code').'</b>: '.$row->card_security;
-                    }
+                    // Removed card details display (card_number,holder_name,type,month,year,security)
+
                     if (! empty($row->cheque_number)) {
                         $arr[] = '<b>'.__('lang_v1.cheque_no').'</b>: '.$row->cheque_number;
                     }

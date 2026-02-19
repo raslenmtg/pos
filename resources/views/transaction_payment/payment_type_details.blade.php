@@ -1,24 +1,10 @@
 <div class="payment_details_div @if( $payment_line->method !== 'card' ) {{ 'hide' }} @endif" data-type="card" >
-<h4> {{__('lang_v1.optional')}}</h4>	
-<div class="col-md-4">
-		<div class="form-group">
-			{!! Form::label("card_number", __('lang_v1.card_no')) !!}
-			{!! Form::text("card_number", $payment_line->card_number, ['class' => 'form-control', 'placeholder' => __('lang_v1.card_no')]); !!}
-		</div>
-	</div>
-	<div class="col-md-4">
-		<div class="form-group">
-			{!! Form::label("card_holder_name", __('lang_v1.card_holder_name')) !!}
-			{!! Form::text("card_holder_name", $payment_line->card_holder_name, ['class' => 'form-control', 'placeholder' => __('lang_v1.card_holder_name')]); !!}
-		</div>
-	</div>
-	<div class="col-md-4">
+	<div class="col-md-12">
 		<div class="form-group">
 			{!! Form::label("card_transaction_number",__('lang_v1.card_transaction_no')) !!}
 			{!! Form::text("card_transaction_number", $payment_line->card_transaction_number, ['class' => 'form-control', 'placeholder' => __('lang_v1.card_transaction_no')]); !!}
 		</div>
 	</div>
-	
 </div>
 <div class="payment_details_div @if( $payment_line->method !== 'cheque' ) {{ 'hide' }} @endif" data-type="cheque" >
 	<div class="col-md-12">

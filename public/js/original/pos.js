@@ -690,7 +690,7 @@ $(document).ready((function() {
     })), $('div#confirmSuspendModal').on('shown.bs.modal', (function(e) {
         $(this).find('textarea').focus();
     })), $('button#pos-save-card').click((function() {
-        $('input#card_number_0').val($('#card_number').val()), $('input#card_holder_name_0').val($('#card_holder_name').val()), $('input#card_transaction_number_0').val($('#card_transaction_number').val()), $('select#card_type_0').val($('#card_type').val()), $('input#card_month_0').val($('#card_month').val()), $('input#card_year_0').val($('#card_year').val()), $('input#card_security_0').val($('#card_security').val()), $('div#card_details_modal').modal('hide'), pos_form_obj.submit();
+        $('input#card_transaction_number_0').val($('#card_transaction_number').val()), $('div#card_details_modal').modal('hide'), pos_form_obj.submit();
     })), $('button#pos-suspend').click((function() {
         $('input#is_suspend').val(1), $('div#confirmSuspendModal').modal('hide'), pos_form_obj.submit(), $('input#is_suspend').val(0);
     })), $('#modal_payment').find('.select2').each((function() {
@@ -1022,7 +1022,7 @@ $(document).ready((function() {
     var t = $('select#select_location_id').length ? $('select#select_location_id').find(':selected').data('default_payment_accounts') : $('#location_id').data('default_payment_accounts'),
         a = $(this).val(), n = $(this).closest('.payment_row');
     if (a && 'advance' != a) {
-        var _ = t && t[a].account ? t[a].account : '', i = n.find('.payment_row_index').val(),
+        var _ = t && t[a] && t[a].account ? t[a].account : '', i = n.find('.payment_row_index').val(),
             o = n.find('select#account_' + i);
         o.length && t && (o.val(_), o.change());
     }
