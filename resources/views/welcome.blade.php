@@ -90,16 +90,6 @@
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '768128085832071');
-        fbq('track', 'PageView');
-
-        // Track landing page visit - Standard Event
-        fbq('track', 'ViewContent', {
-            content_name: 'Simplex Gestion Landing Page',
-            content_category: 'Landing Page',
-            content_type: 'product',
-            value: 90.00,
-            currency: 'TND'
-        });
 
         // Track potential lead - Standard Event
         fbq('track', 'Lead', {
