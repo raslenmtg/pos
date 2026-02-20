@@ -222,7 +222,7 @@ class BusinessUtil extends Util
     {
         $business_details['sell_price_tax'] = 'includes';
 
-        $business_details['default_profit_percent'] = 25;
+        $business_details['default_profit_percent'] = 50;
         $business_details['tax_label_1'] = 'M.F';
 
         //Add POS shortcuts
