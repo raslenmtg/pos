@@ -1255,7 +1255,7 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         fixedHeader:false,
-        aaSorting: [[2, 'desc']],
+        aaSorting: [[1, 'desc']],
         ajax: {
             url: '/reports/sell-payment-report',
             data: function(d) {
