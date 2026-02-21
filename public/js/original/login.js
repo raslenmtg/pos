@@ -59,7 +59,15 @@ $(document).ready(function() {
         },
         rules: {
             name: 'required',
+            first_name: 'required',
+            mobile: {
+                required: true,
+                digits: true,
+                minlength: 8,
+                maxlength: 8,
+            },
             email: {
+                required: true,
                 email: true,
                 remote: {
                     url: '/business/register/check-email',
@@ -76,6 +84,7 @@ $(document).ready(function() {
                 minlength: 5,
             },
             confirm_password: {
+                required: true,
                 equalTo: '#password',
             },
             username: {
@@ -97,6 +106,13 @@ $(document).ready(function() {
         },
         messages: {
             name: LANG.specify_business_name,
+            first_name: LANG.field_required,
+            mobile: {
+                required: LANG.field_required,
+                digits: LANG.digits_only,
+                minlength: LANG.phone_8_digits,
+                maxlength: LANG.phone_8_digits,
+            },
             password: {
                 minlength: LANG.password_min_length,
             },

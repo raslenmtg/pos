@@ -119,35 +119,38 @@ class BusinessController extends Controller
      */
     public function postRegister(Request $request)
     {
-        if(!config('constants.allow_registration')) {
+      /*  if(!config('constants.allow_registration')) {
             $output = ['success' => 0,
                 'msg' => 'Inscription est désactivée pour le moment, veuillez nous contacter.',
             ];
             return redirect('login')->with('status', $output);
-        }
+        }*/
 
 
         try {
-          /*   $validator = $request->validate(
+            $request->validate(
                 [
-                    'name' => 'required|max:255',
-                    'surname' => 'max:10',
-                    'email' => 'sometimes|nullable|email|unique:users|max:255',
-                    'first_name' => 'required|max:255',
-                    'username' => 'required|min:4|max:255|unique:users',
-                    'password' => 'required|min:4|max:255',
+                    'name'       => 'max:255',
+                    'mobile'     => 'required|digits:8',
+                    'first_name' => 'max:255',
+                    'email'      => 'required|email|unique:users|max:255',
+                    'username'   => 'required|min:4|max:255|unique:users',
+                    'password'   => 'required|min:5|max:255|confirmed',
                 ],
                 [
-                    'name.required' => __('validation.required', ['attribute' => __('business.business_name')]),
-                    'email.email' => __('validation.email', ['attribute' => __('business.email')]),
-                    'email.email' => __('validation.unique', ['attribute' => __('business.email')]),
-                    'first_name.required' => __('validation.required', ['attribute' => __('business.first_name')]),
-                    'username.required' => __('validation.required', ['attribute' => __('business.username')]),
-                    'username.min' => __('validation.min', ['attribute' => __('business.username')]),
-                    'password.required' => __('validation.required', ['attribute' => __('business.username')]),
-                    'password.min' => __('validation.min', ['attribute' => __('business.username')])
+                    'mobile.required'     => 'Le champ téléphone est obligatoire.',
+                    'mobile.digits'       => 'Le téléphone doit contenir exactement 8 chiffres.',
+                    'email.required'      => 'Le champ e-mail est obligatoire.',
+                    'email.email'         => 'Veuillez saisir une adresse e-mail valide.',
+                    'email.unique'        => 'Cette adresse e-mail est déjà utilisée.',
+                    'username.required'   => 'Le champ nom d\'utilisateur est obligatoire.',
+                    'username.min'        => 'Le nom d\'utilisateur doit contenir au moins 4 caractères.',
+                    'username.unique'     => 'Ce nom d\'utilisateur est déjà utilisé.',
+                    'password.required'   => 'Le champ mot de passe est obligatoire.',
+                    'password.min'        => 'Le mot de passe doit contenir au moins 5 caractères.',
+                    'password.confirmed'  => 'La confirmation du mot de passe ne correspond pas.',
                 ]
-            ); */
+            );
 
             DB::beginTransaction();
 
@@ -212,32 +215,32 @@ class BusinessController extends Controller
             DB::commit();
 
             $customData = [
-                'value' => 1, // or the actual value of the registration/package
-                'currency' => 'USD', // or the currency from your application settings
                 'content_name' => 'Business Registration',
                 'content_ids' => [$business->id],
             ];
 
             $userData = [
                 'em' => $user->email,
-                'ph' => null, // If you collect phone number
+                'ph' => $business_location['mobile'],
                 'fn' => $user->first_name,
                 'ln' => $user->last_name,
             ];
 
-            $this->sendFacebookApiEvent($request, 'Purchase', $customData, $userData);
+            $this->sendFacebookApiEvent($request, 'Lead', $customData, $userData);
 
             $output = ['success' => 1,
                 'msg' => __('business.business_created_succesfully'),
             ];
 
             return redirect('login')->with('status', $output);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            return back()->withErrors($e->validator)->withInput();
         } catch (\Exception $e) {
             DB::rollBack();
             \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
 
             $output = ['success' => 0,
-                'msg' => __('messages.something_went_wrong'),
+                'msg' => 'Une erreur est survenue. Veuillez réessayer.',
             ];
 
             return back()->with('status', $output)->withInput();

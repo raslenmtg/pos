@@ -138,4 +138,7 @@ LANG = {
     'authentication_successfull': 'Authentication successfull',
     'please_enter' : 'Please enter ',
     'or_more_characters' : 'or more characters',
+    'field_required': 'Ce champ est obligatoire.',
+    'digits_only': 'Veuillez saisir uniquement des chiffres.',
+    'phone_8_digits': 'Le numéro de téléphone doit comporter exactement 8 chiffres.',
 };

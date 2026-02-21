@@ -91,6 +91,8 @@
             'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '768128085832071');
 
+        // Track landing page visit - Standard Event
+        fbq('track', 'ViewContent');
 
         // Track potential lead - Standard Event
         fbq('track', 'Lead', {
@@ -806,6 +808,10 @@
             </div>
 
             <div class="d-flex align-items-center order-md-1 order-2">
+                <a href="{{ route('business.getRegister') }}" class="btn btn-outline" style="margin: 0 5px">
+                    إنشاء حساب
+                    <i class='bx bx-plus'></i>
+                </a>
                 <a href="{{ route('login') }}" class="btn btn-primary" style="margin: 0 5px">
                     <i class='bx bx-log-in'></i>
                     تسجيل الدخول
@@ -832,9 +838,10 @@
 
                 </p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a  href="tel:+21624327623"  class="btn btn-primary btn-md">
-                        <i class='bx bx-phone-call me-2'></i> احكي مع خبير
+                    <a  href="{{ route('business.getRegister') }}"  class="btn btn-primary btn-md">
+                      ابدأ تجربتك المجانية
                     </a>
+
 
                 </div>
                 <div class="mt-4 text-muted small">

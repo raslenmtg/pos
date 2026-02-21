@@ -90,7 +90,7 @@
             s.parentNode.insertBefore(t,s)}(window, document,'script',
             'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '768128085832071');
-
+        fbq('track', 'ViewContent');
         // Track potential lead - Standard Event
         fbq('track', 'Lead', {
             content_name: 'French Landing Page Visit',
@@ -797,6 +797,10 @@
             </div>
 
             <div class="d-flex align-items-center order-md-1 order-2">
+                <a href="{{ route('business.getRegister') }}" class="btn btn-outline" style="margin: 0 5px">
+                    Inscription
+                    <i class='bx bx-plus'></i>
+                </a>
                 <a href="{{ route('login') }}" class="btn btn-primary" style="margin: 0 5px">
                     <i class='bx bx-log-in'></i>
                     Se connecter
@@ -818,8 +822,8 @@
                     Synchronisez vos stocks, vos operations et votre facturation en temps réel. Gagnez du temps et développez votre activité avec Simplex Gestion.
                 </p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a  href="tel:+21624327623"  class="btn btn-primary btn-md">
-                        <i class='bx bx-phone-call me-2'></i> Parlez à un Expert
+                    <a href="{{ route('business.getRegister') }}" class="btn btn-primary btn-md">
+                      Commencer maintenant
                     </a>
 
                 </div>
