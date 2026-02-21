@@ -94,13 +94,7 @@
         // Track landing page visit - Standard Event
         fbq('track', 'ViewContent');
 
-        // Track potential lead - Standard Event
-        fbq('track', 'Lead', {
-            content_name: 'Arabic Landing Page Visit',
-            content_category: 'Landing Page',
-            source: 'welcome-ar',
-            event_id: 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
-        });
+
     </script>
     <noscript><img height="1" width="1" style="display:none"
                    src="https://www.facebook.com/tr?id=768128085832071&ev=PageView&noscript=1"

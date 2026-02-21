@@ -91,13 +91,7 @@
             'https://connect.facebook.net/en_US/fbevents.js');
         fbq('init', '768128085832071');
         fbq('track', 'ViewContent');
-        // Track potential lead - Standard Event
-        fbq('track', 'Lead', {
-            content_name: 'French Landing Page Visit',
-            content_category: 'Landing Page',
-            source: 'welcome',
-            event_id: 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
-        });
+
 
     </script>
     <noscript><img height="1" width="1" style="display:none"
