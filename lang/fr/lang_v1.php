@@ -127,7 +127,7 @@ return [
     'applicable_in_cpg' => 'Postuler dans les groupes de prix de vente',
     'applicable_tax_help' => '<br> <br/> Si le prix d\'achat (à l\'exclusion de la taxe) n\'est pas le même que <br/> prix d\'achat (y compris la taxe) <br/>, vous devez fournir le nom du taux d\'imposition.',
     'applicable_tax_ins' => 'Nom du taux d\'imposition',
-    'application_tour' => 'Visite de candidature',
+    'application_tour' => 'guide',
     'applied_discount_text' => 'Remise: <i>:discount_name</i> Appliqué (se termine à: <i>:ends_at</i>)',
     'apply_all' => 'Appliquer tout',
     'aspect_ratio_should_be_1_1' => 'Le rapport 1\1 ',

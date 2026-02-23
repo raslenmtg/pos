@@ -48,7 +48,19 @@
             <div class="tw-flex tw-flex-wrap tw-items-center tw-justify-end tw-gap-3">
              
                 {{-- data-toggle="popover" remove this for on hover show --}}
-
+                <a href="#" id="start_tour"
+                   class="tw-flex tw-items-center tw-gap-2 tw-px-3 tw-py-2 tw-text-sm tw-font-medium tw-text-gray-600 tw-transition-all tw-duration-200 tw-rounded-lg tw-bg-gray-100"
+                   role="menuitem" tabindex="-1">
+                    <svg aria-hidden="true" class="tw-w-5 tw-h-5" xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24" stroke-width="1.75" stroke="currentColor" fill="none"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                        <path d="M12 17l0 .01" />
+                        <path d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4" />
+                    </svg>
+                    @lang('lang_v1.application_tour')
+                </a>
                 <button id="btnCalculator" title="@lang('lang_v1.calculator')" data-content='@include('layouts.partials.calculator')'
                     type="button" data-trigger="click" data-html="true" data-placement="bottom" 
                     class="tw-hidden md:tw-inline-flex tw-items-center tw-justify-center tw-text-sm tw-font-medium tw-text-white tw-transition-all tw-duration-200 tw-bg-@if(!empty(session('business.theme_color'))){{session('business.theme_color')}}@else{{'primary'}}@endif-800 hover:tw-bg-@if(!empty(session('business.theme_color'))){{session('business.theme_color')}}@else{{'primary'}}@endif-700 tw-p-1.5 tw-rounded-lg tw-ring-1 hover:tw-text-white tw-ring-white/10">
@@ -72,7 +84,7 @@
 
               
                     @can('sell.create')
-                        <a href="{{ action([\App\Http\Controllers\SellPosController::class, 'create']) }}"
+                        <a id="tour_step_pos" href="{{ action([\App\Http\Controllers\SellPosController::class, 'create']) }}"
                             class="sm:tw-inline-flex tw-transition-all tw-duration-200 tw-gap-2 tw-bg-@if(!empty(session('business.theme_color'))){{session('business.theme_color')}}@else{{'primary'}}@endif-800 hover:tw-bg-@if(!empty(session('business.theme_color'))){{session('business.theme_color')}}@else{{'primary'}}@endif-700 tw-py-1.5 tw-px-3 tw-rounded-lg tw-items-center tw-justify-center tw-text-sm tw-font-medium tw-ring-1 tw-ring-white/10 hover:tw-text-white tw-text-white">
                             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"
                               stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"
