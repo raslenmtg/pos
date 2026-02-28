@@ -32,7 +32,7 @@ class ExpenseController extends Controller
     {
         $this->transactionUtil = $transactionUtil;
         $this->moduleUtil = $moduleUtil;
-        $this->dummyPaymentLine = ['method' => 'cash', 'amount' => 0, 'note' => '', 'cheque_number' => '', 'bank_account_number' => '',
+        $this->dummyPaymentLine = ['method' => 'cash', 'amount' => 0, 'note' => '', 'card_transaction_number' => '', 'cheque_number' => '', 'bank_account_number' => '',
             'is_return' => 0, 'transaction_no' => '', ];
         $this->cashRegisterUtil = $cashRegisterUtil;
     }
