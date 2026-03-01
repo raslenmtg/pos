@@ -18,9 +18,9 @@ class SetSessionData
      */
     public function handle($request, Closure $next)
     {
-        if (! $request->session()->has('user')) {
-            $business_util = new BusinessUtil;
+        $business_util = new BusinessUtil;
 
+        if (! $request->session()->has('user')) {
             $user = Auth::user();
             $session_data = ['id' => $user->id,
                 'surname' => $user->surname,
@@ -43,9 +43,13 @@ class SetSessionData
             $request->session()->put('user', $session_data);
             $request->session()->put('business', $business);
             $request->session()->put('currency', $currency_data);
+        }
 
-            //set current financial year to session
-            $financial_year = $business_util->getCurrentFinancialYear($business->id);
+        // Always refresh the financial year so date filters never default to a past year
+        // (important for users whose session persists across year boundaries)
+        if ($request->session()->has('user')) {
+            $business_id = $request->session()->get('user.business_id');
+            $financial_year = $business_util->getCurrentFinancialYear($business_id);
             $request->session()->put('financial_year', $financial_year);
         }
 
