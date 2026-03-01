@@ -967,7 +967,14 @@ function update_grand_total() {
 
     __write_number($('input#grand_total_hidden'), grand_total, true);
 
-    var payment = __read_number($('input.payment-amount'), true);
+    var payment = 0;
+    $('#payment_rows_div').find('input.payment-amount').each(function() {
+        payment += __read_number($(this), true);
+    });
+    // fallback for pages without #payment_rows_div
+    if ($('#payment_rows_div').length === 0) {
+        payment = __read_number($('input.payment-amount'), true);
+    }
 
     var due = grand_total - payment;
     // __write_number($('input.payment-amount'), grand_total, true);
@@ -979,8 +986,14 @@ function update_grand_total() {
     //__currency_convert_recursively($(document));
 }
 $(document).on('change', 'input.payment-amount', function() {
-    var payment = __read_number($(this), true);
     var grand_total = __read_number($('input#grand_total_hidden'), true);
+    var payment = 0;
+    $('#payment_rows_div').find('input.payment-amount').each(function() {
+        payment += __read_number($(this), true);
+    });
+    if ($('#payment_rows_div').length === 0) {
+        payment = __read_number($('input.payment-amount'), true);
+    }
     var bal = grand_total - payment;
     $('#payment_due').text(__currency_trans_from_en(bal, true, true));
 });

@@ -552,14 +552,24 @@
 		</div>
 	@endcomponent
 	@component('components.widget', ['class' => 'box-primary', 'title' => __('purchase.add_payment')])
-		<div class="box-body payment_row">
+		<div class="box-body">
 			<div class="row">
 				<div class="col-md-12">
 					<strong>@lang('lang_v1.advance_balance'):</strong> <span id="advance_balance_text">0</span>
 					{!! Form::hidden('advance_balance', null, ['id' => 'advance_balance', 'data-error-msg' => __('lang_v1.required_advance_balance_not_available')]); !!}
 				</div>
 			</div>
-			@include('sale_pos.partials.payment_row_form', ['row_index' => 0, 'show_date' => true, 'show_denomination' => true])
+			<div id="payment_rows_div">
+				<div class="payment_row">
+					@include('sale_pos.partials.payment_row_form', ['row_index' => 0, 'show_date' => true, 'show_denomination' => true])
+				</div>
+			</div>
+			<input type="hidden" id="payment_row_index" value="1">
+			<div class="row" style="margin-top:10px;">
+				<div class="col-md-12">
+					<button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm tw-w-full" id="add-payment-row">@lang('sale.add_payment_row')</button>
+				</div>
+			</div>
 			<hr>
 			<div class="row">
 				<div class="col-sm-12 text-center">
@@ -607,6 +617,57 @@
 			set_payment_type_dropdown();
 			$('select#location_id').change(function() {
 				set_payment_type_dropdown();
+			});
+
+			// Add payment row button
+			$('button#add-payment-row').click(function() {
+				var row_index = $('#payment_row_index').val();
+				var location_id = $('select#location_id').val();
+				$.ajax({
+					method: 'POST',
+					url: '/sells/pos/get_payment_row',
+					data: { row_index: row_index, location_id: location_id },
+					dataType: 'html',
+					success: function(html) {
+						if (html) {
+							var paid = 0;
+							$('#payment_rows_div').find('input.payment-amount').each(function() {
+								paid += __read_number($(this));
+							});
+							var grand_total = __read_number($('input#grand_total_hidden'), true);
+							var remaining = grand_total - paid;
+							if (remaining < 0) remaining = 0;
+
+							var container = $('#payment_rows_div').append(html);
+							$(container).find('input.payment-amount').last()
+								.val(__currency_trans_from_en(remaining, false)).change().select();
+							__select2($(container).find('.select2'));
+							$(container).find('.paid_on').datetimepicker({
+								format: moment_date_format,
+								ignoreReadonly: true
+							});
+							$(container).find('#method_' + row_index).change();
+							$('#payment_row_index').val(parseInt(row_index) + 1);
+						}
+					}
+				});
+			});
+
+			// Remove payment row
+			$(document).on('click', '.remove_payment_row', function() {
+				swal({title: LANG.sure, icon: 'warning', buttons: true, dangerMode: true})
+					.then(function(confirmed) {
+						if (confirmed) {
+							$(this).closest('.payment_row').remove();
+							// recalculate payment due
+							var grand_total = __read_number($('input#grand_total_hidden'), true);
+							var paid = 0;
+							$('#payment_rows_div').find('input.payment-amount').each(function() {
+								paid += __read_number($(this));
+							});
+							$('#payment_due').text(__currency_trans_from_en(grand_total - paid, true, true));
+						}
+					}.bind(this));
 			});
     	});
     	$(document).on('change', '.payment_types_dropdown, #location_id', function(e) {
