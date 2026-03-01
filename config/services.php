@@ -35,4 +35,9 @@ return [
         'api_access_token' => env('FACEBOOK_CONVERSIONS_API_ACCESS_TOKEN'),
         'test_event_code' => env('CONVERSIONS_API_TEST_CODE'),
     ],
+
+    'gemini' => [
+        'api_key' => env('GEMINI_API_KEY'),
+        'model'   => env('GEMINI_MODEL', 'gemini-2.5-flash'),
+    ],
 ];

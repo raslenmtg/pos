@@ -55,6 +55,7 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariationTemplateController;
 use App\Http\Controllers\WarrantyController;
+use App\Http\Controllers\InvoiceScanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -102,6 +103,10 @@ Route::middleware([ 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'C
     Route::get('service-staff-availability', [SellPosController::class, 'showServiceStaffAvailibility']);
     Route::get('pause-resume-service-staff-timer/{user_id}', [SellPosController::class, 'pauseResumeServiceStaffTimer']);
     Route::get('mark-as-available/{user_id}', [SellPosController::class, 'markAsAvailable']);
+
+    // Invoice OCR scan routes
+    Route::post('/invoice-scans/upload', [InvoiceScanController::class, 'upload'])->name('invoice-scans.upload');
+    Route::post('/invoice-scans/confirm', [InvoiceScanController::class, 'confirm'])->name('invoice-scans.confirm');
 
     Route::resource('purchase-requisition', PurchaseRequisitionController::class)->except(['edit', 'update']);
     Route::post('/get-requisition-products', [PurchaseRequisitionController::class, 'getRequisitionProducts'])->name('get-requisition-products');
