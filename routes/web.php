@@ -79,6 +79,12 @@ use Illuminate\Support\Facades\Route;
         return view('ar.welcome-ar');
     });
 
+    Route::get('/site.webmanifest', function () {
+        return response()->file(public_path('site.webmanifest'), [
+            'Content-Type' => 'application/manifest+json',
+        ]);
+    })->name('site.webmanifest');
+
     Auth::routes();
 
     Route::get('/business/register', [BusinessController::class, 'getRegister'])->name('business.getRegister');
