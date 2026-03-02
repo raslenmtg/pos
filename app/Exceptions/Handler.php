@@ -58,11 +58,13 @@ class Handler extends ExceptionHandler
             ]);
         }
 
-        // Ensure CSRF errors are sent to Sentry
-        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
-            if (app()->bound('sentry')) {
-                app('sentry')->captureException($exception);
-            }
+        // Always send every exception to Sentry explicitly so that exceptions
+        // suppressed by Laravel's internal $internalDontReport list
+        // (e.g. ValidationException, AuthenticationException, 404s) are still
+        // captured when desired, and so that EMERGENCY-logged exceptions that
+        // are caught inside controllers also reach Sentry.
+        if (app()->bound('sentry')) {
+            app('sentry')->captureException($exception);
         }
 
         parent::report($exception);
