@@ -961,9 +961,15 @@ function update_grand_total() {
     var additional_expense_3 = __read_number($('input#additional_expense_value_3'), true);
     var additional_expense_4 = __read_number($('input#additional_expense_value_4'), true);
 
+    //Calculate timbre
+    var timbre = 0;
+    if ($('input#timbre_value').length) {
+        timbre = parseFloat($('input#timbre_value').val()) || 0;
+    }
+
     //Calculate Final total
     grand_total = total_subtotal - discount + tax + shipping_charges + 
-    additional_expense_1 + additional_expense_2 + additional_expense_3 + additional_expense_4;
+    additional_expense_1 + additional_expense_2 + additional_expense_3 + additional_expense_4 + timbre;
 
     __write_number($('input#grand_total_hidden'), grand_total, true);
 
@@ -977,7 +983,6 @@ function update_grand_total() {
     }
 
     var due = grand_total - payment;
-    // __write_number($('input.payment-amount'), grand_total, true);
 
     $('#grand_total').text(__currency_trans_from_en(grand_total, true, true));
 

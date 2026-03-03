@@ -19,6 +19,9 @@
 	<input type="hidden" id="p_symbol" value="{{$currency_details->symbol}}">
 	<input type="hidden" id="p_thousand" value="{{$currency_details->thousand_separator}}">
 	<input type="hidden" id="p_decimal" value="{{$currency_details->decimal_separator}}">
+	@if($business_details->enable_timbre)
+		<input type="hidden" id="timbre_value" value="{{ $business_details->timbre_value }}">
+	@endif
 
 	@include('layouts.partials.error')
 
@@ -366,6 +369,16 @@
 						<span id="tax_calculated_amount" class="display_currency">0</span>
 					</td>
 				</tr>
+				@if($business_details->enable_timbre)
+				<tr>
+					<td colspan="3">&nbsp;</td>
+					<td>
+						<b>Timbre fiscale:</b>(+)
+						<span id="timbre_calculated_amount" class="display_currency">{{ $business_details->timbre_value }}</span>
+					</td>
+				</tr>
+				@endif
+
 				<tr>
 					<td colspan="4">
 						<div class="form-group">
@@ -547,9 +560,60 @@
 				<div style="background-color: #f2f2f2; padding: 10px; border: 1px solid #ddd; margin-top: 10px;">
 					{!! Form::hidden('final_total', 0 , ['id' => 'grand_total_hidden']); !!}
 					<b class="tw-text-xl">@lang('purchase.purchase_total'): </b><span id="grand_total" class="display_currency tw-text-2xl" >0</span>
+					<div id="rs_grand_total_info" style="display:none; margin-top:5px;">
+						<span class="text-danger" style="font-size:1rem;">
+							<b>Retenue à la source (RS) (-):</b> <span id="rs_deduction_grand"></span>
+						</span>
+					</div>
 				</div>
 			</div>
 		</div>
+		{{-- RS Rate Section --}}
+		<div class="col-12" style="margin-top: 10px;">
+			<div class="form-group">
+				<div class="checkbox">
+					<label>{!! Form::checkbox('is_rs', 1, false, ['class' => 'input-icheck', 'id' => 'is_rs']); !!} @lang('lang_v1.is_rs')</label>
+				</div>
+			</div>
+		</div>
+		<div id="choose_rs" class="hide">
+			<div class="tw-block">
+				<div class="tw-mb-1">
+					<h5>TVA: <span id="selected_tax_purchase"></span>
+						<span id="tax_error_purchase" class="text-danger" style="display:none;">Aucun taxe appliquée, séléctionner un taxe</span>
+					</h5>
+				</div>
+				<div class="col-sm-5">
+					<div class="form-group">
+						{!! Form::label('tax_category_purchase', __('expense.operation_type') . ':') !!}
+						{!! Form::select('tax_category_purchase', [
+                            'capitalIncome' => 'Revenus des capitaux mobiliers',
+                            'boardCompensation' => 'Jetons de présences et tantièmes',
+                            'assetTransfers' => 'Cessions Fc et immeubles',
+                            'dividends' => 'Dividendes',
+                            'rentals' => 'Loyers',
+                            'acquisitions' => 'Acquisitions des marchandises, matériel équipements et de services',
+                            'professionalServices' => 'Rémunération des activités non commerciales',
+                            'gambling' => 'Jeux de pari et loterie'
+                        ], null, ['class' => 'form-control', 'id' => 'tax_category_purchase', 'placeholder' => __('messages.please_select')]) !!}
+					</div>
+				</div>
+				<div class="col-sm-5">
+					<div class="form-group">
+						{!! Form::label('code_rs', __('expense.operation') . ':') !!}
+						{!! Form::select('code_rs', ['' => __('messages.please_select')], null, ['class' => 'form-control', 'id' => 'code_rs_purchase', 'name' => 'code_rs', 'disabled' => 'disabled']) !!}
+					</div>
+				</div>
+				<div class="tw-flex-row width-50 tw-justify-between col-sm-10" style="display: none;" id="tax_rate_display_purchase">
+					<h4 class="form-text">
+						{{ __('expense.rs_rate') }}: <span id="tax_rate_value_purchase"></span>%
+					</h4>
+					<h4>{{ __('lang_v1.total_amount_with_tax') }}: <span id="ht_rs_purchase"></span></h4>
+					<h4>Montant RS (-): <span id="rs_deduction_purchase" style="color:red;"></span></h4>
+				</div>
+			</div>
+		</div>
+
 	@endcomponent
 	@component('components.widget', ['class' => 'box-primary', 'title' => __('purchase.add_payment')])
 		<div class="box-body">
@@ -559,13 +623,12 @@
 					{!! Form::hidden('advance_balance', null, ['id' => 'advance_balance', 'data-error-msg' => __('lang_v1.required_advance_balance_not_available')]); !!}
 				</div>
 			</div>
-			<div id="payment_rows_div">
-				<div class="payment_row">
-					@include('sale_pos.partials.payment_row_form', ['row_index' => 0, 'show_date' => true, 'show_denomination' => true])
-				</div>
+		<div id="payment_rows_div">
+			<div class="payment_row">
+				@include('sale_pos.partials.payment_row_form', ['row_index' => 0, 'show_date' => true, 'show_denomination' => true])
 			</div>
-			<input type="hidden" id="payment_row_index" value="1">
-			<div class="row" style="margin-top:10px;">
+		</div>
+		<input type="hidden" id="payment_row_index" value="1">
 				<div class="col-md-12">
 					<button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm tw-w-full" id="add-payment-row">@lang('sale.add_payment_row')</button>
 				</div>
@@ -604,6 +667,177 @@
 	<script src="{{ asset('js/purchase.js?v=' . $asset_v) }}"></script>
 	<script src="{{ asset('js/product.js?v=' . $asset_v) }}"></script>
 	<script type="text/javascript">
+
+		// ── RS Rate logic ──────────────────────────────────────────────
+		const purchaseTaxCodes = {
+			"capitalIncome": [
+				{ value: "RS3_000001", text: "Revenus de capitaux mobiliers servis aux résidents soumis à l'impôts (IS ou IRPP) - 20%", rate: "20" }
+			],
+			"boardCompensation": [
+				{ value: "RS8_000001", text: "Rémunérations et primes servies aux membres des conseils/comités de SA payées aux résidents - 20%", rate: "20" }
+			],
+			"assetTransfers": [
+				{ value: "RS6_000001", text: "Cession de fonds de commerce par les personnes morales et les personnes physiques résidentes - 2.5%", rate: "2.5" },
+				{ value: "RS6_000002", text: "Cession d'immeubles et des droits sociaux dans les sociétés immobilières par les personnes morales et les personnes physiques résidentes - 2.5%", rate: "2.5" }
+			],
+			"dividends": [
+				{ value: "RS5_000001", text: "Dividendes servies à des personnes physiques résidentes - 10%", rate: "10" }
+			],
+			"rentals": [
+				{ value: "RS1_000001", text: "Loyers d'hôtels servis aux personnes morales et aux personnes physiques soumises à l'impôt sur le revenu selon le régime réel - 5%", rate: "5" },
+				{ value: "RS1_000002", text: "Loyers servis à des résidents établis - 10%", rate: "10" }
+			],
+			"acquisitions": [
+				{ value: "RS7_000003", text: "Montants ≥ 1.000 D pour acquisitions auprès de personnes bénéficiant de la déduction de 2/3 et IS au taux de 10% - 0.5%", rate: "0.5" },
+				{ value: "RS7_000002", text: "Montants ≥ 1.000 D pour acquisitions auprès de personnes soumises à l'IS au taux de 15% - 1%", rate: "1" },
+				{ value: "RS7_000004", text: "Commission revenant aux distributeurs agréés des opérateurs télécoms (personne physique) - 1.5%", rate: "1.5" },
+				{ value: "RS7_000005", text: "Montants ≥ 1.000 D pour acquisitions de marchandises/services auprès de personnes soumises à l'IS à des taux autres que 15% et 10% - 1%", rate: "1" },
+				{ value: "RS7_000001", text: "Montants ≥ 1.000 D pour acquisitions de marchandises/services auprès de personnes soumises à l'IS à des taux autres que 15% et 10% - 1.5%", rate: "1.5" }
+			],
+			"professionalServices": [
+				{ value: "RS2_000001", text: "Honoraires servis aux BNC forfait d'assiette, commissions, courtages et rémunérations des activités non commerciales servis à des résidents établis - 10%", rate: "10" },
+				{ value: "RS2_000002", text: "Honoraires servis aux BNC régime réel résidents établis - 3%", rate: "3" },
+				{ value: "RS2_000003", text: "Rémunérations en contrepartie de la performance - 3%", rate: "3" },
+				{ value: "RS2_000004", text: "Rémunérations servies aux artistes et aux personnes morales au titre de la production... - 5%", rate: "5" }
+			],
+			"gambling": [
+				{ value: "RS11_000001", text: "Jeux de pari et loterie (hors courses de chevaux et pronostics sportifs) et gains en nature - 25%", rate: "25" }
+			]
+		};
+
+		function calculatePurchaseRSDeduction() {
+			// grandTotal from hidden input (includes timbre if enabled)
+			var grandTotal = __read_number($('input#grand_total_hidden'), true);
+			if (!grandTotal || grandTotal <= 0) return;
+
+			// Base for RS = grand total EXCLUDING timbre
+			var timbre = parseFloat($('input#timbre_value').val()) || 0;
+			var baseForRS = grandTotal - timbre;
+
+			var rsRate = parseFloat($('#code_rs_purchase').find('option:selected').data('rate')) || 0;
+			var rsDeduction = 0;
+			if (rsRate > 0 && $('#is_rs').is(':checked') && baseForRS > 0) {
+				rsDeduction = baseForRS * (rsRate / 100);
+			}
+
+			// Show RS deduction info below grand total box
+			if (rsDeduction > 0) {
+				$('#rs_deduction_grand').text(__currency_trans_from_en(rsDeduction, false, false));
+				$('#rs_grand_total_info').show();
+			} else {
+				$('#rs_grand_total_info').hide();
+			}
+
+			// Only update payment_due (grand_total label stays untouched)
+			var paid = 0;
+			$('#payment_rows_div').find('input.payment-amount').each(function() {
+				paid += __read_number($(this), true);
+			});
+			var due = grandTotal - rsDeduction - paid;
+			$('#payment_due').text(__currency_trans_from_en(due, true, true));
+
+			// Show detail panel
+			if (rsRate > 0) {
+				var taxPercentage = parseFloat($('select#tax_id').find('option:selected').data('tax_amount')) || 0;
+				var HT = baseForRS / (1 + (taxPercentage / 100));
+				$('#ht_rs_purchase').text(__currency_trans_from_en(HT, false, false));
+				$('#rs_deduction_purchase').text(__currency_trans_from_en(rsDeduction, false, false));
+				$('#tax_rate_value_purchase').text(rsRate);
+				$('#tax_rate_display_purchase').show();
+			} else {
+				$('#tax_rate_display_purchase').hide();
+			}
+		}
+
+		function resetToNormalGrandTotal() {
+			// Restore normal payment_due (grand_total label stays untouched)
+			var grandTotal = __read_number($('input#grand_total_hidden'), true);
+			$('#rs_grand_total_info').hide();
+			var paid = 0;
+			$('#payment_rows_div').find('input.payment-amount').each(function() {
+				paid += __read_number($(this), true);
+			});
+			$('#payment_due').text(__currency_trans_from_en(grandTotal - paid, true, true));
+			$('#tax_rate_display_purchase').hide();
+		}
+
+		$(document).on('change', '#tax_category_purchase', function() {
+			var selectedCategory = $(this).val();
+			var $codeSelect = $('#code_rs_purchase');
+			$codeSelect.empty().append('<option value="">{{ __("messages.please_select") }}</option>');
+			if (selectedCategory && purchaseTaxCodes[selectedCategory]) {
+				$codeSelect.prop('disabled', false);
+				$.each(purchaseTaxCodes[selectedCategory], function(i, code) {
+					$codeSelect.append($('<option></option>').attr('value', code.value).attr('data-rate', code.rate).text(code.text));
+				});
+			} else {
+				$codeSelect.prop('disabled', true);
+				$('#tax_rate_display_purchase').hide();
+			}
+		});
+
+		$(document).on('change', '#code_rs_purchase', function() {
+			var rate = $(this).find('option:selected').data('rate');
+			if (rate) {
+				$('#tax_rate_value_purchase').text(rate);
+				calculatePurchaseRSDeduction();
+			} else {
+				resetToNormalGrandTotal();
+			}
+		});
+
+		$(document).on('change', 'select#tax_id', function() {
+			if ($('#is_rs').length && $('#is_rs').is(':checked')) {
+				calculatePurchaseRSDeduction();
+			}
+		});
+
+		// Recalculate RS when payment amount changes
+		$(document).on('change input', 'input.payment-amount', function() {
+			if ($('#is_rs').length && $('#is_rs').is(':checked')) {
+				calculatePurchaseRSDeduction();
+			}
+		});
+
+		$('#is_rs').on('ifChecked', function() {
+			$('#choose_rs').removeClass('hide');
+			calculatePurchaseRSDeduction();
+		});
+		$('#is_rs').on('ifUnchecked', function() {
+			$('#choose_rs').addClass('hide');
+			resetToNormalGrandTotal();
+		});
+
+		// Before submitting: write RS-adjusted final_total into the hidden field
+		// so the backend receives (grand_total - rs_deduction) as final_total
+		$(document).on('submit', 'form#add_purchase_form', function() {
+			if ($('#is_rs').length && $('#is_rs').is(':checked')) {
+				var grandTotal = __read_number($('input#grand_total_hidden'), true);
+				var timbre    = parseFloat($('input#timbre_value').val()) || 0;
+				var baseForRS = grandTotal - timbre;
+				var rsRate    = parseFloat($('#code_rs_purchase').find('option:selected').data('rate')) || 0;
+				if (rsRate > 0 && baseForRS > 0) {
+					var rsDeduction = baseForRS * (rsRate / 100);
+					var netTotal    = grandTotal - rsDeduction;
+					__write_number($('input#grand_total_hidden'), netTotal, true);
+				}
+			}
+		});
+
+		// Patch update_grand_total AFTER purchase.js is loaded so RS stays applied
+		$(document).ready(function() {
+			if (typeof update_grand_total === 'function') {
+				var _orig = update_grand_total;
+				update_grand_total = function() {
+					_orig.apply(this, arguments);
+					if ($('#is_rs').length && $('#is_rs').is(':checked')) {
+						calculatePurchaseRSDeduction();
+					}
+				};
+			}
+		});
+		// ── end RS Rate logic ──────────────────────────────────────────
+
 		$(document).ready( function(){
       		__page_leave_confirmation('#add_purchase_form');
       		$('.paid_on').datetimepicker({

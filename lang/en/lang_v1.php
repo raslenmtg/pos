@@ -40,6 +40,7 @@ return [
     'opening_stock_added_successfully' => 'Opening stock added successfully',
     'update_n_edit_opening_stock' => 'Update & Edit Opening Stock',
     'total_amount_exc_tax' => 'Total Amount (Exc. Tax)',
+    'is_rs' => 'Apply withholding tax (RS)',
     'currency_symbol_placement' => 'Currency Symbol Placement',
     'before_amount' => 'Before amount',
     'after_amount' => 'After amount',

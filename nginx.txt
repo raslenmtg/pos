@@ -3,8 +3,8 @@ server {
     server_name simplexgestion.tn;
 
  listen 443 ssl; # managed by Certbot
-    ssl_certificate /etc/en/pos/cert/fullchain1.pem; # managed by Certbot
-    ssl_certificate_key /etc/en/pos/cert/privkey1.pem; # managed by Certbot
+    ssl_certificate /etc/en/pos/cert/fullchain.pem;
+    ssl_certificate_key /etc/en/pos/cert/privkey.pem;
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
@@ -24,9 +24,25 @@ error_log /dev/null;
     }
 
     location = /favicon.ico { access_log off; log_not_found off; }
-    location = /robots.txt  { access_log off; log_not_found off; }
+ location = /sitemap.xml {
+        try_files $uri =404;
+        access_log off;
+        log_not_found off;
+    }
 
-   location = /index.php {
+    location = /robots.txt {
+        try_files $uri =404;
+        access_log off;
+        log_not_found off;
+    }
+
+#    location ~ \.php$ {
+#        fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
+#        fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+#        include fastcgi_params;
+#    }
+
+    location = /index.php {
     include fastcgi_params;
     fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
     fastcgi_pass unix:/var/run/php/php8.3-fpm.sock;
@@ -56,20 +72,12 @@ location ~* (wp-includes|HNAP1|phpunit|owa|ReportServer|wlwmanifest|\+CSCOE\+|\+
       return 444;
   }
 
-
     location ~ /\.(?!well-known).* {
         deny all;
     }
 
     # Cache images for 30 days
-location ~* \.(jpg|jpeg|png|gif|ico|webp|svg)$ {
-    expires 30d;
-    access_log off;
-    add_header Cache-Control "public, max-age=2592000, immutable";
-}
-
-# Cache JS and CSS for 7 days
-location ~* \.(css|js)$ {
+location ~* \.(jpg|jpeg|png|gif|ico|webp|svg|css|js)$ {
     expires 30d;
     access_log off;
     add_header Cache-Control "public, max-age=2592000, immutable";
@@ -77,8 +85,8 @@ location ~* \.(css|js)$ {
 
 
 }
+
 server {
-    listen 80;
     server_name www.simplexgestion.tn;
     return 301 https://simplexgestion.tn$request_uri;
 }
@@ -91,9 +99,9 @@ server {
 server {
       listen 443 ssl;
       server_name www.simplexgestion.tn;
-      ssl_certificate /etc/en/pos/cert/fullchain1.pem;     
-      ssl_certificate_key /etc/en/pos/cert/privkey1.pem;   
-      include /etc/letsencrypt/options-ssl-nginx.conf;     
-      ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;       
-      return 301 https://simplexgestion.tn$request_uri;    
+      ssl_certificate /etc/en/pos/cert/fullchain.pem;
+      ssl_certificate_key /etc/en/pos/cert/privkey.pem;
+      include /etc/letsencrypt/options-ssl-nginx.conf;
+      ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+      return 301 https://simplexgestion.tn$request_uri;
   }
