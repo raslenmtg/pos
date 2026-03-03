@@ -221,17 +221,17 @@
 			</div>
 		</div>
 		@endif
+		<div class="col-12 text-center">
+			<button type="button" id="invoice_scan_btn" class="tw-dw-btn tw-dw-btn-success tw-text-white tw-dw-btn-sm" data-toggle="modal" data-target="#invoice_scan_modal">
+				<i class="fa fa-magic"></i> Scanner avec IA
+			</button>
+		</div>
 	@endcomponent
 
 	@component('components.widget', ['class' => 'box-primary'])
 		<div class="row">
 			<div class="col-sm-2 text-center">
 				<button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm" data-toggle="modal" data-target="#import_purchase_products_modal">@lang('product.import_products')</button>
-			</div>
-			<div class="col-sm-2 text-center">
-				<button type="button" id="invoice_scan_btn" class="tw-dw-btn tw-dw-btn-success tw-text-white tw-dw-btn-sm" data-toggle="modal" data-target="#invoice_scan_modal" @if($search_disable) disabled @endif>
-					<i class="fa fa-magic"></i> Scanner avec IA
-				</button>
 			</div>
 			<div class="col-sm-6">
 				<div class="form-group">

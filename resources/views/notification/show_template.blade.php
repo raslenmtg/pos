@@ -183,5 +183,35 @@
       }
     }
   });
+$('#send_notification_form').submit(function(e){
+    e.preventDefault();
+    tinyMCE.triggerSave();
+    var data = $(this).serialize();
+    var btn = $('#send_notification_btn');
+    btn.text("@lang('lang_v1.sending')...");
+    btn.attr('disabled', 'disabled');
+    $.ajax({
+        method: "POST",
+        url: $(this).attr("action"),
+        dataType: "json",
+        data: $(this).serialize(),
+        beforeSend: function(xhr) {
+            __disable_submit_button(btn);
+        },
+        success: function(result){
+            if(result.success == true){
+                if (result.whatsapp_link) {
+                    window.open(result.whatsapp_link);
+                }
+                $('div.view_modal').modal('hide');
+                toastr.success(result.msg);
+            } else {
+                toastr.error(result.msg);
+            }
+            $('#send_notification_btn').text("@lang('lang_v1.send')");
+            $('#send_notification_btn').removeAttr('disabled');
+        }
+    });
+});
 
 </script>

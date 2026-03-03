@@ -96,11 +96,11 @@ class NotificationController extends Controller
      */
     public function send(Request $request)
     {
-        abort(403, 'Unauthorized action.');
-        // if (!auth()->user()->can('send_notification')) {
-        //     abort(403, 'Unauthorized action.');
-        // }
-      
+
+         if (!auth()->user()->can('send_notification')) {
+             abort(403, 'Unauthorized action.');
+         }
+
 
         try {
             $customer_notifications = NotificationTemplate::customerNotifications();
@@ -108,7 +108,8 @@ class NotificationController extends Controller
 
             $data = $request->only(['to_email', 'subject', 'email_body', 'mobile_number', 'sms_body', 'notification_type', 'cc', 'bcc', 'whatsapp_text']);
 
-            $emails_array = array_map('trim', explode(',', $data['to_email']));
+            // EMAIL SENDING DISABLED
+            // $emails_array = array_map('trim', explode(',', $data['to_email']));
 
             $transaction_id = $request->input('transaction_id');
             $business_id = request()->session()->get('business.id');
@@ -116,10 +117,10 @@ class NotificationController extends Controller
             $transaction = ! empty($transaction_id) ? Transaction::find($transaction_id) : null;
 
             $orig_data = [
-                'email_body' => $data['email_body'],
-                'sms_body' => $data['sms_body'],
-                'subject' => $data['subject'],
-                'whatsapp_text' => $data['whatsapp_text'],
+                'email_body' => $data['email_body'] ?? '',
+                'sms_body' => $data['sms_body'] ?? '',
+                'subject' => $data['subject'] ?? '',
+                'whatsapp_text' => $data['whatsapp_text'] ?? '',
             ];
 
             if ($request->input('template_for') == 'new_booking') {
@@ -146,19 +147,20 @@ class NotificationController extends Controller
 
             $whatsapp_link = '';
             if (array_key_exists($request->input('template_for'), $customer_notifications)) {
-                if (in_array('email', $notification_type)) {
-                    if (! empty($request->input('attach_pdf'))) {
-                        $data['pdf_name'] = 'INVOICE-'.$transaction->invoice_no.'.pdf';
-                        $data['pdf'] = $this->transactionUtil->getEmailAttachmentForGivenTransaction($business_id, $transaction_id, true);
-                    }
-
-                    Notification::route('mail', $emails_array)
-                                    ->notify(new CustomerNotification($data));
-
-                    if (! empty($transaction)) {
-                        $this->notificationUtil->activityLog($transaction, 'email_notification_sent', null, [], false);
-                    }
-                }
+                // EMAIL SENDING DISABLED
+                // if (in_array('email', $notification_type)) {
+                //     if (! empty($request->input('attach_pdf'))) {
+                //         $data['pdf_name'] = 'INVOICE-'.$transaction->invoice_no.'.pdf';
+                //         $data['pdf'] = $this->transactionUtil->getEmailAttachmentForGivenTransaction($business_id, $transaction_id, true);
+                //     }
+                //
+                //     Notification::route('mail', $emails_array)
+                //                     ->notify(new CustomerNotification($data));
+                //
+                //     if (! empty($transaction)) {
+                //         $this->notificationUtil->activityLog($transaction, 'email_notification_sent', null, [], false);
+                //     }
+                // }
                 if (in_array('sms', $notification_type)) {
                     $this->notificationUtil->sendSms($data);
 
@@ -170,18 +172,19 @@ class NotificationController extends Controller
                     $whatsapp_link = $this->notificationUtil->getWhatsappNotificationLink($data);
                 }
             } elseif (array_key_exists($request->input('template_for'), $supplier_notifications)) {
-                if (in_array('email', $notification_type)) {
-                    if ($request->input('template_for') == 'purchase_order') {
-                        $data['pdf_name'] = 'PO-'.$transaction->ref_no.'.pdf';
-                        $data['pdf'] = $this->transactionUtil->getPurchaseOrderPdf($business_id, $transaction_id, true);
-                    }
-                    Notification::route('mail', $emails_array)
-                                    ->notify(new SupplierNotification($data));
-
-                    if (! empty($transaction)) {
-                        $this->notificationUtil->activityLog($transaction, 'email_notification_sent', null, [], false);
-                    }
-                }
+                // EMAIL SENDING DISABLED
+                // if (in_array('email', $notification_type)) {
+                //     if ($request->input('template_for') == 'purchase_order') {
+                //         $data['pdf_name'] = 'PO-'.$transaction->ref_no.'.pdf';
+                //         $data['pdf'] = $this->transactionUtil->getPurchaseOrderPdf($business_id, $transaction_id, true);
+                //     }
+                //     Notification::route('mail', $emails_array)
+                //                     ->notify(new SupplierNotification($data));
+                //
+                //     if (! empty($transaction)) {
+                //         $this->notificationUtil->activityLog($transaction, 'email_notification_sent', null, [], false);
+                //     }
+                // }
                 if (in_array('sms', $notification_type)) {
                     $this->notificationUtil->sendSms($data);
 
