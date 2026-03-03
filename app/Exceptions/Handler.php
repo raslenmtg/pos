@@ -63,7 +63,7 @@ class Handler extends ExceptionHandler
         // (e.g. ValidationException, AuthenticationException, 404s) are still
         // captured when desired, and so that EMERGENCY-logged exceptions that
         // are caught inside controllers also reach Sentry.
-        if (!($exception instanceof \Symfony\Component\Routing\Exception\RouteNotFoundException)) {
+        if (app()->environment('production') && !($exception instanceof \Symfony\Component\Routing\Exception\RouteNotFoundException) ) {
             app('sentry')->captureException($exception);
         }
 
