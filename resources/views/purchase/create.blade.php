@@ -582,6 +582,12 @@
 					<h5>TVA: <span id="selected_tax_purchase"></span>
 						<span id="tax_error_purchase" class="text-danger" style="display:none;">Aucun taxe appliquée, séléctionner un taxe</span>
 					</h5>
+					<div style="display: grid">
+						<span id="contact_mobile_error_purchase" class="text-danger" style="display:none;">Le contact sélectionné n'a pas de numéro de téléphone</span>
+						<span id="contact_email_error_purchase" class="text-danger" style="display:none;">Le contact sélectionné n'a pas d'email</span>
+						<span id="contact_address_error_purchase" class="text-danger" style="display:none;">Le contact sélectionné n'a pas d'adresse</span>
+						<span id="contact_tax_number_error_purchase" class="text-danger" style="display:none;">Le contact sélectionné n'a pas de matricule fiscale</span>
+					</div>
 				</div>
 				<div class="col-sm-5">
 					<div class="form-group">
@@ -837,6 +843,49 @@
 			}
 		});
 		// ── end RS Rate logic ──────────────────────────────────────────
+
+		// ── Contact validation for RS ──────────────────────────────────
+		const purchaseContactsDetails = @json($contacts_details ?? []);
+
+		function updateSelectedContactDisplay_purchase() {
+			var $contactSelect = $('select#supplier_id');
+			var selectedVal = $contactSelect.val();
+			var $mobileError   = $('#contact_mobile_error_purchase');
+			var $emailError    = $('#contact_email_error_purchase');
+			var $addressError  = $('#contact_address_error_purchase');
+			var $taxNumError   = $('#contact_tax_number_error_purchase');
+
+			$mobileError.hide(); $emailError.hide(); $addressError.hide(); $taxNumError.hide();
+
+			if (!selectedVal || selectedVal === '') return;
+
+			var contact = purchaseContactsDetails[selectedVal];
+			if (contact) {
+				if (!contact.mobile || contact.mobile.trim() === '') $mobileError.show();
+				if (!contact.email  || contact.email.trim()  === '') $emailError.show();
+				var hasAddress = (contact.address_line_1 && contact.address_line_1.trim() !== '') ||
+				                 (contact.city  && contact.city.trim()  !== '') ||
+				                 (contact.state && contact.state.trim() !== '');
+				if (!hasAddress) $addressError.show();
+				if (!contact.tax_number || contact.tax_number.trim() === '') $taxNumError.show();
+			} else {
+				$mobileError.show(); $emailError.show(); $addressError.show(); $taxNumError.show();
+			}
+		}
+
+		$(document).on('change', 'select#supplier_id', function() {
+			if ($('#is_rs').is(':checked')) {
+				updateSelectedContactDisplay_purchase();
+			}
+		});
+
+		$('#is_rs').on('ifChecked.contactCheck', function() {
+			updateSelectedContactDisplay_purchase();
+		});
+		$('#is_rs').on('ifUnchecked.contactCheck', function() {
+			$('#contact_mobile_error_purchase, #contact_email_error_purchase, #contact_address_error_purchase, #contact_tax_number_error_purchase').hide();
+		});
+		// ── end contact validation ─────────────────────────────────────
 
 		$(document).ready( function(){
       		__page_leave_confirmation('#add_purchase_form');

@@ -278,8 +278,15 @@ class PurchaseController extends Controller
 
         $common_settings = ! empty(session('business.common_settings')) ? session('business.common_settings') : [];
 
+        $contacts_details = \App\Contact::where('business_id', $business_id)
+            ->where('type', '!=', 'lead')
+            ->where('contact_status', 'active')
+            ->select('id', 'mobile', 'address_line_1', 'city', 'state', 'tax_number', 'email')
+            ->get()
+            ->keyBy('id');
+
         return view('purchase.create')
-            ->with(compact('taxes', 'orderStatuses', 'business_locations', 'currency_details', 'default_purchase_status', 'customer_groups', 'types', 'shortcuts', 'payment_line', 'payment_types', 'accounts', 'bl_attributes', 'common_settings', 'business_details'));
+            ->with(compact('taxes', 'orderStatuses', 'business_locations', 'currency_details', 'default_purchase_status', 'customer_groups', 'types', 'shortcuts', 'payment_line', 'payment_types', 'accounts', 'bl_attributes', 'common_settings', 'business_details', 'contacts_details'));
     }
 
     /**
@@ -614,6 +621,13 @@ class PurchaseController extends Controller
                                         ->pluck('ref_no', 'id');
         }
 
+        $contacts_details = \App\Contact::where('business_id', $business_id)
+            ->where('type', '!=', 'lead')
+            ->where('contact_status', 'active')
+            ->select('id', 'mobile', 'address_line_1', 'city', 'state', 'tax_number', 'email')
+            ->get()
+            ->keyBy('id');
+
         return view('purchase.edit')
             ->with(compact(
                 'taxes',
@@ -628,7 +642,8 @@ class PurchaseController extends Controller
                 'shortcuts',
                 'purchase_orders',
                 'common_settings',
-                'business_details'
+                'business_details',
+                'contacts_details'
             ));
     }
 
