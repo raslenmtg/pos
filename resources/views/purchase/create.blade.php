@@ -593,13 +593,13 @@
 					<div class="form-group">
 						{!! Form::label('tax_category_purchase', __('expense.operation_type') . ':') !!}
 						{!! Form::select('tax_category_purchase', [
+                            'acquisitions' => 'Acquisitions des marchandises, matériel équipements et de services',
+                            'professionalServices' => 'Rémunération des activités non commerciales',
+                            'rentals' => 'Loyers',
                             'capitalIncome' => 'Revenus des capitaux mobiliers',
                             'boardCompensation' => 'Jetons de présences et tantièmes',
                             'assetTransfers' => 'Cessions Fc et immeubles',
                             'dividends' => 'Dividendes',
-                            'rentals' => 'Loyers',
-                            'acquisitions' => 'Acquisitions des marchandises, matériel équipements et de services',
-                            'professionalServices' => 'Rémunération des activités non commerciales',
                             'gambling' => 'Jeux de pari et loterie'
                         ], null, ['class' => 'form-control', 'id' => 'tax_category_purchase', 'placeholder' => __('messages.please_select')]) !!}
 					</div>
@@ -694,11 +694,11 @@
 				{ value: "RS1_000002", text: "Loyers servis à des résidents établis - 10%", rate: "10" }
 			],
 			"acquisitions": [
-				{ value: "RS7_000003", text: "Montants ≥ 1.000 D pour acquisitions auprès de personnes bénéficiant de la déduction de 2/3 et IS au taux de 10% - 0.5%", rate: "0.5" },
-				{ value: "RS7_000002", text: "Montants ≥ 1.000 D pour acquisitions auprès de personnes soumises à l'IS au taux de 15% - 1%", rate: "1" },
-				{ value: "RS7_000004", text: "Commission revenant aux distributeurs agréés des opérateurs télécoms (personne physique) - 1.5%", rate: "1.5" },
-				{ value: "RS7_000005", text: "Montants ≥ 1.000 D pour acquisitions de marchandises/services auprès de personnes soumises à l'IS à des taux autres que 15% et 10% - 1%", rate: "1" },
-				{ value: "RS7_000001", text: "Montants ≥ 1.000 D pour acquisitions de marchandises/services auprès de personnes soumises à l'IS à des taux autres que 15% et 10% - 1.5%", rate: "1.5" }
+				{ value: "RS7_000002", text: "Fournisseur IS 15% - 1%", rate: "1" },
+				{ value: "RS7_000001", text: "Fournisseur IS autre que 15% et 10% - 1.5%", rate: "1.5" },
+				{ value: "RS7_000003", text: "Fournisseur IS 10% avec avantage 2/3 - 0.5%", rate: "0.5" },
+				{ value: "RS7_000004", text: "Distributeur télécom agréé (personne physique) - 1.5%", rate: "1.5" },
+				{ value: "RS7_000005", text: "Fournisseur IS autre que 15% et 10% - 1%", rate: "1" },
 			],
 			"professionalServices": [
 				{ value: "RS2_000001", text: "Honoraires servis aux BNC forfait d'assiette, commissions, courtages et rémunérations des activités non commerciales servis à des résidents établis - 10%", rate: "10" },
