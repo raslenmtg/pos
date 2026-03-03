@@ -461,6 +461,7 @@ class Util
      */
     public function sendSms($data)
     {
+        return true;
         $sms_settings = $data['sms_settings'];
         $sms_service = isset($sms_settings['sms_service']) ? $sms_settings['sms_service'] : 'other';
 

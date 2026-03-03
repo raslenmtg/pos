@@ -20,7 +20,7 @@
             @include('notification_template.partials.tags', ['tags' => $tags])
         </div>
         <div class="box-group" id="accordion">
-            {{-- email --}}
+            {{-- email
             <div class="panel box box-solid">
               <div class="box-header with-border">
                 <h4 class="box-title">
@@ -75,7 +75,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
             {{-- sms /whatsapp--}}
             @if($notification_template['template_for'] != 'send_ledger')
                 <div class="panel box box-solid">
@@ -128,7 +128,7 @@
         @endif
         {!! Form::hidden('template_for', $notification_template['template_for']); !!}
         <div class="modal-footer">
-
+          <button type="submit" class="tw-dw-btn tw-dw-btn-primary tw-text-white" id="send_notification_btn">@lang('lang_v1.send')</button>
           <button type="button" class="tw-dw-btn tw-dw-btn-neutral tw-text-white" data-dismiss="modal">@lang('messages.close')</button>
         </div>
         {!! Form::close() !!}
