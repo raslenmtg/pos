@@ -41,6 +41,7 @@ return [
     'update_n_edit_opening_stock' => 'Update & Edit Opening Stock',
     'total_amount_exc_tax' => 'Total Amount (Exc. Tax)',
     'is_rs' => 'Apply withholding tax (RS)',
+    'export_tej' => 'Export TEJ',
     'currency_symbol_placement' => 'Currency Symbol Placement',
     'before_amount' => 'Before amount',
     'after_amount' => 'After amount',

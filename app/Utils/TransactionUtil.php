@@ -4651,7 +4651,8 @@ class TransactionUtil extends Util
                         TP2.transaction_id=PR.id ) as return_paid'),
                         DB::raw('COUNT(PR.id) as return_exists'),
                         DB::raw('COALESCE(PR.final_total, 0) as amount_return'),
-                        DB::raw("CONCAT(COALESCE(u.surname, ''),' ',COALESCE(u.first_name, ''),' ',COALESCE(u.last_name,'')) as added_by")
+                        DB::raw("CONCAT(COALESCE(u.surname, ''),' ',COALESCE(u.first_name, ''),' ',COALESCE(u.last_name,'')) as added_by"),
+                        'transactions.code_rs'
                     )
                     ->groupBy('transactions.id');
 

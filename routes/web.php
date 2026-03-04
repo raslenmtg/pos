@@ -215,6 +215,7 @@ Route::middleware([ 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'C
     Route::get('/purchases/get_suppliers', [PurchaseController::class, 'getSuppliers']);
     Route::post('/purchases/get_purchase_entry_row', [PurchaseController::class, 'getPurchaseEntryRow']);
     Route::post('/purchases/check_ref_number', [PurchaseController::class, 'checkRefNumber']);
+    Route::get('/purchases/{id}/exportTEJ', [PurchaseController::class, 'exportTEJ']);
     Route::resource('purchases', PurchaseController::class)->except(['show']);
 
     Route::get('/toggle-subscription/{id}', [SellPosController::class, 'toggleRecurringInvoices']);

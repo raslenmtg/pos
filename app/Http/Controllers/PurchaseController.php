@@ -164,13 +164,25 @@ class PurchaseController extends Controller
                         $html .= '<li><a href="#" data-href="'.action([\App\Http\Controllers\NotificationController::class, 'getTemplate'], [ $row->id,  'items_pending']).'" class="btn-modal" data-container=".view_modal"><i class="fas fa-envelope" aria-hidden="true"></i> '.__('lang_v1.item_pending_notification').'</a></li>';
                     }
 
+                    if (! empty($row->code_rs)) {
+                        $html .= '<li class="divider"></li>';
+                        $html .= '<li><a href="'.action([\App\Http\Controllers\PurchaseController::class, 'exportTEJ'], [$row->id]).'"><i class="fas fa-file-code" aria-hidden="true"></i> '.__('lang_v1.export_tej').'</a></li>';
+                    }
+
                     $html .= '</ul></div>';
 
                     return $html;
                 })
                 ->removeColumn('id')
                 ->editColumn('ref_no', function ($row) {
-                    return ! empty($row->return_exists) ? $row->ref_no.' <small class="label bg-red label-round no-print" title="'.__('lang_v1.some_qty_returned').'"><i class="fas fa-undo"></i></small>' : $row->ref_no;
+                    $html = $row->ref_no;
+                    if (! empty($row->return_exists)) {
+                        $html .= ' <small class="label bg-red label-round no-print" style="padding:4px" title="'.__('lang_v1.some_qty_returned').'"><i class="fas fa-undo"></i></small>';
+                    }
+                    if (! empty($row->code_rs)) {
+                        $html .= ' <small class="label bg-purple label-round no-print" style="padding: 4px" title="Retenu Ã  la source appliquÃ©e"><i class="fas fa-tag"></i> RS</small>';
+                    }
+                    return $html;
                 })
                 ->editColumn(
                     'final_total',
@@ -193,7 +205,7 @@ class PurchaseController extends Controller
                 )
                 ->addColumn('payment_due', function ($row) {
                     $due = $row->final_total - $row->amount_paid;
-                    $due_html = '<strong>'.__('lang_v1.purchase').':</strong> <span class="payment_due" data-orig-value="'.$due.'">'.$this->transactionUtil->num_f($due, true).'</span>';
+                    $due_html = empty($due)?'':'<span class="payment_due" data-orig-value="'.$due.'">'.$this->transactionUtil->num_f($due, true).'</span>';
 
                     if (! empty($row->return_exists)) {
                         $return_due = $row->amount_return - $row->return_paid;
@@ -530,10 +542,10 @@ class PurchaseController extends Controller
 
         $business_id = request()->session()->get('user.business_id');
 
-        //Check if subscribed or not
+       /* //Check if subscribed or not
         if (! $this->moduleUtil->isSubscribed($business_id)) {
             return $this->moduleUtil->expiredResponse(action([\App\Http\Controllers\PurchaseController::class, 'index']));
-        }
+        }*/
 
         //Check if the transaction can be edited or not.
         $edit_days = request()->session()->get('business.transaction_edit_days');
@@ -1448,4 +1460,206 @@ class PurchaseController extends Controller
 
         return $output;
     }
+
+    /**
+     * Export purchase as TEJ XML file.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function exportTEJ(\Illuminate\Http\Request $request, $id)
+    {
+        if (! auth()->user()->can('purchase.view')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $purchase = Transaction::where('id', $id)
+            ->with(['contact', 'tax', 'business', 'location'])
+            ->where('type', 'purchase')
+            ->whereNotNull('code_rs')
+            ->where('code_rs', '!=', '')
+            ->firstOrFail();
+
+        $business = $purchase->business;
+        $transactionDate = \Carbon\Carbon::parse($purchase->transaction_date);
+
+        $declarantMatriculeFiscal = $business->tax_number_1 ?? '';
+
+        if (preg_match('/(\d+).*?([A-Z])/i', $declarantMatriculeFiscal, $matches)) {
+            $numberPart = $matches[1];
+            $letterPart = strtoupper($matches[2]);
+            $cleanMatricule = str_pad($numberPart, 7, '0', STR_PAD_LEFT) . $letterPart;
+        } else {
+            return back()->with('status', ['success' => 0, 'msg' => 'Invalid Matricule Fiscal format du declarant. Expected format: 0123456X']);
+        }
+
+        $codeActe = '1';
+
+        $xml = new \DOMDocument('1.0', 'UTF-8');
+        $xml->formatOutput = true;
+        $xml->standalone = true;
+
+        $root = $xml->createElement('DeclarationsRS');
+        $root->setAttribute('VersionSchema', '1.0');
+        $xml->appendChild($root);
+
+        $declarant = $xml->createElement('Declarant');
+        $root->appendChild($declarant);
+        $declarant->appendChild($xml->createElement('TypeIdentifiant', '1'));
+        $declarant->appendChild($xml->createElement('Identifiant', $cleanMatricule));
+        $declarant->appendChild($xml->createElement('CategorieContribuable', 'PM'));
+
+        $referenceDeclaration = $xml->createElement('ReferenceDeclaration');
+        $root->appendChild($referenceDeclaration);
+        $referenceDeclaration->appendChild($xml->createElement('ActeDepot', $codeActe));
+        $referenceDeclaration->appendChild($xml->createElement('AnneeDepot', $transactionDate->format('Y')));
+        $referenceDeclaration->appendChild($xml->createElement('MoisDepot', $transactionDate->format('m')));
+
+        $ajouterCertificats = $xml->createElement('AjouterCertificats');
+        $root->appendChild($ajouterCertificats);
+
+        $contact = $purchase->contact;
+
+        if (! $contact) {
+            return back()->with('status', ['success' => 0, 'msg' => 'No contact found for this purchase.']);
+        }
+
+        $certificat = $xml->createElement('Certificat');
+        $ajouterCertificats->appendChild($certificat);
+
+        $beneficiaire = $xml->createElement('Beneficiaire');
+        $certificat->appendChild($beneficiaire);
+
+        $idTaxpayer = $xml->createElement('IdTaxpayer');
+        $beneficiaire->appendChild($idTaxpayer);
+
+        $matriculeFiscal = $xml->createElement('MatriculeFiscal');
+        $idTaxpayer->appendChild($matriculeFiscal);
+
+        $matriculeFiscal->appendChild($xml->createElement('TypeIdentifiant', '1'));
+
+        if (preg_match('/(\d+).*?([A-Z])/i', $contact->tax_number, $matches)) {
+            $numberPart = $matches[1];
+            $letterPart = strtoupper($matches[2]);
+            $cleanMatriculeContact = str_pad($numberPart, 7, '0', STR_PAD_LEFT) . $letterPart;
+        } else {
+            $contactName = $contact->contact_type == 'business' ? $contact->supplier_business_name : $contact->name;
+            return back()->with('status', ['success' => 0, 'msg' => 'Invalid Matricule Fiscal format for ' . $contactName . '. Expected format: 0123456X']);
+        }
+
+        $matriculeFiscal->appendChild($xml->createElement('Identifiant', $cleanMatriculeContact));
+        $categorieBenef = $contact->contact_type === 'individual' ? 'PP' : 'PM';
+        $matriculeFiscal->appendChild($xml->createElement('CategorieContribuable', $categorieBenef));
+
+        $beneficiaire->appendChild($xml->createElement('Resident', '1'));
+
+        $nomBenef = $xml->createElement('NometprenonOuRaisonsociale');
+        $nomBenef->appendChild($xml->createTextNode($contact->contact_type == 'business' ? $contact->supplier_business_name : $contact->name));
+        $beneficiaire->appendChild($nomBenef);
+
+        $adresseBenef = $xml->createElement('Adresse');
+        $adresseBenef->appendChild($xml->createTextNode($this->purchaseFormatAddress($contact)));
+        $beneficiaire->appendChild($adresseBenef);
+
+        $infosContact = $xml->createElement('InfosContact');
+        $beneficiaire->appendChild($infosContact);
+        $infosContact->appendChild($xml->createElement('AdresseMail', $contact->email ?? ''));
+        $infosContact->appendChild($xml->createElement('NumTel', $contact->mobile ?? ''));
+
+        $certificat->appendChild($xml->createElement('DatePayement',
+            \Carbon\Carbon::parse($purchase->transaction_date)->format('d/m/Y')
+        ));
+
+        $certificat->appendChild($xml->createElement('Ref_certif_chez_declarant', $purchase->ref_no ?? ''));
+
+        $listeOperations = $xml->createElement('ListeOperations');
+        $certificat->appendChild($listeOperations);
+
+        $operation = $xml->createElement('Operation');
+        $operation->setAttribute('IdTypeOperation', $purchase->code_rs);
+        $listeOperations->appendChild($operation);
+
+        $rsRate = $this->purchaseGetRSRate($purchase->code_rs);
+
+        $montantTTC = intval(($purchase->final_total / (1 - ($rsRate / 100))) * 1000);
+        $tauxTVA = $purchase->tax ? floatval($purchase->tax->amount) : 0;
+        $montantHT = intval($montantTTC / (1 + ($tauxTVA / 100)));
+        $montantTVA = $montantTTC - $montantHT;
+        $montantRS = intval($montantTTC * ($rsRate / 100));
+        $montantNetServi = intval($purchase->final_total * 1000);
+
+        $operation->appendChild($xml->createElement('AnneeFacturation',
+            \Carbon\Carbon::parse($purchase->transaction_date)->format('Y')
+        ));
+        $operation->appendChild($xml->createElement('CNPC', '0'));
+        $operation->appendChild($xml->createElement('P_Charge', '0'));
+        $operation->appendChild($xml->createElement('MontantHT', $montantHT));
+        $operation->appendChild($xml->createElement('TauxRS', number_format($rsRate, 2, '.', '')));
+        $operation->appendChild($xml->createElement('TauxTVA', number_format($tauxTVA, 2, '.', '')));
+        $operation->appendChild($xml->createElement('MontantTVA', $montantTVA));
+        $operation->appendChild($xml->createElement('MontantTTC', $montantTTC));
+        $operation->appendChild($xml->createElement('MontantRS', $montantRS));
+        $operation->appendChild($xml->createElement('MontantNetServi', $montantNetServi));
+
+        $totalPayement = $xml->createElement('TotalPayement');
+        $certificat->appendChild($totalPayement);
+        $totalPayement->appendChild($xml->createElement('TotalMontantHT', $montantHT));
+        $totalPayement->appendChild($xml->createElement('TotalMontantTVA', $montantTVA));
+        $totalPayement->appendChild($xml->createElement('TotalMontantTTC', $montantTTC));
+        $totalPayement->appendChild($xml->createElement('TotalMontantRS', $montantRS));
+        $totalPayement->appendChild($xml->createElement('TotalMontantNetServi', $montantNetServi));
+
+        $exercice = $transactionDate->format('Y');
+        $mois = $transactionDate->format('m');
+        $filename = sprintf('%s-%s-%s-%s.xml', $cleanMatricule, $exercice, $mois, $codeActe);
+
+        return response($xml->saveXML(), 200)
+            ->header('Content-Type', 'application/xml')
+            ->header('Content-Disposition', 'attachment; filename="' . $filename . '"');
+    }
+
+    /**
+     * Format contact address for TEJ export.
+     */
+    private function purchaseFormatAddress($contact)
+    {
+        $addressParts = array_filter([
+            $contact->address_line_1,
+            $contact->address_line_2,
+            $contact->city,
+            $contact->state,
+            $contact->zip_code,
+        ]);
+
+        return implode(', ', $addressParts);
+    }
+
+    /**
+     * Get RS rate from code_rs for purchases.
+     */
+    private function purchaseGetRSRate($codeRS)
+    {
+        $rsRates = [
+            'RS3_000001' => 20,
+            'RS8_000001' => 20,
+            'RS6_000001' => 2.5,
+            'RS6_000002' => 2.5,
+            'RS5_000001' => 10,
+            'RS1_000001' => 5,
+            'RS1_000002' => 10,
+            'RS7_000001' => 1.5,
+            'RS7_000002' => 1,
+            'RS7_000003' => 0.5,
+            'RS7_000004' => 1.5,
+            'RS7_000005' => 1,
+            'RS2_000001' => 10,
+            'RS2_000002' => 3,
+            'RS2_000003' => 3,
+            'RS2_000004' => 5,
+            'RS11_000001' => 25,
+        ];
+
+        return $rsRates[$codeRS] ?? 0;
+    }
 }
+
