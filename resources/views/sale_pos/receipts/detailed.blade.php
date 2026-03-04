@@ -58,15 +58,15 @@
     <td style="width: 100%; padding-bottom: 10px; border-bottom: 1px solid #000;">
         <table style="width:100%; border-collapse: collapse;">
             <tr>
-                <!-- LOGO (LEFT) -->
+               {{-- <!-- LOGO (LEFT) -->
                 <td style="width: 20%; vertical-align: middle; text-align: left;">
                     @if(!empty($receipt_details->logo))
                         <img src="{{$receipt_details->logo}}" style="max-width: 180px; max-height: 100px;">
                     @endif
                 </td>
-
+--}}
                 <!-- CENTER TEXT -->
-                <td style="width: 60%; text-align: center; line-height: 15px;">
+                <td style="width: 100%; text-align: center; line-height: 15px;">
                     @if(empty($receipt_details->letter_head))
                         @if(!empty($receipt_details->header_text))
                             <div style="margin-bottom: 6px;">{!! $receipt_details->header_text !!}</div>
@@ -92,8 +92,6 @@
                     </div>
                 </td>
 
-                <!-- EMPTY RIGHT (BALANCE) -->
-                <td style="width: 20%;"></td>
             </tr>
         </table>
     </td>
@@ -478,10 +476,10 @@
 
 
 
-<table class="no-break-section" style="width:100%; margin:0 auto;">
+<table class="no-break-section" style="width:100%; margin:0;">
     <tr>
         <td style="text-align:center; padding:0; margin:0;">
-            <div style="margin:0 auto; max-width:100%; text-align:center;">
+            <div style="margin:0 auto; width:100%; text-align:center;">
 
                 @if(!empty($receipt_details->additional_notes))
                     <div style="margin:15px auto; padding:10px; border:1px solid #000; max-width:90%; text-align:left; display:inline-block;">
@@ -490,21 +488,30 @@
                     </div>
                 @endif
 
-                @if(!empty($receipt_details->footer_text))
-                    <div style="margin:10px auto; text-align:center; display:block; width:100%;">
-                        {!! $receipt_details->footer_text !!}
-                    </div>
-                @endif
 
-                @if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
-                    <div style="margin:10px auto; text-align:center; display:block;">
-                        <img
-                                src="data:image/png;base64,{{ DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54]) }}"
-                                style="display:block; margin:0 auto;">
-                    </div>
-                @endif
 
             </div>
+        </td>
+    </tr>
+    <tr >
+        <td style="text-align:center; padding:0; margin:0;width:100%;">
+        @if(!empty($receipt_details->footer_text))
+            <div style="text-align:center; display:block; width:100%;">
+                {!! $receipt_details->footer_text !!}
+            </div>
+        @endif
+
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:center; padding:0; margin:0;width:100%;">
+        @if($receipt_details->show_qr_code && !empty($receipt_details->qr_code_text))
+            <div style="margin:10px auto; text-align:center; display:block;">
+                <img
+                        src="data:image/png;base64,{{ DNS2D::getBarcodePNG($receipt_details->qr_code_text, 'QRCODE', 3, 3, [39, 48, 54]) }}"
+                        style="display:block; margin:0 auto;">
+            </div>
+        @endif
         </td>
     </tr>
 </table>
