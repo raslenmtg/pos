@@ -89,9 +89,7 @@
       @if(!empty($custom_labels['purchase']['custom_field_4']))
         <br><strong>{{$custom_labels['purchase']['custom_field_4'] ?? ''}}: </strong> {{$purchase->custom_field_4}}
       @endif
-      @if(!empty($purchase->code_rs))
-        <br><strong>@lang('lang_v1.is_rs'):</strong> {{ $purchase->code_rs }}
-      @endif
+
       @if(!empty($purchase_order_nos))
             <strong>@lang('restaurant.order_no'):</strong>
             {{$purchase_order_nos}}
@@ -383,6 +381,37 @@
               <th>{{ $purchase->additional_expense_key_4 }}:</th>
               <td><b>(+)</b></td>
               <td><span class="display_currency pull-right" >{{ $purchase->additional_expense_value_4 }}</span></td>
+            </tr>
+          @endif
+          <tr>
+            <th>Timbre fiscale:</th>
+            <td>(+)</td>
+            <td><span class="display_currency pull-right" data-currency_symbol="true" >1</span></td>
+          </tr>
+          @php
+            $purchaseTaxCodes = [
+                "RS3_000001" => 20, "RS8_000001" => 20, "RS6_000001" => 2.5, "RS6_000002" => 2.5,
+                "RS5_000001" => 10, "RS1_000001" => 5, "RS1_000002" => 10, "RS7_000003" => 0.5,
+                "RS7_000002" => 1, "RS7_000004" => 1.5, "RS7_000005" => 1, "RS7_000001" => 1.5,
+                "RS2_000001" => 10, "RS2_000002" => 3, "RS2_000003" => 3, "RS2_000004" => 5,
+                "RS11_000001" => 25
+            ];
+            $rs_rate = $purchaseTaxCodes[$purchase->code_rs] ?? 0;
+            $amount_rs = 0;
+            if($rs_rate > 0) {
+                $business_details = session('business');
+                $timbre_value = (!empty($business_details['enable_timbre']) && $business_details['enable_timbre'] == 1) ? ($business_details['timbre_value'] ?? 0) : 0;
+                 if($rs_rate < 100) {
+                     $base_amount = ($purchase->final_total - $timbre_value) / (1 - ($rs_rate/100));
+                     $amount_rs = $base_amount * ($rs_rate/100);
+                 }
+            }
+          @endphp
+          @if(!empty($purchase->code_rs))
+            <tr>
+              <td><strong>Retenu à la source appliquée:</strong> {{ $rs_rate + 0 }}% </td>
+              <td><b>(-)</b></td>
+              <td> <span class="display_currency pull-right" data-currency_symbol="true">{{ $amount_rs }}</span></td>
             </tr>
           @endif
           <tr>
