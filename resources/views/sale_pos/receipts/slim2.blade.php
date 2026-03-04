@@ -225,7 +225,10 @@
 					@if(!empty($receipt_details->sub_heading_line5))
 						{{ $receipt_details->sub_heading_line5 }}<br/>
 					@endif
-	<br/><span class="sub-headings">{!! $receipt_details->invoice_no_prefix !!} {{$receipt_details->invoice_no}}</span>
+
+					@if(!empty($receipt_details->invoice_no))
+						<br/><span class="sub-headings">{!! $receipt_details->invoice_no_prefix !!}{{$receipt_details->invoice_no}}</span>
+					@endif
 				
 				
 				</div>
