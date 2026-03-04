@@ -89,6 +89,9 @@
       @if(!empty($custom_labels['purchase']['custom_field_4']))
         <br><strong>{{$custom_labels['purchase']['custom_field_4'] ?? ''}}: </strong> {{$purchase->custom_field_4}}
       @endif
+      @if(!empty($purchase->code_rs))
+        <br><strong>@lang('lang_v1.is_rs'):</strong> {{ $purchase->code_rs }}
+      @endif
       @if(!empty($purchase_order_nos))
             <strong>@lang('restaurant.order_no'):</strong>
             {{$purchase_order_nos}}
