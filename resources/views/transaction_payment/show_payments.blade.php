@@ -206,11 +206,9 @@
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white no-print" 
-              aria-label="Print" 
-                onclick="$(this).closest('div.modal').printThis();">
+            <a href="{{ action([\App\Http\Controllers\TransactionPaymentController::class, 'printPayments'], [$transaction->id]) }}" target="_blank" class="tw-dw-btn tw-dw-btn-primary tw-text-white no-print" >
                 <i class="fa fa-print"></i> @lang( 'messages.print' )
-            </button>
+            </a>
             <button type="button" class="tw-dw-btn tw-dw-btn-neutral tw-text-white no-print" data-dismiss="modal">@lang( 'messages.close' )</button>
         </div>
     </div><!-- /.modal-content -->

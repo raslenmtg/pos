@@ -27,10 +27,17 @@ class InvoiceMappingService
         array $catalog
     ): array {
         // Call Gemini to extract all line items from the image
-        $geminiItems = $this->gemini->extractAndMap($imagePath, $catalog);
+        $geminiData = $this->gemini->extractAndMap($imagePath, $catalog);
+
+        $items = $geminiData['items'] ?? [];
+        // Fallback for list response
+        if (isset($geminiData[0]) && is_array($geminiData[0])) {
+            $items = $geminiData;
+            $geminiData = [];
+        }
 
         $results = [];
-        foreach ($geminiItems as $item) {
+        foreach ($items as $item) {
             $ocrText = $item['ocr_text'] ?? '';
 
             // Check cached mapping first
@@ -53,7 +60,12 @@ class InvoiceMappingService
             $results[] = $item;
         }
 
-        return $results;
+        return [
+            'invoice_date' => $geminiData['invoice_date'] ?? null,
+            'ref_no'       => $geminiData['ref_no'] ?? null,
+            'supplier'     => $geminiData['supplier'] ?? null,
+            'items'        => $results,
+        ];
     }
 
     /**

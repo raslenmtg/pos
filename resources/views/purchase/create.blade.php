@@ -76,7 +76,7 @@
 					$search_disable = false; 
 				@endphp
 			@else
-				@php $default_location = null;
+				@php $default_location = $business_locations->keys()->first();
 				$search_disable = true;
 				@endphp
 			@endif

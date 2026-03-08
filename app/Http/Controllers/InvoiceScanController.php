@@ -51,7 +51,7 @@ class InvoiceScanController extends Controller
             ->toArray();
 
         try {
-            $items = $this->mappingService->extractFromInvoice(
+            $extractedData = $this->mappingService->extractFromInvoice(
                 $businessId,
                 $supplierId,
                 $absolutePath,
@@ -64,6 +64,8 @@ class InvoiceScanController extends Controller
             // Remove temp file
             \Illuminate\Support\Facades\Storage::disk('local')->delete($path);
         }
+
+        $items = $extractedData['items'] ?? [];
 
         // Enrich each item with variation_id (first variation of the product)
         foreach ($items as &$item) {
@@ -78,10 +80,65 @@ class InvoiceScanController extends Controller
         }
         unset($item);
 
-        return response()->json([
+        $extractedData['items'] = $items;
+
+        // Try to match supplier if not provided
+        if (empty($supplierId) && !empty($extractedData['supplier'])) {
+            $ocrSup = $extractedData['supplier'];
+            $match = null;
+
+            // 1. Try Tax Number Matching (Robust)
+            if (!empty($ocrSup['tax_number'])) {
+                // Exact match
+                $match = \App\Contact::where('business_id', $businessId)
+                    ->where('type', 'supplier')
+                    ->where('tax_number', $ocrSup['tax_number'])
+                    ->first();
+
+                // If no exact match, try simplified match (remove non-alphanumeric)
+                if (!$match) {
+                    $taxSimplified = preg_replace('/[^a-zA-Z0-9]/', '', $ocrSup['tax_number']);
+                    if (strlen($taxSimplified) > 4) { // Avoid matching short junk
+                        // Get candidates - optimization: search by first few chars if possible, or loose search
+                        // For now we assume reasonably small supplier list or good DB performance
+                        $candidates = \App\Contact::where('business_id', $businessId)
+                            ->where('type', 'supplier')
+                            ->select('id', 'name', 'tax_number', 'supplier_business_name')
+                            ->get();
+
+                        foreach ($candidates as $candidate) {
+                            $cTax = preg_replace('/[^a-zA-Z0-9]/', '', $candidate->tax_number);
+                            // check if one contains the other to handle partial scans
+                            if (!empty($cTax) && ($cTax === $taxSimplified || strpos($cTax, $taxSimplified) !== false || strpos($taxSimplified, $cTax) !== false)) {
+                                $match = $candidate;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // 2. Try Name Matching
+            if (!$match && !empty($ocrSup['name'])) {
+                $match = \App\Contact::where('business_id', $businessId)
+                    ->where('type', 'supplier')
+                    ->where(function($q) use ($ocrSup) {
+                        $q->where('name', 'LIKE', '%' . $ocrSup['name'] . '%')
+                          ->orWhere('supplier_business_name', 'LIKE', '%' . $ocrSup['name'] . '%');
+                    })
+                    ->first();
+            }
+
+            if ($match) {
+                $extractedData['matched_supplier_id'] = $match->id;
+                // Use business name if available, otherwise name
+                $extractedData['matched_supplier_name'] = $match->supplier_business_name ?: $match->name;
+            }
+        }
+
+        return response()->json(array_merge([
             'success' => true,
-            'items'   => $items,
-        ]);
+        ], $extractedData));
     }
 
     /**

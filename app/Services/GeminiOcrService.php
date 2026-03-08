@@ -26,10 +26,6 @@ class GeminiOcrService
      */
     public function extractAndMap(string $imagePath, array $catalog): array
     {
-        if (empty($this->apiKey)) {
-            Log::warning('GeminiOcrService: GEMINI_API_KEY is not configured.');
-            return [];
-        }
 
         $imageData = base64_encode(file_get_contents($imagePath));
         $mimeType  = mime_content_type($imagePath);
@@ -49,23 +45,49 @@ the comma is a decimal separator (NOT thousands separator).
 Examples: "8,000" = 8.000 dinars, "12,750" = 12.750 dinars.
 Since you work in simplex which removes 3 decimal digits, return prices divided by 1000.
 So "8,000" → 8, "12,750" → 12.750 → return as 12.75.
-Extract all product line items from this supplier invoice.
-For each item, find the closest match in this product catalog:
+
+Extract the following information from this supplier invoice:
+1. Invoice Date (format YYYY-MM-DD HH:mm:ss if time present, else YYYY-MM-DD)
+2. Invoice Reference Number
+3. Supplier Information (Name, Tax Number, Phone, Email, Address, City). 
+   Note: Tax Number often follows formats like "1234567/A", "123456/A/B/C", "1234567ABC" or similar Tunisian matricule fiscal formats.
+4. Product line items.
+
+For each product item, find the closest match in this product catalog:
 {$catalogJson}
 
-Return ONLY a valid JSON array with no extra text or markdown. Format:
-[
-  {
-    "ocr_text": "exact text from invoice",
-    "product_id": 42,
-    "product_name": "matched product name",
-    "quantity": 10,
-    "unit_price": 2.50,
-    "confidence": 0.95
-  }
-]
+Return ONLY a valid JSON object with no extra text or markdown. Format:
+{
+  "invoice_date": "MM/DD/YYYY",
+  "ref_no": "ABC-123",
+  "supplier": {
+      "name": "Business Name",
+      "tax_number": "Tax ID",
+      "mobile": "Phone",
+      "email": "Email",
+      "address_line_1": "Address",
+      "city": "City"
+  },
+  "items": [
+    {
+        "ocr_text": "exact text from invoice",
+        "product_id": 42,
+        "product_name": "matched product name",
+        "quantity": 10,
+        "unit_price": 2.50,
+        "line_discount": 0,
+        "sku": "extracted SKU/Code if present",
+        "tax_rate": "extracted TVA if present",
+        "confidence": 0.95
+    }
+  ]
+}
 
-If no match is found in the catalog, set product_id to null and confidence to 0.
+If no match is found for product_id, set it to null and confidence to 0.
+Notes:
+- Extract "remise" or "discount" per line item if present. Return as percentage number (e.g. 5 for 5%).
+- Extract "TVA" or "Tax" per line item if present. Return as percentage number (e.g. 19 for 19%).
+- Extract "Code" or "Reference" as SKU.
 PROMPT;
 
         try {

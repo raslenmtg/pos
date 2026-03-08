@@ -338,6 +338,7 @@ Route::middleware([ 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'C
     Route::get('/payments/add_payment/{transaction_id}', [TransactionPaymentController::class, 'addPayment']);
     Route::get('/payments/pay-contact-due/{contact_id}', [TransactionPaymentController::class, 'getPayContactDue']);
     Route::post('/payments/pay-contact-due', [TransactionPaymentController::class, 'postPayContactDue']);
+    Route::get('/payments/print-payments/{transaction_id}', [TransactionPaymentController::class, 'printPayments']);
     Route::resource('payments', TransactionPaymentController::class);
 
     //Printers...

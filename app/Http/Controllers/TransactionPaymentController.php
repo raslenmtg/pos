@@ -179,10 +179,10 @@ class TransactionPaymentController extends Controller
             $payments_query = TransactionPayment::where('transaction_id', $id);
 
             $accounts_enabled = false;
-            if ($this->moduleUtil->isModuleEnabled('account')) {
+         /*   if ($this->moduleUtil->isModuleEnabled('account')) {
                 $accounts_enabled = true;
                 $payments_query->with(['payment_account']);
-            }
+            }*/
 
             $payments = $payments_query->get();
             $location_id = ! empty($transaction->location_id) ? $transaction->location_id : null;
@@ -448,91 +448,52 @@ class TransactionPaymentController extends Controller
         if (request()->ajax()) {
             $business_id = request()->session()->get('user.business_id');
 
-            $due_payment_type = request()->input('type');
-            $query = Contact::where('contacts.id', $contact_id)
-                            ->leftjoin('transactions AS t', 'contacts.id', '=', 't.contact_id');
-            if ($due_payment_type == 'purchase') {
-                $query->select(
-                    DB::raw("SUM(IF(t.type = 'purchase', final_total, 0)) as total_purchase"),
-                    DB::raw("SUM(IF(t.type = 'purchase', (SELECT SUM(amount) FROM transaction_payments WHERE transaction_payments.transaction_id=t.id), 0)) as total_paid"),
-                    'contacts.name',
-                    'contacts.supplier_business_name',
-                    'contacts.id as contact_id'
-                    );
-            } elseif ($due_payment_type == 'purchase_return') {
-                $query->select(
-                    DB::raw("SUM(IF(t.type = 'purchase_return', final_total, 0)) as total_purchase_return"),
-                    DB::raw("SUM(IF(t.type = 'purchase_return', (SELECT SUM(amount) FROM transaction_payments WHERE transaction_payments.transaction_id=t.id), 0)) as total_return_paid"),
-                    'contacts.name',
-                    'contacts.supplier_business_name',
-                    'contacts.id as contact_id'
-                    );
-            } elseif ($due_payment_type == 'sell') {
-                $query->select(
-                    DB::raw("SUM(IF(t.type = 'sell' AND t.status = 'final', final_total, 0)) as total_invoice"),
-                    DB::raw("SUM(IF(t.type = 'sell' AND t.status = 'final', (SELECT SUM(IF(is_return = 1,-1*amount,amount)) FROM transaction_payments WHERE transaction_payments.transaction_id=t.id), 0)) as total_paid"),
-                    'contacts.name',
-                    'contacts.supplier_business_name',
-                    'contacts.id as contact_id'
-                );
-            } elseif ($due_payment_type == 'sell_return') {
-                $query->select(
-                    DB::raw("SUM(IF(t.type = 'sell_return', final_total, 0)) as total_sell_return"),
-                    DB::raw("SUM(IF(t.type = 'sell_return', (SELECT SUM(amount) FROM transaction_payments WHERE transaction_payments.transaction_id=t.id), 0)) as total_return_paid"),
-                    'contacts.name',
-                    'contacts.supplier_business_name',
-                    'contacts.id as contact_id'
-                    );
-            }
+            $contact = Contact::where('business_id', $business_id)->find($contact_id);
 
-            //Query for opening balance details
-            $query->addSelect(
-                DB::raw("SUM(IF(t.type = 'opening_balance', final_total, 0)) as opening_balance"),
-                DB::raw("SUM(IF(t.type = 'opening_balance', (SELECT SUM(amount) FROM transaction_payments WHERE transaction_payments.transaction_id=t.id), 0)) as opening_balance_paid")
-            );
-            $contact_details = $query->first();
+            // $contact_details = $contact->name;
+            // if (! empty($contact->supplier_business_name)) {
+            //     $contact_details .= ', ' . $contact->supplier_business_name;
+            // }
 
-            $payment_line = new TransactionPayment();
-            if ($due_payment_type == 'purchase') {
-                $contact_details->total_purchase = empty($contact_details->total_purchase) ? 0 : $contact_details->total_purchase;
-                $payment_line->amount = $contact_details->total_purchase -
-                                    $contact_details->total_paid;
-            } elseif ($due_payment_type == 'purchase_return') {
-                $payment_line->amount = $contact_details->total_purchase_return -
-                                    $contact_details->total_return_paid;
-            } elseif ($due_payment_type == 'sell') {
-                $contact_details->total_invoice = empty($contact_details->total_invoice) ? 0 : $contact_details->total_invoice;
-
-                $payment_line->amount = $contact_details->total_invoice -
-                                    $contact_details->total_paid;
-            } elseif ($due_payment_type == 'sell_return') {
-                $payment_line->amount = $contact_details->total_sell_return -
-                                    $contact_details->total_return_paid;
-            }
-
-            //If opening balance due exists add to payment amount
-            $contact_details->opening_balance = ! empty($contact_details->opening_balance) ? $contact_details->opening_balance : 0;
-            $contact_details->opening_balance_paid = ! empty($contact_details->opening_balance_paid) ? $contact_details->opening_balance_paid : 0;
-            $ob_due = $contact_details->opening_balance - $contact_details->opening_balance_paid;
-            if ($ob_due > 0) {
-                $payment_line->amount += $ob_due;
-            }
-
-            $amount_formated = $this->transactionUtil->num_f($payment_line->amount);
-
-            $contact_details->total_paid = empty($contact_details->total_paid) ? 0 : $contact_details->total_paid;
-
-            $payment_line->method = 'cash';
-            $payment_line->paid_on = \Carbon::now()->toDateTimeString();
-
-            $payment_types = $this->transactionUtil->payment_types(null, false, $business_id);
+            $payment_types = $this->transactionUtil->payment_types(null, true);
 
             //Accounts
-            $accounts = $this->moduleUtil->accountsDropdown($business_id, true);
+            $accounts = $this->moduleUtil->accountsDropdown($business_id, true, false, true);
 
             return view('transaction_payment.pay_supplier_due_modal')
-                        ->with(compact('contact_details', 'payment_types', 'payment_line', 'due_payment_type', 'ob_due', 'amount_formated', 'accounts'));
+                        ->with(compact('contact', 'payment_types', 'contact_id', 'accounts'));
         }
+    }
+
+    /**
+     * Display a listing of payments for printing.
+     *
+     * @param  int  $transaction_id
+     * @return \Illuminate\Http\Response
+     */
+    public function printPayments($transaction_id)
+    {
+        if (! (auth()->user()->can('sell.payments') || auth()->user()->can('purchase.payments') || auth()->user()->can('hms.add_booking_payment'))) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $transaction = Transaction::where('id', $transaction_id)
+                                    ->with(['contact', 'business', 'transaction_for'])
+                                    ->firstOrFail();
+        $payments_query = TransactionPayment::where('transaction_id', $transaction_id);
+
+        $accounts_enabled = false;
+        if ($this->moduleUtil->isModuleEnabled('account')) {
+            $accounts_enabled = true;
+            $payments_query->with(['payment_account']);
+        }
+
+        $payments = $payments_query->get();
+        $location_id = ! empty($transaction->location_id) ? $transaction->location_id : null;
+        $payment_types = $this->transactionUtil->payment_types($location_id, true);
+
+        return view('transaction_payment.print_payments')
+                ->with(compact('transaction', 'payments', 'payment_types', 'accounts_enabled'));
     }
 
     /**

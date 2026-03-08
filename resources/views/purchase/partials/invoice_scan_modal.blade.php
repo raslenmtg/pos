@@ -39,6 +39,7 @@
                                     <th>Produit correspondant</th>
                                     <th>Quantité </th>
                                     <th>Prix</th>
+                                    <th>Remise (%)</th>
                                     <th>Fiabilité</th>
                                 </tr>
                             </thead>
