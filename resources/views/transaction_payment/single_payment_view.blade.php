@@ -191,8 +191,7 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white no-print" 
-        aria-label="Print" 
-          onclick="$(this).closest('div.modal').printThis();">
+        aria-label="Print">
         <i class="fa fa-print"></i> @lang( 'messages.print' )
       </button>
       <button type="button" class="tw-dw-btn tw-dw-btn-neutral tw-text-white no-print" data-dismiss="modal">@lang( 'messages.close' )

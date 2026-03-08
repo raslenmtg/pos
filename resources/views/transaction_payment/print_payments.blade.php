@@ -112,8 +112,6 @@
                     <p><strong>@lang('purchase.ref_no'):</strong> {{ $transaction->ref_no }}</p>
                 @elseif(in_array($transaction->type, ['sell', 'sell_return']))
                     <p><strong>@lang('sale.invoice_no'):</strong> {{ $transaction->invoice_no }}</p>
-                @elseif (in_array($transaction->type, ['hms_booking']))
-                    <p><strong>@lang('hms::lang.booking_Id'):</strong> {{ $transaction->ref_no }}</p>
                 @endif
                  <p><strong>@lang('purchase.payment_status'):</strong> {{ __('lang_v1.' . $transaction->payment_status) }}</p>
             </div>
