@@ -1010,5 +1010,5 @@
 		}
 	</script>
 	@include('purchase.partials.keyboard_shortcuts')
-	@include('purchase.partials.invoice_scan_js')
+
 @endsection

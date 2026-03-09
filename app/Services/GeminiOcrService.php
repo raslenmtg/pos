@@ -88,6 +88,7 @@ Notes:
 - Extract "remise" or "discount" per line item if present. Return as percentage number (e.g. 5 for 5%).
 - Extract "TVA" or "Tax" per line item if present. Return as percentage number (e.g. 19 for 19%).
 - Extract "Code" or "Reference" as SKU.
+- Price must be TTC (taxes included). If only HT (hors taxe) price is available, calculate TTC using: TTC = HT * (1 + TVA/100). For example, if HT = 10.000 and TVA = 19%, then TTC = 10.000 * 1.19 = 11.900. Use the TVA rate extracted from that line item, or the general invoice TVA rate if no per-line rate is found.
 PROMPT;
 
         try {
