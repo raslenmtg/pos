@@ -229,8 +229,13 @@
         </div>
 
         <div class="doc-right">
-            <div class="doc-title">@lang('lang_v1.payment_receipt')</div>
-            <div class="badge-paid">&#10003;&nbsp;@lang('lang_v1.paid')</div>
+            <div class="doc-title">
+                @if(in_array($transaction->type, ['sell','sell_return']))
+                    Règlement
+                @elseif(in_array($transaction->type, ['purchase','expense','purchase_return','payroll','hms_booking']))
+                    Avis de règlement
+                    @endif
+                </div>
             <div class="doc-meta">
                 <strong>@lang('purchase.ref_no'):</strong> {{ $single_payment_line->payment_ref_no ?? '—' }}<br>
                 <strong>@lang('lang_v1.paid_on'):</strong> {{ @format_datetime($single_payment_line->paid_on) }}
@@ -343,7 +348,7 @@
 
     {{-- FOOTER --}}
     <div class="r-footer">
-        <div class="footer-note">@lang('lang_v1.payment_receipt_footer_note')</div>
+        <div class="footer-note"></div>
         <div class="sig-box">
             <div class="sig-line"></div>
             <div class="sig-lbl">@lang('lang_v1.authorized_signatory')</div>
