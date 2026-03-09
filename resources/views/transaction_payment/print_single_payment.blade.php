@@ -34,7 +34,7 @@
 
         /* ── Toolbar (screen only) ── */
         .toolbar {
-            max-width: 560px;
+            max-width: 720px;
             margin: 0 auto 14px;
             display: flex;
             gap: 8px;
@@ -59,7 +59,7 @@
 
         /* ── Receipt card — half-page width ── */
         .receipt {
-            max-width: 560px;          /* ~half A4 width on screen */
+            max-width: 720px;
             margin: 0 auto;
             background: var(--white);
             border: 1px solid var(--border);
@@ -68,11 +68,7 @@
             overflow: hidden;
         }
 
-        /* Coloured top strip */
-        .topbar {
-            height: 5px;
-            background: linear-gradient(90deg, var(--accent) 0%, #60a5fa 100%);
-        }
+
 
         /* ── HEADER: logo left, title right ── */
         .r-header {
@@ -181,15 +177,34 @@
         /* ── PRINT ── */
         @media print {
             @page {
-                size: A5 landscape;   /* half-page: 210 × 148 mm */
-                margin: 8mm;
+                size: A4 portrait;
+                margin: 10mm 12mm;
             }
             .toolbar  { display: none !important; }
-            body      { background: #fff; padding: 0; font-size: 10px; }
-            .receipt  { max-width: 100%; box-shadow: none; border: none; border-radius: 0; }
+            body      { background: #fff; padding: 0; font-size: 11px; }
+            .receipt  {
+                max-width: 100%;
+                width: 100%;
+                box-shadow: none;
+                border: 1px solid #cbd5e0;
+                border-radius: 0;
+            }
             .topbar        { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
             .r-amount      { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
             .badge-paid    { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+            /* scale up padding for A4 */
+            .r-header      { padding: 18px 24px 14px; }
+            .r-col         { padding: 14px 24px; }
+            .r-amount      { padding: 12px 24px; }
+            .r-note        { padding: 10px 24px; }
+            .r-footer      { padding: 12px 24px 18px; }
+            .r-amount .val { font-size: 24px; }
+            .r-header .biz-name { font-size: 15px; }
+            .r-header .doc-title { font-size: 18px; }
+            .party-name    { font-size: 13px; }
+            .kv td         { font-size: 11px; padding: 3.5px 0; }
+            .col-title     { font-size: 9px; margin-bottom: 8px; }
+            .sig-line      { width: 140px; }
         }
     </style>
 </head>
