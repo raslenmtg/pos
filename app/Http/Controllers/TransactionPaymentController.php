@@ -497,6 +497,89 @@ class TransactionPaymentController extends Controller
     }
 
     /**
+     * Print a single payment receipt.
+     *
+     * @param  int  $payment_id
+     * @return \Illuminate\Http\Response
+     */
+    public function printSinglePayment($payment_id)
+    {
+        if (! (auth()->user()->can('sell.payments') ||
+                auth()->user()->can('purchase.payments') ||
+                auth()->user()->can('edit_sell_payment') ||
+                auth()->user()->can('delete_sell_payment') ||
+                auth()->user()->can('edit_purchase_payment') ||
+                auth()->user()->can('delete_purchase_payment') ||
+                auth()->user()->can('hms.add_booking_payment')
+            )) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $business_id = request()->session()->get('business.id');
+        $single_payment_line = TransactionPayment::findOrFail($payment_id);
+
+        $transaction = null;
+        if (! empty($single_payment_line->transaction_id)) {
+            $transaction = Transaction::where('id', $single_payment_line->transaction_id)
+                            ->with(['contact', 'location', 'business', 'transaction_for'])
+                            ->first();
+        } else {
+            $child_payment = TransactionPayment::where('business_id', $business_id)
+                    ->where('parent_id', $payment_id)
+                    ->with(['transaction', 'transaction.contact', 'transaction.location', 'transaction.business', 'transaction.transaction_for'])
+                    ->first();
+            $transaction = ! empty($child_payment) ? $child_payment->transaction : null;
+        }
+
+        $payment_types = $this->transactionUtil->payment_types(null, false, $business_id);
+
+        return view('transaction_payment.print_single_payment')
+                ->with(compact('single_payment_line', 'transaction', 'payment_types'));
+    }
+
+    /**
+     * Shared helper: load a payment and its parent transaction for print views.
+     */
+    private function loadPaymentForPrint($payment_id)
+    {
+        $business_id = request()->session()->get('business.id');
+        $payment = TransactionPayment::findOrFail($payment_id);
+        $transaction = null;
+
+        if (! empty($payment->transaction_id)) {
+            $transaction = Transaction::where('id', $payment->transaction_id)
+                ->with(['contact', 'location', 'business', 'transaction_for'])
+                ->first();
+        } else {
+            $child = TransactionPayment::where('business_id', $business_id)
+                ->where('parent_id', $payment_id)
+                ->with(['transaction', 'transaction.contact', 'transaction.location', 'transaction.business'])
+                ->first();
+            $transaction = $child ? $child->transaction : null;
+        }
+
+        return [$payment, $transaction];
+    }
+
+    /**
+     * Print Tunisian Lettre de Change (Traite).
+     */
+    public function printLettreDeChange($payment_id)
+    {
+        if (! (auth()->user()->can('sell.payments') || auth()->user()->can('purchase.payments'))) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        [$payment, $transaction] = $this->loadPaymentForPrint($payment_id);
+
+        $util = app(\App\Utils\Util::class);
+        $amount_in_words = $util->numToWord($payment->amount);
+
+        return view('transaction_payment.print_lettre_de_change')
+            ->with(compact('payment', 'transaction', 'amount_in_words'));
+    }
+
+    /**
      * Adds Payments for Contact due
      *
      * @param  \Illuminate\Http\Request  $request

@@ -213,3 +213,25 @@
         </div>
     </div><!-- /.modal-content -->
 </div><!-- /.modal-dialog -->
+
+{{-- Hidden iframe for direct silent printing --}}
+<iframe id="print-payments-frame" style="display:none;width:0;height:0;border:none;position:absolute;left:-9999px;top:-9999px;"></iframe>
+<script>
+function directPrintPayments(url) {
+    var frame = document.getElementById('print-payments-frame');
+    var btn = document.querySelector('.modal-footer .tw-dw-btn-primary');
+    if (btn) btn.disabled = true;
+
+    frame.onload = function () {
+        try {
+            frame.contentWindow.focus();
+            frame.contentWindow.print();
+        } catch(e) {
+            window.open(url, '_blank');
+        }
+        setTimeout(function () { if (btn) btn.disabled = false; }, 1500);
+    };
+
+    frame.src = url;
+}
+</script>

@@ -16,11 +16,6 @@
         font-family: Arial, sans-serif;
         color: #333;
     }
-    .payment-header {
-        border-bottom: 2px solid #333;
-        margin-bottom: 20px;
-        padding-bottom: 15px;
-    }
     .company-details {
         float: left;
         width: 60%;
@@ -100,7 +95,7 @@
         <button class="btn-primary" onclick="window.print();"><i class="fa fa-print"></i> @lang('messages.print')</button>
     </div>
 
-    <div class="payment-header clearfix">
+    <div class="clearfix">
         <div class="company-details">
             @include('transaction_payment.payment_business_details')
         </div>
@@ -120,7 +115,7 @@
 
     <div class="clearfix">
         <div class="recipient-section">
-            <strong>@lang('contact.contact_info'):</strong><br>
+            <strong>Client:</strong><br>
             <div style="margin-top: 5px;">
                 @if($transaction->type == 'payroll')
                      <strong>{{ $transaction->transaction_for->user_full_name }}</strong>
@@ -158,9 +153,6 @@
                 <th>@lang('purchase.ref_no')</th>
                 <th>@lang('purchase.payment_method')</th>
                 <th>@lang('purchase.payment_note')</th>
-                @if($accounts_enabled)
-                    <th>@lang('lang_v1.payment_account')</th>
-                @endif
                 <th class="text-right">@lang('purchase.amount')</th>
             </tr>
         </thead>
@@ -177,11 +169,8 @@
                     <td>{{ $payment->payment_ref_no }}</td>
                     <td>{{ $payment_types[$payment->method] ?? '' }}</td>
                     <td>{{ $payment->note }}</td>
-                    @if($accounts_enabled)
-                        <td>{{$payment->payment_account->name ?? ''}}</td>
-                    @endif
                     <td class="text-right">
-                        <span class="display_currency" data-currency_symbol="true">{{ $payment->amount }}</span>
+                        @format_currency($payment->amount)
                     </td>
                 </tr>
             @empty
@@ -192,18 +181,15 @@
         </tbody>
         <tfoot>
             <tr style="background-color: #f9f9f9; font-weight: bold;">
-                <td colspan="{{ $accounts_enabled ? 4 : 3 }}" class="text-right">@lang('sale.total'):</td>
-                @if($accounts_enabled)
-                    <td></td>
-                @endif
+                <td colspan="4" class="text-right">@lang('sale.total'):</td>
                 <td class="text-right">
-                    <span class="display_currency" data-currency_symbol="true">{{ $total_amount }}</span>
+                    @format_currency($total_amount)
                 </td>
             </tr>
         </tfoot>
     </table>
 
-    <div class="clearfix" style="margin-top: 40px; border-top: 1px dashed #ccc; padding-top: 10px;">
+    <div class="clearfix" style="margin-top: 40px; padding-top: 10px;">
         <div style="float: right; width: 30%; border-top: 1px solid #000; text-align: center; padding-top: 5px;">
              @lang('lang_v1.authorized_signatory')
         </div>

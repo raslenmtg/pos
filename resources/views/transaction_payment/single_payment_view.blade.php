@@ -190,12 +190,54 @@
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white no-print" 
-        aria-label="Print">
-        <i class="fa fa-print"></i> @lang( 'messages.print' )
+
+      {{-- Receipt --}}
+      <button type="button"
+              class="tw-dw-btn tw-dw-btn-primary tw-text-white no-print"
+              onclick="directPrint('{{ action([\App\Http\Controllers\TransactionPaymentController::class, 'printSinglePayment'], [$single_payment_line->id]) }}')">
+        <i class="fa fa-print"></i> @lang('messages.print')
       </button>
-      <button type="button" class="tw-dw-btn tw-dw-btn-neutral tw-text-white no-print" data-dismiss="modal">@lang( 'messages.close' )
+
+
+      {{-- Lettre de Change (custom_pay_1 only) --}}
+      @if($single_payment_line->method == 'custom_pay_1')
+      <button type="button"
+              class="tw-dw-btn tw-dw-btn-warning tw-text-white no-print"
+              onclick="directPrint('{{ action([\App\Http\Controllers\TransactionPaymentController::class, 'printLettreDeChange'], [$single_payment_line->id]) }}')">
+        <i class="fa fa-file-contract"></i> Imprimer Lettre de Change
+      </button>
+      @endif
+
+      <button type="button" class="tw-dw-btn tw-dw-btn-neutral tw-text-white no-print" data-dismiss="modal">
+        @lang('messages.close')
       </button>
     </div>
   </div>
 </div>
+
+{{-- Hidden iframe used for direct silent printing --}}
+<iframe id="silent-print-frame" style="display:none;width:0;height:0;border:none;position:absolute;left:-9999px;top:-9999px;"></iframe>
+
+<script>
+function directPrint(url) {
+    var frame = document.getElementById('silent-print-frame');
+
+    // Show a brief loading state on all print buttons
+    var btns = document.querySelectorAll('.modal-footer .tw-dw-btn');
+    btns.forEach(function(b){ b.disabled = true; });
+
+    frame.onload = function () {
+        try {
+            frame.contentWindow.focus();
+            frame.contentWindow.print();
+        } catch(e) {
+            // Fallback: open in new tab if iframe print is blocked
+            window.open(url, '_blank');
+        }
+        // Re-enable buttons after print dialog appears
+        setTimeout(function(){ btns.forEach(function(b){ b.disabled = false; }); }, 1500);
+    };
+
+    frame.src = url;
+}
+</script>
