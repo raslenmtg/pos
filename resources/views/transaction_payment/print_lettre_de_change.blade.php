@@ -20,49 +20,95 @@
         .t { position: absolute; white-space: nowrap; }
 
         @media print {
-            body { background: white; padding: 0; }
+            html, body { background: white; padding: 0; margin: 0; }
             .print-btn { display: none; }
-            .page { box-shadow: none; }
-            @page { size: A4; margin: 0; }
+            .page {
+                box-shadow: none;
+                zoom: 1.5;
+            }
+            @page { size: auto; margin: 0; }
         }
     </style>
 </head>
 <body>
 
-<button class="print-btn" onclick="window.print()">🖨️ Imprimer</button>
+@php
+    // ── Helpers ──────────────────────────────────────────────────────────────
+    $location   = $transaction->location  ?? null;
+    $contact    = $transaction->contact   ?? null;
+    $business   = $transaction->business  ?? null;
+
+    // Place (city of business location)
+    $city = $location->city ?? ($business->locations->first()->city ?? '');
+
+    // Dates
+    $emission_date = !empty($payment->paid_on)
+        ? \Carbon\Carbon::parse($payment->paid_on)->format('d/m/Y')
+        : '';
+    $echeance_date = !empty($payment->due_date)
+        ? \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y')
+        : '';
+
+    // RIB — stored in bank_account_number as a 20-char string (or space-separated)
+    $rib_raw = preg_replace('/\s+/', '', $payment->bank_account_number ?? '');
+    $rib_bank   = strlen($rib_raw) >= 2  ? substr($rib_raw, 0,  2)  : ($rib_raw ?: '');
+    $rib_branch = strlen($rib_raw) >= 5  ? substr($rib_raw, 2,  3)  : '';
+    $rib_acc    = strlen($rib_raw) >= 18 ? substr($rib_raw, 5,  13) : (strlen($rib_raw) > 5 ? substr($rib_raw, 5) : '');
+    $rib_key    = strlen($rib_raw) >= 20 ? substr($rib_raw, 18, 2)  : '';
+
+    // Amount formatted (Tunisian style)
+    $amount_formatted = '#'.number_format((float)$payment->amount, 3, ',', ' ') . '# DT';
+
+    // Beneficiary = business name (tireur)
+    $beneficiary = $business->name ?? '';
+
+    // Bank info — stored in note as "BANK NAME - BRANCH" or just bank name
+    $note_parts = explode('-', $payment->note ?? '', 2);
+    $bank_name  = trim($note_parts[0] ?? '');
+    $bank_branch = trim($note_parts[1] ?? '');
+
+    // Drawer (tiré) = contact
+    $drawer_name    = $contact->name ?? '';
+    $drawer_address = trim(($contact->city ?? '') . ', ' . ($contact->state ?? ''), ', ');
+    $drawer_zip     = $contact->zip_code ?? '';
+@endphp
+
+<button class="print-btn" onclick="window.print()">🖨 Imprimer</button>
 
 <div class="page">
-    <!-- px coords * 0.6261 for x, * 0.6372 for y -->
+    <!-- px coords * 0.6261 for x, * 0.6372 for y (scaled x1.3) -->
 
-    <div class="t" style="left:269px; top:36px;">nabeul</div>
-    <div class="t" style="left:164px; top:47px;">11/03/2026</div>
-    <div class="t" style="left:264px; top:47px;">09/03/2026</div>
+    <div class="t" style="left:269px; top:36px;">{{ $city }}</div>
+    <div class="t" style="left:164px; top:47px;">{{ $emission_date }}</div>
+    <div class="t" style="left:264px; top:47px;">{{ $echeance_date }}</div>
 
-    <div class="t" style="left:152px; top:75px;">12</div>
-    <div class="t" style="left:182px; top:75px;">345</div>
-    <div class="t" style="left:225px; top:75px;">6789123456789</div>
-    <div class="t" style="left:336px; top:75px;">20</div>
-    <div class="t" style="left:403px; top:74px;">1 200,000 DT</div>
+    <div class="t" style="left:152px; top:75px;">{{ $rib_bank }}</div>
+    <div class="t" style="left:182px; top:75px;">{{ $rib_branch }}</div>
+    <div class="t" style="left:225px; top:75px;">{{ $rib_acc }}</div>
+    <div class="t" style="left:336px; top:75px;">{{ $rib_key }}</div>
+    <div class="t" style="left:403px; top:74px;">{{ $amount_formatted }}</div>
 
-    <div class="t" style="left:403px; top:117px;">1 200,000 DT</div>
-    <div class="t" style="left:240px; top:123px;">PACO</div>
-    <div class="t" style="left:201px; top:141px;">mille deux cents dinars.</div>
+    <div class="t" style="left:42px; top:115px;">{{ $beneficiary }}</div>
+    <div class="t" style="left:403px; top:117px;">{{ $amount_formatted }}</div>
+    <div class="t" style="left:240px; top:123px;">{{ $beneficiary }}</div>
+    <div class="t" style="left:201px; top:141px;">{{ $amount_in_words }}</div>
 
-    <div class="t" style="left:33px;  top:171px;">nabeul</div>
-    <div class="t" style="left:104px; top:171px;">09/03/2026</div>
-    <div class="t" style="left:183px; top:171px;">11/03/2026</div>
+    <div class="t" style="left:33px;  top:171px;">{{ $city }}</div>
+    <div class="t" style="left:104px; top:171px;">{{ $emission_date }}</div>
+    <div class="t" style="left:183px; top:171px;">{{ $echeance_date }}</div>
 
-    <div class="t" style="left:19px;  top:203px;">12</div>
-    <div class="t" style="left:41px;  top:203px;">345</div>
-    <div class="t" style="left:94px;  top:203px;">6789123456789</div>
-    <div class="t" style="left:200px; top:203px;">20</div>
-    <div class="t" style="left:376px; top:203px;">ATTIJARI BANK</div>
-    <div class="t" style="left:387px; top:212px;">hammem lif</div>
+    <div class="t" style="left:19px;  top:203px;">{{ $rib_bank }}</div>
+    <div class="t" style="left:41px;  top:203px;">{{ $rib_branch }}</div>
+    <div class="t" style="left:94px;  top:203px;">{{ $rib_acc }}</div>
+    <div class="t" style="left:200px; top:203px;">{{ $rib_key }}</div>
+    <div class="t" style="left:376px; top:203px;">{{ $bank_name }}</div>
+    <div class="t" style="left:387px; top:212px;">{{ $bank_branch }}</div>
 
-    <div class="t" style="left:255px; top:218px;">EL CAPO</div>
-    <div class="t" style="left:225px; top:228px;">Hammem lif, ben arous</div>
-    <div class="t" style="left:277px; top:239px;">8010</div>
+    <div class="t" style="left:255px; top:218px;">{{ $drawer_name }}</div>
+    <div class="t" style="left:225px; top:228px;">{{ $drawer_address }}</div>
+    <div class="t" style="left:277px; top:239px;">{{ $drawer_zip }}</div>
 </div>
 
 </body>
 </html>
+
