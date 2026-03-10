@@ -30,6 +30,7 @@
                     <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">@lang('purchase.purchases')</a>
                     <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">@lang('lang_v1.reward_point_settings')</a>
                     <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">@lang('lang_v1.custom_labels')</a>
+                    <a href="#" class="list-group-item text-center tw-font-bold tw-text-sm md:tw-text-base">Compte Bancaire</a>
                 </div>
             </div>
             <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10 pos-tab">
@@ -58,6 +59,9 @@
                
                 <!-- tab 12 end -->
                 @include('business.partials.settings_custom_labels')
+                <!-- bank account tab start -->
+                @include('business.partials.settings_bank_account')
+                <!-- bank account tab end -->
             </div>
         @endcomponent
         {{-- </div> --}}

@@ -421,6 +421,7 @@ Route::middleware([ 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'C
         Route::post('/deposit', [AccountController::class, 'postDeposit']);
         Route::get('/close/{id}', [AccountController::class, 'close']);
         Route::get('/activate/{id}', [AccountController::class, 'activate']);
+        Route::post('/simple-update/{id}', [AccountController::class, 'simpleUpdate']);
         Route::get('/delete-account-transaction/{id}', [AccountController::class, 'destroyAccountTransaction']);
         Route::get('/edit-account-transaction/{id}', [AccountController::class, 'editAccountTransaction']);
         Route::post('/update-account-transaction/{id}', [AccountController::class, 'updateAccountTransaction']);

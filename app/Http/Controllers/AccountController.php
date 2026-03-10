@@ -254,6 +254,7 @@ class AccountController extends Controller
 
                 $output = ['success' => true,
                     'msg' => __('account.account_created_success'),
+                    'account_id' => $account->id,
                 ];
             } catch (\Exception $e) {
                 \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
@@ -566,6 +567,63 @@ class AccountController extends Controller
             }
 
             return $output;
+        }
+    }
+
+    /**
+     * Remove the specified account from storage (soft delete).
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($id)
+    {
+        if (! auth()->user()->can('account.access')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        if (request()->ajax()) {
+            try {
+                $business_id = session()->get('user.business_id');
+                $account = Account::where('business_id', $business_id)->findOrFail($id);
+                $account->delete();
+
+                $output = ['success' => true, 'msg' => __('lang_v1.deleted_success')];
+            } catch (\Exception $e) {
+                \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
+                $output = ['success' => false, 'msg' => __('messages.something_went_wrong')];
+            }
+
+            return response()->json($output);
+        }
+    }
+
+    /**
+     * Simple update: name, account_number, is_closed only.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function simpleUpdate(Request $request, $id)
+    {
+        if (! auth()->user()->can('account.access')) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        if (request()->ajax()) {
+            try {
+                $business_id = session()->get('user.business_id');
+                $account = Account::where('business_id', $business_id)->findOrFail($id);
+                $account->name           = $request->input('name');
+                $account->account_number = $request->input('account_number');
+                $account->is_closed      = $request->input('is_closed', 0) ? 1 : 0;
+                $account->save();
+
+                $output = ['success' => true, 'msg' => __('account.account_updated_success')];
+            } catch (\Exception $e) {
+                \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
+                $output = ['success' => false, 'msg' => __('messages.something_went_wrong')];
+            }
+
+            return response()->json($output);
         }
     }
 

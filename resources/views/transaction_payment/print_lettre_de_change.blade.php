@@ -33,39 +33,50 @@
 <body>
 
 @php
-    // ── Helpers ──────────────────────────────────────────────────────────────
-    $location   = $transaction->location  ?? null;
-    $contact    = $transaction->contact   ?? null;
-    $business   = $transaction->business  ?? null;
+    $location = $transaction->location ?? null;
+    $contact  = $transaction->contact  ?? null;
+    $business = $transaction->business ?? null;
 
-    // Place (city of business location)
+    // City
     $city = $location->city ?? ($business->locations->first()->city ?? '');
 
     // Dates
     $emission_date = !empty($payment->paid_on)
-        ? \Carbon\Carbon::parse($payment->paid_on)->format('d/m/Y')
-        : '';
+        ? \Carbon\Carbon::parse($payment->paid_on)->format('d/m/Y') : '';
     $echeance_date = !empty($payment->due_date)
-        ? \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y')
-        : '';
+        ? \Carbon\Carbon::parse($payment->due_date)->format('d/m/Y') : '';
 
-    // RIB — stored in bank_account_number as a 20-char string (or space-separated)
-    $rib_raw = preg_replace('/\s+/', '', $payment->bank_account_number ?? '');
-    $rib_bank   = strlen($rib_raw) >= 2  ? substr($rib_raw, 0,  2)  : ($rib_raw ?: '');
+    // Default values so variables are always defined
+    $rib_raw    = '';
+    $rib_bank   = '';
+    $rib_branch = '';
+    $rib_acc    = '';
+    $rib_key    = '';
+    $bank_name  = '';
+    $bank_branch = '';
+
+    if (!in_array($transaction->type, ['sell', 'sell_return'])) {
+    if (!empty($business_account)) {
+        $rib_raw   = preg_replace('/\s+/', '', $business_account->account_number ?? '');
+        $bank_name = $business_account->name ?? '';
+    } else {
+        $rib_raw   = preg_replace('/\s+/', '', $payment->bank_account_number ?? '');
+        $bank_name = trim(explode('-', $payment->note ?? '', 2)[0] ?? '');
+    }
+    $bank_branch = '';
+
+    // Split 20-digit RIB: [2 bank][3 branch][13 account][2 key]
+    $rib_bank   = strlen($rib_raw) >= 2  ? substr($rib_raw, 0,  2)  : $rib_raw;
     $rib_branch = strlen($rib_raw) >= 5  ? substr($rib_raw, 2,  3)  : '';
     $rib_acc    = strlen($rib_raw) >= 18 ? substr($rib_raw, 5,  13) : (strlen($rib_raw) > 5 ? substr($rib_raw, 5) : '');
     $rib_key    = strlen($rib_raw) >= 20 ? substr($rib_raw, 18, 2)  : '';
+    } // end if not sell
+    // Amount
+    $amount_formatted = '#' . number_format((float)$payment->amount, 3, ',', ' ') . '# DT';
 
-    // Amount formatted (Tunisian style)
-    $amount_formatted = '#'.number_format((float)$payment->amount, 3, ',', ' ') . '# DT';
-
-    // Beneficiary = business name (tireur)
+    // Beneficiary (tireur) = business name
     $beneficiary = $business->name ?? '';
 
-    // Bank info — stored in note as "BANK NAME - BRANCH" or just bank name
-    $note_parts = explode('-', $payment->note ?? '', 2);
-    $bank_name  = trim($note_parts[0] ?? '');
-    $bank_branch = trim($note_parts[1] ?? '');
 
     // Drawer (tiré) = contact
     $drawer_name    = $contact->name ?? '';
@@ -82,18 +93,18 @@
     <div class="t" style="left:164px; top:47px;">{{ $emission_date }}</div>
     <div class="t" style="left:264px; top:47px;">{{ $echeance_date }}</div>
 
-    <div class="t" style="left:152px; top:75px;">{{ $rib_bank }}</div>
-    <div class="t" style="left:182px; top:75px;">{{ $rib_branch }}</div>
-    <div class="t" style="left:225px; top:75px;">{{ $rib_acc }}</div>
-    <div class="t" style="left:336px; top:75px;">{{ $rib_key }}</div>
+    <div class="t" style="left:152px; top:75px;">{{ $rib_bank??'' }}</div>
+    <div class="t" style="left:182px; top:75px;">{{ $rib_branch??'' }}</div>
+    <div class="t" style="left:225px; top:75px;">{{ $rib_acc??'' }}</div>
+    <div class="t" style="left:336px; top:75px;">{{ $rib_key??'' }}</div>
     <div class="t" style="left:403px; top:74px;">{{ $amount_formatted }}</div>
 
     <div class="t" style="left:42px; top:115px;">{{ $beneficiary }}</div>
     <div class="t" style="left:403px; top:117px;">{{ $amount_formatted }}</div>
     <div class="t" style="left:240px; top:123px;">{{ $beneficiary }}</div>
-    <div class="t" style="left:201px; top:141px;">{{ $amount_in_words }}</div>
+    <div class="t" style="left:100px; top:141px;">{{ $amount_in_words }}</div>
 
-    <div class="t" style="left:33px;  top:171px;">{{ $city }}</div>
+    <div class="t" style="left:25px;  top:171px;">{{ $city }}</div>
     <div class="t" style="left:104px; top:171px;">{{ $emission_date }}</div>
     <div class="t" style="left:183px; top:171px;">{{ $echeance_date }}</div>
 

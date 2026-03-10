@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Account;
 use App\Contact;
 use App\Events\TransactionPaymentAdded;
 use App\Events\TransactionPaymentUpdated;
@@ -575,8 +576,15 @@ class TransactionPaymentController extends Controller
         $util = app(\App\Utils\Util::class);
         $amount_in_words = $util->numToWord($payment->amount);
 
+        // Load the first active (non-closed) bank account of the business
+        $business_id = request()->session()->get('user.business_id');
+        $business_account = Account::where('business_id', $business_id)
+            ->where('is_closed', 0)
+            ->orderBy('id')
+            ->first();
+
         return view('transaction_payment.print_lettre_de_change')
-            ->with(compact('payment', 'transaction', 'amount_in_words'));
+            ->with(compact('payment', 'transaction', 'amount_in_words', 'business_account'));
     }
 
     /**
