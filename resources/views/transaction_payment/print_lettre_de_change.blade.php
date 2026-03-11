@@ -20,13 +20,13 @@
         .t { position: absolute; white-space: nowrap; }
 
         @media print {
-            html, body { background: white; padding: 0; margin: 0; }
+            html, body { background: white; padding: 0 0 0 22px; margin: 0 0 0 22px; }
             .print-btn { display: none; }
             .page {
                 box-shadow: none;
-                zoom: 1.5;
+                zoom: 1.3;
             }
-            @page { size: auto; margin: 0; }
+            @page { size: auto; margin: 0 0 0 22px; }
         }
     </style>
 </head>
@@ -95,8 +95,6 @@
 
 @endphp
 
-<button class="print-btn" onclick="window.print()">🖨 Imprimer</button>
-
 <div class="page">
     <!-- px coords * 0.6261 for x, * 0.6372 for y (scaled x1.3) -->
 
@@ -107,12 +105,12 @@
     <div class="t" style="left:152px; top:75px;">{{ $rib_bank??'' }}</div>
     <div class="t" style="left:182px; top:75px;">{{ $rib_branch??'' }}</div>
     <div class="t" style="left:225px; top:75px;">{{ $rib_acc??'' }}</div>
-    <div class="t" style="left:336px; top:75px;">{{ $rib_key??'' }}</div>
-    <div class="t" style="left:403px; top:74px;">{{ $amount_formatted }}</div>
+    <div class="t" style="left:342px; top:75px;">{{ $rib_key??'' }}</div>
+    <div class="t" style="left:403px; top:76px;">{{ $amount_formatted }}</div>
 
     <div class="t" style="left:42px; top:115px;">{{ $beneficiary }}</div>
-    <div class="t" style="left:403px; top:117px;">{{ $amount_formatted }}</div>
-    <div class="t" style="left:240px; top:123px;">{{ $beneficiary }}</div>
+    <div class="t" style="left:403px; top:119px;">{{ $amount_formatted }}</div>
+    <div class="t" style="left:230px; top:123px;">{{ $beneficiary }}</div>
     <div class="t" style="left:100px; top:141px;">{{ $amount_in_words }}</div>
 
     <div class="t" style="left:25px;  top:171px;">{{ $city }}</div>
@@ -122,13 +120,13 @@
     <div class="t" style="left:19px;  top:203px;">{{ $rib_bank }}</div>
     <div class="t" style="left:41px;  top:203px;">{{ $rib_branch }}</div>
     <div class="t" style="left:94px;  top:203px;">{{ $rib_acc }}</div>
-    <div class="t" style="left:200px; top:203px;">{{ $rib_key }}</div>
+    <div class="t" style="left:206px; top:203px;">{{ $rib_key }}</div>
     <div class="t" style="left:376px; top:203px;">{{ $bank_name }}</div>
     <div class="t" style="left:387px; top:212px;">{{ $bank_branch }}</div>
 
-    <div class="t" style="left:255px; top:218px;">{{ $drawer_name }}</div>
-    <div class="t" style="left:255px; top:228px;">{{ $drawer_address }}</div>
-    <div class="t" style="left:277px; top:239px;">{{ $drawer_zip }}</div>
+    <div class="t" style="left:245px; top:218px;">{{ $drawer_name }}</div>
+    <div class="t" style="left:245px; top:228px;">{{ $drawer_address }}</div>
+    <div class="t" style="left:267px; top:239px;">{{ $drawer_zip }}</div>
 </div>
 
 </body>
