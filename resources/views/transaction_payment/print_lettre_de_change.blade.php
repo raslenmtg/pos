@@ -62,7 +62,7 @@
      else
      $drawer_name   = $contact->name ?? '';
 
-    $drawer_address = trim($contact->city ?? '');
+    $drawer_address = $contact->city ?? '';
     $drawer_zip     = $contact->zip_code ?? '';
 
     } else{
@@ -87,7 +87,7 @@
      else
      $beneficiary   = $contact->name ?? '';
     $drawer_name= $business->name ?? '';
-    $drawer_address = trim($location->city ?? '');
+    $drawer_address = $location->city ?? '';
     $drawer_zip     = $location->zip_code ?? '';
 
     }
@@ -127,7 +127,7 @@
     <div class="t" style="left:387px; top:212px;">{{ $bank_branch }}</div>
 
     <div class="t" style="left:255px; top:218px;">{{ $drawer_name }}</div>
-    <div class="t" style="left:225px; top:228px;">{{ $drawer_address }}</div>
+    <div class="t" style="left:255px; top:228px;">{{ $drawer_address }}</div>
     <div class="t" style="left:277px; top:239px;">{{ $drawer_zip }}</div>
 </div>
 
