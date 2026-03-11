@@ -55,7 +55,18 @@
     $bank_name  = '';
     $bank_branch = '';
 
-    if (!in_array($transaction->type, ['sell', 'sell_return'])) {
+    if (in_array($transaction->type, ['sell', 'sell_return'])) {
+    $beneficiary = $business->name ?? '';
+     if($contact->contact_type=='business')
+     $drawer_name   = $contact->supplier_business_name ?? '';
+     else
+     $drawer_name   = $contact->name ?? '';
+
+    $drawer_address = trim($contact->city ?? '');
+    $drawer_zip     = $contact->zip_code ?? '';
+
+    } else{
+
     if (!empty($business_account)) {
         $rib_raw   = preg_replace('/\s+/', '', $business_account->account_number ?? '');
         $bank_name = $business_account->name ?? '';
@@ -70,18 +81,18 @@
     $rib_branch = strlen($rib_raw) >= 5  ? substr($rib_raw, 2,  3)  : '';
     $rib_acc    = strlen($rib_raw) >= 18 ? substr($rib_raw, 5,  13) : (strlen($rib_raw) > 5 ? substr($rib_raw, 5) : '');
     $rib_key    = strlen($rib_raw) >= 20 ? substr($rib_raw, 18, 2)  : '';
-    } // end if not sell
-    // Amount
+
+    if($contact->contact_type=='business')
+     $beneficiary   = $contact->supplier_business_name ?? '';
+     else
+     $beneficiary   = $contact->name ?? '';
+    $drawer_name= $business->name ?? '';
+    $drawer_address = trim($location->city ?? '');
+    $drawer_zip     = $location->zip_code ?? '';
+
+    }
     $amount_formatted = '#' . number_format((float)$payment->amount, 3, ',', ' ') . '# DT';
 
-    // Beneficiary (tireur) = business name
-    $beneficiary = $business->name ?? '';
-
-
-    // Drawer (tiré) = contact
-    $drawer_name    = $contact->name ?? '';
-    $drawer_address = trim(($contact->city ?? '') . ', ' . ($contact->state ?? ''), ', ');
-    $drawer_zip     = $contact->zip_code ?? '';
 @endphp
 
 <button class="print-btn" onclick="window.print()">🖨 Imprimer</button>
