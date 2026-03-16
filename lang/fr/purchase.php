@@ -26,7 +26,7 @@
      'add_purchase' => 'Ajouter un achat',
      'purchase_date' => "Date d'achat",
      'purchase_quantity' => "Quantité d'achat",
-     'unit_cost_before_tax' => 'Coût unitaire',
+     'unit_cost_before_tax' => 'Coût unitaire TTC',
      'subtotal_before_tax' => 'Sous-total HT',
      'product_tax' => 'Taxe sur les produits',
      'net_cost' => 'Coût net',

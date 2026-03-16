@@ -1575,39 +1575,83 @@ class PurchaseController extends Controller
         $listeOperations = $xml->createElement('ListeOperations');
         $certificat->appendChild($listeOperations);
 
-        $operation = $xml->createElement('Operation');
-        $operation->setAttribute('IdTypeOperation', $purchase->code_rs);
-        $listeOperations->appendChild($operation);
-
         $rsRate = $this->purchaseGetRSRate($purchase->code_rs);
 
-        $montantTTC = intval(($purchase->final_total / (1 - ($rsRate / 100))) * 1000);
-        $tauxTVA = $purchase->tax ? floatval($purchase->tax->amount) : 0;
-        $montantHT = intval($montantTTC / (1 + ($tauxTVA / 100)));
-        $montantTVA = $montantTTC - $montantHT;
-        $montantRS = intval($montantTTC * ($rsRate / 100));
-        $montantNetServi = intval($purchase->final_total * 1000);
+        $groupedOperations = [];
+        $totalHT_Global = 0;
+        $totalTVA_Global = 0;
+        $totalTTC_Global = 0;
+        $totalRS_Global = 0;
+        $totalNetServi_Global = 0;
 
-        $operation->appendChild($xml->createElement('AnneeFacturation',
-            \Carbon\Carbon::parse($purchase->transaction_date)->format('Y')
-        ));
-        $operation->appendChild($xml->createElement('CNPC', '0'));
-        $operation->appendChild($xml->createElement('P_Charge', '0'));
-        $operation->appendChild($xml->createElement('MontantHT', $montantHT));
-        $operation->appendChild($xml->createElement('TauxRS', number_format($rsRate, 2, '.', '')));
-        $operation->appendChild($xml->createElement('TauxTVA', number_format($tauxTVA, 2, '.', '')));
-        $operation->appendChild($xml->createElement('MontantTVA', $montantTVA));
-        $operation->appendChild($xml->createElement('MontantTTC', $montantTTC));
-        $operation->appendChild($xml->createElement('MontantRS', $montantRS));
-        $operation->appendChild($xml->createElement('MontantNetServi', $montantNetServi));
+        foreach ($purchase->purchase_lines as $line) {
+            $taxRate = $line->line_tax ? floatval($line->line_tax->amount) : 0;
+            $taxKey = (string) $taxRate;
+
+            if (! isset($groupedOperations[$taxKey])) {
+                $groupedOperations[$taxKey] = [
+                    'tax_rate' => $taxRate,
+                    'amount_ttc' => 0,
+                ];
+            }
+
+            $quantity = $line->quantity;
+            $unitTtc = $line->purchase_price_inc_tax;
+
+            $lineTTC = $unitTtc * $quantity;
+
+            $groupedOperations[$taxKey]['amount_ttc'] += $lineTTC;
+        }
+
+        foreach ($groupedOperations as $group) {
+            $operation = $xml->createElement('Operation');
+            $operation->setAttribute('IdTypeOperation', $purchase->code_rs);
+            $listeOperations->appendChild($operation);
+
+            $amountTTC = $group['amount_ttc'];
+            $rate = $group['tax_rate'];
+
+            // Calculate HT from TTC by deducting tax rate logic: HT = TTC / (1 + rate/100)
+            $amountHT = $amountTTC / (1 + ($rate / 100));
+            $amountTVA = $amountTTC - $amountHT;
+
+            $montantTTC = intval(round($amountTTC * 1000));
+            $montantHT = intval(round($amountHT * 1000));
+
+            // Recalculate TVA as the difference to ensure HT + TVA = TTC exactly in integers
+            $montantTVA = $montantTTC - $montantHT;
+
+            $montantRS = intval(round($montantTTC * ($rsRate / 100)));
+            $montantNetServi = $montantTTC - $montantRS;
+
+            $totalHT_Global += $montantHT;
+            $totalTVA_Global += $montantTVA;
+            $totalTTC_Global += $montantTTC;
+            $totalRS_Global += $montantRS;
+            $totalNetServi_Global += $montantNetServi;
+
+            $operation->appendChild($xml->createElement('AnneeFacturation',
+                \Carbon\Carbon::parse($purchase->transaction_date)->format('Y')
+            ));
+
+            $operation->appendChild($xml->createElement('CNPC', '0'));
+            $operation->appendChild($xml->createElement('P_Charge', '0'));
+            $operation->appendChild($xml->createElement('MontantHT', $montantHT));
+            $operation->appendChild($xml->createElement('TauxRS', number_format($rsRate, 2, '.', '')));
+            $operation->appendChild($xml->createElement('TauxTVA', number_format($group['tax_rate'], 2, '.', '')));
+            $operation->appendChild($xml->createElement('MontantTVA', $montantTVA));
+            $operation->appendChild($xml->createElement('MontantTTC', $montantTTC));
+            $operation->appendChild($xml->createElement('MontantRS', $montantRS));
+            $operation->appendChild($xml->createElement('MontantNetServi', $montantNetServi));
+        }
 
         $totalPayement = $xml->createElement('TotalPayement');
         $certificat->appendChild($totalPayement);
-        $totalPayement->appendChild($xml->createElement('TotalMontantHT', $montantHT));
-        $totalPayement->appendChild($xml->createElement('TotalMontantTVA', $montantTVA));
-        $totalPayement->appendChild($xml->createElement('TotalMontantTTC', $montantTTC));
-        $totalPayement->appendChild($xml->createElement('TotalMontantRS', $montantRS));
-        $totalPayement->appendChild($xml->createElement('TotalMontantNetServi', $montantNetServi));
+        $totalPayement->appendChild($xml->createElement('TotalMontantHT', $totalHT_Global));
+        $totalPayement->appendChild($xml->createElement('TotalMontantTVA', $totalTVA_Global));
+        $totalPayement->appendChild($xml->createElement('TotalMontantTTC', $totalTTC_Global));
+        $totalPayement->appendChild($xml->createElement('TotalMontantRS', $totalRS_Global));
+        $totalPayement->appendChild($xml->createElement('TotalMontantNetServi', $totalNetServi_Global));
 
         $exercice = $transactionDate->format('Y');
         $mois = $transactionDate->format('m');

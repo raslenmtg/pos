@@ -23,9 +23,8 @@
     </style>
     <![endif]-->
 
-    <!-- Primary Meta Tags -->
-    <title>Simplex Gestion - Gestion Commerciale Tunisie | Facturation, Stock & POS 2026</title>
-    <meta name="title" content="Simplex Gestion - Gestion Commerciale Tunisie | Facturation, Stock & POS 2026">
+    <title>Simplex Gestion - Gestion Commerciale tunisie</title>
+    <meta name="title" content="Simplex Gestion - Gestion Commerciale pour Fournisseurs, Grossistes et Distributeurs en Tunisie">
     <meta name="description" content="Logiciel de gestion commerciale #1 en Tunisie. Gérez facturation, stock, point de vente (POS), achats avec conformité fiscale (retenue à la source, TVA). Essai gratuit. Support 24/7.">
     <meta name="keywords" content="logiciel gestion tunisie, gestion commerciale tunisie, logiciel facturation tunisie, gestion stock tunisie, pos tunisie, point de vente tunisie, logiciel commercial tunisie, facturation électronique tunisie, gestion entreprise tunisie, logiciel comptabilité tunisie">
     <meta name="author" content="Simplex Gestion">
@@ -839,11 +838,11 @@
 
                 </div>
                 <div class="mt-4 text-muted small">
-                    <i class='bx bx-check-circle text-success'></i> تحضير الحساب بمعطياتك
+                    <i class='bx bx-check-circle text-success'></i> إعداد الحساب بمعطياتك
                     <span class="mx-2">•</span>
                     <i class='bx bx-check-circle text-success'></i> شرح البرنامج
                     <span class="mx-2">•</span>
-                    <i class='bx bx-check-circle text-success'></i> دعم 7/7
+                    <i class='bx bx-check-circle text-success'></i> دعم تقني 7/7
                 </div>
             </div>
 
