@@ -117,7 +117,6 @@
                                 <th>@lang('lang_v1.recur_details')</th>
                                 <th>@lang('expense.expense_category')</th>
                                 <th>@lang('product.sub_category')</th>
-                                <th>@lang('lang_v1.rs')</th>
                                 <th>@lang('business.location')</th>
                                 <th>@lang('sale.payment_status')</th>
                                 <th>@lang('product.tax')</th>
@@ -131,7 +130,7 @@
                         </thead>
                         <tfoot>
                             <tr class="bg-gray font-17 text-center footer-total">
-                                <td colspan="9"><strong>@lang('sale.total'):</strong></td>
+                                <td colspan="8"><strong>@lang('sale.total'):</strong></td>
                                 <td class="footer_payment_status_count"></td>
                                 <td></td>
                                 <td class="footer_expense_total"></td>
@@ -213,13 +212,11 @@
         });
 
         // If DataTable exists, update header checkbox state after draw (paging/filtering)
-        if (typeof expense_table !== 'undefined' && expense_table) {
-            expense_table.on('draw', function () {
-                var $all = $('#expense_table tbody input.row_checkbox');
-                var $checked = $('#expense_table tbody input.row_checkbox:checked');
-                $('#expense_select_all').prop('checked', $all.length > 0 && $all.length === $checked.length);
-            });
-        }
+        $(document).on('draw.dt', '#expense_table', function () {
+            var $all = $('#expense_table tbody input.row_checkbox');
+            var $checked = $('#expense_table tbody input.row_checkbox:checked');
+            $('#expense_select_all').prop('checked', $all.length > 0 && $all.length === $checked.length);
+        });
     })
  </script>
 @endsection
