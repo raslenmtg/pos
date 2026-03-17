@@ -108,7 +108,7 @@ class AutoSendPaymentReminder extends Command
                         $data['email_settings'] = $business->email_settings ?? [];
                         $data['sms_settings'] = $business->sms_settings ?? [];
 
-                        //send email notification
+                     /*   //send email notification
                         if (! empty($data['auto_send']) && ! empty($sell->contact->email)) {
                             try {
                                 Notification::route('mail', [$sell->contact->email])
@@ -129,7 +129,7 @@ class AutoSendPaymentReminder extends Command
                             } catch (\Exception $e) {
                                 \Log::emergency('File:'.$e->getFile().'Line:'.$e->getLine().'Message:'.$e->getMessage());
                             }
-                        }
+                        }*/
 
                         //TODO:: whatsapp notification to be implemented
                     }

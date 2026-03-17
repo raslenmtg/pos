@@ -1331,9 +1331,24 @@ class Util
                     \App\Notifications\UpcomingPaymentAlert::class
                 ) {
                     $msg = __(
+                        'lang_v1.upcoming_payment_general',
+                        $data
+                    );
+                    if($data['transaction_type']=='purchase')
+                    $msg = __(
                         'lang_v1.upcoming_invoice_payment_due',
                        $data
                     );
+                    if($data['transaction_type']=='sell')
+                        $msg = __(
+                            'lang_v1.upcoming_invoice_payment',
+                            $data
+                        );
+                    if($data['transaction_type']=='expense')
+                        $msg = __(
+                            'lang_v1.upcoming_expense_payment_due',
+                            $data
+                        );
                     $icon_class = 'fas fa-exclamation-circle bg-yellow';
                 }
 

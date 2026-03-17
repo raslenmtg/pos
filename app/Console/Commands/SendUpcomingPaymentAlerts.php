@@ -68,10 +68,10 @@ class SendUpcomingPaymentAlerts extends Command
                                 'invoice_no' => $transaction->transaction->invoice_no,
                                 'paid_on' => Carbon::parse($transaction->paid_on)->format('d/m'),
                                 'method' => $transaction->method,
-                                'card_number' => $transaction->card_number,
                                 'amount' => $transaction->amount,
                                 'cheque_number' => $transaction->cheque_number,
                                 'bank_account_number' => $transaction->bank_account_number,
+                                'transaction_type' => $transaction->transaction->type,
                             ];
                             $user->notify(new UpcomingPaymentAlert($data));
                         }
