@@ -155,7 +155,12 @@ $(document).ready(function () {
             text: '<i class="fa fa-file-csv" aria-hidden="true"></i> ' + LANG.export_to_csv,
             className: 'tw-dw-btn-xs  tw-dw-btn tw-dw-btn-outline tw-my-2',
             exportOptions: {
-                columns: ':visible',
+                columns: function(idx, data, node) {
+                    var isAction = $(node).attr('aria-label') === 'Action' ||
+                        $(node).text().trim().toLowerCase() === 'action';
+
+                    return $(node).is(':visible') && !isAction;
+                }
             },
             footer: true,
         },
@@ -164,7 +169,12 @@ $(document).ready(function () {
             text: '<i class="fa fa-file-excel" aria-hidden="true"></i> ' + LANG.export_to_excel,
             className: 'tw-dw-btn-xs  tw-dw-btn tw-dw-btn-outline tw-my-2',
             exportOptions: {
-                columns: ':visible',
+                columns: function(idx, data, node) {
+                    var isAction = $(node).attr('aria-label') === 'Action' ||
+                        $(node).text().trim().toLowerCase() === 'action';
+
+                    return $(node).is(':visible') && !isAction;
+                }
             },
             footer: true,
         },
@@ -173,7 +183,12 @@ $(document).ready(function () {
             text: '<i class="fa fa-print" aria-hidden="true"></i> ' + LANG.print,
             className: 'tw-dw-btn-xs  tw-dw-btn tw-dw-btn-outline tw-my-2',
             exportOptions: {
-                columns: ':visible',
+                columns: function(idx, data, node) {
+                    var isAction = $(node).attr('aria-label') === 'Action' ||
+                        $(node).text().trim().toLowerCase() === 'action';
+
+                    return $(node).is(':visible') && !isAction;
+                },
                 stripHtml: true,
             },
             footer: true,
@@ -198,10 +213,16 @@ $(document).ready(function () {
 
     var pdf_btn = {
         extend: 'pdf',
+        orientation: 'landscape',
         text: '<i class="fa fa-file-pdf" aria-hidden="true"></i> ' + LANG.export_to_pdf,
         className: 'tw-dw-btn-xs  tw-dw-btn tw-dw-btn-outline tw-my-2',
         exportOptions: {
-            columns: ':visible',
+            columns: function(idx, data, node) {
+                var isAction = $(node).attr('aria-label') === 'Action' ||
+                    $(node).text().trim().toLowerCase() === 'action';
+
+                return $(node).is(':visible') && !isAction;
+            }
         },
         footer: true,
     };
