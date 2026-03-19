@@ -63,6 +63,7 @@
      $drawer_name   = $contact->name ?? '';
 
     $drawer_address = $contact->city ?? '';
+    $drawer_street = $contact->address_line_1 ?? '';
     $drawer_zip     = $contact->zip_code ?? '';
 
     } else{
@@ -88,6 +89,7 @@
      $beneficiary   = $contact->name ?? '';
     $drawer_name= $business->name ?? '';
     $drawer_address = $location->city ?? '';
+    $drawer_street = $location->landmark ?? '';
     $drawer_zip     = $location->zip_code ?? '';
 
     }
@@ -99,8 +101,8 @@
     <!-- px coords * 0.6261 for x, * 0.6372 for y (scaled x1.3) -->
 
     <div class="t" style="left:269px; top:36px;">{{ $city }}</div>
-    <div class="t" style="left:164px; top:47px;">{{ $emission_date }}</div>
-    <div class="t" style="left:264px; top:47px;">{{ $echeance_date }}</div>
+    <div class="t" style="left:164px; top:47px;">{{ $echeance_date }}</div>
+    <div class="t" style="left:264px; top:47px;">{{ $emission_date }}</div>
 
     <div class="t" style="left:152px; top:75px;">{{ $rib_bank??'' }}</div>
     <div class="t" style="left:182px; top:75px;">{{ $rib_branch??'' }}</div>
@@ -116,6 +118,7 @@
     <div class="t" style="left:25px;  top:171px;">{{ $city }}</div>
     <div class="t" style="left:104px; top:171px;">{{ $emission_date }}</div>
     <div class="t" style="left:183px; top:171px;">{{ $echeance_date }}</div>
+    <div class="t" style="left:263px; top:171px;">{{ $drawer_name }}</div>
 
     <div class="t" style="left:19px;  top:203px;">{{ $rib_bank }}</div>
     <div class="t" style="left:41px;  top:203px;">{{ $rib_branch }}</div>
@@ -126,7 +129,8 @@
 
     <div class="t" style="left:245px; top:218px;">{{ $drawer_name }}</div>
     <div class="t" style="left:245px; top:228px;">{{ $drawer_address }}</div>
-    <div class="t" style="left:267px; top:239px;">{{ $drawer_zip }}</div>
+    <div class="t" style="left:245px; top:238px;">{{ $drawer_street }}</div>
+    <div class="t" style="left:267px; top:249px;">{{ $drawer_zip }}</div>
 </div>
 
 </body>

@@ -166,7 +166,17 @@
                 @endphp
                 <tr>
                     <td>{{ @format_datetime($payment->paid_on) }}</td>
-                    <td>{{ $payment->payment_ref_no }}</td>
+                    <td>
+                        @if($payment->method == 'bank_transfer')
+                            {{ $payment->bank_account_number }}
+                        @elseif($payment->method == 'custom_pay_1')
+                            {{ $payment->transaction_no }}
+                        @elseif($payment->method == 'card')
+                            {{ $payment->card_transaction_number }}
+                        @else
+                            {{ $payment->payment_ref_no }}
+                        @endif
+                    </td>
                     <td>{{ $payment_types[$payment->method] ?? '' }}</td>
                     <td>{{ $payment->note }}</td>
                     <td class="text-right">

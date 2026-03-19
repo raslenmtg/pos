@@ -767,6 +767,7 @@ class TransactionUtil extends Util
                         'payment_for' => $transaction->contact_id,
                         'payment_ref_no' => $payment_ref_no,
                         'account_id' => ! empty($payment['account_id']) && $payment['method'] != 'advance' ? $payment['account_id'] : null,
+                        'due_date' => isset($payment['due_date']) ? ($uf_data ? $this->uf_date($payment['due_date'], true) : $payment['due_date']) : null,
                     ];
 
                     for ($i = 1; $i < 8; $i++) {
@@ -843,6 +844,10 @@ class TransactionUtil extends Util
     {
         $payment_id = $payment['payment_id'];
         unset($payment['payment_id']);
+
+        if (! empty($payment['due_date'])) {
+            $payment['due_date'] = $uf_data ? $this->uf_date($payment['due_date'], true) : $payment['due_date'];
+        }
 
         for ($i = 1; $i < 8; $i++) {
             if ($payment['method'] == 'custom_pay_'.$i) {
