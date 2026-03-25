@@ -1008,6 +1008,83 @@
 				});
 			}
 		}
+
+		// ── Prefill Purchase Form Handler ──────────────────────────────────
+		$(document).ready(function() {
+			// Get prefill data from PHP passed through view
+			var prefillData = @json($prefill_data ?? []);
+			
+			// Check if there is data to prefill
+			if (!prefillData || (!prefillData.supplier_id && !prefillData.product_id)) {
+				return;  // No prefill data, exit early
+			}
+
+			// Helper function to check if a value is not empty/null
+			function hasValue(val) {
+				return val !== null && val !== undefined && val !== '';
+			}
+
+			// Step 1: Auto-select supplier if provided
+			if (hasValue(prefillData.supplier_id)) {
+				$('#supplier_id').val(prefillData.supplier_id).trigger('change');
+			}
+
+			// Step 2: Auto-add product row if product_id and quantity are provided
+			if (hasValue(prefillData.product_id) && hasValue(prefillData.quantity)) {
+				var product_id = prefillData.product_id;
+				var variation_id = hasValue(prefillData.variation_id) ? prefillData.variation_id : '0';
+				var quantity = prefillData.quantity;
+
+				// Wait for the form to be fully loaded (especially supplier selection)
+				// Use a small delay to ensure all event handlers are ready
+				setTimeout(function() {
+					// Get current row count and location
+					var row_count = parseInt($('#row_count').val()) || 0;
+					var location_id = $('#location_id').val();
+					var supplier_id = $('#supplier_id').val();
+
+					// Prepare AJAX request data
+					var request_data = {
+						product_id: product_id,
+						variation_id: variation_id,
+						row_count: row_count,
+						location_id: location_id,
+						supplier_id: supplier_id
+					};
+
+					// Check if this is a purchase order form
+					if ($('#is_purchase_order').length) {
+						request_data.is_purchase_order = true;
+					}
+
+					// Make AJAX call to get purchase entry row
+					$.ajax({
+						method: 'POST',
+						url: '/purchases/get_purchase_entry_row',
+						dataType: 'html',
+						data: request_data,
+						success: function(response) {
+							// Append the row using the existing function
+							append_purchase_lines(response, row_count);
+
+							// Set the quantity field value
+							var $quantityField = $('#purchase_entry_table tbody tr:last').find('.purchase_quantity');
+							if ($quantityField.length) {
+								$quantityField.val(quantity).trigger('change');
+							}
+
+							// Clear the search field after successful addition
+							$('#search_product').val('');
+						},
+						error: function(xhr, status, error) {
+							console.error('Error fetching purchase entry row:', error);
+							// Silently fail - user can manually add the product
+						}
+					});
+				}, 500);  // 500ms delay to ensure all event handlers are registered
+			}
+		});
+		// ── end prefill handler ───────────────────────────────────────────
 	</script>
 	@include('purchase.partials.keyboard_shortcuts')
 

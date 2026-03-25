@@ -1,7 +1,7 @@
 <?php
 
  return [
-     'product_stock_alert' => "Produits à faible stock. <br/> <small class = 'text-muted'> Basé sur la quantité d'alerte de produit définie dans l'écran d'ajout de produit. <br> Achetez ce produit avant la fin du stock. </small>",
+     'product_stock_alert' => "Stock bas : seuil d'alerte atteint. <br/> <small class = 'text-muted'> Le niveau de stock actuel est inférieur à la quantité d'alerte définie. </small>",
      'payment_dues' => "Paiement en attente pour les achats. <br/> <small class = 'text-muted'> Basé sur la limite de payement du fournisseur. <br/> Affichage des paiements à payer en 7 jours ou moins. </small>",
      'input_tax' => 'Taxe totale collectée pour les ventes dans la période sélectionnée.',
      'output_tax' => 'Taxe totale versée pour les achats pour la période sélectionnée.',

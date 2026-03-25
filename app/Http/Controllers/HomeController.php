@@ -15,6 +15,7 @@ use App\Utils\TransactionUtil;
 use App\Utils\ProductUtil;
 use App\Utils\Util;
 use App\VariationLocationDetails;
+use App\Services\SmartQuantityService;
 use Datatables;
 use DB;
 use Illuminate\Http\Request;
@@ -36,6 +37,8 @@ class HomeController extends Controller
     protected $restUtil;
     protected $productUtil;
 
+    protected $smartQuantityService;
+
     /**
      * Create a new controller instance.
      *
@@ -48,6 +51,7 @@ class HomeController extends Controller
         Util $commonUtil,
         RestaurantUtil $restUtil,
         ProductUtil $productUtil,
+        SmartQuantityService $smartQuantityService,
     ) {
         $this->businessUtil = $businessUtil;
         $this->transactionUtil = $transactionUtil;
@@ -55,6 +59,7 @@ class HomeController extends Controller
         $this->commonUtil = $commonUtil;
         $this->restUtil = $restUtil;
         $this->productUtil = $productUtil;
+        $this->smartQuantityService = $smartQuantityService;
     }
 
     /**
@@ -209,8 +214,34 @@ class HomeController extends Controller
 
         $common_settings = ! empty(session('business.common_settings')) ? session('business.common_settings') : [];
 
+        // Get smart quantity alerts from recent notifications (last 2 days) to avoid calling Nixtla API on every page load
+        $business_id = request()->session()->get('user.business_id');
+        $smart_quantity_alerts = [];
+        
+        $recent_notifications = auth()->user()->notifications()
+            ->where('type', 'App\Notifications\LowStockNotification')
+            ->get()
+            ->unique(function ($item) {
+                return $item->data['variation_id'] ?? null;
+            });
 
-        return view('home.index', compact('sells_chart_1', 'sells_chart_2', 'widgets', 'all_locations', 'common_settings', 'is_admin'));
+        foreach ($recent_notifications as $notification) {
+            $data = $notification->data;
+            if (!empty($data)) {
+                $smart_quantity_alerts[] = [
+                    'product_name' => $data['product_name'] ?? '',
+                    'variation_id' => $data['variation_id'] ?? '',
+                    'current_stock' => $data['current_stock'] ?? 0,
+                    'days_remaining' => $data['days_remaining'] ?? 0,
+                    'reorder_qty' => $data['reorder_qty'] ?? 0,
+                    'supplier' => [
+                        'supplier_id' => $data['supplier_id'] ?? null
+                    ]
+                ];
+            }
+        }
+
+        return view('home.index', compact('sells_chart_1', 'sells_chart_2', 'widgets', 'all_locations', 'common_settings', 'is_admin', 'smart_quantity_alerts'));
     }
 
     /**

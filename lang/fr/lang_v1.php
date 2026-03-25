@@ -1000,7 +1000,7 @@ return [
     'purchase_price_inc_tax_ins1' => 'Requis si le prix d\'achat excluant la taxe n\'est pas donné',
     'purchase_ref_no' => 'Achat réf.',
     'purchase_report' => 'Rapport d\'achat',
-    'purchase_requisition' => 'Demande d\'achat (interne)',
+    'purchase_requisition' => 'Demande d\'achat',
     'purchase_requisition_details' => 'Détails de la demande d\'achat',
     'purchase_requisition_help_text' => 'Une demande d\'achat',
     'purchase_requisition_list'=>'Liste des demandes',

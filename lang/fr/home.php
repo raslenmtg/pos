@@ -14,7 +14,7 @@
      'sells_last_30_days' => 'Ventes des 30 derniers jours',
      'sells_current_fy' => 'Année commerciale en cours',
      'total_sells' => 'Total des ventes (:currency)',
-     'product_stock_alert' => 'Alerte de stock',
+     'product_stock_alert' => 'Stock critique',
      'payment_dues' => 'Dettes',
      'due_amount' => 'Montant dû',
      'stock_expiry_alert' => "Alerte d'expiration de stock",

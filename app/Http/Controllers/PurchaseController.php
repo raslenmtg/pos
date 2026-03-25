@@ -297,8 +297,16 @@ class PurchaseController extends Controller
             ->get()
             ->keyBy('id');
 
+        // Handle prefill parameters
+        $prefill_data = [
+            'supplier_id' => request()->input('supplier_id'),
+            'product_id' => request()->input('product_id'),
+            'variation_id' => request()->input('variation_id'),
+            'quantity' => request()->input('quantity') ?: request()->input('reorder_qty'),
+        ];
+
         return view('purchase.create')
-            ->with(compact('taxes', 'orderStatuses', 'business_locations', 'currency_details', 'default_purchase_status', 'customer_groups', 'types', 'shortcuts', 'payment_line', 'payment_types', 'accounts', 'bl_attributes', 'common_settings', 'business_details', 'contacts_details'));
+            ->with(compact('taxes', 'orderStatuses', 'business_locations', 'currency_details', 'default_purchase_status', 'customer_groups', 'types', 'shortcuts', 'payment_line', 'payment_types', 'accounts', 'bl_attributes', 'common_settings', 'business_details', 'contacts_details', 'prefill_data'));
     }
 
     /**
