@@ -189,5 +189,40 @@
     		}
     		
     	})
+
+		// ── Prefill Purchase Requisition Form Handler ──────────────────────────
+		$(document).ready(function() {
+			var prefillData = @json($prefill_data ?? []);
+			if (prefillData && prefillData.variation_id && prefillData.quantity) {
+				setTimeout(function() {
+					var loc_id = $('#location_id').val();
+					if(loc_id) {
+						$.ajax({
+							method: 'post',
+							url: "{{route('get-requisition-products')}}",
+							dataType: 'html',
+							data: {
+								location_id: loc_id,
+								variation_id: prefillData.variation_id
+							},
+							success: function(result) {
+								var rows = $(result);
+								rows.find('tr').each(function() {
+									var row_variation_id = $(this).attr('data-variation_id');
+									if ($('tr[data-variation_id="' + row_variation_id + '"]').length == 0) {
+										// Set quantity
+										var qtyInput = $(this).find('input[name="purchases[' + row_variation_id + '][quantity]"]');
+										if (qtyInput.length) {
+											qtyInput.val(prefillData.quantity);
+										}
+										$('#products_list tbody').append($(this));
+									}
+								});
+							}
+						});
+					}
+				}, 500); // slight delay to ensure location is set
+			}
+		});
 	</script>
 @endsection

@@ -46,8 +46,8 @@
                     @forelse($smart_quantity_alerts as $alert)
                         <tr class="hover:tw-bg-gray-50 tw-transition-colors">
                             <td class="tw-px-6 tw-py-4">
-                                <input type="checkbox" class="smart-qty-checkbox tw-rounded tw-border-gray-300 tw-text-primary-600 focus:tw-ring-primary-500" 
-                                    data-variation-id="{{ $alert['variation_id'] }}" 
+                                <input type="checkbox" class="smart-qty-checkbox tw-rounded tw-border-gray-300 tw-text-primary-600 focus:tw-ring-primary-500"
+                                    data-variation-id="{{ $alert['variation_id'] }}"
                                     data-quantity="{{ $alert['reorder_qty'] }}">
                             </td>
                             <td class="tw-px-6 tw-py-4 tw-text-gray-900 tw-font-medium">
@@ -58,30 +58,29 @@
                             </td>
                             <td class="tw-px-6 tw-py-4 tw-text-right tw-text-gray-900">
                                 <span class="tw-inline-flex tw-items-center tw-px-2.5 tw-py-0.5 tw-rounded-full tw-text-xs tw-font-medium tw-bg-blue-100 tw-text-blue-800">
-                                    {{ number_format($alert['current_stock'], 2) }}
+                                    {{ $alert['current_stock'] }}
                                 </span>
                             </td>
                             <td class="tw-px-6 tw-py-4 tw-text-right">
                                 @if($alert['days_remaining'] <= 3)
                                     <span class="tw-inline-flex tw-items-center tw-px-2.5 tw-py-0.5 tw-rounded-full tw-text-xs tw-font-medium tw-bg-red-100 tw-text-red-800">
-                                        {{ number_format($alert['days_remaining'], 1) }} {{ __('messages.days') }}
+                                        {{ $alert['days_remaining'] }} {{ __('messages.days') }}
                                     </span>
                                 @elseif($alert['days_remaining'] <= 7)
                                     <span class="tw-inline-flex tw-items-center tw-px-2.5 tw-py-0.5 tw-rounded-full tw-text-xs tw-font-medium tw-bg-amber-100 tw-text-amber-800">
-                                        {{ number_format($alert['days_remaining'], 1) }} {{ __('messages.days') }}
+                                        {{ $alert['days_remaining'] }} {{ __('messages.days') }}
                                     </span>
                                 @else
                                     <span class="tw-inline-flex tw-items-center tw-px-2.5 tw-py-0.5 tw-rounded-full tw-text-xs tw-font-medium tw-bg-yellow-100 tw-text-yellow-800">
-                                        {{ number_format($alert['days_remaining'], 1) }} {{ __('messages.days') }}
+                                        {{ $alert['days_remaining'] }} {{ __('messages.days') }}
                                     </span>
                                 @endif
                             </td>
                             <td class="tw-px-6 tw-py-4 tw-text-right tw-text-gray-900 tw-font-semibold">
-                                {{ number_format($alert['reorder_qty'], 2) }}
+                                {{ $alert['reorder_qty'] }}
                             </td>
-                            <td class="tw-px-6 tw-py-4 tw-text-center">
-                                @if(!empty($alert['supplier']) && !empty($alert['supplier']['supplier_id']))
-                                    <a href="{{ route('purchase.create', ['supplier_id' => $alert['supplier']['supplier_id'], 'product_id' => $alert['variation_id'], 'quantity' => $alert['reorder_qty']]) }}"
+                            <td class="tw-px-6 tw-py-4 tw-text-right">
+                                    <a href="{{ route('purchase-order.create', ['supplier_id' => $alert['supplier']['supplier_id'], 'product_id' => $alert['variation_id'], 'quantity' => $alert['reorder_qty']]) }}"
                                        class="tw-inline-flex tw-items-center tw-justify-center tw-px-3 tw-py-1.5 tw-text-xs tw-font-medium tw-text-white tw-bg-primary-600 hover:tw-bg-primary-700 tw-rounded-lg tw-transition-colors">
                                         <svg class="tw-w-4 tw-h-4 tw-mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                             <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
@@ -94,17 +93,6 @@
                                         </svg>
                                         {{ __('messages.order') }}
                                     </a>
-                                @else
-                                    <a href="{{ route('purchase-requisition.create', ['variation_id' => $alert['variation_id'], 'quantity' => $alert['reorder_qty']]) }}"
-                                       class="tw-inline-flex tw-items-center tw-justify-center tw-px-3 tw-py-1.5 tw-text-xs tw-font-medium tw-text-white tw-bg-yellow-600 hover:tw-bg-yellow-700 tw-rounded-lg tw-transition-colors">
-                                        <svg class="tw-w-4 tw-h-4 tw-mr-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                            <path d="M12 5l0 14" />
-                                            <path d="M5 12l14 0" />
-                                        </svg>
-                                        {{ __('lang_v1.add_purchase_requisition') }}
-                                    </a>
-                                @endif
                             </td>
                         </tr>
                     @empty
@@ -124,18 +112,9 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- Footer -->
-        <div class="tw-bg-gray-50 tw-px-6 tw-py-3 tw-border-t tw-border-gray-200 tw-flex tw-items-center tw-justify-between">
-
-            @if(!empty($smart_quantity_alerts) && count($smart_quantity_alerts) > 0)
-                <a href="{{ route('product.index') }}" class="tw-text-xs tw-font-medium tw-text-primary-600 hover:tw-text-primary-700">
-                    {{ __('messages.view_all_products') }} →
-                </a>
-            @endif
-        </div>
     </div>
 </div>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

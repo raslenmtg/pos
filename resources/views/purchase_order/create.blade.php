@@ -116,7 +116,7 @@
 		              {!! Form::select('pay_term_type', 
 		              	['months' => __('lang_v1.months'), 
 		              		'days' => __('lang_v1.days')], 
-		              		null, 
+		              	 null,
 		              	['class' => 'form-control width-60 pull-left','placeholder' => __('messages.please_select'), 'id' => 'pay_term_type']); !!}
 		            </div>
 		        </div>
@@ -525,6 +525,61 @@
 
 			if($('#location_id').length){
 				$('#location_id').change();
+			}
+
+			// ── Prefill Purchase Order Form Handler ──────────────────────────────────
+			var prefillData = @json($prefill_data ?? []);
+
+			if (prefillData && prefillData.supplier_id) {
+				function hasValue(val) {
+					return val !== null && val !== undefined && val !== '';
+				}
+
+				if (hasValue(prefillData.supplier_id) && hasValue(prefillData.supplier_name)) {
+					var newOption = new Option(prefillData.supplier_name, prefillData.supplier_id, true, true);
+					$('#supplier_id').append(newOption).trigger('change');
+				}
+
+				if (hasValue(prefillData.product_id) && hasValue(prefillData.quantity)) {
+					var product_id = prefillData.product_id;
+					var variation_id = hasValue(prefillData.variation_id) ? prefillData.variation_id : '0';
+					var quantity = prefillData.quantity;
+
+					setTimeout(function() {
+						var row_count = parseInt($('#row_count').val()) || 0;
+						var location_id = $('#location_id').val();
+						var supplier_id = $('#supplier_id').val();
+
+						var request_data = {
+							product_id: product_id,
+							variation_id: variation_id,
+							row_count: row_count,
+							location_id: location_id,
+							supplier_id: supplier_id,
+							is_purchase_order: true
+						};
+
+						$.ajax({
+							method: 'POST',
+							url: '/purchases/get_purchase_entry_row',
+							dataType: 'html',
+							data: request_data,
+							success: function(response) {
+								append_purchase_lines(response, row_count);
+
+								var $quantityField = $('#purchase_entry_table tbody tr:last').find('.purchase_quantity');
+								if ($quantityField.length) {
+									$quantityField.val(quantity).trigger('change');
+								}
+
+								$('#search_product').val('');
+							},
+							error: function(xhr, status, error) {
+								console.error('Error fetching purchase entry row:', error);
+							}
+						});
+					}, 500); // slight delay to ensure location/supplier are set
+				}
 			}
     	});
 	</script>

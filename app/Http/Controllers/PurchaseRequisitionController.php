@@ -187,7 +187,12 @@ class PurchaseRequisitionController extends Controller
 
         $brands = Brands::forDropdown($business_id);
 
-        return view('purchase_requisition.create')->with(compact('business_locations', 'categories', 'brands'));
+        $prefill_data = [
+            'variation_id' => request()->input('variation_id'),
+            'quantity' => request()->input('quantity') ?: request()->input('reorder_qty'),
+        ];
+
+        return view('purchase_requisition.create')->with(compact('business_locations', 'categories', 'brands', 'prefill_data'));
     }
 
     /**
@@ -414,6 +419,10 @@ class PurchaseRequisitionController extends Controller
 
             if (! empty(request()->input('category_id'))) {
                 $query->whereIn('p.category_id', request()->input('category_id'));
+            }
+
+            if (! empty(request()->input('variation_id'))) {
+                $query->where('v.id', request()->input('variation_id'));
             }
 
             $products = $query->select(

@@ -283,8 +283,32 @@ class PurchaseOrderController extends Controller
 
         $common_settings = ! empty(session('business.common_settings')) ? session('business.common_settings') : [];
 
+        // Handle prefill parameters
+        $prefill_data = [
+            'supplier_id' => request()->input('supplier_id'),
+            'product_id' => request()->input('product_id'),
+            'variation_id' => request()->input('variation_id'),
+            'quantity' => request()->input('quantity') ?: request()->input('reorder_qty'),
+        ];
+
+        // If variation_id is present but product_id is not, find product_id
+        if (!empty($prefill_data['variation_id']) && empty($prefill_data['product_id'])) {
+            $variation = \App\Variation::find($prefill_data['variation_id']);
+            if ($variation) {
+                $prefill_data['product_id'] = $variation->product_id;
+            }
+        }
+
+        // Pass supplier name for select2 prefill if possible
+        if (!empty($prefill_data['supplier_id'])) {
+            $supplier = \App\Contact::find($prefill_data['supplier_id']);
+            if ($supplier) {
+                $prefill_data['supplier_name'] = $supplier->name . ($supplier->supplier_business_name ? ' - ' . $supplier->supplier_business_name : '');
+            }
+        }
+
         return view('purchase_order.create')
-            ->with(compact('taxes', 'business_locations', 'currency_details', 'customer_groups', 'types', 'shortcuts', 'bl_attributes', 'shipping_statuses', 'users', 'common_settings'));
+            ->with(compact('taxes', 'business_locations', 'currency_details', 'customer_groups', 'types', 'shortcuts', 'bl_attributes', 'shipping_statuses', 'users', 'common_settings', 'prefill_data'));
     }
 
     /**
