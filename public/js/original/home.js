@@ -54,6 +54,83 @@ $(document).ready(function() {
     $('#stock_alert_location').change( function(){
         stock_alert_table.ajax.reload();
     });
+
+
+    //smart quantity alert datatable
+    if ($('#smart_quantity_alert_table').length) {
+        var smart_quantity_alert_table = $('#smart_quantity_alert_table').DataTable({
+            processing: true,
+            serverSide: false,
+            ordering: false,
+            searching: false,
+            scrollY: "75vh",
+            scrollX: true,
+            scrollCollapse: true,
+            fixedHeader: false,
+            dom: 'Btirp'
+        });
+
+        var $smart_select_all = $('#smart-qty-select-all');
+        var $bulk_process_btn = $('#bulk-process-btn');
+
+        var get_smart_qty_checkboxes = function() {
+            return smart_quantity_alert_table.rows({ search: 'applied' }).nodes().to$().find('.smart-qty-checkbox');
+        };
+
+        var update_smart_qty_select_all = function() {
+            var $all = get_smart_qty_checkboxes();
+            var $checked = $all.filter(':checked');
+            $smart_select_all.prop('checked', $all.length > 0 && $all.length === $checked.length);
+        };
+
+        $smart_select_all.on('change', function() {
+            get_smart_qty_checkboxes().prop('checked', this.checked);
+        });
+
+        $('#smart_quantity_alert_table').on('change', '.smart-qty-checkbox', function() {
+            update_smart_qty_select_all();
+        });
+
+        smart_quantity_alert_table.on('draw', function() {
+            update_smart_qty_select_all();
+        });
+
+        $bulk_process_btn.on('click', function() {
+            var items = [];
+
+            get_smart_qty_checkboxes().filter(':checked').each(function() {
+                items.push({
+                    variation_id: $(this).data('variation-id'),
+                    quantity: $(this).data('quantity')
+                });
+            });
+
+            if (items.length === 0) {
+                toastr.warning($bulk_process_btn.data('no-row-msg'));
+                return;
+            }
+
+            $.ajax({
+                url: $bulk_process_btn.data('url'),
+                method: 'POST',
+                data: { items: items },
+                success: function(res) {
+                    if (res.success) {
+                        toastr.success(res.msg);
+                        setTimeout(function() {
+                            location.reload();
+                        }, 1500);
+                    } else {
+                        toastr.error(res.msg);
+                    }
+                },
+                error: function() {
+                    toastr.error($bulk_process_btn.data('error-msg'));
+                }
+            });
+        });
+    }
+
     //payment dues datatables
     purchase_payment_dues_table = $('#purchase_payment_dues_table').DataTable({
         processing: true,

@@ -115,8 +115,8 @@ class CheckLowStockCommand extends Command
     {
         try {
             Notification::send($users, new LowStockNotification(
-                intval($productData['product_name']),
-                $productData['current_stock'],
+                $productData['product_name'],
+                intval($productData['current_stock']),
                 intval($productData['days_remaining']),
                 intval($productData['reorder_qty']),
                 $productData['variation_id'] ?? null,

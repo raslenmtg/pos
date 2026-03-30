@@ -94,21 +94,17 @@ class LowStockNotification extends Notification implements ShouldQueue
         $link = null;
         if ($this->variation_id) {
             if ($this->supplier_id) {
-                $link = route('purchases.create', [
-                    'variation_id' => $this->variation_id, 
+                $link = route('purchase-order.create', [
+                    'product_id' => $this->variation_id,
                     'supplier_id' => $this->supplier_id,
-                    'quantity' => $this->reorder_qty
-                ]);
-            } else {
-                $link = route('purchase-requisition.create', [
-                    'variation_id' => $this->variation_id,
                     'quantity' => $this->reorder_qty
                 ]);
             }
         }
-        
-        $msg = "⚠️ *{$this->product_name}* " . __('messages.current_stock') . ": {$this->current_stock} | " . __('messages.days_remaining') . ": {$this->days_remaining} | " . __('messages.reorder_qty') . ": *{$this->reorder_qty}*";
 
+        $msg = "Stock faible : {$this->product_name} sera en rupture dans {$this->days_remaining} jours. Il vous reste {$this->current_stock}, Commandez {$this->reorder_qty} unités.";
+        if($this->days_remaining <= 5)
+            $msg = "🚨 STOCK CRITIQUE : {$this->product_name} en rupture imminente dans {$this->days_remaining} jours! Il vous reste {$this->current_stock} Commandez {$this->reorder_qty} unités.";
         return [
             'message' => $msg,
             'link' => $link,
@@ -118,7 +114,6 @@ class LowStockNotification extends Notification implements ShouldQueue
             'reorder_qty' => $this->reorder_qty,
             'variation_id' => $this->variation_id,
             'supplier_id' => $this->supplier_id,
-            'urgency' => $this->days_remaining <= 3 ? 'critical' : ($this->days_remaining <= 5 ? 'high' : 'medium'),
         ];
     }
 }

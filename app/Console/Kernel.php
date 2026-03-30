@@ -32,6 +32,7 @@ class Kernel extends ConsoleKernel
             $schedule->command('pos:autoSendPaymentReminder')->dailyAt('8:00');*/
             $schedule->command('pos:updateRewardPoints')->dailyAt('03:00');
             $schedule->command('pos:sendUpcomingPaymentAlerts')->dailyAt('01:00');
+            $schedule->command('check:low-stock')->cron('0 2 */2 * *');
 
         }
     }

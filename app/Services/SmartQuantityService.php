@@ -116,7 +116,7 @@ class SmartQuantityService
         if ($daily_sales_data->count() < 20) {
             return 0;
         }
-        $ten_days_ago = \Carbon\Carbon::now()->subDays(10)->toDateString();
+        $ten_days_ago = \Carbon\Carbon::now()->subDays(30)->toDateString();
         $last_sale_date = $daily_sales_data->last()->date;
 
         if ($last_sale_date < $ten_days_ago) {
@@ -307,18 +307,6 @@ class SmartQuantityService
         $older_avg = array_sum($older_values) / 30;
 
         $trend = ($recent_avg - $older_avg) / max(0.01, $older_avg);
-
-        \Illuminate\Support\Facades\Log::info('Merchant Pattern Detection', [
-            'closed_days' => $closed_days,
-            'open_days' => $open_days,
-            'normal_avg' => round($normal_avg, 2),
-            'anomaly_count' => count($anomaly_sales),
-            'anomaly_percentage' => round((count($anomaly_sales) / count($sales_on_sales_days)) * 100, 1) . '%',
-            'recent_avg' => round($recent_avg, 2),
-            'older_avg' => round($older_avg, 2),
-            'trend' => round($trend * 100, 1) . '%',
-            'upper_bound' => round($upper_bound, 2),
-        ]);
 
         // 4. Calculate velocity based on merchant's pattern
 

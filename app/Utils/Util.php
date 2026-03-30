@@ -1297,7 +1297,7 @@ class Util
         $notifications_data = [];
         foreach ($notifications as $notification) {
             $data = $notification->data;
-            if (in_array($notification->type, [\App\Notifications\RecurringInvoiceNotification::class, \App\Notifications\RecurringExpenseNotification::class, \App\Notifications\UpcomingPaymentAlert::class])) {
+            if (in_array($notification->type, [\App\Notifications\RecurringInvoiceNotification::class, \App\Notifications\RecurringExpenseNotification::class, \App\Notifications\UpcomingPaymentAlert::class, \App\Notifications\LowStockNotification::class])) {
                 $msg = '';
                 $icon_class = '';
                 $link = '';
@@ -1334,22 +1334,26 @@ class Util
                         'lang_v1.upcoming_payment_general',
                         $data
                     );
-                    if($data['transaction_type']=='purchase')
+                    if(!empty($data['transaction_type']) && $data['transaction_type']=='purchase')
                     $msg = __(
                         'lang_v1.upcoming_invoice_payment_due',
                        $data
                     );
-                    if($data['transaction_type']=='sell')
+                    if(!empty($data['transaction_type']) && $data['transaction_type']=='sell')
                         $msg = __(
                             'lang_v1.upcoming_invoice_payment',
                             $data
                         );
-                    if($data['transaction_type']=='expense')
+                    if(!empty($data['transaction_type']) && $data['transaction_type']=='expense')
                         $msg = __(
                             'lang_v1.upcoming_expense_payment_due',
                             $data
                         );
                     $icon_class = 'fas fa-exclamation-circle bg-yellow';
+                } elseif ($notification->type == \App\Notifications\LowStockNotification::class){
+                   $msg=$notification->data['message'];
+                    $link=$notification->data['link'];
+                    $icon_class = 'fas fa-boxes bg-red';
                 }
 
                 $notifications_data[] = [
