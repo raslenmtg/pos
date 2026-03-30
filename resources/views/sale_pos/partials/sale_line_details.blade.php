@@ -6,7 +6,7 @@
             <th>{{ __('lang_v1.lot_n_expiry') }}</th>
         @endif
         @if($sell->type == 'sales_order')
-            <th>@lang('lang_v1.quantity_remaining')</th>
+            <th>@lang('lang_v1.quantity')</th>
         @endif
         <th>{{ __('sale.qty') }}</th>
         @if(!empty($pos_settings['inline_service_staff']))

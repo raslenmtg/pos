@@ -92,7 +92,7 @@
                         <th>@lang('purchase.location')</th>
                         <th>@lang('purchase.supplier')</th>
                         <th>@lang('sale.status')</th>
-                        <th>@lang('lang_v1.quantity_remaining')</th>
+                        <th>@lang('lang_v1.quantity')</th>
                         <th>@lang('lang_v1.shipping_status')</th>
                         <th>@lang('lang_v1.added_by')</th>
                     </tr>

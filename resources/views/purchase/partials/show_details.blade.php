@@ -156,7 +156,7 @@
               <th>Désignation</th>
               <th>@lang('product.sku')</th>
               @if($purchase->type == 'purchase_order')
-                <th class="text-right">@lang( 'lang_v1.quantity_remaining' )</th>
+                <th class="text-right">@lang( 'lang_v1.quantity' )</th>
               @endif
               <th class="text-right">@if($purchase->type == 'purchase_order') @lang('lang_v1.order_quantity') @else @lang('purchase.purchase_quantity') @endif</th>
               <th class="text-right">@lang( 'lang_v1.unit_cost_before_discount' )</th>
