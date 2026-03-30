@@ -1125,7 +1125,10 @@ function toggle_search() {
 $(document).on('change', '#location_id', function() {
     get_purchase_requisitions();
     toggle_search();
-    $('#purchase_entry_table tbody').html('');
+    // Keep manually added lines on purchase order create; only clear on regular purchase create.
+    if ($('#is_purchase_order').length === 0) {
+        $('#purchase_entry_table tbody').html('');
+    }
     update_table_total();
     update_grand_total();
     update_table_sr_number();

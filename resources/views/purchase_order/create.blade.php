@@ -523,6 +523,29 @@
 		        removeLabel: LANG.remove,
 		    });
 
+			// purchase.js clears lines on every location change; preserve lines on PO create.
+			var poRowsSnapshot = null;
+			$(document).on('select2:opening mousedown focus', '#location_id', function() {
+				if ($('#is_purchase_order').length) {
+					poRowsSnapshot = $('#purchase_entry_table tbody tr').clone(true, true);
+				}
+			});
+
+			$(document).on('change', '#location_id', function() {
+				if (!$('#is_purchase_order').length) {
+					return;
+				}
+
+				if (poRowsSnapshot && poRowsSnapshot.length && $('#purchase_entry_table tbody tr').length === 0) {
+					$('#purchase_entry_table tbody').append(poRowsSnapshot);
+					update_table_total();
+					update_grand_total();
+					update_table_sr_number();
+				}
+
+				poRowsSnapshot = null;
+			});
+
 			if($('#location_id').length){
 				$('#location_id').change();
 			}
