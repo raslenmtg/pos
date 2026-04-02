@@ -553,11 +553,56 @@
 			// ── Prefill Purchase Order Form Handler ──────────────────────────────────
 			var prefillData = @json($prefill_data ?? []);
 
-			if (prefillData && prefillData.supplier_id) {
-				function hasValue(val) {
-					return val !== null && val !== undefined && val !== '';
+			function hasValue(val) {
+				return val !== null && val !== undefined && val !== '';
+			}
+
+			function appendPrefillItem(items, index) {
+				if (!items || index >= items.length) {
+					return;
 				}
 
+				var item = items[index];
+				if (!hasValue(item.product_id) || !hasValue(item.quantity)) {
+					appendPrefillItem(items, index + 1);
+					return;
+				}
+
+				setTimeout(function() {
+					var row_count = parseInt($('#row_count').val()) || 0;
+
+					$.ajax({
+						method: 'POST',
+						url: '/purchases/get_purchase_entry_row',
+						dataType: 'html',
+						data: {
+							product_id: item.product_id,
+							variation_id: hasValue(item.variation_id) ? item.variation_id : '0',
+							row_count: row_count,
+							is_purchase_order: true
+						},
+						success: function(response) {
+							append_purchase_lines(response, row_count);
+
+							var $quantityField = $('#purchase_entry_table tbody tr:last').find('.purchase_quantity');
+							if ($quantityField.length) {
+								$quantityField.val(item.quantity).trigger('change');
+							}
+
+							$('#search_product').val('');
+							appendPrefillItem(items, index + 1);
+						},
+						error: function(xhr, status, error) {
+							console.error('Error fetching purchase entry row:', error);
+							appendPrefillItem(items, index + 1);
+						}
+					});
+				}, 300);
+			}
+
+			if (prefillData && Array.isArray(prefillData.items) && prefillData.items.length > 0) {
+				appendPrefillItem(prefillData.items, 0);
+			} else if (prefillData && prefillData.supplier_id) {
 				if (hasValue(prefillData.supplier_id) && hasValue(prefillData.supplier_name)) {
 					var newOption = new Option(prefillData.supplier_name, prefillData.supplier_id, true, true);
 					$('#supplier_id').append(newOption).trigger('change');

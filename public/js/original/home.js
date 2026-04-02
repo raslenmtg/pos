@@ -17,12 +17,12 @@ $(document).ready(function() {
 
     $('#dashboard_location').change( function(e) {
         var start = $('#dashboard_date_filter')
-                    .data('daterangepicker')
-                    .startDate.format('YYYY-MM-DD');
+            .data('daterangepicker')
+            .startDate.format('YYYY-MM-DD');
 
         var end = $('#dashboard_date_filter')
-                    .data('daterangepicker')
-                    .endDate.format('YYYY-MM-DD');
+            .data('daterangepicker')
+            .endDate.format('YYYY-MM-DD');
 
         update_statistics(start, end);
     });
@@ -116,10 +116,8 @@ $(document).ready(function() {
                 data: { items: items },
                 success: function(res) {
                     if (res.success) {
-                        toastr.success(res.msg);
-                        setTimeout(function() {
-                            location.reload();
-                        }, 1500);
+                        if (res.redirect_url)
+                            window.location.href = res.redirect_url;
                     } else {
                         toastr.error(res.msg);
                     }
@@ -241,7 +239,7 @@ $(document).ready(function() {
                 { data: 'name', name: 'contacts.name'},
                 { data: 'business_location', name: 'bl.name'},
                 { data: 'action', name: 'action'}
-            ]            
+            ]
         });
     }
 });
@@ -287,18 +285,18 @@ function update_statistics(start, end) {
             $('.total_prp').html(__currency_trans_from_en(data.total_purchase_return_paid, true));
             $('.net').html(__currency_trans_from_en(data.net, true));
 
-            // assign tooltip total_sell_return 
+            // assign tooltip total_sell_return
             var lang = $('#total_srp').data('value');
             var splitlang = lang.split('-');
-            
+
             var newContent = "<p class='mb-0 text-muted fs-10 mt-5'>" + splitlang[0] + ": <span class=''>" + __currency_trans_from_en(data.total_sell_return, true) + "</span><br>" + splitlang[1] + ": <span class=''>" + __currency_trans_from_en(data.total_sell_return_paid, true) + "</span></p>";
             $('#total_srp').attr('data-content', newContent)
-            // assign tooltip total_purchase_return 
+            // assign tooltip total_purchase_return
             var lang = $('#total_prp').data('value');
             var splitlang = lang.split('-');
-            
+
             var newContent = "<p class='mb-0 text-muted fs-10 mt-5'>" + splitlang[0] + ": <span class=''>" + __currency_trans_from_en(data.total_purchase_return, true) + "</span><br>" + splitlang[1] + ": <span class=''>" + __currency_trans_from_en(data.total_purchase_return_paid, true) + "</span></p>";
-            
+
             $('#total_prp').attr('data-content', newContent);
 
         },

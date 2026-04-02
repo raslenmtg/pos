@@ -44,7 +44,7 @@ return [
     'order' => 'Commander',
     'no_supplier' => 'Aucun Fournisseur',
     'no_low_stock_products' => 'Aucune alerte',
-    'showing_low_stock_products' => 'Affichage des produits en rupture de stock dans les 7 prochains jours',
+    'showing_low_stock_products' => 'Affichage des produits en rupture de stock dans les 15 prochains jours',
     'view_all_products' => 'Voir Tous les Produits',
     'days' => 'jours',
     'bulk_order' => 'Commander',

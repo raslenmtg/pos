@@ -1,1 +1,304 @@
-function update_statistics(a,t){var e="";$("#dashboard_location").length>0&&(e=$("#dashboard_location").val());var r={start:a,end:t,location_id:e},n='<i class="fas fa-sync fa-spin fa-fw margin-bottom"></i>';$(".total_purchase").html(n),$(".purchase_due").html(n),$(".total_sell").html(n),$(".invoice_due").html(n),$(".total_expense").html(n),$(".total_purchase_return").html(n),$(".total_sell_return").html(n),$(".net").html(n),$.ajax({method:"get",url:"/home/get-totals",dataType:"json",data:r,success:function(a){$(".total_purchase").html(__currency_trans_from_en(a.total_purchase,!0)),$(".purchase_due").html(__currency_trans_from_en(a.purchase_due,!0)),$(".total_sell").html(__currency_trans_from_en(a.total_sell,!0)),$(".invoice_due").html(__currency_trans_from_en(a.invoice_due,!0)),$(".total_expense").html(__currency_trans_from_en(a.total_expense,!0));var t=a.total_purchase_return-a.total_purchase_return_paid;$(".total_purchase_return").html(__currency_trans_from_en(t,!0));var e=a.total_sell_return-a.total_sell_return_paid;$(".total_sell_return").html(__currency_trans_from_en(e,!0)),$(".total_sr").html(__currency_trans_from_en(a.total_sell_return,!0)),$(".total_srp").html(__currency_trans_from_en(a.total_sell_return_paid,!0)),$(".total_pr").html(__currency_trans_from_en(a.total_purchase_return,!0)),$(".total_prp").html(__currency_trans_from_en(a.total_purchase_return_paid,!0)),$(".net").html(__currency_trans_from_en(a.net,!0));var r="<p class='mb-0 text-muted fs-10 mt-5'>"+(n=$("#total_srp").data("value").split("-"))[0]+": <span class=''>"+__currency_trans_from_en(a.total_sell_return,!0)+"</span><br>"+n[1]+": <span class=''>"+__currency_trans_from_en(a.total_sell_return_paid,!0)+"</span></p>";$("#total_srp").attr("data-content",r);var n;r="<p class='mb-0 text-muted fs-10 mt-5'>"+(n=$("#total_prp").data("value").split("-"))[0]+": <span class=''>"+__currency_trans_from_en(a.total_purchase_return,!0)+"</span><br>"+n[1]+": <span class=''>"+__currency_trans_from_en(a.total_purchase_return_paid,!0)+"</span></p>";$("#total_prp").attr("data-content",r)}})}$(document).ready((function(){1==$("#dashboard_date_filter").length&&(dateRangeSettings.startDate=moment(),dateRangeSettings.endDate=moment(),$("#dashboard_date_filter").daterangepicker(dateRangeSettings,(function(a,t){$("#dashboard_date_filter span").html(a.format(moment_date_format)+" ~ "+t.format(moment_date_format)),update_statistics(a.format("YYYY-MM-DD"),t.format("YYYY-MM-DD")),$("#quotation_table").length&&$("#dashboard_location").length&&quotation_datatable.ajax.reload()})),update_statistics(moment().format("YYYY-MM-DD"),moment().format("YYYY-MM-DD"))),$("#dashboard_location").change((function(a){update_statistics($("#dashboard_date_filter").data("daterangepicker").startDate.format("YYYY-MM-DD"),$("#dashboard_date_filter").data("daterangepicker").endDate.format("YYYY-MM-DD"))}));var a=$("#stock_alert_table").DataTable({processing:!0,serverSide:!0,ordering:!1,searching:!1,scrollY:"75vh",scrollX:!0,scrollCollapse:!0,fixedHeader:!1,dom:"Btirp",ajax:{url:"/home/product-stock-alert",data:function(a){$("#stock_alert_location").length>0&&(a.location_id=$("#stock_alert_location").val())}},fnDrawCallback:function(a){__currency_convert_recursively($("#stock_alert_table"))}});if($("#stock_alert_location").change((function(){a.ajax.reload()})),$("#smart_quantity_alert_table").length){var t=$("#smart_quantity_alert_table").DataTable({processing:!0,serverSide:!1,ordering:!1,searching:!1,scrollY:"75vh",scrollX:!0,scrollCollapse:!0,fixedHeader:!1,dom:"Btirp"}),e=$("#smart-qty-select-all"),r=$("#bulk-process-btn"),n=function(){return t.rows({search:"applied"}).nodes().to$().find(".smart-qty-checkbox")},_=function(){var a=n(),t=a.filter(":checked");e.prop("checked",a.length>0&&a.length===t.length)};e.on("change",(function(){n().prop("checked",this.checked)})),$("#smart_quantity_alert_table").on("change",".smart-qty-checkbox",(function(){_()})),t.on("draw",(function(){_()})),r.on("click",(function(){var a=[];n().filter(":checked").each((function(){a.push({variation_id:$(this).data("variation-id"),quantity:$(this).data("quantity")})})),0!==a.length?$.ajax({url:r.data("url"),method:"POST",data:{items:a},success:function(a){a.success?(toastr.success(a.msg),setTimeout((function(){location.reload()}),1500)):toastr.error(a.msg)},error:function(){toastr.error(r.data("error-msg"))}}):toastr.warning(r.data("no-row-msg"))}))}purchase_payment_dues_table=$("#purchase_payment_dues_table").DataTable({processing:!0,serverSide:!0,ordering:!1,searching:!1,scrollY:"75vh",scrollX:!0,scrollCollapse:!0,fixedHeader:!1,dom:"Btirp",ajax:{url:"/home/purchase-payment-dues",data:function(a){$("#purchase_payment_dues_location").length>0&&(a.location_id=$("#purchase_payment_dues_location").val())}},fnDrawCallback:function(a){__currency_convert_recursively($("#purchase_payment_dues_table"))}}),$("#purchase_payment_dues_location").change((function(){purchase_payment_dues_table.ajax.reload()})),sales_payment_dues_table=$("#sales_payment_dues_table").DataTable({processing:!0,serverSide:!0,ordering:!1,searching:!1,scrollY:"75vh",scrollX:!0,scrollCollapse:!0,fixedHeader:!1,dom:"Btirp",ajax:{url:"/home/sales-payment-dues",data:function(a){$("#sales_payment_dues_location").length>0&&(a.location_id=$("#sales_payment_dues_location").val())}},fnDrawCallback:function(a){__currency_convert_recursively($("#sales_payment_dues_table"))}}),$("#sales_payment_dues_location").change((function(){sales_payment_dues_table.ajax.reload()})),stock_expiry_alert_table=$("#stock_expiry_alert_table").DataTable({processing:!0,serverSide:!0,searching:!1,scrollY:"75vh",scrollX:!0,scrollCollapse:!0,fixedHeader:!1,dom:"Btirp",ajax:{url:"/reports/stock-expiry",data:function(a){a.exp_date_filter=$("#stock_expiry_alert_days").val()}},order:[[3,"asc"]],columns:[{data:"product",name:"p.name"},{data:"location",name:"l.name"},{data:"stock_left",name:"stock_left"},{data:"exp_date",name:"exp_date"}],fnDrawCallback:function(a){__show_date_diff_for_human($("#stock_expiry_alert_table")),__currency_convert_recursively($("#stock_expiry_alert_table"))}}),$("#quotation_table").length&&(quotation_datatable=$("#quotation_table").DataTable({processing:!0,serverSide:!0,fixedHeader:!1,aaSorting:[[0,"desc"]],ajax:{url:"/sells/draft-dt?is_quotation=1",data:function(a){$("#dashboard_location").length>0&&(a.location_id=$("#dashboard_location").val())}},columnDefs:[{targets:4,orderable:!1,searchable:!1}],columns:[{data:"transaction_date",name:"transaction_date"},{data:"invoice_no",name:"invoice_no"},{data:"name",name:"contacts.name"},{data:"business_location",name:"bl.name"},{data:"action",name:"action"}]}))}));
+﻿$(document).ready(function() {
+    if ($('#dashboard_date_filter').length == 1) {
+        dateRangeSettings.startDate = moment();
+        dateRangeSettings.endDate = moment();
+        $('#dashboard_date_filter').daterangepicker(dateRangeSettings, function(start, end) {
+            $('#dashboard_date_filter span').html(
+                start.format(moment_date_format) + ' ~ ' + end.format(moment_date_format)
+            );
+            update_statistics(start.format('YYYY-MM-DD'), end.format('YYYY-MM-DD'));
+            if ($('#quotation_table').length && $('#dashboard_location').length) {
+                quotation_datatable.ajax.reload();
+            }
+        });
+
+        update_statistics(moment().format('YYYY-MM-DD'), moment().format('YYYY-MM-DD'));
+    }
+
+    $('#dashboard_location').change( function(e) {
+        var start = $('#dashboard_date_filter')
+            .data('daterangepicker')
+            .startDate.format('YYYY-MM-DD');
+
+        var end = $('#dashboard_date_filter')
+            .data('daterangepicker')
+            .endDate.format('YYYY-MM-DD');
+
+        update_statistics(start, end);
+    });
+
+    //atock alert datatables
+    var stock_alert_table = $('#stock_alert_table').DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        searching: false,
+        scrollY:        "75vh",
+        scrollX:        true,
+        scrollCollapse: true,
+        fixedHeader: false,
+        dom: 'Btirp',
+        ajax: {
+            "url": '/home/product-stock-alert',
+            "data": function ( d ) {
+                if ($('#stock_alert_location').length > 0) {
+                    d.location_id = $('#stock_alert_location').val();
+                }
+            }
+        },
+        fnDrawCallback: function(oSettings) {
+            __currency_convert_recursively($('#stock_alert_table'));
+        },
+    });
+
+    $('#stock_alert_location').change( function(){
+        stock_alert_table.ajax.reload();
+    });
+
+
+    //smart quantity alert datatable
+    if ($('#smart_quantity_alert_table').length) {
+        var smart_quantity_alert_table = $('#smart_quantity_alert_table').DataTable({
+            processing: true,
+            serverSide: false,
+            ordering: false,
+            searching: false,
+            scrollY: "75vh",
+            scrollX: true,
+            scrollCollapse: true,
+            fixedHeader: false,
+            dom: 'Btirp'
+        });
+
+        var $smart_select_all = $('#smart-qty-select-all');
+        var $bulk_process_btn = $('#bulk-process-btn');
+
+        var get_smart_qty_checkboxes = function() {
+            return smart_quantity_alert_table.rows({ search: 'applied' }).nodes().to$().find('.smart-qty-checkbox');
+        };
+
+        var update_smart_qty_select_all = function() {
+            var $all = get_smart_qty_checkboxes();
+            var $checked = $all.filter(':checked');
+            $smart_select_all.prop('checked', $all.length > 0 && $all.length === $checked.length);
+        };
+
+        $smart_select_all.on('change', function() {
+            get_smart_qty_checkboxes().prop('checked', this.checked);
+        });
+
+        $('#smart_quantity_alert_table').on('change', '.smart-qty-checkbox', function() {
+            update_smart_qty_select_all();
+        });
+
+        smart_quantity_alert_table.on('draw', function() {
+            update_smart_qty_select_all();
+        });
+
+        $bulk_process_btn.on('click', function() {
+            var items = [];
+
+            get_smart_qty_checkboxes().filter(':checked').each(function() {
+                items.push({
+                    variation_id: $(this).data('variation-id'),
+                    quantity: $(this).data('quantity')
+                });
+            });
+
+            if (items.length === 0) {
+                toastr.warning($bulk_process_btn.data('no-row-msg'));
+                return;
+            }
+
+            $.ajax({
+                url: $bulk_process_btn.data('url'),
+                method: 'POST',
+                data: { items: items },
+                success: function(res) {
+                    if (res.success) {
+                        if (res.redirect_url)
+                            window.location.href = res.redirect_url;
+                    } else {
+                        toastr.error(res.msg);
+                    }
+                },
+                error: function() {
+                    toastr.error($bulk_process_btn.data('error-msg'));
+                }
+            });
+        });
+    }
+
+    //payment dues datatables
+    purchase_payment_dues_table = $('#purchase_payment_dues_table').DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        searching: false,
+        scrollY:        "75vh",
+        scrollX:        true,
+        scrollCollapse: true,
+        fixedHeader: false,
+        dom: 'Btirp',
+        ajax: {
+            "url": '/home/purchase-payment-dues',
+            "data": function ( d ) {
+                if ($('#purchase_payment_dues_location').length > 0) {
+                    d.location_id = $('#purchase_payment_dues_location').val();
+                }
+            }
+        },
+        fnDrawCallback: function(oSettings) {
+            __currency_convert_recursively($('#purchase_payment_dues_table'));
+        },
+    });
+
+    $('#purchase_payment_dues_location').change( function(){
+        purchase_payment_dues_table.ajax.reload();
+    });
+
+    //Sales dues datatables
+    sales_payment_dues_table = $('#sales_payment_dues_table').DataTable({
+        processing: true,
+        serverSide: true,
+        ordering: false,
+        searching: false,
+        scrollY:        "75vh",
+        scrollX:        true,
+        scrollCollapse: true,
+        fixedHeader: false,
+        dom: 'Btirp',
+        ajax: {
+            "url": '/home/sales-payment-dues',
+            "data": function ( d ) {
+                if ($('#sales_payment_dues_location').length > 0) {
+                    d.location_id = $('#sales_payment_dues_location').val();
+                }
+            }
+        },
+        fnDrawCallback: function(oSettings) {
+            __currency_convert_recursively($('#sales_payment_dues_table'));
+        },
+    });
+
+    $('#sales_payment_dues_location').change( function(){
+        sales_payment_dues_table.ajax.reload();
+    });
+
+    //Stock expiry report table
+    stock_expiry_alert_table = $('#stock_expiry_alert_table').DataTable({
+        processing: true,
+        serverSide: true,
+        searching: false,
+        scrollY:        "75vh",
+        scrollX:        true,
+        scrollCollapse: true,
+        fixedHeader: false,
+        dom: 'Btirp',
+        ajax: {
+            url: '/reports/stock-expiry',
+            data: function(d) {
+                d.exp_date_filter = $('#stock_expiry_alert_days').val();
+            },
+        },
+        order: [[3, 'asc']],
+        columns: [
+            { data: 'product', name: 'p.name' },
+            { data: 'location', name: 'l.name' },
+            { data: 'stock_left', name: 'stock_left' },
+            { data: 'exp_date', name: 'exp_date' },
+        ],
+        fnDrawCallback: function(oSettings) {
+            __show_date_diff_for_human($('#stock_expiry_alert_table'));
+            __currency_convert_recursively($('#stock_expiry_alert_table'));
+        },
+    });
+
+    if ($('#quotation_table').length) {
+        quotation_datatable = $('#quotation_table').DataTable({
+            processing: true,
+            serverSide: true,
+            fixedHeader:false,
+            aaSorting: [[0, 'desc']],
+            "ajax": {
+                "url": '/sells/draft-dt?is_quotation=1',
+                "data": function ( d ) {
+                    if ($('#dashboard_location').length > 0) {
+                        d.location_id = $('#dashboard_location').val();
+                    }
+                }
+            },
+            columnDefs: [ {
+                "targets": 4,
+                "orderable": false,
+                "searchable": false
+            } ],
+            columns: [
+                { data: 'transaction_date', name: 'transaction_date'  },
+                { data: 'invoice_no', name: 'invoice_no'},
+                { data: 'name', name: 'contacts.name'},
+                { data: 'business_location', name: 'bl.name'},
+                { data: 'action', name: 'action'}
+            ]
+        });
+    }
+});
+
+function update_statistics(start, end) {
+    var location_id = '';
+    if ($('#dashboard_location').length > 0) {
+        location_id = $('#dashboard_location').val();
+    }
+    var data = { start: start, end: end, location_id: location_id };
+    //get purchase details
+    var loader = '<i class="fas fa-sync fa-spin fa-fw margin-bottom"></i>';
+    $('.total_purchase').html(loader);
+    $('.purchase_due').html(loader);
+    $('.total_sell').html(loader);
+    $('.invoice_due').html(loader);
+    $('.total_expense').html(loader);
+    $('.total_purchase_return').html(loader);
+    $('.total_sell_return').html(loader);
+    $('.net').html(loader);
+    $.ajax({
+        method: 'get',
+        url: '/home/get-totals',
+        dataType: 'json',
+        data: data,
+        success: function(data) {
+            //purchase details
+            $('.total_purchase').html(__currency_trans_from_en(data.total_purchase, true));
+            $('.purchase_due').html(__currency_trans_from_en(data.purchase_due, true));
+
+            //sell details
+            $('.total_sell').html(__currency_trans_from_en(data.total_sell, true));
+            $('.invoice_due').html(__currency_trans_from_en(data.invoice_due, true));
+            //expense details
+            $('.total_expense').html(__currency_trans_from_en(data.total_expense, true));
+            var total_purchase_return = data.total_purchase_return - data.total_purchase_return_paid;
+            $('.total_purchase_return').html(__currency_trans_from_en(total_purchase_return, true));
+            var total_sell_return_due = data.total_sell_return - data.total_sell_return_paid;
+            $('.total_sell_return').html(__currency_trans_from_en(total_sell_return_due, true));
+            $('.total_sr').html(__currency_trans_from_en(data.total_sell_return, true));
+            $('.total_srp').html(__currency_trans_from_en(data.total_sell_return_paid, true));
+            $('.total_pr').html(__currency_trans_from_en(data.total_purchase_return, true));
+            $('.total_prp').html(__currency_trans_from_en(data.total_purchase_return_paid, true));
+            $('.net').html(__currency_trans_from_en(data.net, true));
+
+            // assign tooltip total_sell_return 
+            var lang = $('#total_srp').data('value');
+            var splitlang = lang.split('-');
+
+            var newContent = "<p class='mb-0 text-muted fs-10 mt-5'>" + splitlang[0] + ": <span class=''>" + __currency_trans_from_en(data.total_sell_return, true) + "</span><br>" + splitlang[1] + ": <span class=''>" + __currency_trans_from_en(data.total_sell_return_paid, true) + "</span></p>";
+            $('#total_srp').attr('data-content', newContent)
+            // assign tooltip total_purchase_return 
+            var lang = $('#total_prp').data('value');
+            var splitlang = lang.split('-');
+
+            var newContent = "<p class='mb-0 text-muted fs-10 mt-5'>" + splitlang[0] + ": <span class=''>" + __currency_trans_from_en(data.total_purchase_return, true) + "</span><br>" + splitlang[1] + ": <span class=''>" + __currency_trans_from_en(data.total_purchase_return_paid, true) + "</span></p>";
+
+            $('#total_prp').attr('data-content', newContent);
+
+        },
+    });
+}

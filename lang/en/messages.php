@@ -57,7 +57,7 @@ return [
     'order' => 'Order',
     'no_supplier' => 'No Supplier',
     'no_low_stock_products' => 'No low stock alerts',
-    'showing_low_stock_products' => 'Showing products with stock running out in next 7 days',
+    'showing_low_stock_products' => 'Showing products with stock running out in next 15 days',
     'view_all_products' => 'View All Products',
     'days' => 'days',
     'bulk_order' => 'Order',

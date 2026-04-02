@@ -283,12 +283,15 @@ class PurchaseOrderController extends Controller
 
         $common_settings = ! empty(session('business.common_settings')) ? session('business.common_settings') : [];
 
+        $prefill_items = request()->session()->pull('smart_quantity_prefill_items', []);
+
         // Handle prefill parameters
         $prefill_data = [
             'supplier_id' => request()->input('supplier_id'),
             'product_id' => request()->input('product_id'),
             'variation_id' => request()->input('variation_id'),
             'quantity' => request()->input('quantity') ?: request()->input('reorder_qty'),
+            'items' => $prefill_items,
         ];
 
         // If variation_id is present but product_id is not, find product_id
