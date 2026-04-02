@@ -269,7 +269,8 @@ class SmartQuantityService
 
         foreach ($day_patterns as $day => $pattern) {
             $zero_percentage = $pattern['zeros'] / $pattern['count'];
-            $avg_when_open = $pattern['total'] / ($pattern['count'] - $pattern['zeros']);
+            $open_count = $pattern['count'] - $pattern['zeros'];
+            $avg_when_open = $open_count > 0 ? $pattern['total'] / $open_count : 0;
 
             if ($zero_percentage >= 0.8) {
                 $closed_days[] = $day;
