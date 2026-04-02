@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Routing\AbstractRouteCollection;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -46,27 +47,12 @@ class Handler extends ExceptionHandler
     {
         \Log::error('Global Exception - File: ' . $exception->getFile() . ' Line: ' . $exception->getLine() . ' Message: ' . $exception->getMessage());
 
-        // Log additional details for validation exceptions
-        if ($exception instanceof \Illuminate\Validation\ValidationException) {
-            \Log::error('Validation Exception Details: ', [
-                'errors' => $exception->errors(),
-                'input' => request()->except(['password', 'password_confirmation']),
-                'url' => request()->fullUrl(),
-                'method' => request()->method(),
-                'user_agent' => request()->userAgent(),
-                'ip' => request()->ip()
-            ]);
-        }
-
         // Always send every exception to Sentry explicitly so that exceptions
         // suppressed by Laravel's internal $internalDontReport list
         // (e.g. ValidationException, AuthenticationException, 404s) are still
         // captured when desired, and so that EMERGENCY-logged exceptions that
         // are caught inside controllers also reach Sentry.
-        if (app()->environment('production') &&
-            !($exception instanceof \Symfony\Component\Routing\Exception\RouteNotFoundException) &&
-            !($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException)
-        ) {
+        if (app()->environment('production') && $this->shouldReport($exception)) {
             app('sentry')->captureException($exception);
         }
 
