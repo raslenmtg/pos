@@ -2020,7 +2020,10 @@ class ProductUtil extends Util
         if ($purchase_details->type == 'variable') {
             $product_name = $purchase_details->product.' - '.$purchase_details->product_variation.' - '.$purchase_details->variation_name.' ('.$purchase_details->sub_sku.')';
         } else {
-            $product_name = $purchase_details->product.' ('.$purchase_details->sku.')';
+            if(empty($purchase_details->product)&&empty($purchase_details->sku))
+                $product_name=null;
+            else
+                $product_name = $purchase_details->product.' ('.$purchase_details->sku.')';
         }
 
         $output = [
