@@ -55,7 +55,6 @@
                     id="purchase_payment_report_table">
                         <thead>
                             <tr>
-                                <th>&nbsp;</th>
                                 <th>@lang('purchase.ref_no')</th>
                                 <th>@lang('lang_v1.paid_on')</th>
                                 <th>@lang('sale.amount')</th>
@@ -67,7 +66,7 @@
                         </thead>
                         <tfoot>
                             <tr class="bg-gray font-17 footer-total text-center">
-                                <td colspan="3"><strong>@lang('sale.total'):</strong></td>
+                                <td colspan="2"><strong>@lang('sale.total'):</strong></td>
                                 <td><span class="display_currency" id="footer_total_amount" data-currency_symbol ="true"></span></td>
                                 <td colspan="4"></td>
                             </tr>

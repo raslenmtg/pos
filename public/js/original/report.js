@@ -1145,7 +1145,7 @@ $(document).ready(function() {
         processing: true,
         serverSide: true,
         fixedHeader:false,
-        aaSorting: [[2, 'desc']],
+        aaSorting: [[1, 'desc']],
         ajax: {
             url: '/reports/purchase-payment-report',
             data: function(d) {
@@ -1166,12 +1166,6 @@ $(document).ready(function() {
             },
         },
         columns: [
-            {
-                orderable: false,
-                searchable: false,
-                data: null,
-                defaultContent: '',
-            },
             { data: 'payment_ref_no', name: 'payment_ref_no' },
             { data: 'paid_on', name: 'paid_on' },
             { data: 'amount', name: 'transaction_payments.amount' },
@@ -1184,47 +1178,7 @@ $(document).ready(function() {
             var total_amount = sum_table_col($('#purchase_payment_report_table'), 'paid-amount');
             $('#footer_total_amount').text(total_amount);
             __currency_convert_recursively($('#purchase_payment_report_table'));
-        },
-        createdRow: function(row, data, dataIndex) {
-            if (!data.transaction_id) {
-                $(row)
-                    .find('td:eq(0)')
-                    .addClass('details-control');
-            }
-        },
-    });
-
-    // Array to track the ids of the details displayed rows
-    var ppr_detail_rows = [];
-
-    $('#purchase_payment_report_table tbody').on('click', 'tr td.details-control', function() {
-        var tr = $(this).closest('tr');
-        var row = purchase_payment_report.row(tr);
-        var idx = $.inArray(tr.attr('id'), ppr_detail_rows);
-
-        if (row.child.isShown()) {
-            tr.removeClass('details');
-            row.child.hide();
-
-            // Remove from the 'open' array
-            ppr_detail_rows.splice(idx, 1);
-        } else {
-            tr.addClass('details');
-
-            row.child(show_child_payments(row.data())).show();
-
-            // Add to the 'open' array
-            if (idx === -1) {
-                ppr_detail_rows.push(tr.attr('id'));
-            }
         }
-    });
-
-    // On each draw, loop over the `detailRows` array and show any child rows
-    purchase_payment_report.on('draw', function() {
-        $.each(ppr_detail_rows, function(i, id) {
-            $('#' + id + ' td.details-control').trigger('click');
-        });
     });
 
     if ($('#ppr_date_filter').length == 1) {
