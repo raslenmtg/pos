@@ -2403,11 +2403,11 @@ class ReportController extends Controller
                     if ($row->method == 'cheque') {
                         $method .= '<br>('.__('lang_v1.cheque_no').': '.$row->cheque_number.')';
                     } elseif ($row->method == 'card') {
-                        $method .= '<br>(: '.$row->card_transaction_number.')';
+                        $method .= '<br>( '.$row->card_transaction_number.')';
                     } elseif ($row->method == 'bank_transfer') {
                         $method .= '<br>('.__('lang_v1.bank_account_no').': '.$row->bank_account_number.')';
                     } elseif ($row->method == 'custom_pay_1') {
-                        $method .= '<br>(: '.$row->transaction_no.')';
+                        $method .= '<br>( '.$row->transaction_no.')';
                     } elseif ($row->method == 'custom_pay_2') {
                         $method .= '<br>('.__('lang_v1.transaction_no').': '.$row->transaction_no.')';
                     } elseif ($row->method == 'custom_pay_3') {

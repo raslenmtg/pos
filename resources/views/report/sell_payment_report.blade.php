@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        {!! Form::label('payment_types', __('lang_v1.payment_method').':') !!}
+                        {!! Form::label('payment_types', __('cash_receipt.payment_method').':') !!}
                         <div class="input-group">
                             <span class="input-group-addon">
                                 <i class="fas fa-money-bill-alt"></i>
@@ -78,12 +78,12 @@
                         <thead>
                             <tr>
                                 <th>@lang('purchase.ref_no')</th>
-                                <th>@lang('lang_v1.payment_date')</th>
+                                <th>@lang('cash_receipt.payment_date')</th>
                                 <th>@lang('sale.amount')</th>
                                 <th>@lang('contact.customer')</th>
                                 <th>@lang('lang_v1.contact_id')</th>
                                 <th>@lang('lang_v1.customer_group')</th>
-                                <th>@lang('lang_v1.payment_method')</th>
+                                <th>@lang('cash_receipt.payment_method')</th>
                                 <th>@lang('sale.invoice_no')</th>
                                 <th>@lang('messages.action')</th>
                             </tr>

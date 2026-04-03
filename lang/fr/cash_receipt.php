@@ -1,0 +1,31 @@
+<?php
+
+return [
+    'payment' => 'Encaissement',
+    'payment_account' => 'Compte d\'encaissement',
+    'payment_account_deleted_success' => 'Compte d\'encaissement supprimé avec succès',
+    'payment_account_success' => 'Le compte d\'encaissement a bien été ajouté',
+    'payment_account_updated_success' => 'Compte d\'encaissement mis à jour avec succès',
+    'payment_accounts' => 'Comptes d\'encaissement',
+    'payment_date' => 'Date d\'encaissement',
+    'payment_deleted' => 'Encaissement supprimé',
+    'payment_details' => 'Détails de l\'encaissement',
+    'payment_edited' => 'Encaissement modifié',
+    'payment_for_invoice_no' => 'Encaissement pour la facture n°',
+    'payment_gateway' => 'Passerelle d\'encaissement en ligne',
+    'payment_link' => 'Lien d\'encaissement',
+    'payment_link_help_text' => 'En permettant aux utilisateurs de régler la facture via le lien d\'encaissement',
+    'payment_method' => 'Mode d\'encaissement',
+    'payment_note' => 'Note d\'encaissement',
+    'payment_option_help' => 'Activer ou désactiver les méthodes d\'encaissement pour cet emplacement',
+    'payment_options' => 'Options d\'encaissement',
+    'payment_paid' => 'Montant encaissé',
+    'payment_paid_notification' => 'Notification de montant encaissé',
+    'payment_received' => 'Encaissement reçu',
+    'payment_received_notification' => 'Envoyer la notification d\'encaissement reçu',
+    'payment_recovered_today' => 'Encaissements récupérés aujourd\'hui',
+    'payment_reminder' => 'Rappel d\'encaissement',
+    'payment_reminder_help' => 'Si activé, une notification de rappel d\'encaissement sera automatiquement envoyée au client pour toute facture impayée',
+    'payment_type' => 'Type d\'encaissement',
+
+];
