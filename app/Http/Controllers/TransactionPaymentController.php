@@ -417,7 +417,7 @@ class TransactionPaymentController extends Controller
                 $payment_line->paid_on = \Carbon::now()->toDateTimeString();
 
                 //Accounts
-                $accounts = $this->moduleUtil->accountsDropdown($business_id, true, false, true);
+                $accounts =$this->moduleUtil->isModuleEnabled('account')? $this->moduleUtil->accountsDropdown($business_id, true, false, true):[];
 
                 $view = view('transaction_payment.payment_row')
                 ->with(compact('transaction', 'payment_types', 'payment_line', 'amount_formated', 'accounts'))->render();
