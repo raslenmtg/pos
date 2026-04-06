@@ -208,6 +208,17 @@ class AdminSidebarMenu
                             );
                         }
 
+                        if (
+                            in_array('stock_adjustment', (array) session('business.enabled_modules')) &&
+                            (auth()->user()->can('purchase.view') || auth()->user()->can('purchase.create') || auth()->user()->can('view_own_purchase'))
+                        ) {
+                            $sub->url(
+                                action([\App\Http\Controllers\InventaireController::class, 'index']),
+                                __('inventaire.inventaire'),
+                                ['icon' => '', 'active' => request()->segment(1) == 'inventaire']
+                            );
+                        }
+
                         $sub->url(
                             action([\App\Http\Controllers\WarrantyController::class, 'index']),
                             __('lang_v1.warranties'),

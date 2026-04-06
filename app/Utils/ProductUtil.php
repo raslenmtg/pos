@@ -2140,7 +2140,7 @@ class ProductUtil extends Util
                     'quantity_change' => $quantity_change,
                     'stock' => $this->roundQuantity($stock),
                     'type' => 'stock_adjustment',
-                    'type_label' => __('stock_adjustment.stock_adjustment'),
+                    'type_label' => __('stock_adjustment.adjustment'),
                     'ref_no' => $stock_line->ref_no,
                     'stock_in_second_unit' => $this->roundQuantity($stock_in_second_unit),
                 ]);

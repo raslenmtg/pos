@@ -22,6 +22,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ImportOpeningStockController;
 use App\Http\Controllers\ImportProductsController;
 use App\Http\Controllers\ImportSalesController;
+use App\Http\Controllers\InventaireController;
 use App\Http\Controllers\InvoiceLayoutController;
 use App\Http\Controllers\InvoiceSchemeController;
 use App\Http\Controllers\LabelsController;
@@ -351,6 +352,11 @@ Route::middleware([ 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'C
     Route::get('/stock-adjustments/remove-expired-stock/{purchase_line_id}', [StockAdjustmentController::class, 'removeExpiredStock']);
     Route::post('/stock-adjustments/get_product_row', [StockAdjustmentController::class, 'getProductRow']);
     Route::resource('stock-adjustments', StockAdjustmentController::class);
+    Route::post('/inventaire/get_product_row', [InventaireController::class, 'getProductRow'])->name('inventaire.get_product_row');
+    Route::post('/inventaire/get_products_by_category', [InventaireController::class, 'getProductsByCategory'])->name('inventaire.get_products_by_category');
+    Route::post('/inventaire/export/excel', [InventaireController::class, 'exportExcel'])->name('inventaire.export_excel');
+    Route::post('/inventaire/export/pdf', [InventaireController::class, 'exportPdf'])->name('inventaire.export_pdf');
+    Route::resource('inventaire', InventaireController::class);
 
     Route::get('/cash-register/register-details', [CashRegisterController::class, 'getRegisterDetails']);
     Route::get('/cash-register/close-register/{id?}', [CashRegisterController::class, 'getCloseRegister']);
