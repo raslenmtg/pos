@@ -6,13 +6,38 @@ use Illuminate\Database\Eloquent\Model;
 
 class Inventory extends Model
 {
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'inventories';
 
     /**
-     * The attributes that aren't mass assignable.
+     * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'business_id',
+        'location_id',
+        'ref_no',
+        'inventory_date',
+        'notes',
+        'status',
+        'stock_adjustment_transaction_id',
+        'created_by',
+        'updated_by',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'inventory_date' => 'datetime',
+    ];
 
     public function lines()
     {

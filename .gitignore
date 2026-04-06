@@ -13,7 +13,7 @@ public/uploads/temp/*
 storage/logs/*
 public/uploads/*
 storage/logs/laravel.log
-
+.phpunit.result.cache
 .claude/settings.local.json
 composer.lock
 storage/framework/cache/data/*
