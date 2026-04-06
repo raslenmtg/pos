@@ -3,7 +3,7 @@
 
     {!! Form::open(['url' => action([\App\Http\Controllers\TransactionPaymentController::class, 'postPayContactDue']), 'method' => 'post', 'id' => 'pay_contact_due_form', 'files' => true ]) !!}
 
-    {!! Form::hidden("contact_id", $contact_details->contact_id); !!}
+    {!! Form::hidden("contact_id", $contact_id); !!}
     {!! Form::hidden("due_payment_type", $due_payment_type); !!}
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -11,7 +11,7 @@
     </div>
 
     <div class="modal-body">
-      <div class="row">
+     {{-- <div class="row">
         @if($due_payment_type == 'purchase')
         <div class="col-md-6">
           <div class="well">
@@ -110,7 +110,7 @@
                     </div>
                 </div>
             </div>
-        @endif
+        @endif--}}
       <div class="row payment_row">
         <div class="col-md-4">
           <div class="form-group">
@@ -149,11 +149,11 @@
             </div>
           </div>
         </div>
-        @php
+    {{--    @php
             $pos_settings = !empty(session()->get('business.pos_settings')) ? json_decode(session()->get('business.pos_settings'), true) : [];
 
             $enable_cash_denomination_for_payment_methods = !empty($pos_settings['enable_cash_denomination_for_payment_methods']) ? $pos_settings['enable_cash_denomination_for_payment_methods'] : [];
-        @endphp
+        @endphp--}}
 
      
 
