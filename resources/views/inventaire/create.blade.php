@@ -41,6 +41,9 @@
                 </div>
             </div>
         </div>
+        <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm tw-w-full tw-mt-2" id="add_all_products">
+            <i class="fa fa-list"></i> @lang('inventaire.add_all_products')
+        </button>
     @endcomponent
 
     @component('components.widget', ['class' => 'box-solid'])
@@ -62,9 +65,6 @@
                     <label>&nbsp;</label>
                     <button type="button" class="tw-dw-btn tw-dw-btn-warning tw-text-white tw-dw-btn-sm tw-w-full" id="add_category_products">
                         <i class="fa fa-plus"></i> @lang('inventaire.add_category_products')
-                    </button>
-                    <button type="button" class="tw-dw-btn tw-dw-btn-primary tw-text-white tw-dw-btn-sm tw-w-full tw-mt-2" id="add_all_products">
-                        <i class="fa fa-list"></i> @lang('inventaire.add_all_products')
                     </button>
                 </div>
             </div>
