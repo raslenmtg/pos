@@ -69,13 +69,13 @@ function refresh_inventaire_table() {
     inventaire_table.ajax
         .url(
             '/inventaire?location_id=' +
-                (location_id || '') +
-                '&product_id=' +
-                (product_id || '') +
-                '&start_date=' +
-                start +
-                '&end_date=' +
-                end
+            (location_id || '') +
+            '&product_id=' +
+            (product_id || '') +
+            '&start_date=' +
+            start +
+            '&end_date=' +
+            end
         )
         .load();
 }
@@ -87,7 +87,7 @@ $(document).ready(function() {
                 source: function(request, response) {
                     $.getJSON(
                         '/products/list',
-                        { location_id: $('#location_id').val(), term: request.term, check_qty: false },
+                        { location_id: $('#location_id').val(), term: request.term, check_qty: false, 'search_fields[]': ['name', 'sku'] },
                         response
                     );
                 },
@@ -294,10 +294,10 @@ $(document).ready(function() {
                 $('#inventaire_date_filter')
                     .data('daterangepicker')
                     .startDate.format(moment_date_format) +
-                    ' ~ ' +
-                    $('#inventaire_date_filter')
-                        .data('daterangepicker')
-                        .endDate.format(moment_date_format)
+                ' ~ ' +
+                $('#inventaire_date_filter')
+                    .data('daterangepicker')
+                    .endDate.format(moment_date_format)
             );
         }
 
