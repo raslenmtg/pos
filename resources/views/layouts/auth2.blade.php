@@ -17,7 +17,7 @@
 
     @include('layouts.partials.extracss_auth')
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code
     <script>
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -33,7 +33,7 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=768128085832071&ev=PageView&noscript=1"
     /></noscript>
-    <!-- End Meta Pixel Code -->
+     End Meta Pixel Code -->
 
 
 </head>

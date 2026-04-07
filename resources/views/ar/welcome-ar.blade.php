@@ -78,7 +78,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 
-    <!-- Meta Pixel Code -->
+    <!-- Meta Pixel Code
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -93,12 +93,9 @@
         // Track landing page visit - Standard Event
         fbq('track', 'ViewContent');
 
-
     </script>
-    <noscript><img height="1" width="1" style="display:none"
-                   src="https://www.facebook.com/tr?id=768128085832071&ev=PageView&noscript=1"
-        /></noscript>
-    <!-- End Meta Pixel Code -->
+
+   End Meta Pixel Code -->
 
     <!-- JSON-LD Structured Data - Organization -->
     <script type="application/ld+json">
