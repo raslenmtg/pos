@@ -1204,7 +1204,7 @@
 
 
                         <div class="d-grid gap-3">
-                            <a href="https://wa.me/21624327623?text=Bonjour%20Simplex,%20je%20souhaite%20une%20démonstration%20pour%20mon%20projet." class="btn btn-primary btn-lg fw-bold">
+                            <a href="https://wa.me/21693796501?text=Bonjour%20Simplex,%20je%20souhaite%20une%20démonstration%20pour%20mon%20projet." class="btn btn-primary btn-lg fw-bold">
                                 <i class='bx bxl-whatsapp me-2'></i>احجز ديمو متاعك
                             </a>
                         </div>
@@ -1284,7 +1284,7 @@
         </div>
     </div>
 </section>
-<a href="https://wa.me/21624327623" class="whatsapp-float" target="_blank" title="Contactez-nous sur WhatsApp">
+<a href="https://wa.me/21693796501" class="whatsapp-float" target="_blank" title="Contactez-nous sur WhatsApp">
     <i class='bx bxl-whatsapp'></i>
 </a>
 <footer class="bg-dark text-white pt-5 pb-3">
@@ -1315,7 +1315,7 @@
             <div class="col-lg-4 mb-4">
                 <h5 class="fw-bold mb-3">اتصل بنا</h5>
                 <ul class="list-unstyled text-secondary p-0" style="direction: ltr">
-                    <li class="mb-3 d-flex align-items-center"><i class='bx bx-phone me-2 text-primary'></i> +216 24 327 623</li>
+                    <li class="mb-3 d-flex align-items-center"><i class='bx bx-phone me-2 text-primary'></i> +216 93 796 501</li>
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-envelope me-2 text-primary'></i> contact@simplexgestion.tn</li>
                 </ul>
             </div>

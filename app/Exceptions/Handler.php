@@ -52,7 +52,8 @@ class Handler extends ExceptionHandler
         // (e.g. ValidationException, AuthenticationException, 404s) are still
         // captured when desired, and so that EMERGENCY-logged exceptions that
         // are caught inside controllers also reach Sentry.
-        if (app()->environment('production') && $this->shouldReport($exception)) {
+       // if (app()->environment('production') && $this->shouldReport($exception)) {
+        if (app()->environment('production')) {
             app('sentry')->captureException($exception);
         }
 
