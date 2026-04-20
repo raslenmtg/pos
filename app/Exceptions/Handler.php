@@ -24,7 +24,9 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<\Throwable>>
      */
     protected $dontReport = [
-        //
+        \Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class,
+        \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException::class,
+        \Symfony\Component\Routing\Exception\RouteNotFoundException::class,
     ];
 
     /**
@@ -46,17 +48,16 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $e)
     {
-        \Log::error('Global Exception - File: ' . $e->getFile() . ' Line: ' . $e->getLine() . ' Message: ' . $e->getMessage());
+        if ($this->shouldReport($e)) {
+            \Log::error('Global Exception - File: ' . $e->getFile() . ' Line: ' . $e->getLine() . ' Message: ' . $e->getMessage());
+        }
 
         // Always send every exception to Sentry explicitly so that exceptions
         // suppressed by Laravel's internal $internalDontReport list
         // (e.g. ValidationException, AuthenticationException, 404s) are still
         // captured when desired, and so that EMERGENCY-logged exceptions that
         // are caught inside controllers also reach Sentry.
-        if (app()->environment('production') && $this->shouldReport($e)
-            && !$e instanceof NotFoundHttpException
-            && !$e instanceof MethodNotAllowedHttpException
-        ) {
+        if (app()->environment('production') && $this->shouldReport($e)) {
        // if (app()->environment('production')) {
             app('sentry')->captureException($e);
         }
