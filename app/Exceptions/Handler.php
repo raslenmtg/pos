@@ -3,7 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Routing\AbstractRouteCollection;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -40,24 +41,27 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Throwable  $exception
+     * @param  \Throwable  $e
      * @return void
      */
-    public function report(Throwable $exception)
+    public function report(Throwable $e)
     {
-        \Log::error('Global Exception - File: ' . $exception->getFile() . ' Line: ' . $exception->getLine() . ' Message: ' . $exception->getMessage());
+        \Log::error('Global Exception - File: ' . $e->getFile() . ' Line: ' . $e->getLine() . ' Message: ' . $e->getMessage());
 
         // Always send every exception to Sentry explicitly so that exceptions
         // suppressed by Laravel's internal $internalDontReport list
         // (e.g. ValidationException, AuthenticationException, 404s) are still
         // captured when desired, and so that EMERGENCY-logged exceptions that
         // are caught inside controllers also reach Sentry.
-        if (app()->environment('production') && $this->shouldReport($exception)) {
+        if (app()->environment('production') && $this->shouldReport($e)
+            && !$e instanceof NotFoundHttpException
+            && !$e instanceof MethodNotAllowedHttpException
+        ) {
        // if (app()->environment('production')) {
-            app('sentry')->captureException($exception);
+            app('sentry')->captureException($e);
         }
 
-        parent::report($exception);
+        parent::report($e);
     }
 
     /**
