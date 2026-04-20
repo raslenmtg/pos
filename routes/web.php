@@ -76,6 +76,42 @@ use Illuminate\Support\Facades\Route;
     Route::get('/', function () {
         return view('welcome');
     });
+    Route::get('/cgu', function () {
+        return view('seo.cgu');
+    });
+    Route::get('/legal', function () {
+        return view('seo.legal');
+    });
+    Route::get('/faq', function () {
+        return view('seo.faq');
+    });
+    Route::get('/features', function () {
+        return view('seo.features');
+    });
+    Route::get('/compare', function () {
+        return view('seo.comparison');
+    });
+    Route::get('/affiliate', function () {
+        return view('seo.affiliate');
+    });
+    Route::get('/about', function () {
+        return view('seo.about');
+    });
+    Route::get('/contact', function () {
+        return view('seo.contact');
+    });
+    Route::get('/pricing', function () {
+        return view('seo.price');
+    });
+    Route::get('/blog', function () {
+        return view('seo.blog');
+    });
+    Route::get('/jobs', function () {
+        return view('seo.job');
+    });
+    Route::get('/privacy', function () {
+        return view('seo.privacy');
+    });
 
     Route::get('/ar', function () {
         return view('ar.welcome-ar');

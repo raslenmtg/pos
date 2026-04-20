@@ -58,9 +58,11 @@ return [
             'prefix_indexes' => true,
             'strict' => false,
             'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-            ]) : [],
+            'options' => [
+                PDO::ATTR_PERSISTENT => true,        // persistent connections = faster
+                PDO::ATTR_EMULATE_PREPARES => false, // use real prepared statements
+                PDO::ATTR_TIMEOUT => 5,              // fail fast if MySQL is down
+            ],
             //'dump' => [ 'dump_binary_path' => 'D:\laragon\bin\mysql\mysql-8.0.30-winx64\bin'] 
             // Uncomment above line for windows & provide path to mysql dump binary for backup to work
         ],

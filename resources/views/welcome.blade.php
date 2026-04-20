@@ -79,7 +79,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 
-    <!-- Meta Pixel Code
+
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -93,21 +93,25 @@
         fbq('track', 'ViewContent');
 
 
-    </script>-->
+    </script>
     <noscript><img height="1" width="1" style="display:none"
                    src="https://www.facebook.com/tr?id=768128085832071&ev=PageView&noscript=1"
         /></noscript>
     <!-- End Meta Pixel Code -->
 
-    <!-- JSON-LD Structured Data - Organization -->
+
+    <!-- JSON-LD Structured Data - LocalBusiness -->
     <script type="application/ld+json">
         {
           "@context": "https://schema.org",
+          "@graph": [
+             {
+         "@id": "https://www.simplexgestion.tn/#accueil",
           "@type": "Organization",
           "name": "Simplex Gestion",
           "url": "https://www.simplexgestion.tn",
           "logo": "https://www.simplexgestion.tn/logo.png",
-          "description": "application de gestion commerciale pour les commerces tunisiennes",
+          "description": "application de gestion commerciale pour les commerces en tunisie",
           "address": {
             "@type": "PostalAddress",
             "addressCountry": "TN",
@@ -115,7 +119,7 @@
           },
           "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+216-24-327-623",
+            "telephone": "+216-93-796-501",
             "contactType": "Customer Service",
             "areaServed": "TN",
             "availableLanguage": ["French", "Arabic"]
@@ -125,48 +129,15 @@
             "https://www.instagram.com/simplexgestion",
             "https://www.tiktok.com/@simplexgestion"
           ]
-        }
-    </script>
-
-    <!-- JSON-LD Structured Data - SoftwareApplication -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          "name": "Simplex Gestion",
-          "operatingSystem": "Web, Windows, macOS",
-          "applicationCategory": "BusinessApplication",
-          "description": "Logiciel complet pour la gestion commerciale en Tunisie - Facturation, Stock, POS, Achats",
-          "offers": {
-            "@type": "Offer",
-            "price": "3",
-            "priceCurrency": "TND",
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "price": "3",
-              "priceCurrency": "TND",
-              "unitText": "DAY"
-            }
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "250"
-          },
-          "featureList": "Facturation, Gestion Stock, Point de Vente (POS), Achats, Conformité Fiscale, Rapports"
-        }
-    </script>
-
-    <!-- JSON-LD Structured Data - LocalBusiness -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
+        },
+          {
+          "@id": "https://www.simplexgestion.tn/#legal",
           "@type": "LocalBusiness",
           "name": "Simplex Gestion",
           "image": "https://www.simplexgestion.tn/logo.png",
           "@id": "https://www.simplexgestion.tn",
           "url": "https://www.simplexgestion.tn",
-          "telephone": "+216-24-327-623",
+          "telephone": "+216-93-796-501",
           "address": {
             "@type": "PostalAddress",
             "addressCountry": "TN"
@@ -190,13 +161,35 @@
             "opens": "00:00",
             "closes": "23:59"
           }
-        }
-    </script>
+          },
+            {
+          "@id": "https://www.simplexgestion.tn/#accueil",
+          "@type": "SoftwareApplication",
+          "name": "Simplex Gestion",
+          "operatingSystem": "Web",
+          "applicationCategory": "BusinessApplication",
+           "description": "application de gestion commerciale pour les commerces en tunisie",
+          "offers": {
+            "@type": "Offer",
+            "price": "3",
+            "priceCurrency": "TND",
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "price": "3",
+              "priceCurrency": "TND",
+              "unitText": "DAY"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "250"
+          },
+          "featureList": "Facturation, Gestion Stock, Point de Vente (POS), Achats, Conformité Fiscale, Rapports"
+        },
 
-    <!-- JSON-LD Structured Data - FAQPage -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
+          {
+          "@id": "https://www.simplexgestion.tn/#faq",
           "@type": "FAQPage",
           "mainEntity": [
             {
@@ -232,24 +225,52 @@
               }
             }
           ]
-        }
-    </script>
-
-    <!-- JSON-LD Structured Data - BreadcrumbList -->
-    <script type="application/ld+json">
+        },
         {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [
+          "@type": "SiteNavigationElement",
+          "@id": "https://www.simplexgestion.tn/#nav",
+          "name": "Main Menu",
+          "hasPart": [
             {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Accueil",
-              "item": "https://www.simplexgestion.tn/"
+              "@type": "SiteNavigationElement",
+              "name": "Fonctionnalités",
+              "hasPart": [
+                { "@type": "WebPage", "name": "Gestion des Ventes", "url": "https://www.simplexgestion.tn/features/ventes" },
+                { "@type": "WebPage", "name": "Gestion de Stock", "url": "https://www.simplexgestion.tn/features/stock" },
+                { "@type": "WebPage", "name": "Achats & Dépenses", "url": "https://www.simplexgestion.tn/features/achat-et-dépenses" },
+                { "@type": "WebPage", "name": "Impôt", "url": "https://www.simplexgestion.tn/features/tax" },
+                { "@type": "WebPage", "name": "Rapports & Statistiques", "url": "https://www.simplexgestion.tn/features/rapport" }
+              ]
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "name": "Solutions",
+              "hasPart": [
+                { "@type": "WebPage", "name": "Grossistes", "url": "https://www.simplexgestion.tn/solution/grossiste" },
+                { "@type": "WebPage", "name": "Distributeurs", "url": "https://www.simplexgestion.tn/solution/distributeur" },
+                { "@type": "WebPage", "name": "Fournisseurs", "url": "https://www.simplexgestion.tn/solution/fournisseur" },
+                { "@type": "WebPage", "name": "Détaillants", "url": "https://www.simplexgestion.tn/solution/detaillant" }
+              ]
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "name": "Ressources",
+              "hasPart": [
+                { "@type": "WebPage", "name": "Blog", "url": "https://www.simplexgestion.tn/blog" },
+                { "@type": "WebPage", "name": "Comparatifs", "url": "https://www.simplexgestion.tn/compare" },
+                { "@type": "WebPage", "name": "FAQ", "url": "https://www.simplexgestion.tn/faq" }
+              ]
             }
           ]
         }
+
+
+
+
+        ]
+        }
     </script>
+
 
 
     <style>
@@ -775,7 +796,7 @@
 </head>
 <body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="100">
 
-<nav class="navbar fixed-top">
+<div class="navbar fixed-top">
     <div class="container-fluid">
         <div class="d-flex justify-content-between align-items-center w-100 py-1 py-md-3 flex-wrap">
             <div class="d-flex align-items-center order-md-2 order-1 mb-2 mb-md-0">
@@ -785,7 +806,7 @@
                     </a>
                 </span>
                 <span class="navbar-brand m-0" style="align-self: end"> Simplex<span class="text-primary">.</span></span>
-                <a href="#" class="navbar-brand">
+                <a href="/" class="navbar-brand">
                     <img src="img/logo.png" alt="Logo Simplex Gestion Tunisie - Logiciel Gestion commerciale" width="40" height="40">
                 </a>
             </div>
@@ -802,7 +823,7 @@
             </div>
         </div>
     </div>
-</nav>
+</div>
 
 
 <section class="hero-section" id="accueil">
@@ -1150,7 +1171,7 @@
     </div>
 </section>
 
-<section class="py-5" id="contact">
+<section class="py-5" id="price">
     <div class="container">
         <div class="pricing-table text-center">
             <h2 class="display-4 fw-bold mb-4">L'offre Tout-en-Un</h2>
@@ -1249,40 +1270,80 @@
             </div>
         </div>
     </div>
+    </div>
 </section>
 <a href="https://wa.me/21693796501" class="whatsapp-float" target="_blank" title="Contactez-nous sur WhatsApp">
     <i class='bx bxl-whatsapp'></i>
 </a>
 <footer class="bg-dark text-white pt-5 pb-3">
     <div class="container">
+        <h3 class="fw-bold mb-4">Simplex<span class="text-primary">Gestion</span></h3>
         <div class="row">
-            <div class="col-lg-4 mb-4">
-                <h3 class="fw-bold mb-4">Simplex<span class="text-primary">Gestion</span></h3>
-                <p class="text-secondary">
-                    Logiciel de gestion commerciale tout-en-un conçu pour le marché tunisien. Facturation, Stock, Caisse et Comptabilité.
-                </p>
-                <div class="d-flex gap-3 mt-4">
-                    <a href="https://www.facebook.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
-                    <a href="https://www.tiktok.com/@simplexgestion" class="text-white fs-4"><i class='bx bxl-tiktok'></i></a>
-                    <a href="https://www.instagram.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-instagram-alt'></i></a>
-                </div>
-            </div>
-            <div class="col-lg-2 col-6"></div>
-            <div class="col-lg-2 col-6 mb-4">
-                <h5 class="fw-bold mb-3">Raccourcis</h5>
+            <nav class="col-lg-2 col-6 mb-4">
+                <h5 class="fw-bold mb-3">Navigation</h5>
                 <ul class="list-unstyled text-secondary">
-                    <li class="mb-2"><a href="#accueil" class="text-decoration-none text-secondary hover-white">Accueil</a></li>
-                    <li class="mb-2"><a href="#ventes" class="text-decoration-none text-secondary hover-white">Ventes</a></li>
-                    <li class="mb-2"><a href="#stock" class="text-decoration-none text-secondary hover-white">Stock</a></li>
-                    <li class="mb-2"><a href="#legal" class="text-decoration-none text-secondary hover-white">Impôt</a></li>
-                    <li class="mb-2"><a href="#contact" class="text-decoration-none text-secondary hover-white">Contact</a></li>
+                    <li class="mb-2"><a href="/" class="text-decoration-none text-secondary hover-white">Accueil</a></li>
+                    <li class="mb-2"><a href="/features" class="text-decoration-none text-secondary hover-white">Fonctionnalités</a></li>
+                    <li class="mb-2"><a href="/pricing" class="text-decoration-none text-secondary hover-white">Tarifs</a></li>
+                    <li class="mb-2"><a href="/about" class="text-decoration-none text-secondary hover-white">À propos</a></li>
+                    <li class="mb-2"><a href="/contact" class="text-decoration-none text-secondary hover-white">Contact</a></li>
                 </ul>
-            </div>
-            <div class="col-lg-4 mb-4">
+
+
+            </nav>
+            <nav class="col-lg-2 col-6 mb-4">
+                <h5 class="fw-bold mb-3">Fonctionnalités</h5>
+                <ul class="list-unstyled text-secondary">
+                    <li class="mb-2"><a href="/features/ventes" class="text-decoration-none text-secondary hover-white">Gestion des Ventes</a></li>
+                    <li class="mb-2"><a href="/features/stock" class="text-decoration-none text-secondary hover-white">Gestion de Stock</a></li>
+                    <li class="mb-2"><a href="/features/achat-et-dépenses" class="text-decoration-none text-secondary hover-white">Achats & Dépenses</a></li>
+                    <li class="mb-2"><a href="/features/caisse" class="text-decoration-none text-secondary hover-white">Caisse</a></li>
+                    <li class="mb-2"><a href="/features/rapport" class="text-decoration-none text-secondary hover-white">Rapports & Statistiques</a></li>
+                </ul>
+
+
+            </nav>
+            <nav class="col-lg-2 col-6 mb-4">
+                <h5 class="fw-bold mb-3">Solutions Pour</h5>
+                <ul class="list-unstyled text-secondary">
+                    <li class="mb-2"><a href="/solution/grossiste" class="text-decoration-none text-secondary hover-white">Grossistes</a></li>
+                    <li class="mb-2"><a href="/solution/distributeur" class="text-decoration-none text-secondary hover-white">Distributeurs</a></li>
+                    <li class="mb-2"><a href="/solution/fournisseur" class="text-decoration-none text-secondary hover-white">Fournisseurs</a></li>
+                    <li class="mb-2"><a href="/solution/detaillant" class="text-decoration-none text-secondary hover-white">Détaillants</a></li>
+                </ul>
+
+
+            </nav>
+
+            <nav class="col-lg-2 col-6 mb-4">
+                <h5 class="fw-bold mb-3">Ressources</h5>
+                <ul class="list-unstyled text-secondary">
+                    <li class="mb-2"><a href="/blog" class="text-decoration-none text-secondary hover-white">Blog</a></li>
+                    <li class="mb-2"><a href="/affiliate" class="text-decoration-none text-secondary hover-white">Affiliation</a></li>
+                    <li class="mb-2"><a href="/jobs" class="text-decoration-none text-secondary hover-white">Carrières</a></li>
+                    <li class="mb-2"><a href="/compare" class="text-decoration-none text-secondary hover-white">Comparatifs</a></li>
+                    <li class="mb-2"><a href="/faq" class="text-decoration-none text-secondary hover-white">FAQ</a></li>
+                </ul>
+            </nav>
+
+            <nav class="col-lg-2 col-6 mb-4">
+                <h5 class="fw-bold mb-3">Légal</h5>
+                <ul class="list-unstyled text-secondary">
+                    <li class="mb-2"><a href="/legal" class="text-decoration-none text-secondary hover-white">Mentions Légales</a></li>
+                    <li class="mb-2"><a href="/privacy" class="text-decoration-none text-secondary hover-white">Confidentialité</a></li>
+                    <li class="mb-2"><a href="/terms" class="text-decoration-none text-secondary hover-white">Conditions d'utilisation</a></li>
+                </ul>
+            </nav>
+            <div class="col-lg-2 mb-4">
                 <h5 class="fw-bold mb-3">Nous Contacter</h5>
                 <ul class="list-unstyled text-secondary">
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-phone me-2 text-primary'></i> +216 93 796 501</li>
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-envelope me-2 text-primary'></i> contact@simplexgestion.tn</li>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="https://www.facebook.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
+                        <a href="https://www.tiktok.com/@simplexgestion" class="text-white fs-4"><i class='bx bxl-tiktok'></i></a>
+                        <a href="https://www.instagram.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-instagram-alt'></i></a>
+                    </div>
                 </ul>
             </div>
         </div>
@@ -1292,8 +1353,8 @@
                 &copy; 2026 Simplex Gestion. Tous droits réservés.
             </div>
             <div class="col-md-6 text-center text-md-end text-secondary small">
-                <a href="#" class="text-secondary text-decoration-none me-3">Mentions Légales</a>
-                <a href="#" class="text-secondary text-decoration-none">Politique de Confidentialité</a>
+                <a href="/cgu" class="text-secondary text-decoration-none me-3">Mentions Légales</a>
+                <a href="/privacy" class="text-secondary text-decoration-none">Politique de Confidentialité</a>
             </div>
         </div>
     </div>
