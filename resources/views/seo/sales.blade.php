@@ -3,7 +3,35 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simplex Gestion – Gestion des Ventes</title>
+    <title>Logiciel de gestion des ventes en Tunisie | Simplex Gestion</title>
+    <meta name="description" content="Pilotez vos ventes de la commande à l'encaissement avec Simplex Gestion : devis, factures, paiements multiples, retours et tableaux de bord pour entreprises en Tunisie.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:locale" content="fr_TN">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Simplex Gestion">
+    <meta property="og:title" content="Logiciel de gestion des ventes en Tunisie | Simplex Gestion">
+    <meta property="og:description" content="Centralisez devis, factures, encaissements et retours dans un seul module de gestion des ventes pensé pour les entreprises tunisiennes.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Logiciel de gestion des ventes en Tunisie | Simplex Gestion">
+    <meta name="twitter:description" content="Un module ventes complet pour gérer facturation, paiements, expéditions et retours.">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Module de gestion des ventes",
+            "serviceType": "Logiciel de gestion des ventes",
+            "description": "Solution pour centraliser devis, factures, paiements, expéditions et retours dans une seule interface.",
+            "areaServed": "TN",
+            "provider": {
+                "@type": "Organization",
+                "name": "Simplex Gestion",
+                "url": "{{ url('/') }}"
+            },
+            "url": "{{ url()->current() }}"
+        }
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -738,6 +766,7 @@
     </div>
 </div>
 
+<main>
 <!-- ═══════════════════════════════════════════════════════ -->
 <!--  HERO                                                   -->
 <!-- ═══════════════════════════════════════════════════════ -->
@@ -1344,6 +1373,7 @@
     </div>
 </section>
 
+</main>
 <footer class="bg-dark text-white pt-5 pb-3">
     <div class="container">
         <div class="row align-items-center">

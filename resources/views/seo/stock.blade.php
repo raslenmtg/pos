@@ -3,7 +3,35 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simplex Gestion – Gestion de Stock</title>
+    <title>Logiciel de gestion de stock en Tunisie | Simplex Gestion</title>
+    <meta name="description" content="Maîtrisez vos stocks en temps réel avec Simplex Gestion : inventaire, transferts multi-dépôts, alertes de rupture, pertes et valorisation pour entreprises en Tunisie.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:locale" content="fr_TN">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Simplex Gestion">
+    <meta property="og:title" content="Logiciel de gestion de stock en Tunisie | Simplex Gestion">
+    <meta property="og:description" content="Suivez l'inventaire, transférez le stock entre entrepôts, gérez les pertes et valorisez vos articles dans un module unique.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Logiciel de gestion de stock en Tunisie | Simplex Gestion">
+    <meta name="twitter:description" content="Inventaire, alertes de rupture, transferts et valorisation du stock sur une seule plateforme.">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Module de gestion de stock",
+            "serviceType": "Logiciel de gestion de stock",
+            "description": "Solution pour gérer l'inventaire, les transferts, les pertes et la valorisation du stock en temps réel.",
+            "areaServed": "TN",
+            "provider": {
+                "@type": "Organization",
+                "name": "Simplex Gestion",
+                "url": "{{ url('/') }}"
+            },
+            "url": "{{ url()->current() }}"
+        }
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -569,6 +597,7 @@
     </div>
 </div>
 
+<main>
 <!-- ═══════════════════════════════════════════════════════ -->
 <!--  HERO                                                   -->
 <!-- ═══════════════════════════════════════════════════════ -->
@@ -1079,6 +1108,7 @@
     </div>
 </section>
 
+</main>
 <footer class="bg-dark text-white pt-5 pb-3">
     <div class="container">
         <div class="row align-items-center">
