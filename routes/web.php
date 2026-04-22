@@ -88,6 +88,12 @@ use Illuminate\Support\Facades\Route;
     Route::get('/features', function () {
         return view('seo.features');
     });
+    Route::get('/features/ventes', function () {
+        return view('seo.sales');
+    });
+    Route::get('/features/stock', function () {
+        return view('seo.stock');
+    });
     Route::get('/compare', function () {
         return view('seo.comparison');
     });
