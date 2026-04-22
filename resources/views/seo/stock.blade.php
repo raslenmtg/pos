@@ -587,7 +587,7 @@
         <div class="d-flex justify-content-between align-items-center w-100 py-2 py-md-3">
             <a class="d-flex align-items-center" style="text-decoration: none" href="/">
                 <span class="navbar-brand m-0">Simplex<span class="text-primary">.</span></span>
-                <img src="img/logo.png" alt="Simplex Gestion" width="36" height="36" class="ms-2">
+                <img src="/img/logo.png" alt="Simplex Gestion" width="36" height="36" class="ms-2">
             </a>
             <div class="d-flex align-items-center gap-2">
                 <a href="{{ route('business.getRegister') }}" class="btn btn-outline">Inscription</a>
