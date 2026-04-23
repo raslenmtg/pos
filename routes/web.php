@@ -94,6 +94,12 @@ use Illuminate\Support\Facades\Route;
     Route::get('/features/stock', function () {
         return view('seo.stock');
     });
+    Route::get('/features/achat', function () {
+        return view('seo.purchase');
+    });
+    Route::get('/features/caisse', function () {
+        return view('seo.pos');
+    });
     Route::get('/compare', function () {
         return view('seo.comparison');
     });

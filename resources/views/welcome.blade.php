@@ -1296,7 +1296,8 @@
                 <ul class="list-unstyled text-secondary">
                     <li class="mb-2"><a href="/features/ventes" class="text-decoration-none text-secondary hover-white">Gestion des Ventes</a></li>
                     <li class="mb-2"><a href="/features/stock" class="text-decoration-none text-secondary hover-white">Gestion de Stock</a></li>
-                    <li class="mb-2"><a href="/features/achat-et-dépenses" class="text-decoration-none text-secondary hover-white">Achats & Dépenses</a></li>
+                    <li class="mb-2"><a href="/features/achat" class="text-decoration-none text-secondary hover-white">Achats</a></li>
+                    <li class="mb-2"><a href="/features/expense" class="text-decoration-none text-secondary hover-white">Dépenses</a></li>
                     <li class="mb-2"><a href="/features/caisse" class="text-decoration-none text-secondary hover-white">Caisse</a></li>
                     <li class="mb-2"><a href="/features/rapport" class="text-decoration-none text-secondary hover-white">Rapports & Statistiques</a></li>
                 </ul>
