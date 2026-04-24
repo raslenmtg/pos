@@ -38,30 +38,47 @@
     </url>
 
     <url>
-        <loc>https://simplexgestion.tn/features/ventes</loc>
-        <lastmod>2026-04-22</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://simplexgestion.tn/features/stock</loc>
-        <lastmod>2026-04-22</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://simplexgestion.tn/features/achat</loc>
+        <loc>https://simplexgestion.tn/fonctionnalites/gestion-ventes</loc>
         <lastmod>2026-04-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://simplexgestion.tn/features/caisse</loc>
+        <loc>https://simplexgestion.tn/fonctionnalites/gestion-stock</loc>
         <lastmod>2026-04-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://simplexgestion.tn/fonctionnalites/gestion-achats</loc>
+        <lastmod>2026-04-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://simplexgestion.tn/fonctionnalites/caisse-enregistreuse</loc>
+        <lastmod>2026-04-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://simplexgestion.tn/fonctionnalites/gestion-depenses</loc>
+        <lastmod>2026-04-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://simplexgestion.tn/fonctionnalites/gestion-client-fournisseur</loc>
+        <lastmod>2026-04-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://simplexgestion.tn/fonctionnalites/rapports-statistiques</loc>
+        <lastmod>2026-04-24</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>    <url>
         <loc>https://simplexgestion.tn/compare</loc>
         <lastmod>2026-04-22</lastmod>
         <changefreq>monthly</changefreq>

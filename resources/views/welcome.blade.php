@@ -1283,7 +1283,7 @@
                 <h5 class="fw-bold mb-3">Navigation</h5>
                 <ul class="list-unstyled text-secondary">
                     <li class="mb-2"><a href="/" class="text-decoration-none text-secondary hover-white">Accueil</a></li>
-                    <li class="mb-2"><a href="/features" class="text-decoration-none text-secondary hover-white">Fonctionnalités</a></li>
+                    <li class="mb-2"><a href="/fonctionnalites" class="text-decoration-none text-secondary hover-white">Fonctionnalités</a></li>
                     <li class="mb-2"><a href="/pricing" class="text-decoration-none text-secondary hover-white">Tarifs</a></li>
                     <li class="mb-2"><a href="/about" class="text-decoration-none text-secondary hover-white">À propos</a></li>
                     <li class="mb-2"><a href="/contact" class="text-decoration-none text-secondary hover-white">Contact</a></li>
@@ -1294,13 +1294,15 @@
             <nav class="col-lg-2 col-6 mb-4">
                 <h5 class="fw-bold mb-3">Fonctionnalités</h5>
                 <ul class="list-unstyled text-secondary">
-                    <li class="mb-2"><a href="/features/ventes" class="text-decoration-none text-secondary hover-white">Gestion des Ventes</a></li>
-                    <li class="mb-2"><a href="/features/stock" class="text-decoration-none text-secondary hover-white">Gestion de Stock</a></li>
-                    <li class="mb-2"><a href="/features/achat" class="text-decoration-none text-secondary hover-white">Achats</a></li>
-                    <li class="mb-2"><a href="/features/expense" class="text-decoration-none text-secondary hover-white">Dépenses</a></li>
-                    <li class="mb-2"><a href="/features/caisse" class="text-decoration-none text-secondary hover-white">Caisse</a></li>
-                    <li class="mb-2"><a href="/features/rapport" class="text-decoration-none text-secondary hover-white">Rapports & Statistiques</a></li>
+                    <li class="mb-2"><a href="/fonctionnalites/gestion-ventes" class="text-decoration-none text-secondary hover-white">Ventes</a></li>
+                    <li class="mb-2"><a href="/fonctionnalites/gestion-stock" class="text-decoration-none text-secondary hover-white">Stock</a></li>
+                    <li class="mb-2"><a href="/fonctionnalites/gestion-achats" class="text-decoration-none text-secondary hover-white">Achats</a></li>
+                    <li class="mb-2"><a href="/fonctionnalites/gestion-depenses" class="text-decoration-none text-secondary hover-white">Dépenses</a></li>
+                    <li class="mb-2"><a href="/fonctionnalites/caisse-enregistreuse" class="text-decoration-none text-secondary hover-white">Caisse</a></li>
+                    <li class="mb-2"><a href="/fonctionnalites/gestion-client-fournisseur" class="text-decoration-none text-secondary hover-white">Client & fournisseur</a></li>
+                    <li class="mb-2"><a href="/fonctionnalites/rapports-statistiques" class="text-decoration-none text-secondary hover-white">Rapports & Statistiques</a></li>
                 </ul>
+            </nav>
 
 
             </nav>

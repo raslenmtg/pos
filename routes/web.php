@@ -85,20 +85,42 @@ use Illuminate\Support\Facades\Route;
     Route::get('/faq', function () {
         return view('seo.faq');
     });
-    Route::get('/features', function () {
-        return view('seo.features');
-    });
-    Route::get('/features/ventes', function () {
-        return view('seo.sales');
-    });
-    Route::get('/features/stock', function () {
-        return view('seo.stock');
-    });
-    Route::get('/features/achat', function () {
-        return view('seo.purchase');
-    });
-    Route::get('/features/caisse', function () {
-        return view('seo.pos');
+
+    Route::prefix('fonctionnalites')->group(function () {
+
+        // Main features overview page
+        Route::get('/', function () {
+            return view('seo.features');
+        })->name('features.index');
+
+        Route::get('/gestion-ventes', function () {
+            return view('seo.sales');
+        })->name('features.sales');
+
+        Route::get('/gestion-stock', function () {
+            return view('seo.stock');
+        })->name('features.stock');
+
+        Route::get('/gestion-achats', function () {
+            return view('seo.purchase');
+        })->name('features.purchase');
+
+        Route::get('/gestion-depenses', function () {
+            return view('seo.expense'); // Added this to match your nav
+        })->name('features.expense');
+
+        Route::get('/caisse-enregistreuse', function () {
+            return view('seo.pos');
+        })->name('features.pos');
+
+        Route::get('/gestion-client-fournisseur', function () {
+            return view('seo.client');
+        })->name('features.client');
+
+        Route::get('/rapports-statistiques', function () {
+            return view('seo.report'); // Added this to match your nav
+        })->name('features.reports');
+
     });
     Route::get('/compare', function () {
         return view('seo.comparison');
