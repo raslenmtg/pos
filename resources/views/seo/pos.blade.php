@@ -3,7 +3,35 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simplex Gestion – Module Caisse / POS</title>
+    <title>Logiciel de caisse POS en Tunisie | Simplex Gestion</title>
+    <meta name="description" content="Accélérez l'encaissement avec le module caisse POS de Simplex Gestion : scan code-barres, ventes comptoir, retours, paiements multiples et suivi des sessions en Tunisie.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:locale" content="fr_TN">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Simplex Gestion">
+    <meta property="og:title" content="Logiciel de caisse POS en Tunisie | Simplex Gestion">
+    <meta property="og:description" content="Une caisse rapide et complète : encaissement, scanner, grilles tarifaires, retours et gestion de session.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Logiciel de caisse POS en Tunisie | Simplex Gestion">
+    <meta name="twitter:description" content="Optimisez vos ventes en point de vente avec un POS moderne et personnalisable.">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Module Caisse / POS",
+            "serviceType": "Logiciel de caisse POS",
+            "description": "Solution de point de vente pour encaissement rapide, gestion des paiements et suivi des transactions en magasin.",
+            "areaServed": "TN",
+            "provider": {
+                "@type": "Organization",
+                "name": "Simplex Gestion",
+                "url": "{{ url('/') }}"
+            },
+            "url": "{{ url()->current() }}"
+        }
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">

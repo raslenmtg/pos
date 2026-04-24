@@ -3,7 +3,35 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simplex Gestion – Gestion des Achats</title>
+    <title>Logiciel de gestion des achats en Tunisie | Simplex Gestion</title>
+    <meta name="description" content="Pilotez vos achats fournisseurs avec Simplex Gestion : demandes d'achat, bons de commande, réceptions, retours, retenue à la source et suivi des paiements en Tunisie.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:locale" content="fr_TN">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Simplex Gestion">
+    <meta property="og:title" content="Logiciel de gestion des achats en Tunisie | Simplex Gestion">
+    <meta property="og:description" content="Centralisez le cycle d'achat complet : demande, commande, réception, retours et conformité fiscale tunisienne.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Logiciel de gestion des achats en Tunisie | Simplex Gestion">
+    <meta name="twitter:description" content="Un module achats complet pour maîtriser fournisseurs, coûts, paiements et conformité.">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Module de gestion des achats",
+            "serviceType": "Logiciel de gestion des achats",
+            "description": "Solution pour gérer demandes d'achat, commandes fournisseurs, réceptions, retours et paiements.",
+            "areaServed": "TN",
+            "provider": {
+                "@type": "Organization",
+                "name": "Simplex Gestion",
+                "url": "{{ url('/') }}"
+            },
+            "url": "{{ url()->current() }}"
+        }
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
