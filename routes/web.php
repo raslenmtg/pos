@@ -118,7 +118,7 @@ use Illuminate\Support\Facades\Route;
         })->name('features.client');
 
         Route::get('/rapports-statistiques', function () {
-            return view('seo.report'); // Added this to match your nav
+            return view('seo.reports'); // Added this to match your nav
         })->name('features.reports');
 
     });

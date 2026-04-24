@@ -3,7 +3,35 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Simplex Gestion – Module Clients & Fournisseurs</title>
+    <title>Logiciel CRM clients et fournisseurs en Tunisie | Simplex Gestion</title>
+    <meta name="description" content="Gérez vos clients et fournisseurs avec Simplex Gestion : fiches complètes, soldes, encours, grand livre, documents, limites de crédit et suivi des impayés en Tunisie.">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="{{ url()->current() }}">
+    <meta property="og:locale" content="fr_TN">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Simplex Gestion">
+    <meta property="og:title" content="Logiciel CRM clients et fournisseurs en Tunisie | Simplex Gestion">
+    <meta property="og:description" content="Centralisez la gestion des tiers : clients, fournisseurs, soldes, historiques et documents sur une seule plateforme.">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Logiciel CRM clients et fournisseurs en Tunisie | Simplex Gestion">
+    <meta name="twitter:description" content="Une gestion complète des clients et fournisseurs, pensée pour les entreprises tunisiennes.">
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Module Clients & Fournisseurs",
+            "serviceType": "Logiciel CRM clients et fournisseurs",
+            "description": "Solution pour gérer les tiers, suivre les soldes, les impayés, les documents et les historiques commerciaux.",
+            "areaServed": "TN",
+            "provider": {
+                "@type": "Organization",
+                "name": "Simplex Gestion",
+                "url": "{{ url('/') }}"
+            },
+            "url": "{{ url()->current() }}"
+        }
+    </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -605,30 +633,67 @@
         .doc-item .di-name { font-size: 0.88rem; font-weight: 600; color: var(--text-main); }
         .doc-item .di-meta { font-size: 0.75rem; color: var(--text-muted); margin-top: 3px; }
 
-        /* ─── CTA ─────────────────────────────────────────────── */
+        /* ─── CTA ─────────────────────────────────────────── */
         .cta-section {
-            padding: 80px 24px; text-align: center;
-            background: linear-gradient(135deg, #1e40af 0%, #2563eb 45%, #0ea5e9 100%);
+            padding: 80px 24px;
+            text-align: center;
+            background: linear-gradient(135deg, #2948ff 0%, #6366f1 100%);
             border-top: none;
+            color: #fff;
         }
-        .cta-section h2 { font-size: clamp(1.6rem, 3.5vw, 2.4rem); font-weight: 800; margin-bottom: 16px; }
-        .cta-section p  { color: rgba(255, 255, 255, 0.9); font-size: 1.05rem; max-width: 540px; margin: 0 auto 36px; }
-        .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-        .cta-section .btn-primary {
-            background: #fff; color: var(--primary); border: none;
-            padding: 14px 32px; border-radius: 8px;
-            font-size: 1rem; font-weight: 700; cursor: pointer;
-            transition: transform 0.2s;
+        .cta-section h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            font-weight: 800;
+            margin-bottom: 16px;
         }
-        .cta-section .btn-primary:hover { transform: translateY(-1px); }
+        .cta-section p {
+            color: rgba(255,255,255,0.85);
+            font-size: 1.05rem;
+            max-width: 540px;
+            margin: 0 auto 36px;
+        }
+        .cta-buttons {
+            display: flex;
+            gap: 14px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-outline {
+            background: transparent;
+            color: var(--dark);
+            border: 2px solid #e2e8f0;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .btn-outline:hover { border-color: var(--dark); background: var(--dark); color: #fff; }
+
         .cta-section .btn-outline {
-            background: transparent; color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.85);
-            padding: 14px 32px; border-radius: 8px;
-            font-size: 1rem; font-weight: 600; cursor: pointer;
-            transition: all 0.2s;
+            border-color: rgba(255,255,255,0.85);
+            color: #fff;
         }
-        .cta-section .btn-outline:hover { background: #fff; color: var(--primary); border-color: #fff; }
+
+        .cta-section .btn-outline:hover {
+            background: #fff;
+            color: var(--primary);
+            border-color: #fff;
+        }
+
 
         .divider { height: 1px; background: #e2e8f0; }
 
@@ -729,7 +794,7 @@
     <div class="section-tag">Vue d'ensemble</div>
     <h2 class="section-title">Une fiche tiers complète, deux usages distincts</h2>
     <p class="section-subtitle">
-        Que vous gériez un client fidèle ou un fournisseur stratégique, Simplex Gestion vous offre la même rigueur de suivi avec des fonctions spécifiques à chaque rôle.
+        Que vous gériez un client fidèle ou un fournisseur stratégique, Simplex Gestion vous offre la gestion complète.
     </p>
 
     <div class="split-cards">
@@ -763,8 +828,8 @@
     <div class="cards-grid">
         <div class="card">
             <div class="card-icon icon-teal">📒</div>
-            <h3>Grand livre par tiers</h3>
-            <p>Compte courant détaillé avec débit, crédit, solde progressif et toutes les pièces (factures, règlements, retours).</p>
+            <h3>Grand livre</h3>
+            <p>Compte courant détaillé avec encaissements, impayées, solde progressif et toutes les pièces (factures, règlements, retours).</p>
         </div>
         <div class="card rose">
             <div class="card-icon icon-rose">💳</div>
@@ -789,7 +854,7 @@
         <div class="card">
             <div class="card-icon icon-green">✅</div>
             <h3>Statut actif/inactif</h3>
-            <p>Désactivez un tiers obsolète sans supprimer ses données — toute son historique reste consultable.</p>
+            <p>Désactivez un client/fournisseur obsolète sans supprimer ses données — toute son historique reste consultable.</p>
         </div>
     </div>
 </section>
@@ -943,10 +1008,6 @@
                 </table>
             </div>
         </div>
-
-        <p style="text-align:center; font-size:0.85rem; color:var(--text-muted); margin-top:18px;">
-            ☝️ Reproduction simplifiée — la vraie liste affiche toutes vos colonnes personnalisables et l'ensemble de vos fournisseurs.
-        </p>
     </section>
 </div>
 
@@ -1002,7 +1063,7 @@
             <div class="act-icon ai-dark" style="color:var(--text-light);">⛔</div>
             <div>
                 <h4>Désactiver</h4>
-                <p>Archivez le fournisseur sans perdre l'historique — il n'apparaîtra plus dans les listes actives.</p>
+                <p>Archivez le fournisseur sans perdre l'historique.</p>
             </div>
         </div>
         <div class="act-card indigo">
@@ -1056,7 +1117,7 @@
                     <li class="warn">Filtre <strong>Solde d'avance</strong> — fournisseurs ayant reçu des avances</li>
                     <li class="warn">Filtre <strong>Solde d'ouverture</strong> — soldes hérités d'un ancien système</li>
                     <li class="warn">Filtre <strong>Peut voir que</strong> — restreindre par utilisateur attribué</li>
-                    <li class="warn">Filtre <strong>Statut</strong> — actif, inactif, en attente, validé</li>
+                    <li class="warn">Filtre <strong>Statut</strong> — actif, inactif</li>
                     <li class="warn">Recherche textuelle libre dans tous les champs</li>
                     <li class="warn">Cumul des filtres pour des recherches très précises</li>
                 </ul>
@@ -1107,7 +1168,7 @@
     <div class="section-tag rose">Module Clients</div>
     <h2 class="section-title">Vos clients, vos ventes, vos encours</h2>
     <p class="section-subtitle">
-        Même structure que les fournisseurs, enrichie de fonctions spécifiques à la relation client : suivi des impayés, gestion d'une limite de crédit configurable par client, consultation directe de l'historique des ventes et encaissement en un clic.
+      Suivi des impayés, gestion d'une limite de crédit configurable par client, consultation directe de l'historique des ventes et encaissement en un clic.
     </p>
 
     <div class="mock">
@@ -1255,10 +1316,6 @@
             </table>
         </div>
     </div>
-
-    <p style="text-align:center; font-size:0.85rem; color:var(--text-muted); margin-top:18px;">
-        ☝️ Reproduction simplifiée — la vraie liste affiche tous vos clients et toutes les colonnes que vous souhaitez activer.
-    </p>
 </section>
 
 <div class="divider"></div>
@@ -1268,10 +1325,10 @@
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="section-alt">
     <section class="section">
-        <div class="section-tag rose">Spécificités Clients</div>
+        <div class="section-tag rose">Clients</div>
         <h2 class="section-title">Trois fonctions exclusives à la fiche client</h2>
         <p class="section-subtitle">
-            Au-delà des fonctions communes aux fournisseurs, le module Clients embarque trois piliers indispensables à toute activité commerciale : suivi des impayés, limite de crédit, et accès direct à l'historique des ventes.
+            Le module Clients embarque trois piliers indispensables à toute activité commerciale : suivi des impayés, limite de crédit, et accès direct à l'historique des ventes.
         </p>
 
         <!-- Impayés -->
@@ -1288,7 +1345,6 @@
                     <li class="danger">Indicateur visuel pour les factures en retard</li>
                     <li class="danger">Encaissement direct depuis la fiche (espèces, chèque, virement, carte)</li>
                     <li class="danger">Affectation d'un règlement à plusieurs factures (lettrage)</li>
-                    <li class="danger">Édition de relances et lettres de mise en demeure</li>
                 </ul>
             </div>
             <div>
@@ -1341,9 +1397,7 @@
                 <ul class="feature-list">
                     <li class="warn">Limite de crédit configurable client par client</li>
                     <li class="warn">Calcul de l'encours en temps réel (impayés + ventes en cours)</li>
-                    <li class="warn">Jauge visuelle avec seuil d'alerte (jaune à 80 %, rouge à 100 %)</li>
                     <li class="warn">Blocage automatique des nouvelles ventes à crédit dépassant la limite</li>
-                    <li class="warn">Possibilité de forcer la vente avec validation d'un superviseur</li>
                     <li class="warn">Historique des ajustements de limite (par qui, quand, pourquoi)</li>
                 </ul>
             </div>
@@ -1383,7 +1437,7 @@
 
                     <div class="alert-box alert-warn" style="margin-top:0;">
                         <span>⚠️</span>
-                        <span>Toute nouvelle vente à crédit supérieure à <strong>TND 180</strong> sera bloquée et nécessitera la validation d'un superviseur.</span>
+                        <span>Toute nouvelle vente à crédit supérieure à <strong>TND 180</strong> sera bloquée.</span>
                     </div>
                 </div>
             </div>
@@ -1395,7 +1449,7 @@
                 <div class="section-tag rose">Consulter ses ventes</div>
                 <h3>Toute l'histoire commerciale d'un client, en un clic</h3>
                 <p>
-                    Depuis le menu d'actions, accédez instantanément à la liste complète des ventes effectuées avec ce client : factures, devis, bons de livraison, retours et règlements. Triez, filtrez par période, exportez ou réimprimez en deux clics.
+                    Depuis le menu d'actions, accédez instantanément à la liste complète des ventes effectuées avec ce client : factures, devis, brouillons, retours et règlements. Triez, filtrez par période, exportez ou réimprimez en deux clics.
                 </p>
                 <ul class="feature-list">
                     <li class="rose">Liste exhaustive des factures, devis et bons de livraison</li>
@@ -1408,7 +1462,7 @@
             </div>
             <div>
                 <div class="credit-card">
-                    <h4 style="color:var(--rose);">🛒 Société Carthago SARL — Ventes (12 derniers mois)</h4>
+                    <h4 style="color:var(--rose);">🛒 Société A — Ventes (12 derniers mois)</h4>
 
                     <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:10px; margin-bottom:18px;">
                         <div style="background:#ffffff; border:1px solid var(--dark-border); border-radius:8px; padding:14px; text-align:center;">
@@ -1417,7 +1471,7 @@
                         </div>
                         <div style="background:#ffffff; border:1px solid var(--dark-border); border-radius:8px; padding:14px; text-align:center;">
                             <div style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; font-weight:600;">Total CA</div>
-                            <div style="font-size:1.4rem; font-weight:800; color:var(--accent); margin-top:4px;">TND 28k</div>
+                            <div style="font-size:1.4rem; font-weight:800; color:var(--accent); margin-top:4px;">TND 2800</div>
                         </div>
                         <div style="background:#ffffff; border:1px solid var(--dark-border); border-radius:8px; padding:14px; text-align:center;">
                             <div style="font-size:0.7rem; color:var(--text-muted); text-transform:uppercase; font-weight:600;">Panier moyen</div>
@@ -1468,13 +1522,12 @@
     <div class="feature-row reverse">
         <div class="feature-content">
             <div class="section-tag">Grand livre — Compte courant</div>
-            <h3>Le compte courant détaillé de chaque tiers,<br>en un seul clic</h3>
+            <h3>Compte courant détaillé,<br>en un seul clic</h3>
             <p>
-                Le grand livre de Simplex Gestion donne une vision chronologique complète de tous les mouvements financiers entre vous et un tiers donné : factures, règlements, retours, avoirs, régularisations. Chaque ligne affiche le débit, le crédit et le solde progressif — avec le solde final clairement mis en évidence.
+                Le grand livre de Simplex Gestion donne une vision complète de tous les mouvements financiers entre vous et un tiers donné : factures, règlements, retours, avoirs, régularisations. Chaque ligne affiche le règlment, l'impayée — avec le solde final clairement mis en évidence.
             </p>
             <ul class="feature-list">
-                <li>Liste chronologique de toutes les pièces comptables</li>
-                <li>Colonnes débit / crédit / solde progressif</li>
+                <li>Liste de toutes les pièces comptables</li>
                 <li>Filtre par période (jour, mois, année, intervalle libre)</li>
                 <li>Lien direct vers chaque pièce d'origine (facture, règlement, retour)</li>
                 <li>Solde d'ouverture pris en compte automatiquement</li>
@@ -1484,57 +1537,50 @@
         </div>
         <div>
             <div class="ledger-mock">
-                <h4>📒 Grand livre — Société Carthago SARL</h4>
+                <h4>📒 Grand livre — Société A</h4>
 
-                <div class="ledger-row head">
-                    <span>Date</span>
-                    <span>Pièce</span>
-                    <span>Débit</span>
-                    <span>Crédit</span>
-                    <span>Solde</span>
-                </div>
 
                 <div class="ledger-row">
                     <span style="color:var(--text-muted);">01/01/2026</span>
                     <span>Solde d'ouverture</span>
                     <span class="ledger-debit">—</span>
                     <span class="ledger-credit">—</span>
-                    <span class="ledger-balance">0.000</span>
+
                 </div>
                 <div class="ledger-row">
                     <span style="color:var(--text-muted);">22/02</span>
                     <span>FA-0052 (vente)</span>
                     <span class="ledger-debit">3,450.000</span>
                     <span class="ledger-credit">—</span>
-                    <span class="ledger-balance">3,450.000</span>
+
                 </div>
                 <div class="ledger-row">
                     <span style="color:var(--text-muted);">28/02</span>
                     <span>RC-0014 (règlement)</span>
                     <span class="ledger-debit">—</span>
                     <span class="ledger-credit">3,450.000</span>
-                    <span class="ledger-balance">0.000</span>
+
                 </div>
                 <div class="ledger-row">
                     <span style="color:var(--text-muted);">12/03</span>
                     <span>FA-0058 (vente)</span>
                     <span class="ledger-debit">1,820.000</span>
                     <span class="ledger-credit">—</span>
-                    <span class="ledger-balance">1,820.000</span>
+
                 </div>
                 <div class="ledger-row">
                     <span style="color:var(--text-muted);">28/03</span>
                     <span>FA-0061 (vente)</span>
                     <span class="ledger-debit">2,100.000</span>
                     <span class="ledger-credit">—</span>
-                    <span class="ledger-balance">3,920.000</span>
+
                 </div>
                 <div class="ledger-row">
                     <span style="color:var(--text-muted);">15/04</span>
                     <span>FA-0067 (vente)</span>
                     <span class="ledger-debit">900.000</span>
                     <span class="ledger-credit">—</span>
-                    <span class="ledger-balance">4,820.000</span>
+
                 </div>
 
                 <div class="ledger-row total rose">
@@ -1542,7 +1588,6 @@
                     <span>SOLDE COURANT</span>
                     <span class="ledger-debit">8,270.000</span>
                     <span class="ledger-credit">3,450.000</span>
-                    <span class="ledger-balance" style="color:#f87171;">4,820.000</span>
                 </div>
             </div>
         </div>
@@ -1566,15 +1611,13 @@
                 <ul class="feature-list">
                     <li class="indigo">Pièces jointes multi-formats (PDF, image, Word, Excel)</li>
                     <li class="indigo">Stockage sécurisé dans le cloud Simplex</li>
-                    <li class="indigo">Aperçu direct sans téléchargement</li>
                     <li class="indigo">Notes internes horodatées avec auteur</li>
                     <li class="indigo">Permissions par rôle (qui peut voir / ajouter / supprimer)</li>
-                    <li class="indigo">Recherche dans les notes et noms de fichiers</li>
                 </ul>
             </div>
             <div>
                 <div class="doc-mock">
-                    <h4>📎 Documents & notes — Société Carthago SARL</h4>
+                    <h4>📎 Documents & notes — Société A</h4>
 
                     <div class="doc-item">
                         <div class="doc-icon di-pdf">📄</div>
@@ -1616,98 +1659,6 @@
         </div>
     </section>
 </div>
-
-<div class="divider"></div>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-<!--  COMPARAISON CLIENTS / FOURNISSEURS                     -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<section class="section">
-    <div class="section-tag">Tableau récapitulatif</div>
-    <h2 class="section-title">Clients et fournisseurs : ce qui est commun, ce qui diffère</h2>
-    <p class="section-subtitle">
-        Une vue synthétique des fonctions partagées et des spécificités de chaque module pour comprendre d'un coup d'œil l'étendue du module Tiers.
-    </p>
-
-    <div class="compare">
-        <table>
-            <thead>
-            <tr>
-                <th>Fonction</th>
-                <th class="col-rose">Clients</th>
-                <th class="col-indigo">Fournisseurs</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Fiche complète (coordonnées, matricule fiscal, adresse)</td>
-                <td><span class="yes">✓</span></td>
-                <td><span class="yes">✓</span></td>
-            </tr>
-            <tr>
-                <td>Solde d'ouverture & solde d'avance</td>
-                <td><span class="yes">✓</span></td>
-                <td><span class="yes">✓</span></td>
-            </tr>
-            <tr>
-                <td>Grand livre — compte courant détaillé</td>
-                <td><span class="yes">✓</span></td>
-                <td><span class="yes">✓</span></td>
-            </tr>
-            <tr>
-                <td>Documents & notes (pièces jointes)</td>
-                <td><span class="yes">✓</span></td>
-                <td><span class="yes">✓</span></td>
-            </tr>
-            <tr>
-                <td>Filtres avancés & exports CSV/Excel/PDF</td>
-                <td><span class="yes">✓</span></td>
-                <td><span class="yes">✓</span></td>
-            </tr>
-            <tr>
-                <td>Suivi des impayés <span class="badge badge-due" style="margin-left:6px;">Ventes</span> / <span class="badge badge-info" style="margin-left:4px;">Achats</span></td>
-                <td><span class="yes">✓ Ventes impayées</span></td>
-                <td><span class="yes">✓ Achats impayés</span></td>
-            </tr>
-            <tr>
-                <td>Suivi des retours impayés</td>
-                <td><span class="yes">✓ Retours de vente</span></td>
-                <td><span class="yes">✓ Retours d'achat</span></td>
-            </tr>
-            <tr>
-                <td>Limite de crédit configurable</td>
-                <td><span class="yes">✓</span></td>
-                <td><span class="no">— Non applicable</span></td>
-            </tr>
-            <tr>
-                <td>Affectation d'une grille tarifaire (détail, gros, VIP…)</td>
-                <td><span class="yes">✓</span></td>
-                <td><span class="no">— Non applicable</span></td>
-            </tr>
-            <tr>
-                <td>Consulter ses ventes / Consulter ses achats</td>
-                <td><span class="yes">✓ Ventes</span></td>
-                <td><span class="yes">✓ Achats</span></td>
-            </tr>
-            <tr>
-                <td>Encaissement / Paiement direct depuis la fiche</td>
-                <td><span class="yes">✓ Encaisser</span></td>
-                <td><span class="yes">✓ Payer</span></td>
-            </tr>
-            <tr>
-                <td>État de stock par fournisseur</td>
-                <td><span class="no">— Non applicable</span></td>
-                <td><span class="yes">✓</span></td>
-            </tr>
-            <tr>
-                <td>Conditions de paiement & délais</td>
-                <td><span class="yes">✓</span></td>
-                <td><span class="yes">✓</span></td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
 
 <div class="divider"></div>
 
