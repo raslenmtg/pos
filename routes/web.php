@@ -85,7 +85,16 @@ use Illuminate\Support\Facades\Route;
     Route::get('/faq', function () {
         return view('seo.faq');
     });
+Route::prefix('solution')->group(function () {
+    Route::get('/grossiste-fournisseur-distributeur', function () {
+        return view('seo.fournisseur');
+    })->name('solution.fournisseur');
 
+    Route::get('/detaillant', function () {
+        return view('seo.detaillant');
+    })->name('solution.detaillant');
+
+});
     Route::prefix('fonctionnalites')->group(function () {
 
         // Main features overview page

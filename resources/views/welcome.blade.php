@@ -1309,9 +1309,7 @@
             <nav class="col-lg-2 col-6 mb-4">
                 <h5 class="fw-bold mb-3">Solutions Pour</h5>
                 <ul class="list-unstyled text-secondary">
-                    <li class="mb-2"><a href="/solution/grossiste" class="text-decoration-none text-secondary hover-white">Grossistes</a></li>
-                    <li class="mb-2"><a href="/solution/distributeur" class="text-decoration-none text-secondary hover-white">Distributeurs</a></li>
-                    <li class="mb-2"><a href="/solution/fournisseur" class="text-decoration-none text-secondary hover-white">Fournisseurs</a></li>
+                    <li class="mb-2"><a href="/solution/grossiste-fournisseur-distributeur" class="text-decoration-none text-secondary hover-white">Fournisseurs / Grossistes / Distributeurs</a></li>
                     <li class="mb-2"><a href="/solution/detaillant" class="text-decoration-none text-secondary hover-white">Détaillants</a></li>
                 </ul>
 
