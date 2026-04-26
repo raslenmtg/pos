@@ -8,12 +8,10 @@
         <div class="modal-body">
             <div class="row">
                 <div class="col-md-6">
-                    <strong>@lang('messages.location'): </strong> {{$purchase->location->name}}<br>
                     <strong>@lang('purchase.ref_no'): </strong> {{$purchase->ref_no}}
                 </div>
                 <div class="col-md-6">
                     <strong>@lang('lang_v1.required_by_date'): </strong> @if(!empty($purchase->delivery_date)){{@format_datetime($purchase->delivery_date)}}@endif <br>
-                    <strong>@lang('lang_v1.added_by'): </strong> {{$purchase->sales_person->user_full_name}}
                 </div>
             </div>
             <div class="row mt-5">
@@ -23,7 +21,7 @@
                             <tr class="bg-green">
                                 <th>@lang('sale.product')</th>
                                 <th>@lang('lang_v1.required_quantity')</th>
-                                <th>@lang( 'lang_v1.quantity_remaining' )</th>
+                                <th>@lang( 'lang_v1.quantity_remaining_to_purchase' )</th>
                             </tr>
                         </thead>
                         <tbody>

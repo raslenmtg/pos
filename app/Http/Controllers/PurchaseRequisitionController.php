@@ -292,8 +292,6 @@ class PurchaseRequisitionController extends Controller
                                 'purchase_lines.product.second_unit',
                                 'purchase_lines.variations',
                                 'purchase_lines.variations.product_variation',
-                                'location',
-                                'sales_person'
                             );
 
         $purchase = $query->firstOrFail();

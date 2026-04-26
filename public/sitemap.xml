@@ -84,7 +84,20 @@
         <lastmod>2026-04-24</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
-    </url>    <url>
+    </url>
+    <url>
+        <loc>https://simplexgestion.tn/solution/detaillant</loc>
+        <lastmod>2026-04-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://simplexgestion.tn/solution/grossiste-fournisseur-distributeur</loc>
+        <lastmod>2026-04-25</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://simplexgestion.tn/compare</loc>
         <lastmod>2026-04-22</lastmod>
         <changefreq>monthly</changefreq>
