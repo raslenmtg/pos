@@ -32,7 +32,7 @@
     <meta name="googlebot" content="index, follow">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.simplexgestion.tn/">
+    <link rel="canonical" href="https://simplexgestion.tn">
 
     <!-- Language and Region -->
     <meta name="language" content="French">
@@ -41,10 +41,10 @@
 
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.simplexgestion.tn/">
+    <meta property="og:url" content="https://simplexgestion.tn/">
     <meta property="og:title" content="Simplex Gestion - Logiciel Gestion Commerciale #1 en Tunisie | Facturation, Stock & POS">
     <meta property="og:description" content="Logiciel de gestion commerciale tout-en-un pour entreprises tunisiennes. Facturation, Stock, POS, Achats et Conformité Fiscale. Essai gratuit - 3 DT/jour.">
-    <meta property="og:image" content="https://www.simplexgestion.tn/images/og-image.jpg">
+    <meta property="og:image" content="https://simplexgestion.tn/images/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="fr_TN">
@@ -52,10 +52,10 @@
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://www.simplexgestion.tn/">
+    <meta name="twitter:url" content="https://simplexgestion.tn/">
     <meta name="twitter:title" content="Simplex Gestion - Logiciel Gestion Commerciale #1 en Tunisie">
     <meta name="twitter:description" content="Logiciel de gestion commerciale tout-en-un. Facturation, Stock, POS. Essai gratuit - Support 24/7.">
-    <meta name="twitter:image" content="https://www.simplexgestion.tn/images/twitter-card.jpg">
+    <meta name="twitter:image" content="https://simplexgestion.tn/images/twitter-card.jpg">
 
     <!-- Favicon and App Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -78,7 +78,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 
-    <!-- Meta Pixel Code
+    <!-- Meta Pixel Code -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -95,160 +95,7 @@
 
     </script>
 
-   End Meta Pixel Code -->
-
-    <!-- JSON-LD Structured Data - Organization -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Simplex Gestion",
-          "url": "https://www.simplexgestion.tn",
-          "logo": "https://www.simplexgestion.tn/logo.png",
-          "description": "Logiciel de gestion commerciale pour entreprises tunisiennes",
-          "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "TN",
-            "addressRegion": "Tunis"
-          },
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+216-24-327-623",
-            "contactType": "Customer Service",
-            "areaServed": "TN",
-            "availableLanguage": ["French", "Arabic"]
-          },
-          "sameAs": [
-            "https://www.facebook.com/simplexgestion",
-            "https://www.instagram.com/simplexgestion",
-            "https://www.tiktok.com/@simplexgestion"
-          ]
-        }
-    </script>
-
-    <!-- JSON-LD Structured Data - SoftwareApplication -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "SoftwareApplication",
-          "name": "Simplex Gestion",
-          "operatingSystem": "Web, Windows, macOS",
-          "applicationCategory": "BusinessApplication",
-          "description": "Logiciel complet pour la gestion commerciale en Tunisie - Facturation, Stock, POS, Achats",
-          "offers": {
-            "@type": "Offer",
-            "price": "3",
-            "priceCurrency": "TND",
-            "priceSpecification": {
-              "@type": "UnitPriceSpecification",
-              "price": "3",
-              "priceCurrency": "TND",
-              "unitText": "DAY"
-            }
-          },
-          "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "250"
-          },
-          "featureList": "Facturation, Gestion Stock, Point de Vente (POS), Achats, Conformité Fiscale, Rapports"
-        }
-    </script>
-
-    <!-- JSON-LD Structured Data - LocalBusiness -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "name": "Simplex Gestion",
-          "image": "https://www.simplexgestion.tn/logo.png",
-          "@id": "https://www.simplexgestion.tn",
-          "url": "https://www.simplexgestion.tn",
-          "telephone": "+216-24-327-623",
-          "address": {
-            "@type": "PostalAddress",
-            "addressCountry": "TN"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 36.8065,
-            "longitude": 10.1815
-          },
-          "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-              "Sunday"
-            ],
-            "opens": "00:00",
-            "closes": "23:59"
-          }
-        }
-    </script>
-
-    <!-- JSON-LD Structured Data - FAQPage -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": [
-            {
-              "@type": "Question",
-              "name": "Puis-je tester Simplex Gestion avant de payer ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Oui, absolument. Vous pouvez demander une période d'essai gratuite. C'est l'occasion idéale pour découvrir toutes les fonctionnalités et valider que le logiciel correspond à vos besoins, sans aucun engagement."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Mes données sont-elles en sécurité avec Simplex Gestion ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Oui. Nous utilisons des serveurs hautement sécurisés avec chiffrement des données et effectuons des sauvegardes quotidiennes automatiques."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Puis-je récupérer mes anciennes données ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Oui, nous proposons un module d'importation Excel. Vous pouvez importer votre liste de clients, fournisseurs et votre catalogue articles (avec stock initial) en quelques minutes."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Puis-je annuler mon abonnement à tout moment ?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "Oui, en toute liberté. Nos offres sont sans engagement de durée. Vous pouvez arrêter votre abonnement quand vous le souhaitez, sans frais cachés ni pénalités."
-              }
-            }
-          ]
-        }
-    </script>
-
-    <!-- JSON-LD Structured Data - BreadcrumbList -->
-    <script type="application/ld+json">
-        {
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Accueil",
-              "item": "https://www.simplexgestion.tn/"
-            }
-          ]
-        }
-    </script>
-
+    <!-- End Meta Pixel Code -->
 
     <style>
         :root {

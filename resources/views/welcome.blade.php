@@ -33,7 +33,7 @@
     <meta name="googlebot" content="index, follow">
 
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://www.simplexgestion.tn/">
+    <link rel="canonical" href="https://simplexgestion.tn">
 
     <!-- Language and Region -->
     <meta name="language" content="French">
@@ -42,10 +42,10 @@
 
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.simplexgestion.tn/">
+    <meta property="og:url" content="https://simplexgestion.tn">
     <meta property="og:title" content="Simplex Gestion - Logiciel Gestion Commerciale #1 en Tunisie | Facturation, Stock & POS">
     <meta property="og:description" content="Logiciel de gestion commerciale tout-en-un pour entreprises tunisiennes. Facturation, Stock, POS, Achats et Conformité Fiscale. Essai gratuit - 3 DT/jour.">
-    <meta property="og:image" content="https://www.simplexgestion.tn/images/og-image.jpg">
+    <meta property="og:image" content="https://simplexgestion.tn/img/logo.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:locale" content="fr_TN">
@@ -53,16 +53,16 @@
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://www.simplexgestion.tn/">
+    <meta name="twitter:url" content="https://simplexgestion.tn">
     <meta name="twitter:title" content="Simplex Gestion - Logiciel Gestion Commerciale #1 en Tunisie">
     <meta name="twitter:description" content="Logiciel de gestion commerciale tout-en-un. Facturation, Stock, POS. Essai gratuit - Support 24/7.">
-    <meta name="twitter:image" content="https://www.simplexgestion.tn/images/twitter-card.jpg">
+    <meta name="twitter:image" content="https://simplexgestion.tn/img/logo.png">
 
     <!-- Favicon and App Icons -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
 
     <!-- DNS Prefetch & Preconnect for Performance -->
