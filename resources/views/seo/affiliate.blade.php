@@ -22,15 +22,15 @@
               "provider": {
                 "@type": "Organization",
                 "name": "Simplex Gestion",
-                "url": "https://www.simplexgestion.tn"
+                "url": "https://simplexgestion.tn"
               },
               "areaServed": "TN"
             },
             {
               "@type": "BreadcrumbList",
               "itemListElement": [
-                { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.simplexgestion.tn/" },
-                { "@type": "ListItem", "position": 2, "name": "Partenariat", "item": "https://www.simplexgestion.tn/affiliate" }
+                { "@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://simplexgestion.tn/" },
+                { "@type": "ListItem", "position": 2, "name": "Partenariat", "item": "https://simplexgestion.tn/affiliate" }
               ]
             }
           ]
