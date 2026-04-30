@@ -106,11 +106,11 @@
           "@context": "https://schema.org",
           "@graph": [
              {
-         "@id": "https://www.simplexgestion.tn/#accueil",
+         "@id": "https://simplexgestion.tn/about",
           "@type": "Organization",
           "name": "Simplex Gestion",
-          "url": "https://www.simplexgestion.tn",
-          "logo": "https://www.simplexgestion.tn/logo.png",
+          "url": "https://simplexgestion.tn",
+          "logo": "https://simplexgestion.tn/logo.png",
           "description": "application de gestion commerciale pour les commerces en tunisie",
           "address": {
             "@type": "PostalAddress",
@@ -131,12 +131,12 @@
           ]
         },
           {
-          "@id": "https://www.simplexgestion.tn/#legal",
+          "@id": "https://simplexgestion.tn/contact",
           "@type": "LocalBusiness",
           "name": "Simplex Gestion",
-          "image": "https://www.simplexgestion.tn/logo.png",
-          "@id": "https://www.simplexgestion.tn",
-          "url": "https://www.simplexgestion.tn",
+          "image": "https://simplexgestion.tn/logo.png",
+          "@id": "https://simplexgestion.tn",
+          "url": "https://simplexgestion.tn",
           "telephone": "+216-93-796-501",
           "address": {
             "@type": "PostalAddress",
@@ -163,7 +163,7 @@
           }
           },
             {
-          "@id": "https://www.simplexgestion.tn/#accueil",
+          "@id": "https://simplexgestion.tn",
           "@type": "SoftwareApplication",
           "name": "Simplex Gestion",
           "operatingSystem": "Web",
@@ -189,7 +189,7 @@
         },
 
           {
-          "@id": "https://www.simplexgestion.tn/#faq",
+          "@id": "https://simplexgestion.tn/faq",
           "@type": "FAQPage",
           "mainEntity": [
             {
@@ -228,37 +228,59 @@
         },
         {
           "@type": "SiteNavigationElement",
-          "@id": "https://www.simplexgestion.tn/#nav",
+          "@id": "https://simplexgestion.tn/#footer-nav",
           "name": "Main Menu",
           "hasPart": [
             {
               "@type": "SiteNavigationElement",
-              "name": "Fonctionnalités",
+              "name": "Navigation",
               "hasPart": [
-                { "@type": "WebPage", "name": "Gestion des Ventes", "url": "https://www.simplexgestion.tn/features/ventes" },
-                { "@type": "WebPage", "name": "Gestion de Stock", "url": "https://www.simplexgestion.tn/features/stock" },
-                { "@type": "WebPage", "name": "Achats & Dépenses", "url": "https://www.simplexgestion.tn/features/achat-et-dépenses" },
-                { "@type": "WebPage", "name": "Impôt", "url": "https://www.simplexgestion.tn/features/tax" },
-                { "@type": "WebPage", "name": "Rapports & Statistiques", "url": "https://www.simplexgestion.tn/features/rapport" }
+                { "@type": "WebPage", "name": "Accueil", "url": "https://simplexgestion.tn/" },
+                { "@type": "WebPage", "name": "Fonctionnalités", "url": "https://simplexgestion.tn/fonctionnalites" },
+                { "@type": "WebPage", "name": "Tarifs", "url": "https://simplexgestion.tn/pricing" },
+                { "@type": "WebPage", "name": "À propos", "url": "https://simplexgestion.tn/about" },
+                { "@type": "WebPage", "name": "Contact", "url": "https://simplexgestion.tn/contact" }
               ]
             },
             {
               "@type": "SiteNavigationElement",
-              "name": "Solutions",
+              "name": "Fonctionnalités",
               "hasPart": [
-                { "@type": "WebPage", "name": "Grossistes", "url": "https://www.simplexgestion.tn/solution/grossiste" },
-                { "@type": "WebPage", "name": "Distributeurs", "url": "https://www.simplexgestion.tn/solution/distributeur" },
-                { "@type": "WebPage", "name": "Fournisseurs", "url": "https://www.simplexgestion.tn/solution/fournisseur" },
-                { "@type": "WebPage", "name": "Détaillants", "url": "https://www.simplexgestion.tn/solution/detaillant" }
+                { "@type": "WebPage", "name": "Ventes", "url": "https://simplexgestion.tn/fonctionnalites/gestion-ventes" },
+                { "@type": "WebPage", "name": "Stock", "url": "https://simplexgestion.tn/fonctionnalites/gestion-stock" },
+                { "@type": "WebPage", "name": "Achats", "url": "https://simplexgestion.tn/fonctionnalites/gestion-achats" },
+                { "@type": "WebPage", "name": "Dépenses", "url": "https://simplexgestion.tn/fonctionnalites/gestion-depenses" },
+                { "@type": "WebPage", "name": "Caisse", "url": "https://simplexgestion.tn/fonctionnalites/caisse-enregistreuse" },
+                { "@type": "WebPage", "name": "Client & fournisseur", "url": "https://simplexgestion.tn/fonctionnalites/gestion-client-fournisseur" },
+                { "@type": "WebPage", "name": "Rapports & Statistiques", "url": "https://simplexgestion.tn/fonctionnalites/rapports-statistiques" }
+              ]
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "name": "Solutions Pour",
+              "hasPart": [
+                { "@type": "WebPage", "name": "Fournisseurs / Grossistes / Distributeurs", "url": "https://simplexgestion.tn/solution/grossiste-fournisseur-distributeur" },
+                { "@type": "WebPage", "name": "Détaillants", "url": "https://simplexgestion.tn/solution/detaillant" }
               ]
             },
             {
               "@type": "SiteNavigationElement",
               "name": "Ressources",
               "hasPart": [
-                { "@type": "WebPage", "name": "Blog", "url": "https://www.simplexgestion.tn/blog" },
-                { "@type": "WebPage", "name": "Comparatifs", "url": "https://www.simplexgestion.tn/compare" },
-                { "@type": "WebPage", "name": "FAQ", "url": "https://www.simplexgestion.tn/faq" }
+                { "@type": "WebPage", "name": "Blog", "url": "https://simplexgestion.tn/blog" },
+                { "@type": "WebPage", "name": "Affiliation", "url": "https://simplexgestion.tn/affiliate" },
+                { "@type": "WebPage", "name": "Carrières", "url": "https://simplexgestion.tn/jobs" },
+                { "@type": "WebPage", "name": "Comparatifs", "url": "https://simplexgestion.tn/compare" },
+                { "@type": "WebPage", "name": "FAQ", "url": "https://simplexgestion.tn/faq" }
+              ]
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "name": "Légal",
+              "hasPart": [
+                { "@type": "WebPage", "name": "Mentions Légales", "url": "https://simplexgestion.tn/legal" },
+                { "@type": "WebPage", "name": "Confidentialité", "url": "https://simplexgestion.tn/privacy" },
+                { "@type": "WebPage", "name": "Conditions d'utilisation", "url": "https://simplexgestion.tn/terms" }
               ]
             }
           ]
@@ -1275,7 +1297,7 @@
 <a href="https://wa.me/21693796501" class="whatsapp-float" target="_blank" title="Contactez-nous sur WhatsApp">
     <i class='bx bxl-whatsapp'></i>
 </a>
-<footer class="bg-dark text-white pt-5 pb-3">
+<footer class="bg-dark text-white pt-5 pb-3" id="footer-nav">
     <div class="container">
         <h3 class="fw-bold mb-4">Simplex<span class="text-primary">Gestion</span></h3>
         <div class="row">
