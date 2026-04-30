@@ -135,7 +135,6 @@
           "@type": "LocalBusiness",
           "name": "Simplex Gestion",
           "image": "https://simplexgestion.tn/logo.png",
-          "@id": "https://simplexgestion.tn",
           "url": "https://simplexgestion.tn",
           "telephone": "+216-93-796-501",
           "address": {
