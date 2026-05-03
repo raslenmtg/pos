@@ -25,7 +25,7 @@
 
     <title>Simplex Gestion - Gestion Commerciale tunisie</title>
     <meta name="title" content="Simplex Gestion - Gestion Commerciale pour Fournisseurs, Grossistes et Distributeurs en Tunisie">
-    <meta name="description" content="Logiciel de gestion commerciale #1 en Tunisie. Gérez facturation, stock, point de vente (POS), achats avec conformité fiscale (retenue à la source, TVA). Essai gratuit. Support 24/7.">
+    <meta name="description" content="Logiciel de gestion commerciale en ligne #1 en Tunisie. Gérez facturation, stock, point de vente (POS), achats avec conformité fiscale (retenue à la source, TVA). Essai gratuit. Support 24/7.">
     <meta name="keywords" content="logiciel gestion tunisie, gestion commerciale tunisie, logiciel facturation tunisie, gestion stock tunisie, pos tunisie, point de vente tunisie, logiciel commercial tunisie, facturation électronique tunisie, gestion entreprise tunisie, logiciel comptabilité tunisie">
     <meta name="author" content="Simplex Gestion">
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -42,7 +42,7 @@
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://simplexgestion.tn/">
-    <meta property="og:title" content="Simplex Gestion - Logiciel Gestion Commerciale #1 en Tunisie | Facturation, Stock & POS">
+    <meta property="og:title" content="Simplex Gestion - Logiciel Gestion Commerciale en ligne #1 en Tunisie | Facturation, Stock & POS">
     <meta property="og:description" content="Logiciel de gestion commerciale tout-en-un pour entreprises tunisiennes. Facturation, Stock, POS, Achats et Conformité Fiscale. Essai gratuit - 3 DT/jour.">
     <meta property="og:image" content="https://simplexgestion.tn/images/og-image.jpg">
     <meta property="og:image:width" content="1200">
@@ -53,7 +53,7 @@
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://simplexgestion.tn/">
-    <meta name="twitter:title" content="Simplex Gestion - Logiciel Gestion Commerciale #1 en Tunisie">
+    <meta name="twitter:title" content="Simplex Gestion - Logiciel Gestion Commerciale en ligne #1 en Tunisie">
     <meta name="twitter:description" content="Logiciel de gestion commerciale tout-en-un. Facturation, Stock, POS. Essai gratuit - Support 24/7.">
     <meta name="twitter:image" content="https://simplexgestion.tn/images/twitter-card.jpg">
 
@@ -1173,8 +1173,8 @@
                 &copy; 2026 Simplex Gestion جميع الحقوق محفوظة
             </div>
             <div class="col-md-6 text-center text-md-end text-secondary small">
-                <a href="#" class="text-secondary text-decoration-none me-3">Mentions Légales</a>
-                <a href="#" class="text-secondary text-decoration-none">Politique de Confidentialité</a>
+                <a href="/cgu" class="text-secondary text-decoration-none me-3">Mentions Légales</a>
+                <a href="/privacy" class="text-secondary text-decoration-none">Politique de Confidentialité</a>
             </div>
         </div>
     </div>
