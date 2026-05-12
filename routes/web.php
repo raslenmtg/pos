@@ -23,6 +23,8 @@ use App\Http\Controllers\ImportOpeningStockController;
 use App\Http\Controllers\ImportProductsController;
 use App\Http\Controllers\ImportSalesController;
 use App\Http\Controllers\InventaireController;
+use App\Http\Controllers\ManufactureController;
+use App\Http\Controllers\ManufactureRecipeController;
 use App\Http\Controllers\InvoiceLayoutController;
 use App\Http\Controllers\InvoiceSchemeController;
 use App\Http\Controllers\LabelsController;
@@ -431,6 +433,25 @@ Route::middleware([ 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'C
     Route::get('/stock-adjustments/remove-expired-stock/{purchase_line_id}', [StockAdjustmentController::class, 'removeExpiredStock']);
     Route::post('/stock-adjustments/get_product_row', [StockAdjustmentController::class, 'getProductRow']);
     Route::resource('stock-adjustments', StockAdjustmentController::class);
+    Route::prefix('manufacture')->name('manufacture.')->group(function () {
+        Route::get('/', [ManufactureController::class, 'index'])->name('index');
+        Route::get('/report', [ManufactureController::class, 'report'])->name('report');
+        Route::get('/create', [ManufactureController::class, 'create'])->name('create');
+        Route::post('/', [ManufactureController::class, 'store'])->name('store');
+
+        Route::prefix('recipes')->name('recipes.')->group(function () {
+            Route::get('/', [ManufactureRecipeController::class, 'index'])->name('index');
+            Route::get('/create', [ManufactureRecipeController::class, 'create'])->name('create');
+            Route::post('/', [ManufactureRecipeController::class, 'store'])->name('store');
+            Route::get('/{id}/edit', [ManufactureRecipeController::class, 'edit'])->name('edit');
+            Route::put('/{id}', [ManufactureRecipeController::class, 'update'])->name('update');
+            Route::delete('/{id}', [ManufactureRecipeController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::get('/{id}', [ManufactureController::class, 'show'])->whereNumber('id')->name('show');
+        Route::post('/{id}/complete', [ManufactureController::class, 'complete'])->whereNumber('id')->name('complete');
+        Route::delete('/{id}', [ManufactureController::class, 'destroy'])->whereNumber('id')->name('destroy');
+    });
     Route::post('/inventaire/get_product_row', [InventaireController::class, 'getProductRow'])->name('inventaire.get_product_row');
     Route::post('/inventaire/get_products_by_category', [InventaireController::class, 'getProductsByCategory'])->name('inventaire.get_products_by_category');
     Route::post('/inventaire/export/excel', [InventaireController::class, 'exportExcel'])->name('inventaire.export_excel');

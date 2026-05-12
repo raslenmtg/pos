@@ -2197,7 +2197,7 @@ class ProductUtil extends Util
                     'quantity_change' => $quantity_change,
                     'stock' => $this->roundQuantity($stock),
                     'type' => 'sell',
-                    'type_label' => __('manufacturing::lang.ingredient'),
+                    'type_label' => __('manufacture.ingredient'),
                     'ref_no' => '',
                     'stock_in_second_unit' => $this->roundQuantity($stock_in_second_unit),
                 ]);
@@ -2208,7 +2208,7 @@ class ProductUtil extends Util
                     'quantity_change' => $quantity_change,
                     'stock' => $this->roundQuantity($stock),
                     'type' => 'production_purchase',
-                    'type_label' => __('manufacturing::lang.manufactured'),
+                    'type_label' => __('manufacture.manufactured'),
                     'ref_no' => $stock_line->ref_no,
                     'stock_in_second_unit' => $this->roundQuantity($stock_in_second_unit),
                 ]);

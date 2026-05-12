@@ -472,6 +472,46 @@ class AdminSidebarMenu
                 )->order(40);
             }
 
+            if (in_array('manufacture', $enabled_modules) && (auth()->user()->can('purchase.view') || auth()->user()->can('purchase.create') || auth()->user()->can('view_own_purchase'))) {
+                $menu->dropdown(
+                    __('manufacture.manufacture'),
+                    function ($sub) {
+                        if (auth()->user()->can('purchase.view') || auth()->user()->can('view_own_purchase')) {
+                            $sub->url(
+                                action([\App\Http\Controllers\ManufactureController::class, 'index']),
+                                __('manufacture.work_orders'),
+                                ['icon' => '', 'active' => request()->segment(1) == 'manufacture' && request()->segment(2) == null]
+                            );
+                        }
+                        if (auth()->user()->can('purchase.create')) {
+                            $sub->url(
+                                action([\App\Http\Controllers\ManufactureController::class, 'create']),
+                                __('manufacture.add_work_order'),
+                                ['icon' => '', 'active' => request()->segment(1) == 'manufacture' && request()->segment(2) == 'create']
+                            );
+                            $sub->url(
+                                action([\App\Http\Controllers\ManufactureRecipeController::class, 'index']),
+                                __('manufacture.recipes'),
+                                ['icon' => '', 'active' => request()->segment(1) == 'manufacture' && request()->segment(2) == 'recipes']
+                            );
+                        }
+                        $sub->url(
+                            action([\App\Http\Controllers\ManufactureController::class, 'report']),
+                            __('manufacture.report'),
+                            ['icon' => '', 'active' => request()->segment(1) == 'manufacture' && request()->segment(2) == 'report']
+                        );
+                    },
+                    ['icon' => '<svg aria-hidden="true" class="tw-size-5 tw-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M3 21h18"></path>
+                        <path d="M5 21v-12l5 4v-4l5 4h4"></path>
+                        <path d="M19 21v-8l-1.436 -9.574a.5 .5 0 0 0 -.495 -.426h-1.145a.5 .5 0 0 0 -.494 .418l-1.43 8.582"></path>
+                        <path d="M9 17h1"></path>
+                        <path d="M14 17h1"></path>
+                      </svg>']
+                )->order(42);
+            }
+
             //Expense dropdown
             if (in_array('expenses', $enabled_modules) && (auth()->user()->can('all_expense.access') || auth()->user()->can('view_own_expense'))) {
                 $menu->dropdown(

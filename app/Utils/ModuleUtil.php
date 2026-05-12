@@ -475,6 +475,7 @@ class ModuleUtil extends Util
             'pos_sale' => ['name' => __('sale.pos_sale')],
             'stock_transfers' => ['name' => __('lang_v1.stock_transfers')],
             'stock_adjustment' => ['name' => __('stock_adjustment.stock_adjustment')],
+            'manufacture' => ['name' => __('manufacture.manufacture')],
             'expenses' => ['name' => __('expense.expenses')],
             'account' => ['name' => __('lang_v1.account')],
             'tables' => ['name' => __('restaurant.tables'),
