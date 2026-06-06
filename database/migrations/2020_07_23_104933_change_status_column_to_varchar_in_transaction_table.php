@@ -2,19 +2,12 @@
 
 use App\Transaction;
 use Illuminate\Database\Migrations\Migration;
-use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        DB::statement('ALTER TABLE transactions MODIFY COLUMN `status` VARCHAR(191) NOT NULL;');
-
+        // status column is already varchar - no-op for PostgreSQL
         Transaction::where('type', 'sell_transfer')
                 ->update(['status' => 'final']);
 
@@ -22,11 +15,6 @@ return new class extends Migration
                 ->update(['status' => 'received']);
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
     }

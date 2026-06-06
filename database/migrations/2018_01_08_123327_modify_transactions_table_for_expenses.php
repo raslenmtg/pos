@@ -7,16 +7,8 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        DB::statement("ALTER TABLE transactions MODIFY COLUMN type ENUM('purchase','sell', 'expense')");
-        DB::statement('ALTER TABLE transactions MODIFY COLUMN contact_id INT(11) UNSIGNED DEFAULT NULL');
-
         Schema::table('transactions', function (Blueprint $table) {
             $table->integer('expense_category_id')->nullable()->unsigned()->after('final_total');
             $table->foreign('expense_category_id')->references('id')->on('expense_categories')->onDelete('cascade');
@@ -27,15 +19,9 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::table('transactions', function (Blueprint $table) {
-            //
         });
     }
 };

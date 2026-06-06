@@ -7,18 +7,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        DB::statement("ALTER TABLE `transactions` CHANGE `type` `type` ENUM('purchase','sell','expense','stock_adjustment') DEFAULT NULL");
+        // ENUM change for type - no-op for PostgreSQL (type is varchar)
 
-        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-
-        DB::statement('DROP TABLE IF EXISTS stock_adjustment_lines');
+        DB::statement('DROP TABLE IF EXISTS stock_adjustment_lines CASCADE');
 
         Schema::create('stock_adjustment_lines', function (Blueprint $table) {
             $table->increments('id');
@@ -33,29 +26,20 @@ return new class extends Migration
             $table->decimal('unit_price', 22, 4)->comment('Last purchase unit price')->nullable();
             $table->timestamps();
 
-            //Indexing
             $table->index('transaction_id');
         });
 
         Schema::table('transactions', function (Blueprint $table) {
-            $table->enum('adjustment_type', ['normal', 'abnormal'])->nullable()->after('payment_status');
+            $table->string('adjustment_type')->nullable()->after('payment_status');
             $table->decimal('total_amount_recovered', 22, 4)->comment('Used for stock adjustment.')->nullable()->after('exchange_rate');
         });
 
-        //Create & Rename stock_adjustment table.
-        DB::statement('CREATE TABLE IF NOT EXISTS `stock_adjustments` (`id` int(11) DEFAULT NULL) ');
+        // Create temp table using PostgreSQL syntax
+        DB::statement('CREATE TABLE IF NOT EXISTS stock_adjustments (id INTEGER DEFAULT NULL)');
         Schema::rename('stock_adjustments', 'stock_adjustments_temp');
-
-        DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        //
     }
 };

@@ -5,23 +5,14 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        DB::statement('ALTER TABLE products MODIFY COLUMN alert_quantity DECIMAL(22, 4) DEFAULT NULL');
+        DB::statement("ALTER TABLE products ALTER COLUMN alert_quantity TYPE DECIMAL(22, 4)");
+        DB::statement("ALTER TABLE products ALTER COLUMN alert_quantity DROP NOT NULL");
+        DB::statement("ALTER TABLE products ALTER COLUMN alert_quantity DROP DEFAULT");
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        //
     }
 };

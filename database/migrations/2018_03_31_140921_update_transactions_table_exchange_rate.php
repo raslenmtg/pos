@@ -1,26 +1,18 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        DB::statement('ALTER TABLE transactions MODIFY COLUMN exchange_rate DECIMAL(20,3) NOT NULL DEFAULT 0');
+        DB::statement('ALTER TABLE transactions ALTER COLUMN exchange_rate TYPE DECIMAL(20,3)');
+        DB::statement('ALTER TABLE transactions ALTER COLUMN exchange_rate SET NOT NULL');
+        DB::statement('ALTER TABLE transactions ALTER COLUMN exchange_rate SET DEFAULT 0');
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        //
     }
 };

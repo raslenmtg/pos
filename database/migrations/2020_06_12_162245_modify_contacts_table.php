@@ -7,11 +7,6 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::table('contacts', function (Blueprint $table) {
@@ -24,16 +19,12 @@ return new class extends Migration
             $table->date('dob')->after('zip_code')->nullable();
         });
 
-        DB::statement('ALTER TABLE contacts CHANGE landmark address_line_1 text;');
+        // PostgreSQL: RENAME COLUMN instead of CHANGE
+        DB::statement('ALTER TABLE contacts RENAME COLUMN landmark TO address_line_1');
 
-        DB::statement('UPDATE contacts SET first_name=name;');
+        DB::statement("UPDATE contacts SET first_name=name");
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
     }

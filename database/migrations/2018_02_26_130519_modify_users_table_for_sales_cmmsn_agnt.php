@@ -2,20 +2,13 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        DB::statement('ALTER TABLE users MODIFY COLUMN surname CHAR(10)');
-
+        // MODIFY COLUMN surname - no-op for PostgreSQL
         Schema::table('users', function (Blueprint $table) {
             $table->char('contact_no', 15)->nullable()->after('language');
             $table->text('address')->nullable()->after('contact_no');
@@ -24,15 +17,9 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            //
         });
     }
 };

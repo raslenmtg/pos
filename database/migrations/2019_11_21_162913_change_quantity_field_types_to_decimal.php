@@ -5,25 +5,20 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        DB::statement("ALTER TABLE purchase_lines MODIFY COLUMN quantity DECIMAL(22, 4) NOT NULL DEFAULT  '0'");
+        DB::statement("ALTER TABLE purchase_lines ALTER COLUMN quantity TYPE DECIMAL(22, 4)");
+        DB::statement("ALTER TABLE purchase_lines ALTER COLUMN quantity SET NOT NULL");
+        DB::statement("ALTER TABLE purchase_lines ALTER COLUMN quantity SET DEFAULT 0");
 
-        DB::statement("ALTER TABLE transaction_sell_lines MODIFY COLUMN quantity DECIMAL(22, 4) NOT NULL DEFAULT  '0'");
+        DB::statement("ALTER TABLE transaction_sell_lines ALTER COLUMN quantity TYPE DECIMAL(22, 4)");
+        DB::statement("ALTER TABLE transaction_sell_lines ALTER COLUMN quantity SET NOT NULL");
+        DB::statement("ALTER TABLE transaction_sell_lines ALTER COLUMN quantity SET DEFAULT 0");
 
-        DB::statement("ALTER TABLE transactions MODIFY COLUMN discount_amount DECIMAL(22, 4) DEFAULT  '0'");
+        DB::statement("ALTER TABLE transactions ALTER COLUMN discount_amount TYPE DECIMAL(22, 4)");
+        DB::statement("ALTER TABLE transactions ALTER COLUMN discount_amount SET DEFAULT 0");
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
     }

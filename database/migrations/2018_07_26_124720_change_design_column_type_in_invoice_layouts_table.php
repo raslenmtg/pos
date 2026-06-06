@@ -5,23 +5,13 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        DB::statement("ALTER TABLE invoice_layouts MODIFY COLUMN design VARCHAR(190) DEFAULT 'classic'");
+        DB::statement("ALTER TABLE invoice_layouts ALTER COLUMN design TYPE VARCHAR(190)");
+        DB::statement("ALTER TABLE invoice_layouts ALTER COLUMN design SET DEFAULT 'classic'");
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        //
     }
 };

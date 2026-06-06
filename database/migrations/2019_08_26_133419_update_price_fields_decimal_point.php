@@ -5,43 +5,35 @@ use Illuminate\Support\Facades\DB;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        //Get all columns with type decimal(20, 2)
-        $db_name = env('DB_DATABASE');
+        // Get all columns with type decimal(20, 2) in PostgreSQL
+        $columns = DB::select("SELECT DISTINCT table_name, column_name, column_default
+            FROM information_schema.columns
+            WHERE data_type = 'numeric'
+            AND table_schema = 'public'
+            AND numeric_scale = 2
+            AND numeric_precision = 20");
 
-        $columns = DB::select("SELECT distinct table_name, 
-            column_name, data_type, column_default
-            from information_schema.columns
-            where data_type='decimal'
-            and table_schema='$db_name'
-            and numeric_scale=2 
-            and numeric_precision=20");
-
-        //Alter all columns
         foreach ($columns as $col) {
-            if (! empty($col->table_name)) {
+            if (!empty($col->table_name)) {
                 $table_name = $col->table_name;
                 $col_name = $col->column_name;
                 $default = is_null($col->column_default) ? 'NULL' : $col->column_default;
+                // Strip PostgreSQL cast from default (e.g. "0::numeric" -> "0")
+                $default = preg_replace('/::[\w\s]+$/', '', $default);
 
-                DB::statement("ALTER TABLE $table_name MODIFY COLUMN $col_name DECIMAL(22, 4) DEFAULT $default");
+                DB::statement("ALTER TABLE \"$table_name\" ALTER COLUMN \"$col_name\" TYPE DECIMAL(22, 4)");
+                if ($default === 'NULL') {
+                    DB::statement("ALTER TABLE \"$table_name\" ALTER COLUMN \"$col_name\" DROP NOT NULL");
+                } else {
+                    DB::statement("ALTER TABLE \"$table_name\" ALTER COLUMN \"$col_name\" SET DEFAULT $default");
+                }
             }
         }
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        //
     }
 };

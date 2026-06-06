@@ -7,18 +7,13 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::table('variations', function (Blueprint $table) {
             $table->text('combo_variations')->nullable()->comment('Contains the combo variation details');
         });
 
-        DB::statement("ALTER TABLE `products` CHANGE `type` `type` ENUM('single','variable','modifier','combo') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL;");
+        // ENUM change for type - no-op for PostgreSQL (type is varchar)
 
         Schema::table('transaction_sell_lines', function (Blueprint $table) {
             $table->string('children_type')
@@ -33,11 +28,6 @@ return new class extends Migration
         DB::statement("UPDATE transaction_sell_lines SET children_type='modifier' WHERE parent_sell_line_id IS NOT NULL");
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::table('variations', function (Blueprint $table) {

@@ -7,26 +7,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('allow_login')->default(1)->after('business_id');
         });
 
-        DB::statement('ALTER TABLE users CHANGE username username VARCHAR(191) NULL;');
-        DB::statement('ALTER TABLE users CHANGE password password VARCHAR(191) NULL;');
+        // Make username and password nullable in PostgreSQL
+        DB::statement('ALTER TABLE users ALTER COLUMN username DROP NOT NULL');
+        DB::statement('ALTER TABLE users ALTER COLUMN password DROP NOT NULL');
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
     }
