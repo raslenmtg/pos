@@ -448,6 +448,15 @@ class BusinessController extends Controller
 
             $business_details['common_settings'] = ! empty($request->input('common_settings')) ? $request->input('common_settings') : [];
 
+            // Ecommerce slug
+            if ($request->filled('ecom_slug')) {
+                $slug = preg_replace('/[^a-z0-9\-]/', '', strtolower($request->input('ecom_slug')));
+                $business->ecom_slug = $slug ?: null;
+            } else {
+                $business->ecom_slug = null;
+            }
+            $business->save();
+
             //update session data
             $request->session()->put('business', $business);
 

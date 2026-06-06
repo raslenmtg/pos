@@ -93,4 +93,31 @@
             </div>
         </div>
     </div>
+
+    {{-- Ecommerce / Online Store --}}
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 style="margin-bottom:10px;margin-top:4px;font-weight:700;"><i class="fa fa-shopping-cart"></i> Boutique en ligne</h4>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                {!! Form::label('ecom_slug', 'Identifiant boutique (slug) :') !!}
+                <div class="input-group">
+                    <span class="input-group-addon">/store/</span>
+                    {!! Form::text('ecom_slug', $business->ecom_slug, [
+                        'class' => 'form-control',
+                        'placeholder' => 'ex: monmagasin',
+                        'pattern' => '[a-z0-9\-]+',
+                        'title' => 'Lettres minuscules, chiffres et tirets uniquement'
+                    ]); !!}
+                </div>
+                <p class="help-block"><i>Identifiant unique de votre boutique en ligne. Lettres minuscules, chiffres et tirets uniquement. Ex: <strong>monmagasin</strong></i></p>
+                @if($business->ecom_slug)
+                <a href="{{ route('online_store.index', $business->ecom_slug) }}" target="_blank" class="btn btn-xs btn-success">
+                    <i class="fa fa-external-link"></i> Voir ma boutique
+                </a>
+                @endif
+            </div>
+        </div>
+    </div>
 </div>

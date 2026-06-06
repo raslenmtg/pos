@@ -60,6 +60,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VariationTemplateController;
 use App\Http\Controllers\WarrantyController;
 use App\Http\Controllers\InvoiceScanController;
+use App\Http\Controllers\EcomOrderController;
+use App\Http\Controllers\OnlineStoreController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -575,6 +577,25 @@ Route::middleware([ 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'C
     Route::put('update-sales-orders/{id}/status', [SalesOrderController::class, 'postEditSalesOrderStatus']);
     Route::get('reports/activity-log', [ReportController::class, 'activityLog']);
     Route::get('user-location/{latlng}', [HomeController::class, 'getUserLocation']);
+
+    // Ecommerce – online orders admin
+    Route::get('ecom-orders', [EcomOrderController::class, 'index'])->name('ecom.orders.index');
+    Route::get('ecom-orders/{id}', [EcomOrderController::class, 'show'])->name('ecom.orders.show');
+    Route::post('ecom-orders/{id}/status', [EcomOrderController::class, 'updateStatus'])->name('ecom.orders.status');
+    Route::post('ecom-orders/{id}/create-contact', [EcomOrderController::class, 'createContact'])->name('ecom.orders.createContact');
+});
+
+// Online Store – public routes (no auth)
+Route::prefix('store')->group(function () {
+    Route::get('/{slug}', [OnlineStoreController::class, 'index'])->name('online_store.index');
+    Route::get('/{slug}/produit/{id}', [OnlineStoreController::class, 'show'])->name('online_store.show');
+    Route::get('/{slug}/panier', [OnlineStoreController::class, 'cart'])->name('online_store.cart');
+    Route::post('/{slug}/panier/ajouter', [OnlineStoreController::class, 'addToCart'])->name('online_store.addToCart');
+    Route::post('/{slug}/panier/supprimer', [OnlineStoreController::class, 'removeFromCart'])->name('online_store.removeFromCart');
+    Route::post('/{slug}/panier/update', [OnlineStoreController::class, 'updateCart'])->name('online_store.updateCart');
+    Route::get('/{slug}/commande', [OnlineStoreController::class, 'checkout'])->name('online_store.checkout');
+    Route::post('/{slug}/commande', [OnlineStoreController::class, 'placeOrder'])->name('online_store.placeOrder');
+    Route::get('/{slug}/confirmation/{order_number}', [OnlineStoreController::class, 'success'])->name('online_store.success');
 });
 
 // Route::middleware(['EcomApi'])->prefix('api/ecom')->group(function () {

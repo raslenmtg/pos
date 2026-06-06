@@ -1,2 +1,3 @@
 - [PostgreSQL migration compat](pgsql-migration-compat.md) — MySQL-specific SQL in migrations must be rewritten for PostgreSQL; many were fixed during import.
 - [DB env var collision](db-env-collision.md) — Replit secrets set DB_* vars as literal ${PGXXX} strings; removing them lets .env file values take effect.
+- [Ecommerce feature](ecom-feature.md) — Online store + admin orders module; business table is named "business" not "businesses" in PostgreSQL.
