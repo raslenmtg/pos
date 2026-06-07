@@ -210,7 +210,7 @@
             </div>
             <div class="form-group">
                 <label>
-                    {!! Form::checkbox('sell_online', 1, !(empty($duplicate_product)) ? $duplicate_product->sell_online : true, ['class' => 'input-icheck', 'id' => 'sell_online']); !!}
+                    {!! Form::checkbox('online_store_enabled', 1, !(empty($duplicate_product)) ? $duplicate_product->online_store_enabled : true, ['class' => 'input-icheck', 'id' => 'online_store_enabled']); !!}
                     <strong><i class="fa fa-globe"></i> Vendre en ligne (boutique e-commerce)</strong>
                 </label>
                 <p class="help-block"><i>Afficher ce produit dans la boutique en ligne de votre entreprise.</i></p>

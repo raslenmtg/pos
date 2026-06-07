@@ -101,20 +101,20 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group">
-                {!! Form::label('ecom_slug', 'Identifiant boutique (slug) :') !!}
+                {!! Form::label('online_store_subdomain', 'Sous-domaine de votre boutique :') !!}
                 <div class="input-group">
-                    <span class="input-group-addon">/store/</span>
-                    {!! Form::text('ecom_slug', $business->ecom_slug, [
+                    {!! Form::text('online_store_subdomain', $business->online_store_subdomain ?? null, [
                         'class' => 'form-control',
-                        'placeholder' => 'ex: monmagasin',
+                        'placeholder' => 'ex: phonex',
                         'pattern' => '[a-z0-9\-]+',
                         'title' => 'Lettres minuscules, chiffres et tirets uniquement'
                     ]); !!}
+                    <span class="input-group-addon">.simplexgestion.tn</span>
                 </div>
-                <p class="help-block"><i>Identifiant unique de votre boutique en ligne. Lettres minuscules, chiffres et tirets uniquement. Ex: <strong>monmagasin</strong></i></p>
-                @if($business->ecom_slug)
-                <a href="{{ route('online_store.index', $business->ecom_slug) }}" target="_blank" class="btn btn-xs btn-success">
-                    <i class="fa fa-external-link"></i> Voir ma boutique
+                <p class="help-block"><i>Sous-domaine unique de votre boutique. Ex: <strong>phonex</strong> → votre boutique sera accessible à <strong>phonex.simplexgestion.tn</strong></i></p>
+                @if(!empty($business->online_store_subdomain))
+                <a href="{{ url('ecom-store/'.$business->online_store_subdomain) }}" target="_blank" class="btn btn-xs btn-success">
+                    <i class="fa fa-external-link"></i> Prévisualiser ma boutique (dev)
                 </a>
                 @endif
             </div>

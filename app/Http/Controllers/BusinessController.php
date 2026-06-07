@@ -448,12 +448,12 @@ class BusinessController extends Controller
 
             $business_details['common_settings'] = ! empty($request->input('common_settings')) ? $request->input('common_settings') : [];
 
-            // Ecommerce slug
-            if ($request->filled('ecom_slug')) {
-                $slug = preg_replace('/[^a-z0-9\-]/', '', strtolower($request->input('ecom_slug')));
-                $business->ecom_slug = $slug ?: null;
+            // Ecommerce subdomain
+            if ($request->filled('online_store_subdomain')) {
+                $subdomain = preg_replace('/[^a-z0-9\-]/', '', strtolower($request->input('online_store_subdomain')));
+                $business->online_store_subdomain = $subdomain ?: null;
             } else {
-                $business->ecom_slug = null;
+                $business->online_store_subdomain = null;
             }
             $business->save();
 

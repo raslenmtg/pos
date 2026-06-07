@@ -1,0 +1,14 @@
+{
+    "name": "Ecommerce",
+    "alias": "ecommerce",
+    "description": "Online store and order management for business owners",
+    "keywords": [],
+    "active": 1,
+    "order": 10,
+    "providers": [
+        "Modules\\Ecommerce\\Providers\\EcommerceServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
