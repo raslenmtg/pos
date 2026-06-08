@@ -121,7 +121,7 @@ $(function () {
         var btn = $(this).prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> En cours...');
 
         $.ajax({
-            url: '{{ url("ecom/online-orders") }}/' + current_order_id + '/finalize',
+            url: '{{ url("online-orders") }}/' + current_order_id + '/finalize',
             method: 'POST',
             data: { _token: '{{ csrf_token() }}', shipping_status: shipping },
             success: function (res) {

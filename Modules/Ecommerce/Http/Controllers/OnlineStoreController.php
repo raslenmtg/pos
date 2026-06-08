@@ -13,6 +13,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+use Modules\Ecommerce\Services\WhatsAppService;
 
 class OnlineStoreController extends Controller
 {
@@ -260,6 +261,18 @@ class OnlineStoreController extends Controller
 
             session()->forget($this->cartKey($business->id));
             DB::commit();
+
+            // WhatsApp notification to the business owner
+            $notifPhone = data_get($business->common_settings, 'notification_phone');
+            if ($notifPhone) {
+                $info = [
+                    'customer_name'    => $request->customer_name,
+                    'customer_phone'   => $request->customer_phone,
+                    'customer_address' => $request->customer_address,
+                ];
+                $message = WhatsAppService::buildOrderMessage($info, $ref_no, $subtotal);
+                (new WhatsAppService())->send($notifPhone, $message);
+            }
 
             return redirect()->route('ecom.dev.success', [$subdomain, $ref_no]);
 

@@ -49,8 +49,8 @@ Route::prefix('ecom-store/{subdomain}')
 | Admin — Online Orders (requires auth)
 |--------------------------------------------------------------------------
 */
-Route::middleware(['web', 'auth'])
-    ->prefix('ecom/online-orders')
+Route::middleware(['web', 'auth', 'SetSessionData', 'language', 'AdminSidebarMenu', 'CheckUserLogin'])
+    ->prefix('online-orders')
     ->name('ecom.orders.')
     ->group(function () {
         Route::get('/', [OnlineOrdersController::class, 'index'])->name('index');
