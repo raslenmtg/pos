@@ -53,15 +53,6 @@ class OnlineOrdersController extends Controller
                 ->addColumn('total', function ($row) {
                     return number_format($row->final_total, 2).' DT';
                 })
-                ->addColumn('shipping', function ($row) {
-                    $statuses = $this->transactionUtil->shipping_statuses();
-                    $label = $statuses[$row->shipping_status] ?? '<em class="text-muted">Non défini</em>';
-                    $colors = ['ordered' => 'info', 'packed' => 'warning', 'shipped' => 'primary', 'delivered' => 'success', 'cancelled' => 'danger'];
-                    $color = $colors[$row->shipping_status] ?? 'default';
-                    return $row->shipping_status
-                        ? "<span class='label label-{$color}'>{$label}</span>"
-                        : '<em class="text-muted">—</em>';
-                })
                 ->addColumn('date', function ($row) {
                     return $row->created_at ? $row->created_at->format('d/m/Y H:i') : '—';
                 })
@@ -89,9 +80,8 @@ class OnlineOrdersController extends Controller
 
         $contact = Contact::find($transaction->contact_id);
         $info = json_decode($transaction->additional_notes, true) ?? [];
-        $shipping_statuses = $this->transactionUtil->shipping_statuses();
 
-        return view('ecommerce::orders.show_modal', compact('transaction', 'contact', 'info', 'shipping_statuses'));
+        return view('ecommerce::orders.show_modal', compact('transaction', 'contact', 'info'));
     }
 
     public function finalize(Request $request, $id)

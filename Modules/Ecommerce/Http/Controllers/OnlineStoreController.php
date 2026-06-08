@@ -32,7 +32,7 @@ class OnlineStoreController extends Controller
 
         $query = Product::where('business_id', $business->id)
             ->where('online_store_enabled', true)
-            ->where('status', 'active')
+            ->where('not_for_selling', 0)
             ->with(['variations']);
 
         if ($request->filled('q')) {
@@ -57,7 +57,7 @@ class OnlineStoreController extends Controller
 
         $product = Product::where('business_id', $business->id)
             ->where('online_store_enabled', true)
-            ->where('status', 'active')
+            ->where('not_for_selling', 0)
             ->with(['variations'])
             ->findOrFail($id);
 
@@ -229,7 +229,7 @@ class OnlineStoreController extends Controller
                 ];
             }
 
-            $ref_no = 'ONLINE-'.strtoupper(uniqid());
+            $ref_no = 'ONLINE-'.strtoupper(substr(uniqid(),-5));
 
             $transaction = Transaction::create([
                 'business_id'     => $business->id,

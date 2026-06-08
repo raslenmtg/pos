@@ -4,11 +4,7 @@
 
 @section('content')
 <section class="content-header">
-    <h1>Commandes en ligne <small>Boutique e-commerce</small></h1>
-    <ol class="breadcrumb">
-        <li><a href="{{ url('/') }}"><i class="fa fa-dashboard"></i> Tableau de bord</a></li>
-        <li class="active">Commandes en ligne</li>
-    </ol>
+    <h1>Commandes en ligne </h1>
 </section>
 
 <section class="content">
@@ -17,9 +13,6 @@
             <div class="box box-primary">
                 <div class="box-header with-border">
                     <h3 class="box-title"><i class="fa fa-shopping-bag"></i> Liste des commandes en ligne</h3>
-                    <div class="box-tools pull-right">
-                        <span class="label label-warning">Statut : En attente de finalisation</span>
-                    </div>
                 </div>
                 <div class="box-body">
                     <table class="table table-bordered table-striped" id="ecom_orders_table">
@@ -28,7 +21,6 @@
                                 <th>Référence</th>
                                 <th>Client</th>
                                 <th>Total</th>
-                                <th>Expédition</th>
                                 <th>Date</th>
                                 <th>Actions</th>
                             </tr>
@@ -59,14 +51,13 @@
 <div class="modal fade" id="finalize_order_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header bg-success" style="border-radius:4px 4px 0 0;">
+            <div class="modal-header bg-light-green">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title" style="color:#fff;"><i class="fa fa-check-circle"></i> Finaliser la commande</h4>
             </div>
             <div class="modal-body">
-                <p>Sélectionnez le statut d'expédition initial pour cette commande. La commande sera marquée comme <strong>finale</strong>.</p>
+                <p>Sélectionnez le statut d'expédition pour cette commande:</p>
                 <div class="form-group">
-                    <label>Statut d'expédition</label>
                     <select id="finalize_shipping_status" class="form-control">
                         @foreach($shipping_statuses as $key => $label)
                             <option value="{{ $key }}" {{ $key === 'ordered' ? 'selected' : '' }}>{{ $label }}</option>
@@ -81,7 +72,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
                 <button type="button" class="btn btn-success" id="btn_confirm_finalize">
-                    <i class="fa fa-check"></i> Confirmer la finalisation
+                    <i class="fa fa-check"></i> Confirmer la commande
                 </button>
             </div>
         </div>
@@ -100,14 +91,10 @@ $(function () {
             { data: 'ref_no', name: 'transactions.ref_no' },
             { data: 'customer', name: 'contacts.name', orderable: false },
             { data: 'total', name: 'transactions.final_total' },
-            { data: 'shipping', name: 'transactions.shipping_status', orderable: false },
             { data: 'date', name: 'transactions.created_at' },
             { data: 'actions', name: 'actions', orderable: false, searchable: false },
         ],
-        order: [[4, 'desc']],
-        language: {
-            url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/French.json'
-        }
+        order: [[3, 'desc']]
     });
 
     // Show detail modal

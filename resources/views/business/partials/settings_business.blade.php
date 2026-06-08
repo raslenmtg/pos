@@ -111,10 +111,10 @@
                     ]); !!}
                     <span class="input-group-addon">.simplexgestion.tn</span>
                 </div>
-                <p class="help-block"><i>Sous-domaine unique de votre boutique. Ex: <strong>phonex</strong> → votre boutique sera accessible à <strong>phonex.simplexgestion.tn</strong></i></p>
+                <p class="help-block"><i>Sous-domaine unique de votre société. Ex: <strong>monmagasin</strong> → votre société sera accessible à <strong>monmagasin.simplexgestion.tn</strong></i></p>
                 @if(!empty($business->online_store_subdomain))
                 <a href="{{ url('ecom-store/'.$business->online_store_subdomain) }}" target="_blank" class="btn btn-xs btn-success">
-                    <i class="fa fa-external-link"></i> Prévisualiser ma boutique (dev)
+                    <i class="fa fa-external-link"></i> Prévisualiser ma société
                 </a>
                 @endif
             </div>

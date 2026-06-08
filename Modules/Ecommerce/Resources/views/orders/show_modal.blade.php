@@ -12,19 +12,6 @@
         <table class="table table-condensed">
             <tr><td style="width:120px;color:#888;">Référence</td><td><strong>{{ $transaction->ref_no }}</strong></td></tr>
             <tr><td style="color:#888;">Date</td><td>{{ $transaction->created_at->format('d/m/Y H:i') }}</td></tr>
-            <tr><td style="color:#888;">Expédition</td>
-                <td>
-                    @php
-                        $colors = ['ordered'=>'info','packed'=>'warning','shipped'=>'primary','delivered'=>'success','cancelled'=>'danger'];
-                        $sc = $colors[$transaction->shipping_status] ?? 'default';
-                    @endphp
-                    @if($transaction->shipping_status)
-                        <span class="label label-{{ $sc }}">{{ $shipping_statuses[$transaction->shipping_status] ?? $transaction->shipping_status }}</span>
-                    @else
-                        <em class="text-muted">Non défini</em>
-                    @endif
-                </td>
-            </tr>
         </table>
     </div>
 </div>

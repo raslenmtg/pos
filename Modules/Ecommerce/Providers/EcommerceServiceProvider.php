@@ -8,7 +8,7 @@ class EcommerceServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->registerConfig();
+      //  $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(__DIR__.'/../Database/Migrations');
     }
