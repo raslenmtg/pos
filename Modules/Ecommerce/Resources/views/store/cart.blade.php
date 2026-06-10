@@ -48,7 +48,6 @@
                                             <input type="hidden" name="key" value="{{ $item['key'] }}">
                                             <input type="number" name="quantity" value="{{ $item['quantity'] }}" min="1"
                                                    class="form-control input-sm qty-input" style="width:70px;">
-                                            <button type="submit" class="btn btn-xs btn-default"><i class="fa fa-refresh"></i></button>
                                         </form>
                                     </td>
                                     <td class="text-right line-subtotal"><strong>{{ number_format($item['subtotal'], 2) }} DT</strong></td>

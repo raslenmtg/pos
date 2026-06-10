@@ -7,6 +7,7 @@ use App\Contact;
 use App\Product;
 use App\Transaction;
 use App\TransactionSellLine;
+use App\Utils\TransactionUtil;
 use App\Variation;
 use App\BusinessLocation;
 use App\User;
@@ -17,9 +18,17 @@ use Modules\Ecommerce\Services\WhatsAppService;
 
 class OnlineStoreController extends Controller
 {
+    protected $transactionUtil;
+
+    public function __construct(
+        TransactionUtil $transactionUtil,
+    )
+    {
+        $this->transactionUtil = $transactionUtil;
+    }
     protected function resolveBusiness($subdomain)
     {
-        return Business::where('online_store_subdomain', $subdomain)->firstOrFail();
+        return Business::with('locations')->where('online_store_subdomain', $subdomain)->firstOrFail();
     }
 
     protected function cartKey($business_id)
@@ -231,6 +240,8 @@ class OnlineStoreController extends Controller
             }
 
             $ref_no = 'ONLINE-'.strtoupper(substr(uniqid(),-5));
+            $invoice_no = $this->transactionUtil->getInvoiceNumber($business->id, 'final', $location->id);
+
 
             $transaction = Transaction::create([
                 'business_id'     => $business->id,
@@ -246,6 +257,7 @@ class OnlineStoreController extends Controller
                 'shipping_charges' => 0,
                 'final_total'     => $subtotal,
                 'created_by'      => $admin->id,
+                'invoice_no'          => $invoice_no,
                 'ref_no'          => $ref_no,
                 'additional_notes' => json_encode([
                     'customer_name'    => $request->customer_name,

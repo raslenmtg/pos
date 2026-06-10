@@ -51,7 +51,7 @@
         .hero p { font-size: 18px; opacity: .8; }
 
         /* MAIN */
-        .store-main { max-width: 1200px; margin: 30px auto; padding: 0 20px; }
+        .store-main { max-width: 1200px; margin: 30px auto; padding: 0 20px; min-height: calc(100vh - 400px); }
 
         /* PRODUCT GRID */
         .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 24px; }
@@ -121,7 +121,15 @@
         .empty-state h3 { font-size: 22px; color: var(--muted); margin-bottom: 10px; }
 
         /* FOOTER */
-        .store-footer { background: var(--primary); color: rgba(255,255,255,.7); text-align: center; padding: 24px 20px; margin-top: 60px; font-size: 13px; }
+        .store-footer { background: var(--primary); color: rgba(255,255,255,.7); padding: 32px 20px 24px; margin-top: 60px; font-size: 14px; }
+        .store-footer h5 { color: var(--white); margin: 0; font-size: 18px; }
+        .store-footer h6 { color: var(--white); margin: 0; font-size: 12px; letter-spacing: 1px; }
+        .store-footer p { margin: 0; color: rgba(255,255,255,.7); }
+        .store-footer .mb-1 { margin-bottom: 5px; }
+        .store-footer .mb-2 { margin-bottom: 10px; }
+        .store-footer .mb-3 { margin-bottom: 15px; }
+        .store-footer .mb-0 { margin-bottom: 0; }
+        .store-footer strong { color: var(--white); }
 
         /* QUANTITY */
         .qty-input { display: flex; align-items: center; border: 2px solid var(--border); border-radius: 8px; overflow: hidden; width: 120px; }
@@ -144,6 +152,8 @@
             .header-inner { flex-direction: column; }
             .product-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
             .hero h1 { font-size: 28px; }
+            .store-footer > div > div[style*="grid"] { grid-template-columns: 1fr !important; }
+            .store-footer > div > div[style*="text-align: right"] { text-align: left !important; }
         }
     </style>
     @yield('head_styles')
@@ -183,7 +193,42 @@
     @yield('content')
 
     <footer class="store-footer">
-        <p>&copy; {{ date('Y') }} {{ $business->name }} – Tous droits réservés</p>
+        <div style="max-width: 1200px; margin: auto;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                <div>
+                    @if($business->logo)
+                        <img src="{{ asset('uploads/business_logos/'.$business->logo) }}" alt="{{ $business->name }}" height="40" style="margin-bottom: 10px;">
+                    @endif
+                    <h5 class="mb-3">{{ $business->name }}</h5>
+                    <p class="mb-2">Boutique en ligne officielle</p>
+                </div>
+                <div>
+                    <h6 class="mb-2">Adresse</h6>
+                    @php($location = $business->locations->first())
+                    @if($location)
+                        <p class="mb-1">{{ $location->landmark }}, {{ $location->city }}</p>
+                        <p class="mb-1">{{ $location->state }}, {{ $location->zip_code }}</p>
+                        <p class="mb-1">{{ $location->country }}</p>
+                    @endif
+                </div>
+                <div style="text-align: right;">
+                    <h6 class="mb-2">Contact</h6>
+                    @if($location)
+                        @if($location->mobile)
+                            <p class="mb-1"><i class="fas fa-phone" style="width: 20px;"></i> {{ $location->mobile }}</p>
+                        @endif
+                        @if($location->email)
+                            <p class="mb-1"><i class="fas fa-envelope" style="width: 20px;"></i> {{ $location->email }}</p>
+                        @endif
+                    @endif
+                </div>
+            </div>
+            <hr style="border-color: rgba(255,255,255,.1); margin: 24px 0;">
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+                <p class="mb-0" style="font-size: 12px;">&copy; {{ date('Y') }} {{ $business->name }}. Tous droits réservés.</p>
+                <p class="mb-0" style="font-size: 12px;">Propulsé par <strong>Simplex Gestion</strong></p>
+            </div>
+        </div>
     </footer>
 </body>
 </html>

@@ -6,6 +6,7 @@ use App\Business;
 use App\Contact;
 use App\Transaction;
 use App\TransactionSellLine;
+use App\Utils\ProductUtil;
 use App\Utils\Util;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -15,10 +16,12 @@ use Yajra\DataTables\Facades\DataTables;
 class OnlineOrdersController extends Controller
 {
     protected $transactionUtil;
-
-    public function __construct(Util $transactionUtil)
+    protected $productUtil;
+    public function __construct(Util $transactionUtil,
+                                ProductUtil $productUtil)
     {
         $this->transactionUtil = $transactionUtil;
+        $this->productUtil = $productUtil;
     }
 
     public function index(Request $request)
@@ -111,6 +114,32 @@ class OnlineOrdersController extends Controller
                 'status'          => 'final',
                 'shipping_status' => $shipping_status,
             ]);
+
+            $location_id = $transaction->location_id;
+
+            foreach ($transaction->sell_lines as $sell_line) {
+                $product = $sell_line->product;
+                $variation = $sell_line->variations;
+
+                $decrease_qty = $sell_line->quantity;
+
+                if ($product->enable_stock) {
+                    $this->productUtil->decreaseProductQuantity(
+                        $product->id,
+                        $variation->id ?? null,
+                        $location_id,
+                        $decrease_qty
+                    );
+                }
+
+                if ($product->type == 'combo') {
+                    $this->productUtil->decreaseProductQuantityCombo(
+                        $product->combo,
+                        $location_id
+                    );
+                }
+            }
+
 
             DB::commit();
             return response()->json(['success' => true, 'message' => 'Commande finalisée avec succès.']);

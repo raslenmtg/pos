@@ -25,7 +25,16 @@
         .product-card .product-price { color: #1a73e8; font-size: 18px; font-weight: 700; }
         .product-card .btn-add { width: 100%; margin-top: 10px; border-radius: 6px; background: #1a73e8; border-color: #1a73e8; }
         .product-card .btn-add:hover { background: #155dbe; border-color: #155dbe; }
-        .store-footer { background: #2d3a4b; color: #adb5bd; text-align: center; padding: 24px 0; margin-top: 48px; font-size: 13px; }
+        .store-footer { background: #2d3a4b; color: #adb5bd; padding: 32px 0 24px; margin-top: 48px; font-size: 14px; }
+        .store-footer h5 { color: #fff; margin: 0; font-size: 18px; }
+        .store-footer h6 { color: #fff; margin: 0; }
+        .store-footer p { margin: 0; color: #adb5bd; }
+        .store-footer .mb-1 { margin-bottom: 5px; }
+        .store-footer .mb-2 { margin-bottom: 10px; }
+        .store-footer .mb-3 { margin-bottom: 15px; }
+        .store-footer .mb-0 { margin-bottom: 0; }
+        .text-right-sm { text-align: right; }
+        @media(max-width:768px) { .text-right-sm { text-align: center; } }
         .store-footer strong { color: #fff; }
         .breadcrumb { background: transparent; padding: 8px 0; font-size: 13px; }
         .page-hero { background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%); color: #fff; padding: 40px 0 32px; margin-bottom: 32px; }
@@ -42,7 +51,7 @@
         <div class="row">
             <div class="col-sm-3 col-xs-6">
                 <a href="{{ route('ecom.dev.index', $subdomain) }}" class="brand">
-                    <i class="fa fa-shopping-bag"></i> {{ $business->name }}
+                     {{ $business->name }}
                 </a>
             </div>
             <div class="col-sm-6 hidden-xs">
@@ -76,12 +85,51 @@
             <div class="alert alert-danger">{{ session('error') }}</div>
         </div>
     @endif
-    @yield('content')
+    <div style="min-height: calc(100vh - 250px);">
+        @yield('content')
+    </div>
 </div>
 
 <footer class="store-footer">
     <div class="container">
-        Boutique de <strong>{{ $business->name }}</strong> — Propulsé par <strong>Simplex Gestion</strong>
+        <div class="row">
+            <div class="col-sm-4 col-xs-12">
+                @if($business->logo)
+                    <img src="{{ asset('uploads/business_logos/'.$business->logo) }}" alt="{{ $business->name }}" height="40" class="mb-2">
+                @endif
+                <h5 class="mb-3">{{ $business->name }}</h5>
+                <p class="mb-2">Boutique en ligne officielle</p>
+            </div>
+            <div class="col-sm-4 col-xs-6">
+                <h6 class="text-uppercase mb-2" style="color: #fff; font-size: 12px; letter-spacing: 1px;">Adresse</h6>
+                @php($location = $business->locations->first())
+                @if($location)
+                    <p class="mb-1">{{ $location->landmark }}, {{ $location->city }}</p>
+                    <p class="mb-1">{{ $location->state }}, {{ $location->zip_code }}</p>
+                    <p class="mb-1">{{ $location->country }}</p>
+                @endif
+            </div>
+            <div class="col-sm-4 col-xs-6">
+                <h6 class="text-uppercase mb-2" style="color: #fff; font-size: 12px; letter-spacing: 1px;">Contact</h6>
+                @if($location)
+                    @if($location->mobile)
+                        <p class="mb-1"><i class="fa fa-phone" style="width: 20px;"></i> {{ $location->mobile }}</p>
+                    @endif
+                    @if($location->email)
+                        <p class="mb-1"><i class="fa fa-envelope" style="width: 20px;"></i> {{ $location->email }}</p>
+                    @endif
+                @endif
+            </div>
+        </div>
+        <hr style="border-color: #4a5568; margin: 24px 0;">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <p class="mb-0" style="font-size: 12px;">&copy; {{ date('Y') }} {{ $business->name }}. Tous droits réservés.</p>
+            </div>
+            <div class="col-sm-6 col-xs-12 text-right-sm">
+                <p class="mb-0" style="font-size: 12px;">Publié par <strong>Simplex Gestion</strong></p>
+            </div>
+        </div>
     </div>
 </footer>
 
