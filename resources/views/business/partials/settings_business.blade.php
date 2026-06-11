@@ -94,3 +94,44 @@
         </div>
     </div>
 </div>
+{{-- Ecommerce / Online Store --}}
+<div class="row">
+    <div class="col-sm-12">
+        <h4 style="margin-bottom:10px;margin-top:4px;font-weight:700;"><i class="fa fa-shopping-cart"></i> Boutique en ligne</h4>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            {!! Form::label('online_store_subdomain', 'Sous-domaine de votre boutique :') !!}
+            <div class="input-group">
+                {!! Form::text('online_store_subdomain', $business->online_store_subdomain ?? null, [
+                    'class' => 'form-control',
+                    'placeholder' => 'ex: phonex',
+                    'pattern' => '[a-z0-9\-]+',
+                    'title' => 'Lettres minuscules, chiffres et tirets uniquement'
+                ]); !!}
+                <span class="input-group-addon">.simplexgestion.tn</span>
+            </div>
+            <p class="help-block"><i>Sous-domaine unique de votre société. Ex: <strong>monmagasin</strong> → votre société sera accessible à <strong>monmagasin.simplexgestion.tn</strong></i></p>
+            @if(!empty($business->online_store_subdomain))
+                <a href="{{ url('ecom-store/'.$business->online_store_subdomain) }}" target="_blank" class="btn btn-xs btn-success">
+                    <i class="fa fa-external-link"></i> Prévisualiser ma société
+                </a>
+            @endif
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="form-group">
+        {!! Form::label('common_settings[notification_phone]', 'Numéro WhatsApp pour les notifications :') !!}
+        <div class="input-group">
+            <span class="input-group-addon">+216</span>
+            {!! Form::text('common_settings[notification_phone]', !empty($common_settings['notification_phone']) ? $common_settings['notification_phone'] : null, [
+                'class' => 'form-control',
+                'placeholder' => '93796501',
+                'id' => 'notification_phone',
+            ]); !!}
+        </div>
+        <p class="help-block"><i>Vous recevrez une notification WhatsApp à chaque nouvelle commande en ligne.</i></p>
+    </div>
+</div>

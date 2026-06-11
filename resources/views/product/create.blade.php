@@ -208,6 +208,13 @@
                     {!! Form::checkbox('not_for_selling', 1, !(empty($duplicate_product)) ? $duplicate_product->not_for_selling : false, ['class' => 'input-icheck']); !!} <strong>@lang('lang_v1.not_for_selling')</strong>
                 </label> @show_tooltip(__('lang_v1.tooltip_not_for_selling'))
             </div>
+            <div class="form-group">
+                <label>
+                    {!! Form::checkbox('online_store_enabled', 1, !(empty($duplicate_product)) ? $duplicate_product->online_store_enabled : true, ['class' => 'input-icheck', 'id' => 'online_store_enabled']); !!}
+                    <strong><i class="fa fa-globe"></i> Vendre en ligne (boutique e-commerce)</strong>
+                </label>
+                <p class="help-block"><i>Afficher ce produit dans la boutique en ligne de votre entreprise.</i></p>
+            </div>
         </div>
 
      

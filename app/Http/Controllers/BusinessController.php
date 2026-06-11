@@ -447,7 +447,14 @@ class BusinessController extends Controller
             $business_details['custom_labels'] = json_encode($business_details['custom_labels']);
 
             $business_details['common_settings'] = ! empty($request->input('common_settings')) ? $request->input('common_settings') : [];
-
+            // Ecommerce subdomain
+            if ($request->filled('online_store_subdomain')) {
+                $subdomain = preg_replace('/[^a-z0-9\-]/', '', strtolower($request->input('online_store_subdomain')));
+                $business->online_store_subdomain = $subdomain ?: null;
+            } else {
+                $business->online_store_subdomain = null;
+            }
+            $business->save();
             //update session data
             $request->session()->put('business', $business);
 
