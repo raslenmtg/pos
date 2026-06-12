@@ -168,6 +168,18 @@ Route::prefix('solution')->group(function () {
         ]);
     })->name('site.webmanifest');
 
+    Route::get('/session-recover', function () {
+
+        // destroy current session
+        auth()->logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/login')
+            ->with('warning', 'Votre session a expiré suite à une mise à jour. Veuillez vous reconnecter.');
+    })->name('session.recover');
+
     Auth::routes();
 
     Route::get('/business/register', [BusinessController::class, 'getRegister'])->name('business.getRegister');
