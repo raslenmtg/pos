@@ -28,14 +28,9 @@ class EcommerceServiceProvider extends ServiceProvider
 
     protected function registerViews()
     {
-        $viewPath = resource_path('views/modules/ecommerce');
         $sourcePath = __DIR__.'/../Resources/views';
 
-        $this->publishes([$sourcePath => $viewPath], 'views');
-
-        $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path.'/modules/ecommerce';
-        }, config('view.paths')), [$sourcePath]), 'ecommerce');
+        $this->loadViewsFrom($sourcePath, 'ecommerce');
     }
 
     public function provides()
