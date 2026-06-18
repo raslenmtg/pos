@@ -111,7 +111,6 @@
 
             $(document).on('input change', '.qty-input', function () {
                 var val = parseInt($(this).val());
-                if (isNaN(val) || val < 1) { $(this).val(1); }
                 recalculate();
             });
         });

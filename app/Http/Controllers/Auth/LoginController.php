@@ -72,7 +72,10 @@ class LoginController extends Controller
         $this->businessUtil->activityLog(auth()->user(), 'logout');
 
         request()->session()->flush();
-        \Auth::logout();
+        auth()->logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
 
         return redirect('/login');
     }
