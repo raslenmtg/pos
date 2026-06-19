@@ -18,7 +18,8 @@ Route::domain('{subdomain}.'.config('ecommerce.domain', 'simplexgestion.tn'))
         Route::get('/panier', [OnlineStoreController::class, 'cart'])->name('cart');
         Route::post('/panier/ajouter', [OnlineStoreController::class, 'addToCart'])->name('addToCart');
         Route::post('/panier/supprimer', [OnlineStoreController::class, 'removeFromCart'])->name('removeFromCart');
-        Route::post('/panier/update', [OnlineStoreController::class, 'updateCart'])->name('updateCart');
+Route::post('/panier/update', [OnlineStoreController::class, 'updateCart'])->name('updateCart');
+        Route::post('/panier/update-batch', [OnlineStoreController::class, 'updateCartBatch'])->name('updateCartBatch');
         Route::get('/commande', [OnlineStoreController::class, 'checkout'])->name('checkout');
         Route::post('/commande', [OnlineStoreController::class, 'placeOrder'])->name('placeOrder');
         Route::get('/confirmation/{ref}', [OnlineStoreController::class, 'success'])->name('success');
@@ -28,7 +29,6 @@ Route::domain('{subdomain}.'.config('ecommerce.domain', 'simplexgestion.tn'))
 |--------------------------------------------------------------------------
 | Development fallback: path-based (Replit / local dev)
 | /ecom-store/{subdomain}/...
-|--------------------------------------------------------------------------
 */
 Route::prefix('ecom-store/{subdomain}')
     ->name('ecom.dev.')
@@ -39,6 +39,7 @@ Route::prefix('ecom-store/{subdomain}')
         Route::post('/panier/ajouter', [OnlineStoreController::class, 'addToCart'])->name('addToCart');
         Route::post('/panier/supprimer', [OnlineStoreController::class, 'removeFromCart'])->name('removeFromCart');
         Route::post('/panier/update', [OnlineStoreController::class, 'updateCart'])->name('updateCart');
+        Route::post('/panier/update-batch', [OnlineStoreController::class, 'updateCartBatch'])->name('updateCartBatch');
         Route::get('/commande', [OnlineStoreController::class, 'checkout'])->name('checkout');
         Route::post('/commande', [OnlineStoreController::class, 'placeOrder'])->name('placeOrder');
         Route::get('/confirmation/{ref}', [OnlineStoreController::class, 'success'])->name('success');

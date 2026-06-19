@@ -83,10 +83,10 @@
                         <div style="display:flex;justify-content:space-between;font-size:18px;font-weight:700;color:#1a73e8;margin-bottom:20px;">
                             <span>Total</span><span id="cart-total">{{ number_format($total, 2) }} DT</span>
                         </div>
-                        <a href="{{ route('ecom.dev.checkout', $subdomain) }}" class="btn btn-primary btn-block btn-lg" style="border-radius:8px;background:#1a73e8;border-color:#1a73e8;">
-                            <i class="fa fa-credit-card"></i> Passer la commande
-                        </a>
-                    </div>
+<a href="{{ route('ecom.dev.checkout', $subdomain) }}" id="checkout-btn" class="btn btn-primary btn-block btn-lg" style="border-radius:8px;background:#1a73e8;border-color:#1a73e8;">
+                             <i class="fa fa-credit-card"></i> Passer la commande
+                         </a>
+                     </div>
                 </div>
             </div>
         @endif
@@ -110,8 +110,33 @@
             }
 
             $(document).on('input change', '.qty-input', function () {
-                var val = parseInt($(this).val());
                 recalculate();
+            });
+
+            $('#checkout-btn').on('click', function (e) {
+                e.preventDefault();
+                var $btn = $(this);
+                $btn.prop('disabled', true).html('<i class="fa fa-spinner fa-spin"></i> Chargement...');
+
+                var updates = [];
+                $('.qty-input').each(function () {
+                    var $input = $(this);
+                    var val = parseInt($input.val()) || 1;
+                    updates.push({
+                        key: $input.closest('form').find('input[name="key"]').val(),
+                        quantity: val
+                    });
+                });
+
+                $.post('{{ route('ecom.dev.updateCartBatch', $subdomain) }}', {
+                    _token: $('meta[name="csrf-token"]').attr('content') || $('input[name="_token"]').val(),
+                    updates: updates
+                }, function () {
+                    window.location.href = $btn.attr('href');
+                }).fail(function () {
+                    $btn.prop('disabled', false).html('<i class="fa fa-credit-card"></i> Passer la commande');
+                    alert('Erreur lors de la mise à jour du panier');
+                });
             });
         });
     </script>

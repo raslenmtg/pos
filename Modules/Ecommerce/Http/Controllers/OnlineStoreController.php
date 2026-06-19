@@ -155,6 +155,25 @@ class OnlineStoreController extends Controller
         return redirect()->back();
     }
 
+    public function updateCartBatch(Request $request, $subdomain)
+    {
+        $business = $this->resolveBusiness($subdomain);
+        $updates = $request->input('updates', []);
+        $cart = session($this->cartKey($business->id), []);
+
+        foreach ($updates as $update) {
+            $key = $update['key'] ?? null;
+            $quantity = max(1, (int) ($update['quantity'] ?? 1));
+            if ($key && isset($cart[$key])) {
+                $cart[$key]['quantity'] = $quantity;
+            }
+        }
+
+        session([$this->cartKey($business->id) => $cart]);
+
+        return response()->json(['success' => true]);
+    }
+
     public function checkout(Request $request, $subdomain)
     {
         $business = $this->resolveBusiness($subdomain);
