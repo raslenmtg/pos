@@ -4,6 +4,7 @@ namespace Modules\Ecommerce\Http\Controllers;
 
 use App\Business;
 use App\Contact;
+use App\Notifications\OnlineOrderNotification;
 use App\Product;
 use App\Transaction;
 use App\TransactionSellLine;
@@ -286,10 +287,16 @@ class OnlineStoreController extends Controller
                 TransactionSellLine::create($line);
             }
 
+            $usersBusiness=User::where('business_id', $business->id)->get();
+            foreach ($usersBusiness as $user) {
+                $user->notify(new OnlineOrderNotification());
+            }
+
             session()->forget($this->cartKey($business->id));
             DB::commit();
 
-            // WhatsApp notification to the business owner
+
+          /*  // WhatsApp notification to the business owner
             $notifPhone = data_get($business->common_settings, 'notification_phone');
             if ($notifPhone) {
                 $info = [
@@ -299,7 +306,7 @@ class OnlineStoreController extends Controller
                 ];
                 $message = WhatsAppService::buildOrderMessage($info, $ref_no, $subtotal);
                 (new WhatsAppService())->send($notifPhone, $message);
-            }
+            }*/
 
             return redirect()->route('ecom.dev.success', [$subdomain, $ref_no]);
 

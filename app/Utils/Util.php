@@ -1297,7 +1297,7 @@ class Util
         $notifications_data = [];
         foreach ($notifications as $notification) {
             $data = $notification->data;
-            if (in_array($notification->type, [\App\Notifications\RecurringInvoiceNotification::class, \App\Notifications\RecurringExpenseNotification::class, \App\Notifications\UpcomingPaymentAlert::class, \App\Notifications\LowStockNotification::class])) {
+            if (in_array($notification->type, [\App\Notifications\RecurringInvoiceNotification::class, \App\Notifications\RecurringExpenseNotification::class, \App\Notifications\UpcomingPaymentAlert::class, \App\Notifications\OnlineOrderNotification::class, \App\Notifications\LowStockNotification::class])) {
                 $msg = '';
                 $icon_class = '';
                 $link = '';
@@ -1354,6 +1354,10 @@ class Util
                    $msg=$notification->data['message'];
                     $link=$notification->data['link'];
                     $icon_class = 'fas fa-boxes bg-red';
+                }   elseif ($notification->type == \App\Notifications\OnlineOrderNotification::class){
+                    $msg= "🛒 *Nouvelle commande en ligne !";
+                    $link="/online-orders";
+                    $icon_class = 'fas fa-cart-plus';
                 }
 
                 $notifications_data[] = [
