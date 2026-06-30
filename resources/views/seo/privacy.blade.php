@@ -223,11 +223,9 @@
 
             <article class="legal-section">
                 <h2>5. Partage des données</h2>
-                <p>Les données ne sont pas vendues à des tiers.</p>
-                <p>Elles peuvent être partagées uniquement avec :</p>
-                <ul>
-                    <li>les prestataires techniques (hébergement)</li>
-                </ul>
+                <p>Nous ne vendons ni ne partageons vos données. Vos informations ne sont jamais commercialisées ni communiquées à des tiers, sauf obligation légale ou avec votre autorisation.</p>
+                <p>Vos données restent votre propriété. Vous conservez l'entière propriété de toutes les informations enregistrées dans votre compte..</p>
+                <p>Accès limité à vos données. Notre équipe n'accède à vos données qu'en cas d'assistance technique ou de résolution d'un incident, et, dans la mesure du possible, avec votre accord préalable.</p>
             </article>
 
             <article class="legal-section">
