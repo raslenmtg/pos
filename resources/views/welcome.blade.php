@@ -1334,7 +1334,7 @@
                 <ul class="list-unstyled text-secondary">
                     <li class="mb-2"><a href="/legal" class="text-decoration-none text-secondary hover-white">Mentions Légales</a></li>
                     <li class="mb-2"><a href="/privacy" class="text-decoration-none text-secondary hover-white">Confidentialité</a></li>
-                    <li class="mb-2"><a href="/terms" class="text-decoration-none text-secondary hover-white">Conditions d'utilisation</a></li>
+                    <li class="mb-2"><a href="/cgu" class="text-decoration-none text-secondary hover-white">Conditions d'utilisation</a></li>
                 </ul>
             </nav>
             <div class="col-lg-2 mb-4">
