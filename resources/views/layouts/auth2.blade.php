@@ -28,7 +28,12 @@
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '768128085832071');
-    fbq('track', 'InitiateCheckout');
+    fbq('track', 'InitiateCheckout', {
+        currency: 'TND',
+        value: 90
+    }, {
+        eventID: '{{ session()->getId() }}_InitiateCheckout'
+    });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=768128085832071&ev=PageView&noscript=1"

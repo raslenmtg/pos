@@ -38,6 +38,7 @@ trait FacebookConversionsApi
             'event_time' => time(),
             'action_source' => 'website',
             'event_source_url' => $request->fullUrl(),
+            'event_id' => $request->session()->getId() . '_' . $eventName, // <-- add this line
             'user_data' => array_merge([
                 'client_ip_address' => $request->ip(),
                 'client_user_agent' => $request->header('User-Agent'),

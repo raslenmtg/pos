@@ -120,18 +120,3 @@
         </div>
     </div>
 </div>
-
-<div class="col-sm-6">
-    <div class="form-group">
-        {!! Form::label('common_settings[notification_phone]', 'Numéro WhatsApp pour les notifications :') !!}
-        <div class="input-group">
-            <span class="input-group-addon">+216</span>
-            {!! Form::text('common_settings[notification_phone]', !empty($common_settings['notification_phone']) ? $common_settings['notification_phone'] : null, [
-                'class' => 'form-control',
-                'placeholder' => '93796501',
-                'id' => 'notification_phone',
-            ]); !!}
-        </div>
-        <p class="help-block"><i>Vous recevrez une notification WhatsApp à chaque nouvelle commande en ligne.</i></p>
-    </div>
-</div>

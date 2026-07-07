@@ -102,7 +102,7 @@ class BusinessController extends Controller
         $package_id = request()->package;
 
         $system_settings = System::getProperties(['superadmin_enable_register_tc', 'superadmin_register_tc'], true);
-        $this->sendFacebookApiEvent(request(), 'InitiateCheckout');
+        $this->sendFacebookApiEvent(request(), 'InitiateCheckout',['currency'=>'TND','value'=>90]);
         return view('business.register', compact(
             'currencies',
             'timezone_list',
