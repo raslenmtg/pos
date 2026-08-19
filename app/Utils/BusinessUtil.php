@@ -46,9 +46,7 @@ class BusinessUtil extends Util
             'business_id' => $business_id,
             'guard_name' => 'web',
         ]);
-        $cashier_role->syncPermissions(['sell.view', 'sell.create', 'sell.update', 'sell.delete', 'access_all_locations', 'view_cash_register', 'close_cash_register']);
-
-        $business = Business::findOrFail($business_id);
+        $cashier_role->syncPermissions(['sell.view', 'sell.create', 'sell.update', 'sell.delete', 'access_all_locations', 'view_cash_register', 'close_cash_register','print_invoice']);
 
         //Update reference count
         $ref_count = $this->setAndGetReferenceCount('contacts', $business_id);
