@@ -803,6 +803,7 @@ class AdminSidebarMenu
 
 
             // Boutique en ligne (Ecommerce)
+            if (auth()->user()->can('ecommerce'))
             $menu->dropdown(
                 'Boutique en ligne',
                 function ($sub) {

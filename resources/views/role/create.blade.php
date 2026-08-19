@@ -649,7 +649,7 @@
               <div class="col-md-12">
                 <div class="checkbox">
                   <label>
-                    {!! Form::checkbox('permissions[]', 'print_invoice', false, ['class' => 'input-icheck']); !!}
+                    {!! Form::checkbox('permissions[]', 'print_invoice', true, ['class' => 'input-icheck']); !!}
                     {{ __('lang_v1.print_invoice') }}
                   </label>
                 </div>
@@ -1640,24 +1640,22 @@
           @endif
         </div>
         </div>
-        @if(in_array('tables', $enabled_modules))
-          <div class="row">
+        <hr>
+        <div class="row">
             <div class="col-md-3">
-              <h4>@lang( 'restaurant.restaurant' )</h4>
+                <h4>Boutique en ligne</h4>
             </div>
             <div class="col-md-9">
-              <div class="col-md-12">
-                <div class="checkbox">
-                  <label>
-                    {!! Form::checkbox('permissions[]', 'access_tables', false, 
-                    [ 'class' => 'input-icheck']); !!} {{ __('lang_v1.access_tables') }}
-                  </label>
+                <div class="col-md-12">
+                    <div class="checkbox">
+                        <label>
+                            {!! Form::checkbox('permissions[]', 'ecommerce', false,
+                            [ 'class' => 'input-icheck']); !!} Gestion des commandes
+                        </label>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-        @endif
-        
+        </div>
         @include('role.partials.module_permissions')
         <div class="row">
         <div class="col-md-12 text-center">
