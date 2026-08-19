@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
+use Laravel\Passport\Passport;
 use League\Flysystem\Filesystem;
 use Spatie\Dropbox\Client as DropboxClient;
 use Spatie\FlysystemDropbox\DropboxAdapter;
@@ -243,6 +244,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         //
+        Passport::ignoreRoutes();
     }
 
     /**
