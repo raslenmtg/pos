@@ -115,7 +115,7 @@ return [
         ],
 
         'sentry' => [
-            'driver' => 'sentry',
+            'driver' => 'sentry_logs',
             'level' => env('LOG_LEVEL', 'error'), // send error and above to Sentry
             'bubble' => true,
         ],

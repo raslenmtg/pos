@@ -182,7 +182,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-
+        Sentry\Laravel\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
