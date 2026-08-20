@@ -349,20 +349,22 @@ class RoleController extends Controller
      */
     private function __createPermissionIfNotExists($permissions)
     {
-        $exising_permissions = Permission::whereIn('name', $permissions)
-                                    ->pluck('name')
-                                    ->toArray();
+        $permissions = array_unique($permissions);
 
-        $non_existing_permissions = array_diff($permissions, $exising_permissions);
+        $existing_permissions = Permission::whereIn('name', $permissions)
+            ->pluck('name')
+            ->toArray();
 
-        if (! empty($non_existing_permissions)) {
-            foreach ($non_existing_permissions as $new_permission) {
-                $time_stamp = \Carbon::now()->toDateTimeString();
-                Permission::create([
-                    'name' => $new_permission,
-                    'guard_name' => 'web',
-                ]);
-            }
+        $non_existing_permissions = array_diff(
+            $permissions,
+            $existing_permissions
+        );
+
+        foreach ($non_existing_permissions as $new_permission) {
+            Permission::create([
+                'name' => $new_permission,
+                'guard_name' => 'web',
+            ]);
         }
     }
 }
