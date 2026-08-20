@@ -276,8 +276,12 @@
             <div class="summary-left">
                 @if(!empty($receipt_details->payments))
                     <div class="summary-section">
-                        <h3>Mode de Paiement</h3>
+                        <h3>Mode de réglement</h3>
                         <table class="payments-table">
+                            <tr>
+                                <th>Mode</th>
+                                <th>Montant à payer</th>
+                            </tr>
                             @foreach($receipt_details->payments as $payment)
                                 <tr>
                                     <td>{{$payment['method']}}:</td>

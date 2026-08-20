@@ -349,13 +349,18 @@
         <section class="invoice-summary">
             <div class="summary-left">
                 @if(!empty($receipt_details->payments))
-                    <span style="font-size: 16px;font-weight:bold">Mode de Paiement:</span>
+                    <span style="font-size: 16px;font-weight:bold">Mode de règlement:</span>
                     <table class="payments-table">
+                        <tr>
+                            <td>Mode</td>
+                            <td>Montant à payer</td>
+                            <td>Date</td>
+                        </tr>
                         @foreach($receipt_details->payments as $payment)
                             <tr>
                                 <td>{{$payment['method']}}</td>
                                 <td class="text-right">{{$payment['amount']}}</td>
-                                <td>({{$payment['date']}})</td>
+                                <td>{{$payment['date']}}</td>
                             </tr>
                         @endforeach
                     </table>
