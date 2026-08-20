@@ -83,7 +83,7 @@
 				    <div class="table-responsive">
 				        <table class="table no-border @cannot('view_purchase_price') show_price_with_permission no-print @endcan">
 				          	<tr>
-				            	<th>@lang('stock_adjustment.total_amount'): </th>
+				            	<th>@lang('stock_adjustment.total_amount_lost'): </th>
 				            	<td><span class="display_currency pull-right" data-currency_symbol="true">{{ $stock_adjustment->final_total }}</span></td>
 				          	</tr>
 				          	<tr>

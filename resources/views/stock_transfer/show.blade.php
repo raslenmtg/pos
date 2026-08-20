@@ -133,7 +133,7 @@
 				          </tr>
 				        @endif
 				        <tr class="@cannot('view_purchase_price') show_price_with_permission no-print @endcan">
-				          <th>@lang('purchase.purchase_total'):</th>
+				          <th>@lang('sale.total_amount'):</th>
 				          <td></td>
 				          <td><span class="display_currency pull-right" data-currency_symbol="true" >{{ $sell_transfer->final_total }}</span></td>
 				        </tr>

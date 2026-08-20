@@ -137,10 +137,10 @@
             <div class="row">
                 <div class="col-sm-4">
                     <div class="form-group">
-                        {!! Form::label('shipping_charges', __('lang_v1.shipping_charges') . ':') !!}
+                        {!! Form::label('shipping_charges', __('purchase.additional_shipping_charges') . ':') !!}
                         {!! Form::text('shipping_charges', 0, [
                             'class' => 'form-control input_number',
-                            'placeholder' => __('lang_v1.shipping_charges'),
+                            'placeholder' => __('purchase.additional_shipping_charges'),
                         ]) !!}
                     </div>
                 </div>
@@ -153,7 +153,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12 text-right show_price_with_permission">
-                    <b>@lang('stock_adjustment.total_amount'):</b> <span id="final_total_text">0.00</span>
+                    <h4>@lang('stock_adjustment.total_amount'): <span id="final_total_text">0.00</span></h4>
                 </div>
                 <br>
                 <br>

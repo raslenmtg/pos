@@ -41,17 +41,9 @@
             @component('components.widget')
                 <table class="table no-border">
                     <tr>
-                        <th>{{ __('report.total_normal') }}:</th>
+                        <th>{{ __('report.total_recovered') }}:</th>
                         <td>
-                            <span class="total_normal">
-                                <i class="fas fa-sync fa-spin fa-fw"></i>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>{{ __('report.total_abnormal') }}:</th>
-                        <td>
-                             <span class="total_abnormal">
+                             <span class="total_recovered">
                                 <i class="fas fa-sync fa-spin fa-fw"></i>
                             </span>
                         </td>
@@ -64,23 +56,6 @@
                             </span>
                         </td>
                     </tr>
-                </table>
-            @endcomponent
-        </div>
-
-        <div class="col-sm-6">
-            @component('components.widget')
-                <table class="table no-border">
-                    <tr>
-                        <th>{{ __('report.total_recovered') }}:</th>
-                        <td>
-                             <span class="total_recovered">
-                                <i class="fas fa-sync fa-spin fa-fw"></i>
-                            </span>
-                        </td>
-                    </tr>
-                    <tr><td>&nbsp;</td></tr>
-                    <tr><td>&nbsp;</td></tr>
                 </table>
             @endcomponent
         </div>
@@ -98,7 +73,7 @@
                                 <th>@lang('purchase.ref_no')</th>
                                 <th>@lang('business.location')</th>
                                 <th>@lang('stock_adjustment.adjustment_type')</th>
-                                <th>@lang('stock_adjustment.total_amount')</th>
+                                <th>@lang('stock_adjustment.total_amount_lost')</th>
                                 <th>@lang('stock_adjustment.total_amount_recovered')</th>
                                 <th>@lang('stock_adjustment.reason_for_stock_adjustment')</th>
                                 <th>@lang('lang_v1.added_by')</th>

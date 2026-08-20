@@ -21,6 +21,7 @@ return [
     'normal' => 'Normal',
     'abnormal' => 'Abnormal',
     'total_amount' => 'Total Amount',
+    'total_amount_lost' => 'Total Amount Lost',
     'total_amount_recovered' => 'Total amount recovered',
     'reason_for_stock_adjustment' => 'Reason',
     'stock_adjustment_added_successfully' => 'Stock adjustment added successfully',

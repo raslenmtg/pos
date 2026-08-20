@@ -116,7 +116,7 @@
 <br>
 <div class="row">
   
-  <div class="col-xs-6">
+  <div class="col-xs-8">
     <div class="table-responsive">
       <table class="table show_price_with_permission">
         <tr>
@@ -124,31 +124,30 @@
           <td></td>
           <td><span class="display_currency pull-right" data-currency_symbol="true">{{ $total }}</span></td>
         </tr>
-        @if( !empty( $sell_transfer->shipping_charges ) )
+        @if(  $sell_transfer->shipping_charges>0)
           <tr>
             <th>@lang('purchase.additional_shipping_charges'):</th>
             <td><b>(+)</b></td>
             <td><span class="display_currency pull-right" data-currency_symbol="true">{{ $sell_transfer->shipping_charges }}</span></td>
           </tr>
-        @endif
+
         <tr>
-          <th>@lang('purchase.purchase_total'):</th>
+          <th>@lang('sale.total_amount'):</th>
           <td></td>
           <td><span class="display_currency pull-right" data-currency_symbol="true" >{{ $sell_transfer->final_total }}</span></td>
         </tr>
+        @endif
       </table>
     </div>
   </div>
 </div>
+@if($sell_transfer->additional_notes)
 <div class="row">
   <div class="col-sm-6">
     <strong>@lang('purchase.additional_notes'):</strong><br>
     <p class="well well-sm no-shadow bg-gray">
-      @if($sell_transfer->additional_notes)
         {{ $sell_transfer->additional_notes }}
-      @else
-        --
-      @endif
     </p>
   </div>
 </div>
+@endif

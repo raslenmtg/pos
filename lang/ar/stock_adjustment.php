@@ -11,6 +11,7 @@
      'normal' => 'عادي',
      'abnormal' => 'غير عادي',
      'total_amount' => 'الإجمالي',
+     'total_amount_lost' => 'إجمالي الاتلاف',
      'total_amount_recovered' => 'الإجمالي المسترد',
      'reason_for_stock_adjustment' => 'السبب',
      'stock_adjustment_added_successfully' => 'تمت اضافة مخزون تالف بنجاح',
