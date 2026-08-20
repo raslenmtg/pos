@@ -359,7 +359,7 @@
                         @foreach($receipt_details->payments as $payment)
                             <tr>
                                 <td>{{$payment['method']}}</td>
-                                <td class="text-right">{{$payment['amount']}}</td>
+                                <td class="text-center">{{$payment['amount']}}</td>
                                 <td>{{$payment['date']}}</td>
                             </tr>
                         @endforeach
