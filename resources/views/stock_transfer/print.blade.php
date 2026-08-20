@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-xs-12">
     <h2 class="page-header">
-      @lang('lang_v1.stock_transfers') (<b>@lang('purchase.ref_no'):</b> #{{ $sell_transfer->ref_no }})
+      @lang('lang_v1.stock_transfers') (#{{ $sell_transfer->ref_no }})
       <small class="pull-right"><b>@lang('messages.date'):</b> {{ @format_date($sell_transfer->transaction_date) }}</small>
     </h2>
   </div>
@@ -57,11 +57,6 @@
         <br>Email: {{$location_details['purchase']->email}}
       @endif
     </address>
-  </div>
-
-  <div class="col-sm-4 invoice-col">
-    <b>@lang('purchase.ref_no'):</b> #{{ $sell_transfer->ref_no }}<br/>
-    <b>@lang('messages.date'):</b> {{ @format_date($sell_transfer->transaction_date) }}<br/>
   </div>
 </div>
 
