@@ -353,7 +353,7 @@
                     <table class="payments-table">
                         <tr>
                             <td>Mode</td>
-                            <td>Montant à payer</td>
+                            <td>Montant réglé</td>
                             <td>Date</td>
                         </tr>
                         @foreach($receipt_details->payments as $payment)
