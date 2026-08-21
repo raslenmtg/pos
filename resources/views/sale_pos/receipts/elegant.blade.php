@@ -281,11 +281,13 @@
                             <tr>
                                 <th>Mode</th>
                                 <th>Montant à payer</th>
+                                <td>Date</td>
                             </tr>
                             @foreach($receipt_details->payments as $payment)
                                 <tr>
                                     <td>{{$payment['method']}}:</td>
                                     <td class="mono-font">&nbsp;{{$payment['amount']}}</td>
+                                    <td>{{$payment['date']}}</td>
                                 </tr>
                             @endforeach
                         </table>
