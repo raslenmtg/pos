@@ -807,7 +807,7 @@
                 <li>Limite de crédit configurable par client</li>
                 <li>Historique complet des ventes et règlements</li>
                 <li>Affectation d'une grille tarifaire (détail, gros, VIP…)</li>
-                <li>Solde d'avance et solde d'ouverture</li>
+                <li>Acompte et Crédit</li>
             </ul>
         </div>
         <div class="split-card indigo">
@@ -886,8 +886,8 @@
                 <div class="filters-row">
                     <div class="filter-check"><span class="cbx"></span> Achat impayé</div>
                     <div class="filter-check"><span class="cbx"></span> Retour d'achat</div>
-                    <div class="filter-check"><span class="cbx"></span> Solde d'avance</div>
-                    <div class="filter-check"><span class="cbx"></span> Solde d'ouverture</div>
+                    <div class="filter-check"><span class="cbx"></span> Acompte</div>
+                    <div class="filter-check"><span class="cbx"></span> Crédit initial</div>
                 </div>
                 <div class="filters-row" style="grid-template-columns: 1fr 1fr;">
                     <div class="filter-select">
@@ -930,8 +930,8 @@
                         <th>Nom de l'entreprise <span class="sort">↕</span></th>
                         <th>Email <span class="sort">↕</span></th>
                         <th>Matricule fiscal <span class="sort">↕</span></th>
-                        <th>Solde ouverture <span class="sort">↕</span></th>
-                        <th>Solde avance <span class="sort">↕</span></th>
+                        <th>Crédit initial <span class="sort">↕</span></th>
+                        <th>Acompte <span class="sort">↕</span></th>
                         <th>Mobile</th>
                         <th>Tot. achats impayés <span class="sort">↕</span></th>
                         <th>Tot. retours impayés <span class="sort">↕</span></th>
@@ -1114,8 +1114,8 @@
                 <ul class="feature-list">
                     <li class="warn">Filtre <strong>Achat impayé</strong> — n'afficher que les fournisseurs avec dettes ouvertes</li>
                     <li class="warn">Filtre <strong>Retour d'achat</strong> — fournisseurs avec retours en attente</li>
-                    <li class="warn">Filtre <strong>Solde d'avance</strong> — fournisseurs ayant reçu des avances</li>
-                    <li class="warn">Filtre <strong>Solde d'ouverture</strong> — soldes hérités d'un ancien système</li>
+                    <li class="warn">Filtre <strong>Avance</strong> — fournisseurs ayant reçu des avances</li>
+                    <li class="warn">Filtre <strong>Crédit initial</strong> — soldes hérités d'un ancien système</li>
                     <li class="warn">Filtre <strong>Peut voir que</strong> — restreindre par utilisateur attribué</li>
                     <li class="warn">Filtre <strong>Statut</strong> — actif, inactif</li>
                     <li class="warn">Recherche textuelle libre dans tous les champs</li>
@@ -1129,8 +1129,8 @@
                         <div class="filters-row">
                             <div class="filter-check"><span class="cbx checked"></span> Achat impayé</div>
                             <div class="filter-check"><span class="cbx"></span> Retour d'achat</div>
-                            <div class="filter-check"><span class="cbx checked"></span> Solde d'avance</div>
-                            <div class="filter-check"><span class="cbx"></span> Solde d'ouverture</div>
+                            <div class="filter-check"><span class="cbx checked"></span> Acompte</div>
+                            <div class="filter-check"><span class="cbx"></span> Crédit initial</div>
                         </div>
                         <div class="filters-row" style="grid-template-columns: 1fr 1fr; margin-top: 6px;">
                             <div class="filter-select">
@@ -1185,7 +1185,7 @@
             <div class="filters-row">
                 <div class="filter-check"><span class="cbx checked" style="background:var(--rose); border-color:var(--rose);"></span> Vente impayée</div>
                 <div class="filter-check"><span class="cbx"></span> Retour de vente</div>
-                <div class="filter-check"><span class="cbx"></span> Solde d'avance</div>
+                <div class="filter-check"><span class="cbx"></span> Acompte</div>
                 <div class="filter-check"><span class="cbx"></span> Limite de crédit dépassée</div>
             </div>
             <div class="filters-row" style="grid-template-columns: 1fr 1fr 1fr;">
@@ -1232,7 +1232,7 @@
                     <th>Mobile</th>
                     <th>Grille tarif</th>
                     <th>Limite crédit</th>
-                    <th>Solde avance</th>
+                    <th>Acompte</th>
                     <th>Tot. ventes impayées <span class="sort">↕</span></th>
                     <th>Statut</th>
                 </tr>

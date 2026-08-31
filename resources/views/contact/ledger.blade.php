@@ -118,8 +118,8 @@
 				<th width="10%" class="text-center">@lang('sale.location')</th>
 				<th width="5%" class="text-center">@lang('sale.payment_status')</th>
 				{{--<th width="10%" class="text-center">@lang('sale.total')</th>--}}
-				<th width="10%" class="text-center">@lang('account.debit')</th>
-				<th width="10%" class="text-center">@lang('account.credit')</th>
+				<th width="10%" class="text-center">@if( $contact->type == 'customer') @lang('account.credit')@else @lang('account.debit')   @endif</th>
+				<th width="10%" class="text-center">@if( $contact->type == 'customer') @lang('account.debit')@else @lang('account.credit')   @endif</th>
 				{{-- <th width="10%" class="text-center summary_hidden">@lang('lang_v1.balance')</th> --}}
 				<th width="5%" class="text-center">@lang('lang_v1.payment_method')</th>
 				<th width="15%" class="text-center">@lang('report.others')</th>

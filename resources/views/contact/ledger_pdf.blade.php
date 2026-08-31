@@ -220,13 +220,13 @@
             <thead>
                 <tr>
                     <th width="18%">@lang('lang_v1.date')</th>
-                    <th width="9%">N°</th>
+                    <th width="9%" class="text-center">@lang('purchase.ref_no')</th>
                     <th width="8%">@lang('lang_v1.type')</th>
                     <th width="8%">@lang('sale.location')</th>
-                    <th width="7%">Status</th>
-                    <th width="10%">@lang('account.debit')</th>
-                    <th width="10%">@lang('account.credit')</th>
-                    <th width="8%">M.P</th>
+                    <th width="5%" class="text-center">@lang('sale.payment_status')</th>
+                    <th width="10%">@if( $contact->type == 'customer') @lang('account.credit')@else @lang('account.debit')   @endif</th>
+                    <th width="10%">@if( $contact->type == 'customer') @lang('account.debit')@else @lang('account.credit')   @endif</th>
+                    <th width="8%">@lang('lang_v1.payment_method')</th>
                     <th width="12%">@lang('report.others')</th>
                 </tr>
             </thead>
