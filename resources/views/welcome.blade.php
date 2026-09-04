@@ -801,7 +801,7 @@
         <div class="d-flex justify-content-between align-items-center w-100 py-1 py-md-3 flex-wrap">
             <div class="d-flex align-items-center order-md-2 order-1 mb-2 mb-md-0">
                 <span class="me-3 me-md-5">
-                    <a href="/ar" >
+                    <a href="/ar" aria-label="Version arabe">
                      <svg width="40px" height="35px" viewBox="0 0 36 36" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--twemoji" preserveAspectRatio="xMidYMid meet"><path fill="#E70013" d="M32 5H4a4 4 0 0 0-4 4v18a4 4 0 0 0 4 4h28a4 4 0 0 0 4-4V9a4 4 0 0 0-4-4z"></path><circle fill="#FFF" cx="18" cy="18" r="6.5"></circle><path fill="#E70013" d="M15.4 18a3.9 3.9 0 0 1 6.541-2.869a4.875 4.875 0 1 0 0 5.738A3.9 3.9 0 0 1 15.4 18z"></path><path fill="#E70013" d="M19.645 16.937l-1.249-1.719v2.125L16.375 18l2.021.657v2.125l1.249-1.719l2.021.656L20.417 18l1.249-1.719z"></path></svg>
                     </a>
                 </span>
@@ -1313,6 +1313,7 @@
                 <ul class="list-unstyled text-secondary">
                     <li class="mb-2"><a href="/solution/grossiste-fournisseur-distributeur" class="text-decoration-none text-secondary hover-white">Fournisseurs / Grossistes / Distributeurs</a></li>
                     <li class="mb-2"><a href="/solution/detaillant" class="text-decoration-none text-secondary hover-white">Détaillants</a></li>
+                    <li class="mb-2"><a href="/solution/vente-en-camion" class="text-decoration-none text-secondary hover-white">Vente en camion & vente terrain</a></li>
                 </ul>
 
 

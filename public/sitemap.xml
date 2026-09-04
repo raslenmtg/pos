@@ -98,6 +98,12 @@
         <priority>0.8</priority>
     </url>
     <url>
+        <loc>https://simplexgestion.tn/solution/vente-en-camion</loc>
+        <lastmod>2026-09-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
         <loc>https://simplexgestion.tn/compare</loc>
         <lastmod>2026-04-22</lastmod>
         <changefreq>monthly</changefreq>

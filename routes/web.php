@@ -96,6 +96,10 @@ Route::prefix('solution')->group(function () {
         return view('seo.detaillant');
     })->name('solution.detaillant');
 
+    Route::get('/vente-en-camion', function () {
+        return view('seo.vente_mobile_camion');
+    })->name('solution.ventes-mobile');
+
 });
     Route::prefix('fonctionnalites')->group(function () {
 
