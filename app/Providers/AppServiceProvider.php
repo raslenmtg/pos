@@ -50,7 +50,7 @@ class AppServiceProvider extends ServiceProvider
             $lang = request()->get('lang');
             $allowed = ['en', 'fr', 'ar']; // your actual supported locales
             if (in_array($lang, $allowed, true)) {
-                App::setLocale($lang);
+                \App::setLocale($lang);
             }
         }
 
