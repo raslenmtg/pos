@@ -1344,9 +1344,9 @@
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-phone me-2 text-primary'></i> +216 93 796 501</li>
                     <li class="mb-3 d-flex align-items-center"><i class='bx bx-envelope me-2 text-primary'></i> contact@simplexgestion.tn</li>
                     <div class="d-flex gap-3 mt-4">
-                        <a href="https://www.facebook.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
-                        <a href="https://www.tiktok.com/@simplexgestion" class="text-white fs-4"><i class='bx bxl-tiktok'></i></a>
-                        <a href="https://www.instagram.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-instagram-alt'></i></a>
+                        <a href="https://www.facebook.com/simplexgestion" aria-label="Facebook" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
+                        <a href="https://www.tiktok.com/@simplexgestion" aria-label="tiktok" class="text-white fs-4"><i class='bx bxl-tiktok'></i></a>
+                        <a href="https://www.instagram.com/simplexgestion" aria-label="instagram" class="text-white fs-4"><i class='bx bxl-instagram-alt'></i></a>
                     </div>
                 </ul>
             </div>

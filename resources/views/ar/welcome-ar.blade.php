@@ -1123,9 +1123,9 @@
                     برنامج إدارة التجارة المتكامل المصمم خصيصاً للسوق التونسية. يشمل إصدار الفواتير، وإدارة المخزون، ونظام كاسة، والمحاسبة.
                 </p>
                 <div class="d-flex gap-3 mt-4">
-                    <a href="https://www.facebook.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
-                    <a href="https://www.tiktok.com/@simplexgestion" class="text-white fs-4"><i class='bx bxl-tiktok'></i></a>
-                    <a href="https://www.instagram.com/simplexgestion" class="text-white fs-4"><i class='bx bxl-instagram-alt'></i></a>
+                    <a href="https://www.facebook.com/simplexgestion" aria-label="Facebook" class="text-white fs-4"><i class='bx bxl-facebook-circle'></i></a>
+                    <a href="https://www.tiktok.com/@simplexgestion" aria-label="tiktok" class="text-white fs-4"><i class='bx bxl-tiktok'></i></a>
+                    <a href="https://www.instagram.com/simplexgestion" aria-label="instagram" class="text-white fs-4"><i class='bx bxl-instagram-alt'></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-6"></div>
