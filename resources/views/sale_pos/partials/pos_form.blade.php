@@ -1,5 +1,5 @@
-<div class="row">
-	<div class="col-md-4">
+<div class="row pos-toolbar">
+	<div class="col-md-4 pos-customer-field">
 		<div class="form-group">
 			<div class="input-group">
 				<span class="input-group-addon">
@@ -26,7 +26,7 @@
 			<small class="text-danger hide contact_due_text"><strong>@lang('account.customer_due'):</strong> <span></span></small>
 		</div>
 	</div>
-	<div class="col-md-8">
+	<div class="col-md-8 pos-search-field">
 		<div class="form-group">
 			<div class="input-group">
 				<div class="input-group-btn">
