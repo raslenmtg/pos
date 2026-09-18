@@ -25,25 +25,7 @@
         ]) !!}
         @csrf
         <div class="pos-shell">
-            <header class="pos-shell-header">
-    <div class="pos-top-left">
-        <div class="pos-location"><span>Location:</span><strong>{{ $default_location->name ?? '-' }}</strong></div>
-        <div class="pos-date">{{ $default_datetime ?? now()->format('m/d/Y H:i') }} <i class="far fa-calendar-alt"></i></div>
-    </div>
-    <div class="pos-top-actions">
-        <button type="button" class="pos-tool-btn" title="Back"><i class="fas fa-chevron-left"></i></button>
-        <button type="button" class="pos-tool-btn" title="Undo"><i class="fas fa-undo"></i></button>
-        <button type="button" class="pos-tool-btn" title="Pause"><i class="fas fa-pause"></i></button>
-        <button type="button" class="pos-tool-btn pos-tool-green" title="Register"><i class="fas fa-briefcase"></i></button>
-        <button type="button" class="pos-tool-btn pos-tool-danger" title="Close"><i class="fas fa-power-off"></i></button>
-        <button type="button" class="pos-tool-btn" title="Calculator"><i class="fas fa-calculator"></i></button>
-        <button type="button" class="pos-tool-btn" title="Fullscreen"><i class="fas fa-expand"></i></button>
-        <button type="button" class="pos-tool-btn" title="Display"><i class="fas fa-desktop"></i></button>
-        <button type="button" class="pos-expense-btn" data-toggle="modal" data-target="#expense_modal"><i class="fas fa-minus-circle"></i> Add Expense</button>
-        <button type="button" class="pos-mobile-products" data-toggle="modal" data-target="#mobile_product_suggestion_modal"><i class="fas fa-th-large"></i><span>Products</span></button>
-        <button type="button" class="pos-header-icon" data-toggle="modal" data-target="#recent_transactions_modal"><i class="fas fa-history"></i></button>
-    </div>
-</header><div class="pos-workspace">
+            <header class="pos-shell-header"><div class="pos-branding"><div class="pos-brand-mark"><i class="fas fa-cash-register"></i></div><div><div class="pos-kicker">POINT OF SALE</div><h1>@lang("sale.pos_sale")</h1></div></div><div class="pos-context"><div class="pos-context-item"><span class="pos-context-icon"><i class="fas fa-store"></i></span><div><small>LOCATION</small><strong>{{ $default_location->name ?? "-" }}</strong></div></div><div class="pos-context-divider"></div><div class="pos-context-item"><span class="pos-context-icon"><i class="far fa-calendar-alt"></i></span><div><small>DATE</small><strong>{{ $default_datetime ?? now()->format("Y-m-d H:i") }}</strong></div></div><button type="button" class="pos-mobile-products" data-toggle="modal" data-target="#mobile_product_suggestion_modal"><i class="fas fa-th-large"></i><span>Products</span></button><button type="button" class="pos-header-icon" data-toggle="modal" data-target="#recent_transactions_modal"><i class="fas fa-history"></i></button></div></header><div class="pos-workspace">
                 
                     {{-- <div class="@if (empty($pos_settings['hide_product_suggestion'])) col-md-7 @else col-md-10 col-md-offset-1 @endif no-padding pr-12"> --}}
                     <div class="pos-cart-panel">
@@ -326,9 +308,7 @@
  .pos-modern .pos-form-actions #recent-transactions{font-size:9px!important;padding:0 10px!important}
  .pos-modern .pos-mobile-products{display:block!important}
 }
-</style>.pos-modern .pos-top-left{display:flex;align-items:center;gap:30px}.pos-modern .pos-location{display:flex;align-items:center;gap:12px;font-size:12px}.pos-modern .pos-location span{font-weight:700;color:#18212d}.pos-modern .pos-location strong{font-weight:400;color:#2e3b4b}.pos-modern .pos-date{height:42px;min-width:153px;padding:0 13px;border-radius:7px;background:#5d68db;color:#fff;display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:700}.pos-modern .pos-top-actions{display:flex;align-items:center;gap:7px;margin-left:auto}.pos-modern .pos-tool-btn{width:40px;height:40px;border:1px solid #dfe5ec;background:#fff;border-radius:7px;color:#526174;display:flex;align-items:center;justify-content:center}.pos-modern .pos-tool-green{color:#15966a}.pos-modern .pos-tool-danger{color:#e64c55}.pos-modern .pos-expense-btn{height:40px;padding:0 15px;border:1px solid #dfe5ec;background:#fff;border-radius:7px;font-size:12px;font-weight:700;color:#202b39}.pos-modern .pos-expense-btn i{margin-right:6px;color:#253040}.pos-modern .pos-mobile-products{display:none}.pos-modern .pos-branding{display:none!important}.pos-modern .pos-context{display:none!important}.pos-modern .pos-header-icon{width:40px;height:40px}.pos-modern .pos-form-actions .pos-express-finalize[data-pay_method="cash"]{background:#3bbd88!important;width:155px!important}
-@media(max-width:900px){.pos-modern .pos-tool-btn:nth-child(-n+5){display:none}.pos-modern .pos-expense-btn{display:none}.pos-modern .pos-top-left{gap:8px}.pos-modern .pos-location strong{max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pos-modern .pos-date{min-width:130px}}
-@media(max-width:768px){.pos-modern .pos-shell-header{padding:0 6px!important}.pos-modern .pos-top-left{gap:5px}.pos-modern .pos-location{font-size:10px;gap:5px}.pos-modern .pos-date{height:36px;min-width:112px;padding:0 8px;font-size:9px}.pos-modern .pos-top-actions{gap:4px}.pos-modern .pos-tool-btn:nth-child(n){display:none}.pos-modern .pos-header-icon{display:flex!important;width:32px;height:32px}.pos-modern .pos-mobile-products{display:block!important;height:32px!important;padding:0 7px!important}.pos-modern .pos-workspace{grid-template-columns:1fr!important}}</style>
+</style></style>
 @section('javascript')
     <!-- HTML5 QR Code Scanner -->
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
