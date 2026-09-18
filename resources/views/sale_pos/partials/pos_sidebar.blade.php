@@ -3,15 +3,15 @@
         @include('sale_pos.partials.featured_products')
     @endif
 </div>
-<div class="row tw-mb-1">
+<div class="row tw-mb-1 pos-catalog-filters">
     @if (!empty($categories))
         <div class="col-md-6 !tw-px-2" id="product_category_div">
             <div class="tw-dw-drawer tw-dw-drawer-end">
                 <input id="my-drawer-4" type="checkbox" class="tw-dw-drawer-toggle">
                 <div class="tw-dw-drawer-content">
                     <!-- Page content here -->
-                    <label for="my-drawer-4"
-                        class="tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 hover:tw-from-indigo-600 hover:tw-to-blue-600 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-ring-offset-2 active:tw-from-indigo-700 active:tw-to-blue-700 lg:tw-w-[98%] tw-w-full tw-flex tw-items-center tw-justify-center tw-gap-1 tw-text-base md:tw-text-lg tw-text-white tw-font-semibold tw-rounded-xl tw-h-12 tw-cursor-pointer">
+                        <label for="my-drawer-4"
+                        class="pos-filter-button tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 hover:tw-from-indigo-600 hover:tw-to-blue-600 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-ring-offset-2 active:tw-from-indigo-700 active:tw-to-blue-700 lg:tw-w-[98%] tw-w-full tw-flex tw-items-center tw-justify-center tw-gap-1 tw-text-base md:tw-text-lg tw-text-white tw-font-semibold tw-rounded-xl tw-h-12 tw-cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg"
                             class="tw-w-5 icon icon-tabler icon-tabler-category-plus" width="44" height="44"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
@@ -110,7 +110,7 @@
                 <div class="tw-dw-drawer-content">
                     <!-- Page content here -->
                     <label for="my-drawer-brand"
-                        class="tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 hover:tw-from-indigo-600 hover:tw-to-blue-600 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-ring-offset-2 active:tw-from-indigo-700 active:tw-to-blue-700 lg:tw-w-[98%] tw-w-full tw-flex tw-items-center tw-justify-center tw-gap-1 tw-text-base md:tw-text-lg tw-text-white tw-font-semibold tw-rounded-xl tw-h-12 tw-cursor-pointer">
+                        class="pos-filter-button tw-bg-gradient-to-r tw-from-indigo-600 tw-to-blue-500 hover:tw-from-indigo-600 hover:tw-to-blue-600 focus:tw-outline-none focus:tw-ring-2 focus:tw-ring-blue-500 focus:tw-ring-offset-2 active:tw-from-indigo-700 active:tw-to-blue-700 lg:tw-w-[98%] tw-w-full tw-flex tw-items-center tw-justify-center tw-gap-1 tw-text-base md:tw-text-lg tw-text-white tw-font-semibold tw-rounded-xl tw-h-12 tw-cursor-pointer">
                         <svg xmlns="http://www.w3.org/2000/svg" class="tw-w-5 icon icon-tabler icon-tabler-brand-beats"
                             width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff"
                             fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -173,7 +173,7 @@
             id="show_featured_products">@lang('lang_v1.featured_products')</button>
     </div>
 </div>
-<div class="row">
+<div class="row pos-product-results">
     <input type="hidden" id="suggestion_page" value="1">
     <div class="col-md-12">
         <div class="eq-height-row" id="product_list_body"></div>

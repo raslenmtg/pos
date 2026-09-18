@@ -3,7 +3,7 @@
 @section('title', __('sale.pos_sale'))
 
 @section('content')
-    <section class="content no-print">
+    <section class="content no-print pos-shell">
         <input type="hidden" id="amount_rounding_method" value="{{ $pos_settings['amount_rounding_method'] ?? '' }}">
         @if (!empty($pos_settings['allow_overselling']))
             <input type="hidden" id="is_overselling_allowed">
@@ -18,22 +18,44 @@
             $is_discount_enabled = $pos_settings['disable_discount'] != 1 ? true : false;
             $is_rp_enabled = session('business.enable_rp') == 1 ? true : false;
         @endphp
+        <div class="pos-page-header">
+            <div class="pos-page-heading">
+                <div class="pos-page-icon"><i class="fas fa-cash-register"></i></div>
+                <div>
+                    <p class="pos-eyebrow">@lang('sale.pos_sale')</p>
+                    <h1>@lang('sale.pos_sale')</h1>
+                </div>
+            </div>
+            <div class="pos-page-meta">
+                <span class="pos-live-indicator" title="@lang('sale.pos_sale')"><span></span>Ready</span>
+                @if (!empty($default_location))
+                    <span class="pos-location"><i class="fas fa-map-marker-alt"></i>{{ $default_location->name }}</span>
+                @endif
+            </div>
+        </div>
         {!! Form::open([
             'url' => action([\App\Http\Controllers\SellPosController::class, 'store']),
             'method' => 'post',
             'id' => 'add_pos_sell_form',
         ]) !!}
         @csrf
-        <div class="row mb-12">
+        <div class="row mb-12 pos-workspace">
             <div class="col-md-12 tw-pt-0 tw-mb-14">
                 <div class="row tw-flex lg:tw-flex-row md:tw-flex-col sm:tw-flex-col tw-flex-col tw-items-start md:tw-gap-4">
                     {{-- <div class="@if (empty($pos_settings['hide_product_suggestion'])) col-md-7 @else col-md-10 col-md-offset-1 @endif no-padding pr-12"> --}}
-                    <div class="tw-px-3 tw-w-full  lg:tw-px-0 lg:tw-pr-0 @if(empty($pos_settings['hide_product_suggestion'])) lg:tw-w-[60%]  @else lg:tw-w-[100%] @endif">
+                    <div class="pos-cart-column tw-px-3 tw-w-full lg:tw-px-0 lg:tw-pr-0 @if(empty($pos_settings['hide_product_suggestion'])) lg:tw-w-[60%] @else lg:tw-w-[100%] @endif">
 
-                        <div class="tw-shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] tw-rounded-2xl tw-bg-white tw-mb-2 md:tw-mb-8 tw-p-2">
+                        <div class="pos-panel pos-cart-panel tw-shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] tw-rounded-2xl tw-bg-white tw-mb-2 md:tw-mb-8 tw-p-2">
 
                             {{-- <div class="box box-solid mb-12 @if (!isMobile()) mb-40 @endif"> --}}
                                 <div class="box-body pb-0">
+                                    <div class="pos-panel-heading">
+                                        <div>
+                                            <h2><i class="fas fa-shopping-basket"></i>@lang('sale.products')</h2>
+                                            <p>@lang('sale.product')</p>
+                                        </div>
+                                        <span class="pos-panel-badge"><i class="fas fa-bolt"></i>@lang('product.add_new_product')</span>
+                                    </div>
                                     {!! Form::hidden('location_id', $default_location->id ?? null, [
                                         'id' => 'location_id',
                                         'data-receipt_printer_type' => !empty($default_location->receipt_printer_type)
@@ -63,8 +85,17 @@
                         </div>
                     </div>
                     @if (empty($pos_settings['hide_product_suggestion']) && !isMobile())
-                        <div class="md:tw-no-padding tw-w-full lg:tw-w-[40%] tw-px-5">
+                        <div class="pos-catalog-column md:tw-no-padding tw-w-full lg:tw-w-[40%] tw-px-5">
+                            <div class="pos-panel pos-catalog-panel">
+                                <div class="pos-panel-heading pos-catalog-heading">
+                                    <div>
+                                        <h2><i class="fas fa-layer-group"></i>@lang('lang_v1.featured_products')</h2>
+                                        <p>@lang('sale.product')</p>
+                                    </div>
+                                    <span class="pos-catalog-shortcut"><i class="fas fa-keyboard"></i> F2</span>
+                                </div>
                             @include('sale_pos.partials.pos_sidebar')
+                            </div>
                         </div>
                     @endif
                 </div>
@@ -102,6 +133,7 @@
 
 @stop
 @section('css')
+    <link rel="stylesheet" href="{{ asset('css/pos-redesign.css?v=' . $asset_v) }}">
     <!-- include module css -->
     @if (!empty($pos_module_data))
         @foreach ($pos_module_data as $key => $value)

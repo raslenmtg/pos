@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row pos-toolbar-row">
 	<div class="col-md-4">
 		<div class="form-group">
 			<div class="input-group">
@@ -45,7 +45,7 @@
 		</div>
 	</div>
 </div>
-<div class="row">
+<div class="row pos-options-row">
 	@if(!empty($pos_settings['show_invoice_layout']))
 	<div class="col-md-4">
 		<div class="form-group">
@@ -174,7 +174,7 @@
     @endforeach
 @endif
 <div class="row">
-	<div class="col-sm-12 pos_product_div">
+	<div class="col-sm-12 pos_product_div pos-cart-items">
 		<input type="hidden" name="sell_price_tax" id="sell_price_tax" value="{{$business_details->sell_price_tax}}">
 
 		<!-- Keeps count of product rows -->
@@ -186,7 +186,7 @@
 				$hide_tax = 'hide';
 			}
 		@endphp
-		<table class="table table-condensed table-bordered table-striped table-responsive" id="pos_table">
+		<table class="table table-condensed table-bordered table-striped table-responsive pos-cart-table" id="pos_table">
 			<thead>
 				<tr>
 					<th class="tex-center tw-text-sm md:!tw-text-base tw-font-bold @if(!empty($pos_settings['inline_service_staff'])) col-md-3 @else col-md-4 @endif">	
