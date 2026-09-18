@@ -116,7 +116,199 @@
 @media(max-width:1200px) and (min-width:769px){.pos-workspace{grid-template-columns:minmax(400px,.85fr) minmax(430px,1fr)}.pos-modern{padding:10px}.pos-cart-card,.pos-catalog-card{min-height:560px;height:calc(100vh - 130px)}.pos-modern .pos-toolbar{grid-template-columns:1fr}}
 .pos-modern .pos-product-card{height:184px;border:1px solid var(--pos-line);border-radius:12px;background:#fff;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s,border-color .15s}.pos-modern .pos-product-card:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(24,34,48,.09);border-color:#c6d0e0}.pos-modern .pos-product-image{height:108px;width:100%;background-color:#fafbfd;border-bottom:1px solid #eef1f5}.pos-modern .pos-product-info{padding:8px 9px;min-width:0}.pos-modern .pos-product-name{font-size:11px;font-weight:700;line-height:1.25;color:#263345;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pos-modern .pos-product-name span{font-weight:600;color:#687587}.pos-modern .pos-product-sku{font-size:9px;color:#99a3b0;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pos-modern .pos-product-meta{display:flex;justify-content:space-between;align-items:center;gap:5px;margin-top:6px;font-size:9px;color:#8490a0}.pos-modern .pos-product-meta strong{font-size:10px;color:#3157d5}.pos-modern .pos-empty-products{height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#8792a1;gap:5px}.pos-modern .pos-empty-products i{font-size:30px;color:#bdc5d0;margin-bottom:4px}.pos-modern .pos-empty-products strong{color:#596678}.pos-modern .pos-empty-products span{font-size:11px}.pos-modern #product_category_div,.pos-modern #product_brand_div{padding:0 4px!important}.pos-modern .pos-catalog-card .tw-dw-drawer-content{width:100%}.pos-modern .pos-catalog-card .tw-dw-drawer-content label{font-size:11px!important;font-weight:700!important}.pos-modern .pos-catalog-card .tw-dw-drawer-content label svg{margin-right:3px}.pos-modern .pos-catalog-card .tw-dw-drawer-side .tw-dw-menu{background:#fff}.pos-modern .pos-catalog-card .tw-dw-drawer-side .tw-dw-card{min-height:70px}.pos-modern #featured_products_box{margin:0}.pos-modern #feature_product_div{display:none!important}
 @media(max-width:768px){.pos-mobile-products{display:block}.pos-modern{padding:7px 7px 84px;min-height:100vh}.pos-shell-header{height:56px;border-radius:11px;padding:0 10px;margin-bottom:8px}.pos-brand-mark{width:34px;height:34px;border-radius:9px;font-size:14px}.pos-branding{gap:8px}.pos-kicker{font-size:7px}.pos-branding h1{font-size:15px}.pos-context-item:not(:first-child),.pos-context-divider{display:none}.pos-context{gap:6px}.pos-context-item small{display:none}.pos-context-item strong{font-size:10px;max-width:85px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.pos-context-icon{width:30px;height:30px}.pos-header-icon{width:32px;height:32px}.pos-workspace{display:block}.pos-cart-card{height:auto;min-height:0;padding:9px;border-radius:11px;overflow:visible}.pos-cart-card .box-body{height:auto}.pos-products-panel{display:none}.pos-modern .pos-toolbar{display:flex;flex-direction:column;gap:7px;margin-bottom:9px}.pos-modern .pos-toolbar>[class*=col-]{width:100%!important}.pos-modern .pos-toolbar .form-control,.pos-modern .pos-toolbar .input-group-addon,.pos-modern .pos-toolbar .input-group-btn .btn{height:46px}.pos-modern #pos_table{font-size:11px}.pos-modern #pos_table thead th{padding:7px 4px!important;font-size:8px!important}.pos-modern #pos_table thead th:nth-child(3),.pos-modern #pos_table tbody td:nth-child(3),.pos-modern #pos_table thead th:nth-child(4),.pos-modern #pos_table tbody td:nth-child(4){display:none}.pos-modern #pos_table tbody tr.product_row td{padding:7px 4px!important}.pos-modern #pos_table img{width:38px!important;height:38px!important}.pos-modern .product_row .input-number{max-width:105px}.pos-modern .pos_form_totals{padding-top:8px}.pos-modern .pos_form_totals td{padding:6px 5px!important;font-size:10px}.pos-modern .pos-form-actions{position:fixed!important;left:7px;right:7px;bottom:7px;z-index:1100;border:1px solid var(--pos-line)!important;border-radius:12px!important;box-shadow:0 7px 24px rgba(24,34,48,.15)!important}.pos-modern .pos-form-actions>div{min-height:62px;padding:7px!important}.pos-modern .pos-form-actions .pos-total{padding-left:8px;border:0}.pos-modern #total_payable{font-size:16px!important}.pos-modern .pos-form-actions button{min-height:40px;font-size:10px!important}#mobile_product_suggestion_modal .modal-dialog{width:100%;height:100%;margin:0}#mobile_product_suggestion_modal .modal-content{height:100%;border:0;border-radius:0}#mobile_product_suggestion_modal .modal-body{padding:10px;overflow-y:auto}}
-</style>
+
+/* POS reference layout - desktop + touch responsive */
+.pos-modern{
+    --ref-bg:#f1f3f6; --ref-border:#dfe4ea; --ref-text:#243142;
+    --ref-muted:#718096; --ref-primary:#5865d8; --ref-green:#36bf8a;
+    background:var(--ref-bg)!important; padding:6px 7px 78px!important;
+}
+.pos-modern .pos-shell{max-width:none;width:100%}
+.pos-modern .pos-shell-header{
+    height:52px!important; margin:0 0 5px!important; padding:0 9px 0 14px!important;
+    border-radius:10px!important; border:1px solid #e1e5eb!important;
+    box-shadow:0 2px 9px rgba(25,35,50,.08)!important;
+}
+.pos-modern .pos-brand-mark{display:none!important}
+.pos-modern .pos-branding{gap:8px!important}
+.pos-modern .pos-kicker{display:none!important}
+.pos-modern .pos-branding h1{font-size:14px!important;font-weight:700!important;margin:0!important}
+.pos-modern .pos-branding:before{content:"Location:";font-size:12px;font-weight:700;color:#18212d;margin-right:2px}
+.pos-modern .pos-context{margin-left:auto;gap:7px!important}
+.pos-modern .pos-context-item{height:42px;padding:0 10px;background:#fff;border:0;border-radius:7px}
+.pos-modern .pos-context-item:first-child{display:none!important}
+.pos-modern .pos-context-item:nth-of-type(2){background:#5d68db;color:#fff}
+.pos-modern .pos-context-item:nth-of-type(2) .pos-context-icon{display:none}
+.pos-modern .pos-context-item:nth-of-type(2) small{display:none}
+.pos-modern .pos-context-item:nth-of-type(2) strong{color:#fff;font-size:11px}
+.pos-modern .pos-context-divider{display:none}
+.pos-modern .pos-mobile-products{height:38px!important}
+.pos-modern .pos-header-icon{width:40px!important;height:40px!important;background:#fff;border:1px solid #e0e5eb;border-radius:7px!important}
+.pos-modern .pos-workspace{
+    display:grid!important;grid-template-columns:minmax(0,60%) minmax(0,40%)!important;
+    gap:5px!important;align-items:stretch!important;
+}
+.pos-modern .pos-cart-card,.pos-modern .pos-catalog-card{
+    height:calc(100vh - 134px)!important;min-height:0!important;
+    border-radius:10px!important;border:1px solid #dfe4ea!important;
+    box-shadow:0 1px 5px rgba(20,30,45,.05)!important;
+}
+.pos-modern .pos-cart-card{padding:6px!important}
+.pos-modern .pos-catalog-card{padding:5px!important}
+.pos-modern .pos-cart-card .box-body{height:100%!important}
+.pos-modern .pos-catalog-header{
+    height:42px;padding:0 4px!important;margin:0!important;border:0!important;
+}
+.pos-modern .pos-catalog-header>div{display:none!important}
+.pos-modern .pos-catalog-action{display:none!important}
+.pos-modern .pos-toolbar{
+    display:grid!important;grid-template-columns:300px minmax(0,1fr)!important;
+    gap:7px!important;margin:0 0 5px!important;
+}
+.pos-modern .pos-toolbar>[class*=col-]{padding:0!important}
+.pos-modern .pos-toolbar .form-control,
+.pos-modern .pos-toolbar .input-group-addon,
+.pos-modern .pos-toolbar .input-group-btn .btn,
+.pos-modern .pos-toolbar .select2-selection--single{
+    height:36px!important;background:#fff!important;border:1px solid #d6dde6!important;
+    box-shadow:none!important;font-size:12px!important;
+}
+.pos-modern .pos-toolbar .input-group-addon{min-width:34px!important}
+.pos-modern .pos-toolbar .input-group-btn .btn{min-width:36px!important}
+.pos-modern .pos_product_div{height:calc(100% - 41px)!important;display:flex!important}
+.pos-modern #pos_table{border-spacing:0!important;table-layout:fixed!important}
+.pos-modern #pos_table thead th{
+    height:30px!important;padding:5px 6px!important;background:#f7f9fb!important;
+    color:#8793a3!important;border:0!important;font-size:9px!important;
+    text-transform:uppercase!important;letter-spacing:.05em!important;
+}
+.pos-modern #pos_table tbody tr.product_row td{
+    height:58px!important;padding:5px 6px!important;background:#fff!important;
+    border-bottom:1px solid #e7ebf0!important;border-top:0!important;
+}
+.pos-modern #pos_table tbody tr.product_row td:first-child,
+.pos-modern #pos_table tbody tr.product_row td:last-child{border-left:0!important;border-right:0!important;border-radius:0!important}
+.pos-modern #pos_table tbody tr.product_row:hover td{background:#fbfcfe!important}
+.pos-modern #pos_table img{width:34px!important;height:34px!important;border:0!important;border-radius:4px!important}
+.pos-modern .product_row .input-number{max-width:120px!important}
+.pos-modern .product_row .input-number .btn,
+.pos-modern .product_row .pos_quantity{height:34px!important;border-color:#ccd5df!important}
+.pos-modern .product_row .pos_line_total_text{font-weight:700!important}
+.pos-modern .product_row .pos_remove_row{width:28px!important;height:28px!important;background:#ffe9e8!important}
+.pos-modern .pos_form_totals{
+    margin-top:auto!important;padding:0!important;border-top:1px solid #dfe4ea!important;
+}
+.pos-modern .pos_form_totals>div{padding:0!important}
+.pos-modern .pos_form_totals table{
+    border:0!important;border-radius:0!important;background:#fff!important;
+}
+.pos-modern .pos_form_totals td{
+    padding:6px 9px!important;font-size:10px!important;border:0!important;
+}
+.pos-modern .pos_form_totals tr:first-child td{
+    background:#f7f9fb!important;border-right:1px solid #e1e6ec!important;
+}
+.pos-modern .pos_form_totals tr:first-child td:last-child{border-right:0!important}
+.pos-modern .pos_form_totals tr:nth-child(2) td{border-top:1px solid #e7ebf0!important}
+.pos-modern .pos-form-actions{
+    position:fixed!important;left:7px!important;right:7px!important;bottom:0!important;
+    z-index:1050!important;height:65px!important;margin:0!important;padding:0!important;
+    background:#fff!important;border:1px solid #dfe4ea!important;border-radius:10px 10px 0 0!important;
+    box-shadow:0 -2px 10px rgba(20,30,45,.08)!important;
+}
+.pos-modern .pos-form-actions>div{
+    height:64px!important;min-height:0!important;padding:5px 9px!important;
+    flex-direction:row!important;overflow:visible!important;
+}
+.pos-modern .pos-form-actions>div>div:nth-child(2){
+    order:1!important;display:flex!important;align-items:center!important;gap:15px!important;
+}
+.pos-modern .pos-form-actions>div>div:nth-child(1){display:none!important}
+.pos-modern .pos-form-actions>div>div:nth-child(3){margin-left:auto!important}
+.pos-modern .pos-form-actions button{
+    min-height:40px!important;border-radius:7px!important;font-size:11px!important;
+    padding:5px 13px!important;box-shadow:none!important;
+}
+.pos-modern .pos-form-actions>div>div:nth-child(2) button:not(#pos-finalize):not(.pos-express-finalize){background:transparent!important}
+.pos-modern .pos-form-actions #pos-finalize{background:#203b59!important;width:155px!important}
+.pos-modern .pos-form-actions .pos-express-finalize[data-pay_method=cash){background:#3bbd88!important;width:155px!important}
+.pos-modern .pos-form-actions .pos-total{
+    display:flex!important;align-items:center!important;gap:10px!important;
+    margin-left:auto!important;padding:0 20px!important;border-left:1px solid #e2e6eb!important;
+}
+.pos-modern .pos-form-actions .pos-total>div{font-size:9px!important;line-height:1.2!important}
+.pos-modern .pos-form-actions #total_payable{font-size:20px!important}
+.pos-modern .pos-form-actions #recent-transactions{
+    height:40px!important;border-radius:20px!important;padding:0 22px!important;
+    background:#646ee4!important;
+}
+/* catalog controls become three compact tabs like the reference */
+.pos-modern .pos-catalog-card .tw-mb-1{
+    display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:6px!important;
+    margin:0 0 6px!important;
+}
+.pos-modern #product_category_div,.pos-modern #product_brand_div{padding:0!important;width:auto!important}
+.pos-modern #product_category_div label,.pos-modern #product_brand_div label{
+    height:36px!important;min-height:36px!important;width:100%!important;
+    border-radius:18px!important;background:#fff!important;color:#39475a!important;
+    border:1px solid #e0e5eb!important;box-shadow:0 1px 3px rgba(20,30,45,.04)!important;
+    font-size:11px!important;font-weight:700!important;
+}
+.pos-modern #product_category_div label{color:#39475a!important}
+.pos-modern #product_category_div label svg,.pos-modern #product_brand_div label svg{
+    width:15px!important;height:15px!important;stroke:#5d68db!important;
+}
+.pos-modern #feature_product_div{
+    display:block!important;width:auto!important;padding:0!important;margin:0!important;
+}
+.pos-modern #show_featured_products{
+    display:block!important;width:100%!important;height:36px!important;
+    border:1px solid #e0e5eb!important;border-radius:18px!important;background:#fff!important;
+    color:#39475a!important;font-size:11px!important;font-weight:700!important;
+}
+.pos-modern #product_list_body{padding:0!important;overflow-y:auto!important}
+.pos-modern .pos-catalog-card .eq-height-row{margin:0 -3px!important}
+.pos-modern .pos-catalog-card .eq-height-row>[class*=col-]{padding:3px!important}
+.pos-modern .pos-product-card{
+    height:137px!important;border:1px solid #e0e5eb!important;border-radius:8px!important;
+    box-shadow:none!important;background:#fff!important;
+}
+.pos-modern .pos-product-card:hover{transform:none!important;box-shadow:0 3px 10px rgba(30,40,60,.08)!important}
+.pos-modern .pos-product-image{height:78px!important;background-color:#fff!important;border-bottom:1px solid #f0f2f5!important}
+.pos-modern .pos-product-info{padding:5px 7px!important}
+.pos-modern .pos-product-name{font-size:10px!important;text-align:center!important}
+.pos-modern .pos-product-sku{font-size:9px!important;text-align:center!important}
+.pos-modern .pos-product-meta{font-size:8px!important;margin-top:2px!important}
+.pos-modern .pos-product-meta strong{font-size:9px!important}
+@media(max-width:1100px) and (min-width:769px){
+ .pos-modern .pos-workspace{grid-template-columns:55% 45%!important}
+ .pos-modern .pos-toolbar{grid-template-columns:1fr!important}
+}
+@media(max-width:768px){
+ .pos-modern{padding:4px 4px 72px!important}
+ .pos-modern .pos-shell-header{height:48px!important;margin-bottom:4px!important}
+ .pos-modern .pos-context-item:nth-of-type(2){height:36px!important}
+ .pos-modern .pos-workspace{display:block!important}
+ .pos-modern .pos-cart-card{height:auto!important;min-height:calc(100vh - 124px)!important}
+ .pos-modern .pos-products-panel{display:none!important}
+ .pos-modern .pos-toolbar{display:grid!important;grid-template-columns:1fr!important;gap:5px!important}
+ .pos-modern .pos-toolbar .form-control,.pos-modern .pos-toolbar .input-group-addon,.pos-modern .pos-toolbar .input-group-btn .btn{height:42px!important}
+ .pos-modern .pos_product_div{height:auto!important}
+ .pos-modern #pos_table thead th:nth-child(3),.pos-modern #pos_table tbody td:nth-child(3),
+ .pos-modern #pos_table thead th:nth-child(4),.pos-modern #pos_table tbody td:nth-child(4){display:none!important}
+ .pos-modern #pos_table tbody tr.product_row td{height:55px!important;padding:4px!important}
+ .pos-modern .pos-form-actions{left:4px!important;right:4px!important;height:62px!important}
+ .pos-modern .pos-form-actions>div{height:61px!important;padding:4px!important}
+ .pos-modern .pos-form-actions>div>div:nth-child(2){gap:4px!important;overflow-x:auto!important;max-width:72%!important}
+ .pos-modern .pos-form-actions button{min-width:72px!important;padding:4px 8px!important;font-size:9px!important}
+ .pos-modern .pos-form-actions #pos-finalize{width:auto!important;min-width:105px!important}
+ .pos-modern .pos-form-actions .pos-express-finalize[data-pay_method=cash]{width:auto!important;min-width:85px!important}
+ .pos-modern .pos-form-actions .pos-total{display:none!important}
+ .pos-modern .pos-form-actions>div>div:nth-child(3){display:block!important}
+ .pos-modern .pos-form-actions #recent-transactions{font-size:9px!important;padding:0 10px!important}
+ .pos-modern .pos-mobile-products{display:block!important}
+}
+</style></style>
 @section('javascript')
     <!-- HTML5 QR Code Scanner -->
     <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
