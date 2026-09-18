@@ -5,9 +5,9 @@
     <div
         class="pos-form-actions tw-rounded-tr-xl tw-rounded-tl-xl tw-shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] tw-bg-white tw-cursor-pointer">
         <div
-            class="tw-flex tw-items-center tw-justify-between tw-flex-col sm:tw-flex-row md:tw-flex-row lg:tw-flex-row xl:tw-flex-row tw-gap-2 tw-px-4 tw-py-0 tw-overflow-x-auto tw-w-full">
+            class="pos-actionbar-inner tw-flex tw-items-center tw-justify-between tw-flex-col sm:tw-flex-row md:tw-flex-row lg:tw-flex-row xl:tw-flex-row tw-gap-2 tw-px-4 tw-py-0 tw-overflow-x-auto tw-w-full">
 
-            <div class="md:!tw-w-none !tw-flex md:!tw-hidden !tw-flex-row !tw-items-center !tw-gap-3">
+            <div class="pos-mobile-total md:!tw-w-none !tw-flex md:!tw-hidden !tw-flex-row !tw-items-center !tw-gap-3">
                 <div class="tw-pos-total tw-flex tw-items-center tw-gap-3">
                     <div class="tw-text-black tw-font-bold tw-text-sm tw-flex tw-items-center tw-flex-col tw-leading-1">
                         <div>@lang('sale.total_payable'):</div>
@@ -18,7 +18,7 @@
                 </div>
             </div>
 
-            <div class="!tw-w-full md:!tw-w-none !tw-flex md:!tw-hidden !tw-flex-row !tw-items-center !tw-gap-3">
+            <div class="pos-mobile-primary !tw-w-full md:!tw-w-none !tw-flex md:!tw-hidden !tw-flex-row !tw-items-center !tw-gap-3">
                 @if (!Gate::check('disable_pay_checkout') || auth()->user()->can('superadmin') || auth()->user()->can('admin'))
                     <button type="button"
                         class=" tw-flex tw-flex-row tw-items-center tw-justify-center tw-gap-1 tw-font-bold tw-text-white tw-cursor-pointer tw-text-xs md:tw-text-sm tw-bg-[#001F3E] tw-rounded-md tw-p-2 tw-w-[8.5rem] @if (!$is_mobile)  @endif no-print @if ($pos_settings['disable_pay_checkout'] != 0) hide @endif"
@@ -41,7 +41,7 @@
                         @lang('messages.delete')</button>
                 @endif
             </div>
-            <div class="tw-flex tw-items-center tw-gap-4 tw-flex-row tw-overflow-x-auto">
+            <div class="pos-secondary-actions tw-flex tw-items-center tw-gap-4 tw-flex-row tw-overflow-x-auto">
 
                 @if (!Gate::check('disable_draft') || auth()->user()->can('superadmin') || auth()->user()->can('admin'))
                     <button type="button"
@@ -121,7 +121,7 @@
 												id="final_total_input" value=0>
 					<span id="total_payable" class="number">0</span>
 					</div> --}}
-                    <div class="pos-total md:tw-flex md:tw-items-center md:tw-gap-3 tw-hidden">
+                    <div class="pos-desktop-total pos-total md:tw-flex md:tw-items-center md:tw-gap-3 tw-hidden">
                         <div
                             class="tw-text-black tw-font-bold tw-text-base md:tw-text-2xl tw-flex tw-items-center tw-flex-col">
                             <div>@lang('sale.total')</div>
@@ -134,7 +134,7 @@
                 @endif
             </div>
 
-            <div class="tw-w-full md:tw-w-fit tw-flex tw-flex-col tw-items-end tw-gap-3 tw-hidden md:tw-block">
+            <div class="pos-recent-action tw-w-full md:tw-w-fit tw-flex tw-flex-col tw-items-end tw-gap-3 tw-hidden md:tw-block">
                 @if (!isset($pos_settings['hide_recent_trans']) || $pos_settings['hide_recent_trans'] == 0)
                     <button type="button"
                         class="tw-font-bold tw-bg-[#646EE4] hover:tw-bg-[#414aac] tw-rounded-full tw-text-white tw-w-full md:tw-w-fit tw-px-5 tw-h-11 tw-cursor-pointer tw-text-xs md:tw-text-sm"

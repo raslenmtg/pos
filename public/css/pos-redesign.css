@@ -487,3 +487,305 @@
         width: 50%;
     }
 }
+
+/* POS command header */
+.pos-header {
+    background: #0d1727;
+    border-bottom: 1px solid #22314a;
+    box-shadow: 0 8px 24px rgba(9, 18, 34, .18);
+    padding: 8px 18px 10px !important;
+    position: relative;
+    z-index: 1040;
+}
+
+.pos-command-header {
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.pos-header-context {
+    color: #fff;
+    min-width: 300px;
+}
+
+.pos-header-context p {
+    align-items: center;
+    color: #f8fafc;
+    display: flex;
+    font-size: 12px;
+    gap: 7px;
+    margin: 0 !important;
+}
+
+.pos-header-context p strong {
+    color: #a9b8cc;
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.pos-header-context #select_location_id {
+    background: #17253a;
+    border: 1px solid #334863;
+    border-radius: 8px;
+    color: #fff;
+    height: 34px;
+    padding: 4px 10px;
+    width: min(220px, 42%) !important;
+}
+
+.pos-clock {
+    align-items: center;
+    background: #17253a !important;
+    border: 1px solid #334863;
+    border-radius: 8px !important;
+    color: #a9b8cc;
+    display: inline-flex;
+    font-size: 11px;
+    gap: 8px;
+    margin-left: 6px;
+    padding: 8px 10px !important;
+}
+
+.pos-clock .curr_datetime {
+    color: #e7edf7 !important;
+}
+
+.pos-clock .fa-keyboard {
+    color: #83a0ff !important;
+}
+
+.pos-header-actions {
+    gap: 8px !important;
+    justify-content: flex-end !important;
+}
+
+.pos-header-actions > a,
+.pos-header-actions > button {
+    align-items: center;
+    background: #17253a !important;
+    border: 1px solid #334863 !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    color: #cfdaea !important;
+    display: inline-flex !important;
+    height: 38px !important;
+    justify-content: center;
+    margin: 0 !important;
+    min-width: 38px;
+    padding: 0 10px !important;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+.pos-header-actions > a:first-child {
+    background: #243653 !important;
+    border-color: #50698e !important;
+    margin-right: auto !important;
+}
+
+.pos-header-actions > a:hover,
+.pos-header-actions > button:hover {
+    background: #263b5d !important;
+    border-color: #718bb4 !important;
+    transform: translateY(-1px);
+}
+
+.pos-header-actions > a i,
+.pos-header-actions > button i {
+    margin: 0 !important;
+}
+
+.pos-header-actions > a strong,
+.pos-header-actions > button strong {
+    align-items: center;
+    display: flex;
+    margin: 0 !important;
+}
+
+.pos-header-actions .tw-inline {
+    display: none !important;
+}
+
+/* Checkout dock */
+.pos-form-actions {
+    background: #101b2c !important;
+    border: 1px solid #263a58;
+    border-radius: 16px !important;
+    bottom: 14px;
+    box-shadow: 0 14px 36px rgba(10, 21, 39, .25) !important;
+    left: 18px;
+    margin: 0 !important;
+    padding: 9px 12px !important;
+    right: 18px;
+    width: auto;
+}
+
+.pos-actionbar-inner {
+    gap: 14px !important;
+    overflow: visible !important;
+}
+
+.pos-secondary-actions {
+    align-items: center;
+    flex: 1 1 auto;
+    gap: 6px !important;
+    min-width: 0;
+    overflow: visible !important;
+}
+
+.pos-secondary-actions > button {
+    align-items: center;
+    background: transparent !important;
+    border: 1px solid transparent;
+    border-radius: 9px;
+    color: #aebbd0 !important;
+    display: inline-flex !important;
+    flex-direction: column;
+    font-size: 10px !important;
+    gap: 4px;
+    justify-content: center;
+    margin: 0 !important;
+    min-height: 46px;
+    min-width: 58px;
+    padding: 5px 8px !important;
+    transition: background .18s ease, border-color .18s ease, color .18s ease;
+}
+
+.pos-secondary-actions > button:hover {
+    background: #1c2d48 !important;
+    border-color: #344e73;
+    color: #fff !important;
+}
+
+.pos-secondary-actions > button i {
+    font-size: 14px;
+    margin: 0 !important;
+}
+
+.pos-secondary-actions > #pos-finalize,
+.pos-secondary-actions > .pos-express-finalize[data-pay_method="cash"],
+.pos-secondary-actions > #pos-cancel,
+.pos-secondary-actions > #pos-delete {
+    border: 0;
+    border-radius: 10px;
+    color: #fff !important;
+    flex-direction: row;
+    font-size: 12px !important;
+    font-weight: 800;
+    min-height: 42px;
+    min-width: 132px;
+    padding: 0 14px !important;
+}
+
+.pos-secondary-actions > #pos-finalize {
+    background: #4f68e8 !important;
+    margin-left: auto !important;
+}
+
+.pos-secondary-actions > .pos-express-finalize[data-pay_method="cash"] {
+    background: #16a477 !important;
+}
+
+.pos-secondary-actions > #pos-cancel,
+.pos-secondary-actions > #pos-delete {
+    background: #c74356 !important;
+}
+
+.pos-desktop-total {
+    align-items: center;
+    background: #17253a;
+    border: 1px solid #334863;
+    border-radius: 11px;
+    display: flex !important;
+    gap: 12px !important;
+    margin: 0 2px !important;
+    min-height: 46px;
+    padding: 6px 14px;
+}
+
+.pos-desktop-total > div {
+    color: #aebbd0 !important;
+    font-size: 10px !important;
+    line-height: 1.15;
+    text-transform: uppercase;
+}
+
+.pos-desktop-total #total_payable {
+    color: #fff !important;
+    font-size: 20px !important;
+}
+
+.pos-recent-action {
+    flex: 0 0 auto;
+}
+
+.pos-recent-action button {
+    background: #263b5d !important;
+    border: 1px solid #4f6890;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+    height: 42px !important;
+    padding: 0 13px !important;
+}
+
+.pos-recent-action button:hover {
+    background: #314a70 !important;
+}
+
+.pos-footer {
+    background: #0d1727;
+    border-top: 1px solid #22314a;
+    color: #64748b !important;
+    margin: 0 !important;
+    padding: 10px 18px;
+}
+
+@media (max-width: 991px) {
+    .pos-header {
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+
+    .pos-header-context {
+        min-width: 0;
+    }
+
+    .pos-form-actions {
+        bottom: 8px;
+        left: 8px;
+        padding: 7px !important;
+        right: 8px;
+    }
+
+    .pos-actionbar-inner {
+        gap: 8px !important;
+    }
+
+    .pos-secondary-actions {
+        max-width: 100%;
+        overflow-x: auto !important;
+    }
+}
+
+@media (max-width: 575px) {
+    .pos-header-context p {
+        justify-content: space-between;
+    }
+
+    .pos-header-context #select_location_id {
+        width: 45% !important;
+    }
+
+    .pos-clock {
+        display: none !important;
+    }
+
+    .pos-secondary-actions > #pos-finalize,
+    .pos-secondary-actions > .pos-express-finalize[data-pay_method="cash"],
+    .pos-secondary-actions > #pos-cancel {
+        min-width: 112px;
+    }
+}

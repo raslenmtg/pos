@@ -1,5 +1,5 @@
 <!-- Main Footer -->
-  <footer class="no-print text-center text-info">
+  <footer class="pos-footer no-print text-center text-info">
     <!-- To the right -->
     <!-- <div class="pull-right hidden-xs">
       Anything you want

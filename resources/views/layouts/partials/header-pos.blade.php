@@ -160,8 +160,8 @@
     </div> --}}
 
     <div
-        class="tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-justify-between tw-shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] tw-bg-white tw-rounded-xl tw-mx-0 tw-mt-1 tw-mb-0 md:tw-mb-0 tw-p-3">
-        <div class="tw-w-full md:tw-w-1/3">
+        class="pos-command-header tw-flex tw-flex-col md:tw-flex-row tw-items-center tw-justify-between tw-shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] tw-bg-white tw-rounded-xl tw-mx-0 tw-mt-1 tw-mb-0 md:tw-mb-0 tw-p-3">
+        <div class="pos-header-context tw-w-full md:tw-w-1/3">
             <div class="tw-flex tw-items-center tw-gap-2">
                 <p><strong>@lang('sale.location'): &nbsp;</strong></p>
                 <div style="width: 28%">
@@ -182,7 +182,7 @@
                     @endif
                 </div>
                 <div
-                    class="tw-hidden md:tw-block tw-bg-[#646EE4] hover:tw-bg-[#414aac] tw-py-1.5 tw-px-2 tw-rounded-md">
+                    class="pos-clock tw-hidden md:tw-block tw-bg-[#646EE4] hover:tw-bg-[#414aac] tw-py-1.5 tw-px-2 tw-rounded-md">
                      &nbsp; <span
                         class="curr_datetime text-white tw-font-semibold">{{ @format_datetime('now') }}</span>
                     <i class="fa fa-keyboard hover-q text-white" aria-hidden="true" data-container="body"
@@ -206,7 +206,7 @@
             </div>
         </div>
 
-        <div class="tw-w-full md:tw-w-2/3 !tw-p-0 tw-flex tw-items-center tw-justify-between tw-gap-4 tw-flex-col md:tw-flex-row tw-hidden md:tw-flex"
+        <div class="pos-header-actions tw-w-full md:tw-w-2/3 !tw-p-0 tw-flex tw-items-center tw-justify-between tw-gap-4 tw-flex-col md:tw-flex-row tw-hidden md:tw-flex"
             id="pos_header_more_options">
             <a href="{{ $go_back_url }}" title="{{ __('lang_v1.go_back') }}"
                 class="tw-shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] tw-bg-white hover:tw-bg-white/60 tw-cursor-pointer tw-border-2 tw-flex tw-items-center tw-justify-center tw-rounded-md md:tw-w-8 tw-w-auto tw-h-8 tw-text-gray-600 pull-right">

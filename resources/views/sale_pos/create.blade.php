@@ -18,21 +18,6 @@
             $is_discount_enabled = $pos_settings['disable_discount'] != 1 ? true : false;
             $is_rp_enabled = session('business.enable_rp') == 1 ? true : false;
         @endphp
-        <div class="pos-page-header">
-            <div class="pos-page-heading">
-                <div class="pos-page-icon"><i class="fas fa-cash-register"></i></div>
-                <div>
-                    <p class="pos-eyebrow">@lang('sale.pos_sale')</p>
-                    <h1>@lang('sale.pos_sale')</h1>
-                </div>
-            </div>
-            <div class="pos-page-meta">
-                <span class="pos-live-indicator" title="@lang('sale.pos_sale')"><span></span>Ready</span>
-                @if (!empty($default_location))
-                    <span class="pos-location"><i class="fas fa-map-marker-alt"></i>{{ $default_location->name }}</span>
-                @endif
-            </div>
-        </div>
         {!! Form::open([
             'url' => action([\App\Http\Controllers\SellPosController::class, 'store']),
             'method' => 'post',
